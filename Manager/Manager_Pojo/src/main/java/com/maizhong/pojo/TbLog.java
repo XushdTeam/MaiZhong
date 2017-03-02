@@ -7,6 +7,16 @@ public class TbLog {
 
     private Integer logType;
 
+    public String getLogMethod() {
+        return logMethod;
+    }
+
+    public void setLogMethod(String logMethod) {
+        this.logMethod = logMethod;
+    }
+
+    private String logMethod;
+
     private String moduleName;
 
     private String methodName;

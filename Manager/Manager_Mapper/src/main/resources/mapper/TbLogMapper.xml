@@ -6,6 +6,7 @@
     <result column="log_type" jdbcType="INTEGER" property="logType" />
     <result column="module_name" jdbcType="VARCHAR" property="moduleName" />
     <result column="method_name" jdbcType="VARCHAR" property="methodName" />
+    <result column="log_method" jdbcType="VARCHAR" property="logMethod" />
     <result column="request_ip" jdbcType="CHAR" property="requestIp" />
     <result column="exception_code" jdbcType="VARCHAR" property="exceptionCode" />
     <result column="params" jdbcType="VARCHAR" property="params" />
@@ -74,7 +75,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, log_type, module_name, method_name, request_ip, exception_code, params, user_name, 
+    id, log_type, module_name, method_name,log_method,request_ip, exception_code, params, user_name,
     log_time
   </sql>
   <sql id="Blob_Column_List">
@@ -130,11 +131,11 @@
   </delete>
   <insert id="insert" parameterType="com.maizhong.pojo.TbLog">
     insert into tb_log (id, log_type, module_name, 
-      method_name, request_ip, exception_code, 
+      method_name, log_method,request_ip, exception_code,
       params, user_name, log_time, 
       exception_detail)
     values (#{id,jdbcType=BIGINT}, #{logType,jdbcType=INTEGER}, #{moduleName,jdbcType=VARCHAR}, 
-      #{methodName,jdbcType=VARCHAR}, #{requestIp,jdbcType=CHAR}, #{exceptionCode,jdbcType=VARCHAR}, 
+      #{methodName,jdbcType=VARCHAR},#{logMethod,jdbcType=VARCHAR}, #{requestIp,jdbcType=CHAR}, #{exceptionCode,jdbcType=VARCHAR},
       #{params,jdbcType=VARCHAR}, #{userName,jdbcType=CHAR}, #{logTime,jdbcType=TIMESTAMP}, 
       #{exceptionDetail,jdbcType=LONGVARCHAR})
   </insert>
@@ -152,6 +153,9 @@
       </if>
       <if test="methodName != null">
         method_name,
+      </if>
+      <if test="logMethod != null">
+        log_method,
       </if>
       <if test="requestIp != null">
         request_ip,
@@ -184,6 +188,9 @@
       </if>
       <if test="methodName != null">
         #{methodName,jdbcType=VARCHAR},
+      </if>
+      <if test="logMethod != null">
+        #{logMethod,jdbcType=VARCHAR},
       </if>
       <if test="requestIp != null">
         #{requestIp,jdbcType=CHAR},

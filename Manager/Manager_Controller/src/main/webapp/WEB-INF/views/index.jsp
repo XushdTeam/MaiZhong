@@ -47,7 +47,7 @@
                 <li class="layui-nav-item ">
                     <a href="javascript:;" data-fid="3">
                         <i class="fa1 fa-institution"></i>
-                        <cite>学校</cite>
+                        <cite>商城功能</cite>
                     </a>
                 </li>
                 <shiro:hasAnyRoles name="admin,dev">

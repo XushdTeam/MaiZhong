@@ -88,6 +88,7 @@ public class SystemLogAspect {
             tbLog.setModuleName(controllerDescription.get("module"));
             tbLog.setLogType(0);
             tbLog.setRequestIp(ip);
+            tbLog.setLogMethod(joinPoint.getTarget().getClass().getName() + "." + joinPoint.getSignature().getName() + "()");
             tbLog.setExceptionCode(null);
             tbLog.setExceptionDetail( null);
             tbLog.setParams(null);
@@ -145,6 +146,7 @@ public class SystemLogAspect {
             tbLog.setExceptionCode(e.getClass().getName());
             tbLog.setLogType(1);
             tbLog.setExceptionDetail(e.getMessage());
+            tbLog.setLogMethod(joinPoint.getTarget().getClass().getName() + "." + joinPoint.getSignature().getName() + "()");
             tbLog.setParams(params);
             tbLog.setUserName(tbUser.getUserName());
             tbLog.setLogTime(new Date());
