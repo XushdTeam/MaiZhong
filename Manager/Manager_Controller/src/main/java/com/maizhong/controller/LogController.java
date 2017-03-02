@@ -9,6 +9,7 @@ import com.maizhong.pojo.TbLog;
 import com.maizhong.service.LogService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 日志控制器
  * Created by Xushd on 2017/3/2.
  */
+@Controller
 public class LogController {
 
     @Autowired

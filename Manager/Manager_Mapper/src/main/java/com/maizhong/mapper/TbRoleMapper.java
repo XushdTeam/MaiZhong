@@ -30,4 +30,6 @@ public interface TbRoleMapper {
     int updateByPrimaryKey(TbRole record);
 
     List<TbRole> getRoleByUserId(Long id);
+
+    List<TbRole> gerRoleListByUserIdAll(Long id);
 }

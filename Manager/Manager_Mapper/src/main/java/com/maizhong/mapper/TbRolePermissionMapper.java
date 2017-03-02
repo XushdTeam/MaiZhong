@@ -5,6 +5,7 @@ import com.maizhong.pojo.TbRolePermissionKey;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TbRolePermissionMapper {
     long countByExample(TbRolePermissionExample example);
@@ -22,4 +23,6 @@ public interface TbRolePermissionMapper {
     int updateByExampleSelective(@Param("record") TbRolePermissionKey record, @Param("example") TbRolePermissionExample example);
 
     int updateByExample(@Param("record") TbRolePermissionKey record, @Param("example") TbRolePermissionExample example);
+
+    int insertRolePermission(List<Map<String,String>> list);
 }

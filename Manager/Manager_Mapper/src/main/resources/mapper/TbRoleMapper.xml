@@ -270,7 +270,22 @@
   </select>
 
 
-
+  <!--获取用户的角色信息-->
+  <select id="gerRoleListByUserIdAll" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT
+    R.*, CASE
+    WHEN
+    R.id = U.role_id THEN
+    1
+    ELSE
+    0
+    END AS ischecked
+    FROM
+    tb_role R
+    LEFT JOIN tb_user_role U ON R.id = U.role_id
+    AND U.user_id = #{id,jdbcType=BIGINT}
+    WHERE R.status = 1 AND delflag = 0
+  </select>
 
 
 

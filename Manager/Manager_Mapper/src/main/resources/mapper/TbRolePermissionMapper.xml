@@ -142,4 +142,14 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
+  <!--插入角色的权限信息 批量插入-->
+  <insert id="insertRolePermission" parameterType="List">
+    INSERT  tb_role_permission
+    (role_id,permission_id)
+    VALUES
+    <foreach collection="list" item="obj" index="index" separator=",">
+      (#{obj.roleId},#{obj.permissionId})
+    </foreach>
+  </insert>
 </mapper>
