@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maizhong.mapper.TbLogMapper">
+  <resultMap id="BaseResultMap" type="com.maizhong.pojo.TbLog">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="log_type" jdbcType="INTEGER" property="logType" />
+    <result column="module_name" jdbcType="VARCHAR" property="moduleName" />
+    <result column="method_name" jdbcType="VARCHAR" property="methodName" />
+    <result column="request_ip" jdbcType="CHAR" property="requestIp" />
+    <result column="exception_code" jdbcType="VARCHAR" property="exceptionCode" />
+    <result column="params" jdbcType="VARCHAR" property="params" />
+    <result column="user_name" jdbcType="CHAR" property="userName" />
+    <result column="log_time" jdbcType="TIMESTAMP" property="logTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.maizhong.pojo.TbLog">
+    <result column="exception_detail" jdbcType="LONGVARCHAR" property="exceptionDetail" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, log_type, module_name, method_name, request_ip, exception_code, params, user_name, 
+    log_time
+  </sql>
+  <sql id="Blob_Column_List">
+    exception_detail
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.maizhong.pojo.TbLogExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.maizhong.pojo.TbLogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maizhong.pojo.TbLogExample">
+    delete from tb_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maizhong.pojo.TbLog">
+    insert into tb_log (id, log_type, module_name, 
+      method_name, request_ip, exception_code, 
+      params, user_name, log_time, 
+      exception_detail)
+    values (#{id,jdbcType=BIGINT}, #{logType,jdbcType=INTEGER}, #{moduleName,jdbcType=VARCHAR}, 
+      #{methodName,jdbcType=VARCHAR}, #{requestIp,jdbcType=CHAR}, #{exceptionCode,jdbcType=VARCHAR}, 
+      #{params,jdbcType=VARCHAR}, #{userName,jdbcType=CHAR}, #{logTime,jdbcType=TIMESTAMP}, 
+      #{exceptionDetail,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maizhong.pojo.TbLog">
+    insert into tb_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="logType != null">
+        log_type,
+      </if>
+      <if test="moduleName != null">
+        module_name,
+      </if>
+      <if test="methodName != null">
+        method_name,
+      </if>
+      <if test="requestIp != null">
+        request_ip,
+      </if>
+      <if test="exceptionCode != null">
+        exception_code,
+      </if>
+      <if test="params != null">
+        params,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="logTime != null">
+        log_time,
+      </if>
+      <if test="exceptionDetail != null">
+        exception_detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="logType != null">
+        #{logType,jdbcType=INTEGER},
+      </if>
+      <if test="moduleName != null">
+        #{moduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="methodName != null">
+        #{methodName,jdbcType=VARCHAR},
+      </if>
+      <if test="requestIp != null">
+        #{requestIp,jdbcType=CHAR},
+      </if>
+      <if test="exceptionCode != null">
+        #{exceptionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null">
+        #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=CHAR},
+      </if>
+      <if test="logTime != null">
+        #{logTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exceptionDetail != null">
+        #{exceptionDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maizhong.pojo.TbLogExample" resultType="java.lang.Long">
+    select count(*) from tb_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_log
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.logType != null">
+        log_type = #{record.logType,jdbcType=INTEGER},
+      </if>
+      <if test="record.moduleName != null">
+        module_name = #{record.moduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.methodName != null">
+        method_name = #{record.methodName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requestIp != null">
+        request_ip = #{record.requestIp,jdbcType=CHAR},
+      </if>
+      <if test="record.exceptionCode != null">
+        exception_code = #{record.exceptionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.params != null">
+        params = #{record.params,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=CHAR},
+      </if>
+      <if test="record.logTime != null">
+        log_time = #{record.logTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.exceptionDetail != null">
+        exception_detail = #{record.exceptionDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update tb_log
+    set id = #{record.id,jdbcType=BIGINT},
+      log_type = #{record.logType,jdbcType=INTEGER},
+      module_name = #{record.moduleName,jdbcType=VARCHAR},
+      method_name = #{record.methodName,jdbcType=VARCHAR},
+      request_ip = #{record.requestIp,jdbcType=CHAR},
+      exception_code = #{record.exceptionCode,jdbcType=VARCHAR},
+      params = #{record.params,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=CHAR},
+      log_time = #{record.logTime,jdbcType=TIMESTAMP},
+      exception_detail = #{record.exceptionDetail,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_log
+    set id = #{record.id,jdbcType=BIGINT},
+      log_type = #{record.logType,jdbcType=INTEGER},
+      module_name = #{record.moduleName,jdbcType=VARCHAR},
+      method_name = #{record.methodName,jdbcType=VARCHAR},
+      request_ip = #{record.requestIp,jdbcType=CHAR},
+      exception_code = #{record.exceptionCode,jdbcType=VARCHAR},
+      params = #{record.params,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=CHAR},
+      log_time = #{record.logTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.pojo.TbLog">
+    update tb_log
+    <set>
+      <if test="logType != null">
+        log_type = #{logType,jdbcType=INTEGER},
+      </if>
+      <if test="moduleName != null">
+        module_name = #{moduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="methodName != null">
+        method_name = #{methodName,jdbcType=VARCHAR},
+      </if>
+      <if test="requestIp != null">
+        request_ip = #{requestIp,jdbcType=CHAR},
+      </if>
+      <if test="exceptionCode != null">
+        exception_code = #{exceptionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null">
+        params = #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=CHAR},
+      </if>
+      <if test="logTime != null">
+        log_time = #{logTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exceptionDetail != null">
+        exception_detail = #{exceptionDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.maizhong.pojo.TbLog">
+    update tb_log
+    set log_type = #{logType,jdbcType=INTEGER},
+      module_name = #{moduleName,jdbcType=VARCHAR},
+      method_name = #{methodName,jdbcType=VARCHAR},
+      request_ip = #{requestIp,jdbcType=CHAR},
+      exception_code = #{exceptionCode,jdbcType=VARCHAR},
+      params = #{params,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=CHAR},
+      log_time = #{logTime,jdbcType=TIMESTAMP},
+      exception_detail = #{exceptionDetail,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maizhong.pojo.TbLog">
+    update tb_log
+    set log_type = #{logType,jdbcType=INTEGER},
+      module_name = #{moduleName,jdbcType=VARCHAR},
+      method_name = #{methodName,jdbcType=VARCHAR},
+      request_ip = #{requestIp,jdbcType=CHAR},
+      exception_code = #{exceptionCode,jdbcType=VARCHAR},
+      params = #{params,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=CHAR},
+      log_time = #{logTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

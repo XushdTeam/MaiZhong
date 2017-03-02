@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Common/Common.iml" filepath="$PROJECT_DIR$/Common/Common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MaiZhong.iml" filepath="$PROJECT_DIR$/MaiZhong.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Manager/Manager.iml" filepath="$PROJECT_DIR$/Manager/Manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Manager/Manager_Controller/Manager_Controller.iml" filepath="$PROJECT_DIR$/Manager/Manager_Controller/Manager_Controller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Manager/Manager_Mapper/Manager_Mapper.iml" filepath="$PROJECT_DIR$/Manager/Manager_Mapper/Manager_Mapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Manager/Manager_Pojo/Manager_Pojo.iml" filepath="$PROJECT_DIR$/Manager/Manager_Pojo/Manager_Pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Manager/Manager_Service/Manager_Service.iml" filepath="$PROJECT_DIR$/Manager/Manager_Service/Manager_Service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Portal/Portal.iml" filepath="$PROJECT_DIR$/Portal/Portal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Z_Mybatis/Z_Mybatis.iml" filepath="$PROJECT_DIR$/Z_Mybatis/Z_Mybatis.iml" />
+    </modules>
+  </component>
+</project>

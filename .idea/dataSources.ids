@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - maizhongcar@192.168.3.187" uuid="91deca49-0fb6-4907-bddd-8a46562dd222">
+    <database-info product="MySQL" version="5.6.21" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.5">
+      <schema id="1" name="maizhongcar"/>
+      <table id="2" parent="1" name="tb_log">
+        <comment>日志表</comment>
+      </table>
+      <table id="3" parent="1" name="tb_menu">
+        <comment>系统菜单表</comment>
+      </table>
+      <table id="4" parent="1" name="tb_permission">
+        <comment>权限表</comment>
+      </table>
+      <table id="5" parent="1" name="tb_role">
+        <comment>角色表</comment>
+      </table>
+      <table id="6" parent="1" name="tb_role_permission">
+        <comment>角色权限关联表</comment>
+      </table>
+      <table id="7" parent="1" name="tb_user">
+        <comment>用户表</comment>
+      </table>
+      <table id="8" parent="1" name="tb_user_role">
+        <comment>用户角色关联</comment>
+      </table>
+      <column id="9" parent="2" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(10)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="10" parent="2" name="log_type">
+        <comment>操作类型0 正常 1异常</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(1)</data-type>
+      </column>
+      <column id="11" parent="2" name="module_name">
+        <comment>模块名称</comment>
+        <data-type>varchar(200)</data-type>
+      </column>
+      <column id="12" parent="2" name="method_name">
+        <comment>方法名称</comment>
+        <data-type>varchar(200)</data-type>
+      </column>
+      <column id="13" parent="2" name="request_ip">
+        <comment>请求IP</comment>
+        <mandatory>1</mandatory>
+        <data-type>char(20)</data-type>
+      </column>
+      <column id="14" parent="2" name="exception_code">
+        <comment>异常code</comment>
+        <data-type>varchar(100)</data-type>
+      </column>
+      <column id="15" parent="2" name="exception_detail">
+        <comment>异常详细</comment>
+        <data-type>text</data-type>
+      </column>
+      <column id="16" parent="2" name="params">
+        <comment>请求参数</comment>
+        <data-type>varchar(200)</data-type>
+      </column>
+      <column id="17" parent="2" name="user_name">
+        <comment>操作用户名</comment>
+        <mandatory>1</mandatory>
+        <data-type>char(20)</data-type>
+        <default-expression>&apos;root&apos;</default-expression>
+      </column>
+      <column id="18" parent="2" name="log_time">
+        <comment>日志时间</comment>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;CURRENT_TIMESTAMP&apos;</default-expression>
+      </column>
+      <index id="19" parent="2" name="idex_log_time">
+        <columns>log_time</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="20" parent="2" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="21" parent="3" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(10)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="22" parent="3" name="menu_name">
+        <comment>菜单名称</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+      </column>
+      <column id="23" parent="3" name="menu_ico">
+        <comment>菜单图标</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+      </column>
+      <column id="24" parent="3" name="menu_url">
+        <comment>菜单链接</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+      </column>
+      <column id="25" parent="3" name="menu_type">
+        <comment>菜单类型</comment>
+        <mandatory>1</mandatory>
+        <data-type>char(20)</data-type>
+      </column>
+      <column id="26" parent="3" name="parent">
+        <comment>父级</comment>
+        <mandatory>1</mandatory>
+        <data-type>bigint(10)</data-type>
+      </column>
+      <column id="27" parent="3" name="sort">
+        <data-type>int(2)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="28" parent="3" name="status">
+        <comment>1启用0停用</comment>
+        <data-type>int(1)</data-type>
+        <default-expression>&apos;1&apos;</default-expression>
+      </column>
+      <column id="29" parent="3" name="delflag">
+        <comment>1删除0未删除</comment>
+        <data-type>int(1)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="30" parent="3" name="create_user">
+        <comment>创建者</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+      </column>
+      <column id="31" parent="3" name="create_time">
+        <comment>创建时间</comment>
+        <data-type>timestamp</data-type>
+      </column>
+      <index id="32" parent="3" name="idex_menu_name">
+        <columns>menu_name</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="33" parent="3" name="idex_menu_type">
+        <columns>menu_type</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="34" parent="3" name="idex_parent">
+        <columns>parent</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="35" parent="3" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="36" parent="4" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(10)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="37" parent="4" name="permission_name">
+        <comment>权限名称</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="38" parent="4" name="permission_key">
+        <comment>权限KEY</comment>
+        <mandatory>1</mandatory>
+        <data-type>char(50)</data-type>
+      </column>
+      <column id="39" parent="4" name="parent">
+        <comment>父节点id 0为父节点</comment>
+        <mandatory>1</mandatory>
+        <data-type>bigint(10)</data-type>
+      </column>
+      <column id="40" parent="4" name="sort">
+        <comment>排序</comment>
+        <data-type>int(10)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="41" parent="4" name="status">
+        <comment>1启用0停用</comment>
+        <data-type>int(1)</data-type>
+        <default-expression>&apos;1&apos;</default-expression>
+      </column>
+      <column id="42" parent="4" name="delflag">
+        <comment>1删除0未删除</comment>
+        <data-type>int(1)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="43" parent="4" name="create_user">
+        <comment>创建者</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+      </column>
+      <column id="44" parent="4" name="create_time">
+        <comment>创建时间</comment>
+        <data-type>timestamp</data-type>
+      </column>
+      <index id="45" parent="4" name="idex_permission_key">
+        <columns>permission_key</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="46" parent="4" name="idex_permission_name">
+        <columns>permission_name</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="47" parent="4" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="48" parent="5" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(10)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="49" parent="5" name="role_name">
+        <comment>角色名称</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="50" parent="5" name="role_key">
+        <comment>角色key</comment>
+        <mandatory>1</mandatory>
+        <data-type>char(20)</data-type>
+      </column>
+      <column id="51" parent="5" name="role_description">
+        <comment>角色描述</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(200)</data-type>
+      </column>
+      <column id="52" parent="5" name="status">
+        <comment>1启用0停用</comment>
+        <data-type>int(1)</data-type>
+        <default-expression>&apos;1&apos;</default-expression>
+      </column>
+      <column id="53" parent="5" name="delflag">
+        <comment>1删除0未删除</comment>
+        <data-type>int(1)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="54" parent="5" name="create_user">
+        <comment>创建者</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+      </column>
+      <column id="55" parent="5" name="create_time">
+        <comment>创建时间</comment>
+        <data-type>timestamp</data-type>
+      </column>
+      <index id="56" parent="5" name="idex_role_key">
+        <columns>role_key</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="57" parent="5" name="idex_role_name">
+        <columns>role_name</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="58" parent="5" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="59" parent="6" name="role_id">
+        <comment>角色ID</comment>
+        <mandatory>1</mandatory>
+        <data-type>bigint(10)</data-type>
+      </column>
+      <column id="60" parent="6" name="permission_id">
+        <comment>权限ID</comment>
+        <mandatory>1</mandatory>
+        <data-type>bigint(10)</data-type>
+      </column>
+      <key id="61" parent="6" name="PRIMARY">
+        <columns>role_id
+permission_id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="62" parent="7" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(10)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="63" parent="7" name="user_name">
+        <comment>用户名</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="64" parent="7" name="user_phone">
+        <comment>用户手机号</comment>
+        <mandatory>1</mandatory>
+        <data-type>char(11)</data-type>
+      </column>
+      <column id="65" parent="7" name="password">
+        <comment>密码</comment>
+        <mandatory>1</mandatory>
+        <data-type>char(200)</data-type>
+      </column>
+      <column id="66" parent="7" name="status">
+        <comment>1启用0停用</comment>
+        <data-type>int(1)</data-type>
+        <default-expression>&apos;1&apos;</default-expression>
+      </column>
+      <column id="67" parent="7" name="delflag">
+        <comment>1删除0未删除</comment>
+        <data-type>int(1)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="68" parent="7" name="create_user">
+        <comment>创建者</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+      </column>
+      <column id="69" parent="7" name="create_time">
+        <comment>更新时间</comment>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="70" parent="7" name="remark">
+        <comment>备注</comment>
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;&apos;</default-expression>
+      </column>
+      <index id="71" parent="7" name="idex_user_name">
+        <columns>user_name</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="72" parent="7" name="idex_user_phone">
+        <columns>user_phone</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="73" parent="7" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="74" parent="8" name="user_id">
+        <comment>用户ID</comment>
+        <mandatory>1</mandatory>
+        <data-type>bigint(10)</data-type>
+      </column>
+      <column id="75" parent="8" name="role_id">
+        <comment>角色ID</comment>
+        <mandatory>1</mandatory>
+        <data-type>bigint(10)</data-type>
+      </column>
+      <key id="76" parent="8" name="PRIMARY">
+        <columns>user_id
+role_id</columns>
+        <primary>1</primary>
+      </key>
+    </database-model>
+  </data-source>
+</component>

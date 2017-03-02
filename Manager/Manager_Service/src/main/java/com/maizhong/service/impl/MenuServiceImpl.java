@@ -1,0 +1,104 @@
+package com.maizhong.service.impl;
+
+import com.maizhong.common.dto.MenuNode;
+import com.maizhong.common.result.JsonResult;
+import com.maizhong.common.target.ServiceLog;
+import com.maizhong.common.utils.JsonUtils;
+import com.maizhong.dao.JedisClient;
+import com.maizhong.mapper.TbMenuMapper;
+import com.maizhong.pojo.TbMenu;
+import com.maizhong.pojo.TbMenuExample;
+import com.maizhong.service.MenuService;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * 菜单服务接口实现
+ * Created by Xushd on 2017/3/1.
+ */
+@Service
+public class MenuServiceImpl implements MenuService {
+
+    public static final Logger LOGGER = LoggerFactory.getLogger(MenuServiceImpl.class);
+
+
+    @Autowired
+    private TbMenuMapper tbMenuMapper;
+
+    @Autowired
+    private JedisClient jedisClient;
+
+    @Value("${MANAGER_MENU_KEY}")
+    private String MANAGER_MENU_KEY;
+
+
+    @ServiceLog(module = "菜单管理", methods = "前台菜单获取")
+    @Override
+    public JsonResult getMenuListForWeb(String typeId) {
+        //命中缓存
+        try {
+            String jsonResult = jedisClient.hget(MANAGER_MENU_KEY, typeId);
+            if (!StringUtils.isBlank(jsonResult)) {
+                LOGGER.info("命中缓存 MANAGER_MENU_KEY:{}", jsonResult);
+                return JsonResult.OK(JsonUtils.jsonToList(jsonResult,MenuNode.class));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        List<MenuNode> results = getByParentId(Long.parseLong(typeId), false);
+        //向缓存中添加
+        try {
+            String jsonResult = JsonUtils.objectToJson(results);
+            jedisClient.hset(MANAGER_MENU_KEY, typeId, jsonResult);
+            LOGGER.info("添加缓存 MANAGER_MENU_KEY:{}", jsonResult);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return JsonResult.OK(results);
+    }
+
+    /**
+     * 递归获取菜单信息
+     *
+     * @param parentId menuType or parent
+     * @param isParent true parent false menuType
+     * @return
+     */
+    private List<MenuNode> getByParentId(long parentId, boolean isParent) {
+        List<MenuNode> results = new ArrayList<>();
+        TbMenuExample example = new TbMenuExample();
+        TbMenuExample.Criteria criteria = example.createCriteria();
+        if (isParent) {
+            criteria.andParentEqualTo(parentId);
+        } else {
+            criteria.andMenuTypeEqualTo(String.valueOf(parentId)).andParentEqualTo(0L);
+        }
+        criteria.andDelflagEqualTo(0).andStatusEqualTo(1);
+        example.setOrderByClause("sort");
+        List<TbMenu> menuList = tbMenuMapper.selectByExample(example);
+        for (TbMenu menu : menuList) {
+            if (isParent) {
+                MenuNode node = new MenuNode(menu.getMenuName(), menu.getMenuIco(), menu.getMenuUrl());
+                results.add(node);
+            } else {
+                if (menu.getSort() == 0) {
+                    MenuNode node = new MenuNode(menu.getMenuName(), menu.getMenuIco(), true, getByParentId(menu.getId(), true));
+                    results.add(node);
+                } else {
+                    MenuNode node = new MenuNode(menu.getMenuName(), menu.getMenuIco(), false, getByParentId(menu.getId(), true));
+                    results.add(node);
+                }
+
+            }
+
+        }
+        return results;
+    }
+}

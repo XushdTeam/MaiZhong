@@ -1,0 +1,53 @@
+﻿html body { margin-top: 80px; }
+body { background-color: #eee; }
+/* 布局 */
+.site-inline { font-size: 0; min-height: 1000px; border: 1px solid #d9dadc; background-color: #fff; }
+.site-tree, .site-content { display: inline-block; *display: inline; *zoom: 1; vertical-align: top; font-size: 14px; }
+.site-tree { width: 220px; min-height: 1000px; padding: 5px 0 20px; }
+.site-content { width: 849px; min-height: 1000px; padding: 20px 20px 50px 20px; }
+
+/* 头部 */
+.header { position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 65px; border-bottom: 1px solid #2F4056; background-color: #2F4056; color: #fff; margin-bottom: 10px; }
+.logo { position: absolute; left: 0; top: 18px; overflow: hidden; }
+.logo img { width: 34px; height: 31px; -webkit-transition: -webkit-transform 1.5s ease-out; -webkit-border-radius: 110px; border-radius: 110px; -moz-transition: -moz-transform 1.5s ease-out; -o-transition: -o-transform 1.5s ease-out; -ms-transition: -ms-transform 1.5s ease-out; }
+.logo:hover img { -webkit-transform: rotateZ(360deg); -moz-transform: rotateZ(360deg); -o-transform: rotateZ(360deg); -ms-transform: rotateZ(360deg); transform: rotateZ(360deg); }
+
+.header .layui-nav { position: absolute; margin-left: 60px; padding: 0; background: none; }
+.header .layui-nav .layui-nav-item { margin: 0 5px; line-height: 66px; }
+body .layui-layout-admin .site-demo { bottom: 82px; }
+body .site-demo-nav .layui-nav-item { line-height: 40px; }
+.layui-nav-item .layui-icon { position: relative; font-size: 20px; }
+.layui-nav-item a cite { padding: 0 10px; }
+/* 登录信息 */
+.nav-user { position: absolute; top: 12px; right: 0; }
+.nav-user span, .nav-user .unlogin, .out-login, .avatar, .avatar *, .nav-user .nav { display: inline-block; vertical-align: middle; *display: inline; *zoom: 1; }
+.avatar { color: #A9B7B7; font-size: 14px; }
+.avatar img { width: 42px; height: 42px; border-radius: 100%; }
+.avatar cite, .avatar i { margin-left: 10px; }
+.nav-user .nav { position: relative; top: -2px; left: auto; right: 0; margin-left: 30px; }
+.nav-user .nav a { padding: 0 10px; padding: 0 20px; font-size: 14px; color: #999; }
+.nav-user .nav a i { position: relative; top: 5px; padding-right: 8px; font-size: 18px; font-size: 26px; }
+.nav-user .nav a .icon-shouye, .nav-user .nav a .icon-shezhi { top: 2px; }
+.nav-user .nav a:hover, .nav .nav-this { color: #fff; }
+.nav-user .nav a:hover { transition: all .4s; }
+/*登录样式*/
+.login-header { margin-bottom: 0px; }
+.login-header .login-top-bg { display: block; /*background: #e9f1f5 url("../img/dj-content-wrap-after-index-tit.png") no-repeat 5% 0px;*/ height: 66px; }
+.login-header .login-top-menu { right: 20px; }
+.login-header .sitename { width: 300px; float: left; }
+.login-header .sitename h2 { display: block; margin-left: 50px; height: 66px; line-height: 66px; font-size: 20px; font-weight: 300; }
+.login_content { margin-top: -15px; padding-top: 65px; min-height: 500px; vertical-align: middle; width: 100%; padding-bottom: 90px; background: #e9f1f5 url("../images/bg-regist-main2.jpg") no-repeat 50% 100%; border-bottom: 1px solid #E5E5E5; }
+.login_content #login-banner { float: left; padding-left: 10px; }
+#regist { width: 960px; margin: 0 auto; }
+.login_content #login-banner { float: left; padding-left: 10px; }
+#login-banner img { max-width: 100%; width: 600px; height: 348px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); }
+#login { float: left; min-height: 360px; max-width: 320px; padding: 0 10px 0px 20px; }
+#login form { margin-left: 0px; padding: 26px 24px 72px; font-weight: normal; border: none; -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); }
+#login .layui-btn { padding: 0px 30px 1px; width: 100%; }
+#login a.send { display: inline-block; border: 1px solid #E8E8E8; border-radius: 3px; width: 158px; height: 40px; line-height: 40px; color: #333; font-size: 14px; text-align: center; background: #FFF none repeat scroll 0% 0%; vertical-align: middle; margin-top: 10px; }
+#login #nav { text-shadow: #FFF 0 0 5px,#FFF 0 0 10px; float: right; margin: 0 2px 0 0px; padding: 16px 0px 0 0px; }
+/* 底部 */
+.footer { padding: 30px 0; line-height: 30px; text-align: center; background-color: #eee; color: #666; font-weight: 300; }
+body .layui-layout-admin .footer-demo { height: auto; padding: 15px 0; line-height: 26px; }
+.footer a { padding: 0 5px; }
+.footer { padding: 20px 0; }

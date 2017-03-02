@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Manager" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Manager/Manager_Controller" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Manager/Manager_Mapper" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Manager/Manager_Pojo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Manager/Manager_Service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Portal" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Z_Mybatis" charset="UTF-8" />
+  </component>
+</project>
