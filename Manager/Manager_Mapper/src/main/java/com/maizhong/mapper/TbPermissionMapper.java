@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface TbPermissionMapper {
+
     long countByExample(TbPermissionExample example);
 
     int deleteByExample(TbPermissionExample example);
@@ -30,4 +31,6 @@ public interface TbPermissionMapper {
     int updateByPrimaryKey(TbPermission record);
 
     List<TbPermission> getPermissionByRoleId(Long id);
+
+    List<TbPermission> getPermissionByRoleIdAll(@Param("roleId") Long roleId, @Param("parentId") Long parentId);
 }

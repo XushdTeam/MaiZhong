@@ -288,6 +288,24 @@
     RP.role_id = #{id,jdbcType=BIGINT}
   </select>
 
-
+  <!--通过roleid获取角色的权限信息 返回所有权限包括没有赋予的权限-->
+  <select id="getPermissionByRoleIdAll" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT
+    P.*,
+    CASE
+    WHEN P.id = R.permission_id
+    THEN 1
+    ELSE 0
+    END
+    AS ischecked
+    FROM
+    tb_permission P
+    LEFT JOIN tb_role_permission R
+    ON P.id = R.permission_id
+    AND R.role_id = #{roleId}
+    WHERE P.parent = #{parentId}
+    AND P.status = 1 AND P.delflag = 0
+    ORDER BY P.sort
+  </select>
 
 </mapper>
