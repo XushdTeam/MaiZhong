@@ -1,6 +1,7 @@
 package com.maizhong.service.impl;
 
 import com.maizhong.common.dto.MenuNode;
+import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.target.ServiceLog;
 import com.maizhong.common.utils.JsonUtils;
@@ -37,6 +38,76 @@ public class MenuServiceImpl implements MenuService {
 
     @Value("${MANAGER_MENU_KEY}")
     private String MANAGER_MENU_KEY;
+
+
+
+    @ServiceLog(module = "菜单管理",methods = "菜单列表")
+    @Override
+    public List<TbMenu> getMenuList(Boolean isParent) {
+
+        List<TbMenu> systemMenuList = tbMenuMapper.selectParentMenuList();
+        if (isParent){
+            return systemMenuList;
+        }else {
+            List<TbMenu> result = new ArrayList<>();
+            for (TbMenu systemMenu : systemMenuList) {
+                result.add(systemMenu);
+                TbMenuExample example = new TbMenuExample();
+                TbMenuExample.Criteria criteria = example.createCriteria();
+                criteria.andDelflagEqualTo(0).andParentEqualTo(systemMenu.getId());
+                example.setOrderByClause("sort");
+                result.addAll(tbMenuMapper.selectByExample(example));
+            }
+            return result;
+        }
+    }
+
+
+    @Override
+    public TbMenu getMenuById(Long id) {
+        return tbMenuMapper.selectByPrimaryKey(id);
+    }
+
+    @ServiceLog(module = "菜单管理",methods = "菜单新增")
+    @Override
+    public OperateEnum insertMenu(TbMenu menu) {
+        int res = tbMenuMapper.insertSelective(menu);
+        if(res>0){
+            return OperateEnum.SUCCESS;
+        }else {
+            return OperateEnum.FAILE;
+        }
+    }
+
+    @ServiceLog(module = "菜单管理",methods = "菜单修改")
+    @Override
+    public OperateEnum updateMenu(TbMenu menu) {
+
+        int res = tbMenuMapper.updateByPrimaryKeySelective(menu);
+        if(res>0){
+            return OperateEnum.SUCCESS;
+        }else {
+            return OperateEnum.FAILE;
+        }
+    }
+
+    @ServiceLog(module = "菜单管理",methods = "菜单删除")
+    @Override
+    public OperateEnum deleteMenu(long id) {
+        //逻辑删除
+        TbMenu menu = new TbMenu();
+        menu.setDelflag(1);
+        menu.setStatus(null);
+        menu.setId(id);
+        int res = tbMenuMapper.updateByPrimaryKeySelective(menu);
+        if(res>0){
+            return OperateEnum.SUCCESS;
+        }else {
+            return OperateEnum.FAILE;
+        }
+    }
+
+
 
 
     @ServiceLog(module = "菜单管理", methods = "前台菜单获取")

@@ -28,4 +28,6 @@ public interface TbMenuMapper {
     int updateByPrimaryKeySelective(TbMenu record);
 
     int updateByPrimaryKey(TbMenu record);
+
+    List<TbMenu> selectParentMenuList();
 }

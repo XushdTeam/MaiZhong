@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.maizhong.mapper.TbMenuMapper">
-  <resultMap id="BaseResultMap" type="com.maizhong.pojo.TbMenu">
+<mapper namespace="com.maizhong.mapper.TbDictionaryMapper">
+  <resultMap id="BaseResultMap" type="com.maizhong.pojo.TbDictionary">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
-    <result column="menu_ico" jdbcType="VARCHAR" property="menuIco" />
-    <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
-    <result column="menu_type" jdbcType="CHAR" property="menuType" />
+    <result column="dic_name" jdbcType="VARCHAR" property="dicName" />
     <result column="parent" jdbcType="BIGINT" property="parent" />
-    <result column="sort" jdbcType="INTEGER" property="sort" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="delflag" jdbcType="INTEGER" property="delflag" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
@@ -73,16 +69,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, menu_name, menu_ico, menu_url, menu_type, parent, sort, status, delflag, create_user, 
-    create_time
+    id, dic_name, parent, status, delflag, create_user, create_time
   </sql>
-  <select id="selectByExample" parameterType="com.maizhong.pojo.TbMenuExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.maizhong.pojo.TbDictionaryExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tb_menu
+    from tb_dictionary
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -93,52 +88,38 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tb_menu
+    from tb_dictionary
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from tb_menu
+    delete from tb_dictionary
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.maizhong.pojo.TbMenuExample">
-    delete from tb_menu
+  <delete id="deleteByExample" parameterType="com.maizhong.pojo.TbDictionaryExample">
+    delete from tb_dictionary
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.maizhong.pojo.TbMenu">
-    insert into tb_menu (id, menu_name, menu_ico, 
-      menu_url, menu_type, parent, 
-      sort, status, delflag, 
-      create_user, create_time)
-    values (#{id,jdbcType=BIGINT}, #{menuName,jdbcType=VARCHAR}, #{menuIco,jdbcType=VARCHAR}, 
-      #{menuUrl,jdbcType=VARCHAR}, #{menuType,jdbcType=CHAR}, #{parent,jdbcType=BIGINT}, 
-      #{sort,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{delflag,jdbcType=INTEGER}, 
-      #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.maizhong.pojo.TbDictionary">
+    insert into tb_dictionary (id, dic_name, parent, 
+      status, delflag, create_user, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{dicName,jdbcType=VARCHAR}, #{parent,jdbcType=BIGINT}, 
+      #{status,jdbcType=INTEGER}, #{delflag,jdbcType=INTEGER}, #{createUser,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.maizhong.pojo.TbMenu">
-    insert into tb_menu
+  <insert id="insertSelective" parameterType="com.maizhong.pojo.TbDictionary">
+    insert into tb_dictionary
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="menuName != null">
-        menu_name,
-      </if>
-      <if test="menuIco != null">
-        menu_ico,
-      </if>
-      <if test="menuUrl != null">
-        menu_url,
-      </if>
-      <if test="menuType != null">
-        menu_type,
+      <if test="dicName != null">
+        dic_name,
       </if>
       <if test="parent != null">
         parent,
-      </if>
-      <if test="sort != null">
-        sort,
       </if>
       <if test="status != null">
         status,
@@ -157,23 +138,11 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="menuName != null">
-        #{menuName,jdbcType=VARCHAR},
-      </if>
-      <if test="menuIco != null">
-        #{menuIco,jdbcType=VARCHAR},
-      </if>
-      <if test="menuUrl != null">
-        #{menuUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="menuType != null">
-        #{menuType,jdbcType=CHAR},
+      <if test="dicName != null">
+        #{dicName,jdbcType=VARCHAR},
       </if>
       <if test="parent != null">
         #{parent,jdbcType=BIGINT},
-      </if>
-      <if test="sort != null">
-        #{sort,jdbcType=INTEGER},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
@@ -189,35 +158,23 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.maizhong.pojo.TbMenuExample" resultType="java.lang.Long">
-    select count(*) from tb_menu
+  <select id="countByExample" parameterType="com.maizhong.pojo.TbDictionaryExample" resultType="java.lang.Long">
+    select count(*) from tb_dictionary
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update tb_menu
+    update tb_dictionary
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.menuName != null">
-        menu_name = #{record.menuName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.menuIco != null">
-        menu_ico = #{record.menuIco,jdbcType=VARCHAR},
-      </if>
-      <if test="record.menuUrl != null">
-        menu_url = #{record.menuUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="record.menuType != null">
-        menu_type = #{record.menuType,jdbcType=CHAR},
+      <if test="record.dicName != null">
+        dic_name = #{record.dicName,jdbcType=VARCHAR},
       </if>
       <if test="record.parent != null">
         parent = #{record.parent,jdbcType=BIGINT},
-      </if>
-      <if test="record.sort != null">
-        sort = #{record.sort,jdbcType=INTEGER},
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
@@ -237,14 +194,10 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update tb_menu
+    update tb_dictionary
     set id = #{record.id,jdbcType=BIGINT},
-      menu_name = #{record.menuName,jdbcType=VARCHAR},
-      menu_ico = #{record.menuIco,jdbcType=VARCHAR},
-      menu_url = #{record.menuUrl,jdbcType=VARCHAR},
-      menu_type = #{record.menuType,jdbcType=CHAR},
+      dic_name = #{record.dicName,jdbcType=VARCHAR},
       parent = #{record.parent,jdbcType=BIGINT},
-      sort = #{record.sort,jdbcType=INTEGER},
       status = #{record.status,jdbcType=INTEGER},
       delflag = #{record.delflag,jdbcType=INTEGER},
       create_user = #{record.createUser,jdbcType=VARCHAR},
@@ -253,26 +206,14 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.pojo.TbMenu">
-    update tb_menu
+  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.pojo.TbDictionary">
+    update tb_dictionary
     <set>
-      <if test="menuName != null">
-        menu_name = #{menuName,jdbcType=VARCHAR},
-      </if>
-      <if test="menuIco != null">
-        menu_ico = #{menuIco,jdbcType=VARCHAR},
-      </if>
-      <if test="menuUrl != null">
-        menu_url = #{menuUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="menuType != null">
-        menu_type = #{menuType,jdbcType=CHAR},
+      <if test="dicName != null">
+        dic_name = #{dicName,jdbcType=VARCHAR},
       </if>
       <if test="parent != null">
         parent = #{parent,jdbcType=BIGINT},
-      </if>
-      <if test="sort != null">
-        sort = #{sort,jdbcType=INTEGER},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
@@ -289,32 +230,14 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.maizhong.pojo.TbMenu">
-    update tb_menu
-    set menu_name = #{menuName,jdbcType=VARCHAR},
-      menu_ico = #{menuIco,jdbcType=VARCHAR},
-      menu_url = #{menuUrl,jdbcType=VARCHAR},
-      menu_type = #{menuType,jdbcType=CHAR},
+  <update id="updateByPrimaryKey" parameterType="com.maizhong.pojo.TbDictionary">
+    update tb_dictionary
+    set dic_name = #{dicName,jdbcType=VARCHAR},
       parent = #{parent,jdbcType=BIGINT},
-      sort = #{sort,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
       delflag = #{delflag,jdbcType=INTEGER},
       create_user = #{createUser,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-
-
-  <select id="selectParentMenuList" resultMap="BaseResultMap">
-    SELECT
-    M.*,D.dic_name AS type_name
-    FROM
-    tb_menu M
-    INNER JOIN tb_dictionary D ON M.menu_type = D.id
-    WHERE
-    M.delflag = 0  AND M.parent = 0
-    ORDER BY M.sort;
-  </select>
-
-
 </mapper>
