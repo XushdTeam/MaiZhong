@@ -142,4 +142,14 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
+  <!--插入用户的角色信息 批量插入-->
+  <insert id="insertUserRole" parameterType="List">
+    INSERT tb_user_role
+    (user_id,role_id)
+    VALUES
+    <foreach collection="list" item="obj" index="index" separator=",">
+      (#{obj.userId},#{obj.roleId})
+    </foreach>
+  </insert>
 </mapper>

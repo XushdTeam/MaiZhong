@@ -1,14 +1,19 @@
 package com.maizhong.pojo;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.util.Date;
 
 public class TbRole {
     private Long id;
 
+    @NotBlank(message = "角色名称不能为空")
     private String roleName;
 
+    @NotBlank(message = "角色KEY不能为空")
     private String roleKey;
 
+    @NotBlank(message = "角色说明不能为空")
     private String roleDescription;
 
     private Integer status;
@@ -18,6 +23,16 @@ public class TbRole {
     private String createUser;
 
     private Date createTime;
+
+    private int isChecked;
+
+    public int getIsChecked() {
+        return isChecked;
+    }
+
+    public void setIsChecked(int isChecked) {
+        this.isChecked = isChecked;
+    }
 
     public Long getId() {
         return id;

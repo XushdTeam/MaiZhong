@@ -5,6 +5,7 @@ import com.maizhong.pojo.TbUserRoleKey;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TbUserRoleMapper {
     long countByExample(TbUserRoleExample example);
@@ -22,4 +23,6 @@ public interface TbUserRoleMapper {
     int updateByExampleSelective(@Param("record") TbUserRoleKey record, @Param("example") TbUserRoleExample example);
 
     int updateByExample(@Param("record") TbUserRoleKey record, @Param("example") TbUserRoleExample example);
+
+    int insertUserRole(List<Map<String,String>> list);
 }

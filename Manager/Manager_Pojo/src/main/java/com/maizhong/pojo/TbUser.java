@@ -3,6 +3,7 @@ package com.maizhong.pojo;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.util.Date;
+import java.util.List;
 
 public class TbUser {
 
@@ -11,6 +12,12 @@ public class TbUser {
     /*附加字段*/
     @NotBlank(message = "验证码为空")
     private String verifyCode;
+
+
+
+    //附加字段
+    private List<String> roleName;
+
 
     private Long id;
 
@@ -130,5 +137,13 @@ public class TbUser {
 
     public void setVerifyCode(String verifyCode) {
         this.verifyCode = verifyCode;
+    }
+
+    public List<String> getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(List<String> roleName) {
+        this.roleName = roleName;
     }
 }

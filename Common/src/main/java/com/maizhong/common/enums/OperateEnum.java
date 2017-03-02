@@ -13,7 +13,8 @@ public enum OperateEnum {
     FILE_EMPTY(500,"文件为空"),
     PASS_NOT_EQUAIL(500,"两次密码不一致"),
     PASS_ERROR(500,"原密码错误"),
-    FILE_UPLOAD_SUCCESS(200,"上传成功");
+    FILE_UPLOAD_SUCCESS(200,"上传成功"),
+    SB(500,"你是不是疯了");
 
     private int state;
 
