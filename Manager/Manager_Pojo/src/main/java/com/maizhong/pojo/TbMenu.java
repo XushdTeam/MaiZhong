@@ -1,16 +1,26 @@
 package com.maizhong.pojo;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.util.Date;
 
 public class TbMenu {
+    //附加字段
+    //菜单类型
+    private String typeName;
+
     private Long id;
 
+    @NotBlank(message = "菜单名称不能为空")
     private String menuName;
 
+    @NotBlank(message = "菜单ICO不能为空")
     private String menuIco;
 
+    @NotBlank(message = "菜单URL不能为空")
     private String menuUrl;
 
+    @NotBlank(message = "菜单类型不能为空")
     private String menuType;
 
     private Long parent;
@@ -111,5 +121,14 @@ public class TbMenu {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getTypeName() {
+        if (typeName==null)return "--";
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 }

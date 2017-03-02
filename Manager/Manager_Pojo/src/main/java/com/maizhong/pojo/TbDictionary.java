@@ -1,12 +1,17 @@
 package com.maizhong.pojo;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class TbDictionary {
     private Long id;
 
+    @NotBlank(message = "字典名称不能为空")
     private String dicName;
 
+    @NotNull(message = "排序不能为空")
     private Long parent;
 
     private Integer status;
@@ -72,4 +77,5 @@ public class TbDictionary {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
 }
