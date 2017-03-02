@@ -28,4 +28,6 @@ public interface MenuService {
     OperateEnum updateMenu(TbMenu menu);
 
     OperateEnum deleteMenu(long id);
+
+    OperateEnum menuRedisClear();
 }

@@ -9,6 +9,7 @@ import com.maizhong.pojo.TbMenu;
 import com.maizhong.service.DicService;
 import com.maizhong.service.MenuService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,6 +43,7 @@ public class MenuController extends GlobalController {
      * 跳转菜单列表     *
      * @return
      */
+    @RequiresPermissions("/menu")
     @RequestMapping(value = "/menu",method = RequestMethod.GET)
     public String menu(Model model){
 
@@ -99,6 +101,7 @@ public class MenuController extends GlobalController {
      * @param result
      * @return
      */
+    @RequiresPermissions("/menu/save")
     @ControllerLog(module = "菜单管理",methods = "菜单新增")
     @RequestMapping(value = "/menu/save",method = RequestMethod.POST)
     @ResponseBody
@@ -125,6 +128,7 @@ public class MenuController extends GlobalController {
      * @param result
      * @return
      */
+    @RequiresPermissions("/menu/update")
     @ControllerLog(module = "菜单管理",methods = "菜单修改")
     @RequestMapping(value = "/menu/update",method = RequestMethod.POST)
     @ResponseBody
@@ -149,6 +153,7 @@ public class MenuController extends GlobalController {
      * @param id
      * @return
      */
+    @RequiresPermissions("/menu/delete")
     @ControllerLog(module = "菜单管理",methods = "菜单删除")
     @RequestMapping(value = "/menu/delete/{id}",method = RequestMethod.POST)
     @ResponseBody
@@ -157,6 +162,14 @@ public class MenuController extends GlobalController {
         return JsonResult.build(res);
     }
 
+    @RequiresPermissions("/menu/redis/clear")
+    @ControllerLog(module = "菜单管理",methods = "菜单缓存清除")
+    @RequestMapping(value = "/menu/redis/clear",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult menuRedisClear(){
+        OperateEnum res = menuService.menuRedisClear();
+        return JsonResult.build(res);
+    }
 
 
 

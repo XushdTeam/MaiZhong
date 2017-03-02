@@ -1,5 +1,7 @@
 package com.maizhong.service;
 
+import com.maizhong.common.dto.PageSearchParam;
+import com.maizhong.common.result.PageResult;
 import com.maizhong.pojo.TbLog;
 
 /**
@@ -8,8 +10,11 @@ import com.maizhong.pojo.TbLog;
  */
 public interface LogService {
 
-
     void writeLog(TbLog tbLog);
 
+    PageResult getLogRunList(PageSearchParam param, int type);
 
+    boolean logRunDel(int type);
+
+    TbLog getLogById(int id);
 }

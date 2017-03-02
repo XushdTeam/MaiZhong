@@ -6,6 +6,7 @@ import com.maizhong.common.target.ControllerLog;
 import com.maizhong.pojo.TbDictionary;
 import com.maizhong.service.DicService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +35,7 @@ public class DictionaryController extends GlobalController {
      * 字典跳转
      * @return
      */
+    @RequiresPermissions("/dictionary")
     @RequestMapping(value = "/dictionary",method = RequestMethod.GET)
     public String dictionary(Model model){
 
@@ -89,6 +91,7 @@ public class DictionaryController extends GlobalController {
      * @param result
      * @return
      */
+    @RequiresPermissions("/dictionary/save")
     @ControllerLog(module = "字典管理",methods = "字典新增")
     @RequestMapping(value = "/dictionary/save",method = RequestMethod.POST)
     @ResponseBody
@@ -115,6 +118,7 @@ public class DictionaryController extends GlobalController {
      * @param result
      * @return
      */
+    @RequiresPermissions("/dictionary/update")
     @ControllerLog(module = "字典管理",methods = "字典修改")
     @RequestMapping(value = "/dictionary/update",method = RequestMethod.POST)
     @ResponseBody
@@ -138,6 +142,7 @@ public class DictionaryController extends GlobalController {
      * @param id
      * @return
      */
+    @RequiresPermissions("/dictionary/delete")
     @ControllerLog(module = "字典管理",methods = "字典删除")
     @RequestMapping(value = "/dictionary/delete/{id}",method = RequestMethod.POST)
     @ResponseBody

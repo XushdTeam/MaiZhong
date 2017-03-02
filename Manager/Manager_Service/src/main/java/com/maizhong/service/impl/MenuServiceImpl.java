@@ -107,7 +107,21 @@ public class MenuServiceImpl implements MenuService {
         }
     }
 
+    @Override
+    public OperateEnum menuRedisClear() {
+        try {
+            long res = jedisClient.del(MANAGER_MENU_KEY);
+            if(res>=0){
+                return OperateEnum.SUCCESS;
+            }else{
+                return OperateEnum.FAILE;
+            }
 
+        }catch (Exception e) {
+            e.printStackTrace();
+            return OperateEnum.FAILE;
+        }
+    }
 
 
     @ServiceLog(module = "菜单管理", methods = "前台菜单获取")
