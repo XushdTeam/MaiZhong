@@ -7,8 +7,9 @@ layui.config({
 });
 layui.use(['layer','app'], function () {
 
-    var $ = layui.jquery,
+    var $ = layui.jquery,layer=layui.layer,
         app=layui.app,active={};
+
 
     //修改tab文字
     var title = $(".fhui-admin-main_hd").find("h2").text();
@@ -126,13 +127,24 @@ layui.use(['layer','app'], function () {
                         return;
                     }
                     pwd = app.sha(pwd);
-                    app.ajaxPost("/lock/" + userName + "/" + pwd,{},function(e,r){
-                        if(e){
-                            layer.msg(r.message, {icon: 2, time: 1000});
-                        }else{
-                            layer.close(lockIndex);
+                    $.ajax({
+                        url: "/lock/" + userName + "/" + pwd,
+                        type: "POST",
+                        dataType: "JSON",
+                        data: {},
+                        success: function (data, startic) {
+
+                            if (data.status == 200) {
+                                layer.close(lockIndex);
+                            } else {
+                                layer.msg(data.message, {icon: 2, time: 1000});
+                            }
+                        },
+                        error: function (e) {
+                            c("Net Lost");
                         }
                     });
+
                 });
 
             }
