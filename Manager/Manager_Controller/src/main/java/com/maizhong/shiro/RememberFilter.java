@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 记住密码处理
@@ -25,6 +26,7 @@ public class RememberFilter extends FormAuthenticationFilter {
 
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
+
         Subject subject = SecurityUtils.getSubject();
         String userPhone = (String) subject.getPrincipal();
         //如果 isAuthenticated 为 false 证明不是登录过的，

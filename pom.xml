@@ -12,6 +12,7 @@
         <module>Common</module>
         <module>Portal</module>
         <module>Z_Mybatis</module>
+        <module>Rest</module>
     </modules>
 
     <packaging>pom</packaging>

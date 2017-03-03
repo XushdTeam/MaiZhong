@@ -28,6 +28,7 @@
         <module name="Manager_Pojo" />
         <module name="Manager_Service" />
         <module name="Portal" />
+        <module name="Rest" />
         <module name="Z_Mybatis" />
       </profile>
     </annotationProcessing>
@@ -40,6 +41,7 @@
       <module name="Manager_Pojo" target="1.7" />
       <module name="Manager_Service" target="1.7" />
       <module name="Portal" target="1.7" />
+      <module name="Rest" target="1.7" />
       <module name="Z_Mybatis" target="1.7" />
     </bytecodeTargetLevel>
   </component>

@@ -70,9 +70,6 @@
                             <a href="javascript:;"><i class="fa fa-user-circle" aria-hidden="true"></i> 个人信息</a>
                         </dd>
                         <dd>
-                            <a href="javascript:;"><i class="fa fa-gear" aria-hidden="true"></i> 设置</a>
-                        </dd>
-                        <dd>
                             <a href="javascript:;" class="do-action" data-type="doLock" aria-hidden="true" ><i class="fa fa-lock" aria-hidden="true"></i> 锁屏</a>
                         </dd>
                         <dd>
@@ -106,7 +103,7 @@
     <script type="text/template" id="lock-temp">
         <div class="admin-header-lock" id="lock-box">
             <div class="admin-header-lock-img">
-                <img src="/resources/images/0.jpg"/>
+                <img src="${userAdvert}"/>
             </div>
             <div class="admin-header-lock-name" id="lockUserName">${userName}</div>
             <input type="text" class="admin-header-lock-input" value="输入密码解锁.." name="lockPwd" id="lockPwd" />

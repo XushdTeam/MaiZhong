@@ -44,6 +44,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/Manager/Manager_Controller" />
     <file type="web" url="file://$PROJECT_DIR$/Portal" />
+    <file type="web" url="file://$PROJECT_DIR$/Rest" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
