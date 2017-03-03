@@ -1,5 +1,6 @@
 package com.maizhong.common.result;
 
+import com.maizhong.common.enums.AuthEnum;
 import com.maizhong.common.enums.OperateEnum;
 
 /**
@@ -31,6 +32,13 @@ public class JsonResult {
     }
 
     public static JsonResult build(OperateEnum result){
+        if (result.getState()==200){
+            return new JsonResult(200,result.getStateInfo(),null);
+        }else{
+            return new JsonResult(500,result.getStateInfo(),null);
+        }
+    }
+    public static JsonResult build(AuthEnum result){
         if (result.getState()==200){
             return new JsonResult(200,result.getStateInfo(),null);
         }else{
