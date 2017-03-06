@@ -113,7 +113,7 @@ public class UserController extends GlobalController{
     @ResponseBody
     public JsonResult userAdvertUpload(@RequestParam(value = "advert", required = false) MultipartFile filedata, @PathVariable String userId){
 
-        JsonResult jsonResult = fileUploadService.uploadImg(filedata);
+        JsonResult jsonResult = fileUploadService.uploadImg(filedata,"/advert");
         if(jsonResult.getStatus()==200){
 
             int res = userService.updateUserAdvert(jsonResult.getData().toString(),Long.parseLong(userId));

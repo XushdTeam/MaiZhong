@@ -21,9 +21,6 @@ public class FileUploadServiceImpl implements FileUploadService {
     @Value("${IMAGE_BASE_URL}")
     private String IMAGE_BASE_URL;
 
-    @Value("${FILE_UPLOAD_PATH}")
-    private String FILE_UPLOAD_PATH;
-
     @Value("${FTP_SERVER_IP}")
     private String FTP_SERVER_IP;
 
@@ -41,7 +38,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 
     @ServiceLog(methods = "图片上传",module = "文件服务")
     @Override
-    public JsonResult uploadImg(MultipartFile filedata) {
+    public JsonResult uploadImg(MultipartFile filedata,String pathKey) {
 
         try{
             if (filedata.isEmpty()) return JsonResult.build(OperateEnum.FILE_EMPTY);
@@ -54,9 +51,9 @@ public class FileUploadServiceImpl implements FileUploadService {
             String newFileName = IDUtils.genImageName()+originalFilename.substring(originalFilename.lastIndexOf("."));
             //转存文件,上传到FTP
             FtpUtil.uploadFile(FTP_SERVER_IP,FTP_SERVER_PORT,FTP_SERVER_USERNAME,FTP_SERVER_PASSWORD
-            ,FILE_UPLOAD_PATH,filePath,newFileName,filedata.getInputStream());
+            ,pathKey,filePath,newFileName,filedata.getInputStream());
 
-            return JsonResult.build(200,OperateEnum.FILE_UPLOAD_SUCCESS.getStateInfo(),IMAGE_BASE_URL+FILE_UPLOAD_PATH+filePath+"/"+newFileName);
+            return JsonResult.build(200,OperateEnum.FILE_UPLOAD_SUCCESS.getStateInfo(),IMAGE_BASE_URL+pathKey+filePath+"/"+newFileName);
 
         }catch (Exception e){
             e.printStackTrace();

@@ -13,6 +13,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class IndexController extends GlobalController{
 
+
+    @RequestMapping(value = "/")
+    public String root(){
+        return "index";
+    }
+
+
+
+
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String Index(Model model){
         TbUser user = super.getUserInfo();
