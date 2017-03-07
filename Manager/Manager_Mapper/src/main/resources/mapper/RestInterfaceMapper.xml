@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maizhong.mapper.RestInterfaceMapper">
+  <resultMap id="BaseResultMap" type="com.maizhong.pojo.RestInterface">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="interface_name" jdbcType="VARCHAR" property="interfaceName" />
+    <result column="interface_url" jdbcType="VARCHAR" property="interfaceUrl" />
+    <result column="interface_param" jdbcType="VARCHAR" property="interfaceParam" />
+    <result column="interface_desc" jdbcType="VARCHAR" property="interfaceDesc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, interface_name, interface_url, interface_param, interface_desc
+  </sql>
+  <select id="selectByExample" parameterType="com.maizhong.pojo.RestInterfaceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rest_interface
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rest_interface
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from rest_interface
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maizhong.pojo.RestInterfaceExample">
+    delete from rest_interface
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maizhong.pojo.RestInterface">
+    insert into rest_interface (id, interface_name, interface_url, 
+      interface_param, interface_desc)
+    values (#{id,jdbcType=BIGINT}, #{interfaceName,jdbcType=VARCHAR}, #{interfaceUrl,jdbcType=VARCHAR}, 
+      #{interfaceParam,jdbcType=VARCHAR}, #{interfaceDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maizhong.pojo.RestInterface">
+    insert into rest_interface
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="interfaceName != null">
+        interface_name,
+      </if>
+      <if test="interfaceUrl != null">
+        interface_url,
+      </if>
+      <if test="interfaceParam != null">
+        interface_param,
+      </if>
+      <if test="interfaceDesc != null">
+        interface_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="interfaceName != null">
+        #{interfaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceUrl != null">
+        #{interfaceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceParam != null">
+        #{interfaceParam,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceDesc != null">
+        #{interfaceDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maizhong.pojo.RestInterfaceExample" resultType="java.lang.Long">
+    select count(*) from rest_interface
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update rest_interface
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.interfaceName != null">
+        interface_name = #{record.interfaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interfaceUrl != null">
+        interface_url = #{record.interfaceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interfaceParam != null">
+        interface_param = #{record.interfaceParam,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interfaceDesc != null">
+        interface_desc = #{record.interfaceDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update rest_interface
+    set id = #{record.id,jdbcType=BIGINT},
+      interface_name = #{record.interfaceName,jdbcType=VARCHAR},
+      interface_url = #{record.interfaceUrl,jdbcType=VARCHAR},
+      interface_param = #{record.interfaceParam,jdbcType=VARCHAR},
+      interface_desc = #{record.interfaceDesc,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.pojo.RestInterface">
+    update rest_interface
+    <set>
+      <if test="interfaceName != null">
+        interface_name = #{interfaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceUrl != null">
+        interface_url = #{interfaceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceParam != null">
+        interface_param = #{interfaceParam,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceDesc != null">
+        interface_desc = #{interfaceDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maizhong.pojo.RestInterface">
+    update rest_interface
+    set interface_name = #{interfaceName,jdbcType=VARCHAR},
+      interface_url = #{interfaceUrl,jdbcType=VARCHAR},
+      interface_param = #{interfaceParam,jdbcType=VARCHAR},
+      interface_desc = #{interfaceDesc,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
