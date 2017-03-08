@@ -2,8 +2,9 @@ package com.maizhong.mapper;
 
 import com.maizhong.pojo.TbCarBrand;
 import com.maizhong.pojo.TbCarBrandExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface TbCarBrandMapper {
     long countByExample(TbCarBrandExample example);

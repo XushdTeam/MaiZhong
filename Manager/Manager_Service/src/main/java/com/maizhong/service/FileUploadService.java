@@ -9,5 +9,11 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public interface FileUploadService {
 
-    JsonResult uploadImg(MultipartFile filedata);
+    /**
+     * 图片上传服务
+     * @param filedata 文件
+     * @param pathKey 分类路径
+     * @return
+     */
+    JsonResult uploadImg(MultipartFile filedata,String pathKey);
 }

@@ -1,0 +1,63 @@
+package com.maizhong.pojo;
+
+public class TbAdvert {
+    private Long id;
+
+    private String advertName;
+
+    private String advertUrl;
+
+    private String advertImg;
+
+    private Integer advertType;
+
+    private String advertDesc;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getAdvertName() {
+        return advertName;
+    }
+
+    public void setAdvertName(String advertName) {
+        this.advertName = advertName == null ? null : advertName.trim();
+    }
+
+    public String getAdvertUrl() {
+        return advertUrl;
+    }
+
+    public void setAdvertUrl(String advertUrl) {
+        this.advertUrl = advertUrl == null ? null : advertUrl.trim();
+    }
+
+    public String getAdvertImg() {
+        return advertImg;
+    }
+
+    public void setAdvertImg(String advertImg) {
+        this.advertImg = advertImg == null ? null : advertImg.trim();
+    }
+
+    public Integer getAdvertType() {
+        return advertType;
+    }
+
+    public void setAdvertType(Integer advertType) {
+        this.advertType = advertType;
+    }
+
+    public String getAdvertDesc() {
+        return advertDesc;
+    }
+
+    public void setAdvertDesc(String advertDesc) {
+        this.advertDesc = advertDesc == null ? null : advertDesc.trim();
+    }
+}

@@ -2,8 +2,9 @@ package com.maizhong.mapper;
 
 import com.maizhong.pojo.TbCarType;
 import com.maizhong.pojo.TbCarTypeExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface TbCarTypeMapper {
     long countByExample(TbCarTypeExample example);
