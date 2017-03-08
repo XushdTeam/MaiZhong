@@ -81,7 +81,7 @@ public class TypeServiceImpl implements TypeService {
         criteria.andTypeNameEqualTo(tbCarType.getTypeName());
         List<TbCarType> carType = tbCarTypeMapper.selectByExample(tbCarTypeExample);
         if (carType.size() > 0){
-            return OperateEnum.READD;
+            return OperateEnum.NAME_REPEAT;
         }
 
             int res = tbCarTypeMapper.insertSelective(tbCarType);

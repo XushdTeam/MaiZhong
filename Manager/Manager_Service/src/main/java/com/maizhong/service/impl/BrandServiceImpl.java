@@ -100,7 +100,7 @@ public class BrandServiceImpl implements BrandService {
         criteria.andBrandNameEqualTo(tbCarBrand.getBrandName());
         List<TbCarBrand> carBrand = tbCarBrandMapper.selectByExample(tbCarBrandExample);
         if (carBrand.size() > 0){
-            return OperateEnum.READD;
+            return OperateEnum.NAME_REPEAT;
         }
             int res = tbCarBrandMapper.insertSelective(tbCarBrand);
             if (res > 0) {
