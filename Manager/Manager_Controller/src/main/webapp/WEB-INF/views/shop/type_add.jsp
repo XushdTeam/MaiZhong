@@ -70,6 +70,7 @@
             var $ = layui.jquery,
                     form = layui.form(),
                     app = layui.app;
+                    app.fixBar();
 
             /**
              * 绑定上传事件

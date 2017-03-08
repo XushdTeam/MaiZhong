@@ -64,6 +64,7 @@
             </div>
         </form>
     </div>
+
     <script type="text/javascript" src="/resources/js/event.js"></script>
     <script type="text/javascript">
         layui.use(['form', 'upload', 'app'], function () {
@@ -74,6 +75,7 @@
             /**
              * 绑定上传事件
              */
+            app.fixBar();
             layui.upload({
               //url: '${uploadUrl}',
               url: '/brand/advert/upload',
