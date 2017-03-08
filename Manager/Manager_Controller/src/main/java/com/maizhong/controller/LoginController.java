@@ -65,7 +65,7 @@ public class LoginController {
             return JsonResult.OK("/index");
         }
         String verifyCode = (String) request.getSession().getAttribute(String.valueOf(SessionEnum.VERIFYCODE_KEY));
-        if(!StringUtils.equals(tbUser.getVerifyCode(),verifyCode)){
+        if(!StringUtils.equals(tbUser.getVerifyCode().toLowerCase(),verifyCode)){
             return JsonResult.Error(AuthEnum.VERIFYCODE_ERROR.getStateInfo());
         }
 
