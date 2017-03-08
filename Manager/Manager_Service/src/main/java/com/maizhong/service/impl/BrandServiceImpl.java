@@ -95,7 +95,13 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public OperateEnum insertCarBrand(TbCarBrand tbCarBrand) {
-
+        TbCarBrandExample tbCarBrandExample = new TbCarBrandExample();
+        TbCarBrandExample.Criteria criteria = tbCarBrandExample.createCriteria();
+        criteria.andBrandNameEqualTo(tbCarBrand.getBrandName());
+        List<TbCarBrand> carBrand = tbCarBrandMapper.selectByExample(tbCarBrandExample);
+        if (carBrand.size() > 0){
+            return OperateEnum.READD;
+        }
             int res = tbCarBrandMapper.insertSelective(tbCarBrand);
             if (res > 0) {
                 return OperateEnum.SUCCESS;

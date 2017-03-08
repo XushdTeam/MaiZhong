@@ -42,7 +42,7 @@ public class TypeController {
         model.addAttribute("handleUrl", "/type/handle");
         model.addAttribute("deleteUrl", "/type/delete");
 
-        return "system/type";
+        return "shop/type";
     }
 
     /**
@@ -83,7 +83,7 @@ public class TypeController {
             //新增
             model.addAttribute("handle", "类别管理/新增类别");
             model.addAttribute("saveUrl", "/type/save");
-            return "system/type_add";
+            return "shop/type_add";
         } else {
             TbCarType type = typeService.getCarTypeByid(Long.valueOf(id));
             model.addAttribute("type", type);
@@ -91,7 +91,7 @@ public class TypeController {
             model.addAttribute("saveUrl", "/type/update");
             model.addAttribute("uploadUrl", "/type/" + type.getId() + "/advert/upload");
             model.addAttribute("passUpdateUrl", "/type/" + type.getId() + "/pass/update");
-            return "system/type_setting";
+            return "shop/type_setting";
         }
     }
 

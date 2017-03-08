@@ -16,8 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-
 /**
  * Description:汽车品牌控制器
  * User: 王存浩
@@ -44,7 +42,7 @@ public class BrandController {
         model.addAttribute("handleUrl", "/brand/handle");
         model.addAttribute("deleteUrl", "/brand/delete");
 
-        return "system/brand";
+        return "shop/brand";
     }
 
 
@@ -81,14 +79,14 @@ public class BrandController {
             //新增
             model.addAttribute("handle", "品牌管理/新增品牌");
             model.addAttribute("saveUrl", "/brand/save");
-            return "system/brand_add";
+            return "shop/brand_add";
         } else {
             TbCarBrand brand = brandService.getCarBrandByid(Long.valueOf(id));
             model.addAttribute("brand", brand);
             model.addAttribute("handle", "品牌管理/品牌修改");
             model.addAttribute("saveUrl", "/brand/update");
             model.addAttribute("uploadUrl", "/brand/" + brand.getId() + "/advert/upload");
-            return "system/brand_setting";
+            return "shop/brand_setting";
         }
     }
 
@@ -142,7 +140,6 @@ public class BrandController {
      * @param id
      * @return
      */
-
     @RequiresPermissions("/brand/advert")
     @ControllerLog(module = "品牌管理", methods = "品牌LOGO修改")
     @RequestMapping(value = "/brand/{id}/advert/upload", method = RequestMethod.POST)
