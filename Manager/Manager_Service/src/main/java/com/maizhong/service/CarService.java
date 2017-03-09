@@ -6,10 +6,12 @@ import com.maizhong.common.result.PageResult;
 import com.maizhong.pojo.TbCar;
 
 /**
- * Created by Administrator on 2017/3/7.
+ * Created by yangF on 2017/3/7.
  */
 public interface CarService {
     public PageResult findAll(PageSearchParam param);
+
+    public PageResult findListToShow(PageSearchParam param);
 
     public JsonResult addTbCar(TbCar tbCar);
 

@@ -5,7 +5,9 @@ import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.common.target.ControllerLog;
+import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.pojo.TbCarBrand;
+import com.maizhong.pojo.TbCarType;
 import com.maizhong.service.BrandService;
 import com.maizhong.service.FileUploadService;
 import org.apache.commons.lang3.StringUtils;
@@ -15,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * Description:汽车品牌控制器
@@ -172,6 +176,20 @@ public class BrandController {
     public JsonResult brandAdvertUpload(@RequestParam(value = "advert", required = false) MultipartFile filedata) {
         JsonResult jsonResult = fileUploadService.uploadImg(filedata, "/advert");
         return  jsonResult;
+    }
+
+
+    /***
+     * 返回所有的json数据
+     * @return
+     */
+    @RequestMapping("/brand/findAll")
+    @ResponseBody
+    public JsonResult findAll(){
+//        String type = brandService.getCarBrandListAll();
+//        return type==null?"{status:500}":"{status:200,data:"+type+"}";
+        List<TbCarBrand> list = JsonUtils.jsonToList(brandService.getCarBrandListAll(), TbCarBrand.class);
+        return JsonResult.OK(list);
     }
 }
 

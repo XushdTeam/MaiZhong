@@ -5,6 +5,7 @@ import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.common.target.ControllerLog;
+import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.pojo.TbCarType;
 import com.maizhong.service.TypeService;
 import com.maizhong.service.FileUploadService;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * Description:汽车类别控制器
@@ -177,6 +180,16 @@ public class TypeController {
     public JsonResult typeAdvertUpload(@RequestParam(value = "advert", required = false) MultipartFile filedata) {
         JsonResult jsonResult = fileUploadService.uploadImg(filedata, "/advert");
         return  jsonResult;
+    }
+
+
+    @RequestMapping("/type/findAll")
+    @ResponseBody
+    public JsonResult findAll(){
+//        String type = typeService.getCarTypeListAll();
+//        return type==null?"{status:500}":"{status:200,data:"+type+"}";
+        List<TbCarType> list = JsonUtils.jsonToList(typeService.getCarTypeListAll(), TbCarType.class);
+        return JsonResult.OK(list);
     }
 }
 

@@ -4,12 +4,15 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.maizhong.common.dto.PageSearchParam;
+import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.common.utils.TimeUtils;
 import com.maizhong.mapper.TbCarMapper;
+import com.maizhong.mapper.ext.TbCarMapperExt;
 import com.maizhong.pojo.TbCar;
 import com.maizhong.pojo.TbCarExample;
+import com.maizhong.pojo.vo.TbCarVo;
 import com.maizhong.service.CarService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/3/7.
+ * Created by yangF on 2017/3/7.
  */
 @Service
 public class CarServiceImpl implements CarService {
@@ -29,6 +32,8 @@ public class CarServiceImpl implements CarService {
     @Resource
     private TbCarMapper tbCarMapper;
 
+    @Resource
+    private TbCarMapperExt tbCarMapperExt;
 
 
     @Value("${PAGESIZE}")
@@ -161,26 +166,26 @@ public class CarServiceImpl implements CarService {
             return JsonResult.Error("数据错误");
         }
 
-//        `number`'汽车编号 ', id 主键
-        if (StringUtils.isBlank(car.getId()+"")||StringUtils.isBlank(car.getNumber()+"")){
+        //  `number`'汽车编号 ', id 主键
+        if (car.getNumber()==null||car.getId()==null||StringUtils.isBlank(car.getId()+"")||StringUtils.isBlank(car.getNumber()+"")){
             return JsonResult.Error("编号或者Id为空了");
         }
         //品牌类型
-        if (StringUtils.isBlank(car.getCarType()+"")||StringUtils.isBlank(car.getCarBrand()+"")){
+        if (car.getCarType()==null||car.getCarBrand()==null||StringUtils.isBlank(car.getCarType()+"")||StringUtils.isBlank(car.getCarBrand()+"")){
             return JsonResult.Error("品牌和类型是必选项");
         }
-//        `year_sku 年款式
-        if (StringUtils.isBlank(car.getYearSku()+"")){
+        // `year_sku 年款式
+        if ( car.getYearSku()==null||StringUtils.isBlank(car.getYearSku()+"")){
             return JsonResult.Error("车辆年份不可以为空");
         }
-//    '订金价格',
-        if (StringUtils.isBlank(car.getReservePrice()+"")||StringUtils.isBlank(car.getSellPrice()+"")){
+        //    '订金价格',
+        if (car.getReservePrice()==null||car.getSellPrice()==null||StringUtils.isBlank(car.getReservePrice()+"")||StringUtils.isBlank(car.getSellPrice()+"")){
             return JsonResult.Error("车辆卖价和定金不可以为空");
         }
-//  '修改时间',
+        //  '修改时间',
         car.setUpdateTime(new Date());
-//        `unable` int(1) NOT NULL DEFAULT '1' COMMENT '是否可用 用于搜索时是否展示',
-        if (StringUtils.isBlank(car.getUnable()+"")){
+        //  unable` '是否可用 用于搜索时是否展示',
+        if (car.getUnable()==null||StringUtils.isBlank(car.getUnable()+"")){
             car.setUnable(1);
         }
 
@@ -195,7 +200,56 @@ public class CarServiceImpl implements CarService {
      */
     @Override
     public JsonResult deleteCar(Long id) {
-        return (id==null?0:tbCarMapper.deleteByPrimaryKey(id))==0?JsonResult.Error("删除失败"):JsonResult.OK("删除成功");
+        return (id==null?0:tbCarMapper.deleteByPrimaryKey(id))==0?JsonResult.build(OperateEnum.FAILE):JsonResult.build(OperateEnum.SUCCESS);
     }
 
+    @Override
+    public PageResult findListToShow(PageSearchParam param) {
+        if (param==null){
+            param=new PageSearchParam();
+        }
+        if (param.getPageSize()==0){
+            param.setPageSize(PAGESIZE);
+        }
+        //开启分页
+        Page page = PageHelper.startPage(param.getPageIndex(), param.getPageSize());
+
+        //添加条件
+        TbCarExample example = new TbCarExample();
+
+        TbCarExample.Criteria criteria = example.createCriteria();
+        //添加查询条件 queryString
+        if (param!=null){
+
+            //添加时间条件
+            if (param.getFiled("timeBegin")!=null){
+                criteria.andUpdateTimeGreaterThan(TimeUtils.getDate(param.getFiled("timeBegin")));
+            }
+            if (param.getFiled("timeEnd")!=null){
+                criteria.andUpdateTimeLessThan(TimeUtils.getDate(param.getFiled("timeEnd")));
+            }
+
+            //添加品牌与类型
+            if (param.getFiled("carType")!=null){
+                criteria.andCarTypeEqualTo(Long.parseLong(param.getFiled("carType")));
+            }
+            if (param.getFiled("carBrand")!=null){
+                criteria.andCarBrandEqualTo(Long.parseLong(param.getFiled("carBrand")));
+            }
+
+            //价格区间放弃
+            if (StringUtils.isNotBlank(param.getFiled("queryString"))&&!param.getFiled("queryString").contains("=")){
+                criteria.andNameLike("%"+param.getFiled("queryString")+"%");
+            }
+        }
+
+        //查询
+        List<TbCarVo> list=tbCarMapperExt.findListNotContainsDesc(example);
+        PageInfo pageInfo = null;
+        if (list!=null){
+            pageInfo = new PageInfo(list);
+        }
+
+        return new PageResult(pageInfo);
+    }
 }
