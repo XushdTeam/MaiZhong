@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 首页控制器
  * Created by Xushd on 2017/3/3.
@@ -26,16 +28,25 @@ public class IndexController {
 
 
 
-    @RequestMapping(value = "/index/login",method = RequestMethod.POST)
+    @RequestMapping(value = "/loginCheck",method = RequestMethod.POST)
     @ResponseBody
     public JsonResult login(String username, String password){
         JsonResult result = indexService.login(username,password);
         return result;
     }
 
-    @RequestMapping(value = "/index/interface",method = RequestMethod.GET)
+    @RequestMapping(value = "/interface",method = RequestMethod.GET)
     public String interfacePage(){
         return "interface";
+    }
+
+
+
+    @RequestMapping(value = "/baseInfo")
+    @ResponseBody
+    public JsonResult baseInfo(){
+        JsonResult result = indexService.getBaseInfo();
+        return result;
     }
 
 }

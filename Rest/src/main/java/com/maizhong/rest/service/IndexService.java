@@ -10,4 +10,6 @@ public interface IndexService {
 
     JsonResult login(String username, String password);
 
+    JsonResult getBaseInfo();
+
 }

@@ -45,7 +45,7 @@
                     </a>
                 </li>--%>
                 <li class="layui-nav-item ">
-                    <a href="javascript:;" data-fid="3">
+                    <a href="javascript:;" data-fid="7">
                         <i class="fa1 fa-institution"></i>
                         <cite>商城功能</cite>
                     </a>

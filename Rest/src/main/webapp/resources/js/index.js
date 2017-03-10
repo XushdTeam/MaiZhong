@@ -22,7 +22,7 @@ layui.use(["form", "color", "layer","app"], function () {
                 tips: [2, '#78BA32'] //还可配置颜色
             });
         }else{
-            app.ajaxPost('/rest/index/login',data,function (e, r) {
+            app.ajaxPost('/rest/login',data,function (e, r) {
                 if (e){
                     app.layerAlertE(e);
                 }else{

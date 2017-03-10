@@ -2,11 +2,121 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>接口调试工具</title>
+    <link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div style="text-align: center">
-    <h1>接口调试工具</h1>
+<div class="container">
+    <div class="jumbotron">
+        <h1>接口调试工具</h1>
+        <p>当前系统接口数量</p>
+        <h2><span class="label label-success">0</span></h2>
+        <div class="row" style="float: right">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">添加</button>
+        </div>
+    </div>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">接口查询</a>
+            </div>
+            <div>
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">提交</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="table-responsive">
+        <table class="table">
+            <caption>接口列表</caption>
+            <thead>
+                <tr>
+                    <th>接口名称</th>
+                    <th>接口地址</th>
+                    <th>测试一下</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>产品1</td>
+                    <td>23/11/2013</td>
+                    <td>待发货</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul class="pager">
+            <li><a href="#">上一页</a></li>
+            <li><a href="#">下一页</a></li>
+        </ul>
+    </div>
+
+
 </div>
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    接口记录添加
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="interface_name" class="col-sm-2 control-label">接口名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="interface_name" name="interface_name"
+                                   placeholder="接口名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="interface_url" class="col-sm-2 control-label">接口名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="interface_url" name="interface_url"
+                                   placeholder="接口地址">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="interface_param" class="col-sm-2 control-label">接口参数</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="interface_param" name="interface_param"
+                                   placeholder="接口参数,多个参数‘,’分割">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="interface_desc" class="col-sm-2 control-label" >接口描述</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" rows="3" id="interface_desc" name="interface_desc" style="resize: none" placeholder="接口描述"></textarea>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    关闭
+                </button>
+                <button type="button" class="btn btn-primary">
+                    保存
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
 </body>
 </html>

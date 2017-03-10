@@ -16,7 +16,7 @@ public class FtpUtilTest {
 
         try {
             FileInputStream in=new FileInputStream(new File("F:\\156.jpg"));
-            boolean flag = FtpUtil.uploadFile("192.168.3.190", 21, "ftpuser", "123456", "/images","/2015/01/21", "156.jpg", in);
+            boolean flag = FtpUtil.uploadFile("192.168.3.190", 21, "ftpuser", "123456", "/advert","/2015/01/21", "156.jpg", in);
             System.out.println(flag);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
