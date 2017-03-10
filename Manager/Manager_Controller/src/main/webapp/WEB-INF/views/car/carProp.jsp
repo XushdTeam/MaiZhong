@@ -11,11 +11,13 @@
 <head>
     <title>汽车属性</title>
     <jsp:include page="../common/head.jsp"/>
+    <script src="/resources/js/jquery.min.js" type="text/javascript"></script>
 </head>
 <body>
 <div class="main-wrap" data-href="${baseUrl}">
     <blockquote class="layui-elem-quote fhui-admin-main_hd">
-        <h2>属性编辑</h2>
+        <a class="layui-btn layui-btn-small do-action" id="returnList" data-type="doAddEdit" data-href="/car/list"><i class="layui-icon">&#xe603;</i> 返回汽车列表</a>
+        <h2 style="display: inline">属性编辑</h2>
     </blockquote>
     <div class="site-text site-block">
         <form class="layui-form layui-form-pane" >
@@ -130,7 +132,8 @@
             </div>
             <div class="layui-form-item">
                 <button class="layui-btn" lay-submit lay-filter="propSeve" id="saveBtn" >保存</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                <button class="layui-btn" type="button" lay-filter="propSeve" onclick="returnList();" >返回车辆列表</button>
+                <button class="layui-btn"  type="button"  onclick="returnDesc();" >返回详情页面</button>
             </div>
         </form>
     </div>
@@ -143,7 +146,6 @@
             var form = layui.form(),$= layui.jquery;
 
             form.on('submit(propSeve)', function(data){
-                alert("测试");
                 $.ajax({
                     type:"POST",
                     url:"${saveUrl}",
@@ -151,20 +153,26 @@
                     contentType:"application/json",
                     data:JSON.stringify(data.field),
                     success:function(result){
-                        alert("xxx");
-//                        layer.msg(result.message);
-//                        if(result.status==200){
-//                            alert("添加成功");
-//                        }
-                    },error:function(result){
-                        alert("yyy");
-
+                        layer.msg(result.message);
+                        if(result.status==200){
+                            $("#returnList").click();
+                        }
                     }
                 })
-                alert("测试");
                 return false;
             });
         })
+
+        function returnDesc(){
+            $("#returnList").attr("data-href","/car/updateUI/${carId}");
+            $("#returnList").click();
+        }
+
+        function returnList(){
+
+            $("#returnList").click();
+        }
+
     </script>
 </div>
 </body>
