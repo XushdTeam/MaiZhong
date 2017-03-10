@@ -75,10 +75,6 @@
                         <button class="layui-btn layui-btn-warm" lay-submit  lay-filter="btnsearch">搜索</button>
                     </div>
 
-
-                    <div class="layui-inline">
-                        <button class="layui-btn layui-btn-warm" lay-submit  lay-filter="btnsearch">搜索</button>
-                    </div>
                 </form>
             </div>
         <!--工具栏-->
