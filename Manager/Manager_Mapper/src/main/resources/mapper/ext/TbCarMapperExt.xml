@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maizhong.mapper.ext.TbCarMapperExt" >
+
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+
+
+  <resultMap id="ExtResultMap" type="com.maizhong.pojo.vo.TbCarVo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="car_brand" jdbcType="VARCHAR" property="carBrand" />
+    <result column="car_type" jdbcType="VARCHAR" property="carType" />
+    <result column="year_sku" jdbcType="VARCHAR" property="yearSku" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="capacity" jdbcType="VARCHAR" property="capacity" />
+    <result column="gearbox" jdbcType="VARCHAR" property="gearbox" />
+    <result column="asname" jdbcType="VARCHAR" property="asname" />
+    <result column="sellpoint" jdbcType="VARCHAR" property="sellpoint" />
+    <result column="reserve_price" jdbcType="DECIMAL" property="reservePrice" />
+    <result column="sell_price" jdbcType="DECIMAL" property="sellPrice" />
+    <result column="shop_price" jdbcType="VARCHAR" property="shopPrice" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="unable" jdbcType="INTEGER" property="unable" />
+    <result column="weight" jdbcType="INTEGER" property="weight" />
+  </resultMap>
+
+
+  <select id="findListNotContainsDesc" parameterType="com.maizhong.pojo.TbCarExample" resultMap="ExtResultMap">
+      select
+      c.id id,
+      c.number number,
+      c.name name,
+      b.brand_name car_brand,
+      t.type_name car_type,
+      c.year_sku year_sku,
+      d1.dic_name color,
+      c.capacity,
+      d2.dic_name,
+      c.asname,
+      c.sellpoint,
+      c.reserve_price,
+      c.sell_price,
+      c.shop_price,
+      date_format(c.update_time, '%Y-%m-%d') update_time,
+      c.image,
+      c.unable,
+      c.weight
+      from
+      tb_car c
+      JOIN tb_car_brand b on  c.car_brand = b.id
+      JOIN  tb_car_type t ON c.car_type = t.id
+      left JOIN  tb_dictionary d1 on c.color = d1.id
+      left JOIN  tb_dictionary d2 on c.gearbox = d2.id
+      <if test="_parameter != null">
+        <include refid="Example_Where_Clause" />
+      </if>
+      <if test="orderByClause != null">
+        order by ${orderByClause}
+      </if>
+  </select>
+</mapper>

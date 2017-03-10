@@ -7,6 +7,7 @@ package com.maizhong.common.enums;
 public enum OperateEnum {
     SUCCESS(200,"操作成功"),
     FAILE(500,"操作失败"),
+    NAME_REPEAT(500,"名称重复"),
     ROLE_IS_USED(500,"角色下有用户存在"),
     USER_PHONE_EXIST(500,"该手机号已经注册"),
     FILE_SIZE(500,"文件太大"),

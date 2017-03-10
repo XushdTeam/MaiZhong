@@ -76,6 +76,14 @@ public class TypeServiceImpl implements TypeService {
     @Override
     public OperateEnum insertCarType(TbCarType tbCarType) {
 
+        TbCarTypeExample tbCarTypeExample = new TbCarTypeExample();
+        TbCarTypeExample.Criteria criteria = tbCarTypeExample.createCriteria();
+        criteria.andTypeNameEqualTo(tbCarType.getTypeName());
+        List<TbCarType> carType = tbCarTypeMapper.selectByExample(tbCarTypeExample);
+        if (carType.size() > 0){
+            return OperateEnum.NAME_REPEAT;
+        }
+
             int res = tbCarTypeMapper.insertSelective(tbCarType);
             if (res > 0) {
                 return OperateEnum.SUCCESS;

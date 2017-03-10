@@ -5,7 +5,9 @@ import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.common.target.ControllerLog;
+import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.pojo.TbCarBrand;
+import com.maizhong.pojo.TbCarType;
 import com.maizhong.service.BrandService;
 import com.maizhong.service.FileUploadService;
 import org.apache.commons.lang3.StringUtils;
@@ -44,7 +46,7 @@ public class BrandController {
         model.addAttribute("handleUrl", "/brand/handle");
         model.addAttribute("deleteUrl", "/brand/delete");
 
-        return "system/brand";
+        return "shop/brand";
     }
 
 
@@ -81,14 +83,14 @@ public class BrandController {
             //新增
             model.addAttribute("handle", "品牌管理/新增品牌");
             model.addAttribute("saveUrl", "/brand/save");
-            return "system/brand_add";
+            return "shop/brand_add";
         } else {
             TbCarBrand brand = brandService.getCarBrandByid(Long.valueOf(id));
             model.addAttribute("brand", brand);
             model.addAttribute("handle", "品牌管理/品牌修改");
             model.addAttribute("saveUrl", "/brand/update");
             model.addAttribute("uploadUrl", "/brand/" + brand.getId() + "/advert/upload");
-            return "system/brand_setting";
+            return "shop/brand_setting";
         }
     }
 
@@ -142,7 +144,6 @@ public class BrandController {
      * @param id
      * @return
      */
-
     @RequiresPermissions("/brand/advert")
     @ControllerLog(module = "品牌管理", methods = "品牌LOGO修改")
     @RequestMapping(value = "/brand/{id}/advert/upload", method = RequestMethod.POST)
@@ -175,6 +176,20 @@ public class BrandController {
     public JsonResult brandAdvertUpload(@RequestParam(value = "advert", required = false) MultipartFile filedata) {
         JsonResult jsonResult = fileUploadService.uploadImg(filedata, "/advert");
         return  jsonResult;
+    }
+
+
+    /***
+     * 返回所有的json数据
+     * @return
+     */
+    @RequestMapping("/brand/findAll")
+    @ResponseBody
+    public JsonResult findAll(){
+//        String type = brandService.getCarBrandListAll();
+//        return type==null?"{status:500}":"{status:200,data:"+type+"}";
+        List<TbCarBrand> list = JsonUtils.jsonToList(brandService.getCarBrandListAll(), TbCarBrand.class);
+        return JsonResult.OK(list);
     }
 }
 
