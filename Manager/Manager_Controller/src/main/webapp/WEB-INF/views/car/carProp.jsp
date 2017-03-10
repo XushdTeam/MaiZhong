@@ -18,7 +18,7 @@
         <h2>属性编辑</h2>
     </blockquote>
     <div class="site-text site-block">
-        <form class="layui-form" name="propSeve" method="post" action="${saveUrl}">
+        <form class="layui-form layui-form-pane" >
             <input type="hidden" value="${prop.id}" name="id"/>
             <input type="hidden" value="${carId}" name="carId"/>
             <%--`id` bigint(10) NOT NULL COMMENT '主键',--%>
@@ -140,7 +140,7 @@
     <script type="text/javascript">
 
         layui.use('form', function() {
-            var form = layui.form();
+            var form = layui.form(),$= layui.jquery;
 
             form.on('submit(propSeve)', function(data){
                 alert("测试");
