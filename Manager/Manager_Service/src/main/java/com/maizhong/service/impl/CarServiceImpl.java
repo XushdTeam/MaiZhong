@@ -7,6 +7,7 @@ import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
+import com.maizhong.common.target.ServiceLog;
 import com.maizhong.common.utils.TimeUtils;
 import com.maizhong.mapper.TbCarMapper;
 import com.maizhong.mapper.ext.TbCarMapperExt;
@@ -42,65 +43,7 @@ public class CarServiceImpl implements CarService {
     @Value("${POINTPRICE}")
     private  static Integer POINTPRICE;
 
-
-
-    @Override
-    public PageResult findAll(PageSearchParam param) {
-        if (param==null){
-            param=new PageSearchParam();
-        }
-        if (param.getPageSize()==0){
-            param.setPageSize(PAGESIZE);
-        }
-        //开启分页
-        Page page = PageHelper.startPage(param.getPageIndex(), param.getPageSize());
-
-        //添加条件
-        TbCarExample example = new TbCarExample();
-
-        TbCarExample.Criteria criteria = example.createCriteria();
-        //添加查询条件 queryString
-        if (param!=null){
-
-            //添加时间条件
-            if (param.getFiled("timeBegin")!=null){
-                criteria.andUpdateTimeGreaterThan(TimeUtils.getDate(param.getFiled("timeBegin")));
-            }
-            if (param.getFiled("timeEnd")!=null){
-                criteria.andUpdateTimeLessThan(TimeUtils.getDate(param.getFiled("timeEnd")));
-            }
-
-            //添加品牌与类型
-            if (param.getFiled("carType")!=null){
-                criteria.andCarTypeEqualTo(Long.parseLong(param.getFiled("carType")));
-            }
-            if (param.getFiled("carBrand")!=null){
-                criteria.andCarBrandEqualTo(Long.parseLong(param.getFiled("carBrand")));
-            }
-
-            //价格区间放弃
-            if (StringUtils.isNotBlank(param.getFiled("queryString"))&&!param.getFiled("queryString").contains("=")){
-                criteria.andNameLike("%"+param.getFiled("queryString")+"%");
-            }
-        }
-
-        long total = page.getTotal();
-        //查询
-        List<TbCar> list=tbCarMapper.selectByExample(example);
-
-
-        PageInfo pageInfo ;
-        if (list!=null){
-            pageInfo = new PageInfo(list);
-            pageInfo.setTotal(total);
-        }else{
-            return  new PageResult(null);
-        }
-
-
-        return new PageResult(pageInfo);
-    }
-
+    @ServiceLog(module = "汽车管理",methods = "汽车添加")
     @Override
     public JsonResult addTbCar(TbCar car) {
         if (car==null){
@@ -138,7 +81,10 @@ public class CarServiceImpl implements CarService {
         int insert = tbCarMapper.insertSelective(car);
 
         if (insert==1){
-            return JsonResult.OK("添加成功");
+            JsonResult build = JsonResult.build(OperateEnum.SUCCESS);
+            //以后改成number？？？ 预留一下
+            build.setData(car.getId());
+            return build;
         } else{
             return JsonResult.Error("网络异常 请联系管理员");
         }
@@ -160,6 +106,8 @@ public class CarServiceImpl implements CarService {
      * @param car
      * @return
      */
+    @ServiceLog(module = "汽车管理",methods = "汽车修改")
+    @Override
     public JsonResult updateCar(TbCar car){
 
         if (car==null){
@@ -198,11 +146,20 @@ public class CarServiceImpl implements CarService {
      * @param id
      * @return
      */
+    @ServiceLog(module = "汽车管理",methods = "汽车删除")
     @Override
     public JsonResult deleteCar(Long id) {
         return (id==null?0:tbCarMapper.deleteByPrimaryKey(id))==0?JsonResult.build(OperateEnum.FAILE):JsonResult.build(OperateEnum.SUCCESS);
     }
 
+    /****
+     * 汽车 列表查询
+     *
+     *      汽车属性不包含 详情
+     *      汽车实体为TbCarVo
+     * @param param
+     * @return
+     */
     @Override
     public PageResult findListToShow(PageSearchParam param) {
         if (param==null){

@@ -28,7 +28,7 @@
                     <div class="layui-form-item layui-input-block">
                         <label class="layui-form-label">汽车编号</label>
                         <div class="layui-input-inline" style="width: 25%">
-                            <input type="text" name="number" required  lay-verify="required" placeholder="请输入汽车编号" autocomplete="off" class="layui-input">
+                            <input type="text" name="number" id="number" required  lay-verify="required" placeholder="请输入汽车编号" autocomplete="off" class="layui-input">
                         </div>
                         <label class="layui-form-label">汽车名称</label>
                         <div class="layui-input-inline"  style="width: 25%">
@@ -186,11 +186,6 @@
                             <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
                             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                         </div>
-                        <div class="layui-input-inline">
-                            <div class="site-demo-button" id="LAY_demo" style="margin-bottom: 0;">
-                                <button data-method="setTop" type="button" class="layui-btn">属性页面预留按钮</button>
-                            </div>
-                        </div>
                     </div>
                 </form>
             </div>
@@ -200,49 +195,6 @@
     <!-- js脚本 -->
     <script type="text/javascript" src="/resources/js/event.js"></script>
     <script type="text/javascript">
-
-    layui.use('layer', function(){
-        var $ = layui.jquery, layer = layui.layer;
-
-        //触发事件
-        var active = {
-            setTop: function(){
-                var that = this;
-                //多窗口模式，层叠置顶
-                layer.open({
-                    type: 2 //此处以iframe举例
-                    ,title: '图片上传'
-                    ,area: ['70%', '70%']
-                    ,shade: 0
-                    ,maxmin: true
-                    ,offset: [ //为了演示，随机坐标
-                        $(window).height()-900,$(window).width()-1500
-                    ]
-                    ,content: 'http://layer.layui.com/test/settop.html'
-                    ,btn: ['保存', '关闭'] //只是为了演示
-                    ,yes: function(){
-                        $(that).click();
-                    }
-                    ,btn2: function(){
-                        layer.closeAll();
-                    }
-
-                    ,zIndex: layer.zIndex //重点1
-                    ,success: function(layero){
-                        layer.setTop(layero); //重点2
-                    }
-                });
-            }};
-
-        $('#LAY_demo .layui-btn').on('click', function(){
-            var othis = $(this), method = othis.data('method');
-            active[method] ? active[method].call(this, othis) : '';
-        });
-
-    });
-
-
-
 
     layui.use('form', function(){
         var form = layui.form();
@@ -256,7 +208,14 @@
             itemAddEditor.sync();
             <!--添加参数-->
             data.field.details=$("#cardetails").val();
-          layer.msg(JSON.stringify(data.field));
+
+            <!--图片收集-->
+            var imgArray = [];
+            $.each($("#imagesShow img"),function(i,e){
+                imgArray.push($(e).attr("src"));
+                alert($(e).attr("src"));
+            });
+            data.field.image = imgArray.join(",");
             //数据提交
             $.ajax({
                 type:"POST",
@@ -267,6 +226,7 @@
                 success:function(result){
                     layer.msg(result.message);
                     if(result.status==200){
+                        $("#returnList").attr("data-href","${seepropUrl}/"+result.data);
                         $("#returnList").click();
                     }
                 }
@@ -274,6 +234,7 @@
             return false;
         });
     });
+
 
     <!--图片上传以及富文本编译器-->
     $(function(){
@@ -314,7 +275,6 @@
                     clickFn : function(urlList) {
                         KindEditor.each(urlList, function(i, data) {
                             $("#imagesShow").append('<div class="layui-input-block" ><a href="'+data.url+'"  target="_blank"><img  style="width: 690px;height: 366px"  src="'+data.url+'"></a><button type="button" class="layui-btn layui-btn-warm" onclick="delImage(this)">删除<button/></div>');
-                            alert(data.url);
                         });
                         editor.hideDialog();
                     }

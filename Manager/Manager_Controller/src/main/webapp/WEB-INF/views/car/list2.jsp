@@ -183,7 +183,10 @@
                         <%--ENT '修改时间',--%>
                             <td>{{ item.updateTime }}</td>
                         <%--MMENT '商品图片，多张图片中间用符号分割',--%>
-                            <td><img src="{{ item.image }}"  style="width: 69px;height: 36px" ></td>
+                            <td>
+                                <span style="display: none;" class="imageHideText">{{ item.image }}</span>
+                                <img src="">
+                            </td>
                         <%--COMMENT '是否可用 用于搜索时是否展示',--%>
                             <%--<td>{{ item.unable }}</td>--%>
                             <td align="center">{{# if (item.unable==1) { }}
@@ -219,8 +222,8 @@
     <script type="text/javascript">
         layui.use("pagelist",function(){
             var pagelist = layui.pagelist;
-            pagelist.basePagingInit(10);
-            pagelist.logTimeInit();
+            pagelist.basePagingInit(15);
+            pagelist.carListInit();
 
         });
         function seeDesc(id,name){
@@ -239,20 +242,6 @@
             },"json");
         }
 
-
-
-
-        <%--$(function(){--%>
-<%--//            页面数据处理--%>
-            <%--var carTypeList = [];--%>
-            <%--<c:forEach items="${carTypeList}" var="type">--%>
-                <%--carTypeList.push("${type}");--%>
-            <%--</c:forEach>--%>
-            <%--$.each(carTypeList,function (i,e) {--%>
-                <%--alert(e);--%>
-            <%--})--%>
-
-        <%--})--%>
     </script>
 </body>
 </html>

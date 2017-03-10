@@ -3,6 +3,7 @@ package com.maizhong.controller;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
+import com.maizhong.common.target.ControllerLog;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.pojo.TbCar;
 import com.maizhong.pojo.TbCarBrand;
@@ -96,6 +97,9 @@ public class CarController {
 
 
 
+    /**
+     * 查看汽车详情
+     * */
     @RequestMapping("/seeDesc")
     @ResponseBody
     public JsonResult seeDesc(@RequestParam("id") Long id){
@@ -111,9 +115,15 @@ public class CarController {
     }
 
 
+    /***
+     * 添加汽车UI页面
+     * @param model
+     * @return
+     */
     @RequestMapping("/add")
     public String addCar(Model model){
         model.addAttribute("insertUrl","/car/insert");
+        model.addAttribute("seepropUrl","/carProp/prop");
 
         //数据准备
         model.addAttribute("carTypeList", JsonUtils.jsonToList(typeService.getCarTypeListAll(), TbCarType.class));
@@ -133,6 +143,7 @@ public class CarController {
      * @param tbCar
      * @return
      */
+    @ControllerLog(module = "汽车管理",methods = "汽车新增")
     @RequestMapping("/insert")
     @ResponseBody
     public  JsonResult insert(@RequestBody TbCar tbCar){
@@ -143,6 +154,12 @@ public class CarController {
     }
 
 
+    /***
+     * 汽车删除入口
+     * @param id
+     * @return
+     */
+    @ControllerLog(module = "汽车管理",methods = "汽车删除")
     @RequestMapping("/deleteCar/{id}")
     @ResponseBody
     public JsonResult delCar(@PathVariable("id") Long id){
@@ -151,6 +168,10 @@ public class CarController {
 
 
 
+    /**
+     * 更改方法
+     * */
+    @ControllerLog(module = "汽车管理",methods = "汽车更改")
     @RequestMapping("/update")
     @ResponseBody
     public  JsonResult updateCar(@RequestBody TbCar tbCar){
@@ -176,6 +197,7 @@ public class CarController {
     public String updateUI(@PathVariable("id") Long id,Model model){
 
         model.addAttribute("updateCarUrl","/car/update");
+        model.addAttribute("seepropUrl","/carProp/prop");
 
         //数据准备
         model.addAttribute("carTypeList", JsonUtils.jsonToList(typeService.getCarTypeListAll(), TbCarType.class));
