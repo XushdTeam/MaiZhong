@@ -47,7 +47,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">车型</label>
                         <div class="layui-input-inline">
-                            <select name="carType" id="carType"  lay-filter="carType">
+                            <select name="carType" id="carType"  lay-filter="carchange" >
                                 <option value=""></option>
                                 <c:forEach items="${carTypeList}" var="type">
                                     <option value="${type.id}">${type.typeName}</option>
@@ -75,10 +75,6 @@
                         <button class="layui-btn layui-btn-warm" lay-submit  lay-filter="btnsearch">搜索</button>
                     </div>
 
-
-                    <div class="layui-inline">
-                        <button class="layui-btn layui-btn-warm" lay-submit  lay-filter="btnsearch">搜索</button>
-                    </div>
                 </form>
             </div>
         <!--工具栏-->
@@ -99,7 +95,7 @@
                 <table class="layui-table" lay-skin="line">
                     <thead>
                     <tr>
-                        <th>
+                        <th style="display: none">
                             <font color="aqua">
                                 <a href="javascript:;" ></a>
                             </font>
@@ -150,7 +146,7 @@
                     <script id="tpl" type="text/html">
                         {{#  layui.each(d.rows, function(index, item){ }}
                         <tr>
-                            <td><input type="checkbox" name="selectNum" value="{{ item.id }}"></td>
+                            <td style="display: none;"><input type="checkbox" name="selectNum" value="{{ item.id }}"></td>
                         <%--车型主键',--%>
                             <%--<td>{{ item.id }}</td>--%>
                         <%--'汽车编号 ',--%>
@@ -204,6 +200,7 @@
                                 <a class="layui-btn layui-btn-small layui-btn-danger do-action" data-type="doDelete" data-text="确定删除<span class=red>{{item.name}}</span>吗？" data-href="${deleteUrl}/{{item.id}}"><i class="icon-trash-o  fa fa-trash-o"></i>删除</a>
                             </td>
                         </tr>
+
                         {{#  }); }}
                     </script>
                     </tbody>
@@ -222,10 +219,11 @@
     <script type="text/javascript">
         layui.use("pagelist",function(){
             var pagelist = layui.pagelist;
+            var form = layui.form();
             pagelist.basePagingInit(15);
             pagelist.carListInit();
-
         });
+
         function seeDesc(id,name){
             $.post("/car/seeDesc",{"id":id},function (data){
                 var title = "";
@@ -237,6 +235,8 @@
                 }
                 layer.open({
                     title: title,
+                    area: 'auto',
+                    maxWidth:1000,
                     content:content
                 });
             },"json");

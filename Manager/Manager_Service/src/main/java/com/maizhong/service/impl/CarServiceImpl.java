@@ -10,9 +10,11 @@ import com.maizhong.common.result.PageResult;
 import com.maizhong.common.target.ServiceLog;
 import com.maizhong.common.utils.TimeUtils;
 import com.maizhong.mapper.TbCarMapper;
+import com.maizhong.mapper.TbCarPropMapper;
 import com.maizhong.mapper.ext.TbCarMapperExt;
 import com.maizhong.pojo.TbCar;
 import com.maizhong.pojo.TbCarExample;
+import com.maizhong.pojo.TbCarPropExample;
 import com.maizhong.pojo.vo.TbCarVo;
 import com.maizhong.service.CarService;
 import org.apache.commons.lang3.StringUtils;
@@ -37,6 +39,9 @@ public class CarServiceImpl implements CarService {
     private TbCarMapperExt tbCarMapperExt;
 
 
+    @Resource
+    private TbCarPropMapper carPropMapper;
+
     @Value("${PAGESIZE}")
     private  static Integer PAGESIZE;
 
@@ -50,33 +55,33 @@ public class CarServiceImpl implements CarService {
             return JsonResult.Error("数据错误");
         }
 
-//        `number`'汽车编号 ',  `name`'车型名称 类似奥迪a4',
+        //number`'汽车编号 ',  `name`'车型名称 类似奥迪a4',
         if (car.getNumber()==null||car.getName()==null||StringUtils.isBlank(car.getNumber())||StringUtils.isBlank(car.getName()+"")){
             return JsonResult.Error("编号或者名称不可以为空");
         }
-//        `car_brand`  '外键链接车辆品牌  类似奥迪',`car_type` '外键  链接车辆类型',
+        //car_brand`  '外键链接车辆品牌  类似奥迪',`car_type` '外键  链接车辆类型',
         if (car.getCarType()==null||car.getCarBrand()==null||StringUtils.isBlank(car.getCarType()+"")||StringUtils.isBlank(car.getCarBrand()+"")){
             return JsonResult.Error("品牌和类型是必选项");
         }
-//        `year_sku`  '年款式 类似 奥迪a42016款',
+        //`year_sku`  '年款式 类似 奥迪a42016款',
         if (car.getYearSku()==null||StringUtils.isBlank(car.getYearSku()+"")){
             return JsonResult.Error("车辆年份不可以为空");
         }
 
-//    '订金价格',
+        //订金价格',
         if (car.getReservePrice()==null||car.getSellPrice()==null||StringUtils.isBlank(car.getReservePrice()+"")||StringUtils.isBlank(car.getSellPrice()+"")){
             return JsonResult.Error("车辆卖价和定金不可以为空");
         }
-//  '添加时间',
+        //添加时间',
         car.setCreateTime(new Date());
-//  '修改时间',
+        //修改时间',
         car.setUpdateTime(new Date());
-//        `unable` '是否可用 用于搜索时是否展示',
+        //unable` '是否可用 用于搜索时是否展示',
         if (car.getUnable()==null||StringUtils.isBlank(car.getUnable()+"")){
             car.setUnable(1);
         }
-//        `desc` text NOT NULL COMMENT '商品详情的存储字段',
-//        `weight` int(11) DEFAULT '100' COMMENT '权重',
+        //desc` text NOT NULL COMMENT '商品详情的存储字段',
+        //weight` int(11) DEFAULT '100' COMMENT '权重',
 
         int insert = tbCarMapper.insertSelective(car);
 
@@ -149,7 +154,16 @@ public class CarServiceImpl implements CarService {
     @ServiceLog(module = "汽车管理",methods = "汽车删除")
     @Override
     public JsonResult deleteCar(Long id) {
-        return (id==null?0:tbCarMapper.deleteByPrimaryKey(id))==0?JsonResult.build(OperateEnum.FAILE):JsonResult.build(OperateEnum.SUCCESS);
+        if (id!=null){
+            //清除汽车属性表
+            if(tbCarMapper.deleteByPrimaryKey(id)>0){
+                TbCarPropExample example = new TbCarPropExample();
+                example.createCriteria().andCarIdEqualTo(id);
+                carPropMapper.deleteByExample(example);
+            }
+            JsonResult.build(OperateEnum.SUCCESS);
+        }
+        return JsonResult.build(OperateEnum.FAILE);
     }
 
     /****

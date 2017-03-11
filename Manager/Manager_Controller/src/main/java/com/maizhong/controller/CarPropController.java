@@ -2,14 +2,17 @@ package com.maizhong.controller;
 
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.target.ControllerLog;
+import com.maizhong.pojo.TbAdvertPublish;
 import com.maizhong.pojo.TbCarProp;
 import com.maizhong.service.CarPropService;
+import com.sun.glass.ui.Size;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by yangF on 2017/3/9.
@@ -49,7 +52,7 @@ public class CarPropController {
     public JsonResult saveOrEdit(@RequestBody TbCarProp tbCarProp){
 
         if (tbCarProp!=null&&tbCarProp.getCarId()!=null){
-            if (tbCarProp.getId()!=null&& StringUtils.isNotBlank(tbCarProp.getId()+"")){
+            if (tbCarProp.getId()==null||StringUtils.isBlank(tbCarProp.getId()+"")){
                  return  carPropService.insertCarProp(tbCarProp);
             }else{
                  return  carPropService.updateCarProp(tbCarProp);

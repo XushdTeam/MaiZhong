@@ -9,6 +9,7 @@ import com.maizhong.pojo.TbCarProp;
 import com.maizhong.pojo.TbCarPropExample;
 import com.maizhong.service.CarPropService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.annotations.Result;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -58,7 +59,7 @@ public class CarPropServiceImpl implements CarPropService {
     public JsonResult insertCarProp(TbCarProp tbCarProp) {
         if (tbCarProp.getCarId()!=null){
             //确认汽车数据是否在
-            TbCar tbCar = tbCarMapper.selectByPrimaryKey(tbCarProp.getId());
+            TbCar tbCar = tbCarMapper.selectByPrimaryKey(tbCarProp.getCarId());
             if (tbCar==null){
                 return JsonResult.Error("属性所添加的汽车不存在 请确认数据");
             }
@@ -84,7 +85,7 @@ public class CarPropServiceImpl implements CarPropService {
     public JsonResult updateCarProp(TbCarProp tbCarProp) {
         if (tbCarProp.getCarId()!=null||tbCarProp.getId()!=null){
             //确认汽车数据是否在
-            TbCar tbCar = tbCarMapper.selectByPrimaryKey(tbCarProp.getId());
+            TbCar tbCar = tbCarMapper.selectByPrimaryKey(tbCarProp.getCarId());
             if (tbCar==null){
                 return JsonResult.Error("所修改的汽车不存在 请确认数据");
             }
@@ -128,4 +129,5 @@ public class CarPropServiceImpl implements CarPropService {
 
         return JsonResult.Error("删除失败");
     }
+
 }

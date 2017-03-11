@@ -14,10 +14,8 @@
 <body>
 <div  class="main-wrap">
     <blockquote class="layui-elem-quote fhui-admin-main_hd">
-        <h2>
-            <a class="layui-btn layui-btn-small do-action" id="returnList" data-type="doAddEdit" data-href="/car/list"><i class="layui-icon">&#xe603;</i> 返回</a>
-            商品添加
-        </h2>
+        <a class="layui-btn layui-btn-small do-action" id="returnList" data-type="doAddEdit" data-href="/car/list"><i class="layui-icon">&#xe603;</i> 返回</a>
+        <h2 style="display: inline">汽车添加</h2>
     </blockquote>
     <div class="y-role">
         <fieldset class="layui-elem-field">
@@ -196,8 +194,9 @@
     <script type="text/javascript" src="/resources/js/event.js"></script>
     <script type="text/javascript">
 
-    layui.use('form', function(){
-        var form = layui.form();
+    layui.use(['form','layer'], function(){
+        var form = layui.form(),
+            layer= layui.layer;
 
         //监听提交
         //ajax 提交
@@ -226,8 +225,14 @@
                 success:function(result){
                     layer.msg(result.message);
                     if(result.status==200){
-                        $("#returnList").attr("data-href","${seepropUrl}/"+result.data);
-                        $("#returnList").click();
+                        layer.confirm(result.message, {
+                            btn: ['确认 返回列表', '添加详细属性'] //可以无限个按钮
+                        }, function(index, layero){
+                            $("#returnList").click();
+                        }, function(index){
+                            $("#returnList").attr("data-href","${seepropUrl}/"+result.data);
+                            $("#returnList").click();
+                        });
                     }
                 }
             });
