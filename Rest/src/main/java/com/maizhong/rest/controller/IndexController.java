@@ -1,5 +1,6 @@
 package com.maizhong.rest.controller;
 
+import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.rest.service.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,6 @@ public class IndexController {
     @Autowired
     private IndexService indexService;
 
-    @RequestMapping(value = "/")
-    public String index(){
-        return "login";
-    }
 
 
 
@@ -48,6 +45,16 @@ public class IndexController {
         JsonResult result = indexService.getBaseInfo();
         return result;
     }
+
+
+    @RequestMapping(value = "/interfaceList",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult interfaceList(PageSearchParam pageSearchParam){
+
+        JsonResult resutl = indexService.getInterfaceList(pageSearchParam);
+        return resutl;
+    }
+
 
 }
 

@@ -11,6 +11,16 @@ public class RestInterface {
 
     private String interfaceDesc;
 
+    private String interfaceType;
+
+    public String getInterfaceType() {
+        return interfaceType;
+    }
+
+    public void setInterfaceType(String interfaceType) {
+        this.interfaceType = interfaceType;
+    }
+
     public Long getId() {
         return id;
     }

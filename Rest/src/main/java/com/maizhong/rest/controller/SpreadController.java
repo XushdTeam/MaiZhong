@@ -19,4 +19,5 @@ public class SpreadController {
 
         return JsonResult.OK();
     }
+
 }
