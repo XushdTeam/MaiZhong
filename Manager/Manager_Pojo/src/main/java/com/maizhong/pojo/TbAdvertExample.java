@@ -503,6 +503,66 @@ public class TbAdvertExample {
             addCriterion("car_number not between", value1, value2, "carNumber");
             return (Criteria) this;
         }
+
+        public Criteria andPublishStateIsNull() {
+            addCriterion("publish_state is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStateIsNotNull() {
+            addCriterion("publish_state is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStateEqualTo(Integer value) {
+            addCriterion("publish_state =", value, "publishState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStateNotEqualTo(Integer value) {
+            addCriterion("publish_state <>", value, "publishState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStateGreaterThan(Integer value) {
+            addCriterion("publish_state >", value, "publishState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStateGreaterThanOrEqualTo(Integer value) {
+            addCriterion("publish_state >=", value, "publishState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStateLessThan(Integer value) {
+            addCriterion("publish_state <", value, "publishState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStateLessThanOrEqualTo(Integer value) {
+            addCriterion("publish_state <=", value, "publishState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStateIn(List<Integer> values) {
+            addCriterion("publish_state in", values, "publishState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStateNotIn(List<Integer> values) {
+            addCriterion("publish_state not in", values, "publishState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStateBetween(Integer value1, Integer value2) {
+            addCriterion("publish_state between", value1, value2, "publishState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStateNotBetween(Integer value1, Integer value2) {
+            addCriterion("publish_state not between", value1, value2, "publishState");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

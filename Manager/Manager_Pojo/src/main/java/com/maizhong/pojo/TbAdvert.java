@@ -13,6 +13,8 @@ public class TbAdvert {
 
     private String carNumber;
 
+    private Integer publishState;
+
     private String advertDesc;
 
     public Long getId() {
@@ -61,6 +63,14 @@ public class TbAdvert {
 
     public void setCarNumber(String carNumber) {
         this.carNumber = carNumber == null ? null : carNumber.trim();
+    }
+
+    public Integer getPublishState() {
+        return publishState;
+    }
+
+    public void setPublishState(Integer publishState) {
+        this.publishState = publishState;
     }
 
     public String getAdvertDesc() {
