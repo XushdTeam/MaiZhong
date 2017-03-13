@@ -12,6 +12,7 @@ import com.maizhong.service.FileUploadService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,9 @@ public class TypeController {
 
     @Autowired
     private FileUploadService fileUploadService;
+
+    @Value("${TYPE_FILEPATH_KEY}")
+    private String typeImgFilepathKey;
 
 
     @RequiresPermissions("/type")
@@ -155,7 +159,7 @@ public class TypeController {
 
         System.out.println("类别示例修改");
 
-        JsonResult jsonResult = fileUploadService.uploadImg(filedata, "/advert");
+        JsonResult jsonResult = fileUploadService.uploadImg(filedata, typeImgFilepathKey==null?"/cartype":typeImgFilepathKey);
         if (jsonResult.getStatus() == 200) {
             int res = typeService.updateTypeAdvert(jsonResult.getData().toString(), Long.parseLong(id));
             if (res > 0) {
@@ -178,7 +182,7 @@ public class TypeController {
     @RequestMapping(value = "/type/advert/upload", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult typeAdvertUpload(@RequestParam(value = "advert", required = false) MultipartFile filedata) {
-        JsonResult jsonResult = fileUploadService.uploadImg(filedata, "/advert");
+        JsonResult jsonResult = fileUploadService.uploadImg(filedata, typeImgFilepathKey==null?"/cartype":typeImgFilepathKey);
         return  jsonResult;
     }
 

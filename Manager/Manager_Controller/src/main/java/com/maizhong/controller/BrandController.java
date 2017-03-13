@@ -13,6 +13,7 @@ import com.maizhong.service.FileUploadService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,9 @@ public class BrandController {
 
     @Autowired
     private FileUploadService fileUploadService;
+
+    @Value("${LOGO_FILEPATH_KEY}")
+    private String logoImgFilepathKey;
 
 
     @RequiresPermissions("/brand")
@@ -152,7 +156,7 @@ public class BrandController {
 
         System.out.println("品牌LOGO修改");
 
-        JsonResult jsonResult = fileUploadService.uploadImg(filedata, "/advert");
+        JsonResult jsonResult = fileUploadService.uploadImg(filedata, logoImgFilepathKey==null?"/carlogo":logoImgFilepathKey);
         if (jsonResult.getStatus() == 200) {
             int res = brandService.updateBrandAdvert(jsonResult.getData().toString(), Long.parseLong(id));
             if (res > 0) {
@@ -174,7 +178,7 @@ public class BrandController {
     @RequestMapping(value = "/brand/advert/upload", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult brandAdvertUpload(@RequestParam(value = "advert", required = false) MultipartFile filedata) {
-        JsonResult jsonResult = fileUploadService.uploadImg(filedata, "/advert");
+        JsonResult jsonResult = fileUploadService.uploadImg(filedata, logoImgFilepathKey==null?"/carlogo":logoImgFilepathKey);
         return  jsonResult;
     }
 

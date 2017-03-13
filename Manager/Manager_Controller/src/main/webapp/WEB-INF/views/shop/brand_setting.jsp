@@ -30,7 +30,6 @@
             <div class="layui-form layui-form-pane layui-tab-item layui-show">
                <form  >
                         <input type="hidden" value="${brand.id}" name="id"/>
-
                         <div class="layui-form-item">
                             <label class="layui-form-label">品牌名称</label>
                             <div class="layui-input-block">
