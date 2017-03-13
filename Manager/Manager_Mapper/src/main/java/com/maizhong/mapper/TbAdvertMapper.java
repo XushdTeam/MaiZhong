@@ -34,4 +34,6 @@ public interface TbAdvertMapper {
     int updateByPrimaryKeyWithBLOBs(TbAdvert record);
 
     int updateByPrimaryKey(TbAdvert record);
+
+    List<TbAdvert> getAdvertPublish(Long typeId);
 }

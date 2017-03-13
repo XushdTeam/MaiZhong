@@ -1,288 +1,313 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.maizhong.mapper.TbAdvertMapper">
-  <resultMap id="BaseResultMap" type="com.maizhong.pojo.TbAdvert">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="advert_name" jdbcType="VARCHAR" property="advertName" />
-    <result column="advert_url" jdbcType="VARCHAR" property="advertUrl" />
-    <result column="advert_img" jdbcType="VARCHAR" property="advertImg" />
-    <result column="advert_type" jdbcType="INTEGER" property="advertType" />
-    <result column="car_number" jdbcType="VARCHAR" property="carNumber" />
-    <result column="advert_desc" jdbcType="LONGVARCHAR" property="advertDesc"/>
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.maizhong.pojo.TbAdvert">
-    <result column="advert_desc" jdbcType="LONGVARCHAR" property="advertDesc" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.maizhong.pojo.TbAdvert">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="advert_name" jdbcType="VARCHAR" property="advertName"/>
+        <result column="advert_url" jdbcType="VARCHAR" property="advertUrl"/>
+        <result column="advert_img" jdbcType="VARCHAR" property="advertImg"/>
+        <result column="advert_type" jdbcType="INTEGER" property="advertType"/>
+        <result column="car_number" jdbcType="VARCHAR" property="carNumber"/>
+        <result column="publish_state" jdbcType="INTEGER" property="publishState"/>
+        <result column="advert_desc" jdbcType="LONGVARCHAR" property="advertDesc"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.maizhong.pojo.TbAdvert">
+        <result column="advert_desc" jdbcType="LONGVARCHAR" property="advertDesc"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, advert_name, advert_url, advert_img, advert_type, car_number, publish_state, advert_desc
   </sql>
-  <sql id="Base_Column_List">
-    id, advert_name, advert_url, advert_img, advert_type, car_number,advert_desc
-  </sql>
-  <sql id="Blob_Column_List">
+    <sql id="Blob_Column_List">
     advert_desc
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.maizhong.pojo.TbAdvertExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from tb_advert
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByExample" parameterType="com.maizhong.pojo.TbAdvertExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from tb_advert
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from tb_advert
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <select id="selectByExampleWithBLOBs" parameterType="com.maizhong.pojo.TbAdvertExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from tb_advert
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.maizhong.pojo.TbAdvertExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from tb_advert
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from tb_advert
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from tb_advert
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.maizhong.pojo.TbAdvertExample">
-    delete from tb_advert
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.maizhong.pojo.TbAdvert">
+    <delete id="deleteByExample" parameterType="com.maizhong.pojo.TbAdvertExample">
+        delete from tb_advert
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.maizhong.pojo.TbAdvert">
     insert into tb_advert (id, advert_name, advert_url, 
       advert_img, advert_type, car_number, 
-      advert_desc)
+      publish_state, advert_desc)
     values (#{id,jdbcType=BIGINT}, #{advertName,jdbcType=VARCHAR}, #{advertUrl,jdbcType=VARCHAR}, 
       #{advertImg,jdbcType=VARCHAR}, #{advertType,jdbcType=INTEGER}, #{carNumber,jdbcType=VARCHAR}, 
-      #{advertDesc,jdbcType=LONGVARCHAR})
+      #{publishState,jdbcType=INTEGER}, #{advertDesc,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.maizhong.pojo.TbAdvert">
-    insert into tb_advert
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="advertName != null">
-        advert_name,
-      </if>
-      <if test="advertUrl != null">
-        advert_url,
-      </if>
-      <if test="advertImg != null">
-        advert_img,
-      </if>
-      <if test="advertType != null">
-        advert_type,
-      </if>
-      <if test="carNumber != null">
-        car_number,
-      </if>
-      <if test="advertDesc != null">
-        advert_desc,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="advertName != null">
-        #{advertName,jdbcType=VARCHAR},
-      </if>
-      <if test="advertUrl != null">
-        #{advertUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="advertImg != null">
-        #{advertImg,jdbcType=VARCHAR},
-      </if>
-      <if test="advertType != null">
-        #{advertType,jdbcType=INTEGER},
-      </if>
-      <if test="carNumber != null">
-        #{carNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="advertDesc != null">
-        #{advertDesc,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.maizhong.pojo.TbAdvertExample" resultType="java.lang.Long">
-    select count(*) from tb_advert
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update tb_advert
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=BIGINT},
-      </if>
-      <if test="record.advertName != null">
+    <insert id="insertSelective" parameterType="com.maizhong.pojo.TbAdvert">
+        insert into tb_advert
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="advertName != null">
+                advert_name,
+            </if>
+            <if test="advertUrl != null">
+                advert_url,
+            </if>
+            <if test="advertImg != null">
+                advert_img,
+            </if>
+            <if test="advertType != null">
+                advert_type,
+            </if>
+            <if test="carNumber != null">
+                car_number,
+            </if>
+            <if test="publishState != null">
+                publish_state,
+            </if>
+            <if test="advertDesc != null">
+                advert_desc,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="advertName != null">
+                #{advertName,jdbcType=VARCHAR},
+            </if>
+            <if test="advertUrl != null">
+                #{advertUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="advertImg != null">
+                #{advertImg,jdbcType=VARCHAR},
+            </if>
+            <if test="advertType != null">
+                #{advertType,jdbcType=INTEGER},
+            </if>
+            <if test="carNumber != null">
+                #{carNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="publishState != null">
+                #{publishState,jdbcType=INTEGER},
+            </if>
+            <if test="advertDesc != null">
+                #{advertDesc,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.maizhong.pojo.TbAdvertExample" resultType="java.lang.Long">
+        select count(*) from tb_advert
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update tb_advert
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.advertName != null">
+                advert_name = #{record.advertName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.advertUrl != null">
+                advert_url = #{record.advertUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="record.advertImg != null">
+                advert_img = #{record.advertImg,jdbcType=VARCHAR},
+            </if>
+            <if test="record.advertType != null">
+                advert_type = #{record.advertType,jdbcType=INTEGER},
+            </if>
+            <if test="record.carNumber != null">
+                car_number = #{record.carNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="record.publishState != null">
+                publish_state = #{record.publishState,jdbcType=INTEGER},
+            </if>
+            <if test="record.advertDesc != null">
+                advert_desc = #{record.advertDesc,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update tb_advert
+        set id = #{record.id,jdbcType=BIGINT},
         advert_name = #{record.advertName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.advertUrl != null">
         advert_url = #{record.advertUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="record.advertImg != null">
         advert_img = #{record.advertImg,jdbcType=VARCHAR},
-      </if>
-      <if test="record.advertType != null">
         advert_type = #{record.advertType,jdbcType=INTEGER},
-      </if>
-      <if test="record.carNumber != null">
         car_number = #{record.carNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="record.advertDesc != null">
-        advert_desc = #{record.advertDesc,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update tb_advert
-    set id = #{record.id,jdbcType=BIGINT},
-      advert_name = #{record.advertName,jdbcType=VARCHAR},
-      advert_url = #{record.advertUrl,jdbcType=VARCHAR},
-      advert_img = #{record.advertImg,jdbcType=VARCHAR},
-      advert_type = #{record.advertType,jdbcType=INTEGER},
-      car_number = #{record.carNumber,jdbcType=VARCHAR},
-      advert_desc = #{record.advertDesc,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update tb_advert
-    set id = #{record.id,jdbcType=BIGINT},
-      advert_name = #{record.advertName,jdbcType=VARCHAR},
-      advert_url = #{record.advertUrl,jdbcType=VARCHAR},
-      advert_img = #{record.advertImg,jdbcType=VARCHAR},
-      advert_type = #{record.advertType,jdbcType=INTEGER},
-      car_number = #{record.carNumber,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.pojo.TbAdvert">
-    update tb_advert
-    <set>
-      <if test="advertName != null">
-        advert_name = #{advertName,jdbcType=VARCHAR},
-      </if>
-      <if test="advertUrl != null">
-        advert_url = #{advertUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="advertImg != null">
-        advert_img = #{advertImg,jdbcType=VARCHAR},
-      </if>
-      <if test="advertType != null">
-        advert_type = #{advertType,jdbcType=INTEGER},
-      </if>
-      <if test="carNumber != null">
-        car_number = #{carNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="advertDesc != null">
-        advert_desc = #{advertDesc,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.maizhong.pojo.TbAdvert">
+        publish_state = #{record.publishState,jdbcType=INTEGER},
+        advert_desc = #{record.advertDesc,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update tb_advert
+        set id = #{record.id,jdbcType=BIGINT},
+        advert_name = #{record.advertName,jdbcType=VARCHAR},
+        advert_url = #{record.advertUrl,jdbcType=VARCHAR},
+        advert_img = #{record.advertImg,jdbcType=VARCHAR},
+        advert_type = #{record.advertType,jdbcType=INTEGER},
+        car_number = #{record.carNumber,jdbcType=VARCHAR},
+        publish_state = #{record.publishState,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.pojo.TbAdvert">
+        update tb_advert
+        <set>
+            <if test="advertName != null">
+                advert_name = #{advertName,jdbcType=VARCHAR},
+            </if>
+            <if test="advertUrl != null">
+                advert_url = #{advertUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="advertImg != null">
+                advert_img = #{advertImg,jdbcType=VARCHAR},
+            </if>
+            <if test="advertType != null">
+                advert_type = #{advertType,jdbcType=INTEGER},
+            </if>
+            <if test="carNumber != null">
+                car_number = #{carNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="publishState != null">
+                publish_state = #{publishState,jdbcType=INTEGER},
+            </if>
+            <if test="advertDesc != null">
+                advert_desc = #{advertDesc,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.maizhong.pojo.TbAdvert">
     update tb_advert
     set advert_name = #{advertName,jdbcType=VARCHAR},
       advert_url = #{advertUrl,jdbcType=VARCHAR},
       advert_img = #{advertImg,jdbcType=VARCHAR},
       advert_type = #{advertType,jdbcType=INTEGER},
       car_number = #{carNumber,jdbcType=VARCHAR},
+      publish_state = #{publishState,jdbcType=INTEGER},
       advert_desc = #{advertDesc,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.maizhong.pojo.TbAdvert">
+    <update id="updateByPrimaryKey" parameterType="com.maizhong.pojo.TbAdvert">
     update tb_advert
     set advert_name = #{advertName,jdbcType=VARCHAR},
       advert_url = #{advertUrl,jdbcType=VARCHAR},
       advert_img = #{advertImg,jdbcType=VARCHAR},
       advert_type = #{advertType,jdbcType=INTEGER},
-      car_number = #{carNumber,jdbcType=VARCHAR}
+      car_number = #{carNumber,jdbcType=VARCHAR},
+      publish_state = #{publishState,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+    <select id="getAdvertPublish" resultMap="ResultMapWithBLOBs">
+    SELECT A.* FROM tb_advert A LEFT JOIN tb_advert_publish B ON A.id = B.advert_id
+    WHERE A.publish_state=1 AND A.advert_type=#{typeId,jdbcType=BIGINT} ORDER BY B.advert_sort ASC;
+  </select>
 </mapper>
