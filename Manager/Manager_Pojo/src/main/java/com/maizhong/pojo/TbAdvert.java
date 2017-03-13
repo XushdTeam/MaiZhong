@@ -11,6 +11,8 @@ public class TbAdvert {
 
     private Integer advertType;
 
+    private String carNumber;
+
     private String advertDesc;
 
     public Long getId() {
@@ -51,6 +53,14 @@ public class TbAdvert {
 
     public void setAdvertType(Integer advertType) {
         this.advertType = advertType;
+    }
+
+    public String getCarNumber() {
+        return carNumber;
+    }
+
+    public void setCarNumber(String carNumber) {
+        this.carNumber = carNumber == null ? null : carNumber.trim();
     }
 
     public String getAdvertDesc() {

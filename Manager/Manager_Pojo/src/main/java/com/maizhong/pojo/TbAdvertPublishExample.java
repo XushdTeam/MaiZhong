@@ -119,6 +119,17 @@ public class TbAdvertPublishExample {
             addCriterion("id =", value, "id");
             return (Criteria) this;
         }
+//测试开始
+        public  Criteria andAdvertTypeEqualTo(Integer value){
+            if (value != null) {
+                addCriterion("p.advert_id=t.id and t.advert_type= ",value,"advertType");
+            }else {
+                addCriterion("p.advert_id=t.id ");
+            }
+
+            return (Criteria) this;
+        }
+        //测试结束
 
         public Criteria andIdNotEqualTo(Long value) {
             addCriterion("id <>", value, "id");
@@ -344,6 +355,10 @@ public class TbAdvertPublishExample {
             addCriterion("advert_sort not between", value1, value2, "advertSort");
             return (Criteria) this;
         }
+
+
+
+
     }
 
     public static class Criteria extends GeneratedCriteria {

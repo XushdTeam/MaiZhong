@@ -21,6 +21,10 @@ public interface TbAdvertPublishMapper {
 
     TbAdvertPublish selectByPrimaryKey(Long id);
 
+    List<TbAdvertPublish> selectTypeListByPrimaryKey(Long id);
+
+    TbAdvertPublish selectJoinAdert(@Param("advertType") Long advertType );
+
     int updateByExampleSelective(@Param("record") TbAdvertPublish record, @Param("example") TbAdvertPublishExample example);
 
     int updateByExample(@Param("record") TbAdvertPublish record, @Param("example") TbAdvertPublishExample example);

@@ -1,5 +1,9 @@
 package com.maizhong.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.maizhong.common.utils.TimeUtils;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class TbAdvertPublish {
@@ -27,14 +31,18 @@ public class TbAdvertPublish {
         this.advertId = advertId;
     }
 
+
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     public Date getAdvertTime() {
         return advertTime;
     }
 
     public void setAdvertTime(Date advertTime) {
+
         this.advertTime = advertTime;
     }
-
     public Integer getAdvertSort() {
         return advertSort;
     }
@@ -42,4 +50,5 @@ public class TbAdvertPublish {
     public void setAdvertSort(Integer advertSort) {
         this.advertSort = advertSort;
     }
+
 }

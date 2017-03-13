@@ -7,6 +7,8 @@
     <result column="advert_url" jdbcType="VARCHAR" property="advertUrl" />
     <result column="advert_img" jdbcType="VARCHAR" property="advertImg" />
     <result column="advert_type" jdbcType="INTEGER" property="advertType" />
+    <result column="car_number" jdbcType="VARCHAR" property="carNumber" />
+    <result column="advert_desc" jdbcType="LONGVARCHAR" property="advertDesc"/>
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.maizhong.pojo.TbAdvert">
     <result column="advert_desc" jdbcType="LONGVARCHAR" property="advertDesc" />
@@ -70,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, advert_name, advert_url, advert_img, advert_type
+    id, advert_name, advert_url, advert_img, advert_type, car_number,advert_desc
   </sql>
   <sql id="Blob_Column_List">
     advert_desc
@@ -125,11 +127,11 @@
   </delete>
   <insert id="insert" parameterType="com.maizhong.pojo.TbAdvert">
     insert into tb_advert (id, advert_name, advert_url, 
-      advert_img, advert_type, advert_desc
-      )
+      advert_img, advert_type, car_number, 
+      advert_desc)
     values (#{id,jdbcType=BIGINT}, #{advertName,jdbcType=VARCHAR}, #{advertUrl,jdbcType=VARCHAR}, 
-      #{advertImg,jdbcType=VARCHAR}, #{advertType,jdbcType=INTEGER}, #{advertDesc,jdbcType=LONGVARCHAR}
-      )
+      #{advertImg,jdbcType=VARCHAR}, #{advertType,jdbcType=INTEGER}, #{carNumber,jdbcType=VARCHAR}, 
+      #{advertDesc,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.pojo.TbAdvert">
     insert into tb_advert
@@ -148,6 +150,9 @@
       </if>
       <if test="advertType != null">
         advert_type,
+      </if>
+      <if test="carNumber != null">
+        car_number,
       </if>
       <if test="advertDesc != null">
         advert_desc,
@@ -168,6 +173,9 @@
       </if>
       <if test="advertType != null">
         #{advertType,jdbcType=INTEGER},
+      </if>
+      <if test="carNumber != null">
+        #{carNumber,jdbcType=VARCHAR},
       </if>
       <if test="advertDesc != null">
         #{advertDesc,jdbcType=LONGVARCHAR},
@@ -198,6 +206,9 @@
       <if test="record.advertType != null">
         advert_type = #{record.advertType,jdbcType=INTEGER},
       </if>
+      <if test="record.carNumber != null">
+        car_number = #{record.carNumber,jdbcType=VARCHAR},
+      </if>
       <if test="record.advertDesc != null">
         advert_desc = #{record.advertDesc,jdbcType=LONGVARCHAR},
       </if>
@@ -213,6 +224,7 @@
       advert_url = #{record.advertUrl,jdbcType=VARCHAR},
       advert_img = #{record.advertImg,jdbcType=VARCHAR},
       advert_type = #{record.advertType,jdbcType=INTEGER},
+      car_number = #{record.carNumber,jdbcType=VARCHAR},
       advert_desc = #{record.advertDesc,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -224,7 +236,8 @@
       advert_name = #{record.advertName,jdbcType=VARCHAR},
       advert_url = #{record.advertUrl,jdbcType=VARCHAR},
       advert_img = #{record.advertImg,jdbcType=VARCHAR},
-      advert_type = #{record.advertType,jdbcType=INTEGER}
+      advert_type = #{record.advertType,jdbcType=INTEGER},
+      car_number = #{record.carNumber,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -244,6 +257,9 @@
       <if test="advertType != null">
         advert_type = #{advertType,jdbcType=INTEGER},
       </if>
+      <if test="carNumber != null">
+        car_number = #{carNumber,jdbcType=VARCHAR},
+      </if>
       <if test="advertDesc != null">
         advert_desc = #{advertDesc,jdbcType=LONGVARCHAR},
       </if>
@@ -256,6 +272,7 @@
       advert_url = #{advertUrl,jdbcType=VARCHAR},
       advert_img = #{advertImg,jdbcType=VARCHAR},
       advert_type = #{advertType,jdbcType=INTEGER},
+      car_number = #{carNumber,jdbcType=VARCHAR},
       advert_desc = #{advertDesc,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -264,7 +281,8 @@
     set advert_name = #{advertName,jdbcType=VARCHAR},
       advert_url = #{advertUrl,jdbcType=VARCHAR},
       advert_img = #{advertImg,jdbcType=VARCHAR},
-      advert_type = #{advertType,jdbcType=INTEGER}
+      advert_type = #{advertType,jdbcType=INTEGER},
+      car_number = #{carNumber,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
