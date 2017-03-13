@@ -20,11 +20,15 @@
     </blockquote>
     <div class="y-role">
         <fieldset class="layui-elem-field">
-            <legend>车型</legend>
+            <legend>车型
+
+                <a class="layui-btn layui-btn-small do-action" id="toProp" data-type="doAddEdit" data-href="${seepropUrl}/"><i class="layui-icon">&#xe609;</i>点击查看属性</a>
+
+            </legend>
             <div class="layui-field-box">
 
                 <form class="layui-form" action="${updateCarUrl}"  method="post">
-                        <input type="hidden" name="id" value="${car.id}">
+                        <input type="hidden" name="id" id="idInput" value="${car.id}">
                     <div class="layui-form-item layui-input-block">
                         <label class="layui-form-label">汽车编号</label>
                         <div class="layui-input-inline" style="width: 25%">
@@ -194,7 +198,12 @@
                     <div class="layui-input-block" id="imagesShow">
                     </div>
 
-
+                    <%--<div class="layui-form-item layui-input-block">--%>
+                        <%--<div class="layui-form-label">属性</div>--%>
+                        <%--<div class="layui-input-block">--%>
+                            <%--<a class="layui-btn layui-btn-small do-action" id="toProp" data-type="doAddEdit" data-href="${seepropUrl}/"><i class="layui-icon">&#xe609;</i>点击查看属性</a>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
 
                     <div class="layui-input-block">
                         <div class="layui-form-item layui-form-text">
@@ -215,9 +224,7 @@
                             <button class="layui-btn" type="button" onclick="javascript:history.go(-1);">返回</button>
                         </div>
                         <div class="layui-input-inline">
-                            <div class="site-demo-button" id="LAY_demo" style="margin-bottom: 0;">
-                                <button data-method="setTop" class="layui-btn">属性页面预留按钮</button>
-                            </div>
+
                         </div>
                     </div>
                 </form>
@@ -228,47 +235,6 @@
 <!-- js脚本 -->
 <script type="text/javascript" src="/resources/js/event.js"></script>
 <script type="text/javascript">
-
-    layui.use('layer', function(){
-        var $ = layui.jquery, layer = layui.layer;
-
-        //触发事件
-        var active = {
-            setTop: function(){
-                var that = this;
-                //多窗口模式，层叠置顶
-                layer.open({
-                    type: 2 //此处以iframe举例
-                    ,title: '图片上传'
-                    ,area: ['70%', '70%']
-                    ,shade: 0
-                    ,maxmin: true
-                    ,offset: [ //为了演示，随机坐标
-                        $(window).height()-900,$(window).width()-1500
-                    ]
-                    ,content: 'http://layer.layui.com/test/settop.html'
-                    ,btn: ['保存', '关闭'] //只是为了演示
-                    ,yes: function(){
-                        $(that).click();
-                    }
-                    ,btn2: function(){
-                        layer.closeAll();
-                    }
-
-                    ,zIndex: layer.zIndex //重点1
-                    ,success: function(layero){
-                        layer.setTop(layero); //重点2
-                    }
-                });
-            }};
-
-        $('#LAY_demo .layui-btn').on('click', function(){
-            var othis = $(this), method = othis.data('method');
-            active[method] ? active[method].call(this, othis) : '';
-        });
-
-    });
-
 
 
 
@@ -313,6 +279,10 @@
 
     <!--图片上传以及富文本编译器-->
     $(function(){
+
+        $("#toProp").attr("data-href","${seepropUrl}/"+$("#idInput").val());
+
+
         var kindEditorParams = {
             //指定上传文件参数名称
             filePostName  : "uploadFile",

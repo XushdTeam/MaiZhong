@@ -1,5 +1,6 @@
 package com.maizhong.rest.service;
 
+import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.result.JsonResult;
 
 /**
@@ -10,4 +11,7 @@ public interface IndexService {
 
     JsonResult login(String username, String password);
 
+    JsonResult getBaseInfo();
+
+    JsonResult getInterfaceList(PageSearchParam pageSearchParam);
 }

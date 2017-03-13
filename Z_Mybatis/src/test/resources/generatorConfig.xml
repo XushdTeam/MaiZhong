@@ -46,7 +46,8 @@
 
         <!-- 指定数据库表 -->
 
-        <table schema="" tableName="tb_dictionary"/>
+        <table schema="" tableName="rest_interface"/>
+
 
        <!-- <table schema="" tableName="system_role"/>
         <table schema="" tableName="system_user_role"/>

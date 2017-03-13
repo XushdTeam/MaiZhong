@@ -34,11 +34,8 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <!--视图解析-->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/" />
-        <property name="suffix" value=".html" />
-    </bean>
 
-    <mvc:resources location="/resources/" mapping="/resources/**"/>
+
+    <mvc:resources location="/static/" mapping="/static/**"/>
+
 </beans>

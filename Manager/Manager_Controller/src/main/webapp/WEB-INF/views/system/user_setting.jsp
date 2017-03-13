@@ -174,6 +174,8 @@
         layui.upload({
             url: '${uploadUrl}',
             before: function(input){
+                console.log(input);
+                return false;
                 $(".loading").show();
             },
             success: function(res) {

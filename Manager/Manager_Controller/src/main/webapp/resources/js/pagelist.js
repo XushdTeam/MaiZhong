@@ -217,6 +217,23 @@ layui.define(["app","form","laytpl","laypage",'laydate','util'],function (export
          */
         roleListInit:function(){
 
+        },
+        /**
+         * 汽车列表页面独立方法
+         */
+        carListInit:function(){
+            private.initTime();
+
+
+            var imageNodes  = $(".imageHideText");
+            $.each(imageNodes,function(i,e){
+                var images = $(e).html().split();
+                // $.each(images,function(i,e){
+                if(images&&images.length>0)
+                    $(".imageHideText").parent().appendChild('<img src="'+images[0]+'"  style="width: 69px;height: 36px" >')
+                // })
+                alert(images[0]);
+            })
         }
     }
     exports("pagelist",obj);

@@ -6,6 +6,7 @@
     <result column="interface_name" jdbcType="VARCHAR" property="interfaceName" />
     <result column="interface_url" jdbcType="VARCHAR" property="interfaceUrl" />
     <result column="interface_param" jdbcType="VARCHAR" property="interfaceParam" />
+    <result column="interface_type" jdbcType="VARCHAR" property="interfaceType" />
     <result column="interface_desc" jdbcType="VARCHAR" property="interfaceDesc" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, interface_name, interface_url, interface_param, interface_desc
+    id, interface_name, interface_url, interface_param,interface_type, interface_desc
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.pojo.RestInterfaceExample" resultMap="BaseResultMap">
     select
