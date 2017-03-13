@@ -2,14 +2,19 @@ package com.maizhong.rest.controller;
 
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.result.JsonResult;
+import com.maizhong.pojo.RestInterface;
 import com.maizhong.rest.service.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * 首页控制器
@@ -55,6 +60,23 @@ public class IndexController {
         return resutl;
     }
 
+    @RequestMapping(value ="/interfaceAdd",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult interfaceAdd(@Validated RestInterface restInterface, BindingResult bindingResult){
+
+        if (bindingResult.hasErrors()){
+            String error = "";
+            List<ObjectError> allErrors = bindingResult.getAllErrors();
+            for (ObjectError allError : allErrors) {
+                error+= allError.getDefaultMessage();
+            }
+            return JsonResult.Error(error);
+        }else {
+            JsonResult result = indexService.saveInterface(restInterface);
+            return result;
+        }
+
+    }
 
 }
 

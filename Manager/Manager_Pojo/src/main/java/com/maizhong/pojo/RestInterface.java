@@ -1,16 +1,22 @@
 package com.maizhong.pojo;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class RestInterface {
     private Long id;
 
+    @NotBlank(message = "接口名称不能为空")
     private String interfaceName;
 
+    @NotBlank(message = "接口URL不能为空")
     private String interfaceUrl;
+
 
     private String interfaceParam;
 
     private String interfaceDesc;
 
+    @NotBlank(message = "请求方式不能为空")
     private String interfaceType;
 
     public String getInterfaceType() {

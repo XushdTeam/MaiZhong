@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.enums.AuthEnum;
+import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.common.utils.SqlUtils;
@@ -45,7 +46,7 @@ public class IndexServiceImpl implements IndexService {
         }else if(!StringUtils.equals(PASSWORD,password)){
             return JsonResult.build(AuthEnum.USER_ERROR_PASSWORD);
         }else{
-            Map<String,Object> user = new HashMap();
+            Map<String,Object> user = new HashMap<>();
             user.put("username",ACCOUNT);
             user.put("password",PASSWORD);
             user.put("advert",ADVERT);
@@ -56,8 +57,10 @@ public class IndexServiceImpl implements IndexService {
     @Override
     public JsonResult getBaseInfo() {
         Map<String,Object> baseInfo = new HashMap<>();
-        baseInfo.put("interfaceCount",0);
         baseInfo.put("version","1.0.0");
+        RestInterfaceExample example = new RestInterfaceExample();
+        long count = interfaceMapper.countByExample(example);
+        baseInfo.put("interfaceCount",count);
         return JsonResult.OK(baseInfo);
     }
 
@@ -77,5 +80,17 @@ public class IndexServiceImpl implements IndexService {
         PageInfo pageInfo = new PageInfo(list);
         PageResult result = new PageResult(pageInfo);
         return JsonResult.OK(result);
+    }
+
+
+    @Override
+    public JsonResult saveInterface(RestInterface restInterface) {
+
+        int res = interfaceMapper.insertSelective(restInterface);
+        if(res>0){
+            return JsonResult.build(OperateEnum.SUCCESS);
+        }else{
+            return JsonResult.build(OperateEnum.FAILE);
+        }
     }
 }
