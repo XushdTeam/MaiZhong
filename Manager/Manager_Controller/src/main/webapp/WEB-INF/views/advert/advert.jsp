@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>广告信息</title>
@@ -31,9 +32,9 @@
                     <div class="layui-input-inline">
                         <select name="advertType">
                             <option value="">请选择广告类型</option>
-                            <option value="0">首页轮播</option>
-                            <option value="1">首页推荐</option>
-                            <option value="2">分类页顶部</option>
+                            <c:forEach items="${typeList}" var="type">
+                                <option value="${type.key}">${type.value}</option>
+                            </c:forEach>
                             <option value="">全部类型</option>
                         </select>
                     </div>
@@ -65,12 +66,12 @@
                     <col width="5%">
                     <col width="10%">
                     <col width="10%">
+                    <col width="5%">
+                    <col width="15%">
                     <col width="10%">
                     <col width="10%">
-                    <col width="10%">
-                    <col width="10%">
-                    <col width="10%">
-                    <col width="25%">
+                    <col width="5%">
+                    <col width="30%">
                 </colgroup>
                 <thead>
                 <tr>
@@ -106,14 +107,15 @@
                         </td>
 
                         <td>
-                            <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit"
-                               data-href="${handleUrl}/{{item.id}}"><i
-                                    class="icon-edit  fa fa-pencil-square-o"></i>编辑</a>
+
                             {{# if (item.publishState) { }}
                             <a class="layui-btn layui-btn-small layui-btn-danger do-action" data-type="doDelete"
                                data-text="确定取消<span class=red></span>吗？"
                                data-href="${baseUrl}/remove/{{item.id}}"><i class="icon-trash-o  fa fa-trash-o"></i>取消发布</a>
                             {{# } else { }}
+                            <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit"
+                               data-href="${handleUrl}/{{item.id}}"><i
+                                    class="icon-edit  fa fa-pencil-square-o"></i>编辑</a>
                             <a class="layui-btn layui-btn-small do-action" data-type="doAndRefresh"
                                data-href="${baseUrl}/fabu/{{item.id}}"><i
                                     class="icon-edit  fa fa-pencil-square-o"></i>发布</a>

@@ -229,4 +229,13 @@ WHERE A.publish_state=1
   ORDER BY B.advert_sort ASC LIMIT #{startPage,jdbcType=BIGINT},#{endPage,jdbcType=BIGINT};
     </select>
 
+    <update id="downSort">
+    UPDATE tb_advert_publish SET advert_sort=advert_sort+1 WHERE id=#{id,jdbcType=BIGINT};
+</update>
+    <update id="upSort">
+        UPDATE tb_advert_publish SET advert_sort=advert_sort-1 WHERE id=#{id,jdbcType=BIGINT};
+    </update>
+    <update id="topSort">
+        UPDATE tb_advert_publish SET advert_sort=0 WHERE id=#{id,jdbcType=BIGINT};
+    </update>
 </mapper>

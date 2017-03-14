@@ -2,11 +2,13 @@ package com.maizhong.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.maizhong.common.dto.KeyValue;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.enums.DicParentEnum;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.common.utils.DicRedisUtils;
+import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.common.utils.SqlUtils;
 import com.maizhong.dao.JedisClient;
 import com.maizhong.mapper.TbAdvertMapper;
@@ -207,34 +209,7 @@ public class AdvertServiceImpl implements AdvertService {
         return null;
     }
 
-   /* *//**
-     * 发布广告
-     * @param tbAdvertPublish
-     * @return
-     *//*
-    @Override
-    public OperateEnum insertAdvertPublish(TbAdvertPublish tbAdvertPublish) {
-        Long advertId = tbAdvertPublish.getAdvertId();
-        TbAdvert tbAdvert = tbAdvertMapper.selectByPrimaryKey(advertId);
-        System.out.println(tbAdvert.getId()+"---"+tbAdvert.getAdvertName()+"=="+tbAdvert.getPublishState());
-        int count = 0;
-        if (tbAdvert == null) {
-            return OperateEnum.FAILE;
-        } else {
-            tbAdvert.setPublishState(1);
-            System.out.println(tbAdvert.getId()+"---"+tbAdvert.getAdvertName()+"=="+tbAdvert.getPublishState());
-            count = tbAdvertMapper.updateByPrimaryKeySelective(tbAdvert);
 
-        }
-
-        int res = tbAdvertPublishMapper.insertSelective(tbAdvertPublish);
-        if (res > 0&&count>0) {
-            return OperateEnum.SUCCESS;
-        } else {
-            return OperateEnum.FAILE;
-        }
-    }
-*/
     /**
      * 更新广告
      * @param tbAdvertPublish
@@ -263,5 +238,12 @@ public class AdvertServiceImpl implements AdvertService {
         } else {
             return OperateEnum.FAILE;
         }
+    }
+
+    @Override
+    public List<KeyValue> getAdvertTypeList() {
+        String json=jedisClient.hget(DIC_KEY,DicParentEnum.ADTYPE.getState()+"");
+        List<KeyValue> list= JsonUtils.jsonToList(json,KeyValue.class);
+        return  list;
     }
 }

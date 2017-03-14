@@ -1,5 +1,6 @@
 package com.maizhong.controller;
 
+import com.maizhong.common.dto.KeyValue;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Description:
@@ -46,11 +48,12 @@ public class AdvertController {
     //@RequiresPermissions("/advert")
     @RequestMapping(value = "/advert", method = RequestMethod.GET)
     public String advert(Model model) {
+        List<KeyValue> list=advertService.getAdvertTypeList();
+        model.addAttribute("typeList",list);
         model.addAttribute("baseUrl", "/advert");
         model.addAttribute("listUrl", "/advert/list");
         model.addAttribute("handleUrl", "/advert/handle");
         model.addAttribute("deleteUrl", "/advert/delete");
-
         return "advert/advert";
     }
 
@@ -79,10 +82,14 @@ public class AdvertController {
             //新增
             model.addAttribute("handle", "广告信息/新增广告");
             model.addAttribute("saveUrl", "/advert/save");
+            List<KeyValue> list=advertService.getAdvertTypeList();
+            model.addAttribute("typeList",list);
             return "advert/advert_add";
         } else {
             TbAdvert advert = advertService.getAdvertByid(Long.valueOf(id));
             model.addAttribute("advert", advert);
+            List<KeyValue> list=advertService.getAdvertTypeList();
+            model.addAttribute("typeList",list);
             model.addAttribute("handle", "广告信息/广告修改");
             model.addAttribute("saveUrl", "/advert/update");
             model.addAttribute("uploadUrl", "/advert/" + advert.getId() + "/advert/upload");

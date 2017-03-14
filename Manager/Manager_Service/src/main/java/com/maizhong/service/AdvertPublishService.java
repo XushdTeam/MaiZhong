@@ -1,5 +1,6 @@
 package com.maizhong.service;
 
+import com.maizhong.common.dto.KeyValue;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.PageResult;
@@ -30,12 +31,6 @@ public interface AdvertPublishService {
     PageResult getAdvertPublishList(PageSearchParam param);
 
 
-    /**
-     * 广告发布信息修改
-     * @param tbAdvertPublish
-     * @return
-     */
-    OperateEnum updateAdvertPublish(TbAdvertPublish tbAdvertPublish);
 
     /**
      * 删除广告发布信息
@@ -53,4 +48,5 @@ public interface AdvertPublishService {
     public  OperateEnum advertPublish(Long id);
 
     OperateEnum removeAdvertPublishById(long id);
+    List<KeyValue> getAdvertTypeList();
 }
