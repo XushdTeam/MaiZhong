@@ -1,5 +1,6 @@
 package com.maizhong.controller;
 
+import com.maizhong.common.dto.KeyValue;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
@@ -34,13 +35,12 @@ public class AdvertPublishController {
     @Autowired
     AdvertPublishService advertPublishService;
 
-    @Autowired
-    AdvertService advertService;
-
 
     //@RequiresPermissions("/advertPublish")
     @RequestMapping(value = "/advertPublish", method = RequestMethod.GET)
     public String advertPublish(Model model) {
+        List<KeyValue> list=advertPublishService.getAdvertTypeList();
+        model.addAttribute("typeList",list);
         model.addAttribute("baseUrl", "/advertPublish");
         model.addAttribute("listUrl", "/advertPublish/list");
         model.addAttribute("handleUrl", "/advertPublish/handle");
@@ -61,8 +61,6 @@ public class AdvertPublishController {
         PageResult result = advertPublishService.getAdvertPublishList(param);
         return JsonResult.OK(result);
     }
-
-
 
 
     /**
@@ -92,8 +90,6 @@ public class AdvertPublishController {
         OperateEnum result = advertPublishService.deleteAdvertPublishById(id);
         return JsonResult.build(result);
     }
-
-
 
 
 }

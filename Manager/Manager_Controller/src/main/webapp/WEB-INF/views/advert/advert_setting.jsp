@@ -58,9 +58,9 @@
                        <div class="layui-input-inline">
                            <select name="advertType" value="${advert.advertType}" lay-verify="required" id="advertType">
                                <option value="">请选择广告类型</option>
-                               <option value="0" <c:if test="${advert.advertType==0}">selected="selected"</c:if>>首页轮播</option>
-                               <option value="1" <c:if test="${advert.advertType==1}">selected="selected"</c:if>>首页推荐</option>
-                               <option value="2" <c:if test="${advert.advertType==2}">selected="selected"</c:if>>分类页顶部</option>
+                               <c:forEach items="${typeList}" var="type">
+                                   <option value="${type.key}" <c:if test="${advert.advertType==type.key}">selected="selected"</c:if>>${type.value}</option>
+                               </c:forEach>
                            </select>
                        </div>
                    </div>

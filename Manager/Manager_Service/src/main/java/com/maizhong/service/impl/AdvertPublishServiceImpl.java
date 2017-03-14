@@ -2,11 +2,16 @@ package com.maizhong.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.maizhong.common.dto.KeyValue;
 import com.maizhong.common.dto.PageSearchParam;
+import com.maizhong.common.enums.DicParentEnum;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.PageResult;
+import com.maizhong.common.utils.DicRedisUtils;
+import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.common.utils.SqlUtils;
 import com.maizhong.common.utils.TimeUtils;
+import com.maizhong.dao.JedisClient;
 import com.maizhong.mapper.TbAdvertMapper;
 import com.maizhong.mapper.TbAdvertPublishMapper;
 import com.maizhong.pojo.*;
@@ -17,6 +22,7 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;
@@ -37,6 +43,12 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
     TbAdvertPublishMapper tbAdvertPublishMapper;
     @Autowired
     TbAdvertMapper tbAdvertMapper;
+    @Autowired
+    private JedisClient jedisClient;
+    @Value("${DIC_KEY}")
+    private String DIC_KEY;
+    @Value("${AD_HOME}")
+    private String AD_HOME;
 
 
     /**
@@ -65,26 +77,26 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
 
     @Override
     public OperateEnum changeSort(String meth, Long id) {
-        TbAdvertPublish tbAdvertPublish = getPublishByid(id);
+        int res=0;
+
         if (StringUtils.equals("top", meth)) {
             //置顶
-            tbAdvertPublish.setAdvertSort(0);
-            updateAdvertPublish(tbAdvertPublish);
+          res= tbAdvertPublishMapper.topSort(id);
 
         } else if (StringUtils.equals("up", meth)) {
-            if (tbAdvertPublish.getAdvertSort() == 0) {
-                return OperateEnum.SUCCESS;
-            } else {
-                tbAdvertPublish.setAdvertSort(getPublishByid(id).getAdvertSort() - 1);
-                updateAdvertPublish(tbAdvertPublish);
-                return OperateEnum.SUCCESS;
-            }
+            res= tbAdvertPublishMapper.upSort(id);
         } else {
-            tbAdvertPublish.setAdvertSort(tbAdvertPublish.getAdvertSort() + 1);
-            updateAdvertPublish(tbAdvertPublish);
-            return OperateEnum.SUCCESS;
+            res= tbAdvertPublishMapper.downSort(id);
         }
-        return OperateEnum.SUCCESS;
+        if (res > 0) {
+            TbAdvertPublish tbAdvertPublish = tbAdvertPublishMapper.selectByPrimaryKey(id);
+            Long advertId=tbAdvertPublish.getAdvertId();
+            TbAdvert tbAdvert = tbAdvertMapper.selectByPrimaryKey(advertId);
+            jedisClient.hdel(AD_HOME,tbAdvert.getAdvertType()+"");
+            return OperateEnum.SUCCESS;
+        } else {
+            return OperateEnum.FAILE;
+        }
     }
 
     @Override
@@ -106,6 +118,7 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
         }
         int res = tbAdvertPublishMapper.insertSelective(tbAdvertPublish);
         if (res > 0) {
+            jedisClient.hdel(AD_HOME,tbAdvert.getAdvertType()+"");
             return OperateEnum.SUCCESS;
         } else {
             return OperateEnum.FAILE;
@@ -128,6 +141,10 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
         int startPage = (param.getPageIndex() - 1) * param.getPageSize();
         List<TbAdvertPublishJoinAdvert> list = tbAdvertPublishMapper.getAdvertPublishByType(typeId,
                 Long.valueOf(startPage), Long.valueOf(param.getPageSize()));
+        String json=jedisClient.hget(DIC_KEY, DicParentEnum.ADTYPE.getState()+"");
+        for (TbAdvertPublishJoinAdvert tbAdvert : list) {
+            tbAdvert.setTypeName(DicRedisUtils.getDicFormRedisById(tbAdvert.getAdvertType()+"",json));
+        }
         PageInfo pageInfo = new PageInfo(list);
         return new PageResult(pageInfo);
     }
@@ -139,15 +156,7 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
      * @return
      */
 
-    @Override
-    public OperateEnum updateAdvertPublish(TbAdvertPublish tbAdvertPublish) {
-        int res = tbAdvertPublishMapper.updateByPrimaryKeySelective(tbAdvertPublish);
-        if (res > 0) {
-            return OperateEnum.SUCCESS;
-        } else {
-            return OperateEnum.FAILE;
-        }
-    }
+
 
     /**
      * 删除发布
@@ -173,6 +182,7 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
 
         int ret = tbAdvertPublishMapper.deleteByPrimaryKey(id);
         if (ret > 0 && count > 0) {
+            jedisClient.hdel(AD_HOME,tbAdvert.getAdvertType()+"");
             return OperateEnum.SUCCESS;
         } else {
             return OperateEnum.FAILE;
@@ -212,6 +222,7 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
         int ret = tbAdvertPublishMapper.deleteByPrimaryKey(tbAdvertPublish.getId());
 
         if (ret > 0 && count > 0) {
+            jedisClient.hdel(AD_HOME,tbAdvert.getAdvertType()+"");
             return OperateEnum.SUCCESS;
         } else {
             return OperateEnum.FAILE;
@@ -229,5 +240,14 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
     public List<TbAdvertPublish> selectTypeListByPrimaryKey(Long id) {
         return tbAdvertPublishMapper.selectTypeListByPrimaryKey(id);
     }
+
+    @Override
+    public List<KeyValue> getAdvertTypeList() {
+        String json=jedisClient.hget(DIC_KEY,DicParentEnum.ADTYPE.getState()+"");
+        List<KeyValue> list= JsonUtils.jsonToList(json,KeyValue.class);
+        return  list;
+    }
+
+
 
 }

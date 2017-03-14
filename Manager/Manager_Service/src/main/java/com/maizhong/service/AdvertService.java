@@ -1,10 +1,13 @@
 package com.maizhong.service;
 
+import com.maizhong.common.dto.KeyValue;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.pojo.TbAdvert;
 import com.maizhong.pojo.TbAdvertPublish;
+
+import java.util.List;
 
 /**
  * Description:广告信息接口
@@ -96,4 +99,5 @@ public interface AdvertService {
     OperateEnum deleteAdvertPublishById(long id);
 
 
+    List<KeyValue> getAdvertTypeList();
 }

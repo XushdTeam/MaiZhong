@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>广告发布</title>
@@ -25,9 +26,9 @@
                     <div class="layui-input-inline">
                         <select name="advertType" >
                             <option value="">全部分类</option>
-                            <option value="0">首页轮播</option>
-                            <option value="1">首页推荐</option>
-                            <option value="2">分类页顶部</option>
+                            <c:forEach items="${typeList}" var="type">
+                                <option value="${type.key}">${type.value}</option>
+                            </c:forEach>
                             <option value="">全部分类</option>
                         </select>
                     </div>
@@ -81,15 +82,7 @@
                         <td><img src="{{ item.advertImg }}" height="50"/></td>
                         <td>{{ item.advertName }}</td>
                         <td>{{ item.advertTime }}</td>
-                        <td align="left">{{# if (item.advertType==0) { }}
-                            首页轮播
-                            {{# } }}
-                            {{# if (item.advertType==1) { }}
-                            首页推荐
-                            {{# } }}
-                            {{# if (item.advertType==2) { }}
-                            分类页顶部
-                            {{# } }}
+                        <td >{{item.typeName }}
                         </td>
                         <td>{{ item.advertSort }}</td>
                         <td>
