@@ -1,6 +1,10 @@
 package com.maizhong.common.utils;
 
-import com.alibaba.fastjson.JSON;
+
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
 
@@ -10,6 +14,8 @@ import java.util.List;
  */
 public class JsonUtils {
 
+    // 定义jackson对象
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     /**
      * 对象转化成json字符串
@@ -17,7 +23,13 @@ public class JsonUtils {
      * @return
      */
     public static String objectToJson(Object object) {
-        return JSON.toJSONString(object);
+        try {
+            String string = MAPPER.writeValueAsString(object);
+            return string;
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -28,7 +40,17 @@ public class JsonUtils {
      * @return
      */
     public static <T>List<T> jsonToList(String jsonStr, Class<T> beanType){
-        return JSON.parseArray(jsonStr,beanType);
+
+        JavaType javaType = MAPPER.getTypeFactory().constructParametricType(List.class, beanType);
+        try {
+            List<T> list = MAPPER.readValue(jsonStr, javaType);
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
     }
 
 }

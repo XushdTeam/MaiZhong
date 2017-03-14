@@ -32,7 +32,7 @@ public class FileUploadController {
     @ResponseBody
     public Map upload(@RequestParam(value = "uploadFile") MultipartFile file ){
 
-        Map result = new HashMap();
+        Map<String,Object> result = new HashMap<>();
 
         JsonResult jsonResult = fileUploadService.uploadImg(file,carImgFilepathKey==null?"/car":carImgFilepathKey);
 

@@ -2,17 +2,17 @@ package com.maizhong.controller;
 
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.target.ControllerLog;
-import com.maizhong.pojo.TbAdvertPublish;
 import com.maizhong.pojo.TbCarProp;
 import com.maizhong.service.CarPropService;
-import com.sun.glass.ui.Size;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * Created by yangF on 2017/3/9.

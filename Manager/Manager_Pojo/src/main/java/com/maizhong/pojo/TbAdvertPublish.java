@@ -1,7 +1,7 @@
 package com.maizhong.pojo;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import com.maizhong.common.utils.TimeUtils;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -34,7 +34,7 @@ public class TbAdvertPublish {
 
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public Date getAdvertTime() {
         return advertTime;
     }

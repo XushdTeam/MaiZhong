@@ -10,7 +10,6 @@ import com.maizhong.common.utils.SqlUtils;
 import com.maizhong.mapper.TbCarBrandMapper;
 import com.maizhong.pojo.TbCarBrand;
 import com.maizhong.pojo.TbCarBrandExample;
-import com.maizhong.pojo.TbRole;
 import com.maizhong.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +27,7 @@ import java.util.List;
 public class BrandServiceImpl implements BrandService {
 
     @Autowired
-    TbCarBrandMapper tbCarBrandMapper;
+    private TbCarBrandMapper tbCarBrandMapper;
 
     /**
      * 根据Id获取品牌对象

@@ -1,6 +1,7 @@
 package com.maizhong.common.result;
 
-import com.alibaba.fastjson.annotation.JSONField;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.pagehelper.PageInfo;
 
 /**
@@ -16,7 +17,7 @@ public class PageResult {
     //当前页
     private int pageNum;
     //rows 数据
-    @JSONField(name = "rows")
+    @JsonProperty("rows")
     private Object data;
 
 

@@ -21,6 +21,18 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
+
+
+        <!-- Jackson Json处理工具包 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <!-- httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
         <!--时间操作组件-->
         <dependency>
             <groupId>joda-time</groupId>
@@ -57,16 +69,14 @@
             <artifactId>commons-fileupload</artifactId>
         </dependency>
 
-        <!--FastJson 工具包-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-        </dependency>
+
 
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
         </dependency>
+
+
 
     </dependencies>
 

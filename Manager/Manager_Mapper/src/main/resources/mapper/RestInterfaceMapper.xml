@@ -121,6 +121,9 @@
       <if test="interfaceParam != null">
         interface_param,
       </if>
+      <if test="interfaceType != null">
+        interface_type,
+      </if>
       <if test="interfaceDesc != null">
         interface_desc,
       </if>
@@ -137,6 +140,9 @@
       </if>
       <if test="interfaceParam != null">
         #{interfaceParam,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceType != null">
+        #{interfaceType,jdbcType=VARCHAR},
       </if>
       <if test="interfaceDesc != null">
         #{interfaceDesc,jdbcType=VARCHAR},
