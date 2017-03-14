@@ -1,5 +1,7 @@
 package com.maizhong.pojo.vo;
 
+import java.util.Date;
+
 /**
  * Created by yangFan on 2017/3/9.
  */
@@ -33,7 +35,7 @@ public class TbCarVo {
 
     private String shopPrice;
 
-    private String updateTime;
+    private Date updateTime;
 
     private String image;
 
@@ -41,6 +43,34 @@ public class TbCarVo {
 
     private String weight;
 
+    private Date createTime;
+
+    private String details;
+
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
 
     public String getNumber() {
         return number;
@@ -144,14 +174,6 @@ public class TbCarVo {
 
     public void setShopPrice(String shopPrice) {
         this.shopPrice = shopPrice;
-    }
-
-    public String getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime;
     }
 
     public String getImage() {
