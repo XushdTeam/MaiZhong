@@ -1,5 +1,6 @@
 package com.maizhong.portal.controller;
 
+import com.maizhong.common.enums.DicParentEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.portal.service.IndexService;
@@ -21,7 +22,8 @@ public class IndexController {
     @RequestMapping(value = "/index")
     public String index(Model model){
 
-        String adJson = indexService.getAdvert(0);
+        String adJson = indexService.getAdvert(14);
+        String carBrand = indexService.getCarBrand();
         model.addAttribute("adJson", adJson);
         return "index";
     }
