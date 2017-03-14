@@ -31,7 +31,6 @@ public class AdvertController {
     @RequestMapping(value = "/getAdvert/{type}")
     public JsonResult getAdvertByType(@PathVariable("type") Integer type) {
         JsonResult result=advertPublishService.getAdvertByType(type);
-
         return result;
     }
 
