@@ -6,8 +6,20 @@
         <result column="advert_id" jdbcType="BIGINT" property="advertId"/>
         <result column="advert_time" jdbcType="TIMESTAMP" property="advertTime"/>
         <result column="advert_sort" jdbcType="INTEGER" property="advertSort"/>
-
     </resultMap>
+
+    <resultMap id="JoinAdvertMap" type="com.maizhong.pojo.TbAdvertPublishJoinAdvert">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="advert_id" jdbcType="BIGINT" property="advertId"/>
+        <result column="advert_time" jdbcType="TIMESTAMP" property="advertTime"/>
+        <result column="advert_sort" jdbcType="INTEGER" property="advertSort"/>
+        <result column="advert_name" jdbcType="VARCHAR" property="advertName"/>
+        <result column="advert_img" jdbcType="VARCHAR" property="advertImg"/>
+        <result column="advert_type" jdbcType="INTEGER" property="advertType"/>
+        <result column="publish_state" jdbcType="INTEGER" property="publishState"/>
+    </resultMap>
+
+
     <sql id="Example_Where_Clause">
         <where>
             <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -206,4 +218,15 @@
         advert_sort = #{advertSort,jdbcType=INTEGER},
         where id = #{id,jdbcType=BIGINT}
     </update>
+
+
+    <select id="getAdvertPublishByType" resultMap="JoinAdvertMap">
+SELECT A.advert_name,A.advert_img,A.advert_type,B.* FROM tb_advert A LEFT JOIN tb_advert_publish B ON A.id = B.advert_id
+WHERE A.publish_state=1
+ <if test="typeId!=null">
+     AND A.advert_type=#{typeId,jdbcType=BIGINT}
+ </if>
+  ORDER BY B.advert_sort ASC LIMIT #{startPage,jdbcType=BIGINT},#{endPage,jdbcType=BIGINT};
+    </select>
+
 </mapper>

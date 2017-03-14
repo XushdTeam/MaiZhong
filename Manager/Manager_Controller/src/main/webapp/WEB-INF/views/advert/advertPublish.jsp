@@ -24,9 +24,11 @@
                     <label class="layui-form-label">广告类型</label>
                     <div class="layui-input-inline">
                         <select name="advertType" >
+                            <option value="">全部分类</option>
                             <option value="0">首页轮播</option>
                             <option value="1">首页推荐</option>
                             <option value="2">分类页顶部</option>
+                            <option value="">全部分类</option>
                         </select>
                     </div>
                 </div>
@@ -41,8 +43,6 @@
                 <div class="box-wrap">
                     <a class="menu-btn"></a>
                     <div class="l-list">
-                        <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit"
-                           data-href="${handleUrl}/new"><i class="fa fa-plus"></i></i>发布广告</a>
                         <a class="layui-btn layui-btn-small do-action" data-type="doRefresh" data-href="${baseUrl}"><i
                                 class="fa fa-refresh"></i>刷新</a>
                     </div>
@@ -58,14 +58,18 @@
                     <col width="15%">
                     <col width="10%">
                     <col width="10%">
+                    <col width="10%">
+                    <col width="5%">
                     <col width="30%">
                 </colgroup>
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>广告ID</th>
+                    <th>广告图片</th>
+                    <th>广告名称</th>
                     <th>发布时间</th>
-                     <th>显示顺序</th>
+                    <th>广告类型</th>
+                    <th>显示顺序</th>
                     <th>操作</th>
                 </tr>
                 </thead>
@@ -74,8 +78,19 @@
                     {{#  layui.each(d.rows, function(index, item){ }}
                     <tr>
                         <td>{{ item.id }}</td>
-                        <td>{{ item.advertId }}</td>
+                        <td><img src="{{ item.advertImg }}" height="50"/></td>
+                        <td>{{ item.advertName }}</td>
                         <td>{{ item.advertTime }}</td>
+                        <td align="left">{{# if (item.advertType==0) { }}
+                            首页轮播
+                            {{# } }}
+                            {{# if (item.advertType==1) { }}
+                            首页推荐
+                            {{# } }}
+                            {{# if (item.advertType==2) { }}
+                            分类页顶部
+                            {{# } }}
+                        </td>
                         <td>{{ item.advertSort }}</td>
                         <td>
                             <a class="layui-btn layui-btn-small do-action" data-type="doAndRefresh"

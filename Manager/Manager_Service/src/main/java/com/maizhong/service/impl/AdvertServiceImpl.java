@@ -3,9 +3,12 @@ package com.maizhong.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.maizhong.common.dto.PageSearchParam;
+import com.maizhong.common.enums.DicParentEnum;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.PageResult;
+import com.maizhong.common.utils.DicRedisUtils;
 import com.maizhong.common.utils.SqlUtils;
+import com.maizhong.dao.JedisClient;
 import com.maizhong.mapper.TbAdvertMapper;
 import com.maizhong.mapper.TbAdvertPublishMapper;
 import com.maizhong.pojo.TbAdvert;
@@ -14,6 +17,7 @@ import com.maizhong.pojo.TbAdvertPublish;
 import com.maizhong.pojo.TbAdvertPublishExample;
 import com.maizhong.service.AdvertService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +31,13 @@ import java.util.List;
 
 @Service
 public class AdvertServiceImpl implements AdvertService {
+
+    @Autowired
+    private JedisClient jedisClient;
+
+
+    @Value("${DIC_KEY}")
+    private String DIC_KEY;
 
 
     @Autowired
@@ -75,6 +86,10 @@ public class AdvertServiceImpl implements AdvertService {
 
         example.setOrderByClause("advert_type ASC,id ASC");
         List<TbAdvert> list = tbAdvertMapper.selectByExample(example);
+        String json=jedisClient.hget(DIC_KEY, DicParentEnum.ADTYPE.getState()+"");
+        for (TbAdvert tbAdvert : list) {
+               tbAdvert.setTypeName(DicRedisUtils.getDicFormRedisById(tbAdvert.getAdvertType()+"",json));
+        }
         PageInfo pageInfo = new PageInfo(list);
         return new PageResult(pageInfo);
     }
@@ -95,6 +110,7 @@ public class AdvertServiceImpl implements AdvertService {
         if (adverts.size() > 0) {
             return OperateEnum.NAME_REPEAT;
         }
+        tbAdvert.setPublishState(0);//默认为未发布
         int res = tbAdvertMapper.insertSelective(tbAdvert);
         if (res > 0) {
             return OperateEnum.SUCCESS;
@@ -112,6 +128,7 @@ public class AdvertServiceImpl implements AdvertService {
     @Override
     public OperateEnum updateAdvert(TbAdvert tbAdvert) {
         int res = tbAdvertMapper.updateByPrimaryKeySelective(tbAdvert);
+
         if (res > 0) {
             return OperateEnum.SUCCESS;
         } else {
@@ -187,17 +204,42 @@ public class AdvertServiceImpl implements AdvertService {
 
     @Override
     public OperateEnum insertAdvertPublish(TbAdvertPublish tbAdvertPublish) {
-        /*TbAdvertPublishExample tbAdvertPublishExample = new TbAdvertPublishExample();
-        TbAdvertPublishExample.Criteria criteria = tbAdvertPublishExample.createCriteria();*/
+        return null;
+    }
+
+   /* *//**
+     * 发布广告
+     * @param tbAdvertPublish
+     * @return
+     *//*
+    @Override
+    public OperateEnum insertAdvertPublish(TbAdvertPublish tbAdvertPublish) {
+        Long advertId = tbAdvertPublish.getAdvertId();
+        TbAdvert tbAdvert = tbAdvertMapper.selectByPrimaryKey(advertId);
+        System.out.println(tbAdvert.getId()+"---"+tbAdvert.getAdvertName()+"=="+tbAdvert.getPublishState());
+        int count = 0;
+        if (tbAdvert == null) {
+            return OperateEnum.FAILE;
+        } else {
+            tbAdvert.setPublishState(1);
+            System.out.println(tbAdvert.getId()+"---"+tbAdvert.getAdvertName()+"=="+tbAdvert.getPublishState());
+            count = tbAdvertMapper.updateByPrimaryKeySelective(tbAdvert);
+
+        }
 
         int res = tbAdvertPublishMapper.insertSelective(tbAdvertPublish);
-        if (res > 0) {
+        if (res > 0&&count>0) {
             return OperateEnum.SUCCESS;
         } else {
             return OperateEnum.FAILE;
         }
     }
-
+*/
+    /**
+     * 更新广告
+     * @param tbAdvertPublish
+     * @return
+     */
     @Override
     public OperateEnum updateAdvertPublish(TbAdvertPublish tbAdvertPublish) {
         int res = tbAdvertPublishMapper.updateByPrimaryKeySelective(tbAdvertPublish);
@@ -208,6 +250,11 @@ public class AdvertServiceImpl implements AdvertService {
         }
     }
 
+    /**
+     * 删除广告-根据id
+     * @param id
+     * @return
+     */
     @Override
     public OperateEnum deleteAdvertPublishById(long id) {
         int ret = tbAdvertPublishMapper.deleteByPrimaryKey(id);

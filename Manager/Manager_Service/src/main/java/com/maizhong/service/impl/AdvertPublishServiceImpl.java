@@ -9,10 +9,7 @@ import com.maizhong.common.utils.SqlUtils;
 import com.maizhong.common.utils.TimeUtils;
 import com.maizhong.mapper.TbAdvertMapper;
 import com.maizhong.mapper.TbAdvertPublishMapper;
-import com.maizhong.pojo.TbAdvert;
-import com.maizhong.pojo.TbAdvertExample;
-import com.maizhong.pojo.TbAdvertPublish;
-import com.maizhong.pojo.TbAdvertPublishExample;
+import com.maizhong.pojo.*;
 import com.maizhong.service.AdvertPublishService;
 import com.maizhong.service.AdvertService;
 import org.apache.commons.lang3.StringUtils;
@@ -38,10 +35,13 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
 
     @Autowired
     TbAdvertPublishMapper tbAdvertPublishMapper;
+    @Autowired
+    TbAdvertMapper tbAdvertMapper;
 
 
     /**
      * 根据广告发布Id获取对象
+     *
      * @param id
      * @return
      */
@@ -56,7 +56,7 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
     }
 
 
-@Override
+    @Override
     public TbAdvertPublish getPublishByid(Long id) {
         List<TbAdvertPublish> advertPublishes = tbAdvertPublishMapper.selectTypeListByPrimaryKey(id);
         if (advertPublishes == null || advertPublishes.size() == 0) return null;
@@ -64,7 +64,7 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
     }
 
     @Override
-    public OperateEnum changeSort(String meth,Long id) {
+    public OperateEnum changeSort(String meth, Long id) {
         TbAdvertPublish tbAdvertPublish = getPublishByid(id);
         if (StringUtils.equals("top", meth)) {
             //置顶
@@ -72,12 +72,12 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
             updateAdvertPublish(tbAdvertPublish);
 
         } else if (StringUtils.equals("up", meth)) {
-            if (tbAdvertPublish.getAdvertSort()==0){
+            if (tbAdvertPublish.getAdvertSort() == 0) {
                 return OperateEnum.SUCCESS;
-            }else {
-            tbAdvertPublish.setAdvertSort(getPublishByid(id).getAdvertSort() - 1);
-            updateAdvertPublish(tbAdvertPublish);
-            return  OperateEnum.SUCCESS;
+            } else {
+                tbAdvertPublish.setAdvertSort(getPublishByid(id).getAdvertSort() - 1);
+                updateAdvertPublish(tbAdvertPublish);
+                return OperateEnum.SUCCESS;
             }
         } else {
             tbAdvertPublish.setAdvertSort(tbAdvertPublish.getAdvertSort() + 1);
@@ -88,44 +88,22 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
     }
 
     @Override
-    public OperateEnum advertPublish(long id) {
-        System.out.println("====advertPublishIMpl========");
-        TbAdvertPublish tbAdvertPublish=new TbAdvertPublish();
+    public OperateEnum advertPublish(Long id) {
+        TbAdvertPublish tbAdvertPublish = new TbAdvertPublish();
         tbAdvertPublish.setAdvertSort(0);
         tbAdvertPublish.setAdvertTime(new Date());
         tbAdvertPublish.setAdvertId(id);
-        OperateEnum result = insertAdvertPublish(tbAdvertPublish);
-        return result;
-    }
-
-
-    /**
-     * 获取广告列表，分页查询，按条件查询
-     * @param param
-     * @return
-     */
-    @Override
-    public PageResult getAdvertPublishList(PageSearchParam param) {
-        PageHelper.startPage(param.getPageIndex(), param.getPageSize());
-        TbAdvertPublishExample example = new TbAdvertPublishExample();
-        TbAdvertPublishExample.Criteria criteria = example.createCriteria();
-
-      if (param.getFiled("advertType") != null) {
-            criteria.andAdvertTypeEqualTo(Integer.valueOf(param.getFiled("advertType")));
-     }else {
-          criteria.andAdvertTypeEqualTo(null);
-      }
-        example.setOrderByClause("id ASC");
-        List<TbAdvertPublish> list = tbAdvertPublishMapper.selectByExample(example);
-        PageInfo pageInfo = new PageInfo(list);
-        return new PageResult(pageInfo);
-    }
-
-    @Override
-    public OperateEnum insertAdvertPublish(TbAdvertPublish tbAdvertPublish) {
-        /*TbAdvertPublishExample tbAdvertPublishExample = new TbAdvertPublishExample();
-        TbAdvertPublishExample.Criteria criteria = tbAdvertPublishExample.createCriteria();*/
-
+        TbAdvert tbAdvert = tbAdvertMapper.selectByPrimaryKey(id);
+        int count = 0;
+        if (tbAdvert == null) {
+            return OperateEnum.FAILE;
+        } else {
+            tbAdvert.setPublishState(1);
+            count = tbAdvertMapper.updateByPrimaryKeySelective(tbAdvert);
+        }
+        if (count < 1) {
+            return OperateEnum.FAILE;
+        }
         int res = tbAdvertPublishMapper.insertSelective(tbAdvertPublish);
         if (res > 0) {
             return OperateEnum.SUCCESS;
@@ -133,6 +111,33 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
             return OperateEnum.FAILE;
         }
     }
+
+
+    /**
+     * 获取广告列表，分页查询，按条件查询
+     *
+     * @param param
+     * @return
+     */
+    @Override
+    public PageResult getAdvertPublishList(PageSearchParam param) {
+        Long typeId=null;
+        if (param.getFiled("advertType") != null) {
+            typeId= Long.valueOf(param.getFiled("advertType"));
+        }
+        int startPage = (param.getPageIndex() - 1) * param.getPageSize();
+        List<TbAdvertPublishJoinAdvert> list = tbAdvertPublishMapper.getAdvertPublishByType(typeId,
+                Long.valueOf(startPage), Long.valueOf(param.getPageSize()));
+        PageInfo pageInfo = new PageInfo(list);
+        return new PageResult(pageInfo);
+    }
+
+    /**
+     * 更新发布
+     *
+     * @param tbAdvertPublish
+     * @return
+     */
 
     @Override
     public OperateEnum updateAdvertPublish(TbAdvertPublish tbAdvertPublish) {
@@ -144,23 +149,85 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
         }
     }
 
+    /**
+     * 删除发布
+     *
+     * @param id
+     * @return
+     */
+
     @Override
-    public OperateEnum deleteAdvertPublishById(long id) {
+    public OperateEnum deleteAdvertPublishById(Long id) {
+        TbAdvertPublish tbAdvertPublish = tbAdvertPublishMapper.selectByPrimaryKey(id);
+        System.out.println(tbAdvertPublish.getAdvertId());
+        Long advertId = tbAdvertPublish.getAdvertId();
+        TbAdvert tbAdvert = tbAdvertMapper.selectByPrimaryKey(advertId);
+        int count = 0;
+
+        if (tbAdvert == null) {
+            return OperateEnum.FAILE;
+        } else {
+            tbAdvert.setPublishState(0);
+            count = tbAdvertMapper.updateByPrimaryKeySelective(tbAdvert);
+        }
+
         int ret = tbAdvertPublishMapper.deleteByPrimaryKey(id);
-        if (ret > 0) {
+        if (ret > 0 && count > 0) {
             return OperateEnum.SUCCESS;
         } else {
             return OperateEnum.FAILE;
         }
     }
 
+
+    /**
+     * 根据广告id取消广告发布
+     *
+     * @param id
+     * @return
+     */
     @Override
-    public List<TbAdvertPublish> selectTypeListByPrimaryKey(long id) {
-       return tbAdvertPublishMapper.selectTypeListByPrimaryKey(id);
+    public OperateEnum removeAdvertPublishById(long id) {
+        TbAdvert tbAdvert = tbAdvertMapper.selectByPrimaryKey(id);
+        TbAdvertPublishExample example = new TbAdvertPublishExample();
+        TbAdvertPublishExample.Criteria criteria = example.createCriteria();
+        criteria.andAdvertIdEqualTo(id);
+        List<TbAdvertPublish> list = tbAdvertPublishMapper.selectByExample(example);
+        if (list == null || list.size() == 0) {
+            return OperateEnum.FAILE;
+        }
+
+        TbAdvertPublish tbAdvertPublish = list.get(0);
+
+
+        int count = 0;
+
+        if (tbAdvert == null) {
+            return OperateEnum.FAILE;
+        } else {
+            tbAdvert.setPublishState(0);
+            count = tbAdvertMapper.updateByPrimaryKeySelective(tbAdvert);
+        }
+
+        int ret = tbAdvertPublishMapper.deleteByPrimaryKey(tbAdvertPublish.getId());
+
+        if (ret > 0 && count > 0) {
+            return OperateEnum.SUCCESS;
+        } else {
+            return OperateEnum.FAILE;
+        }
     }
 
 
-
-
+    /**
+     * 根据类型查询
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public List<TbAdvertPublish> selectTypeListByPrimaryKey(Long id) {
+        return tbAdvertPublishMapper.selectTypeListByPrimaryKey(id);
+    }
 
 }

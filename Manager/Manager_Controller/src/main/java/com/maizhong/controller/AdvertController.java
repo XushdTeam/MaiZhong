@@ -81,7 +81,6 @@ public class AdvertController {
             model.addAttribute("saveUrl", "/advert/save");
             return "advert/advert_add";
         } else {
-            System.out.println("广告信息修改！！");
             TbAdvert advert = advertService.getAdvertByid(Long.valueOf(id));
             model.addAttribute("advert", advert);
             model.addAttribute("handle", "广告信息/广告修改");
@@ -137,6 +136,9 @@ public class AdvertController {
         return JsonResult.build(result);
     }
 
+
+
+
     /**
      * 广告信息修改
      * @param tbAdvert
@@ -190,5 +192,18 @@ public class AdvertController {
 
 
 
+    /**
+     * 根据广告Id取消已发布广告
+     * @param id
+     * @return
+     */
+    //@RequiresPermissions("/advertPublish/delete")
+    @RequestMapping(value = "/advert/remove/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult advertPublishRemove(@PathVariable long id) {
+        //已发布广告删除
+        OperateEnum result = advertPublishService.removeAdvertPublishById(id);
+        return JsonResult.build(result);
+    }
 
 }

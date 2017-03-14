@@ -63,24 +63,26 @@
             <table class="layui-table" lay-skin="line">
                 <colgroup>
                     <col width="5%">
-                    <col width="15%">
                     <col width="10%">
                     <col width="10%">
                     <col width="10%">
-                    <col width="20%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
                     <col width="10%">
                     <col width="25%">
                 </colgroup>
                 <thead>
                 <tr>
-                 <%--   <th><input type="checkbox" name="" lay-skin="line" lay-filter="allChoose"></th>--%>
+                    <%--   <th><input type="checkbox" name="" lay-skin="line" lay-filter="allChoose"></th>--%>
                     <th>ID</th>
                     <th>广告图片</th>
                     <th>广告名称</th>
-                     <th>商品编号</th>
+                    <th>商品编号</th>
                     <th>广告链接</th>
                     <th>广告描述</th>
                     <th>广告位置</th>
+                    <th>是否发布</th>
                     <th>操作</th>
                 </tr>
                 </thead>
@@ -94,15 +96,12 @@
                         <td>{{ item.carNumber }}</td>
                         <td>{{ item.advertUrl }}</td>
                         <td>{{ item.advertDesc}}</td>
-
-                        <td align="left">{{# if (item.advertType==0) { }}
-                          首页轮播
-                            {{# } }}
-                            {{# if (item.advertType==1) { }}
-                            首页推荐
-                            {{# } }}
-                            {{# if (item.advertType==2) { }}
-                            分类页顶部
+                        <td>{{ item.typeName }}
+                        </td>
+                        <td align="center">{{# if (item.publishState) { }}
+                            <i class="fa fa-toggle-on unlock"></i>
+                            {{# } else { }}
+                            <i class="fa fa-toggle-off islock"></i>
                             {{# } }}
                         </td>
 
@@ -110,15 +109,20 @@
                             <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit"
                                data-href="${handleUrl}/{{item.id}}"><i
                                     class="icon-edit  fa fa-pencil-square-o"></i>编辑</a>
-
-
+                            {{# if (item.publishState) { }}
+                            <a class="layui-btn layui-btn-small layui-btn-danger do-action" data-type="doDelete"
+                               data-text="确定取消<span class=red></span>吗？"
+                               data-href="${baseUrl}/remove/{{item.id}}"><i class="icon-trash-o  fa fa-trash-o"></i>取消发布</a>
+                            {{# } else { }}
                             <a class="layui-btn layui-btn-small do-action" data-type="doAndRefresh"
                                data-href="${baseUrl}/fabu/{{item.id}}"><i
                                     class="icon-edit  fa fa-pencil-square-o"></i>发布</a>
-
                             <a class="layui-btn layui-btn-small layui-btn-danger do-action" data-type="doDelete"
                                data-text="确定删除<span class=red>{{item.advertName}}</span>吗？"
                                data-href="${deleteUrl}/{{item.id}}"><i class="icon-trash-o  fa fa-trash-o"></i>删除</a>
+                            {{# } }}
+
+
                         </td>
                     </tr>
                     {{#  }); }}
@@ -136,20 +140,6 @@
 
     <script type="text/javascript" src="/resources/js/event.js"></script>
     <script type="text/javascript">
-
-        /*layui.use('form', function(){
-            var $ = layui.jquery, form = layui.form();
-            //全选
-            form.on('checkbox(allChoose)', function(data){
-                var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
-                child.each(function(index, item){
-                    item.checked = data.elem.checked;
-                });
-                form.render('checkbox');
-            });
-
-        });*/
-
 
         layui.use("pagelist", function () {
             layui.pagelist.basePagingInit(6);

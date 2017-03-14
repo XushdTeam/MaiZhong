@@ -305,7 +305,6 @@
       publish_state = #{publishState,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
-
     <select id="getAdvertPublish" resultMap="ResultMapWithBLOBs">
     SELECT A.* FROM tb_advert A LEFT JOIN tb_advert_publish B ON A.id = B.advert_id
     WHERE A.publish_state=1 AND A.advert_type=#{typeId,jdbcType=BIGINT} ORDER BY B.advert_sort ASC;

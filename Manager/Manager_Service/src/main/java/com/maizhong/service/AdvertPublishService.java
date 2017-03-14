@@ -31,13 +31,6 @@ public interface AdvertPublishService {
 
 
     /**
-     * 新增广告信息
-     * @param tbAdvertPublish
-     * @return
-     */
-    OperateEnum insertAdvertPublish(TbAdvertPublish tbAdvertPublish);
-
-    /**
      * 广告发布信息修改
      * @param tbAdvertPublish
      * @return
@@ -49,16 +42,15 @@ public interface AdvertPublishService {
      * @param id
      * @return
      */
-    OperateEnum deleteAdvertPublishById(long id);
+    OperateEnum deleteAdvertPublishById(Long id);
 
-   List<TbAdvertPublish> selectTypeListByPrimaryKey(long id);
-
+   List<TbAdvertPublish> selectTypeListByPrimaryKey(Long id);
 
     public TbAdvertPublish getPublishByid(Long id);
 
     public OperateEnum changeSort(String meth,Long id);
 
-    public  OperateEnum advertPublish(long id);
+    public  OperateEnum advertPublish(Long id);
 
-
+    OperateEnum removeAdvertPublishById(long id);
 }

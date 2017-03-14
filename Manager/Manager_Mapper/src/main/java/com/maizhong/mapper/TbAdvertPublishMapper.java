@@ -2,6 +2,7 @@ package com.maizhong.mapper;
 
 import com.maizhong.pojo.TbAdvertPublish;
 import com.maizhong.pojo.TbAdvertPublishExample;
+import com.maizhong.pojo.TbAdvertPublishJoinAdvert;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -32,4 +33,6 @@ public interface TbAdvertPublishMapper {
     int updateByPrimaryKeySelective(TbAdvertPublish record);
 
     int updateByPrimaryKey(TbAdvertPublish record);
+
+   List< TbAdvertPublishJoinAdvert> getAdvertPublishByType(@Param("typeId") Long typeId, @Param("startPage")Long startPage, @Param("endPage") Long endPage);
 }

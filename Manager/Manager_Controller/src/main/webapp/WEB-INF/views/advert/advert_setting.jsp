@@ -53,12 +53,14 @@
                    </div>
                    <div class="layui-form-item">
                        <label class="layui-form-label">广告类型</label>
+
+
                        <div class="layui-input-inline">
                            <select name="advertType" value="${advert.advertType}" lay-verify="required" id="advertType">
                                <option value="">请选择广告类型</option>
-                               <option value="0"  >首页轮播</option>
-                               <option value="1">首页推荐</option>
-                               <option value="2">分类页顶部</option>
+                               <option value="0" <c:if test="${advert.advertType==0}">selected="selected"</c:if>>首页轮播</option>
+                               <option value="1" <c:if test="${advert.advertType==1}">selected="selected"</c:if>>首页推荐</option>
+                               <option value="2" <c:if test="${advert.advertType==2}">selected="selected"</c:if>>分类页顶部</option>
                            </select>
                        </div>
                    </div>
