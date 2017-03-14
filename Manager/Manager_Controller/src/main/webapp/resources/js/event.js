@@ -50,7 +50,7 @@ layui.use(['layer', 'app'], function () {
         var url = $(this).data("href");
         app.ajaxPost(url, {}, function (e, r) {
             if (e) {
-                app.layerAlertE(err);
+                app.layerAlertE(e);
             }
             else {
                 app.layerAlertS(r.message);

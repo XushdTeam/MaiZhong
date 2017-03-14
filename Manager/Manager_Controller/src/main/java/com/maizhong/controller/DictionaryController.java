@@ -43,6 +43,7 @@ public class DictionaryController extends GlobalController {
         model.addAttribute("listUrl","/dictionary/list");
         model.addAttribute("handleUrl","/dictionary/handle");
         model.addAttribute("deleteUrl","/dictionary/delete");
+        model.addAttribute("redisUrl","/dictionary/redis");
 
         return "system/dictionary";
     }
@@ -151,8 +152,13 @@ public class DictionaryController extends GlobalController {
         return JsonResult.build(res);
     }
 
-
-
+    @ControllerLog(module = "字典管理",methods = "字典缓存同步")
+    @RequestMapping(value = "/dictionary/redis")
+    @ResponseBody
+    public JsonResult dictionaryRedis(){
+        JsonResult result = dicService.dictionaryRedis();
+        return result;
+    }
 
 
 }

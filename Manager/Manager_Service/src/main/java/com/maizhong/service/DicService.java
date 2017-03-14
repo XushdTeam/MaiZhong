@@ -1,6 +1,7 @@
 package com.maizhong.service;
 
 import com.maizhong.common.enums.OperateEnum;
+import com.maizhong.common.result.JsonResult;
 import com.maizhong.pojo.TbDictionary;
 
 import java.util.List;
@@ -23,4 +24,5 @@ public interface DicService {
 
     List<TbDictionary> getDicListByParent(long parent);
 
+    JsonResult dictionaryRedis();
 }

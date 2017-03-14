@@ -1,12 +1,18 @@
 package com.maizhong.service.impl;
 
+import com.maizhong.common.dto.KeyValue;
+import com.maizhong.common.enums.DicParentEnum;
 import com.maizhong.common.enums.OperateEnum;
+import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.target.ServiceLog;
+import com.maizhong.common.utils.JsonUtils;
+import com.maizhong.dao.JedisClient;
 import com.maizhong.mapper.TbDictionaryMapper;
 import com.maizhong.pojo.TbDictionary;
 import com.maizhong.pojo.TbDictionaryExample;
 import com.maizhong.service.DicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,6 +28,11 @@ public class DicServiceImpl implements DicService {
     @Autowired
     private TbDictionaryMapper tbDictionaryMapper;
 
+    @Autowired
+    private JedisClient jedisClient;
+
+    @Value("${DIC_KEY}")
+    private String DIC_KEY;
 
     @ServiceLog(module = "字典管理",methods = "字典列表")
     @Override
@@ -97,5 +108,25 @@ public class DicServiceImpl implements DicService {
         TbDictionaryExample.Criteria criteria = example.createCriteria();
         criteria.andParentEqualTo(parent).andDelflagEqualTo(0).andStatusEqualTo(1);
         return tbDictionaryMapper.selectByExample(example);
+    }
+
+    @Override
+    public JsonResult dictionaryRedis() {
+        try {
+            List<TbDictionary> tbDictionaries = getDicList(true);
+            for (TbDictionary tbDictionary : tbDictionaries) {
+                List<TbDictionary> dicListChild = getDicListByParent(tbDictionary.getId());
+                List<KeyValue> list = new ArrayList<>();
+                for (TbDictionary dictionary : dicListChild) {
+                   list.add(new KeyValue(dictionary.getId()+"",dictionary.getDicName()));
+                }
+                jedisClient.hdel(DIC_KEY,tbDictionary.getId()+"");
+                jedisClient.hset(DIC_KEY,tbDictionary.getId()+"",JsonUtils.objectToJson(list));
+            }
+            return JsonResult.build(OperateEnum.SUCCESS);
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.build(OperateEnum.FAILE);
+        }
     }
 }

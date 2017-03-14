@@ -4,7 +4,8 @@ package com.maizhong.common.enums;
  * Created by Xushd on 2017/3/2.
  */
 public enum DicParentEnum {
-    FUNCTION(1,"系统功能");
+    FUNCTION(1,"系统功能"),
+    ADTYPE(13,"广告类型");
 
     private int state;
 

@@ -1,6 +1,11 @@
 package com.maizhong.portal.controller;
 
+import com.maizhong.common.result.JsonResult;
+import com.maizhong.common.utils.JsonUtils;
+import com.maizhong.portal.service.IndexService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -10,8 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 
+    @Autowired
+    private IndexService indexService;
+
     @RequestMapping(value = "/index")
-    public String index(){
+    public String index(Model model){
+
+        String adJson = indexService.getAdvert(0);
+        model.addAttribute("adJson", adJson);
         return "index";
     }
 
