@@ -15,6 +15,7 @@
             classpath:spring/spring-dao.xml
             classpath:spring/spring-service.xml
             classpath:spring/spring-jedis.xml
+            classpath:spring/spring-solr.xml
         </param-value>
     </context-param>
     <listener>
