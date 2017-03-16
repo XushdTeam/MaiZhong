@@ -48,11 +48,16 @@
     <result column="reserve_price" jdbcType="DECIMAL" property="reservePrice" />
     <result column="sell_price" jdbcType="DECIMAL" property="sellPrice" />
     <result column="shop_price" jdbcType="VARCHAR" property="shopPrice" />
-    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="image" jdbcType="VARCHAR" property="image" />
     <result column="unable" jdbcType="INTEGER" property="unable" />
     <result column="weight" jdbcType="INTEGER" property="weight" />
   </resultMap>
+    <resultMap extends="ExtResultMap" id="ExtResultMapWithBLOBs" type="com.maizhong.pojo.vo.TbCarVo">
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="details" jdbcType="LONGVARCHAR" property="details" />
+    </resultMap>
+
 
 
   <select id="findListNotContainsDesc" parameterType="com.maizhong.pojo.TbCarExample" resultMap="ExtResultMap">
@@ -71,7 +76,7 @@
       c.reserve_price,
       c.sell_price,
       c.shop_price,
-      date_format(c.update_time, '%Y-%m-%d') update_time,
+      c.update_time,
       c.image,
       c.unable,
       c.weight
@@ -88,4 +93,41 @@
         order by ${orderByClause}
       </if>
   </select>
+
+
+    <select id="findList" parameterType="com.maizhong.pojo.TbCarExample" resultMap="ExtResultMapWithBLOBs">
+        select
+        c.id id,
+        c.number number,
+        c.name name,
+        b.brand_name car_brand,
+        t.type_name car_type,
+        c.year_sku year_sku,
+        d1.dic_name color,
+        c.capacity ,
+        d2.dic_name gearbox,
+        c.asname,
+        c.sellpoint,
+        c.reserve_price,
+        c.sell_price,
+        c.shop_price,
+        c.create_time,
+        c.update_time,
+        c.image,
+        c.unable,
+        c.weight,
+        c.details
+        from
+        tb_car c
+        JOIN tb_car_brand b on  c.car_brand = b.id
+        JOIN  tb_car_type t ON c.car_type = t.id
+        left JOIN  tb_dictionary d1 on c.color = d1.id
+        left JOIN  tb_dictionary d2 on c.gearbox = d2.id
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
 </mapper>
