@@ -3,11 +3,14 @@ package com.maizhong.common.utils;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -87,6 +90,38 @@ public class JsonUtils {
             e.printStackTrace();
         }
 
+        return null;
+    }
+
+
+    /**
+     * 装换 map中带有List的集合
+     *
+     * */
+    public static Map<String,Object> searchResultToMap(String jsonResult,Class clazz){
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode jsonNode = mapper.readTree(jsonResult);
+            JsonNode data = jsonNode.get("data");
+
+
+            JsonNode list = data.get("rows");
+            JsonNode pageNum = data.get("pageNum");
+            JsonNode pageSize = data.get("pageSize");
+            JsonNode pages = data.get("pages");
+            JsonNode total = data.get("total");
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("list",mapper.readValue(list.traverse(),
+                    mapper.getTypeFactory().constructParametricType(List.class,clazz)));
+            map.put("pageNum",pageNum.intValue());
+            map.put("pageSize",pageSize.intValue());
+            map.put("pages",pages.intValue());
+            map.put("total",total.intValue());
+            return map;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
