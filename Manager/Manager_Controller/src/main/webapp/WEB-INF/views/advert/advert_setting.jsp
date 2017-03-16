@@ -78,14 +78,14 @@
                         </div>
                     </form>
             </div>
-            <!-- 品牌LOGO-->
+            <!--展示图片-->
             <shiro:hasPermission name="/user/advert">
             <div class="layui-form layui-form-pane layui-tab-item">
                 <div class="layui-form-item">
                     <div class="avatar-add">
-                        <p>建议尺寸100*100，支持jpg、png、gif，最大不能超过30KB</p>
+                        <p>请设计好图片尺寸后上传</p>
                         <div class="upload-img">
-                            <input type="file" name="advert" id="LAY-file" lay-title="上传品牌LOGO" lay-ext="jpg|png|gif" class="layui-upload-file">
+                            <input type="file" name="advert" id="LAY-file" lay-title="上传展示图片" lay-ext="jpg|png|gif" class="layui-upload-file">
                         </div>
                         <img src="${advert.advertImg}" id="imgShow">
                         <span class="loading"></span>

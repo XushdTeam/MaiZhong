@@ -9,36 +9,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>广告信息</title>
+    <title>首页汽车</title>
     <jsp:include page="../common/head.jsp"/>
 </head>
 <body>
 <div class="main-wrap">
     <blockquote class="layui-elem-quote fhui-admin-main_hd">
-        <h2>广告信息</h2>
+        <h2>首页汽车</h2>
     </blockquote>
     <div class="y-role">
         <div class="search-bar">
             <!--查询区-->
             <form class="layui-form layui-form-pane">
-                <div class="layui-inline">
-                    <label class="layui-form-label">广告名称</label>
+                    <label class="layui-form-label">汽车栏目</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="advertName" value="" placeholder="广告名称" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">广告类型</label>
-                    <div class="layui-input-inline">
-                        <select name="advertType">
-                            <option value="">请选择广告类型</option>
-                            <c:forEach items="${typeList}" var="type">
-                                <option value="${type.key}">${type.value}</option>
+                        <select name="columnId">
+                            <option value="">请选择汽车栏目</option>
+                            <option value="">请选择所属栏目</option>
+                            <c:forEach items="${columnList}" var="item">
+                                <option value="${item.key}">${item.value}</option>
                             </c:forEach>
-                            <option value="">全部类型</option>
+                            <option value="">全部栏目</option>
                         </select>
                     </div>
-                </div>
                 <div class="layui-inline">
                     <button class="layui-btn layui-btn-warm" lay-submit lay-filter="btnsearch">搜索</button>
                 </div>
@@ -51,7 +44,7 @@
                     <a class="menu-btn"></a>
                     <div class="l-list">
                         <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit"
-                           data-href="${handleUrl}/new"><i class="fa fa-plus"></i></i>新增广告</a>
+                           data-href="${handleUrl}/new"><i class="fa fa-plus"></i></i>添加汽车</a>
                         <a class="layui-btn layui-btn-small do-action" data-type="doRefresh" data-href="${baseUrl}"><i
                                 class="fa fa-refresh"></i>刷新</a>
                     </div>
@@ -66,23 +59,21 @@
                     <col width="5%">
                     <col width="10%">
                     <col width="10%">
-                    <col width="5%">
-                    <col width="15%">
                     <col width="10%">
                     <col width="10%">
-                    <col width="5%">
-                    <col width="30%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="35%">
                 </colgroup>
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>广告图片</th>
-                    <th>广告名称</th>
-                    <th>商品编号</th>
-                    <th>广告链接</th>
-                    <th>广告描述</th>
-                    <th>广告位置</th>
-                    <th>是否发布</th>
+                    <th>汽车ID</th>
+                    <th>名称</th>
+                    <th>汽车图片</th>
+                    <th>所属栏目</th>
+                    <th>显示顺序</th>
+                    <th>状态</th>
                     <th>操作</th>
                 </tr>
                 </thead>
@@ -91,39 +82,20 @@
                     {{#  layui.each(d.rows, function(index, item){ }}
                     <tr>
                         <td>{{ item.id }}</td>
-                        <td><img src="{{ item.advertImg }}" height="50"/></td>
-                        <td>{{ item.advertName }}</td>
-                        <td>{{ item.carNumber }}</td>
-                        <td>{{ item.advertUrl }}</td>
-                        <td>{{ item.advertDesc}}</td>
-                        <td>{{ item.typeName }}
-                        </td>
-                        <td align="center">{{# if (item.publishState) { }}
+                        <td>{{ item.carId }}</td>
+                        <td>{{ item.name }}</td>
+                        <td><img src="{{ item.image }}" width="50" height="50"/></td>
+                        <td>{{ item.columnName }}</td>
+                        <td>{{ item.carSort }}</td>
+                        <td align="center">{{# if (item.status) { }}
                             <i class="fa fa-toggle-on unlock"></i>
                             {{# } else { }}
                             <i class="fa fa-toggle-off islock"></i>
                             {{# } }}
                         </td>
-
                         <td>
-
-                            {{# if (item.publishState) { }}
-                            <a class="layui-btn layui-btn-small layui-btn-danger do-action" data-type="doDelete"
-                               data-text="确定取消<span class=red></span>吗？"
-                               data-href="${baseUrl}/remove/{{item.id}}"><i class="icon-trash-o  fa fa-trash-o"></i>取消发布</a>
-                            {{# } else { }}
-                            <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit"
-                               data-href="${handleUrl}/{{item.id}}"><i
-                                    class="icon-edit  fa fa-pencil-square-o"></i>编辑</a>
-                            <a class="layui-btn layui-btn-small do-action" data-type="doAndRefresh"
-                               data-href="${baseUrl}/fabu/{{item.id}}"><i
-                                    class="icon-edit  fa fa-pencil-square-o"></i>发布</a>
-                            <a class="layui-btn layui-btn-small layui-btn-danger do-action" data-type="doDelete"
-                               data-text="确定删除<span class=red>{{item.advertName}}</span>吗？"
-                               data-href="${deleteUrl}/{{item.id}}"><i class="icon-trash-o  fa fa-trash-o"></i>删除</a>
-                            {{# } }}
-
-
+                            <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit" data-href="${handleUrl}/{{item.id}}"><i class="icon-edit  fa fa-pencil-square-o"></i>编辑</a>
+                            <a class="layui-btn layui-btn-small layui-btn-danger do-action" data-type="doDelete" data-text="确定删除<span class=red>{{item.name}}</span>吗？" data-href="${deleteUrl}/{{item.id}}"><i class="icon-trash-o  fa fa-trash-o"></i>删除</a>
                         </td>
                     </tr>
                     {{#  }); }}
@@ -141,7 +113,6 @@
 
     <script type="text/javascript" src="/resources/js/event.js"></script>
     <script type="text/javascript">
-
         layui.use("pagelist", function () {
             layui.pagelist.basePagingInit(6);
         });

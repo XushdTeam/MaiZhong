@@ -1,11 +1,13 @@
 package com.maizhong.rest.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.maizhong.common.dto.CarColumnJoinCar;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.dao.JedisClient;
 import com.maizhong.mapper.TbAdvertMapper;
 import com.maizhong.mapper.TbCarBrandMapper;
+import com.maizhong.mapper.TbCarColumnMapper;
 import com.maizhong.mapper.TbCarTypeMapper;
 import com.maizhong.pojo.*;
 import com.maizhong.rest.service.SpreadService;
@@ -32,6 +34,8 @@ public class SpreadServiceImpl implements SpreadService {
     private TbCarBrandMapper tbCarBrandMapper;
     @Autowired
     private TbCarTypeMapper tbCarTypeMapper;
+    @Autowired
+    private TbCarColumnMapper tbCarColumnMapper;
 
     @Autowired
     private JedisClient jedisClient;
@@ -44,6 +48,9 @@ public class SpreadServiceImpl implements SpreadService {
 
     @Value("${CAR_TYPE}")
     private String CAR_TYPE;
+
+    @Value("${CM_TYPE}")
+    private String CM_TYPE;
 
 
     /**
@@ -132,6 +139,38 @@ public class SpreadServiceImpl implements SpreadService {
         }catch (Exception e){
             e.printStackTrace();
         }
+        return JsonResult.OK(list);
+    }
+
+    /**
+     * 根据栏目Id获取栏目下的所有汽车
+     * @param columnId
+     * @return
+     */
+    @Override
+    public JsonResult getCarColumnById(Integer columnId) {
+
+        //缓存命中
+        try {
+            String json = jedisClient.hget(CM_TYPE,columnId+"");
+            if(StringUtils.isNotBlank(json)){
+                return JsonResult.OK(JsonUtils.jsonToList(json,CarColumnJoinCar.class));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        PageHelper.startPage(0, 10);
+
+        List<CarColumnJoinCar> list = tbCarColumnMapper.getListByColumn(Long.valueOf(columnId));
+
+        //写入缓存
+        try {
+            String jsonStr = JsonUtils.objectToJson(list);
+            jedisClient.hset(CM_TYPE,columnId+"",jsonStr);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         return JsonResult.OK(list);
     }
 
