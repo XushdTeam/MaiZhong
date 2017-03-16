@@ -2,11 +2,14 @@ package com.maizhong.common.utils;
 
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Json工具类
@@ -69,6 +72,22 @@ public class JsonUtils {
 
         return null;
 
+    }
+
+    public static List<Map<String,String>> jsonResultToList(String jsonResult){
+        try {
+            JsonNode jsonNode = MAPPER.readTree(jsonResult);
+            JsonNode data = jsonNode.get("data");
+            if (data.isArray() && data.size() > 0) {
+                List<Map<String,String>> list = MAPPER.readValue(data.traverse(),
+                        MAPPER.getTypeFactory().constructCollectionType(List.class, Map.class));
+                return list;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }

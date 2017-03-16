@@ -10,4 +10,5 @@ import java.util.List;
  */
 public interface TbCarMapperExt {
     public List<TbCarVo> findListNotContainsDesc(TbCarExample tbCarExample);
+    public List<TbCarVo> findList(TbCarExample tbCarExample);
 }

@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ page session="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 
@@ -32,15 +35,15 @@
                     //轮播圆点按钮节点
                     for(var j=0;j<images_count;j++){
                         if(j==0){
-                            $('.banner ol').append('<li class="current" data-url="'+ad_data[j].advertUrl+'"></li>')
+                            $('.banner ol').append('<li class="current" data-url="'+ad_data[j].url+'"></li>')
                         }else{
-                            $('.banner ol').append('<li data-url="'+ad_data[j].advertUrl+'"></li>')
+                            $('.banner ol').append('<li data-url="'+ad_data[j].url+'"></li>')
                         }
                     }
                     //载入图片
-                    $('.banner ul li').css('background-image','url('+ad_data[0].advertImg+')');
+                    $('.banner ul li').css('background-image','url('+ad_data[0].img+')');
                     $.each(ad_data,function(key,value){
-                        $('.banner ul li').eq(key).css('background-image','url('+value.advertImg+')');
+                        $('.banner ul li').eq(key).css('background-image','url('+value.img +')');
                     });
                     $('.banner').css('height',images_height);
                     $('.banner ul').css('width',(images_count+1)*100+'%');
@@ -200,137 +203,129 @@
 <!--热销车型 end-->
 <!--品牌 车型-->
 <div class="index_cen">
-
     <div class="pin">
-        <p>汽车品牌<span><a href="#">大众</a>/<a href="#">奥迪</a>/<a href="#">比亚迪</a>/<a href="#">沃尔沃</a></span><a href="" class="fr more">查看更多</a</p>
+        <p>汽车品牌
+            <span>
+                <c:forEach items="${cbList}" var="item"  varStatus="stat">
+                    <a href="#">${item.name}</a>
+                    <c:if test="${!stat.last}" >/</c:if>
+                </c:forEach>
+            </span>
+            <a href="" class="fr more">查看更多</a>
+        </p>
         <ul class="lists">
-            <li>
-                <a href="#">
-                    <span><img src="img/b_84.png"></span>
-                    <span>大众</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span><img src="img/b_135.png"></span>
-                    <span>大众</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="#">
-                    <span><img src="img/b_15.png"></span>
-                    <span>大众</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="#">
-                    <span><img src="img/b_59.png"></span>
-                    <span>大众</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="#">
-                    <span><img src="img/b_89.png"></span>
-                    <span>大众</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="#">
-                    <span><img src="img/b_62.png"></span>
-                    <span>大众</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="#">
-                    <span><img src="img/b_34.png"></span>
-                    <span>大众</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="#">
-                    <span><img src="img/b_98.png"></span>
-                    <span>大众</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="#">
-                    <span><img src="img/b_38.png"></span>
-                    <span>大众</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="#">
-                    <span><img src="img/b_47.png"></span>
-                    <span>大众</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span><img src="img/b_145.png"></span>
-                    <span>大众</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span><img src="img/b_55.png"></span>
-                    <span>大众</span>
-                </a>
-            </li>
-
+            <c:forEach items="${cbList}" var="item" >
+                <li>
+                    <a href="#">
+                        <span><img src="${item.img}"></span>
+                        <span>${item.name}</span>
+                    </a>
+                </li>
+            </c:forEach>
         </ul><!--lists end-->
         <div class="clear"></div>
 
-        <p class="p2">车系种类<span><a href="#">SUV</a>/<a href="#">MPV</a>/<a href="#">面包</a>/<a href="#">跑车</a></span><a href="" class="fr more">查看更多</a></p>
+        <p class="p2">车系种类
+            <span>
+                <c:forEach items="${ctList}" var="item"  varStatus="stat">
+                    <a href="#">${item.name}</a>
+                    <c:if test="${!stat.last}" >/</c:if>
+                </c:forEach>
+            </span>
+            <a href="" class="fr more">查看更多</a>
+        </p>
         <ul class="lists lists2">
-            <li>
-                <a href="#">
-                    <span><img src="img/c-2.png"></span>
-                    <span>大众</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span><img src="img/c-4.png"></span>
-                    <span>大众</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span><img src="img/c-5.png"></span>
-                    <span>大众</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span><img src="img/c-3.png"></span>
-                    <span>大众</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span><img src="img/c-7.png"></span>
-                    <span>大众</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span><img src="img/c-8.png"></span>
-                    <span>大众</span>
-                </a>
-            </li>
+            <c:forEach items="${ctList}" var="item" >
+                <li>
+                    <a href="#">
+                        <span><img src="${item.img}"></span>
+                        <span>${item.name}</span>
+                    </a>
+                </li>
+            </c:forEach>
         </ul>
     </div><!--pin end-->
 </div>
 <!--品牌 车型 end-->
 <div class="clear"></div>
 
+<!--新闻热点-->
+<div class="new">
+    <div class="new_con">
+        <div class="new_left">
+            <dl>
+                <a href=" ">
+                    <dt><img src="/resources/img/new.jpg"></dt>
+                </a>
+                <dd><a href=" ">家里添置新车，二手车怎么办？</a></dd>
+                <dd><a href=" ">家用商务俩不误，看看这几款MVP</a></dd>
+                <dd><a href=" ">家里添置新车，二手车怎么办？</a></dd>
+                <dd><a href=" ">家用商务俩不误，看看这几款MVP</a></dd>
+            </dl>
+        </div><!--new_left-->
+
+        <div class="new_right">
+            <dl>
+                <a href=" ">
+                    <dt><img src="/resources/img/new_2.jpg"></dt>
+                </a>
+                <dd class="dd1"><a href=" ">稳妥的选择 3款豪华中大型车推荐</a></dd>
+                <dd><a href="">国内豪华品牌中大型车市场销量前三的位置一直都被奥迪A6L、宝马5系、奔驰E级牢牢占据着，除了被不少企业和机关当作公务用车之外，不少消费者也看中了该级别车型宽大的车内空间和丰富的配置，将其作为家用车使用。</a></dd>
+            </dl>
+
+            <dl>
+                <a href=" ">
+                    <dt><img src="/resources/img/new_4.jpg"></dt>
+                </a>
+                <dd class="dd1"><a href=" ">稳妥的选择 3款豪华中大型车推荐</a></dd>
+                <dd><a href="">国内豪华品牌中大型车市场销量前三的位置一直都被奥迪A6L、宝马5系、奔驰E级牢牢占据着，除了被不少企业和机关当作公务用车之外，不少消费者也看中了该级别车型宽大的车内空间和丰富的配置，将其作为家用车使用。</a></dd>
+            </dl>
+        </div><!--new_right-->
+    </div><!--new_con-->
+</div>
+<!--新闻热点 end-->
+<div class="clear"></div>
+<!--footer 开始-->
+<div class="footer">
+    <div class="foot_cen">
+        <div class="n_f_m_c">
+            <a href=" ">关于我们</a>
+            <a href=" ">帮助中心</a>
+            <a href=" ">用户反馈</a>
+        </div><!--n_f_m_c end-->
+
+        <div class="pp">
+            <p>Copyright © 2015-2017 迈众 All Rights Reserved 版权所有 迈众汽车信息服务有限公司</p>
+            <p>营业执照京ICP备15036207号-2   京公网安备 31011402001229号 沪通信管自贸【2016】5号 联系电话：021-10106088</p>
+        </div>
+
+        <div class="rem">
+            <div><img src="img/er.png"></div>
+            <p>微信公众号</p>
+        </div>
+    </div><!--fooot_cen end-->
+</div>
+<!--footer 结束-->
+<script>
+    $(document).ready(function() {
+        $(window).scroll(function() {
+
+            if ($(document).scrollTop()>=230){
+                $(".nav_s").css("background","#fff").css("position","fixed").css("box-shadow","1px 1px 5px #999")
+                $(".navs a,.logo span").css("color","#666")
+                $(".call").hide();
+                $(".s_froms").show();
+            }
+
+            if ($(document).scrollTop()<=230){
+                $(".nav_s").css("background","none").css("position","absolute").css("box-shadow","0px 0px 0px #999")
+                $(".navs a,.logo span").css("color","#fff")
+                $(".call").show();
+                $(".s_froms").hide();
+            }
+
+        });
+    });
+</script>
 </body>
 </html>
