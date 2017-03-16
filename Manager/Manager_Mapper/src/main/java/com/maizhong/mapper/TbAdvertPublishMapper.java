@@ -36,5 +36,5 @@ public interface TbAdvertPublishMapper {
     int upSort(Long id);
     int downSort(Long id);
     int topSort(Long id);
-   List< TbAdvertPublishJoinAdvert> getAdvertPublishByType(@Param("typeId") Long typeId, @Param("startPage")Long startPage, @Param("endPage") Long endPage);
+   List< TbAdvertPublishJoinAdvert> getAdvertPublishByType(@Param("typeId") Long typeId);
 }

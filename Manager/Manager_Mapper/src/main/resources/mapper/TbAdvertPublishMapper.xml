@@ -226,7 +226,7 @@ WHERE A.publish_state=1
  <if test="typeId!=null">
      AND A.advert_type=#{typeId,jdbcType=BIGINT}
  </if>
-  ORDER BY B.advert_sort ASC LIMIT #{startPage,jdbcType=BIGINT},#{endPage,jdbcType=BIGINT};
+  ORDER BY B.advert_sort ASC
     </select>
 
     <update id="downSort">

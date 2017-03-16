@@ -134,13 +134,13 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
      */
     @Override
     public PageResult getAdvertPublishList(PageSearchParam param) {
+        PageHelper.startPage(param.getPageIndex(), param.getPageSize());
         Long typeId=null;
         if (param.getFiled("advertType") != null) {
             typeId= Long.valueOf(param.getFiled("advertType"));
         }
         int startPage = (param.getPageIndex() - 1) * param.getPageSize();
-        List<TbAdvertPublishJoinAdvert> list = tbAdvertPublishMapper.getAdvertPublishByType(typeId,
-                Long.valueOf(startPage), Long.valueOf(param.getPageSize()));
+        List<TbAdvertPublishJoinAdvert> list = tbAdvertPublishMapper.getAdvertPublishByType(typeId);
         String json=jedisClient.hget(DIC_KEY, DicParentEnum.ADTYPE.getState()+"");
         for (TbAdvertPublishJoinAdvert tbAdvert : list) {
             tbAdvert.setTypeName(DicRedisUtils.getDicFormRedisById(tbAdvert.getAdvertType()+"",json));

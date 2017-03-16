@@ -40,7 +40,7 @@
                 <label class="layui-form-label">广告链接</label>
                 <div class="layui-input-block">
                     <input name="advertUrl" autocomplete="off" lay-verify="required" maxlength="200"
-                           placeholder="商品编号和广告链接二选一" class="layui-input" type="text">
+                           placeholder="广告链接" class="layui-input" type="text">
                 </div>
             </div>
             <div class="layui-form-item">

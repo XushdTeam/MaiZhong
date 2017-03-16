@@ -40,7 +40,6 @@ public class SpreadController {
         JsonResult result=spreadService.getIndexCarType();
         return result;
     }
-
     /**
      * 广告获取接口，根据广告类型
      */
@@ -50,4 +49,12 @@ public class SpreadController {
         return result;
     }
 
+/**
+ * 首页汽车栏目获取列表，根据栏目Id
+ */
+@RequestMapping(value="/getCarColumnById/{columnId}")
+public JsonResult getCarColumnById(@PathVariable("columnId") Integer columnId){
+JsonResult result=spreadService.getCarColumnById(columnId);
+    return  result;
+}
 }
