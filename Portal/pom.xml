@@ -21,6 +21,11 @@
             <artifactId>Common</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>MaiZhong</groupId>
+            <artifactId>Manager_Mapper</artifactId>
+            <version>1.0.0</version>
+        </dependency>
         <!--Spring-->
         <dependency>
             <groupId>org.springframework</groupId>

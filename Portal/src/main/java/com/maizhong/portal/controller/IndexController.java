@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 商城首页
  * Created by Xushd on 2017/3/3.
@@ -23,8 +26,11 @@ public class IndexController {
     public String index(Model model){
 
         String adJson = indexService.getAdvert(14);
-        String carBrand = indexService.getCarBrand();
+        List<Map> cbList = indexService.getCarBrand();
+        List<Map> ctList = indexService.getCarType();
         model.addAttribute("adJson", adJson);
+        model.addAttribute("cbList", cbList);
+        model.addAttribute("ctList", ctList);
         return "index";
     }
 

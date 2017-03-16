@@ -907,17 +907,36 @@ color: #A6A6A6;
 .position-left div p{ font-size: 28px; color: #c40000; margin-top: 10px; font-weight: bold;}
 .position-left div p b{ color: #666; font-size: 14px;}
 .hea{ font-weight: 500; font-size: 24px; line-height: 55px; border-bottom: 1px solid #eee}
-/*我的保障*/
-.b_one{ width: 1200px; margin: 0 auto; overflow: hidden;}
-.bg_co{ background: #f5f5f5;}
-.bg_cen{ width: 1200px; margin: 50px auto;overflow: hidden;}
-.bz_left{ width: 25%; float: left;}
-.bz_left img{ width: 100%; border-radius: 300px}
-.bg_co2{ background: #fff}
-.bz_right{ width: 70%; float: left;}
-.bz_right .h2{ font-size: 36px; color: #1daff3; line-height:70px; margin-top: 60px}
-.bz_right .p3{ font-size: 18px; line-height: 50px}
-.huise{ background: #eee}
-.bz_left1{ margin-left: 50px}
-.bz_left2{ margin-left: 60px}
-.nav_s{ position: absolute;top:0;}
+/*首页新闻*/
+.new{ background: #F1F1F1; padding: 50px 0; margin-top: 30px; overflow: hidden;}
+.new .new_con{ width: 1200px; margin: 0px auto}
+.new_left{ width: 478px; float: left;}
+.new_left dl{ background: #fff; padding-bottom: 20px; width: 478px}
+.new_left dl dt img{ width: 100%}
+.new_left dl dd{ line-height: 35px; font-size: 14px; padding-left: 20px}
+.new_right{ width: 698px; float: right; overflow: hidden;}
+.new_right dl{ background: #fff; overflow: hidden; margin-bottom: 20px}
+.new_right dl dt{ float: left; width: 250px}
+.new_right dl dd{ float: right;width:400px;}
+.new_right dl dd.dd1 a{ font-size: 16px; color: #333; padding: 12px 0px; display: block;}
+.new_right dl dd{ padding: 15px 30px 0 0 ; font-size: 14px; line-height: 24px}
+.re_xiao{ background: #eee ;padding: 40px 0;}
+.re_con{ width: 1200px; margin: 0px auto; background: #fff; text-align: center; padding: 40px 0}
+.re_con dl{ position: relative;}
+.re_con dl dd.dd1{background:url(../img/r_bg.png) no-repeat left top  ;width:147px; height: 150px; position:absolute; top: -14px; left: 90px}
+.re_con dl dd.dd2{ width: 385px; height: 319px; background: #fff; position: absolute; right: 95px; top: 27px}
+.re_con dl dd.dd2 h2{ line-height: 45px; text-align: left; color: #000; padding: 0 0 0 16px}
+.re_con dl dd.dd2 p{ font-size: 14px;padding: 0 0 0 16px; text-align: left;}
+.bors{ width: 350px; background: #c40000; height: 45px; border-radius:3px; line-height: 45px; margin-left: 20px}
+.bors a{ color: #fff}
+.re_con ul{ overflow: hidden; padding: 20px 0; color:#af7f4c}
+.re_con ul li{ float: left; width: 150px; font-size: 18px; line-height: 35px; height: 35px;text-align: left; padding: 0 0 0 20px}
+.bort{ width: 350px; height: 45px; border-radius:3px; line-height: 45px; margin-left: 20px; border: 1px solid #999; margin-top: 20px; font-size: 18px; color: #000; font-weight: bold;}
+.halfpay-car-list{ width: 1200px; margin: 20px auto;}
+.position-left{ float: left; width: 380px;  margin: 20px 20px 20px 0}
+.position-left img{ width: 190; height: 101px; float: right; position: relative;}
+.position-left div{ width: 48%; float: left;}
+.position-left div span{ margin-top: 20px; display: block; font-size: 17px;}
+.position-left div p{ font-size: 28px; color: #c40000; margin-top: 10px; font-weight: bold;}
+.position-left div p b{ color: #666; font-size: 14px;}
+.hea{ font-weight: 500; font-size: 24px; line-height: 55px; border-bottom: 1px solid #eee}
