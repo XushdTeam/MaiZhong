@@ -1,13 +1,19 @@
 package com.maizhong.common.result;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.maizhong.common.enums.AuthEnum;
 import com.maizhong.common.enums.OperateEnum;
+
+import java.util.List;
 
 /**
  * 自定义Json 返回对象
  * Created by Xushd on 2017/2/28.
  */
 public class JsonResult {
+
 
     //响应状态
     private Integer status;
@@ -98,5 +104,6 @@ public class JsonResult {
     public void setData(Object data) {
         this.data = data;
     }
+
 
 }
