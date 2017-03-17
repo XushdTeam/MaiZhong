@@ -71,14 +71,14 @@
                             <p class="p_spn" data-type="${condition.key}" data-attr="${condition.value}" style="display:inline">${condition.value}<span class="spas" onclick="delLi(this)">X</span><p>
                         </c:if>
                     </c:forEach>
-                    <p class="p_spn" data-attr="12-16万" data-type="sellPrice" style="display:inline">12-16万<span class="spas" onclick="delLi(this)">X</span><p>
-                    <p class="p_spn" data-attr="1.6-2.0" data-type="capacity" style="display:inline">1.6-2.0L<span class="spas" onclick="delLi(this)">X</span><p>
+                    <p class="p_spn" data-attr="12-16万" data-type="car_sellPrice" style="display:inline">12-16万<span class="spas" onclick="delLi(this)">X</span><p>
+                    <p class="p_spn" data-attr="1.6-2.0" data-type="car_capacity" style="display:inline">1.6-2.0L<span class="spas" onclick="delLi(this)">X</span><p>
 
 
                 </span>
                 <from action="#" method="post" class="">
                     <div class="from_f2">
-                        <input type="text" id="queryString" name="queryString" placeholder="请输入你要查询的东西"><span class="sp" onclick="refresh()"><img src="img/67.jpg"></span>
+                        <input type="text" id="queryString" name="queryString" placeholder="请输入你要查询的东西"><span class="sp" onclick="refresh(true)"><img src="img/67.jpg"></span>
                     </div>
                 </from>
             </div><!--chaxun emd-->
@@ -98,7 +98,7 @@
                             <ul class="av-collapse avd" >
 
                                 <li>
-                                    <a  href="javascript:;" onclick="addCause(this)" data-type="carBrand" data-attr="" style="color:red" title="不限">不限</a>
+                                    <a  href="javascript:;" onclick="addCause(this)" data-type="car_brand" data-attr="" style="color:red" title="不限">不限</a>
                                 </li>
 
                                 <c:forEach items="${carType}" var="type">
@@ -124,14 +124,14 @@
                         <div class="attrValues">
                             <ul class="av-expand" >
                                 <li >
-                                    <a title="车系" style="color:red"  href="javascript:;"  data-attr="" data-type="carBrandLine">
+                                    <a title="车系" style="color:red"  href="javascript:;"  data-attr="" data-type="car_brandLine">
                                         <b>不限</b>
                                     </a>
                                 </li>
 
-                                <c:forEach items="${carBrandLine}" var="line">
+                                <c:forEach items="${car_brandLine}" var="line">
                                     <li>
-                                        <a title="车系" href="javascript:;" data-attr="${line.lineName}" data-type="carBrandLine">
+                                        <a title="车系" href="javascript:;" data-attr="${line.lineName}" data-type="car_brandLine">
                                             <b> ${line.lineName}</b>
                                         </a>
                                     </li>
@@ -147,48 +147,48 @@
                             <ul class="av-expand"  >
 
                                 <li>
-                                    <a title="价格" style="color:red" href="javascript:;" onclick="addCause(this)" data-attr="" data-type="sellPrice">
+                                    <a title="价格" style="color:red" href="javascript:;" onclick="addCause(this)" data-attr="" data-type="car_sellPrice">
                                         <b>不限</b>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a title="价格" href="javascript:;" onclick="addCause(this)" data-attr="0-3万" data-type="sellPrice">
+                                    <a title="价格" href="javascript:;" onclick="addCause(this)" data-attr="0-3万" data-type="car_sellPrice">
                                         <b>3万以下</b>
                                     </a>
                                 </li>
                                 <li>
-                                    <a title="价格" href="javascript:;" onclick="addCause(this)" data-attr="3-5万" data-type="sellPrice">
+                                    <a title="价格" href="javascript:;" onclick="addCause(this)" data-attr="3-5万" data-type="car_sellPrice">
                                         <b>3-5万</b>
                                     </a>
                                 </li>
                                 <li>
-                                    <a title="价格" href="javascript:;" onclick="addCause(this)" data-attr="5-7万" data-type="sellPrice">
+                                    <a title="价格" href="javascript:;" onclick="addCause(this)" data-attr="5-7万" data-type="car_sellPrice">
                                         <b>5-7万</b>
                                     </a>
                                 </li>
                                 <li>
-                                    <a title="价格" href="javascript:;" onclick="addCause(this)" data-attr="7-9万" data-type="sellPrice">
+                                    <a title="价格" href="javascript:;" onclick="addCause(this)" data-attr="7-9万" data-type="car_sellPrice">
                                         <b>7-9万</b>
                                     </a>
                                 </li>
                                 <li>
-                                    <a title="价格" href="javascript:;" onclick="addCause(this)" data-attr="9-12万" data-type="sellPrice">
+                                    <a title="价格" href="javascript:;" onclick="addCause(this)" data-attr="9-12万" data-type="car_sellPrice">
                                         <b>9-12万</b>
                                     </a>
                                 </li>
                                 <li>
-                                    <a title="价格" href="javascript:;" onclick="addCause(this)" data-attr="12-16万" data-type="sellPrice">
+                                    <a title="价格" href="javascript:;" onclick="addCause(this)" data-attr="12-16万" data-type="car_sellPrice">
                                         <b>12-16万</b>
                                     </a>
                                 </li>
                                 <li>
-                                    <a title="价格" href="javascript:;" onclick="addCause(this)" data-attr="16-20万" data-type="sellPrice">
+                                    <a title="价格" href="javascript:;" onclick="addCause(this)" data-attr="16-20万" data-type="car_sellPrice">
                                         <b>16-20万</b>
                                     </a>
                                 </li>
                                 <li>
-                                    <a title="价格" href="javascript:;" onclick="addCause(this)" data-attr="20-万" data-type="sellPrice">
+                                    <a title="价格" href="javascript:;" onclick="addCause(this)" data-attr="20-万" data-type="car_sellPrice">
                                         <b>20万以上</b>
                                     </a>
                                 </li>
@@ -202,7 +202,7 @@
                             <ul>
 
                                 <li>
-                                    <a title="排量" style="color:red" href="javascript:;" onclick="addCause(this)" data-attr="" data-type="capacity">
+                                    <a title="排量" style="color:red" href="javascript:;" onclick="addCause(this)" data-attr="" data-type="car_capacity">
                                         <b>不限</b>
                                     </a>
                                 </li>
@@ -210,42 +210,42 @@
 
 
                                 <li>
-                                    <a title="排量" href="javascript:;" onclick="addCause(this)" data-attr="-1.0" data-type="capacity">
+                                    <a title="排量" href="javascript:;" onclick="addCause(this)" data-attr="-1.0" data-type="car_capacity">
                                         <b>1.0L以下</b>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a title="排量" href="javascript:;" onclick="addCause(this)" data-attr="1.1-1.6" data-type="capacity">
+                                    <a title="排量" href="javascript:;" onclick="addCause(this)" data-attr="1.1-1.6" data-type="car_capacity">
                                         <b>1.1L~1.6L</b>
                                     </a>
                                 </li>
                                 <li>
-                                    <a title="排量" href="javascript:;" onclick="addCause(this)" data-attr="1.6-2.0" data-type="capacity">
+                                    <a title="排量" href="javascript:;" onclick="addCause(this)" data-attr="1.6-2.0" data-type="car_capacity">
                                         <b>1.6L~2.0L</b>
                                     </a>
                                 </li>
 
 
                                 <li>
-                                    <a title="排量" href="javascript:;" onclick="addCause(this)" data-attr="2.0-2.5" data-type="capacity">
+                                    <a title="排量" href="javascript:;" onclick="addCause(this)" data-attr="2.0-2.5" data-type="car_capacity">
                                         <b>2.0L~2.5L</b>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a title="排量" href="javascript:;" onclick="addCause(this)" data-attr="2.5-3.0" data-type="capacity">
+                                    <a title="排量" href="javascript:;" onclick="addCause(this)" data-attr="2.5-3.0" data-type="car_capacity">
                                         <b>2.5L~3.0L</b>
                                     </a>
                                 </li>
                                 <li>
-                                    <a title="排量" href="javascript:;" onclick="addCause(this)" data-attr="3.0-4.0" data-type="capacity">
+                                    <a title="排量" href="javascript:;" onclick="addCause(this)" data-attr="3.0-4.0" data-type="car_capacity">
                                         <b>3.0L~4.0L</b>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a title="排量" href="javascript:;" onclick="addCause(this)" data-attr="4.0-" data-type="capacity">
+                                    <a title="排量" href="javascript:;" onclick="addCause(this)" data-attr="4.0-" data-type="car_capacity">
                                         <b>4.0L以上</b>
                                     </a>
                                 </li>
@@ -263,14 +263,14 @@
 
 
                                 <li>
-                                    <a title="颜色" style="color:red" href="javascript:;" data-attr="" data-type="color">
+                                    <a title="颜色" style="color:red" href="javascript:;" data-attr="" data-type="car_color">
                                         <b>不限</b>
                                     </a>
                                 </li>
 
-                                <c:forEach items="${colors}" var="color" >
+                                <c:forEach items="${colors}" var="car_color" >
                                     <li>
-                                        <a title="颜色" href="javascript:;" data-attr="${color.id}" data-type="color">
+                                        <a title="颜色" href="javascript:;" data-attr="${color.id}" data-type="car_color">
                                             <b>${color.dicName}</b>
                                         </a>
                                     </li>
@@ -290,14 +290,14 @@
 
 
                                 <li>
-                                    <a title="变速箱" style="color:red" href="javascript:;" onclick="addCause(this)" data-attr="" data-type="gearbox">
+                                    <a title="变速箱" style="color:red" href="javascript:;" onclick="addCause(this)" data-attr="" data-type="car_gearbox">
                                         <b>不限</b>
                                     </a>
                                 </li>
 
-                                <c:forEach items="${gearboxs}" var="gearbox" >
+                                <c:forEach items="${gearboxs}" var="car_gearbox" >
                                     <li>
-                                        <a title="变速箱" href="javascript:;" onclick="addCause(this)" data-attr="${gearbox.id}" data-type="gearbox">
+                                        <a title="变速箱" href="javascript:;" onclick="addCause(this)" data-attr="${gearbox.id}" data-type="car_gearbox">
                                             <b>${gearbox.dicName}</b>
                                         </a>
                                     </li>
@@ -379,7 +379,7 @@
                         <a href=" ">2</a>
                         <a href=" ">3</a>
                         <b class="ui-page-break">...</b>
-                        <a class="ui-page-next" href=" ">下一页&gt;&gt;</a>
+                        <a class="ui-page-next" href="">下一页&gt;&gt;</a>
                     </b>
                     <b class="ui-page-skip">
                         <form name="filterPageForm" method="get">
@@ -527,10 +527,10 @@
 //        删除元素
         var pEle = $(Obj).parent();
         $("a[data-type='"+$(pEle).data("type")+"'][data-attr='"+$(pEle).data("attr")+"']").removeAttr("style");
-//        css("color","black");
-        $("a[data-type='"+$(pEle).data("type")+"'][data-attr='']").css("color","red");
+//        css("car_color","black");
+        $("a[data-type='"+$(pEle).data("type")+"'][data-attr='']").css("car_color","red");
         $(Obj).parent().remove();
-
+        refresh();
     }
 
 
@@ -550,31 +550,36 @@
             if($(e).data("type")){
                 var selected = $("a[data-type='"+$(e).data("type")+"'][data-attr='"+$(e).data("attr")+"']")
                 $.each($(selected).parent().parent().find("a"),function () {
-//                    $(this).css("color","black");
+//                    $(this).css("car_color","black");
                     $(this).removeAttr("style");
                 })
-                $(selected).css("color","red");
+                $(selected).css("car_color","red");
             }
         })
     })
 
 
-    function refresh(){
+    function refresh(bo){
 
         //初始化url
         var url = "${searchUrl}";
 
+
+        url+="?pageIndex="+$(".ui-page-cur")[0].text();
+
         //拼装数据
-        var bo = true;
-        if($("#queryString").val()){
-            url+="?queryString="+$("#queryString").val();
-            bo=false;
+        //拼装查询框中的数据  如果查询框中有数据 并且是由查询按钮触发的事件 直接跳转
+        if(bo&&$("#queryString").val()){
+            url+="&searchFileds[queryString]="+$("#queryString").val();
+            //跳转
+            window.location.href = url;
         }
+        //拼装起始页与页面数据大小
 
-
+        //如果没跳转  拼装条件
         $("#searchArea p").each(function (i,e) {
             if($(e).data("type")){
-                url+=bo?"?":"&"+$(e).data("type")+"="+$(e).data("attr");
+                url+=bo?"?searchFileds[":"&searchFileds["+$(e).data("type")+"]="+$(e).data("attr");
                 if(bo) bo=false;
             }
         })
