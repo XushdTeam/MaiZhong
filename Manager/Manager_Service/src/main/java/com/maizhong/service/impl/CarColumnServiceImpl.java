@@ -7,6 +7,7 @@ import com.maizhong.common.dto.KeyValue;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.enums.DicParentEnum;
 import com.maizhong.common.enums.OperateEnum;
+import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.common.utils.DicRedisUtils;
 import com.maizhong.common.utils.JsonUtils;
@@ -133,6 +134,18 @@ public class CarColumnServiceImpl implements CarColumnService {
             return OperateEnum.SUCCESS;
         } else {
             return OperateEnum.FAILE;
+        }
+    }
+
+    @Override
+    public JsonResult carColumnRedis() {
+        try {
+                jedisClient.del(CM_TYPE);
+            return JsonResult.build(OperateEnum.SUCCESS);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.build(OperateEnum.FAILE);
         }
     }
 }

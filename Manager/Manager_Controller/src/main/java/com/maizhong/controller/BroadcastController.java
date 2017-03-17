@@ -41,6 +41,7 @@ public class BroadcastController {
         List<KeyValue> list=carColumnService.getColumnList();
         model.addAttribute("columnList",list);
         model.addAttribute("baseUrl", "/carColumn");
+        model.addAttribute("redisUrl","/carColumn/redisUrl");
         model.addAttribute("listUrl", "/carColumn/list");
         model.addAttribute("handleUrl", "/carColumn/handle");
         model.addAttribute("deleteUrl", "/carColumn/delete");
@@ -133,6 +134,18 @@ public class BroadcastController {
     public JsonResult carColumnUpdate(TbCarColumn tbCarColumn) {
         OperateEnum result = carColumnService.updateCarColumn(tbCarColumn);
         return JsonResult.build(result);
+    }
+
+    /**
+     * 缓存刷新
+     * @return
+     */
+    @ControllerLog(module = "首页汽车",methods = "缓存同步")
+    @RequestMapping(value = "/carColumn/redisUrl")
+    @ResponseBody
+    public JsonResult dictionaryRedis(){
+        JsonResult result = carColumnService.carColumnRedis();
+        return result;
     }
 
 }
