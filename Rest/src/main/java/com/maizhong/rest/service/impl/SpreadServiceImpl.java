@@ -171,7 +171,7 @@ public class SpreadServiceImpl implements SpreadService {
             e.printStackTrace();
         }
 
-        List<CarColumnJoinCar> list = tbCarColumnMapper.getListByColumn(Long.valueOf(columnId));//获取列表
+        List<CarColumnJoinCar> list = tbCarColumnMapper.getListByColumn(1L,Long.valueOf(columnId));//获取列表
 
         //写入缓存
         try {

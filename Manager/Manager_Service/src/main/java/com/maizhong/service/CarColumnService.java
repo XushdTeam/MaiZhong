@@ -17,14 +17,13 @@ import java.util.List;
 public interface CarColumnService {
     PageResult getCarColumnList(PageSearchParam param);
 
-
     OperateEnum insertCarColumn(TbCarColumn tbCarColumn);
 
     List<KeyValue> getColumnList();
 
     OperateEnum deleteColumnCarById(long id);
 
-    TbCarColumn getCarColumnByid(Long aLong);
+    TbCarColumn getCarColumnByid(Long id);
 
     OperateEnum updateCarColumn(TbCarColumn tbCarColumn);
 }

@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -47,7 +48,8 @@ public class CarColumnServiceImpl implements CarColumnService {
 
     @Value("${DIC_KEY}")
     private String DIC_KEY;
-
+    @Value("${CM_TYPE}")
+    private String CM_TYPE;
 
     @Override
     public PageResult getCarColumnList(PageSearchParam param) {
@@ -56,15 +58,16 @@ public class CarColumnServiceImpl implements CarColumnService {
         if (param.getFiled("columnId") != null) {
             columnId= Long.valueOf(param.getFiled("columnId"));
         }
-        List<CarColumnJoinCar> list = tbCarColumnMapper.getListByColumn(columnId);
+
+        List<CarColumnJoinCar> list = tbCarColumnMapper.getListByColumn(null,columnId);
         String json=jedisClient.hget(DIC_KEY, DicParentEnum.CMID.getState()+"");
-       for (CarColumnJoinCar carColumnJoinCar : list) {
+
+        for (CarColumnJoinCar carColumnJoinCar : list) {
            carColumnJoinCar.setColumnName(DicRedisUtils.getDicFormRedisById(carColumnJoinCar.getColumnId()+"",json));
         }
         PageInfo pageInfo = new PageInfo(list);
         return new PageResult(pageInfo);
     }
-
 
     /**
      * 添加汽车栏目下的汽车
@@ -78,7 +81,6 @@ public class CarColumnServiceImpl implements CarColumnService {
             return OperateEnum.NO_CAR;
         }
 
-
         TbCarColumnExample tbCarColumnExample= new TbCarColumnExample();
         TbCarColumnExample.Criteria criteria = tbCarColumnExample.createCriteria();
         criteria.andCarIdEqualTo(tbCarColumn.getCarId());
@@ -88,6 +90,7 @@ public class CarColumnServiceImpl implements CarColumnService {
         }
         int res = tbCarColumnMapper.insertSelective(tbCarColumn);
         if (res > 0) {
+            jedisClient.hdel(CM_TYPE,tbCarColumn.getColumnId()+"");
             return OperateEnum.SUCCESS;
         } else {
             return OperateEnum.FAILE;
@@ -105,6 +108,7 @@ public class CarColumnServiceImpl implements CarColumnService {
     public OperateEnum deleteColumnCarById(long id) {
         int ret = tbCarColumnMapper.deleteByPrimaryKey(id);
         if (ret > 0) {
+            jedisClient.hdel(CM_TYPE,tbCarColumnMapper.selectByPrimaryKey(id).getColumnId()+"");
             return OperateEnum.SUCCESS;
         } else {
             return OperateEnum.FAILE;
@@ -125,6 +129,7 @@ public class CarColumnServiceImpl implements CarColumnService {
     public OperateEnum updateCarColumn(TbCarColumn tbCarColumn) {
        int res= tbCarColumnMapper.updateByPrimaryKeySelective(tbCarColumn);
         if (res > 0) {
+            jedisClient.del(CM_TYPE);//可能修改类型，所以所有类型全部删除
             return OperateEnum.SUCCESS;
         } else {
             return OperateEnum.FAILE;
