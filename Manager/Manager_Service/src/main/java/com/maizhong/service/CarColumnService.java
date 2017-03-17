@@ -3,6 +3,7 @@ package com.maizhong.service;
 import com.maizhong.common.dto.KeyValue;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.enums.OperateEnum;
+import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.pojo.TbCarColumn;
 
@@ -17,14 +18,15 @@ import java.util.List;
 public interface CarColumnService {
     PageResult getCarColumnList(PageSearchParam param);
 
-
     OperateEnum insertCarColumn(TbCarColumn tbCarColumn);
 
     List<KeyValue> getColumnList();
 
     OperateEnum deleteColumnCarById(long id);
 
-    TbCarColumn getCarColumnByid(Long aLong);
+    TbCarColumn getCarColumnByid(Long id);
 
     OperateEnum updateCarColumn(TbCarColumn tbCarColumn);
+
+    JsonResult carColumnRedis();
 }

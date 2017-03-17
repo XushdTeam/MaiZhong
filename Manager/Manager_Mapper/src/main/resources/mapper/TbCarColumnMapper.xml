@@ -243,8 +243,11 @@
   <select id="getListByColumn" resultMap="ColumnJoinCar">
     SELECT A.*,B.number, B.name,B.year_sku, B.capacity, B.asname,
     B.sellpoint, B.reserve_price, B.sell_price, B.shop_price, B.image
-    FROM tb_car_column A LEFT JOIN tb_car B ON A.car_id = B.id
-    WHERE A.status=1 AND A.deflag=0
+    FROM tb_car_column A LEFT JOIN tb_car B ON A.car_id = B.id LEFT JOIN tb_dictionary C ON C.id=A.column_id
+    WHERE A.deflag=0  AND C.`status`=1
+    <if test="status!=null">
+     AND A.status=#{status,jdbcType=BIGINT}
+    </if>
     <if test="columnId!=null">
       AND A.column_id=#{columnId,jdbcType=BIGINT}
     </if>

@@ -52,9 +52,9 @@ public class SpreadController {
 /**
  * 首页汽车栏目获取列表，根据栏目Id
  */
-@RequestMapping(value="/getCarColumnById/{columnId}")
-public JsonResult getCarColumnById(@PathVariable("columnId") Integer columnId){
-JsonResult result=spreadService.getCarColumnById(columnId);
+@RequestMapping(value="/getCarColumnById/{columnId}/{number}")
+public JsonResult getCarColumnById(@PathVariable("columnId") Integer columnId,@PathVariable("number") Integer number){
+JsonResult result=spreadService.getCarColumnById(columnId,number);
     return  result;
 }
 }

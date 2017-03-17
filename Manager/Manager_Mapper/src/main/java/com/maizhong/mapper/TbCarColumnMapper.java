@@ -31,5 +31,5 @@ public interface TbCarColumnMapper {
 
     int updateByPrimaryKey(TbCarColumn record);
 
-    List<CarColumnJoinCar> getListByColumn(@Param("columnId")Long columnId);
+    List<CarColumnJoinCar> getListByColumn(@Param("status")Long status,@Param("columnId")Long columnId);
 }

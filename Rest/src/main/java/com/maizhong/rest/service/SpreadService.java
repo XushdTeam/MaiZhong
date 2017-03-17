@@ -23,5 +23,5 @@ public interface SpreadService {
 
     JsonResult getIndexCarType();
 
-    JsonResult getCarColumnById(Integer columnId);
+    JsonResult getCarColumnById(Integer columnId,Integer number);
 }

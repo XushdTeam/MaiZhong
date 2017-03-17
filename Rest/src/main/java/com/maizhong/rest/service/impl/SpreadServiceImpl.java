@@ -148,20 +148,30 @@ public class SpreadServiceImpl implements SpreadService {
      * @return
      */
     @Override
-    public JsonResult getCarColumnById(Integer columnId) {
+    public JsonResult getCarColumnById(Integer columnId,Integer number) {
 
+        if (number<=0){
+            number=1;
+        }
+        int size=0;
         //缓存命中
         try {
             String json = jedisClient.hget(CM_TYPE,columnId+"");
             if(StringUtils.isNotBlank(json)){
-                return JsonResult.OK(JsonUtils.jsonToList(json,CarColumnJoinCar.class));
+                List<CarColumnJoinCar> carList=JsonUtils.jsonToList(json,CarColumnJoinCar.class);
+                size=carList.size();
+                   if (size<=number){
+                       return JsonResult.OK(carList);
+                   }else {
+                       return  JsonResult.OK(carList.subList(0,number));
+                   }
+
             }
         }catch (Exception e){
             e.printStackTrace();
         }
-        PageHelper.startPage(0, 10);
 
-        List<CarColumnJoinCar> list = tbCarColumnMapper.getListByColumn(Long.valueOf(columnId));
+        List<CarColumnJoinCar> list = tbCarColumnMapper.getListByColumn(1L,Long.valueOf(columnId));//获取列表
 
         //写入缓存
         try {
@@ -170,10 +180,18 @@ public class SpreadServiceImpl implements SpreadService {
         }catch (Exception e){
             e.printStackTrace();
         }
+        if (list!=null){
+            size=list.size();
+            if(size<=number){
+                return JsonResult.OK(list);
+            }else {
+                  return JsonResult.OK(list.subList(0,number));
+            }
 
-        return JsonResult.OK(list);
+        }else {
+            return JsonResult.OK(null);
+        }
     }
-
 
 }
 
