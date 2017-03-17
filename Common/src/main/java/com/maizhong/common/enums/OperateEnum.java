@@ -17,7 +17,8 @@ public enum OperateEnum {
     PASS_ERROR(500,"原密码错误"),
     FILE_UPLOAD_SUCCESS(200,"上传成功"),
     SB(500,"你是不是疯了"),
-    NO_CAR(500,"添加的汽车不存在" );
+    NO_CAR(500,"添加的汽车不存在" ),
+    THAN_FOUR(500,"同一栏目不能超过4条" );
 
     private int state;
 
