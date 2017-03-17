@@ -49,6 +49,10 @@ public class BrandController {
         model.addAttribute("listUrl", "/brand/list");
         model.addAttribute("handleUrl", "/brand/handle");
         model.addAttribute("deleteUrl", "/brand/delete");
+        model.addAttribute("insertLineUrl", "/carBrandLine/insert");
+        model.addAttribute("lineListUrl", "/carBrandLine/list");
+        model.addAttribute("deleteLineUrl", "/carBrandLine/delete");
+
 
         return "shop/brand";
     }

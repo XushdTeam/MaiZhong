@@ -11,6 +11,8 @@ public class TbCar {
 
     private Long carBrand;
 
+    private Long carBrandLine;
+
     private Long carType;
 
     private String yearSku;
@@ -34,6 +36,8 @@ public class TbCar {
     private Date createTime;
 
     private Date updateTime;
+
+    private String smimage;
 
     private String image;
 
@@ -73,6 +77,14 @@ public class TbCar {
 
     public void setCarBrand(Long carBrand) {
         this.carBrand = carBrand;
+    }
+
+    public Long getCarBrandLine() {
+        return carBrandLine;
+    }
+
+    public void setCarBrandLine(Long carBrandLine) {
+        this.carBrandLine = carBrandLine;
     }
 
     public Long getCarType() {
@@ -169,6 +181,14 @@ public class TbCar {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getSmimage() {
+        return smimage;
+    }
+
+    public void setSmimage(String smimage) {
+        this.smimage = smimage == null ? null : smimage.trim();
     }
 
     public String getImage() {

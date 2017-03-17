@@ -8,10 +8,7 @@ import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.pojo.TbCar;
 import com.maizhong.pojo.TbCarBrand;
 import com.maizhong.pojo.TbCarType;
-import com.maizhong.service.BrandService;
-import com.maizhong.service.CarService;
-import com.maizhong.service.DicService;
-import com.maizhong.service.TypeService;
+import com.maizhong.service.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,6 +48,9 @@ public class CarController {
 
     @Resource
     private DicService dicService;
+
+    @Resource
+    private BrandLineService brandLineService;
 
     /***
      * 返回汽车列表数据
@@ -124,6 +124,8 @@ public class CarController {
     public String addCar(Model model){
         model.addAttribute("insertUrl","/car/insert");
         model.addAttribute("seepropUrl","/carProp/prop");
+        model.addAttribute("lineListUrl","/carBrandLine/list");
+
 
         //数据准备
         model.addAttribute("carTypeList", JsonUtils.jsonToList(typeService.getCarTypeListAll(), TbCarType.class));
@@ -198,6 +200,8 @@ public class CarController {
 
         model.addAttribute("updateCarUrl","/car/update");
         model.addAttribute("seepropUrl","/carProp/prop");
+        model.addAttribute("lineListUrl","/carBrandLine/list");
+
 
         //数据准备
         model.addAttribute("carTypeList", JsonUtils.jsonToList(typeService.getCarTypeListAll(), TbCarType.class));
@@ -207,8 +211,15 @@ public class CarController {
         model.addAttribute("colorList",dicService.getDicListByParent(4L));
         model.addAttribute("gaerboxList",dicService.getDicListByParent(9L));
 
+
+
         //数据查询与填充
         TbCar car = carService.findCarById(id);
+
+        //数据准备  车系列表
+        JsonResult result = brandLineService.getCarBrandLineList(car.getCarBrand());
+
+        model.addAttribute("lineList",result.getData());
 
         model.addAttribute("car",car);
 

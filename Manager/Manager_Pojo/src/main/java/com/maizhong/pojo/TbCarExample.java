@@ -365,6 +365,66 @@ public class TbCarExample {
             return (Criteria) this;
         }
 
+        public Criteria andCarBrandLineIsNull() {
+            addCriterion("car_brand_line is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarBrandLineIsNotNull() {
+            addCriterion("car_brand_line is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarBrandLineEqualTo(Long value) {
+            addCriterion("car_brand_line =", value, "carBrandLine");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarBrandLineNotEqualTo(Long value) {
+            addCriterion("car_brand_line <>", value, "carBrandLine");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarBrandLineGreaterThan(Long value) {
+            addCriterion("car_brand_line >", value, "carBrandLine");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarBrandLineGreaterThanOrEqualTo(Long value) {
+            addCriterion("car_brand_line >=", value, "carBrandLine");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarBrandLineLessThan(Long value) {
+            addCriterion("car_brand_line <", value, "carBrandLine");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarBrandLineLessThanOrEqualTo(Long value) {
+            addCriterion("car_brand_line <=", value, "carBrandLine");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarBrandLineIn(List<Long> values) {
+            addCriterion("car_brand_line in", values, "carBrandLine");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarBrandLineNotIn(List<Long> values) {
+            addCriterion("car_brand_line not in", values, "carBrandLine");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarBrandLineBetween(Long value1, Long value2) {
+            addCriterion("car_brand_line between", value1, value2, "carBrandLine");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarBrandLineNotBetween(Long value1, Long value2) {
+            addCriterion("car_brand_line not between", value1, value2, "carBrandLine");
+            return (Criteria) this;
+        }
+
         public Criteria andCarTypeIsNull() {
             addCriterion("car_type is null");
             return (Criteria) this;
@@ -1132,6 +1192,76 @@ public class TbCarExample {
 
         public Criteria andUpdateTimeNotBetween(Date value1, Date value2) {
             addCriterion("update_time not between", value1, value2, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmimageIsNull() {
+            addCriterion("smimage is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmimageIsNotNull() {
+            addCriterion("smimage is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmimageEqualTo(String value) {
+            addCriterion("smimage =", value, "smimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmimageNotEqualTo(String value) {
+            addCriterion("smimage <>", value, "smimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmimageGreaterThan(String value) {
+            addCriterion("smimage >", value, "smimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmimageGreaterThanOrEqualTo(String value) {
+            addCriterion("smimage >=", value, "smimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmimageLessThan(String value) {
+            addCriterion("smimage <", value, "smimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmimageLessThanOrEqualTo(String value) {
+            addCriterion("smimage <=", value, "smimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmimageLike(String value) {
+            addCriterion("smimage like", value, "smimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmimageNotLike(String value) {
+            addCriterion("smimage not like", value, "smimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmimageIn(List<String> values) {
+            addCriterion("smimage in", values, "smimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmimageNotIn(List<String> values) {
+            addCriterion("smimage not in", values, "smimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmimageBetween(String value1, String value2) {
+            addCriterion("smimage between", value1, value2, "smimage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmimageNotBetween(String value1, String value2) {
+            addCriterion("smimage not between", value1, value2, "smimage");
             return (Criteria) this;
         }
 

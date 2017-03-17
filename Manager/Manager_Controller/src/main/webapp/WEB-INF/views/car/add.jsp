@@ -68,7 +68,7 @@
                         <div class="layui-form-item layui-input-inline">
                             <label class="layui-form-label">汽车品牌</label>
                             <div class="layui-input-block"  style="width: 50%">
-                                <select name="carBrand" lay-verify="required">
+                                <select name="carBrand" id="carBrand"  lay-filter="carBrand" lay-verify="required">
                                     <option value=""></option>
                                     <c:forEach items="${carBrandList}" var="brand" >
                                         <option value="${brand.id}">${brand.brandName}</option>
@@ -78,16 +78,12 @@
                         </div>
 
                         <div class="layui-form-item layui-input-inline">
-                            <label class="layui-form-label">汽车颜色</label>
+                            <label class="layui-form-label">汽车车系</label>
                             <div class="layui-input-inline">
-                                <select name="color" lay-verify="required">
-                                    <option value=""></option>
-                                    <c:forEach items="${colorList}" var="color">
-                                        <option value="${color.id}">${color.dicName}</option>
-                                    </c:forEach>
+                                <select name="carBrandLine" id="carBrandLine" lay-verify="required">
+                                    <option value="">请先选择品牌</option>
                                 </select>
                             </div>
-
                         </div>
                     </div>
 
@@ -115,6 +111,19 @@
                                 <input type="text" name="weight"  lay-verify="required" placeholder="权重，数值越大出现越靠前" autocomplete="off" class="layui-input">
                             </div>
                         </div>
+
+
+                        <div class="layui-form-item layui-input-inline">
+                            <label class="layui-form-label">汽车颜色</label>
+                            <div class="layui-input-inline">
+                                <select name="color" lay-verify="required">
+                                    <option value=""></option>
+                                    <c:forEach items="${colorList}" var="color">
+                                        <option value="${color.id}">${color.dicName}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="layui-input-block">
@@ -133,7 +142,7 @@
                         <div class="layui-form-item  layui-input-inline">
                             <label class="layui-form-label">市场指导价</label>
                             <div class="layui-input-inline">
-                                <input type="text" id="shopPrice"  placeholder="8.12-12.25  字符串形式" autocomplete="off" class="layui-input">
+                                <input type="text" name="shopPrice" id="shopPrice"  placeholder="8.12-12.25  字符串形式" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                     </div>
@@ -237,6 +246,28 @@
                 }
             });
             return false;
+        });
+
+
+
+
+        //监听下拉框的选择   用于车系下拉框的动态回显
+        //TODO
+        form.on('select(carBrand)', function(data){
+            var brandId = data.value; //得到被选中的值
+            if(!brandId||brandId==""){
+                return;
+            }
+            $.post("${lineListUrl}/"+brandId,function(result){
+                    if(result.status==200){
+                        $("#carBrandLine").html("");
+                        $("#carBrandLine").append("<option value=''>请选择</option>");
+                        $.each(result.data,function(i,e){
+                            $("#carBrandLine").append("<option value='"+e.id+"'>"+e.lineName+"</option>");
+                        })
+                        form.render('select');
+                    }
+            },"json")
         });
     });
 
