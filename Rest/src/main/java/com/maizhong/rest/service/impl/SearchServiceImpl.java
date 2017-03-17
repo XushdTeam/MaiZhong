@@ -3,8 +3,11 @@ package com.maizhong.rest.service.impl;
 import com.github.pagehelper.PageInfo;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.result.JsonResult;
+import com.maizhong.mapper.TbCarBrandLineMapper;
+import com.maizhong.mapper.TbCarBrandMapper;
+import com.maizhong.mapper.TbDictionaryMapper;
 import com.maizhong.mapper.ext.TbCarMapperExt;
-import com.maizhong.pojo.TbCarExample;
+import com.maizhong.pojo.*;
 import com.maizhong.pojo.vo.TbCarVo;
 import com.maizhong.rest.service.SearchService;
 import org.apache.commons.lang3.StringUtils;
@@ -29,6 +32,10 @@ import java.util.Map;
  *          solr定时器（不确定）
  *
  * Created by yangF on 2017/3/14.
+ *
+ * 根据前台页面完善查询条件
+ *      update  yangF 2017/3/16
+ *
  */
 @Service
 public class SearchServiceImpl implements SearchService {
@@ -39,6 +46,15 @@ public class SearchServiceImpl implements SearchService {
 
     @Resource
     private TbCarMapperExt tbCarMapperExt;
+
+    @Resource
+    private TbDictionaryMapper tbDictionaryMapper;
+
+    @Resource
+    private TbCarBrandMapper tbCarBrandMapper;
+
+    @Resource
+    private TbCarBrandLineMapper tbCarBrandLineMapper;
 
 
 
@@ -95,7 +111,7 @@ public class SearchServiceImpl implements SearchService {
         return JsonResult.OK("添加成功");
     }
 
-    /****
+    /**
      * 查询结果返回
      * @param param
      * @return
@@ -104,36 +120,100 @@ public class SearchServiceImpl implements SearchService {
     public JsonResult searchDoc(PageSearchParam param) {
 
 
-        try {
-            String query;
+        //初始化查询字段
+        StringBuffer querysb = new StringBuffer("");
+        Boolean highTiken = false;
 
-            //提取查询字段
-            String q = param.getFiled("queryString");
 
-            if (StringUtils.isBlank(q)) {
-                query = "*:*";
+
+        //判断查询字段 分布  拼装
+        if (param!=null&&param.getSearchFileds()!=null){
+            //如果存在queryString  按照参数进行查询
+            if (param.getFiled("queryString")!=null){
+                querysb.append("car_keywords:"+param.getFiled("queryString"));
+                highTiken = true;
             }else{
-                query=q+":car_keywords";
+                //如果查询string为空   遍历条件  添加条件
+                Boolean bo = true;
+
+                //判断条件    车型和车系为父子关系
+                if (param.getFiled("car_brand")!=null){
+                    //如果车系存在  使用车系进行搜索
+                    if (param.getFiled("car_brand_line")!=null){
+                        querysb.append("car_brand_line:").append(param.getFiled("car_brand_line"));
+                        //反之  使用车型搜索
+                    }else{
+                        querysb.append("car_brand:").append(param.getFiled("car_brand"));
+                    }
+                    bo = false;
+                }
+
+                //颜色
+                if (param.getFiled("car_color")!=null){
+                    querysb.append(bo?"  ":" AND  ").append("car_color:").append(param.getFiled("car_color"));
+                    bo = false;
+                }
+
+                //变速箱
+                if (param.getFiled("car_gearbox")!=null){
+                    querysb.append(bo?"  ":" AND  ").append("car_gearbox:").append(param.getFiled("car_gearbox"));
+                    bo = false;
+                }
+                //类型
+                if (param.getFiled("car_type")!=null){
+                    querysb.append(bo?"  ":" AND  ").append("car_type:").append(param.getFiled("car_type"));
+                    bo = false;
+                }
+
+
+                //售价
+                if (param.getFiled("car_sellPrice")!=null){
+                    String[] split =param.getFiled("car_sellPrice").replaceAll("[^0-9\\-\\.]", "").split("-");
+                    if (split.length==2){
+                        querysb.append(bo?"  ":" AND  ").append("car_sellPrice:")
+                                .append("[").append(split[0]==""?"*":split[0]).append(" TO ").append(split[1]==""?"*":split[1]).append("]");
+                    }
+                    bo = false;
+                }
+
+                //排量
+                if (param.getFiled("car_capacity")!=null){
+                    String[] split =param.getFiled("car_capacity").replaceAll("[^0-9\\-\\.]", "").split("-");
+                    if (split.length==2){
+                        querysb.append(bo?"  ":" AND  ").append("car_capacity:")
+                                .append("[").append(split[0]==""?"*":split[0]).append(" TO ").append(split[1]==""?"*":split[1]).append("]");
+                    }
+                    bo = false;
+                }
             }
-            SolrQuery solrQuery = new SolrQuery(query);
+        }
 
-            Integer page = param.getPageIndex();
-            solrQuery.setStart((page-1)*20);
-            Integer rows = param.getPageSize();
-            solrQuery.setRows(rows);
+        //如果没有查询条件   代表出错或者无查询条件  返回全部结果集
+        if (querysb.length()==0){
+            querysb.append("*:*");
+        }
 
-            if (StringUtils.isNotBlank(q)) {
-                solrQuery.setHighlight(true);
+        SolrQuery solrQuery = new SolrQuery(querysb.toString());
 
-                solrQuery.addHighlightField("car_name");
-                solrQuery.setHighlightSimplePre("<font style='color:red'>");
-                solrQuery.setHighlightSimplePost("</font>");
 
-            }
+        //添加分页信息
+        Integer page = param.getPageIndex();
+        solrQuery.setStart((page-1)*20);
+        Integer rows = param.getPageSize();
+        solrQuery.setRows(rows);
 
+        //高亮开启
+        if (highTiken){
+            solrQuery.setHighlight(true);
+
+            solrQuery.addHighlightField("car_name");
+            solrQuery.setHighlightSimplePre("<font style='color:red'>");
+            solrQuery.setHighlightSimplePost("</font>");
+        }
+
+        try {
+            //solr库连接  返回查询条件
             QueryResponse response = solrServer.query(solrQuery);
-
-
 
             SolrDocumentList documents = response.getResults();
             Map<String, Map<String, List<String>>> highlighting = response.getHighlighting();
@@ -142,9 +222,6 @@ public class SearchServiceImpl implements SearchService {
             TbCarVo tbCarVo = null;
             for (SolrDocument solrDocument : documents) {
                 tbCarVo = new TbCarVo();
-
-
-
                 tbCarVo.setId(solrDocument.get("id").toString());
                 // 高亮处理
                 if (highlighting!=null) {
@@ -176,21 +253,71 @@ public class SearchServiceImpl implements SearchService {
             //结果处理
             //封装
 
-            PageInfo<TbCarVo> info = new PageInfo<>();
-
+            Map<String, Object> result = new HashMap<>();
             long numFound = documents.getNumFound();
 
-            info.setList(tbCarVos);
-            info.setTotal(numFound);
-            info.setPageNum(page);
-            info.setPageSize(rows);
-            info.setPages(Integer.parseInt((numFound%rows>0?numFound/rows+1:numFound/rows)+""));
+            result.put("rows",tbCarVos);
+            result.put("total",numFound);
+            result.put("pageNum",page);
+            result.put("pageSize",rows);
+            result.put("pages",Integer.parseInt((numFound%rows>0?numFound/rows+1:numFound/rows)+""));
 
+            return JsonResult.OK(result);
 
-            return JsonResult.OK(info);
         } catch (SolrServerException e) {
             e.printStackTrace();
         }
         return JsonResult.Error("系统错误，请检查网络");
     }
+
+
+    /***
+     * 根据词典类型 返回List
+     *
+     * @param typeId
+     * @return
+     */
+    @Override
+    public JsonResult searchDicList(Long typeId) {
+        if (typeId==null){
+            return JsonResult.Error("数据错误");
+        }
+        TbDictionaryExample example = new TbDictionaryExample();
+        example.createCriteria().andParentEqualTo(typeId);
+        List<TbDictionary> list = tbDictionaryMapper.selectByExample(example);
+        return list==null?JsonResult.Error("数据错误"):JsonResult.OK(list);
+    }
+
+    /**
+     * 返回所有汽车品牌
+     * */
+    @Override
+    public JsonResult searchCarBrandList() {
+        List<TbCarBrand> list = tbCarBrandMapper.selectByExample(null);
+        return  JsonResult.OK(list);
+    }
+
+
+    /***
+     * 根据汽车品牌返回车系
+     *         参数品牌Id为空返回TOP10
+     * @return
+     */
+    @Override
+    public JsonResult searchBrandLineList(Long brandId) {
+        TbCarBrandLineExample example = new TbCarBrandLineExample();
+        TbCarBrandLineExample.Criteria criteria = example.createCriteria();
+        List<TbCarBrandLine> list = new ArrayList();
+        if (brandId==null){
+            //假装分页  希望缓存能撑住 = =
+            //              应该用不到。。。。
+            list.addAll(tbCarBrandLineMapper.selectByExample(null).subList(0,10));
+        }else{
+            criteria.andBrandIdEqualTo(brandId);
+            list = tbCarBrandLineMapper.selectByExample(example);
+        }
+
+        return  JsonResult.OK(list);
+    }
+
 }

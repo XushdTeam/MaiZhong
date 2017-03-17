@@ -6,6 +6,7 @@ import com.maizhong.rest.service.SearchService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -16,7 +17,7 @@ import java.util.Map;
  * Created by yangF on 2017/3/14.
  */
 @Controller
-@RequestMapping("/test")
+@RequestMapping("/carList")
 public class SearchController {
 
     @Resource
@@ -31,25 +32,52 @@ public class SearchController {
     }
 
 
-    @RequestMapping("/test")
+    /**
+     * solr 查询主接口
+     * @param param
+     * @return
+     */
+    @RequestMapping("/search")
     @ResponseBody
-    public String test(){
-        System.out.println("方法执行中");
-        return "haha";
+    public JsonResult Search(PageSearchParam param){
+        return searchService.searchDoc(param);
+    }
+
+    /***
+     * 返回词典列表数据
+     * @param
+     * @return
+     */
+    @RequestMapping("/dicList")
+    @ResponseBody
+    public JsonResult dicList(@RequestParam("type") Long typeId){
+        return searchService.searchDicList(typeId);
     }
 
 
-    @RequestMapping("/test/{param}")
+
+    /***
+     * 返回车型列表数据
+     * @param
+     * @return
+     */
+    @RequestMapping("/carBrandList")
     @ResponseBody
-    public JsonResult test(@PathVariable("param") String q){
-        PageSearchParam param = new PageSearchParam();
-        Map<String, String> map = new HashMap<>();
-        map.put("queryString",q);
-        System.out.println("方法执行中");
-        return  searchService.searchDoc(param);
+    public JsonResult carTypeList(){
+        return searchService.searchCarBrandList();
     }
 
 
 
 
+    /***
+     * 返回车系列表数据
+     * @param
+     * @return
+     */
+    @RequestMapping("/carBrandLineList")
+    @ResponseBody
+    public JsonResult carTypeList(Long brandId){
+        return searchService.searchBrandLineList(brandId);
+    }
 }

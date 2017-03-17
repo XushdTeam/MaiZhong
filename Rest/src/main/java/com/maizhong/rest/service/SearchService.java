@@ -15,4 +15,9 @@ public interface SearchService {
 
     public JsonResult searchDoc(PageSearchParam param);
 
+    JsonResult searchDicList(Long typeId);
+
+    JsonResult searchCarBrandList();
+
+    JsonResult searchBrandLineList(Long brandId);
 }
