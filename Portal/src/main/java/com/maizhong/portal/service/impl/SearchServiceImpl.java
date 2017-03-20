@@ -1,22 +1,16 @@
 package com.maizhong.portal.service.impl;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.pojo.TbCar;
-import com.maizhong.pojo.vo.SearchResult;
 import com.maizhong.pojo.vo.TbCarVo;
 import com.maizhong.portal.service.SearchService;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
