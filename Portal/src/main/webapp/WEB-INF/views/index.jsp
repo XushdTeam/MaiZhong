@@ -134,9 +134,9 @@
             </a>
         </div>
         <ul class="navs">
-            <li><a href="">首页</a></li>
+            <li><a href="/">首页</a></li>
             <li><a href="">我要买车</a></li>
-            <li><a href="">我要卖车</a></li>
+            <li><a href="/sale.html">我要卖车</a></li>
             <li><a href="">服务保障</a></li>
         </ul><!--navs end-->
         <!--call-->
@@ -170,10 +170,7 @@
             <p class="mai"><a href="#">我要置换</a></p>
             <div class="sec_hide">
                 <ul>
-                    <li><a href="#">大众汽车</a></li>
-                    <li><a href="#">大众汽车</a></li>
-                    <li><a href="#">大众汽车</a></li>
-                    <li><a href="#">大众汽车</a></li>
+
                 </ul>
             </div>
         </div><!--s_from end-->
@@ -260,7 +257,7 @@
             <h2 class="heads"> {{=it[i].name }} <a href="{{=it[i].id}}">更多>></a></h2>
             <div class="recommend-car-list carList" style="display: block; ">
                 {{ for(var j=0, a_l=it[i]['arry'].length; j<a_l; j++) { }}
-                <dl class="{{if(j==a_l-1){}}last{{}}}">
+                <dl class="{{if(j==3){}}last{{}}}">
                     <dd>
                         <a href="{{=it[i]['arry'][j].id}}" class="cars-info">
                             <img src="/resources/img/default.png" data-src="{{=it[i]['arry'][j].img}}" width="360" height="240">
@@ -318,9 +315,10 @@
 <div class="footer">
     <div class="foot_cen">
         <div class="n_f_m_c">
-            <a href=" ">关于我们</a>
-            <a href=" ">帮助中心</a>
-            <a href=" ">用户反馈</a>
+            <a href="/about.html">关于我们</a>
+            <a href="/help.html">帮助中心</a>
+            <a href="/joinus.html">加入我们</a>
+            <a href="/feedback.html">用户反馈</a>
         </div><!--n_f_m_c end-->
 
         <div class="pp">
@@ -387,7 +385,7 @@
                 el.classList.add('success')
             },
             error: function (el) { // 图片加载失败执行方法
-                el.src = './images/error.png'
+                el.src = './resources/img/default.png'
             }
         })
 

@@ -1,0 +1,161 @@
+@charset "utf-8";
+/* CSS other */
+/* author Xushd 2017-3-20*/
+body,ul,p,h1,dl,dd,li,h2,dt,h3,h4,h5,h6{margin:0;padding:0;}
+body{font-size:12px;line-height:180%;color:#666; font-family:"微软雅黑";}
+a{color:#666;text-decoration:none;cursor:pointer;blr:expression(this.onFocus=this.blur());outline:none;}.font{font-family:"黑体";}
+.center{ text-align:center}ul li{ list-style:none}a:hover{ color:#f00}img{border:0}.clear{ clear: both;}
+img,input{vertical-align:middle; outline:none}
+
+/*导航栏*/
+.nav_tops a,.nav_tops span{ color: #666 !important}
+.haeder{ border-bottom: 1px solid #ccc; overflow: hidden; height: 75px}
+.haeder .span_one a{ color: #c40000 !important}
+.haeder .logo span{ font-size:12px;}
+.nav_sec{ height: 600px; position: absolute;top: 0; left: 0; width: 100%; background: rgba(0,0,0,0.3);}
+.nav_s{ overflow: hidden; width: 100%; z-index: 1000;}
+.nav_top{ width: 1200px; margin: 0 auto; overflow: hidden; padding: 30px 0}
+.nav_top .logo{ float: left; width: 200px;margin-top: -15px;}
+.nav_top .logo span{ font-size: 12px; color:#fff; padding-left: 10px}
+.nav_top .navs{ float: left; width: 650px;}
+.nav_top .navs li a{ float: left; padding: 0 15px; margin-right: 30px; color: #fff; font-size: 16px}
+.nav_top .navs li a:hover{ color: #c40000;  transition:color 0.5s;-webkit-transition:color 0.5s;}
+.call{ width: 300px; float: right;}
+.call .span_one a{ color: #fff; font-size: 24px; font-weight: bold;}
+.call .span_one{ margin-right: 30px}
+.call span,.call span a{ font-size: 14px; color: #fff}
+
+/*公司简介*/
+.A_colocr{ background: #F5F5F5; overflow: hidden;}
+.A_colocr .A_con{ width: 1040px; margin:30px auto 100px;  min-height: 500px; overflow: hidden;}
+.A_con .left{ width: 210px; float: left;background:#fff; overflow: hidden; min-height: 750px}
+.A_con .left ul li{ display: block;line-height:75px; text-indent: 1.5em; font-size: 16px; height: 75px; border-bottom: 1px solid #eee; cursor: pointer;}
+.A_con .left ul li span{ font-family: '宋体'; float: right; margin-right: 15px;}
+.A_con .left ul li.cun{ background: #c40000; color: #fff;}
+.A_con .left ul li.cun a{ display: block; color: #fff;}
+.A_con .left ul li a{ display: block;}
+
+.A_con .right{float: right;background:#fff; overflow: hidden; width: 800px; min-height: 700px; padding-bottom: 50px}
+.A_con .right div{ font-size: 14px; line-height: 25px; width: 700px; margin:15px auto 0}
+.A_con .right h3{ font-size:24px; line-height: 45px; height: 45px; font-weight: 500; padding: 10px 0; border-bottom: 1px solid #eee; width: 700px; margin: 20px auto 0;color: #000}
+.A_con .right .zp{ font-size: 16px; background: #666; padding: 0px 15px; line-height:35px; width: 100px;color: #fff; margin-top: 50px}
+.A_con .right ul{ border: 1px solid #666; }
+.A_con .right ul li a{ line-height: 35px; display: block;padding-left: 20px}
+.A_con .right ul li a span{ float:right; font-family: '宋体'; padding-right: 20px}
+.A_con .right img{ margin-left: -30px}
+.A_form textarea{ vertical-align: top; width: 500px; height: 230px;color: #999;font-family: '微软雅黑'; outline: none; border-radius: 8px; padding: 20px 0px 0 20px ; border: 1px solid #ccc}
+.A_form label{ font-size: 16px;color: #666; padding-right: 10px}
+.A_form input{ height: 40px; line-height: 40px; border-radius: 8px; border: 1px solid #ccc; width: 200px; padding-left: 20px}
+.A_form button{ width: 150px; line-height:50px; color: #c40000; margin-left: 80px; border: none; font-size: 16px; border: 1px solid #c40000; border-radius: 8px; text-align: center; height: 50px}
+.A_con .right .xq{ line-height: 30px; text-indent: 2em;}
+.A_con .right h4{color: #c40000; font-size: 16px; padding:10px 0}
+.A_con .right div p{ line-height: 36px;}
+
+/*FOOTER*/
+.footer{ background: #000; overflow: hidden;}
+.foot_cen{ width: 1200px; margin: 0 auto}
+.n_f_m_c{ width: 75%; overflow: hidden; border-bottom: 1px solid #ccc; float: left;}
+.n_f_m_c a{ font-size: 16px; font-weight: bold; padding: 10px 10px; display: block; margin: 20px 0; float: left;color: #ccc}
+.foot_cen p{ font-size: 14px; line-height:28px;}
+.foot_cen .pp{ margin-top: 20px; float: left; width: 75%}
+.rem{ width: 10%; float: right; text-align: center; margin-top: -30px}
+
+/*卖车*/
+.bans{ background: url(../img/ban.jpg) no-repeat center center; background-size:cover; height: 450px}
+.ban_cen{ width: 1200px; margin: 0 auto;}
+.ban_form{ width: 350px; background: #fff; float: right; margin-top: 60px; padding-bottom: 30px; box-shadow: 1px 0px 5px #ccc}
+.ban_cen .p_top{ background: #399afe; line-height: 55px;color: #fff; text-align: center; font-size: 18px; padding-top: 15px}
+.ban_cen .p_top span{ font-size: 36px;}
+.ban_cen .inputs{ display: block; width: 280px; margin: 20px auto 20px; line-height: 32px; border: 1px solid #eee; padding-left: 5px}
+
+.ban_form h2{ width: 285px; text-align: center; line-height:35px; color: #fff; margin: 0 auto; font-size: 20px; background:#399afe; cursor: pointer;}
+.ban_form .h_cens{width: 285px; text-align: center; margin: 15px auto}
+.ban_form input{ vertical-align: top;}
+.ban_form .calls{width: 285px; text-align: center; margin: 23px auto; font-size: 24px; color: #399afe}
+.bg_color{ background: #f5f5f5; overflow: hidden;}
+.bg_color .ma_cen{ width: 1200px; margin:0 auto}
+.bg_color .ma_cen dl{ float: left; width: 25%;  text-align: center; padding:20px 0;}
+.bg_color .ma_cen dl dt{ font-size: 36px; line-height: 55px; height: 55px; width: 55px; border: 2px solid #399afe; border-radius: 112px; margin: 0 auto;color: #399afe}
+.bg_color .ma_cen dl dd{ line-height: 34px; font-size: 18px; line-height: 24px;color: #399afe; height: 34px; margin-top: 10px}
+.newCarSaleCon-tit {
+    width: 1200px;
+    height: 70px;
+    border-bottom: 1px solid #E6E5E5;
+    color: #1B1B1B;
+    font-size: 20px;
+    line-height: 70px;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+.header-box{ overflow: hidden; height: 140px}
+.newCarSaleCon-say {
+    width: 1200px;
+    height: auto;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+.newCarSaleCon-say ul li.bor {
+    border-right: 1px solid #E6E5E5;
+    padding: 36px 38px 0 0;
+}
+.newCarSaleCon-say ul li {
+    width: 558px;
+    height: auto;
+    padding: 36px 0 0 38px;
+    float: left;
+}
+
+.newCarSaleCon-say ul li .header-box.pr {
+    padding-right: 22px;
+}
+
+.newCarSaleCon-say ul li .header-box .header-box-l {
+    width: 112px;
+    height: 112px;
+    border-radius: 112px;
+    overflow: hidden;
+    float: left;
+    display: block;
+}
+
+.newCarSaleCon-say ul li .header-box .header-box-r {
+    width: 389px;
+    height: auto;
+    float: left;
+    color: #585858;
+    display: block;
+    padding-left: 26px;
+    line-height: 28px;
+    font: normal 14px/28px 'Microsoft Yahei';
+}
+
+.newCarSaleCon-say ul li .car-img.pr16 {
+    padding-right: 16px;
+}
+.newCar-question-list .cFaq li {
+    padding: 15px 0;
+}
+.newCar-question-list .cFaq li em {
+    font-size: 18px;
+    color: #1B1B1B;
+    display: block;
+    padding-bottom: 10px;
+}
+
+.newCar-question-list .cFaq li p {
+    font-size: 14px;
+    color: #838383;
+    line-height: 26px;
+}
+.newCar-question-list .cFaq {
+    padding: 0px 0 46px;
+    border: none;
+}
+
+.newCar-question-list {
+    width: 1200px;
+    height: auto;
+    overflow: hidden;
+    margin: 0 auto;
+}
