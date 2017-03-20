@@ -55,9 +55,9 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public Map<String, Object> search(PageSearchParam pageSearchParam) {
         //查询条件准备
-        Map<String,String> param =new HashMap();
+        Map<String,String> param =new HashMap<>();
         //总结果集数据
-        Map<String,Object> results = new HashMap();
+        Map<String,Object> results = new HashMap<>();
         //获取查询条件
         if (pageSearchParam!=null&&pageSearchParam.getSearchFileds()!=null){
             //参数获取
@@ -89,7 +89,7 @@ public class SearchServiceImpl implements SearchService {
         results.put("carBrands",JsonUtils.jsonResultToList(result));
 
         //车系
-        param =  new HashMap();
+        param =  new HashMap<>();
         if (pageSearchParam.getFiled("car_brand")!=null){
             param.put("carBrand",pageSearchParam.getFiled("car_brand"));
         }
@@ -99,13 +99,13 @@ public class SearchServiceImpl implements SearchService {
         //品牌
 
 // 词典数据
-        param =  new HashMap();
+        param =  new HashMap<>();
 //       颜色
         param.put("type",4+"");
         result = HttpClientUtil.doGet(REST_URL + CAR_DIC,param);
         results.put("colors",JsonUtils.jsonResultToList(result));
 
-        param =  new HashMap();
+        param =  new HashMap<>();
 //       变速箱
         param.put("type",9+"");
         result = HttpClientUtil.doGet(REST_URL + CAR_DIC,param);

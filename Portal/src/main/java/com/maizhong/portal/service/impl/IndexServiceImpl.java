@@ -7,6 +7,7 @@ import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.pojo.TbAdvert;
 import com.maizhong.portal.service.IndexService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,7 @@ public class IndexServiceImpl implements IndexService {
 
     /**
      * 获取
+     *
      * @param advertType
      * @return
      */
@@ -43,37 +45,43 @@ public class IndexServiceImpl implements IndexService {
     public String getAdvert(int advertType) {
 
         //调用服务层服务
-        String result = HttpClientUtil.doGet(REST_URL+AD_INTERFACE+advertType);
-        List<Map<String, String>> resultList = JsonUtils.jsonResultToList(result);
-        List<Map> list = new ArrayList<>();
-        for (Map<String, String> resultMap : resultList) {
-            Map<String,String> map = new HashMap<>();
-            map.put("img",resultMap.get("advertImg"));
-            map.put("url",resultMap.get("advertUrl"));
-            list.add(map);
+        String result = HttpClientUtil.doGet(REST_URL + AD_INTERFACE + advertType);
+        if (StringUtils.isNotBlank(result)) {
+            List<Map<String, String>> resultList = JsonUtils.jsonResultToList(result);
+            List<Map> list = new ArrayList<>();
+            for (Map<String, String> resultMap : resultList) {
+                Map<String, String> map = new HashMap<>();
+                map.put("img", resultMap.get("advertImg"));
+                map.put("url", resultMap.get("advertUrl"));
+                list.add(map);
+            }
+            return JsonUtils.objectToJson(list);
+        } else {
+            return null;
         }
-        return JsonUtils.objectToJson(list);
+
 
     }
 
 
     /**
      * 获取汽车品牌
+     *
      * @return
      */
     @Override
     public List<Map> getCarBrand() {
 
         //调用服务层服务
-        String result = HttpClientUtil.doGet(REST_URL+CAR_BRAND);
+        String result = HttpClientUtil.doGet(REST_URL + CAR_BRAND);
 
         List<Map<String, String>> resultList = JsonUtils.jsonResultToList(result);
         List<Map> list = new ArrayList<>();
         for (Map<String, String> resultMap : resultList) {
-            Map<String,String> map = new HashMap<>();
-            map.put("img",resultMap.get("brandImg"));
-            map.put("id",resultMap.get("brandId"));
-            map.put("name",resultMap.get("brandName"));
+            Map<String, String> map = new HashMap<>();
+            map.put("img", resultMap.get("brandImg"));
+            map.put("id", resultMap.get("brandId"));
+            map.put("name", resultMap.get("brandName"));
             list.add(map);
         }
         return list;
@@ -81,21 +89,22 @@ public class IndexServiceImpl implements IndexService {
 
     /**
      * 获取车型
+     *
      * @return
      */
     @Override
     public List<Map> getCarType() {
 
         //调用服务层服务
-        String result = HttpClientUtil.doGet(REST_URL+CAR_TYPE);
+        String result = HttpClientUtil.doGet(REST_URL + CAR_TYPE);
 
         List<Map<String, String>> resultList = JsonUtils.jsonResultToList(result);
         List<Map> list = new ArrayList<>();
         for (Map<String, String> resultMap : resultList) {
-            Map<String,String> map = new HashMap<>();
-            map.put("img",resultMap.get("typeImg"));
-            map.put("id",resultMap.get("typeId"));
-            map.put("name",resultMap.get("typeName"));
+            Map<String, String> map = new HashMap<>();
+            map.put("img", resultMap.get("typeImg"));
+            map.put("id", resultMap.get("typeId"));
+            map.put("name", resultMap.get("typeName"));
             list.add(map);
         }
         return list;
