@@ -89,6 +89,13 @@ public class CarColumnServiceImpl implements CarColumnService {
         if (list.size() > 0){
             return OperateEnum.ADD_REPEAT;
         }
+
+       List<CarColumnJoinCar>  listCount=tbCarColumnMapper.getListByColumn(null, Long.valueOf(tbCarColumn.getColumnId()));
+
+        if (listCount!=null&&listCount.size()>=4){
+            return OperateEnum.THAN_FOUR;
+        }
+
         int res = tbCarColumnMapper.insertSelective(tbCarColumn);
         if (res > 0) {
             jedisClient.hdel(CM_TYPE,tbCarColumn.getColumnId()+"");
@@ -107,9 +114,10 @@ public class CarColumnServiceImpl implements CarColumnService {
 
     @Override
     public OperateEnum deleteColumnCarById(long id) {
+        int columnId=tbCarColumnMapper.selectByPrimaryKey(id).getColumnId();
         int ret = tbCarColumnMapper.deleteByPrimaryKey(id);
         if (ret > 0) {
-            jedisClient.hdel(CM_TYPE,tbCarColumnMapper.selectByPrimaryKey(id).getColumnId()+"");
+           jedisClient.hdel(CM_TYPE,columnId+"");
             return OperateEnum.SUCCESS;
         } else {
             return OperateEnum.FAILE;
