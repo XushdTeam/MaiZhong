@@ -93,7 +93,7 @@ public class SpreadController {
 
        OperateEnum result= spreadService.insertFeedback(p,c,n,r);
 
-        return JsonResult.OK(result);
+        return JsonResult.build(result);
     }
 
 }
