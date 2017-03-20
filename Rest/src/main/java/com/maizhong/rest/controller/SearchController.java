@@ -40,6 +40,11 @@ public class SearchController {
     @RequestMapping("/search")
     @ResponseBody
     public JsonResult Search(PageSearchParam param){
+
+        if (param == null){
+            param = new PageSearchParam();
+        }
+
         return searchService.searchDoc(param);
     }
 
