@@ -2,13 +2,17 @@ package com.maizhong.rest.controller;
 
 
 import com.maizhong.common.dto.CarShowIndex;
+import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
+import com.maizhong.pojo.TbFeedback;
 import com.maizhong.rest.service.SpreadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.MappingJacksonValue;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 推广信息接口
@@ -76,5 +80,20 @@ public class SpreadController {
 
     }
 
+    /**
+     * 用户反馈添加
+     * @param c 反馈内容
+     * @param p 手机号
+     * @param n  姓氏
+     * @param r  性别 先生/女士
+     * @return
+     */
+    @RequestMapping(value = "/feedback",method = RequestMethod.POST)
+    public JsonResult insertFeedback(String c,String p,String n,String r){
+
+       OperateEnum result= spreadService.insertFeedback(p,c,n,r);
+
+        return JsonResult.OK(result);
+    }
 
 }

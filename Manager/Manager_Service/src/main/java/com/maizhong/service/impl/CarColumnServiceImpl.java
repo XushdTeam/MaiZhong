@@ -98,7 +98,7 @@ public class CarColumnServiceImpl implements CarColumnService {
 
         int res = tbCarColumnMapper.insertSelective(tbCarColumn);
         if (res > 0) {
-            jedisClient.hdel(CM_CONTENT,tbCarColumn.getColumnId()+"");
+            jedisClient.del(CM_CONTENT);
             return OperateEnum.SUCCESS;
         } else {
             return OperateEnum.FAILE;
@@ -117,7 +117,7 @@ public class CarColumnServiceImpl implements CarColumnService {
         int columnId=tbCarColumnMapper.selectByPrimaryKey(id).getColumnId();
         int ret = tbCarColumnMapper.deleteByPrimaryKey(id);
         if (ret > 0) {
-           jedisClient.hdel(CM_CONTENT,columnId+"");
+           jedisClient.del(CM_CONTENT);
             return OperateEnum.SUCCESS;
         } else {
             return OperateEnum.FAILE;

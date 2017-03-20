@@ -1,6 +1,7 @@
 package com.maizhong.rest.service;
 
 import com.maizhong.common.dto.CarShowIndex;
+import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 
 import java.util.List;
@@ -29,4 +30,6 @@ public interface SpreadService {
     JsonResult getCarColumnById(Integer columnId,Integer number);
 
     List<CarShowIndex> getHomeItem();
+
+    OperateEnum insertFeedback(String p, String c, String n, String r);
 }
