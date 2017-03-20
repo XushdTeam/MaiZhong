@@ -9,6 +9,8 @@ public class TbCarBrandLine {
 
     private Integer lineSequence;
 
+    private Integer showFlag;
+
     private Integer status;
 
     private Integer delflag;
@@ -43,6 +45,14 @@ public class TbCarBrandLine {
 
     public void setLineSequence(Integer lineSequence) {
         this.lineSequence = lineSequence;
+    }
+
+    public Integer getShowFlag() {
+        return showFlag;
+    }
+
+    public void setShowFlag(Integer showFlag) {
+        this.showFlag = showFlag;
     }
 
     public Integer getStatus() {

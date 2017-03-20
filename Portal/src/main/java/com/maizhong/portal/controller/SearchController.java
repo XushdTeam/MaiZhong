@@ -25,7 +25,7 @@ public class SearchController {
     public String searchIndex(PageSearchParam pageSearchParam, Model model){
 
         Map<String,Object> result = searchService.search(pageSearchParam);
-
+        model.addAllAttributes(result);
 
         return "search";
     }

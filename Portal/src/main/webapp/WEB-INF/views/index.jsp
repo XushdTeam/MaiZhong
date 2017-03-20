@@ -13,6 +13,7 @@
 <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>迈众汽车</title>
     <meta name="keywords" content="汽车,汽车买卖,汽车网,汽车报价,汽车图片,买车"/>
     <meta name="description" content="迈众汽车为您提供最新汽车报价，汽车图片，汽车价格大全，最精彩的汽车新闻、行情、评测、导购内容，是提供信息最快最全的中国汽车网站。"/>
@@ -128,7 +129,9 @@
 <div class="nav_s">
     <div class="nav_top">
         <div class="logo">
-            <a href="#" title="迈众汽车"><img src="img/logo.png"></a><span>北京</span>
+            <a href="#" title="迈众汽车">
+                <img src="/resources/img/logo.png">
+            </a>
         </div>
         <ul class="navs">
             <li><a href="">首页</a></li>
@@ -248,6 +251,32 @@
 </div>
 <!--品牌 车型 end-->
 <div class="clear"></div>
+<div class="clear"></div>
+<!--推荐-->
+<div id = "list">
+    <script id="list-tmpl" type="text/x-dot-template">
+        {{ for(var i=0,len=it.length;i<len; i++) { }}
+        <div class="tuijian">
+            <h2 class="heads"> {{=it[i].name }} <a href="{{=it[i].id}}">更多>></a></h2>
+            <div class="recommend-car-list carList" style="display: block; ">
+                {{ for(var j=0, a_l=it[i]['arry'].length; j<a_l; j++) { }}
+                <dl class="{{if(j==a_l-1){}}last{{}}}">
+                    <dd>
+                        <a href="{{=it[i]['arry'][j].id}}" class="cars-info">
+                            <img src="/resources/img/default.png" data-src="{{=it[i]['arry'][j].img}}" width="360" height="240">
+                            <p>{{=it[i]['arry'][j].name}}</p>
+                            <p><span>{{=it[i]['arry'][j].price}}</span></p>
+                        </a>
+                    </dd>
+                </dl>
+                {{ } }}
+            </div>
+        </div>
+        <div class="clear"></div>
+        {{ } }}
+    </script>
+</div>
+<!--推荐end-->
 
 <!--新闻热点-->
 <div class="new">
@@ -299,33 +328,71 @@
             <p>营业执照京ICP备15036207号-2   京公网安备 31011402001229号 沪通信管自贸【2016】5号 联系电话：021-10106088</p>
         </div>
 
-        <div class="rem">
-            <div><img src="img/er.png"></div>
-            <p>微信公众号</p>
-        </div>
+
     </div><!--fooot_cen end-->
 </div>
 <!--footer 结束-->
+<script src="/resources/script/doT.min.js" type="text/javascript"></script>
+<script src="/resources/script/lazy-load-img.min.js" type="text/javascript"></script>
 <script>
+
+    var is = false;
     $(document).ready(function() {
         $(window).scroll(function() {
-
             if ($(document).scrollTop()>=230){
                 $(".nav_s").css("background","#fff").css("position","fixed").css("box-shadow","1px 1px 5px #999")
                 $(".navs a,.logo span").css("color","#666")
                 $(".call").hide();
                 $(".s_froms").show();
             }
-
             if ($(document).scrollTop()<=230){
                 $(".nav_s").css("background","none").css("position","absolute").css("box-shadow","0px 0px 0px #999")
                 $(".navs a,.logo span").css("color","#fff")
                 $(".call").show();
                 $(".s_froms").hide();
             }
+            if($(document).scrollTop()>=500&& !is){
+                is = true;
+                var URL = "http://192.168.3.192:8080/rest/getHomeItemContent?jsoncallback=?";
+                $.getJSON(URL,function(data){
+                    var evalText = doT.template($("#list-tmpl").text());
+                    $("#list").html(evalText(data));
+                });
+            }
 
         });
     });
+
+    ;(function () {
+
+        window.lazyLoadImg = new LazyLoadImg({
+            el: document.querySelector('#list'),
+            mode: 'diy', //默认模式，将显示原图，diy模式，将自定义剪切，默认剪切居中部分
+            time: 300, // 设置一个检测时间间隔
+            complete: true, //页面内所有数据图片加载完成后，是否自己销毁程序，true默认销毁，false不销毁
+            position: { // 只要其中一个位置符合条件，都会触发加载机制
+                top: 0, // 元素距离顶部
+                right: 0, // 元素距离右边
+                bottom: 0, // 元素距离下面
+                left: 0 // 元素距离左边
+            },
+            diy: { //设置图片剪切规则，diy模式时才有效果
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center center'
+            },
+            before: function () { // 图片加载之前执行方法
+            },
+            success: function (el) { // 图片加载成功执行方法
+                el.classList.add('success')
+            },
+            error: function (el) { // 图片加载失败执行方法
+                el.src = './images/error.png'
+            }
+        })
+
+        // lazyLoadImg.destroy() // 销毁图片懒加载程序
+    })()
 </script>
 </body>
 </html>

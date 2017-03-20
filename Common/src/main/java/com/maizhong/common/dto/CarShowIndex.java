@@ -46,4 +46,9 @@ public class CarShowIndex {
         this.arry = arry;
         this.id = id;
     }
+
+    public CarShowIndex(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

@@ -1,13 +1,18 @@
 package com.maizhong.rest.service.impl;
 
-import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.result.JsonResult;
+import com.maizhong.common.utils.JsonUtils;
+import com.maizhong.dao.JedisClient;
 import com.maizhong.mapper.TbCarBrandLineMapper;
 import com.maizhong.mapper.TbCarBrandMapper;
+import com.maizhong.mapper.TbCarTypeMapper;
 import com.maizhong.mapper.TbDictionaryMapper;
 import com.maizhong.mapper.ext.TbCarMapperExt;
 import com.maizhong.pojo.*;
+import com.maizhong.pojo.vo.SearchResult;
 import com.maizhong.pojo.vo.TbCarVo;
 import com.maizhong.rest.service.SearchService;
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +23,8 @@ import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -45,7 +52,13 @@ public class SearchServiceImpl implements SearchService {
     private SolrServer solrServer;
 
     @Resource
+    private JedisClient jedisClient;
+
+    @Resource
     private TbCarMapperExt tbCarMapperExt;
+
+    @Resource
+    private TbCarTypeMapper tbCarTypeMapper;
 
     @Resource
     private TbDictionaryMapper tbDictionaryMapper;
@@ -56,6 +69,19 @@ public class SearchServiceImpl implements SearchService {
     @Resource
     private TbCarBrandLineMapper tbCarBrandLineMapper;
 
+
+    @Value("${CAR_BRAND}")
+    private String CAR_BRAND;
+
+    @Value("${CAR_BRAND_LINE}")
+    private String CAR_BRAND_LINE;
+
+    @Value("${CAR_TYPE}")
+    private String CAR_TYPE;
+
+
+    @Value("${CAR_DICTION}")
+    private String CAR_DICTION;
 
 
     @Override
@@ -260,7 +286,7 @@ public class SearchServiceImpl implements SearchService {
             result.put("total",numFound);
             result.put("pageNum",page);
             result.put("pageSize",rows);
-            result.put("pages",Integer.parseInt((numFound%rows>0?numFound/rows+1:numFound/rows)+""));
+            result.put("currentPage",Integer.parseInt((numFound%rows>0?numFound/rows+1:numFound/rows)+""));
 
             return JsonResult.OK(result);
 
@@ -278,23 +304,122 @@ public class SearchServiceImpl implements SearchService {
      * @return
      */
     @Override
-    public JsonResult searchDicList(Long typeId) {
+    public List<TbDictionary> searchDicList(Long typeId) {
         if (typeId==null){
-            return JsonResult.Error("数据错误");
+            return null;
         }
+
+        List<TbDictionary> result = null;
+
+        //缓存命中
+        try {
+            String json = jedisClient.hget(CAR_DICTION,typeId+"");
+            if (StringUtils.isNotBlank(json)){
+                result= JsonUtils.jsonToList(json,TbDictionary.class);
+            }
+            //json串为“null” 代表数据库中也不存在此数据
+            //不知道 json中数据如果不存在是返回null还是 “”  干脆偷懒了
+            if (json.equals("")||(result!=null)){
+                return result;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         TbDictionaryExample example = new TbDictionaryExample();
         example.createCriteria().andParentEqualTo(typeId);
-        List<TbDictionary> list = tbDictionaryMapper.selectByExample(example);
-        return list==null?JsonResult.Error("数据错误"):JsonResult.OK(list);
+        result =  tbDictionaryMapper.selectByExample(example);
+        //缓存添加
+        try {
+            if (result!=null&&result.size()>0){
+                String jsonStr = JsonUtils.objectToJson(result);
+                jedisClient.hset(CAR_DICTION,typeId+"",jsonStr);
+            }else{
+                //避免redis穿透
+                jedisClient.hset(CAR_DICTION,typeId+"","");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
     }
 
     /**
      * 返回所有汽车品牌
      * */
     @Override
-    public JsonResult searchCarBrandList() {
-        List<TbCarBrand> list = tbCarBrandMapper.selectByExample(null);
-        return  JsonResult.OK(list);
+    public List<TbCarBrand> searchCarBrandList() {
+
+        List<TbCarBrand> result = null;
+
+        //缓存命中
+        try {
+            String json = jedisClient.get(CAR_BRAND);
+            if (StringUtils.isNotBlank(json)){
+                result= JsonUtils.jsonToList(json,TbCarBrand.class);
+            }
+            //json串为“null” 代表数据库中也不存在此数据
+            //不知道 json中数据如果不存在是返回null还是 “”  干脆偷懒了
+            if (json.equals("")||(result!=null)){
+                return result;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        result = tbCarBrandMapper.selectByExample(null);
+        //缓存添加
+        try {
+            if (result!=null&&result.size()>0){
+                String jsonStr = JsonUtils.objectToJson(result);
+                jedisClient.set(CAR_BRAND,jsonStr);
+            }else{
+                //避免redis穿透
+                jedisClient.set(CAR_BRAND,"");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /****
+     * 返回汽车类型
+     * @return
+     */
+    @Override
+    public List<TbCarType> searchCarType() {
+        List<TbCarType> result = null;
+
+        //缓存命中
+        try {
+            String json = jedisClient.get(CAR_TYPE);
+            if (StringUtils.isNotBlank(json)){
+                result= JsonUtils.jsonToList(json,TbCarType.class);
+            }
+            //json串为“null” 代表数据库中也不存在此数据
+            //不知道 json中数据如果不存在是返回null还是 “”  干脆偷懒了
+            if (json.equals("")||(result!=null)){
+                return result;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        result = tbCarTypeMapper.selectByExample(null);
+        //缓存添加
+        try {
+            if (result!=null&&result.size()>0){
+                String jsonStr = JsonUtils.objectToJson(result);
+                jedisClient.set(CAR_TYPE,jsonStr);
+            }else{
+                //避免redis穿透
+                jedisClient.set(CAR_TYPE,"");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
     }
 
 
@@ -318,6 +443,130 @@ public class SearchServiceImpl implements SearchService {
         }
 
         return  JsonResult.OK(list);
+    }
+
+
+    /**
+     * 前台搜索页面
+     *      完全匹配数据接口
+     *      包括
+     *              参数回显
+     *              solr查询数据
+     *                  车型
+     *                  汽车品牌
+     *                  车系
+     *                  颜色列表
+     *                  变速箱类型
+     * @param param
+     * @return
+     */
+    @Override
+    public  SearchResult searchPageResult(PageSearchParam param){
+
+        SearchResult result = new SearchResult();
+
+        //数据获取
+        //solr文档
+        Map<String,Object> docs = (Map<String, Object>) this.searchDoc(param).getData();
+        //solr文档
+        BeanUtils.copyProperties(docs,result);
+
+        //车型
+        List<TbCarType> carTypes = this.searchCarType();
+        result.setTbCarTypes(carTypes);
+        //汽车品牌
+        List<TbCarBrand> tbCarBrands = this.searchCarBrandList();
+        result.setTbCarBrands(tbCarBrands);
+
+        //车系数据返回的选择
+            //  如果存在车型  返回对应车型的车系
+            //  如果不存在    返回TOP10
+        List carBrandLines = this.searchCarBrandLineList(param.getFiled("car_brand"));
+        result.setTbCarBrandLines(carBrandLines);
+
+        //颜色
+        List<TbDictionary> colors = this.searchDicList(4L);
+        result.setColors(colors);
+
+        //变速箱
+        List<TbDictionary> geadBox = this.searchDicList(9L);
+        result.setGeadboxs(geadBox);
+
+        return result;
+    }
+
+
+    /***
+     *  搜索页面独有方法
+     *      当carbrand为空时 返回Top10
+     *       carbrand不为空时 根据carbrandId查询
+     * @param carBrandName
+     * @return
+     */
+    @Override
+    public List<TbCarBrandLine> searchCarBrandLineList(String carBrandName) {
+
+        List<TbCarBrandLine> result = null;
+
+        //缓存命中
+        try {
+            String json = jedisClient.hget(CAR_BRAND_LINE,carBrandName==null?"Top10":carBrandName);
+            if (StringUtils.isNotBlank(json)&&!json.equals("null")){
+                result= JsonUtils.jsonToList(json,TbCarBrandLine.class);
+            }
+            //json串为“null” 代表数据库中也不存在此数据
+            //不知道 json中数据如果不存在是返回null还是 “”  干脆偷懒了
+            if (json.equals("null")||(result!=null&&result.size()>0)){
+                return result;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        if (carBrandName==null){
+            carBrandName = "top10";
+            result = getTopLineToSearchPage();
+        }else{
+            //页面返回的数据是字符串 需要查询找到carBrand的Id，懒得拓展brandline的mapper了。。。。
+            TbCarBrandExample brandExample = new TbCarBrandExample();
+            brandExample.createCriteria().andBrandNameEqualTo(carBrandName);
+            List<TbCarBrand> tbCarBrands = tbCarBrandMapper.selectByExample(brandExample);
+            if (tbCarBrands!=null&&tbCarBrands.size()==1){
+                TbCarBrandLineExample lineExample = new TbCarBrandLineExample();
+                lineExample.createCriteria().andBrandIdEqualTo(tbCarBrands.get(0).getId());
+                result = tbCarBrandLineMapper.selectByExample(lineExample);
+            }
+        }
+
+        //缓存添加
+        try {
+            if (result!=null&&result.size()>0){
+                String jsonStr = JsonUtils.objectToJson(result);
+                jedisClient.hset(CAR_BRAND_LINE,carBrandName,jsonStr);
+            }else{
+                //避免redis穿透
+                jedisClient.hset(CAR_BRAND_LINE,carBrandName,"null");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+    /***
+     *  方法抽离
+     *      获取 TOP10 被标记的数据
+     */
+    public List<TbCarBrandLine> getTopLineToSearchPage(){
+        PageHelper.startPage(0, 10);
+
+        TbCarBrandLineExample example = new TbCarBrandLineExample();
+        example.createCriteria().andShowFlagEqualTo(1);
+        example.setOrderByClause("line_sequence ASC");
+        //TODO 返回数据正确率待测
+        return tbCarBrandLineMapper.selectByExample(example);
     }
 
 }

@@ -1,16 +1,22 @@
 package com.maizhong.portal.service.impl;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.pojo.TbCar;
+import com.maizhong.pojo.vo.SearchResult;
 import com.maizhong.pojo.vo.TbCarVo;
 import com.maizhong.portal.service.SearchService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,50 +76,25 @@ public class SearchServiceImpl implements SearchService {
         }
 
         //起始页
-        param.put("pageIndex",pageSearchParam.getPageIndex()+"");
-//        results.put("pageIndex",pageSearchParam.getPageIndex()+"");
-
-
+//        param.put("pageIndex",pageSearchParam.getPageIndex()+"");
 
 
         //调用服务层服务
 //        conditions  条件
-        String result;
-
-        //查询结果集
-        result = HttpClientUtil.doPost(REST_URL + CAR_SEARCH,param);
-        results.putAll(JsonUtils.searchResultToMap(result,TbCarVo.class));
-
-        //品牌
-        result = HttpClientUtil.doGet(REST_URL + CAR_BRAND);
-        results.put("carBrands",JsonUtils.jsonResultToList(result));
-
-        //车系
-        param =  new HashMap();
-        if (pageSearchParam.getFiled("car_brand")!=null){
-            param.put("carBrand",pageSearchParam.getFiled("car_brand"));
+        String jsonResult = HttpClientUtil.doPost(REST_URL + CAR_SEARCH,param);
+        SearchResult result = null;
+        try {
+            if (StringUtils.isNotBlank(jsonResult)){
+                ObjectMapper mapper = new ObjectMapper();
+                JsonNode jsonNode = mapper.readTree(jsonResult);
+                JsonNode data = jsonNode.get("data");
+                result = mapper.treeToValue(data, SearchResult.class);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        result = HttpClientUtil.doGet(REST_URL + CAR_BRAND_LINE,param);
-        results.put("carBrandsLines",JsonUtils.jsonResultToList(result));
 
-        //品牌
-
-// 词典数据
-        param =  new HashMap();
-//       颜色
-        param.put("type",4+"");
-        result = HttpClientUtil.doGet(REST_URL + CAR_DIC,param);
-        results.put("colors",JsonUtils.jsonResultToList(result));
-
-        param =  new HashMap();
-//       变速箱
-        param.put("type",9+"");
-        result = HttpClientUtil.doGet(REST_URL + CAR_DIC,param);
-        results.put("gradboxs",JsonUtils.jsonResultToList(result));
-//       类型
-        result = HttpClientUtil.doGet(REST_URL + CAR_TYPE);
-        results.put("types",JsonUtils.jsonResultToList(result));
-        //处理结果集
+        BeanUtils.copyProperties(result,results);
 
         return results;
     }
