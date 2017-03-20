@@ -251,23 +251,21 @@ public class SpreadServiceImpl implements SpreadService {
 
     /**
      * 用户反馈添加
-     *
-     * @param p
-     * @param c
-     * @param n
-     * @param s
+     * @param phone  手机号
+     * @param content  反馈内容
+     * @param surname  称谓
+     * @return
      */
     @Override
-    public OperateEnum insertFeedback(String p, String c, String n, String s) {
-        String surnamr=n+s;
+    public OperateEnum insertFeedback(String phone, String content, String surname) {
         TbFeedback tbFeedback=new TbFeedback();
-        tbFeedback.setPhone(p);
+        tbFeedback.setPhone(phone);
         tbFeedback.setDelflag(0);
         tbFeedback.setStatus(1);
         tbFeedback.setCheckStatus(0);
         tbFeedback.setCreateTime(new Date());
-        tbFeedback.setContent(c);
-        tbFeedback.setSurname(surnamr);
+        tbFeedback.setContent(content);
+        tbFeedback.setSurname(surname);
 
        int res= tbFeedbackMapper.insert(tbFeedback);
 

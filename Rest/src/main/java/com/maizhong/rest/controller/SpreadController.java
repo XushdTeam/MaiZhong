@@ -81,17 +81,16 @@ public class SpreadController {
     }
 
     /**
-     * 用户反馈添加
-     * @param c 反馈内容
-     * @param p 手机号
-     * @param n  姓氏
-     * @param r  性别 先生/女士
+     *用户反馈
+     * @param content 反馈内从
+     * @param phone  手机号
+     * @param surname  称谓
      * @return
      */
     @RequestMapping(value = "/feedback",method = RequestMethod.POST)
-    public JsonResult insertFeedback(String c,String p,String n,String r){
+    public JsonResult insertFeedback(String content,String phone,String surname){
 
-       OperateEnum result= spreadService.insertFeedback(p,c,n,r);
+       OperateEnum result= spreadService.insertFeedback(phone,content,surname);
 
         return JsonResult.build(result);
     }
