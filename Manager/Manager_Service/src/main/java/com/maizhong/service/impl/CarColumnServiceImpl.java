@@ -49,8 +49,8 @@ public class CarColumnServiceImpl implements CarColumnService {
 
     @Value("${DIC_KEY}")
     private String DIC_KEY;
-    @Value("${CM_TYPE}")
-    private String CM_TYPE;
+    @Value("${CM_CONTENT}")
+    private String CM_CONTENT;
 
     @Override
     public PageResult getCarColumnList(PageSearchParam param) {
@@ -98,7 +98,7 @@ public class CarColumnServiceImpl implements CarColumnService {
 
         int res = tbCarColumnMapper.insertSelective(tbCarColumn);
         if (res > 0) {
-            jedisClient.hdel(CM_TYPE,tbCarColumn.getColumnId()+"");
+            jedisClient.hdel(CM_CONTENT,tbCarColumn.getColumnId()+"");
             return OperateEnum.SUCCESS;
         } else {
             return OperateEnum.FAILE;
@@ -117,7 +117,7 @@ public class CarColumnServiceImpl implements CarColumnService {
         int columnId=tbCarColumnMapper.selectByPrimaryKey(id).getColumnId();
         int ret = tbCarColumnMapper.deleteByPrimaryKey(id);
         if (ret > 0) {
-           jedisClient.hdel(CM_TYPE,columnId+"");
+           jedisClient.hdel(CM_CONTENT,columnId+"");
             return OperateEnum.SUCCESS;
         } else {
             return OperateEnum.FAILE;
@@ -138,7 +138,7 @@ public class CarColumnServiceImpl implements CarColumnService {
     public OperateEnum updateCarColumn(TbCarColumn tbCarColumn) {
        int res= tbCarColumnMapper.updateByPrimaryKeySelective(tbCarColumn);
         if (res > 0) {
-            jedisClient.del(CM_TYPE);//可能修改类型，所以所有类型全部删除
+            jedisClient.del(CM_CONTENT);//可能修改类型，所以所有类型全部删除
             return OperateEnum.SUCCESS;
         } else {
             return OperateEnum.FAILE;
@@ -148,7 +148,7 @@ public class CarColumnServiceImpl implements CarColumnService {
     @Override
     public JsonResult carColumnRedis() {
         try {
-                jedisClient.del(CM_TYPE);
+                jedisClient.del(CM_CONTENT);
             return JsonResult.build(OperateEnum.SUCCESS);
 
         }catch (Exception e){
