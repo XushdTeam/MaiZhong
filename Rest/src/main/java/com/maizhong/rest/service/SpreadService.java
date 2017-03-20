@@ -1,6 +1,9 @@
 package com.maizhong.rest.service;
 
+import com.maizhong.common.dto.CarShowIndex;
 import com.maizhong.common.result.JsonResult;
+
+import java.util.List;
 
 /**
  * Description:
@@ -24,4 +27,6 @@ public interface SpreadService {
     JsonResult getIndexCarType();
 
     JsonResult getCarColumnById(Integer columnId,Integer number);
+
+    List<CarShowIndex> getHomeItem();
 }

@@ -2,6 +2,10 @@ package com.maizhong.rest.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.maizhong.common.dto.CarColumnJoinCar;
+import com.maizhong.common.dto.CarIndexDetail;
+import com.maizhong.common.dto.CarShowIndex;
+import com.maizhong.common.dto.KeyValue;
+import com.maizhong.common.enums.DicParentEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.dao.JedisClient;
@@ -16,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,8 +54,11 @@ public class SpreadServiceImpl implements SpreadService {
     @Value("${CAR_TYPE}")
     private String CAR_TYPE;
 
-    @Value("${CM_TYPE}")
-    private String CM_TYPE;
+    @Value("${CM_CONTENT}")
+    private String CM_CONTENT;
+
+    @Value("${DIC_KEY}")
+    private String DIC_KEY;
 
 
     /**
@@ -156,27 +164,33 @@ public class SpreadServiceImpl implements SpreadService {
         int size=0;
         //缓存命中
         try {
-            String json = jedisClient.hget(CM_TYPE,columnId+"");
+            String json = jedisClient.get(CM_CONTENT);
             if(StringUtils.isNotBlank(json)){
-                List<CarColumnJoinCar> carList=JsonUtils.jsonToList(json,CarColumnJoinCar.class);
-                size=carList.size();
-                   if (size<=number){
-                       return JsonResult.OK(carList);
-                   }else {
-                       return  JsonResult.OK(carList.subList(0,number));
-                   }
-
+                return JsonResult.OK(JsonUtils.jsonToList(json, CarShowIndex.class));
             }
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        List<CarColumnJoinCar> list = tbCarColumnMapper.getListByColumn(1L,Long.valueOf(columnId));//获取列表
+        String dicJson = jedisClient.hget(DIC_KEY, DicParentEnum.CMID+"");
+        List<KeyValue> dicList = JsonUtils.jsonToList(dicJson,KeyValue.class);
+        List<CarShowIndex> carShowList = new ArrayList<>();
+        for (KeyValue keyValue : dicList) {
+            List<CarColumnJoinCar> list = tbCarColumnMapper.getListByColumn(1L, Long.valueOf(keyValue.getKey()));
+            if(list!=null&&list.size()>0){
+                CarShowIndex car_show = new CarShowIndex(Long.valueOf(keyValue.getKey()),keyValue.getValue());
+
+            }
+        }
+
+        List<CarColumnJoinCar> list = tbCarColumnMapper.getListByColumn(1L,null);
+        //获取列表
+
 
         //写入缓存
         try {
             String jsonStr = JsonUtils.objectToJson(list);
-            jedisClient.hset(CM_TYPE,columnId+"",jsonStr);
+            jedisClient.hset(CM_CONTENT,columnId+"",jsonStr);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -185,12 +199,51 @@ public class SpreadServiceImpl implements SpreadService {
             if(size<=number){
                 return JsonResult.OK(list);
             }else {
-                  return JsonResult.OK(list.subList(0,number));
+                return JsonResult.OK(list.subList(0,number));
             }
 
         }else {
             return JsonResult.OK(null);
         }
+    }
+
+    @Override
+    public List<CarShowIndex> getHomeItem() {
+        //缓存命中
+        try {
+            String json = jedisClient.get(CM_CONTENT);
+            if(StringUtils.isNotBlank(json)){
+                return JsonUtils.jsonToList(json, CarShowIndex.class);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        String dicJson = jedisClient.hget(DIC_KEY, DicParentEnum.CMID.getState()+"");
+        List<KeyValue> dicList = JsonUtils.jsonToList(dicJson,KeyValue.class);
+        List<CarShowIndex> carShowList = new ArrayList<>();
+        for (KeyValue keyValue : dicList) {
+            List<CarColumnJoinCar> list = tbCarColumnMapper.getListByColumn(1L, Long.valueOf(keyValue.getKey()));
+            if(list!=null&&list.size()>0){
+                CarShowIndex car_show = new CarShowIndex(Long.valueOf(keyValue.getKey()),keyValue.getValue());
+                List<CarIndexDetail> carIndexList = new ArrayList<>();
+                for (CarColumnJoinCar carColumnJoinCar : list) {
+                    carIndexList.add(new CarIndexDetail(carColumnJoinCar.getCarId(),carColumnJoinCar.getName()+carColumnJoinCar.getYearSku(),carColumnJoinCar.getShopPrice(),carColumnJoinCar.getImage()));
+                }
+                car_show.setArry(carIndexList);
+                carShowList.add(car_show);
+            }
+        }
+
+
+        //写入缓存
+        try {
+            String jsonStr = JsonUtils.objectToJson(carShowList);
+            jedisClient.set(CM_CONTENT,jsonStr);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return carShowList;
     }
 
 }
