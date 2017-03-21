@@ -32,4 +32,6 @@ public interface SpreadService {
     List<CarShowIndex> getHomeItem();
 
     OperateEnum insertFeedback(String phone, String content, String surname);
+
+    OperateEnum insertConsult(String phone,String type);
 }

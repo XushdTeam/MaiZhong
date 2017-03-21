@@ -44,6 +44,9 @@ public class SpreadServiceImpl implements SpreadService {
     private TbFeedbackMapper tbFeedbackMapper;
 
     @Autowired
+    private TbConsultMapper tbConsultMapper;
+
+    @Autowired
     private JedisClient jedisClient;
 
     @Value("${AD_HOME}")
@@ -269,6 +272,26 @@ public class SpreadServiceImpl implements SpreadService {
 
        int res= tbFeedbackMapper.insert(tbFeedback);
 
+        if (res>0){
+            return OperateEnum.SUCCESS;
+        }else {
+            return  OperateEnum.FAILE;
+        }
+    }
+
+    @Override
+    public OperateEnum insertConsult(String phone,String type) {
+        TbConsult tbConsult=new TbConsult();
+        tbConsult.setPhone(phone);
+        try {
+            tbConsult.setType(Integer.valueOf(type));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        tbConsult.setDelflag(0);
+        tbConsult.setStatus(0);
+        tbConsult.setConsultTime(new Date());
+        int res= tbConsultMapper.insert(tbConsult);
         if (res>0){
             return OperateEnum.SUCCESS;
         }else {

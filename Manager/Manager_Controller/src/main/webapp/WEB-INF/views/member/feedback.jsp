@@ -59,8 +59,8 @@
                     <col width="5%" >
                     <col width="10%" >
                     <col width="10%" >
-                    <col width="10%" >
-                    <col width="65%" >
+                    <col width="20%" >
+                    <col width="55%" >
                 </colgroup>
                 <thead>
                 <tr>
