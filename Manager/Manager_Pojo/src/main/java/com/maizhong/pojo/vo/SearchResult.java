@@ -6,6 +6,8 @@ import com.maizhong.pojo.TbCarType;
 import com.maizhong.pojo.TbDictionary;
 
 import java.util.List;
+import java.util.Map;
+
 /**
  * Created by YangF on 2017/3/20.
  */
@@ -23,9 +25,32 @@ public class SearchResult {
     private List<TbDictionary> colors;
     private List<TbDictionary> geadboxs;
     private List<TbCarBrandLine> tbCarBrandLines;
+    private Map<String,String> conditions;
+    private String queryString;
+    private String sortString;
 
+    public String getSortString() {
+        return sortString;
+    }
 
+    public void setSortString(String sortString) {
+        this.sortString = sortString;
+    }
 
+    public String getQueryString() {
+        return queryString;
+    }
+
+    public void setQueryString(String queryString) {
+        this.queryString = queryString;
+    }
+    public Map<String, String> getConditions() {
+        return conditions;
+    }
+
+    public void setConditions(Map<String, String> conditions) {
+        this.conditions = conditions;
+    }
     public Integer getPageNum() {
         return pageNum;
     }

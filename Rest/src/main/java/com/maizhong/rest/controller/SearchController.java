@@ -69,6 +69,7 @@ public class SearchController {
      *                      变速箱类型
      * */
     @RequestMapping("/searchPage")
+    @ResponseBody
     public JsonResult searchPageCallBack(PageSearchParam param){
         SearchResult result = searchService.searchPageResult(param);
         return JsonResult.OK(result);

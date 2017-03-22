@@ -150,6 +150,8 @@ public class SearchServiceImpl implements SearchService {
         StringBuffer querysb = new StringBuffer("");
         Boolean highTiken = false;
 
+        //排序字段  避免null指针 所以放在这里
+        String[] sortString = null;
 
 
         //判断查询字段 分布  拼装
@@ -197,7 +199,7 @@ public class SearchServiceImpl implements SearchService {
                     String[] split =param.getFiled("car_sellPrice").replaceAll("[^0-9\\-\\.]", "").split("-");
                     if (split.length==2){
                         querysb.append(bo?"  ":" AND  ").append("car_sellPrice:")
-                                .append("[").append(split[0]==""?"*":split[0]).append(" TO ").append(split[1]==""?"*":split[1]).append("]");
+                                .append("[").append("".equals(split[0])?"*":split[0]).append(" TO ").append("".equals(split[1])?"*":split[1]).append("]");
                     }
                     bo = false;
                 }
@@ -207,9 +209,14 @@ public class SearchServiceImpl implements SearchService {
                     String[] split =param.getFiled("car_capacity").replaceAll("[^0-9\\-\\.]", "").split("-");
                     if (split.length==2){
                         querysb.append(bo?"  ":" AND  ").append("car_capacity:")
-                                .append("[").append(split[0]==""?"*":split[0]).append(" TO ").append(split[1]==""?"*":split[1]).append("]");
+                                .append("[").append("".equals(split[0])?"*":split[0]).append(" TO ").append("".equals(split[1])?"*":split[1]).append("]");
                     }
                     bo = false;
+                }
+
+                // 排序字段
+                if (param.getFiled("sortString")!=null){
+                    sortString =param.getFiled("sortString").split("-");
                 }
             }
         }
@@ -227,6 +234,14 @@ public class SearchServiceImpl implements SearchService {
         solrQuery.setStart((page-1)*20);
         Integer rows = param.getPageSize();
         solrQuery.setRows(rows);
+
+
+        //排序
+        if (sortString!=null&&sortString.length==2){
+            SolrQuery solrQuery1 = solrQuery.addSort(sortString[0],
+                    "desc".equalsIgnoreCase(sortString[1]) ? SolrQuery.ORDER.desc : SolrQuery.ORDER.asc);
+        }
+
 
         //高亮开启
         if (highTiken){
@@ -278,17 +293,20 @@ public class SearchServiceImpl implements SearchService {
 
             //结果处理
             //封装
+            //直接返回SearchResult吧
 
-            Map<String, Object> result = new HashMap<>();
-            long numFound = documents.getNumFound();
+            SearchResult searchResult = new SearchResult();
+//            Map<String, Object> result = new HashMap<>();
+            Long numFound = documents.getNumFound();
 
-            result.put("rows",tbCarVos);
-            result.put("total",numFound);
-            result.put("pageNum",page);
-            result.put("pageSize",rows);
-            result.put("currentPage",Integer.parseInt((numFound%rows>0?numFound/rows+1:numFound/rows)+""));
+            searchResult.setRows(tbCarVos);
+            searchResult.setCurrentPage(page);
+            searchResult.setTotal(numFound.intValue());
+            searchResult.setPageNum(Integer.parseInt((numFound%rows>0?numFound/rows+1:numFound/rows)+""));
+            searchResult.setPageSize(rows);
 
-            return JsonResult.OK(result);
+
+            return JsonResult.OK(searchResult);
 
         } catch (SolrServerException e) {
             e.printStackTrace();
@@ -319,7 +337,7 @@ public class SearchServiceImpl implements SearchService {
             }
             //json串为“null” 代表数据库中也不存在此数据
             //不知道 json中数据如果不存在是返回null还是 “”  干脆偷懒了
-            if (json.equals("")||(result!=null)){
+            if ("".equals(json)||(result!=null)){
                 return result;
             }
         }catch (Exception e){
@@ -360,7 +378,7 @@ public class SearchServiceImpl implements SearchService {
             }
             //json串为“null” 代表数据库中也不存在此数据
             //不知道 json中数据如果不存在是返回null还是 “”  干脆偷懒了
-            if (json.equals("")||(result!=null)){
+            if ("".equals(json)||(result!=null)){
                 return result;
             }
         }catch (Exception e){
@@ -399,7 +417,7 @@ public class SearchServiceImpl implements SearchService {
             }
             //json串为“null” 代表数据库中也不存在此数据
             //不知道 json中数据如果不存在是返回null还是 “”  干脆偷懒了
-            if (json.equals("")||(result!=null)){
+            if ("".equals(json)||(result!=null)){
                 return result;
             }
         }catch (Exception e){
@@ -463,13 +481,8 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public  SearchResult searchPageResult(PageSearchParam param){
 
-        SearchResult result = new SearchResult();
-
-        //数据获取
         //solr文档
-        Map<String,Object> docs = (Map<String, Object>) this.searchDoc(param).getData();
-        //solr文档
-        BeanUtils.copyProperties(docs,result);
+        SearchResult result = (SearchResult) this.searchDoc(param).getData();
 
         //车型
         List<TbCarType> carTypes = this.searchCarType();
@@ -498,6 +511,7 @@ public class SearchServiceImpl implements SearchService {
 
     /***
      *  搜索页面独有方法
+     *      搜索页面显示车系
      *      当carbrand为空时 返回Top10
      *       carbrand不为空时 根据carbrandId查询
      * @param carBrandName
@@ -516,7 +530,7 @@ public class SearchServiceImpl implements SearchService {
             }
             //json串为“null” 代表数据库中也不存在此数据
             //不知道 json中数据如果不存在是返回null还是 “”  干脆偷懒了
-            if (json.equals("null")||(result!=null&&result.size()>0)){
+            if ("null".equals(json)||(result!=null&&result.size()>0)){
                 return result;
             }
         }catch (Exception e){
