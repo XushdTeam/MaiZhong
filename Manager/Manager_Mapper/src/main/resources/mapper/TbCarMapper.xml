@@ -4,23 +4,21 @@
   <resultMap id="BaseResultMap" type="com.maizhong.pojo.TbCar">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="number" jdbcType="VARCHAR" property="number" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="base_id" jdbcType="BIGINT" property="baseId" />
     <result column="car_brand" jdbcType="BIGINT" property="carBrand" />
     <result column="car_brand_line" jdbcType="BIGINT" property="carBrandLine" />
     <result column="car_type" jdbcType="BIGINT" property="carType" />
-    <result column="year_sku" jdbcType="VARCHAR" property="yearSku" />
     <result column="color" jdbcType="BIGINT" property="color" />
-    <result column="capacity" jdbcType="VARCHAR" property="capacity" />
-    <result column="gearbox" jdbcType="BIGINT" property="gearbox" />
-    <result column="asname" jdbcType="VARCHAR" property="asname" />
     <result column="sellpoint" jdbcType="VARCHAR" property="sellpoint" />
     <result column="reserve_price" jdbcType="DECIMAL" property="reservePrice" />
     <result column="sell_price" jdbcType="DECIMAL" property="sellPrice" />
-    <result column="shop_price" jdbcType="VARCHAR" property="shopPrice" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="smimage" jdbcType="VARCHAR" property="smimage" />
     <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="business_id" jdbcType="BIGINT" property="businessId" />
+    <result column="stock_num" jdbcType="INTEGER" property="stockNum" />
+    <result column="sell_num" jdbcType="INTEGER" property="sellNum" />
     <result column="unable" jdbcType="INTEGER" property="unable" />
     <result column="weight" jdbcType="INTEGER" property="weight" />
   </resultMap>
@@ -86,9 +84,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, number, name, car_brand, car_brand_line, car_type, year_sku, color, capacity, 
-    gearbox, asname, sellpoint, reserve_price, sell_price, shop_price, create_time, update_time, 
-    smimage, image, unable, weight
+    id, number, base_id, car_brand, car_brand_line, car_type, color, sellpoint, reserve_price, 
+    sell_price, create_time, update_time, smimage, image, business_id, stock_num, sell_num, 
+    unable, weight
   </sql>
   <sql id="Blob_Column_List">
     details
@@ -142,22 +140,20 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.maizhong.pojo.TbCar">
-    insert into tb_car (id, number, name, 
+    insert into tb_car (id, number, base_id, 
       car_brand, car_brand_line, car_type, 
-      year_sku, color, capacity, 
-      gearbox, asname, sellpoint, 
-      reserve_price, sell_price, shop_price, 
-      create_time, update_time, smimage, 
-      image, unable, weight, 
-      details)
-    values (#{id,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      color, sellpoint, reserve_price, 
+      sell_price, create_time, update_time, 
+      smimage, image, business_id, 
+      stock_num, sell_num, unable, 
+      weight, details)
+    values (#{id,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{baseId,jdbcType=BIGINT}, 
       #{carBrand,jdbcType=BIGINT}, #{carBrandLine,jdbcType=BIGINT}, #{carType,jdbcType=BIGINT}, 
-      #{yearSku,jdbcType=VARCHAR}, #{color,jdbcType=BIGINT}, #{capacity,jdbcType=VARCHAR}, 
-      #{gearbox,jdbcType=BIGINT}, #{asname,jdbcType=VARCHAR}, #{sellpoint,jdbcType=VARCHAR}, 
-      #{reservePrice,jdbcType=DECIMAL}, #{sellPrice,jdbcType=DECIMAL}, #{shopPrice,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{smimage,jdbcType=VARCHAR}, 
-      #{image,jdbcType=VARCHAR}, #{unable,jdbcType=INTEGER}, #{weight,jdbcType=INTEGER}, 
-      #{details,jdbcType=LONGVARCHAR})
+      #{color,jdbcType=BIGINT}, #{sellpoint,jdbcType=VARCHAR}, #{reservePrice,jdbcType=DECIMAL}, 
+      #{sellPrice,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{smimage,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{businessId,jdbcType=BIGINT}, 
+      #{stockNum,jdbcType=INTEGER}, #{sellNum,jdbcType=INTEGER}, #{unable,jdbcType=INTEGER}, 
+      #{weight,jdbcType=INTEGER}, #{details,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.pojo.TbCar">
     insert into tb_car
@@ -168,8 +164,8 @@
       <if test="number != null">
         number,
       </if>
-      <if test="name != null">
-        name,
+      <if test="baseId != null">
+        base_id,
       </if>
       <if test="carBrand != null">
         car_brand,
@@ -180,20 +176,8 @@
       <if test="carType != null">
         car_type,
       </if>
-      <if test="yearSku != null">
-        year_sku,
-      </if>
       <if test="color != null">
         color,
-      </if>
-      <if test="capacity != null">
-        capacity,
-      </if>
-      <if test="gearbox != null">
-        gearbox,
-      </if>
-      <if test="asname != null">
-        asname,
       </if>
       <if test="sellpoint != null">
         sellpoint,
@@ -203,9 +187,6 @@
       </if>
       <if test="sellPrice != null">
         sell_price,
-      </if>
-      <if test="shopPrice != null">
-        shop_price,
       </if>
       <if test="createTime != null">
         create_time,
@@ -218,6 +199,15 @@
       </if>
       <if test="image != null">
         image,
+      </if>
+      <if test="businessId != null">
+        business_id,
+      </if>
+      <if test="stockNum != null">
+        stock_num,
+      </if>
+      <if test="sellNum != null">
+        sell_num,
       </if>
       <if test="unable != null">
         unable,
@@ -236,8 +226,8 @@
       <if test="number != null">
         #{number,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="baseId != null">
+        #{baseId,jdbcType=BIGINT},
       </if>
       <if test="carBrand != null">
         #{carBrand,jdbcType=BIGINT},
@@ -248,20 +238,8 @@
       <if test="carType != null">
         #{carType,jdbcType=BIGINT},
       </if>
-      <if test="yearSku != null">
-        #{yearSku,jdbcType=VARCHAR},
-      </if>
       <if test="color != null">
         #{color,jdbcType=BIGINT},
-      </if>
-      <if test="capacity != null">
-        #{capacity,jdbcType=VARCHAR},
-      </if>
-      <if test="gearbox != null">
-        #{gearbox,jdbcType=BIGINT},
-      </if>
-      <if test="asname != null">
-        #{asname,jdbcType=VARCHAR},
       </if>
       <if test="sellpoint != null">
         #{sellpoint,jdbcType=VARCHAR},
@@ -271,9 +249,6 @@
       </if>
       <if test="sellPrice != null">
         #{sellPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="shopPrice != null">
-        #{shopPrice,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -286,6 +261,15 @@
       </if>
       <if test="image != null">
         #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="businessId != null">
+        #{businessId,jdbcType=BIGINT},
+      </if>
+      <if test="stockNum != null">
+        #{stockNum,jdbcType=INTEGER},
+      </if>
+      <if test="sellNum != null">
+        #{sellNum,jdbcType=INTEGER},
       </if>
       <if test="unable != null">
         #{unable,jdbcType=INTEGER},
@@ -313,8 +297,8 @@
       <if test="record.number != null">
         number = #{record.number,jdbcType=VARCHAR},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.baseId != null">
+        base_id = #{record.baseId,jdbcType=BIGINT},
       </if>
       <if test="record.carBrand != null">
         car_brand = #{record.carBrand,jdbcType=BIGINT},
@@ -325,20 +309,8 @@
       <if test="record.carType != null">
         car_type = #{record.carType,jdbcType=BIGINT},
       </if>
-      <if test="record.yearSku != null">
-        year_sku = #{record.yearSku,jdbcType=VARCHAR},
-      </if>
       <if test="record.color != null">
         color = #{record.color,jdbcType=BIGINT},
-      </if>
-      <if test="record.capacity != null">
-        capacity = #{record.capacity,jdbcType=VARCHAR},
-      </if>
-      <if test="record.gearbox != null">
-        gearbox = #{record.gearbox,jdbcType=BIGINT},
-      </if>
-      <if test="record.asname != null">
-        asname = #{record.asname,jdbcType=VARCHAR},
       </if>
       <if test="record.sellpoint != null">
         sellpoint = #{record.sellpoint,jdbcType=VARCHAR},
@@ -348,9 +320,6 @@
       </if>
       <if test="record.sellPrice != null">
         sell_price = #{record.sellPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="record.shopPrice != null">
-        shop_price = #{record.shopPrice,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -363,6 +332,15 @@
       </if>
       <if test="record.image != null">
         image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessId != null">
+        business_id = #{record.businessId,jdbcType=BIGINT},
+      </if>
+      <if test="record.stockNum != null">
+        stock_num = #{record.stockNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.sellNum != null">
+        sell_num = #{record.sellNum,jdbcType=INTEGER},
       </if>
       <if test="record.unable != null">
         unable = #{record.unable,jdbcType=INTEGER},
@@ -382,23 +360,21 @@
     update tb_car
     set id = #{record.id,jdbcType=BIGINT},
       number = #{record.number,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
+      base_id = #{record.baseId,jdbcType=BIGINT},
       car_brand = #{record.carBrand,jdbcType=BIGINT},
       car_brand_line = #{record.carBrandLine,jdbcType=BIGINT},
       car_type = #{record.carType,jdbcType=BIGINT},
-      year_sku = #{record.yearSku,jdbcType=VARCHAR},
       color = #{record.color,jdbcType=BIGINT},
-      capacity = #{record.capacity,jdbcType=VARCHAR},
-      gearbox = #{record.gearbox,jdbcType=BIGINT},
-      asname = #{record.asname,jdbcType=VARCHAR},
       sellpoint = #{record.sellpoint,jdbcType=VARCHAR},
       reserve_price = #{record.reservePrice,jdbcType=DECIMAL},
       sell_price = #{record.sellPrice,jdbcType=DECIMAL},
-      shop_price = #{record.shopPrice,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       smimage = #{record.smimage,jdbcType=VARCHAR},
       image = #{record.image,jdbcType=VARCHAR},
+      business_id = #{record.businessId,jdbcType=BIGINT},
+      stock_num = #{record.stockNum,jdbcType=INTEGER},
+      sell_num = #{record.sellNum,jdbcType=INTEGER},
       unable = #{record.unable,jdbcType=INTEGER},
       weight = #{record.weight,jdbcType=INTEGER},
       details = #{record.details,jdbcType=LONGVARCHAR}
@@ -410,23 +386,21 @@
     update tb_car
     set id = #{record.id,jdbcType=BIGINT},
       number = #{record.number,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
+      base_id = #{record.baseId,jdbcType=BIGINT},
       car_brand = #{record.carBrand,jdbcType=BIGINT},
       car_brand_line = #{record.carBrandLine,jdbcType=BIGINT},
       car_type = #{record.carType,jdbcType=BIGINT},
-      year_sku = #{record.yearSku,jdbcType=VARCHAR},
       color = #{record.color,jdbcType=BIGINT},
-      capacity = #{record.capacity,jdbcType=VARCHAR},
-      gearbox = #{record.gearbox,jdbcType=BIGINT},
-      asname = #{record.asname,jdbcType=VARCHAR},
       sellpoint = #{record.sellpoint,jdbcType=VARCHAR},
       reserve_price = #{record.reservePrice,jdbcType=DECIMAL},
       sell_price = #{record.sellPrice,jdbcType=DECIMAL},
-      shop_price = #{record.shopPrice,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       smimage = #{record.smimage,jdbcType=VARCHAR},
       image = #{record.image,jdbcType=VARCHAR},
+      business_id = #{record.businessId,jdbcType=BIGINT},
+      stock_num = #{record.stockNum,jdbcType=INTEGER},
+      sell_num = #{record.sellNum,jdbcType=INTEGER},
       unable = #{record.unable,jdbcType=INTEGER},
       weight = #{record.weight,jdbcType=INTEGER}
     <if test="_parameter != null">
@@ -439,8 +413,8 @@
       <if test="number != null">
         number = #{number,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+      <if test="baseId != null">
+        base_id = #{baseId,jdbcType=BIGINT},
       </if>
       <if test="carBrand != null">
         car_brand = #{carBrand,jdbcType=BIGINT},
@@ -451,20 +425,8 @@
       <if test="carType != null">
         car_type = #{carType,jdbcType=BIGINT},
       </if>
-      <if test="yearSku != null">
-        year_sku = #{yearSku,jdbcType=VARCHAR},
-      </if>
       <if test="color != null">
         color = #{color,jdbcType=BIGINT},
-      </if>
-      <if test="capacity != null">
-        capacity = #{capacity,jdbcType=VARCHAR},
-      </if>
-      <if test="gearbox != null">
-        gearbox = #{gearbox,jdbcType=BIGINT},
-      </if>
-      <if test="asname != null">
-        asname = #{asname,jdbcType=VARCHAR},
       </if>
       <if test="sellpoint != null">
         sellpoint = #{sellpoint,jdbcType=VARCHAR},
@@ -474,9 +436,6 @@
       </if>
       <if test="sellPrice != null">
         sell_price = #{sellPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="shopPrice != null">
-        shop_price = #{shopPrice,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -489,6 +448,15 @@
       </if>
       <if test="image != null">
         image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="businessId != null">
+        business_id = #{businessId,jdbcType=BIGINT},
+      </if>
+      <if test="stockNum != null">
+        stock_num = #{stockNum,jdbcType=INTEGER},
+      </if>
+      <if test="sellNum != null">
+        sell_num = #{sellNum,jdbcType=INTEGER},
       </if>
       <if test="unable != null">
         unable = #{unable,jdbcType=INTEGER},
@@ -505,23 +473,21 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.maizhong.pojo.TbCar">
     update tb_car
     set number = #{number,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
+      base_id = #{baseId,jdbcType=BIGINT},
       car_brand = #{carBrand,jdbcType=BIGINT},
       car_brand_line = #{carBrandLine,jdbcType=BIGINT},
       car_type = #{carType,jdbcType=BIGINT},
-      year_sku = #{yearSku,jdbcType=VARCHAR},
       color = #{color,jdbcType=BIGINT},
-      capacity = #{capacity,jdbcType=VARCHAR},
-      gearbox = #{gearbox,jdbcType=BIGINT},
-      asname = #{asname,jdbcType=VARCHAR},
       sellpoint = #{sellpoint,jdbcType=VARCHAR},
       reserve_price = #{reservePrice,jdbcType=DECIMAL},
       sell_price = #{sellPrice,jdbcType=DECIMAL},
-      shop_price = #{shopPrice,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       smimage = #{smimage,jdbcType=VARCHAR},
       image = #{image,jdbcType=VARCHAR},
+      business_id = #{businessId,jdbcType=BIGINT},
+      stock_num = #{stockNum,jdbcType=INTEGER},
+      sell_num = #{sellNum,jdbcType=INTEGER},
       unable = #{unable,jdbcType=INTEGER},
       weight = #{weight,jdbcType=INTEGER},
       details = #{details,jdbcType=LONGVARCHAR}
@@ -530,23 +496,21 @@
   <update id="updateByPrimaryKey" parameterType="com.maizhong.pojo.TbCar">
     update tb_car
     set number = #{number,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
+      base_id = #{baseId,jdbcType=BIGINT},
       car_brand = #{carBrand,jdbcType=BIGINT},
       car_brand_line = #{carBrandLine,jdbcType=BIGINT},
       car_type = #{carType,jdbcType=BIGINT},
-      year_sku = #{yearSku,jdbcType=VARCHAR},
       color = #{color,jdbcType=BIGINT},
-      capacity = #{capacity,jdbcType=VARCHAR},
-      gearbox = #{gearbox,jdbcType=BIGINT},
-      asname = #{asname,jdbcType=VARCHAR},
       sellpoint = #{sellpoint,jdbcType=VARCHAR},
       reserve_price = #{reservePrice,jdbcType=DECIMAL},
       sell_price = #{sellPrice,jdbcType=DECIMAL},
-      shop_price = #{shopPrice,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       smimage = #{smimage,jdbcType=VARCHAR},
       image = #{image,jdbcType=VARCHAR},
+      business_id = #{businessId,jdbcType=BIGINT},
+      stock_num = #{stockNum,jdbcType=INTEGER},
+      sell_num = #{sellNum,jdbcType=INTEGER},
       unable = #{unable,jdbcType=INTEGER},
       weight = #{weight,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}

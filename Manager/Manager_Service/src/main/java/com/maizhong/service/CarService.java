@@ -19,4 +19,6 @@ public interface CarService {
     public  JsonResult deleteCar(Long id);
 
     public JsonResult updateCar(TbCar car);
+
+    JsonResult findBaseCar(String carSeries, String carYear);
 }

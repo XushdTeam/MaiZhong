@@ -125,6 +125,8 @@ public class CarController {
         model.addAttribute("insertUrl","/car/insert");
         model.addAttribute("seepropUrl","/carProp/prop");
         model.addAttribute("lineListUrl","/carBrandLine/list");
+        model.addAttribute("findBaseCar","/car/findBaseCar");
+
 
 
         //数据准备
@@ -225,4 +227,17 @@ public class CarController {
 
         return "/car/update";
     }
+
+
+    /**
+     *
+     * 前台ajax获取数据
+     *         使用车型和汽车年限定位汽车基础类
+     */
+    @RequestMapping("/overall/{carSeries}/{carYear}")
+    @ResponseBody
+    public JsonResult findBaseCar(@PathVariable("carSeries")String carSeries,@PathVariable("carYear") String carYear){
+        return carService.findBaseCar(carSeries,carYear);
+    }
+
 }

@@ -53,6 +53,15 @@
     <result column="unable" jdbcType="INTEGER" property="unable" />
     <result column="weight" jdbcType="INTEGER" property="weight" />
   </resultMap>
+
+
+    <resultMap id="baseCarMap" type="com.maizhong.pojo.vo.TbCarBaseVo">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="car_color" jdbcType="VARCHAR" property="color" />
+        <result column="car_type" jdbcType="VARCHAR" property="carTypeName" />
+    </resultMap>
+
+
     <resultMap extends="ExtResultMap" id="ExtResultMapWithBLOBs" type="com.maizhong.pojo.vo.TbCarVo">
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
         <result column="details" jdbcType="LONGVARCHAR" property="details" />
@@ -129,5 +138,15 @@
         <if test="orderByClause != null">
             order by ${orderByClause}
         </if>
+    </select>
+
+
+    <select id="findByCarYearAndCarSeres"  resultMap="baseCarMap">
+        SELECT
+        id,car_type,car_color
+        FROM
+        tb_car_base
+        WHERE
+        car_series = ${carSeries} AND car_year = ${carYear}
     </select>
 </mapper>

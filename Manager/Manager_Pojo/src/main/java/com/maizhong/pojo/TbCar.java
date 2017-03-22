@@ -7,7 +7,7 @@ public class TbCar {
 
     private String number;
 
-    private String name;
+    private Long baseId;
 
     private Long carBrand;
 
@@ -15,23 +15,13 @@ public class TbCar {
 
     private Long carType;
 
-    private String yearSku;
-
     private Long color;
-
-    private String capacity;
-
-    private Long gearbox;
-
-    private String asname;
 
     private String sellpoint;
 
     private Long reservePrice;
 
     private Long sellPrice;
-
-    private String shopPrice;
 
     private Date createTime;
 
@@ -40,6 +30,12 @@ public class TbCar {
     private String smimage;
 
     private String image;
+
+    private Long businessId;
+
+    private Integer stockNum;
+
+    private Integer sellNum;
 
     private Integer unable;
 
@@ -63,12 +59,12 @@ public class TbCar {
         this.number = number == null ? null : number.trim();
     }
 
-    public String getName() {
-        return name;
+    public Long getBaseId() {
+        return baseId;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setBaseId(Long baseId) {
+        this.baseId = baseId;
     }
 
     public Long getCarBrand() {
@@ -95,44 +91,12 @@ public class TbCar {
         this.carType = carType;
     }
 
-    public String getYearSku() {
-        return yearSku;
-    }
-
-    public void setYearSku(String yearSku) {
-        this.yearSku = yearSku == null ? null : yearSku.trim();
-    }
-
     public Long getColor() {
         return color;
     }
 
     public void setColor(Long color) {
         this.color = color;
-    }
-
-    public String getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(String capacity) {
-        this.capacity = capacity == null ? null : capacity.trim();
-    }
-
-    public Long getGearbox() {
-        return gearbox;
-    }
-
-    public void setGearbox(Long gearbox) {
-        this.gearbox = gearbox;
-    }
-
-    public String getAsname() {
-        return asname;
-    }
-
-    public void setAsname(String asname) {
-        this.asname = asname == null ? null : asname.trim();
     }
 
     public String getSellpoint() {
@@ -157,14 +121,6 @@ public class TbCar {
 
     public void setSellPrice(Long sellPrice) {
         this.sellPrice = sellPrice;
-    }
-
-    public String getShopPrice() {
-        return shopPrice;
-    }
-
-    public void setShopPrice(String shopPrice) {
-        this.shopPrice = shopPrice == null ? null : shopPrice.trim();
     }
 
     public Date getCreateTime() {
@@ -197,6 +153,30 @@ public class TbCar {
 
     public void setImage(String image) {
         this.image = image == null ? null : image.trim();
+    }
+
+    public Long getBusinessId() {
+        return businessId;
+    }
+
+    public void setBusinessId(Long businessId) {
+        this.businessId = businessId;
+    }
+
+    public Integer getStockNum() {
+        return stockNum;
+    }
+
+    public void setStockNum(Integer stockNum) {
+        this.stockNum = stockNum;
+    }
+
+    public Integer getSellNum() {
+        return sellNum;
+    }
+
+    public void setSellNum(Integer sellNum) {
+        this.sellNum = sellNum;
     }
 
     public Integer getUnable() {
