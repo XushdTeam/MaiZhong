@@ -35,6 +35,9 @@ public class IndexServiceImpl implements IndexService {
     @Value("${CAR_TYPE}")
     private String CAR_TYPE;
 
+    @Value("${FEEDBACK}")
+    private String FEEDB_ACK;
+
     /**
      * 获取
      *
@@ -108,5 +111,31 @@ public class IndexServiceImpl implements IndexService {
             list.add(map);
         }
         return list;
+    }
+
+    @Override
+    public String getFeedBackUrl() {
+        return REST_URL+FEEDB_ACK;
+    }
+
+    /**
+     * 用户反馈
+     * @param c
+     * @param p
+     * @param n
+     * @param r
+     * @return
+     */
+    @Override
+    public JsonResult saveFeedback(String c, String p, String n, String r) {
+
+        Map<String,String> map = new HashMap<>();
+        map.put("content",c);
+        map.put("phone",p);
+        map.put("name",n);
+        map.put("name_r",r);
+        String res  = HttpClientUtil.doPost(REST_URL + FEEDB_ACK, map);
+        JsonResult result = JsonUtils.jsonToPojo(res,JsonResult.class);
+        return result;
     }
 }

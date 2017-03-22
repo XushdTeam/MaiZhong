@@ -248,6 +248,4 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
         return  list;
     }
 
-
-
 }

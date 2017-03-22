@@ -17,4 +17,8 @@ public interface IndexService {
     List<Map> getCarBrand();
 
     List<Map> getCarType();
+
+    String getFeedBackUrl();
+
+    JsonResult saveFeedback(String c, String p, String n, String r);
 }
