@@ -15,6 +15,7 @@ import com.maizhong.mapper.ext.TbCarMapperExt;
 import com.maizhong.pojo.TbCar;
 import com.maizhong.pojo.TbCarExample;
 import com.maizhong.pojo.TbCarPropExample;
+import com.maizhong.pojo.vo.TbCarBaseVo;
 import com.maizhong.pojo.vo.TbCarVo;
 import com.maizhong.service.CarService;
 import org.apache.commons.lang3.StringUtils;
@@ -56,17 +57,17 @@ public class CarServiceImpl implements CarService {
         }
 
         //number`'汽车编号 ',  `name`'车型名称 类似奥迪a4',
-        if (car.getNumber()==null||car.getName()==null||StringUtils.isBlank(car.getNumber())||StringUtils.isBlank(car.getName()+"")){
-            return JsonResult.Error("编号或者名称不可以为空");
-        }
+//        if (car.getNumber()==null||car.getName()==null||StringUtils.isBlank(car.getNumber())||StringUtils.isBlank(car.getName()+"")){
+//            return JsonResult.Error("编号或者名称不可以为空");
+//        }
         //car_brand`  '外键链接车辆品牌  类似奥迪',`car_type` '外键  链接车辆类型',
-        if (car.getCarType()==null||car.getCarBrand()==null||StringUtils.isBlank(car.getCarType()+"")||StringUtils.isBlank(car.getCarBrand()+"")){
-            return JsonResult.Error("品牌和类型是必选项");
-        }
+//        if (car.getCarType()==null||car.getCarBrand()==null||StringUtils.isBlank(car.getCarType()+"")||StringUtils.isBlank(car.getCarBrand()+"")){
+//            return JsonResult.Error("品牌和类型是必选项");
+//        }
         //`year_sku`  '年款式 类似 奥迪a42016款',
-        if (car.getYearSku()==null||StringUtils.isBlank(car.getYearSku()+"")){
-            return JsonResult.Error("车辆年份不可以为空");
-        }
+//        if (car.getYearSku()==null||StringUtils.isBlank(car.getYearSku()+"")){
+//            return JsonResult.Error("车辆年份不可以为空");
+//        }
 
         //订金价格',
         if (car.getReservePrice()==null||car.getSellPrice()==null||StringUtils.isBlank(car.getReservePrice()+"")||StringUtils.isBlank(car.getSellPrice()+"")){
@@ -128,9 +129,9 @@ public class CarServiceImpl implements CarService {
             return JsonResult.Error("品牌和类型是必选项");
         }
         // `year_sku 年款式
-        if ( car.getYearSku()==null||StringUtils.isBlank(car.getYearSku()+"")){
-            return JsonResult.Error("车辆年份不可以为空");
-        }
+//        if ( car.getYearSku()==null||StringUtils.isBlank(car.getYearSku()+"")){
+//            return JsonResult.Error("车辆年份不可以为空");
+//        }
         //    '订金价格',
         if (car.getReservePrice()==null||car.getSellPrice()==null||StringUtils.isBlank(car.getReservePrice()+"")||StringUtils.isBlank(car.getSellPrice()+"")){
             return JsonResult.Error("车辆卖价和定金不可以为空");
@@ -209,9 +210,9 @@ public class CarServiceImpl implements CarService {
             }
 
             //价格区间放弃
-            if (StringUtils.isNotBlank(param.getFiled("queryString"))&&!param.getFiled("queryString").contains("=")){
+            /*if (StringUtils.isNotBlank(param.getFiled("queryString"))&&!param.getFiled("queryString").contains("=")){
                 criteria.andNameLike("%"+param.getFiled("queryString")+"%");
-            }
+            }*/
         }
 
         //查询
@@ -222,5 +223,18 @@ public class CarServiceImpl implements CarService {
         }
 
         return new PageResult(pageInfo);
+    }
+
+
+    @Override
+    public JsonResult findBaseCar(String carSeries, String carYear){
+        if (StringUtils.isBlank(carSeries)||StringUtils.isBlank(carYear)){
+            return JsonResult.Error("数据错误");
+        }
+        List<TbCarBaseVo> list = tbCarMapperExt.findByCarYearAndCarSeres(carSeries, carYear);
+        if (list!=null){
+            return JsonResult.OK(list);
+        }
+        return JsonResult.Error("数据错误");
     }
 }

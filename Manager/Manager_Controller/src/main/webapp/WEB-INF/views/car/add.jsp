@@ -39,31 +39,17 @@
                     </div>
 
                     <div class="layui-input-block">
-                        <div class="layui-form-item layui-input-inline">
-                            <label class="layui-form-label">变速箱类型</label>
-                            <div class="layui-input-block" style="width: 50%">
-                                <select name="gearbox" lay-verify="required">
-                                    <option value=""></option>
-                                    <c:forEach items="${gaerboxList}" var="gaer">
-                                        <option value="${gaer.id}">${gaer.dicName}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </div>
-
-
-
-                        <div class="layui-form-item layui-input-inline">
-                            <label class="layui-form-label">汽车分类</label>
-                            <div class="layui-input-block" style="width: 50%">
-                                <select name="carType" lay-verify="required">
-                                    <option value=""></option>
-                                    <c:forEach items="${carTypeList}" var="type">
-                                        <option value="${type.id}">${type.typeName}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </div>
+                        <%--<div class="layui-form-item layui-input-inline">--%>
+                            <%--<label class="layui-form-label">汽车分类</label>--%>
+                            <%--<div class="layui-input-block" style="width: 50%">--%>
+                                <%--<select name="carType" lay-verify="required">--%>
+                                    <%--<option value=""></option>--%>
+                                    <%--<c:forEach items="${carTypeList}" var="type">--%>
+                                        <%--<option value="${type.id}">${type.typeName}</option>--%>
+                                    <%--</c:forEach>--%>
+                                <%--</select>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
 
                         <div class="layui-form-item layui-input-inline">
                             <label class="layui-form-label">汽车品牌</label>
@@ -80,21 +66,49 @@
                         <div class="layui-form-item layui-input-inline">
                             <label class="layui-form-label">汽车车系</label>
                             <div class="layui-input-inline">
-                                <select name="carBrandLine" id="carBrandLine" lay-verify="required">
+                                <select name="carBrandLine" id="carBrandLine"  lay-filter="carBase"   lay-verify="required">
                                     <option value="">请先选择品牌</option>
                                 </select>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="layui-input-block">
-                        <div class="layui-form-item  layui-input-inline">
-                            <label class="layui-form-label">排量</label>
+                        <div class="layui-form-item layui-input-inline">
+                            <label class="layui-form-label">年份</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="capacity" required  lay-verify="required" placeholder="请输入排量" autocomplete="off" class="layui-input">
+                                <select name="carYear" id="carYear"  lay-filter="carBase" placeholder="年份" lay-verify="required">
+                                    <option value="">请选择汽车年份</option>
+                                    <c:forEach begin="1990" end="2020" var="year" varStatus="vs">
+                                        <option value="${year}">${year}</option>
+                                    </c:forEach>
+                                </select>
                             </div>
                         </div>
 
+
+                            <div class="layui-form-item layui-input-inline">
+                                <label class="layui-form-label">汽车款式</label>
+                                <div class="layui-input-inline">
+                                    <select name="baseId" id="car_base"  lay-filter="carColor"   lay-verify="required">
+                                        <option value="">请先选中时间与车系</option>
+                                    </select>
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="layui-input-block">
+
+                        <div class="layui-form-item  layui-input-inline">
+                            <label class="layui-form-label">订金</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="reservePrice"  lay-verify="required" placeholder="页面显示金额" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item  layui-input-inline">
+                            <label class="layui-form-label">售价</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="sellPrice"  lay-verify="required" placeholder="实际价格" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
 
                         <div class="layui-form-item layui-input-inline">
                                 <label class="layui-form-label">是否上架</label>
@@ -112,42 +126,7 @@
                             </div>
                         </div>
 
-
-                        <div class="layui-form-item layui-input-inline">
-                            <label class="layui-form-label">汽车颜色</label>
-                            <div class="layui-input-inline">
-                                <select name="color" lay-verify="required">
-                                    <option value=""></option>
-                                    <c:forEach items="${colorList}" var="color">
-                                        <option value="${color.id}">${color.dicName}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </div>
                     </div>
-
-                    <div class="layui-input-block">
-                        <div class="layui-form-item  layui-input-inline">
-                            <label class="layui-form-label">订金</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="reservePrice"  lay-verify="required" placeholder="页面显示金额" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-form-item  layui-input-inline">
-                            <label class="layui-form-label">售价</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="sellPrice"  lay-verify="required" placeholder="实际价格" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-form-item  layui-input-inline">
-                            <label class="layui-form-label">市场指导价</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="shopPrice" id="shopPrice"  placeholder="8.12-12.25  字符串形式" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                    </div>
-
-
 
 
                     <div class="layui-form-item layui-input-block">
@@ -252,7 +231,7 @@
 
 
         //监听下拉框的选择   用于车系下拉框的动态回显
-        //TODO
+        //TODO  车系车型  品牌联动   时间框选择
         form.on('select(carBrand)', function(data){
             var brandId = data.value; //得到被选中的值
             if(!brandId||brandId==""){
@@ -265,11 +244,60 @@
                         $.each(result.data,function(i,e){
                             $("#carBrandLine").append("<option value='"+e.id+"'>"+e.lineName+"</option>");
                         })
-                        form.render('select');
                     }
+                    form.render('select');
             },"json")
         });
+
+
+
+        //TODO 监听  车系下拉框和时间下拉框
+        form.on('select(carBase)', function(data){
+
+            $("#car_base").html("");
+            $("#car_color").html("");
+            $("#car_color").hide();
+
+            //TODO  汽车车系的选择
+            $("#car_base").append("<option value=''>请选择</option>");
+
+            if($("#carYear").val()==""||$("#carBrandLine").val()==""){
+                return;
+            }else{
+                //显示最终的车型
+                $.post("${findBaseCarUrl}/"+$("#carBrandLine").val()+"/"+$("#carYear").val(),function(result){
+                    if(result.status==200){
+                        $.each(result.data,function(i,e){
+                            //颜色的处理
+                            $("#car_base").append("<option value='"+e.id+"' data-color='"+e.color+"' >"+e.carType+"</option>");
+                        })
+                        form.render('select');
+                    }
+                },"json")
+            }
+        });
+
+
+        //TODO 监听  车型选择
+        form.on('select(carColor)', function(data){
+            $("#car_color").html("");
+            if(data.value==""){
+                return;
+            }
+            var color = $("#car_base :selected").data("color");
+            //判断是否达成颜色显示条件
+            if(color&&color.length>0&&color[0]!=""){
+                $("#car_color").show();
+                $.each(color,function(i,e){
+                    $("#car_color").append("<option value='"+e+"' >"+e+"</option>");
+                })
+            }
+            //TODO  颜色遍历
+            $("#car_base").append("<option value=''>请选择</option>");
+        });
+
     });
+
 
 
     <!--图片上传以及富文本编译器-->
