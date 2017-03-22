@@ -1,13 +1,19 @@
 package com.maizhong.portal.controller;
 
 import com.maizhong.common.result.JsonResult;
+import com.maizhong.pojo.TbFeedback;
 import com.maizhong.portal.service.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +28,7 @@ public class IndexController {
     private IndexService indexService;
 
     @RequestMapping(value = "/index")
-    public String index(Model model){
+    public String index(Model model) {
 
         String adJson = indexService.getAdvert(14);
         List<Map> cbList = indexService.getCarBrand();
@@ -35,66 +41,97 @@ public class IndexController {
 
     /**
      * 关于我们
+     *
      * @param model
      * @return
      */
     @RequestMapping(value = "/about")
-    public String about(Model model){
-        model.addAttribute("title","关于我们");
-        model.addAttribute("tab",0);
+    public String about(Model model) {
+        model.addAttribute("title", "关于我们");
+        model.addAttribute("tab", 0);
         return "public";
     }
 
     /**
      * 加入我们
+     *
      * @param model
      * @return
      */
     @RequestMapping(value = "/joinus")
-    public String joinus(Model model){
-        model.addAttribute("title","加入我们");
-        model.addAttribute("tab",2);
+    public String joinus(Model model) {
+        model.addAttribute("title", "加入我们");
+        model.addAttribute("tab", 2);
         return "public";
     }
+
     /**
      * 加入我们
+     *
      * @param model
      * @return
      */
     @RequestMapping(value = "/help")
-    public String help(Model model){
-        model.addAttribute("title","帮助中心");
-        model.addAttribute("tab",1);
+    public String help(Model model) {
+        model.addAttribute("title", "帮助中心");
+        model.addAttribute("tab", 1);
         return "public";
     }
-     /**
+
+    /**
      * 反馈
+     *
      * @param model
      * @return
      */
     @RequestMapping(value = "/feedback")
-    public String feedback(Model model){
-        model.addAttribute("title","用户反馈");
-        model.addAttribute("tab",3);
+    public String feedback(Model model) {
+        model.addAttribute("title", "用户反馈");
+        model.addAttribute("tab", 3);
         return "public";
     }
 
     @RequestMapping(value = "/sale")
-    public String sale(Model model){
+    public String sale(Model model) {
         return "sale";
     }
 
     /**
      * 用户反馈
-     * @param c
-     * @param p
-     * @param n
-     * @param r
+     * @param feedback
+     * @param result
+     * @param model
      * @return
      */
     @RequestMapping(value = "/feedback/post")
-    public JsonResult feedbackForm(String c,String p,String n,String r){
-        this.indexService.saveFeedback(c,p,n,r);
-        return JsonResult.OK();
+    public String feedbackForm(@Valid TbFeedback feedback, BindingResult result, Model model) {
+        model.addAttribute("title", "用户反馈");
+        model.addAttribute("tab", 4);
+        if(result.hasErrors()){
+
+            List<ObjectError> allErrors = result.getAllErrors();
+            String error = "";
+            for (ObjectError allError : allErrors) {
+                error+= allError.getDefaultMessage()+"<br/>";
+            }
+            model.addAttribute("res",error);
+        }else{
+           if(this.indexService.saveFeedback(feedback)){
+               model.addAttribute("res","我们已经收到您的反馈，非常感谢！");
+           }
+            model.addAttribute("res","信号被风吹走了");
+        }
+        return "public";
     }
+
+    /**
+     * 新闻
+     * @param newsId
+     * @return
+     */
+    @RequestMapping(value = "/news.html")
+    public String news(Long newsId){
+        return "news";
+    }
+
 }

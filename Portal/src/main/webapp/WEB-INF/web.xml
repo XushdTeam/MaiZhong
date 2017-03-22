@@ -34,13 +34,13 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-   <!-- <context-param>
+    <context-param>
         <param-name>logbackConfigLocation</param-name>
         <param-value>classpath:logback.xml</param-value>
     </context-param>
     <listener>
         <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
-    </listener>-->
+    </listener>
 
     <!-- springmvc的前端控制器 -->
     <servlet>
@@ -56,6 +56,11 @@
         <servlet-name>maizhong-portal</servlet-name>
         <!-- 伪静态化 -->
         <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>maizhong-portal</servlet-name>
+        <!-- ajax -->
+        <url-pattern>*.action</url-pattern>
     </servlet-mapping>
 
 </web-app>

@@ -1,6 +1,7 @@
 package com.maizhong.portal.service;
 
 import com.maizhong.common.result.JsonResult;
+import com.maizhong.pojo.TbFeedback;
 
 import java.util.List;
 import java.util.Map;
@@ -20,5 +21,5 @@ public interface IndexService {
 
     String getFeedBackUrl();
 
-    JsonResult saveFeedback(String c, String p, String n, String r);
+    boolean saveFeedback(TbFeedback feedback);
 }

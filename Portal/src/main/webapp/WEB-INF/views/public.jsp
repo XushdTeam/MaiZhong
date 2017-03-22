@@ -15,26 +15,7 @@
     <link rel="stylesheet" type="text/css" href="/resources/style/other.css" />
 </head>
 <body>
-<!--导航-->
-<div class="haeder">
-    <div class="nav_top nav_tops">
-        <div class="logo">
-            <a href="#" title="迈众汽车"><img src="/resources/img/logo.png"></a>
-        </div>
-        <ul class="navs">
-            <li><a href="/">首页</a></li>
-            <li><a href="">我要买车</a></li>
-            <li><a href="/sale.html">我要卖车</a></li>
-            <li><a href="">服务保障</a></li>
-        </ul><!--navs end-->
-        <!--call-->
-        <div class="call">
-            <span class="span_one"><a href="">400-090-0494</a></span>
-            <span><a href="#">登录</a> / <a href="#">注册</a></span>
-        </div>
-    </div><!--nav_top end-->
-</div>
-<!--导航 end-->
+<jsp:include page="head.jsp"></jsp:include>
 <!--background-->
 <img src="/resources/img/gy.jpg" width="100%">
 <!--background-->
@@ -46,7 +27,7 @@
                 <li <c:if test="${tab==0}">class="cun"</c:if>><a href="/about.html">关于我们</a></li>
                 <li <c:if test="${tab==1}">class="cun"</c:if>><a href="/help.html">帮助中心</a></li>
                 <li <c:if test="${tab==2}">class="cun"</c:if>><a href="/joinus.html">加入我们</a></li>
-                <li <c:if test="${tab==3}">class="cun"</c:if>><a href="/feedback.html">用户反馈</a></li>
+                <li <c:if test="${tab>=3}">class="cun"</c:if>><a href="/feedback.html">用户反馈</a></li>
 
             </ul>
         </div>
@@ -108,18 +89,19 @@
                 <c:when test="${tab==3}">
                     <h3>用户反馈</h3>
                     <div class="A_form">
-                        <form id="f_form">
+                        <form id="f_form" action="/feedback/post.html" method="post">
                             <div>
                                 <label>反馈内容</label>
-                                <textarea name="c" id="content"  placeholder="亲！请输入你的意见!"  style="resize: none" maxlength="500"></textarea>
+                                <textarea name="content" id="content"  placeholder="亲！请输入你的意见!"  style="resize: none" maxlength="500"></textarea>
                             </div>
                             <div>
                                 <label>联系电话</label>
-                                <input type="text" name="p" id="phone" placeholder="报答你的方式" maxlength="11" />
+                                <input type="text" name="phone" id="phone" placeholder="报答你的方式" maxlength="11" />
                             </div>
                             <div>
                                 <label>您的称呼</label>
                                 <input type="text" name="n" id="linkName" placeholder="您的称呼" maxlength="10"  />
+                                <input type="hidden" name="surname" id="surname">
                                 <input type="radio" value="先生" name="r" style="width: 20px" checked>先生
                                 <input type="radio" value="女士" name="r" style="width: 20px">女士
                             </div>
@@ -129,54 +111,30 @@
                         </form>
                     </div>
                 </c:when>
+                <c:when test="${tab==4}">
+                    <h1>提交成功，谢谢您！</h1>
+                </c:when>
             </c:choose>
         </div>
     </div><!--A_con end-->
 </div>
 <!--中间部分end-->
-<!--footer 开始-->
-<div class="footer">
-    <div class="foot_cen">
-        <div class="n_f_m_c">
-            <div class="n_f_m_c">
-                <a href="/about.html">关于我们</a>
-                <a href="/help.html">帮助中心</a>
-                <a href="/joinus.html">加入我们</a>
-                <a href="/feedback.html">用户反馈</a>
-            </div><!--n_f_m_c end-->
-        </div>
-
-        <div class="pp">
-            <p>业务合作单位：北京迈众汽车信息服务有限公司</p>
-            <p>Copyright © 2015-2017 优估 All Rights Reserved 版权所有迈众汽车（北京）信息服务有限公司</p>
-            <p>营业执照沪ICP备15036207号-2   沪公网安备 31011402001229号 沪通信管自贸【2016】5号 联系电话：021-10106088</p>
-        </div>
-
-        <div class="rem">
-            <div><img src="img/er.png"></div>
-            <p>微信公众号</p>
-        </div>
-    </div>
-</div>
-<!--fooot_cen end-->
-<script src="/resources/script/jquery-1.8.0.min.js" type="text/javascript"></script>
+<jsp:include page="footer.jsp"></jsp:include>
+<script src="http://cdn.bootcss.com/jquery/3.2.0/jquery.min.js" type="text/javascript"></script>
 <script>
+
     var form = document.forms[0],submit = document.querySelector(".sub");
     form.onsubmit = function(){
-        var content = document.getElementById('content').value;
+        var content = $("#content").val();
         if(content==""){alert("还没有输入意见");return false;}
-        var linkname = document.getElementById('linkName').value;
+        var linkname = $("#linkName").val();
         if(linkname==""){alert("输入您的称呼，我们会尽快联系您");return false;}
-        var phone = document.getElementById('phone').value;
+        var phone = $("#phone").val();
         if(!(/^1[34578]\d{9}$/.test(phone))){
             alert("手机号码有误，请重填");
             return false;
         }
-        $.post("/feedback/post.html",$(form).serialize(),function(res){
-            console.log(res);
-        });
-        return false;
-
+        $("#surname").val(linkname+$('input:radio:checked').val());
     }
 
 </script>

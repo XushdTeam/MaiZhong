@@ -18,7 +18,8 @@
     <meta name="keywords" content="汽车,汽车买卖,汽车网,汽车报价,汽车图片,买车"/>
     <meta name="description" content="迈众汽车为您提供最新汽车报价，汽车图片，汽车价格大全，最精彩的汽车新闻、行情、评测、导购内容，是提供信息最快最全的中国汽车网站。"/>
     <link rel="stylesheet" type="text/css" href="/resources/style/style.css" />
-    <script src="/resources/script/jquery-1.8.0.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="/resources/style/base.css" />
+    <script src="http://cdn.bootcss.com/jquery/3.2.0/jquery.min.js" type="text/javascript"></script>
 
 </head>
 <!--首页头部开始-->
@@ -280,31 +281,28 @@
     <div class="new_con">
         <div class="new_left">
             <dl>
-                <a href=" ">
+                <a href="/news.html?newsId=1">
                     <dt><img src="/resources/img/new.jpg"></dt>
                 </a>
-                <dd><a href=" ">家里添置新车，二手车怎么办？</a></dd>
-                <dd><a href=" ">家用商务俩不误，看看这几款MVP</a></dd>
-                <dd><a href=" ">家里添置新车，二手车怎么办？</a></dd>
-                <dd><a href=" ">家用商务俩不误，看看这几款MVP</a></dd>
+                <dd><a href="/news.html?newsId=1">国内中型车市场的竞争非常激烈，用中坚力量这个词来形容它们是非常合适的，对于选购中型车的消费者来说，最受人关注的是价格，无论是配置、舒适性还是动力表现都较为均衡的车型。接下来给您推荐3款各具特色和性格的合资中型车。</a></dd>
             </dl>
         </div><!--new_left-->
 
         <div class="new_right">
             <dl>
-                <a href=" ">
+                <a href="/news.html?newsId=2">
                     <dt><img src="/resources/img/new_2.jpg"></dt>
                 </a>
-                <dd class="dd1"><a href=" ">稳妥的选择 3款豪华中大型车推荐</a></dd>
-                <dd><a href="">国内豪华品牌中大型车市场销量前三的位置一直都被奥迪A6L、宝马5系、奔驰E级牢牢占据着，除了被不少企业和机关当作公务用车之外，不少消费者也看中了该级别车型宽大的车内空间和丰富的配置，将其作为家用车使用。</a></dd>
+                <dd class="dd1"><a href="/news.html?newsId=2">稳妥的选择 3款豪华中大型车推荐</a></dd>
+                <dd><a href="/news.html?newsId=2">国内豪华品牌中大型车市场销量前三的位置一直都被奥迪A6L、宝马5系、奔驰E级牢牢占据着，除了被不少企业和机关当作公务用车之外，不少消费者也看中了该级别车型宽大的车内空间和丰富的配置，将其作为家用车使用。</a></dd>
             </dl>
 
             <dl>
-                <a href=" ">
+                <a href="/news.html?newsId=3">
                     <dt><img src="/resources/img/new_4.jpg"></dt>
                 </a>
-                <dd class="dd1"><a href=" ">稳妥的选择 3款豪华中大型车推荐</a></dd>
-                <dd><a href="">国内豪华品牌中大型车市场销量前三的位置一直都被奥迪A6L、宝马5系、奔驰E级牢牢占据着，除了被不少企业和机关当作公务用车之外，不少消费者也看中了该级别车型宽大的车内空间和丰富的配置，将其作为家用车使用。</a></dd>
+                <dd class="dd1"><a href="/news.html?newsId=3">稳妥的选择 3款豪华中大型车推荐</a></dd>
+                <dd><a href="/news.html?newsId=3">国内豪华品牌中大型车市场销量前三的位置一直都被奥迪A6L、宝马5系、奔驰E级牢牢占据着，除了被不少企业和机关当作公务用车之外，不少消费者也看中了该级别车型宽大的车内空间和丰富的配置，将其作为家用车使用。</a></dd>
             </dl>
         </div><!--new_right-->
     </div><!--new_con-->
@@ -330,12 +328,28 @@
     </div><!--fooot_cen end-->
 </div>
 <!--footer 结束-->
+<div class="sidebar sidebar-new">
+    <a href="javascript:void(0);" class="sBtn free" id="sphone"><i></i>免费电话</a>
+    <a href="javascript:void(0);" class="toTop"><i></i>返回顶部</a>
+</div>
+<div class="sList free-phone" id="sidebar-list-sphone" style="display:none;">
+    <i></i>
+    <input type="text" placeholder="请输入电话号码" class="ipt-box" id="phone" maxlength="11" />
+    <a href="javascript:void(0);" class="free-btn">电话咨询</a>
+</div>
+<div class="free-phone-error" style="display:none;"><span style="color: red">请输入正确的手机号</span></div>
 <script src="/resources/script/doT.min.js" type="text/javascript"></script>
 <script src="/resources/script/lazy-load-img.min.js" type="text/javascript"></script>
 <script>
 
     var is = false;
     $(document).ready(function() {
+        $(".halfpay-car-list div .lazyload").hover(function(){
+            $(this).animate({right:'15px'});
+        },function(){
+
+            $(this).animate({right:'0px'});
+        });
         $(window).scroll(function() {
             if ($(document).scrollTop()>=230){
                 $(".nav_s").css("background","#fff").css("position","fixed").css("box-shadow","1px 1px 5px #999")
@@ -356,6 +370,7 @@
                     var evalText = doT.template($("#list-tmpl").text());
                     $("#list").html(evalText(data));
                 });
+
             }
 
         });
@@ -387,8 +402,26 @@
             error: function (el) { // 图片加载失败执行方法
                 el.src = './resources/img/default.png'
             }
-        })
-
+        });
+        $('.toTop').click(function () {
+            $("html, body").animate({ scrollTop: 0 }, 200);
+        });
+        $('#sphone').click(function () {
+            $('.free-phone-error').hide();
+            $('#sidebar-list-sphone').toggle();
+        });
+        $('.free-btn').click(function () {
+            var phone = $("#phone").val();
+            if(!(/^1[34578]\d{9}$/.test(phone))){
+                $('.free-phone-error').show();
+                return false;
+            }else{
+                $('.free-phone-error').hide();
+                $.post("/doPhoneLink.action",{phone:phone},function(res){
+                    console.log(123);
+                });
+            }
+        });
         // lazyLoadImg.destroy() // 销毁图片懒加载程序
     })()
 </script>
