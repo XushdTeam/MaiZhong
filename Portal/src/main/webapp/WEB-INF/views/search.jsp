@@ -373,7 +373,7 @@
                     <div class="ui-page-wrap">
                             <b class="ui-page-prev" onclick="jumpPage('-1')">&lt;&lt;上一页</b>
                                 <c:forEach begin="1" end="${searchResult.pageNum}"  varStatus="vs">
-                                    <b onclick="jumpPage('${vs.count}')" <c:if test="${vs.count==searchResult.currentPage}"> class="ui-page-cur"</c:if>>1</b>
+                                    <b onclick="jumpPage('${vs.count}')" <c:if test="${vs.count==searchResult.currentPage}"> class="ui-page-cur"</c:if>>${vs.count}</b>
                                 </c:forEach>
                                 <%--这玩意不会做啊--%>
                                 <%--<b class="ui-page-break">...</b>--%>
@@ -386,6 +386,7 @@
                 </div>
             </c:if>
             <c:if test="${searchResult.total==0}">
+                <h1><font color="aqua">没有查询结果</font></h1>
 
             </c:if>
 

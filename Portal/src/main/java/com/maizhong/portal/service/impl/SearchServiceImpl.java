@@ -104,7 +104,10 @@ public class SearchServiceImpl implements SearchService {
             result.setSortString(pageSearchParam.getSearchFileds().remove("sortString"));
         }
 
-        result.setConditions(pageSearchParam.getSearchFileds());
+
+        if(result!=null){
+            result.setConditions(pageSearchParam.getSearchFileds());
+        }
         return result;
     }
 }
