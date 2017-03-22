@@ -7,10 +7,12 @@ import com.maizhong.common.result.JsonResult;
 import com.maizhong.pojo.TbFeedback;
 import com.maizhong.rest.service.SpreadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
@@ -81,19 +83,30 @@ public class SpreadController {
     }
 
     /**
-     * 用户反馈添加
-     * @param c 反馈内容
-     * @param p 手机号
-     * @param n  姓氏
-     * @param r  性别 先生/女士
+     *用户反馈
+     * @param content 反馈内容
+     * @param phone  手机号
+     * @param surname  称谓
      * @return
      */
     @RequestMapping(value = "/feedback",method = RequestMethod.POST)
-    public JsonResult insertFeedback(String c,String p,String n,String r){
+    public JsonResult insertFeedback(String content,String phone,String surname){
 
-       OperateEnum result= spreadService.insertFeedback(p,c,n,r);
+        OperateEnum result= spreadService.insertFeedback(phone,content,surname);
 
         return JsonResult.build(result);
     }
 
+
+    /**
+     *用户咨询
+     * @param phone  手机号
+     * @param type  种类  0新车 1 二手车
+     * @return
+     */
+    @RequestMapping(value = "/consult",method = RequestMethod.POST)
+    public JsonResult insertConsult(String phone,String type){
+        OperateEnum result= spreadService.insertConsult(phone,type);
+        return JsonResult.build(result);
+    }
 }
