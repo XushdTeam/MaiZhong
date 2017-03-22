@@ -34,4 +34,11 @@ public interface SpreadService {
     OperateEnum insertFeedback(String phone, String content, String surname);
 
     OperateEnum insertConsult(String phone,String type);
+
+    JsonResult getAllBrand();
+
+    JsonResult getSeriesByBrand(Long brandId);
+
+    JsonResult getHotSeries();
+
 }
