@@ -6,6 +6,7 @@
     <result column="brand_id" jdbcType="BIGINT" property="brandId" />
     <result column="line_name" jdbcType="VARCHAR" property="lineName" />
     <result column="line_sequence" jdbcType="INTEGER" property="lineSequence" />
+    <result column="show_flag" jdbcType="INTEGER" property="showFlag" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="delflag" jdbcType="INTEGER" property="delflag" />
   </resultMap>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, brand_id, line_name, line_sequence, status, delflag
+    id, brand_id, line_name, line_sequence, show_flag, status, delflag
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.pojo.TbCarBrandLineExample" resultMap="BaseResultMap">
     select
@@ -102,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.maizhong.pojo.TbCarBrandLine">
     insert into tb_car_brand_line (id, brand_id, line_name, 
-      line_sequence, status, delflag
-      )
+      line_sequence, show_flag, status, 
+      delflag)
     values (#{id,jdbcType=BIGINT}, #{brandId,jdbcType=BIGINT}, #{lineName,jdbcType=VARCHAR}, 
-      #{lineSequence,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{delflag,jdbcType=INTEGER}
-      )
+      #{lineSequence,jdbcType=INTEGER}, #{showFlag,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{delflag,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.pojo.TbCarBrandLine">
     insert into tb_car_brand_line
@@ -122,6 +123,9 @@
       </if>
       <if test="lineSequence != null">
         line_sequence,
+      </if>
+      <if test="showFlag != null">
+        show_flag,
       </if>
       <if test="status != null">
         status,
@@ -142,6 +146,9 @@
       </if>
       <if test="lineSequence != null">
         #{lineSequence,jdbcType=INTEGER},
+      </if>
+      <if test="showFlag != null">
+        #{showFlag,jdbcType=INTEGER},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
@@ -172,6 +179,9 @@
       <if test="record.lineSequence != null">
         line_sequence = #{record.lineSequence,jdbcType=INTEGER},
       </if>
+      <if test="record.showFlag != null">
+        show_flag = #{record.showFlag,jdbcType=INTEGER},
+      </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
       </if>
@@ -189,6 +199,7 @@
       brand_id = #{record.brandId,jdbcType=BIGINT},
       line_name = #{record.lineName,jdbcType=VARCHAR},
       line_sequence = #{record.lineSequence,jdbcType=INTEGER},
+      show_flag = #{record.showFlag,jdbcType=INTEGER},
       status = #{record.status,jdbcType=INTEGER},
       delflag = #{record.delflag,jdbcType=INTEGER}
     <if test="_parameter != null">
@@ -207,6 +218,9 @@
       <if test="lineSequence != null">
         line_sequence = #{lineSequence,jdbcType=INTEGER},
       </if>
+      <if test="showFlag != null">
+        show_flag = #{showFlag,jdbcType=INTEGER},
+      </if>
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
       </if>
@@ -221,6 +235,7 @@
     set brand_id = #{brandId,jdbcType=BIGINT},
       line_name = #{lineName,jdbcType=VARCHAR},
       line_sequence = #{lineSequence,jdbcType=INTEGER},
+      show_flag = #{showFlag,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
       delflag = #{delflag,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}

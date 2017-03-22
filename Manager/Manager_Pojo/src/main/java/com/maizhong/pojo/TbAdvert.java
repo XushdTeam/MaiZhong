@@ -16,7 +16,6 @@ public class TbAdvert {
     private Integer publishState;
 
     private String advertDesc;
-
     private  String typeName;
 
     public void setTypeName(String typeName) {
@@ -89,8 +88,5 @@ public class TbAdvert {
 
     public void setAdvertDesc(String advertDesc) {
         this.advertDesc = advertDesc == null ? null : advertDesc.trim();
-    }
-
-    public TbAdvert() {
     }
 }

@@ -354,6 +354,66 @@ public class TbCarBrandLineExample {
             return (Criteria) this;
         }
 
+        public Criteria andShowFlagIsNull() {
+            addCriterion("show_flag is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowFlagIsNotNull() {
+            addCriterion("show_flag is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowFlagEqualTo(Integer value) {
+            addCriterion("show_flag =", value, "showFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowFlagNotEqualTo(Integer value) {
+            addCriterion("show_flag <>", value, "showFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowFlagGreaterThan(Integer value) {
+            addCriterion("show_flag >", value, "showFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowFlagGreaterThanOrEqualTo(Integer value) {
+            addCriterion("show_flag >=", value, "showFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowFlagLessThan(Integer value) {
+            addCriterion("show_flag <", value, "showFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowFlagLessThanOrEqualTo(Integer value) {
+            addCriterion("show_flag <=", value, "showFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowFlagIn(List<Integer> values) {
+            addCriterion("show_flag in", values, "showFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowFlagNotIn(List<Integer> values) {
+            addCriterion("show_flag not in", values, "showFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowFlagBetween(Integer value1, Integer value2) {
+            addCriterion("show_flag between", value1, value2, "showFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowFlagNotBetween(Integer value1, Integer value2) {
+            addCriterion("show_flag not between", value1, value2, "showFlag");
+            return (Criteria) this;
+        }
+
         public Criteria andStatusIsNull() {
             addCriterion("status is null");
             return (Criteria) this;

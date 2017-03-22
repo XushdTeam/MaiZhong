@@ -66,26 +66,20 @@
             <div class="chaxun">
                 <span class="spans">请选择你的查询条件</span>
                 <span id="searchArea">
-                    <c:forEach items="${conditions}" var="condition">
+                    <c:forEach items="${searchResult.conditions}" var="condition">
                         <c:if test="${condition.value!=null}">
                             <p class="p_spn" data-type="${condition.key}" data-attr="${condition.value}" style="display:inline">${condition.value}<span class="spas" onclick="delLi(this)">X</span><p>
                         </c:if>
                     </c:forEach>
-                    <p class="p_spn" data-attr="12-16万" data-type="car_sellPrice" style="display:inline">12-16万<span class="spas" onclick="delLi(this)">X</span><p>
-                    <p class="p_spn" data-attr="1.6-2.0" data-type="car_capacity" style="display:inline">1.6-2.0L<span class="spas" onclick="delLi(this)">X</span><p>
-
-
                 </span>
                 <from action="#" method="post" class="">
                     <div class="from_f2">
-                        <input type="text" id="queryString" name="queryString" placeholder="请输入你要查询的东西"><span class="sp" onclick="refresh(true)"><img src="img/67.jpg"></span>
+                        <input type="text" id="queryString" value="${searchResult.queryString}" name="queryString" placeholder="请输入你要查询的东西"><span class="sp" onclick="refresh('search')"><img src="img/67.jpg"></span>
                     </div>
                 </from>
             </div><!--chaxun emd-->
 
 
-            <script type="text/javascript">
-            </script>
             <div class="clear"></div>
             <div class="attrs j_NavAttrs" style="display:block">
                 <div class="brandAttr j_nav_brand" data-spm="a220m.1000858.1000720">
@@ -101,9 +95,9 @@
                                     <a  href="javascript:;" onclick="addCause(this)" data-type="car_brand" data-attr="" style="color:red" title="不限">不限</a>
                                 </li>
 
-                                <c:forEach items="${carType}" var="type">
+                                <c:forEach items="${searchResult.tbCarBrands}" var="brands">
                                     <li>
-                                        <a  href="javascript:" onclick="addCause(this)" data-attr="${type.typeName}" data-type="carType" title="${type.typeName}">${type.typeName}</a>
+                                        <a  href="javascript:" onclick="addCause(this)" data-attr="${brands.brandName}" data-type="carType" title="${brands.brandName}">${brands.brandName}</a>
                                     </li>
                                 </c:forEach>
                             </ul>
@@ -129,7 +123,7 @@
                                     </a>
                                 </li>
 
-                                <c:forEach items="${car_brandLine}" var="line">
+                                <c:forEach items="${searchResult.tbCarBrandLines}" var="line">
                                     <li>
                                         <a title="车系" href="javascript:;" data-attr="${line.lineName}" data-type="car_brandLine">
                                             <b> ${line.lineName}</b>
@@ -268,9 +262,9 @@
                                     </a>
                                 </li>
 
-                                <c:forEach items="${colors}" var="car_color" >
+                                <c:forEach items="${searchResult.colors}" var="color" >
                                     <li>
-                                        <a title="颜色" href="javascript:;" data-attr="${color.id}" data-type="car_color">
+                                        <a title="颜色" href="javascript:;" data-attr="${color.dicName}" data-type="car_color">
                                             <b>${color.dicName}</b>
                                         </a>
                                     </li>
@@ -295,9 +289,9 @@
                                     </a>
                                 </li>
 
-                                <c:forEach items="${gearboxs}" var="car_gearbox" >
+                                <c:forEach items="${searchResult.geadboxs}" var="gearbox" >
                                     <li>
-                                        <a title="变速箱" href="javascript:;" onclick="addCause(this)" data-attr="${gearbox.id}" data-type="car_gearbox">
+                                        <a title="变速箱" href="javascript:;" onclick="addCause(this)" data-attr="${gearbox.dicName}" data-type="car_gearbox">
                                             <b>${gearbox.dicName}</b>
                                         </a>
                                     </li>
@@ -314,32 +308,36 @@
 
             <!--综合-->
             <div class="filter clearfix" id="J_Filter"  >
-                <div class="fi_left">全部汽车资源（489473）</div>
+                <div class="fi_left">全部汽车资源</div>
                 <div class="fi_right">
-                    <a class="fSort fSort-cur" href=" " title="点击后恢复默认排序"  >默认排序<i class="f-ico-arrow-d"></i></a>
-                    <a class="fSort" href=" " title="点击后按人气从高到低"  >人气<i class="f-ico-arrow-d"></i></a>
-                    <a class="fSort" href=" ">最新<i class="f-ico-arrow-d"></i></a>
-                    <a class="fSort" href=" ">车龄<i class="f-ico-arrow-d"></i></a>
-                    <a class="fSort" href=" ">里程<i class="f-ico-arrow-d"></i></a>
-                    <a class="fSort" href=" ">价格<i class="f-ico-triangle-mt"></i><i class="f-ico-triangle-mb"></i></a>
+                    <a class="fSort"  data-sname="default" href="javascript:;" title="点击后恢复默认排序"  >默认排序<i class="f-ico-arrow-d"></i></a>
+                    <%--TODO <a class="fSort" data-sname="car_" data-sort="asc" href="javascript:;" title="点击后按人气从高到低">人气<i class="f-ico-arrow-d"></i></a>--%>
+                    <a class="fSort" data-sname="car_createTime" data-sort="asc" onclick="onSort(this)" href="javascript:;" title="点击后按照最新排序">最新<i class="f-ico-arrow-d"></i></a>
+                    <a class="fSort" data-sname="car_capacity" data-sort="asc" onclick="onSort(this)" href="javascript:;">排量<i class="f-ico-triangle-mt"></i><i class="f-ico-arrow-d"></i></a>
+                    <a class="fSort" data-sname="car_createTime" data-sort="asc" onclick="onSort(this)" href="javascript:;"><i class="f-ico-arrow-d"></i></a>
+                    <a class="fSort" data-sname="car_sellPrice" data-sort="asc" onclick="onSort(this)" href="javascript:;">价格<i class="f-ico-triangle-mb"></i></a>
                 </div>
             </div>
 
 
 
-
             <div style="clert:both"></div>
 
+
+
+
             <div class="view grid-nosku views" id="J_ItemList1" >
+            <c:forEach items="${searchResult.rows}" var="carVo">
+
                 <div class="product">
                     <div class="product-iWrap">
                         <div class="productImg-wrap">
                             <a href=" " class="productImg" target="_blank" >
-                                <img src="img/5.jpg">
+                                <img src="${carVo.image}">
                             </a>
                         </div><!--productImg-wrap end-->
                         <p class="productPrice">
-                            <em title="399.00"><b>¥</b>399.00</em>
+                            <em title="399.00"><b>¥</b>${carVo.sellPrice}</em>
                         </p>
                         <p class="productTitle">
                             <a href=" " target="_blank" title="【汽车分期】上汽好车e贷 金融产品 专拍链接 订金支付"  >
@@ -354,16 +352,15 @@
                         <p class="productStatus">
                             <span>月成交 <em>103笔</em></span>
                             <span>评价 <a href=" ">11</a></span>
-              <span data-icon="small" class="ww-light ww-small" >
-                 <a href=" " target="_blank" class="ww-inline ww-online" title="点此可以直接和卖家交流选好的宝贝，或相互交流网购体验，还支持语音视频噢。"><img src="img/44.png"><span>旺旺在线</span></a>
-               </span>
+                            <span data-icon="small" class="ww-light ww-small" >
+                               <a href=" " target="_blank" class="ww-inline ww-online" title="点此可以直接和卖家交流选好的宝贝，或相互交流网购体验，还支持语音视频噢。"><img src="img/44.png"><span>旺旺在线</span></a>
+                            </span>
                         </p>
                     </div>
 
-                </div><!--product end-->
+                </div>
 
-
-
+            </c:forEach>
             </div>
 
 
@@ -371,28 +368,27 @@
 
             <!--分页-->
 
-            <div class="ui-page">
-                <div class="ui-page-wrap">
-                    <b class="ui-page-num">
-                        <b class="ui-page-prev">&lt;&lt;上一页</b>
-                        <b class="ui-page-cur">1</b>
-                        <a href=" ">2</a>
-                        <a href=" ">3</a>
-                        <b class="ui-page-break">...</b>
-                        <a class="ui-page-next" href="">下一页&gt;&gt;</a>
-                    </b>
-                    <b class="ui-page-skip">
-                        <form name="filterPageForm" method="get">
-                            <input type="hidden" name="type" value="pc">
-                            <input type="hidden" name="q" value="汽车">
-                            <input type="hidden" name="totalPage" value="100">
-                            <input type="hidden" name="sort" value="s"><input type="hidden" name="style" value="g">    共100页，到第
-                            <input type="text" name="jumpto" class="ui-page-skipTo" size="3" value="1">页
-                            <button type="submit" class="ui-btn-s" atpanel="2,pageton,,,,20,footer,">确定</button>
-                        </form>
-                    </b>
+            <c:if test="${searchResult.total>0}">
+                <div class="ui-page">
+                    <div class="ui-page-wrap">
+                            <b class="ui-page-prev" onclick="jumpPage('-1')">&lt;&lt;上一页</b>
+                                <c:forEach begin="1" end="${searchResult.pageNum}"  varStatus="vs">
+                                    <b onclick="jumpPage('${vs.count}')" <c:if test="${vs.count==searchResult.currentPage}"> class="ui-page-cur"</c:if>>${vs.count}</b>
+                                </c:forEach>
+                                <%--这玩意不会做啊--%>
+                                <%--<b class="ui-page-break">...</b>--%>
+                                <a class="ui-page-next" onclick="jumpPage('+1')" href="">下一页&gt;&gt;</a>
+                            </b>
+                        <b class="ui-page-skip">
+                            共${searchResult.pageSize}页，到第<input type="text" name="jumpto" id="jumpto" class="ui-page-skipTo" size="3" value="1">页
+                        </b>
+                    </div>
                 </div>
-            </div>
+            </c:if>
+            <c:if test="${searchResult.total==0}">
+                <h1><font color="aqua">没有查询结果</font></h1>
+
+            </c:if>
 
 
 
@@ -401,10 +397,9 @@
                 <a href=" ">大众汽车</a>
                 <a href=" ">汽车整车</a>
                 <a href=" ">suv汽车</a>
-                <a href=" ">二手车</a>
                 <a href=" ">汽车分期</a>
                 <a href=" ">jeep汽车</a>
-                <a href=" ">阿里汽车</a>
+                <a href=" ">迈众汽车</a>
             </p>
 
 
@@ -479,9 +474,8 @@
                 <fieldset>
                     <div class="btmSearch-input clearfix">
                         <input type="text" value="汽车" autocomplete="off" tabindex="9" accesskey="s" class="btmSearch-mq" id="btm-mq" data-bts="0" name="q" aria-label="搜索关键词">
-                        <button type="submit" class="ui-btn-search-l" aria-label="搜索">搜索<s></s></button>
-                        <input type="hidden" name="type" value="p">
-                        <input type="hidden" name="redirect" value="notRedirect">
+                        <!--TODO 搜索方法有问题-->
+                        <button type="button" onclick="refresh('search')" class="ui-btn-search-l" aria-label="搜索">搜索<s></s></button>
                     </div>
                 </fieldset>
             </form>
@@ -534,13 +528,37 @@
     }
 
 
+    //排序以及初始化方法  无参数时为刷新调用的初始化方法
+    function jumpPage(page){
+        if(page){
+            if(page=='+1'){
+                page = parseInt($(".ui-page-cur:first").text())+1;
+            }
+            if(page=='-1'){
+                page = parseInt($(".ui-page-cur:first").text())-1;
+            }
+            $("#jumpto").val(page);
+            refresh('page');
+        }else{
+            $("#jumpto").val($(".ui-page-cur:first").text());
+        }
+        //TODO
+
+
+    }
+
+
+
+
     function addCause(Obj){
 //        添加条件到搜索栏上
         var type = $(Obj).data("type");
         $(".p_spn[data-type='"+type+"']").remove();
         var attr = $(Obj).data("attr");
-        var text = $(Obj).text();
-        $("#searchArea").append('<p class="p_spn" data-type="'+type+'" data-attr="'+attr+'" >'+text+'<span class="spas" onclick="delLi(this)">X</span><p>');
+        if(attr!=""){
+//            var text = $(Obj).text();
+            $("#searchArea").append('<p class="p_spn" data-type="'+type+'" data-attr="'+attr+'" >'+attr+'<span class="spas" onclick="delLi(this)">X</span><p>');
+        }
         refresh();
     }
 
@@ -553,39 +571,106 @@
 //                    $(this).css("car_color","black");
                     $(this).removeAttr("style");
                 })
-                $(selected).css("car_color","red");
+                $(selected).css("color","red");
             }
         })
+
+        queryString = "${searchResult.queryString}"
+        //偷个懒。。。
+        sortString = "${searchResult.sortString}"
+
+        if(sortString!=""){
+            var sortArr = sortString.split("-");
+            //TODO  排序字段回显
+            $("#J_Filter a[data-sname='"+sortArr[0]+"']").addClass("fSort-cur");
+            $("#J_Filter a[data-sname='"+sortArr[0]+"']").data("sort",sortArr[1]);
+        }
     })
 
+    //排序字段选中
+    function onSort(Obj){
+        //清空排序状态
+        $("#J_Filter a").removeClass("fSort-cur");
+        sortString = "";
 
-    function refresh(bo){
+        if($(Obj).data("sname")=="default"){
+            return;
+        }
+
+        //判断是否被选中
+        if($(Obj).hasClass("fSort-cur")){
+            //已经被选中的状态更改
+            if($(Obj).data("sort")=="asc"){
+                $(Obj).data("sort","desc");
+            }else{
+                $(Obj).data("sort","asc");
+            }
+        }else{
+            //未被选中的添加class字段就可以了
+            $(Obj).addClass("fSort-cur");
+        }
+
+        sortString = $(Obj).data("sname")+"-"+ $(Obj).data("sort");
+        alert(sortString)
+        //刷新页面
+        refresh("sort");
+    }
+
+
+
+
+    //参数的意义  判断刷新事件是否是搜索框 排序 还是跳页 字段分别分 search sort page  无字段情况下为默认条件检索
+    //判断是跳页事件还是
+    function refresh(kindStr){
 
         //初始化url
         var url = "${searchUrl}";
 
-
-        url+="?pageIndex="+$(".ui-page-cur")[0].text();
-
-        //拼装数据
-        //拼装查询框中的数据  如果查询框中有数据 并且是由查询按钮触发的事件 直接跳转
-        if(bo&&$("#queryString").val()){
-            url+="&searchFileds[queryString]="+$("#queryString").val();
+//        Search
+//        无视其他条件直接跳转  页数 排序无视
+        if(kindStr=='search'){
+            url+="?searchFileds[queryString]="+$("#queryString").val();
             //跳转
             window.location.href = url;
         }
-        //拼装起始页与页面数据大小
+        //标记字段  添加？  还是 &
+        var bo = true;
+        //如果是非查询或者 查询字段==null的情况下  说明是 分类检索的分页，排序 或者纯粹分类  需要封装排序字段
+        if(!kindStr||queryString==""){
+            //封装查询字段
+            $.each( $("#searchArea p"),function (i,e) {
+                if($(e).data("type")){
+                    url+=bo?"?searchFileds[":"&searchFileds["+$(e).data("type")+"]="+$(e).data("attr");
+                    bo=false;
+                }
+            })
+        }
+        //如果是直接分类 直接跳转  如果不是判断queryString是否为空  不为空添加queryString字段
+        if(!kindStr){
+            window.location.href = url;
+        }else if(queryString!=""){
+            url+=bo?"?searchFileds[queryString]=":"&searchFileds[queryString]="+queryString;
+        }
 
-        //如果没跳转  拼装条件
-        $("#searchArea p").each(function (i,e) {
-            if($(e).data("type")){
-                url+=bo?"?searchFileds[":"&searchFileds["+$(e).data("type")+"]="+$(e).data("attr");
-                if(bo) bo=false;
+
+        //跳页包含排序条件  排序不包含跳页
+        //查询条件存在  非直接跳转 需要添加分页参数 排序参数
+        if(kindStr){
+            if(sortString!=""){
+                url+=bo?"?searchFileds[sortString]=":"&searchFileds[sortString]="+sortString;
+                bo=false;
             }
-        })
+//            if(kindStr=='sort'){
+//            }
+            if(kindStr=='page'){
+                url+=bo?"?pageIndex=":"&pageIndex="+$("#jumpto").val();
+            }
+        }
+
         //跳转
         window.location.href = url;
     }
+
 </script>
 </body>
 </html>

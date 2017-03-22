@@ -1,16 +1,22 @@
 package com.maizhong.portal.service.impl;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.pojo.TbCar;
+import com.maizhong.pojo.vo.SearchResult;
 import com.maizhong.pojo.vo.TbCarVo;
 import com.maizhong.portal.service.SearchService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,11 +59,10 @@ public class SearchServiceImpl implements SearchService {
      * @return
      */
     @Override
-    public Map<String, Object> search(PageSearchParam pageSearchParam) {
+    public SearchResult search(PageSearchParam pageSearchParam) {
         //查询条件准备
-        Map<String,String> param =new HashMap<>();
+        Map<String,String> param =new HashMap();
         //总结果集数据
-        Map<String,Object> results = new HashMap<>();
         //获取查询条件
         if (pageSearchParam!=null&&pageSearchParam.getSearchFileds()!=null){
             //参数获取
@@ -66,56 +71,44 @@ public class SearchServiceImpl implements SearchService {
             for (Map.Entry<String,String> entry: pageSearchParam.getSearchFileds().entrySet()) {
                 param.put("searchFileds["+entry.getKey()+"]",entry.getValue());
             }
-            results.put("conditions",pageSearchParam.getSearchFileds());
         }
 
-        //起始页
         param.put("pageIndex",pageSearchParam.getPageIndex()+"");
-//        results.put("pageIndex",pageSearchParam.getPageIndex()+"");
-
+        param.put("pageSize",pageSearchParam.getPageSize()+"");
 
 
 
         //调用服务层服务
 //        conditions  条件
-        String result;
-
-        //查询结果集
-        result = HttpClientUtil.doPost(REST_URL + CAR_SEARCH,param);
-        results.putAll(JsonUtils.searchResultToMap(result,TbCarVo.class));
-
-        //品牌
-        result = HttpClientUtil.doGet(REST_URL + CAR_BRAND);
-        results.put("carBrands",JsonUtils.jsonResultToList(result));
-
-        //车系
-        param =  new HashMap<>();
-        if (pageSearchParam.getFiled("car_brand")!=null){
-            param.put("carBrand",pageSearchParam.getFiled("car_brand"));
+        //为什么要map。。。
+        String jsonResult = HttpClientUtil.doPost(REST_URL + CAR_SEARCH,param);
+        SearchResult result = null;
+        try {
+            if (StringUtils.isNotBlank(jsonResult)){
+                ObjectMapper mapper = new ObjectMapper();
+                JsonNode jsonNode = mapper.readTree(jsonResult);
+                JsonNode data = jsonNode.get("data");
+                result = mapper.treeToValue(data, SearchResult.class);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        result = HttpClientUtil.doGet(REST_URL + CAR_BRAND_LINE,param);
-        results.put("carBrandsLines",JsonUtils.jsonResultToList(result));
+        //参数回显
 
-        //品牌
+        //如果参数中搜索条件  手动移除 并且添加到回显pojo类中
+        if (pageSearchParam.getFiled("queryString")!=null){
+            result.setQueryString(pageSearchParam.getSearchFileds().remove("queryString"));
+        }
+        //如果参数中排序条件  手动移除 并且添加到回显pojo类中
+        if (pageSearchParam.getFiled("sortString")!=null){
+            result.setSortString(pageSearchParam.getSearchFileds().remove("sortString"));
+        }
 
-// 词典数据
-        param =  new HashMap<>();
-//       颜色
-        param.put("type",4+"");
-        result = HttpClientUtil.doGet(REST_URL + CAR_DIC,param);
-        results.put("colors",JsonUtils.jsonResultToList(result));
 
-        param =  new HashMap<>();
-//       变速箱
-        param.put("type",9+"");
-        result = HttpClientUtil.doGet(REST_URL + CAR_DIC,param);
-        results.put("gradboxs",JsonUtils.jsonResultToList(result));
-//       类型
-        result = HttpClientUtil.doGet(REST_URL + CAR_TYPE);
-        results.put("types",JsonUtils.jsonResultToList(result));
-        //处理结果集
-
-        return results;
+        if(result!=null){
+            result.setConditions(pageSearchParam.getSearchFileds());
+        }
+        return result;
     }
 }
 

@@ -62,6 +62,12 @@ public class BrandLineServiceImpl implements BrandLineService {
             tbCarBrandLine.setStatus(1);
             tbCarBrandLine.setDelflag(0);
         }
+
+        //TODO 缓存处理 预留
+        if (tbCarBrandLine.getShowFlag()!=null&&tbCarBrandLine.getShowFlag()==1){
+
+        }
+
         tbCarBrandLineMapper.insertSelective(tbCarBrandLine);
         return JsonResult.OK("添加成功");
     }
@@ -81,6 +87,11 @@ public class BrandLineServiceImpl implements BrandLineService {
         }else{
             tbCarBrandLine.setStatus(1);
             tbCarBrandLine.setDelflag(0);
+        }
+
+        //TODO 缓存处理 预留
+        if (tbCarBrandLine.getShowFlag()!=null&&tbCarBrandLine.getShowFlag()==1){
+
         }
         tbCarBrandLineMapper.updateByPrimaryKeySelective(tbCarBrandLine);
         return JsonResult.OK("修改成功");
