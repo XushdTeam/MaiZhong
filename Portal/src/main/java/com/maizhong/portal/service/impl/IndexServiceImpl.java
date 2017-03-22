@@ -6,6 +6,7 @@ import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.pojo.TbAdvert;
+import com.maizhong.pojo.TbFeedback;
 import com.maizhong.portal.service.IndexService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -115,27 +116,25 @@ public class IndexServiceImpl implements IndexService {
 
     @Override
     public String getFeedBackUrl() {
-        return REST_URL+FEEDB_ACK;
+        return REST_URL + FEEDB_ACK;
     }
 
     /**
      * 用户反馈
-     * @param c
-     * @param p
-     * @param n
-     * @param r
+     *
+     * @param feedback
      * @return
      */
     @Override
-    public JsonResult saveFeedback(String c, String p, String n, String r) {
-
-        Map<String,String> map = new HashMap<>();
-        map.put("content",c);
-        map.put("phone",p);
-        map.put("name",n);
-        map.put("name_r",r);
-        String res  = HttpClientUtil.doPost(REST_URL + FEEDB_ACK, map);
-        JsonResult result = JsonUtils.jsonToPojo(res,JsonResult.class);
-        return result;
+    public boolean saveFeedback(TbFeedback feedback) {
+        Map<String, String> map = new HashMap<>();
+        map.put("content", feedback.getContent());
+        map.put("phone", feedback.getPhone());
+        map.put("surname", feedback.getSurname());
+        String res = HttpClientUtil.doPost(REST_URL + FEEDB_ACK, map);
+        JsonResult result = JsonUtils.jsonToPojo(res, JsonResult.class);
+        if (result.getStatus() == 200) return true;
+        return false;
     }
+
 }

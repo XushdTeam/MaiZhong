@@ -682,7 +682,7 @@ margin: 0 auto;
 .tuijian{ width: 1200px; margin: 0 auto}
 .tuijian h2{ color: #666; line-height: 45px; margin-top: 20px; height: 45px;font-weight: 500; border-bottom:1px solid #eee; font-size: 22px;}
 .tuijian dl{ border: 1px solid #ccc; width:274px; float: left; margin:10px 32px 0 0}
-.tuijian dl dd img{ width: 100%}
+.tuijian dl dd img{ width: 100%;border-bottom: 1px solid #E6E5E5;}
 .tuijian dl dd p{ line-height: 45px;}
 .tuijian dl.last{ float: right; margin-right: 0;}
 .tuijian dl dd p{ font-size: 15px; padding: 0 10px}

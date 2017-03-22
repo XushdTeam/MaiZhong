@@ -17,26 +17,7 @@
     <link rel="stylesheet" type="text/css" href="/resources/style/other.css" />
 </head>
 <body>
-<!--导航-->
-<div class="haeder">
-    <div class="nav_top nav_tops">
-        <div class="logo">
-            <a href="#" title="迈众汽车"><img src="/resources/img/logo.png"></a>
-        </div>
-        <ul class="navs">
-            <li><a href="/">首页</a></li>
-            <li><a href="">我要买车</a></li>
-            <li><a href="/sale.html">我要卖车</a></li>
-            <li><a href="">服务保障</a></li>
-        </ul><!--navs end-->
-        <!--call-->
-        <div class="call">
-            <span class="span_one"><a href="">400-090-0494</a></span>
-            <span><a href="#">登录</a> / <a href="#">注册</a></span>
-        </div>
-    </div><!--nav_top end-->
-</div>
-<!--导航 end-->
+<jsp:include page="head.jsp"></jsp:include>
 <!--ban 开始-->
 <div class="bans">
     <div class="ban_cen">
@@ -141,29 +122,6 @@
     </div><!--newCar-question-list end-->
 
 </div> <!--bg_colocr end-->
-<!--footer 开始-->
-<div class="footer">
-    <div class="foot_cen">
-        <div class="n_f_m_c">
-            <div class="n_f_m_c">
-                <a href="/about.html">关于我们</a>
-                <a href="/help.html">帮助中心</a>
-                <a href="/joinus.html">加入我们</a>
-                <a href="/feedback.html">用户反馈</a>
-            </div><!--n_f_m_c end-->
-        </div>
-
-        <div class="pp">
-            <p>业务合作单位：北京迈众汽车信息服务有限公司</p>
-            <p>Copyright © 2015-2017 优估 All Rights Reserved 版权所有迈众汽车（北京）信息服务有限公司</p>
-            <p>营业执照沪ICP备15036207号-2   沪公网安备 31011402001229号 沪通信管自贸【2016】5号 联系电话：021-10106088</p>
-        </div>
-
-        <div class="rem">
-            <div><img src="img/er.png"></div>
-            <p>微信公众号</p>
-        </div>
-    </div>
-</div>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
