@@ -99,7 +99,7 @@
     <script type="text/javascript" src="/resources/js/event.js"></script>
     <script type="text/javascript">
         layui.use("pagelist",function(){
-            layui.pagelist.basePagingInit(6);
+            layui.pagelist.basePagingInit(8);
         });
     </script>
 </div>
