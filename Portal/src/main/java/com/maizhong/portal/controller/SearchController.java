@@ -17,7 +17,7 @@ import java.util.Map;
  * Created by YangF on 2017/3/16.
  */
 @Controller
-@RequestMapping("/search")
+/*@RequestMapping("/search")*/
 public class SearchController {
 
     @Resource
@@ -39,6 +39,11 @@ public class SearchController {
         SearchResult search = searchService.search(pageSearchParam);
         model.addAttribute("searchResult",search);
         model.addAttribute("searchUrl","/search/info.html");
+        return "search";
+    }
+    @RequestMapping(value = "/car")
+    public String carlist(){
+
         return "search";
     }
 }

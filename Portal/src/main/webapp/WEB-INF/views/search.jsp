@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: yangF
@@ -7,62 +6,26 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>迈众汽车</title>
-    <script src="/resources/script/jquery-1.8.0.min.js" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="/resources/style/style.css" />
-
-    <%--<link rel="stylesheet" type="text/css" href="/resources/style/base.css" />--%>
-
-    <%--<script type="text/javascript" src="/resources/script/jquery.jqzoom.js"></script>--%>
-    <%--<script type="text/javascript" src="/resources/script/use_jqzoom.js"></script>--%>
-    <script src="/resources/script/js.js"></script>
-    <!--[if lt IE 8]>
-    <script src=”http://ie7-js.googlecode.com/svn/version/2.0(beta)/IE8.js” type=”text/javascript”></script>
-    <![endif]-->
-
-
-    <%--<script type="text/javascript" src="/resources/script/common.js"></script>--%>
-    <%--<script type="text/javascript" src="/resources/script/quick_links.js"></script>--%>
+    <meta name="keywords" content="汽车,汽车买卖,汽车网,汽车报价,汽车图片,买车"/>
+    <meta name="description" content="迈众汽车为您提供最新汽车报价，汽车图片，汽车价格大全，最精彩的汽车新闻、行情、评测、导购内容，是提供信息最快最全的中国汽车网站。"/>
+    <link rel="stylesheet" type="text/css" href="/resources/style/base.css" />
+    <link rel="stylesheet" type="text/css" href="/resources/style/other.css"/>
+    <script src="http://cdn.bootcss.com/jquery/3.2.0/jquery.min.js" type="text/javascript"></script>
 </head>
 <body>
-<!--导航-->
-<div class="haeder">
-    <div class="nav_top nav_tops">
-        <div class="logo">
-            <a href="#" title="迈众汽车"><img src="img/logo.png"></a> <span>北京</span>
-        </div>
-        <ul class="navs">
-            <li><a href>首页</a></li>
-            <li><a href>我要买车</a></li>
-            <li><a href>我要卖车</a></li>
-            <li><a href>服务保障</a></li>
-        </ul><!--navs end-->
-
-        <!--call-->
-        <div class="call">
-            <span class="span_one"><a href="">400-090-0494</a></span>
-            <span><a href="#">登录</a> / <a href="#">注册</a></span>
-        </div>
-    </div><!--nav_top end-->
+<jsp:include page="head.jsp"></jsp:include>
+<div class="x_ban">
+    <img src="/resources/img/x_ban.png" width="1200px">
 </div>
-<!--导航 end-->
-<!--广告位-->
-<%--以后再解开--%>
-<%--<div class="x_ban">--%>
-    <%--<img src="img/x_ban.png" width="1200px">--%>
-<%--</div>--%>
-<!--广告位 end-->
-
-
-
 <div id="content">
-
     <div class="main">
         <div class="crumb" id="J_crumbs">
-
             <div class="chaxun">
                 <span class="spans">请选择你的查询条件</span>
                 <span id="searchArea">
@@ -74,12 +37,10 @@
                 </span>
                 <from action="#" method="post" class="">
                     <div class="from_f2">
-                        <input type="text" id="queryString" value="${searchResult.queryString}" name="queryString" placeholder="请输入你要查询的东西"><span class="sp" onclick="refresh('search')"><img src="img/67.jpg"></span>
+                        <input type="text" id="queryString" value="${searchResult.queryString}" name="queryString" placeholder="请输入你要查询的东西"><span class="sp" onclick="refresh('search')"><img src="/resources/img/67.jpg"></span>
                     </div>
                 </from>
             </div><!--chaxun emd-->
-
-
             <div class="clear"></div>
             <div class="attrs j_NavAttrs" style="display:block">
                 <div class="brandAttr j_nav_brand" data-spm="a220m.1000858.1000720">
@@ -482,39 +443,7 @@
         </div>
     </div>
 </div>
-<!--搜索 恩德-->
-<!--免费电话-->
-<div id="leftsead">
-    <ul>
-        <li id="tel">
-            <a href="javascript:void(0)">
-                <div class="hides" id="tels">
-                    <div class="hides" id="p1">
-                        <img src="img/ll05.png">
-                    </div>
-                    <div class="" id="p33">
-                  <span style="color:#FFF;font-size:12px">
-                      <from action="#" method="post" name="1" class="f_zuo">
-                          <input type="text" />
-                          <span>免费电话</span>
-                      </from>
-                  </span>
-                    </div>
-                </div>
-            </a>
-        </li>
-
-        <li id="btn">
-            <a id="top_btn">
-                <div class="hides" style="width:161px;display:none">
-                    <img src="img/ll06.png" width="161" height="49" />
-                </div>
-                <img src="img/l06.png" width="47" height="49" class="shows" />
-            </a>
-        </li>
-    </ul>
-
-</div>
+<jsp:include page="footer.jsp"></jsp:include>
 <script type="text/javascript">
 
     function delLi(Obj){

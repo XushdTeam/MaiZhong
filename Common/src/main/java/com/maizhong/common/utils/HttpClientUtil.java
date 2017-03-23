@@ -77,6 +77,7 @@ public class HttpClientUtil {
         try {
             // 创建Http Post请求
             HttpPost httpPost = new HttpPost(url);
+
             // 创建参数列表
             if (param != null) {
                 List<NameValuePair> paramList = new ArrayList<>();
@@ -84,7 +85,7 @@ public class HttpClientUtil {
                     paramList.add(new BasicNameValuePair(key, param.get(key)));
                 }
                 // 模拟表单
-                UrlEncodedFormEntity entity = new UrlEncodedFormEntity(paramList);
+                UrlEncodedFormEntity entity = new UrlEncodedFormEntity(paramList,"utf-8");
                 httpPost.setEntity(entity);
             }
             // 执行http请求

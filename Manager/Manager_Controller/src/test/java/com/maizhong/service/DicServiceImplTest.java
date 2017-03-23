@@ -33,10 +33,7 @@ public class DicServiceImplTest {
     @Test
     public void JedisTest(){
 
-        String json = jedisClient.hget(DIC_KEY, DicParentEnum.ADTYPE.getState()+"");
 
-        String dicFormRedisById = DicRedisUtils.getDicFormRedisById("14", json);
-        System.out.println(dicFormRedisById);
 
 
     }

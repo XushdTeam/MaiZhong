@@ -45,6 +45,8 @@
         <shiro.version>1.2.3</shiro.version>
         <aspectjweaver>1.8.6</aspectjweaver>
         <httpclient.version>4.5.1</httpclient.version>
+        <protostuff.version>1.0.8</protostuff.version>
+        <goolecollect.version>1.0</goolecollect.version>
     </properties>
 
     <dependencyManagement>
@@ -251,6 +253,23 @@
                 <version>${aspectjweaver}</version>
             </dependency>
 
+            <!--protostuff 序列化依赖-->
+            <dependency>
+                <groupId>com.dyuproject.protostuff</groupId>
+                <artifactId>protostuff-core</artifactId>
+                <version>${protostuff.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dyuproject.protostuff</groupId>
+                <artifactId>protostuff-runtime</artifactId>
+                <version>${protostuff.version}</version>
+            </dependency>
+            <!--googel collections-->
+            <dependency>
+                <groupId>com.google.collections</groupId>
+                <artifactId>google-collections</artifactId>
+                <version>${goolecollect.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

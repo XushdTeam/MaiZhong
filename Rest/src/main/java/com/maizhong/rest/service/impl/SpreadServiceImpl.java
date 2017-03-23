@@ -303,13 +303,17 @@ public class SpreadServiceImpl implements SpreadService {
         }
     }
 
+    /**
+     * 获取所有品牌
+     * @return
+     */
     @Override
     public JsonResult getAllBrand() {
         //缓存命中
         try {
-            String json = jedisClient.get(CAR_BRAND);
-            if (StringUtils.isNotBlank(json)) {
-                return JsonResult.OK(JsonUtils.jsonToList(json, TbCarBrand.class));
+            List<TbCarBrand> list = jedisClient.getObjectList(CAR_BRAND,TbCarBrand.class,0,-1);
+            if(list!=null&&list.size()>0){
+                return JsonResult.OK(list);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -322,8 +326,7 @@ public class SpreadServiceImpl implements SpreadService {
 
         //写入缓存
         try {
-            String jsonStr = JsonUtils.objectToJson(list);
-            jedisClient.set(CAR_BRAND, jsonStr);
+            jedisClient.setObjectList(CAR_BRAND,list);
         } catch (Exception e) {
             e.printStackTrace();
         }

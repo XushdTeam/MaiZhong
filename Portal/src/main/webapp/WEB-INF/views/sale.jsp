@@ -14,7 +14,7 @@
     <meta name="keywords" content="卖车估价,快速出售二手车" />
     <meta name="description" content="二手车置换新车，卖车估价，新车询价，迈众汽车" />
     <title>【二手车置换新车】卖车估价_二手车快速置换新车-迈众汽车</title>
-    <link rel="stylesheet" type="text/css" href="/resources/style/other.css" />
+    <link rel="stylesheet" type="text/css" href="/resources/style/base.css" />
 </head>
 <body>
 <jsp:include page="head.jsp"></jsp:include>

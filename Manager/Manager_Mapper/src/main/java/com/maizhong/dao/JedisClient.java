@@ -1,5 +1,7 @@
 package com.maizhong.dao;
 
+import java.util.List;
+
 /**
  * Jedis 接口
  * Created by Xushd on 2017/2/28.
@@ -39,6 +41,26 @@ public interface  JedisClient {
      * @return
      */
     long ttl(String key);
+
+    /**
+     * * 获取list对象
+     * @param key
+     * @param clazz
+     * @param start
+     * @param end
+     * @param <T>
+     * @return
+     */
+
+    <T> List<T> getObjectList(String key,Class<T> clazz,int start,int end);
+
+    /**
+     * 设置list对象
+     * @param key
+     * @param value
+     * @return
+     */
+    long setObjectList(String key,List<?> value);
 
 
 }

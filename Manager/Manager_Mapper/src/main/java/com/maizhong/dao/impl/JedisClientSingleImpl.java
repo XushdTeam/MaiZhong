@@ -1,10 +1,14 @@
 package com.maizhong.dao.impl;
 
 
+import com.google.common.collect.Lists;
+import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.dao.JedisClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+
+import java.util.List;
 
 /**
  * JREDIS Daoimpl 单例
@@ -88,4 +92,59 @@ public class JedisClientSingleImpl implements JedisClient {
         jedis.close();
         return ret;
     }
+
+    /**
+     * 获取List缓存
+     * @param key
+     * @param clazz
+     * @param start
+     * @param end
+     * @param <T>
+     * @return
+     */
+    public <T> List<T> getObjectList(String key,Class<T> clazz,int start,int end) {
+        List<T> value = null;
+        Jedis jedis = jedisPool.getResource();
+        try {
+            List<String> list = jedis.lrange(key,start,end);
+            value = Lists.newArrayList();
+            for (String bs : list) {
+                value.add(JsonUtils.jsonToPojo(bs,clazz));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            jedis.close();
+        }
+        return value;
+    }
+
+    /**
+     * 设置list
+     * @param key
+     * @param value
+     * @return
+     */
+    public long setObjectList(String key, List<?> value) {
+        long result = 0;
+        Jedis jedis = jedisPool.getResource();
+        try {
+            List<String> list = Lists.newArrayList();
+            String[] arry = new String[list.size()];
+            for (Object o : value) {
+                list.add(JsonUtils.objectToJson(o).toString());
+            }
+            result = jedis.rpush(key, list.toArray(arry));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            jedis.close();
+        }
+        return result;
+
+    }
+
+
+
 }

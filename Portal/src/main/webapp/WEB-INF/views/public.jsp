@@ -12,7 +12,7 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>${title}-迈众汽车</title>
-    <link rel="stylesheet" type="text/css" href="/resources/style/other.css" />
+    <link rel="stylesheet" type="text/css" href="/resources/style/base.css" />
 </head>
 <body>
 <jsp:include page="head.jsp"></jsp:include>

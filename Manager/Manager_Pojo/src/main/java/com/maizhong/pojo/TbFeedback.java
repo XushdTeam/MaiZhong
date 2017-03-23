@@ -1,6 +1,7 @@
 package com.maizhong.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -8,10 +9,13 @@ import java.util.Date;
 public class TbFeedback {
     private Long id;
 
+    @NotBlank(message = "手机号不能为空")
     private String phone;
 
+    @NotBlank(message = "反馈内容不能为空")
     private String content;
 
+    @NotBlank(message = "联系人不能为空")
     private String surname;
 
     private Date createTime;
