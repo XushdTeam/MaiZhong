@@ -1,10 +1,8 @@
 package com.maizhong.rest.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.maizhong.common.dto.CarColumnJoinCar;
-import com.maizhong.common.dto.CarIndexDetail;
-import com.maizhong.common.dto.CarShowIndex;
-import com.maizhong.common.dto.KeyValue;
+import com.google.common.collect.Lists;
+import com.maizhong.common.dto.*;
 import com.maizhong.common.enums.DicParentEnum;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
@@ -55,6 +53,7 @@ public class SpreadServiceImpl implements SpreadService {
     @Value("${AD_HOME}")
     private String AD_HOME;
 
+    //基础库汽车品牌
     @Value("${CAR_BRAND}")
     private String CAR_BRAND;
 
@@ -70,93 +69,10 @@ public class SpreadServiceImpl implements SpreadService {
     @Value("${CAR_BRAND_LINE}")
     private String CAR_BRAND_LINE;
 
-    /**
-     * 获取发布广告信息
-     *
-     * @param type
-     * @return
-     */
-    @Override
-    public JsonResult getAdvertByType(Integer type) {
+    //热门10中 车的品牌
+    @Value("${CAR_BRAND_HOT}")
+    private String CAR_BRAND_HOT;
 
-        //缓存命中
-        try {
-            String json = jedisClient.hget(AD_HOME, type + "");
-            if (StringUtils.isNotBlank(json)) {
-                return JsonResult.OK(JsonUtils.jsonToList(json, TbAdvert.class));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        List<TbAdvert> list = tbAdvertMapper.getAdvertPublish(Long.valueOf(type));
-
-        //写入缓存
-        try {
-            String jsonStr = JsonUtils.objectToJson(list);
-            jedisClient.hset(AD_HOME, type + "", jsonStr);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return JsonResult.OK(list);
-    }
-
-
-    @Override
-    public JsonResult getIndexBrand() {
-
-        //缓存命中
-        try {
-            String json = jedisClient.get(CAR_BRAND_LINE);
-            if (StringUtils.isNotBlank(json)) {
-                List<TbCarBrand> brands=JsonUtils.jsonToList(json, TbCarBrand.class);
-                return JsonResult.OK(brands.subList(0,10));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        TbCarBrandExample example = new TbCarBrandExample();
-        TbCarBrandExample.Criteria criteria = example.createCriteria();
-        criteria.andDelflagEqualTo(0);
-        example.setOrderByClause("brand_sequence ASC,id ASC");
-        List<TbCarBrand> list = tbCarBrandMapper.selectByExample(example);
-
-        //写入缓存
-        try {
-            String jsonStr = JsonUtils.objectToJson(list);
-            jedisClient.set(CAR_BRAND, jsonStr);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return JsonResult.OK(list.subList(0,10));
-    }
-
-    @Override
-    public JsonResult getIndexCarType() {
-
-        //缓存命中
-        try {
-            String json = jedisClient.get(CAR_TYPE);
-            if (StringUtils.isNotBlank(json)) {
-                return JsonResult.OK(JsonUtils.jsonToList(json, TbCarType.class));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        TbCarTypeExample example = new TbCarTypeExample();
-        TbCarTypeExample.Criteria criteria = example.createCriteria();
-        criteria.andDelflagEqualTo(0);
-        example.setOrderByClause("type_sequence ASC,id ASC");
-        List<TbCarType> list = tbCarTypeMapper.selectByExample(example);
-
-        //写入缓存
-        try {
-            String jsonStr = JsonUtils.objectToJson(list);
-            jedisClient.set(CAR_TYPE, jsonStr);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return JsonResult.OK(list);
-    }
 
     /**
      * 根据栏目Id获取栏目下的所有汽车
@@ -303,10 +219,10 @@ public class SpreadServiceImpl implements SpreadService {
         }
     }
 
-    /**
+   /* *//**
      * 获取所有品牌
      * @return
-     */
+     *//*
     @Override
     public JsonResult getAllBrand() {
         //缓存命中
@@ -332,7 +248,7 @@ public class SpreadServiceImpl implements SpreadService {
         }
 
         return JsonResult.OK(list);
-    }
+    }*/
 
     @Override
     public JsonResult getSeriesByBrand(Long brandId) {
@@ -388,6 +304,129 @@ public class SpreadServiceImpl implements SpreadService {
             e.printStackTrace();
         }
         return JsonResult.OK(list);
+    }
+
+    /**
+     * 首页数据 初次 获取
+     * @author Xushd
+     * @return
+     */
+    @Override
+    public JsonResult getIndexBase() {
+
+        /*step1 首页广告*/
+        List<GgDTO> listGg = getListGg("14");
+        /*step2 品牌*/
+        List<CarBrandDTO> carBrandHot = getCarBrandHot();
+        /*step3 车型*/
+        List<CarTypeDTO> carType = getCarType();
+
+        return JsonResult.OK(new IndexBaseDTO(carBrandHot,listGg,carType));
+    }
+
+    /**
+     * 广告信息获取
+     * @author Xushd
+     * @param ggType
+     * @return
+     */
+    private List<GgDTO> getListGg(String ggType){
+        try {
+            String adJson = jedisClient.hget(AD_HOME,ggType);
+            if(StringUtils.isNotBlank(adJson)){
+                return JsonUtils.jsonToList(adJson,GgDTO.class);
+            }
+        }catch (Exception e){
+           e.printStackTrace();
+        }
+        List<TbAdvert> list = tbAdvertMapper.getAdvertPublish(Long.valueOf(ggType));
+        List<GgDTO> ggDTOs = Lists.newArrayList();
+
+        for (TbAdvert tbAdvert : list) {
+            ggDTOs.add(new GgDTO(tbAdvert.getId(),tbAdvert.getAdvertUrl(),tbAdvert.getAdvertImg()));
+        }
+        try {
+            jedisClient.hset(AD_HOME,ggType,JsonUtils.objectToJson(ggDTOs));
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return ggDTOs;
+
+    }
+
+    /**
+     * 获取热门车品牌
+     * @author Xushd
+     * @return
+     */
+    private List<CarBrandDTO> getCarBrandHot(){
+        try {
+            String carBrandHot = jedisClient.get(CAR_BRAND_HOT);
+            if(StringUtils.isNotBlank(carBrandHot)){
+                return JsonUtils.jsonToList(carBrandHot,CarBrandDTO.class);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        List<TbCarBrand> carBrandList= getCarBrand(10);
+        List<CarBrandDTO> resList = Lists.newArrayList();
+        for (TbCarBrand tbCarBrand : carBrandList) {
+            resList.add(new CarBrandDTO(tbCarBrand.getId(),tbCarBrand.getBrandName(),tbCarBrand.getBrandImg()));
+        }
+        try {
+            String carBrandHot = JsonUtils.objectToJson(resList);
+            jedisClient.set(CAR_BRAND_HOT,carBrandHot);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return resList;
+
+    }
+
+    /**
+     * 获取汽车品牌（基础数据）
+     * @author Xushd
+     * @param rows
+     * @return
+     */
+    private List<TbCarBrand> getCarBrand(int rows){
+        try {
+            List<TbCarBrand> list = jedisClient.getObjectList(CAR_BRAND, TbCarBrand.class, 0, rows);
+            return list;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private List<CarTypeDTO> getCarType(){
+        //缓存命中
+        try {
+            String carTypeJson = jedisClient.get(CAR_TYPE);
+            if (StringUtils.isNotBlank(carTypeJson)) {
+                return JsonUtils.jsonToList(carTypeJson, CarTypeDTO.class);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        TbCarTypeExample example = new TbCarTypeExample();
+        TbCarTypeExample.Criteria criteria = example.createCriteria();
+        criteria.andDelflagEqualTo(0);
+        example.setOrderByClause("type_sequence ASC,id ASC");
+        List<TbCarType> list = tbCarTypeMapper.selectByExample(example);
+        List<CarTypeDTO> resList = Lists.newArrayList();
+        for (TbCarType tbCarType : list) {
+            resList.add(new CarTypeDTO(tbCarType.getId(),tbCarType.getTypeName(),tbCarType.getTypeImg()));
+        }
+        //写入缓存
+        try {
+            String jsonStr = JsonUtils.objectToJson(resList);
+            jedisClient.set(CAR_TYPE, jsonStr);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resList;
     }
 }
 

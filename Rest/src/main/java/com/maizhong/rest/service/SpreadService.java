@@ -13,19 +13,6 @@ import java.util.List;
  * Time: 15:05
  */
 public interface SpreadService {
-    /**
-     * 根据广告类型获取广告列表/getAdvert/{type}
-     * @param type
-     * @return
-     */
-    JsonResult getAdvertByType(Integer type);
-    /**
-     * 获取首页品牌信息
-     * @return
-     */
-    public JsonResult getIndexBrand();
-
-    JsonResult getIndexCarType();
 
     JsonResult getCarColumnById(Integer columnId,Integer number);
 
@@ -35,10 +22,9 @@ public interface SpreadService {
 
     OperateEnum insertConsult(String phone,String type);
 
-    JsonResult getAllBrand();
-
     JsonResult getSeriesByBrand(Long brandId);
 
     JsonResult getHotSeries();
 
+    JsonResult getIndexBase();
 }
