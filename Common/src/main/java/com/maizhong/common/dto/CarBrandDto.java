@@ -4,7 +4,7 @@ package com.maizhong.common.dto;
  * 汽车品牌DTO
  * Created by Xushd on 2017/3/23.
  */
-public class CarBrandDTO {
+public class CarBrandDto {
 
     private Long id;
 
@@ -12,10 +12,10 @@ public class CarBrandDTO {
 
     private String imgUrl;
 
-    public CarBrandDTO() {
+    public CarBrandDto() {
     }
 
-    public CarBrandDTO(Long id, String name, String imgUrl) {
+    public CarBrandDto(Long id, String name, String imgUrl) {
         this.id = id;
         this.name = name;
         this.imgUrl = imgUrl;

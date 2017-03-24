@@ -9,17 +9,17 @@ import java.util.Map;
  */
 public class SearchBaseDTO {
 
-    private List<CarBrandDTO> carBrandhot;
+    private List<CarBrandDto> carBrandhot;
 
     private Map<String,List<KeyValue>> carBrandAll;
 
     private List<KeyValue> carSeriesList;
 
-    public List<CarBrandDTO> getCarBrandhot() {
+    public List<CarBrandDto> getCarBrandhot() {
         return carBrandhot;
     }
 
-    public void setCarBrandhot(List<CarBrandDTO> carBrandhot) {
+    public void setCarBrandhot(List<CarBrandDto> carBrandhot) {
         this.carBrandhot = carBrandhot;
     }
 
