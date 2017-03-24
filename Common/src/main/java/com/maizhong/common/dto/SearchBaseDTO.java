@@ -1,6 +1,7 @@
 package com.maizhong.common.dto;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 查询基本数据DTO
@@ -8,20 +9,33 @@ import java.util.List;
  */
 public class SearchBaseDTO {
 
-    private List<CarBrandDTO> carBrandDTOs;
+    private List<CarBrandDTO> carBrandhot;
 
-    public SearchBaseDTO(List<CarBrandDTO> carBrandDTOs) {
-        this.carBrandDTOs = carBrandDTOs;
+    private Map<String,List<KeyValue>> carBrandAll;
+
+    private List<KeyValue> carSeriesList;
+
+    public List<CarBrandDTO> getCarBrandhot() {
+        return carBrandhot;
     }
 
-    public SearchBaseDTO() {
+    public void setCarBrandhot(List<CarBrandDTO> carBrandhot) {
+        this.carBrandhot = carBrandhot;
     }
 
-    public List<CarBrandDTO> getCarBrandDTOs() {
-        return carBrandDTOs;
+    public Map<String, List<KeyValue>> getCarBrandAll() {
+        return carBrandAll;
     }
 
-    public void setCarBrandDTOs(List<CarBrandDTO> carBrandDTOs) {
-        this.carBrandDTOs = carBrandDTOs;
+    public void setCarBrandAll(Map<String, List<KeyValue>> carBrandAll) {
+        this.carBrandAll = carBrandAll;
+    }
+
+    public List<KeyValue> getCarSeriesList() {
+        return carSeriesList;
+    }
+
+    public void setCarSeriesList(List<KeyValue> carSeriesList) {
+        this.carSeriesList = carSeriesList;
     }
 }
