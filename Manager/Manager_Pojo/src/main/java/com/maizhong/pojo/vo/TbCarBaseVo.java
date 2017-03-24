@@ -6,8 +6,24 @@ package com.maizhong.pojo.vo;
 public class TbCarBaseVo {
     private Long id;
     private String carTypeName;
+    private String carName;
     private String color;
+    private String carYear;
 
+    public String getCarYear() {
+        return carYear;
+    }
+
+    public void setCarYear(String carYear) {
+        this.carYear = carYear;
+    }
+    public String getCarName() {
+        return carName;
+    }
+
+    public void setCarName(String carName) {
+        this.carName = carName;
+    }
 
     public Long getId() {
         return id;

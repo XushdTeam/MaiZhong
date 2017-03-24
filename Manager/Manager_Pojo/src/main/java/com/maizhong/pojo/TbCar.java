@@ -15,7 +15,9 @@ public class TbCar {
 
     private Long carType;
 
-    private Long color;
+    private String carYear;
+
+    private String color;
 
     private String sellpoint;
 
@@ -91,12 +93,20 @@ public class TbCar {
         this.carType = carType;
     }
 
-    public Long getColor() {
+    public String getCarYear() {
+        return carYear;
+    }
+
+    public void setCarYear(String carYear) {
+        this.carYear = carYear == null ? null : carYear.trim();
+    }
+
+    public String getColor() {
         return color;
     }
 
-    public void setColor(Long color) {
-        this.color = color;
+    public void setColor(String color) {
+        this.color = color == null ? null : color.trim();
     }
 
     public String getSellpoint() {
