@@ -96,7 +96,6 @@ public class SpreadController {
     @RequestMapping(value = "/getIndexBase",method = RequestMethod.GET)
     public JsonResult getIndexBase(){
         JsonResult result = spreadService.getIndexBase();
-
         return result;
     }
 }
