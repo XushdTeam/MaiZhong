@@ -1,47 +1,50 @@
 package com.maizhong.common.dto;
 
+import java.util.List;
+
 /**
  * 首页初次数据DTO
  * Created by Xushd on 2017/3/23.
  */
 public class IndexBaseDTO {
 
-    private Object carBrand;
+    private List<CarBrandDTO> carBrand;
 
-    private Object carGg;
+    private List<GgDTO> ggDTOs;
 
-    private Object carType;
+    private List<CarTypeDTO> carType;
 
     public IndexBaseDTO() {
     }
 
-    public IndexBaseDTO(Object carBrand, Object carGg, Object carType) {
-        this.carBrand = carBrand;
-        this.carGg = carGg;
-        this.carType = carType;
-    }
 
-    public Object getCarBrand() {
+    public List<CarBrandDTO> getCarBrand() {
         return carBrand;
     }
 
-    public void setCarBrand(Object carBrand) {
+    public void setCarBrand(List<CarBrandDTO> carBrand) {
         this.carBrand = carBrand;
     }
 
-    public Object getCarGg() {
-        return carGg;
+    public List<GgDTO> getGgDTOs() {
+        return ggDTOs;
     }
 
-    public void setCarGg(Object carGg) {
-        this.carGg = carGg;
+    public void setGgDTOs(List<GgDTO> ggDTOs) {
+        this.ggDTOs = ggDTOs;
     }
 
-    public Object getCarType() {
+    public List<CarTypeDTO> getCarType() {
         return carType;
     }
 
-    public void setCarType(Object carType) {
+    public void setCarType(List<CarTypeDTO> carType) {
+        this.carType = carType;
+    }
+
+    public IndexBaseDTO(List<CarBrandDTO> carBrand, List<GgDTO> ggDTOs, List<CarTypeDTO> carType) {
+        this.carBrand = carBrand;
+        this.ggDTOs = ggDTOs;
         this.carType = carType;
     }
 }
