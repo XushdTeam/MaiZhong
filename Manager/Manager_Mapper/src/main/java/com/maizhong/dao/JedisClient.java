@@ -63,4 +63,5 @@ public interface  JedisClient {
     long setObjectList(String key,List<?> value);
 
 
+
 }

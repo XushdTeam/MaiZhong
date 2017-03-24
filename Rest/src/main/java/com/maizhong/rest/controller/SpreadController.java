@@ -33,49 +33,6 @@ public class SpreadController {
     }
 
     /**
-     * 获取首页品显示品牌前十个
-     */
-    @RequestMapping(value = "/getIndexBrand")
-    public JsonResult getIndexBrand() {
-        JsonResult result = spreadService.getIndexBrand();
-        return result;
-    }
-
-
-    @RequestMapping(value = "/getAllBrand")
-    public JsonResult getAllBrand() {
-        JsonResult result = spreadService.getAllBrand();
-        return result;
-    }
-
-    /**
-     * 获取汽车类型
-     */
-    @RequestMapping(value = "/getIndexCarType")
-    public JsonResult getIndexCarType() {
-        JsonResult result = spreadService.getIndexCarType();
-        return result;
-    }
-
-    /**
-     * 广告获取接口，根据广告类型
-     */
-    @RequestMapping(value = "/getAdvert/{type}")
-    public JsonResult getAdvertByType(@PathVariable("type") Integer type) {
-        JsonResult result = spreadService.getAdvertByType(type);
-        return result;
-    }
-
-    /**
-     * 首页汽车栏目获取列表，根据栏目Id (作废)
-     */
-    @RequestMapping(value = "/getCarColumnById/{columnId}/{number}")
-    public JsonResult getCarColumnById(@PathVariable("columnId") Integer columnId, @PathVariable("number") Integer number) {
-        JsonResult result = spreadService.getCarColumnById(columnId, number);
-        return result;
-    }
-
-    /**
      * 首页分栏数据
      *
      * @param jsoncallback
@@ -129,5 +86,17 @@ public class SpreadController {
     @RequestMapping(value = "/getHotSeries")
     public JsonResult getHotSeries() {
         return spreadService.getHotSeries();
+    }
+
+
+    /**
+     * 前台首页 初次数据获取
+     * @return
+     */
+    @RequestMapping(value = "/getIndexBase",method = RequestMethod.GET)
+    public JsonResult getIndexBase(){
+        JsonResult result = spreadService.getIndexBase();
+
+        return result;
     }
 }

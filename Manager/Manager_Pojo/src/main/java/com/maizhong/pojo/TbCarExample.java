@@ -475,6 +475,76 @@ public class TbCarExample {
             return (Criteria) this;
         }
 
+        public Criteria andCarYearIsNull() {
+            addCriterion("car_year is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarYearIsNotNull() {
+            addCriterion("car_year is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarYearEqualTo(String value) {
+            addCriterion("car_year =", value, "carYear");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarYearNotEqualTo(String value) {
+            addCriterion("car_year <>", value, "carYear");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarYearGreaterThan(String value) {
+            addCriterion("car_year >", value, "carYear");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarYearGreaterThanOrEqualTo(String value) {
+            addCriterion("car_year >=", value, "carYear");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarYearLessThan(String value) {
+            addCriterion("car_year <", value, "carYear");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarYearLessThanOrEqualTo(String value) {
+            addCriterion("car_year <=", value, "carYear");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarYearLike(String value) {
+            addCriterion("car_year like", value, "carYear");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarYearNotLike(String value) {
+            addCriterion("car_year not like", value, "carYear");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarYearIn(List<String> values) {
+            addCriterion("car_year in", values, "carYear");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarYearNotIn(List<String> values) {
+            addCriterion("car_year not in", values, "carYear");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarYearBetween(String value1, String value2) {
+            addCriterion("car_year between", value1, value2, "carYear");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarYearNotBetween(String value1, String value2) {
+            addCriterion("car_year not between", value1, value2, "carYear");
+            return (Criteria) this;
+        }
+
         public Criteria andColorIsNull() {
             addCriterion("color is null");
             return (Criteria) this;
@@ -485,52 +555,62 @@ public class TbCarExample {
             return (Criteria) this;
         }
 
-        public Criteria andColorEqualTo(Long value) {
+        public Criteria andColorEqualTo(String value) {
             addCriterion("color =", value, "color");
             return (Criteria) this;
         }
 
-        public Criteria andColorNotEqualTo(Long value) {
+        public Criteria andColorNotEqualTo(String value) {
             addCriterion("color <>", value, "color");
             return (Criteria) this;
         }
 
-        public Criteria andColorGreaterThan(Long value) {
+        public Criteria andColorGreaterThan(String value) {
             addCriterion("color >", value, "color");
             return (Criteria) this;
         }
 
-        public Criteria andColorGreaterThanOrEqualTo(Long value) {
+        public Criteria andColorGreaterThanOrEqualTo(String value) {
             addCriterion("color >=", value, "color");
             return (Criteria) this;
         }
 
-        public Criteria andColorLessThan(Long value) {
+        public Criteria andColorLessThan(String value) {
             addCriterion("color <", value, "color");
             return (Criteria) this;
         }
 
-        public Criteria andColorLessThanOrEqualTo(Long value) {
+        public Criteria andColorLessThanOrEqualTo(String value) {
             addCriterion("color <=", value, "color");
             return (Criteria) this;
         }
 
-        public Criteria andColorIn(List<Long> values) {
+        public Criteria andColorLike(String value) {
+            addCriterion("color like", value, "color");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorNotLike(String value) {
+            addCriterion("color not like", value, "color");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorIn(List<String> values) {
             addCriterion("color in", values, "color");
             return (Criteria) this;
         }
 
-        public Criteria andColorNotIn(List<Long> values) {
+        public Criteria andColorNotIn(List<String> values) {
             addCriterion("color not in", values, "color");
             return (Criteria) this;
         }
 
-        public Criteria andColorBetween(Long value1, Long value2) {
+        public Criteria andColorBetween(String value1, String value2) {
             addCriterion("color between", value1, value2, "color");
             return (Criteria) this;
         }
 
-        public Criteria andColorNotBetween(Long value1, Long value2) {
+        public Criteria andColorNotBetween(String value1, String value2) {
             addCriterion("color not between", value1, value2, "color");
             return (Criteria) this;
         }

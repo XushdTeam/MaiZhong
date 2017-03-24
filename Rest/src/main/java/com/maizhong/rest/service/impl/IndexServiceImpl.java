@@ -78,6 +78,7 @@ public class IndexServiceImpl implements IndexService {
         }
         List<RestInterface> list = interfaceMapper.selectByExample(example);
         PageInfo pageInfo = new PageInfo(list);
+
         PageResult result = new PageResult(pageInfo);
         return JsonResult.OK(result);
     }
