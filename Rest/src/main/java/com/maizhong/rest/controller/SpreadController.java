@@ -41,9 +41,7 @@ public class SpreadController {
         return result;
     }
 
-    /**
-     * 获取首页品显示品牌前十个
-     */
+
     @RequestMapping(value = "/getAllBrand")
     public JsonResult getAllBrand() {
         JsonResult result = spreadService.getAllBrand();

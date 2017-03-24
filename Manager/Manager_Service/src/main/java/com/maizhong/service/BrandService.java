@@ -6,6 +6,8 @@ import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.pojo.TbCarBrand;
 
+import java.util.List;
+
 /**
  * Description:品牌服务接口
  * User: 王存浩
@@ -28,6 +30,8 @@ public interface BrandService {
      * @return
      */
     PageResult getCarBrandList(PageSearchParam param);
+
+    List<TbCarBrand> getCarBrandList();
 
 
     /**

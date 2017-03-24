@@ -44,16 +44,10 @@ public class BrandController {
     @RequiresPermissions("/brand")
     @RequestMapping(value = "/brand", method = RequestMethod.GET)
     public String carBrand(Model model) {
-
         model.addAttribute("baseUrl", "/brand");
         model.addAttribute("listUrl", "/brand/list");
         model.addAttribute("handleUrl", "/brand/handle");
         model.addAttribute("deleteUrl", "/brand/delete");
-        model.addAttribute("insertLineUrl", "/carBrandLine/insert");
-        model.addAttribute("lineListUrl", "/carBrandLine/list");
-        model.addAttribute("deleteLineUrl", "/carBrandLine/delete");
-
-
         return "shop/brand";
     }
 

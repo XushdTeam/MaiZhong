@@ -73,8 +73,8 @@ public class SearchServiceImpl implements SearchService {
     @Value("${CAR_BRAND}")
     private String CAR_BRAND;
 
-    @Value("${CAR_BRAND_LINE}")
-    private String CAR_BRAND_LINE;
+    @Value("${CAR_SERIES}")
+    private String CAR_SERIES;
 
     @Value("${CAR_TYPE}")
     private String CAR_TYPE;
@@ -524,7 +524,7 @@ public class SearchServiceImpl implements SearchService {
 
         //缓存命中
         try {
-            String json = jedisClient.hget(CAR_BRAND_LINE,carBrandName==null?"Top10":carBrandName);
+            String json = jedisClient.hget(CAR_SERIES,carBrandName==null?"Top10":carBrandName);
             if (StringUtils.isNotBlank(json)&&!json.equals("null")){
                 result= JsonUtils.jsonToList(json,TbCarBrandLine.class);
             }
@@ -557,10 +557,10 @@ public class SearchServiceImpl implements SearchService {
         try {
             if (result!=null&&result.size()>0){
                 String jsonStr = JsonUtils.objectToJson(result);
-                jedisClient.hset(CAR_BRAND_LINE,carBrandName,jsonStr);
+                jedisClient.hset(CAR_SERIES,carBrandName,jsonStr);
             }else{
                 //避免redis穿透
-                jedisClient.hset(CAR_BRAND_LINE,carBrandName,"null");
+                jedisClient.hset(CAR_SERIES,carBrandName,"null");
             }
         }catch (Exception e){
             e.printStackTrace();

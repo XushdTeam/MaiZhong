@@ -80,7 +80,7 @@
                             {{# } }}
                         </td>
                         <td>
-                            <a class="layui-btn layui-btn-small" onclick="showLine('{{ item.id }}')"><i class="icon-edit  fa fa-pencil-square-o"></i>显示车系</a>
+                    <%--        <a class="layui-btn layui-btn-small" onclick="showLine('{{ item.id }}')"><i class="icon-edit  fa fa-pencil-square-o"></i>显示车系</a>--%>
                             <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit" data-href="${handleUrl}/{{item.id}}"><i class="icon-edit  fa fa-pencil-square-o"></i>编辑</a>
                             <a class="layui-btn layui-btn-small layui-btn-danger do-action" data-type="doDelete" data-text="确定删除<span class=red>{{item.brandName}}</span>吗？" data-href="${deleteUrl}/{{item.id}}"><i class="icon-trash-o  fa fa-trash-o"></i>删除</a>
                         </td>
@@ -97,25 +97,59 @@
         </div>
 
 
-        <!--车系列表-->
-        <div id="hideDiv" style="display:none">
-            <table class="layui-table" lay-skin="line">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>车系名称</th>
-                    <th>显示顺序</th>
-                    <th>是否启用</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody id="linelist">
-                </tbody>
-            </table>
-        </div>
+        <%--   <!--车系列表-->
+  <div id="hideDiv" style="display:none">
+      <table class="layui-table" lay-skin="line">
+          <thead>
+          <tr>
+              <th>ID</th>
+              <th>车系名称</th>
+              <th>显示顺序</th>
+              <th>是否启用</th>
+              <th>操作</th>
+          </tr>
+          </thead>
+          <tbody id="linelist">
+          </tbody>
+      </table>
+  </div>
 
-        <!--车系添加-->
-            <%-- --%>
+  <!--车系添加-->
+&lt;%&ndash; &ndash;%&gt;
+      <div  id="hideInsert" style="display:none">
+          <div class="site-text site-block">
+              <form  class="layui-form layui-form-pane">
+                  <input name="id" type="hidden" >
+                  <input name="brandId" type="hidden" >
+                  <div class="layui-form-item">
+                      <label class="layui-form-label">车系名称</label>
+                      <div class="layui-input-block">
+                          <input name="lineName" autocomplete="off" lay-verify="required" maxlength="50"
+                                 placeholder="汽车车系名称  例：辉腾" class="layui-input" type="text">
+                      </div>
+                  </div>
+                  <div class="layui-form-item">
+                      <label class="layui-form-label">车系顺序</label>
+                      <div class="layui-input-block">
+                          <input name="lineSequence" autocomplete="off" lay-verify="number" maxlength="50"
+                                 placeholder="车系顺序 顺序越小越靠前" class="layui-input" type="text">
+                      </div>
+                  </div>
+                  <div class="layui-form-item">
+                      <label class="layui-form-label">是否启用</label>
+                      <div class="layui-input-block">
+                          <input type="radio" name="status" value="1" title="启用" checked="checked" >
+                          <input type="radio" name="status" value="0" title="停用" >
+                      </div>
+                  </div>
+                  <div class="layui-form-item" style="display: none;">
+                      <div class="layui-input-block">
+                          <button class="layui-btn" id="submitBtn"  lay-submit lay-filter="submitBtn" data-href="${insertLineUrl}">添加品牌</button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>--%><%--   &lt;%&ndash; &ndash;%&gt;
             <div  id="hideInsert" style="display:none">
                 <div class="site-text site-block">
                     <form  class="layui-form layui-form-pane">
@@ -149,7 +183,75 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div>--%><%--   &lt;%&ndash; &ndash;%&gt;
+            <div  id="hideInsert" style="display:none">
+                <div class="site-text site-block">
+                    <form  class="layui-form layui-form-pane">
+                        <input name="id" type="hidden" >
+                        <input name="brandId" type="hidden" >
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">车系名称</label>
+                            <div class="layui-input-block">
+                                <input name="lineName" autocomplete="off" lay-verify="required" maxlength="50"
+                                       placeholder="汽车车系名称  例：辉腾" class="layui-input" type="text">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">车系顺序</label>
+                            <div class="layui-input-block">
+                                <input name="lineSequence" autocomplete="off" lay-verify="number" maxlength="50"
+                                       placeholder="车系顺序 顺序越小越靠前" class="layui-input" type="text">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">是否启用</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="status" value="1" title="启用" checked="checked" >
+                                <input type="radio" name="status" value="0" title="停用" >
+                            </div>
+                        </div>
+                        <div class="layui-form-item" style="display: none;">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" id="submitBtn"  lay-submit lay-filter="submitBtn" data-href="${insertLineUrl}">添加品牌</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>--%><%--   &lt;%&ndash; &ndash;%&gt;
+            <div  id="hideInsert" style="display:none">
+                <div class="site-text site-block">
+                    <form  class="layui-form layui-form-pane">
+                        <input name="id" type="hidden" >
+                        <input name="brandId" type="hidden" >
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">车系名称</label>
+                            <div class="layui-input-block">
+                                <input name="lineName" autocomplete="off" lay-verify="required" maxlength="50"
+                                       placeholder="汽车车系名称  例：辉腾" class="layui-input" type="text">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">车系顺序</label>
+                            <div class="layui-input-block">
+                                <input name="lineSequence" autocomplete="off" lay-verify="number" maxlength="50"
+                                       placeholder="车系顺序 顺序越小越靠前" class="layui-input" type="text">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">是否启用</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="status" value="1" title="启用" checked="checked" >
+                                <input type="radio" name="status" value="0" title="停用" >
+                            </div>
+                        </div>
+                        <div class="layui-form-item" style="display: none;">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" id="submitBtn"  lay-submit lay-filter="submitBtn" data-href="${insertLineUrl}">添加品牌</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>--%>
 
 
 

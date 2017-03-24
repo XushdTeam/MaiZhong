@@ -9,17 +9,10 @@ package com.maizhong.common.dto;
 public class CarIndexDetail {
     private Long id;
     private String name;
-    private String price;
+    private String factoryPrice;
     private String img;
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private Long reservePrice;
+    private Long sellPrice;
 
     public Long getId() {
         return id;
@@ -29,12 +22,20 @@ public class CarIndexDetail {
         this.id = id;
     }
 
-    public String getPrice() {
-        return price;
+    public String getName() {
+        return name;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getFactoryPrice() {
+        return factoryPrice;
+    }
+
+    public void setFactoryPrice(String factoryPrice) {
+        this.factoryPrice = factoryPrice;
     }
 
     public String getImg() {
@@ -45,13 +46,31 @@ public class CarIndexDetail {
         this.img = img;
     }
 
+    public Long getReservePrice() {
+        return reservePrice;
+    }
+
+    public void setReservePrice(Long reservePrice) {
+        this.reservePrice = reservePrice;
+    }
+
+    public Long getSellPrice() {
+        return sellPrice;
+    }
+
+    public void setSellPrice(Long sellPrice) {
+        this.sellPrice = sellPrice;
+    }
+
     public CarIndexDetail() {
     }
 
-    public CarIndexDetail(Long id, String name, String price, String img) {
+    public CarIndexDetail(Long id, String name, String factoryPrice, String img, Long reservePrice, Long sellPrice) {
         this.id = id;
         this.name = name;
-        this.price = price;
+        this.factoryPrice = factoryPrice;
         this.img = img;
+        this.reservePrice = reservePrice;
+        this.sellPrice = sellPrice;
     }
 }

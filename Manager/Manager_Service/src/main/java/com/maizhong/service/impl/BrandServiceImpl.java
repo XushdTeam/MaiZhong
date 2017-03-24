@@ -69,6 +69,17 @@ public class BrandServiceImpl implements BrandService {
         return new PageResult(pageInfo);
     }
 
+    @Override
+    public List<TbCarBrand> getCarBrandList() {
+        TbCarBrandExample example = new TbCarBrandExample();
+        TbCarBrandExample.Criteria criteria = example.createCriteria();
+        criteria.andDelflagEqualTo(0);
+        criteria.andStatusEqualTo(1);
+        example.setOrderByClause("brand_sequence ASC,id ASC");
+        List<TbCarBrand> list = tbCarBrandMapper.selectByExample(example);
+        return  list;
+    }
+
     /**
      * 查询出所有状态为1 未删除的品牌信息
      * @return
@@ -76,7 +87,6 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public String getCarBrandListAll() {
-
         TbCarBrandExample example = new TbCarBrandExample();
         TbCarBrandExample.Criteria criteria = example.createCriteria();
         criteria.andDelflagEqualTo(0);

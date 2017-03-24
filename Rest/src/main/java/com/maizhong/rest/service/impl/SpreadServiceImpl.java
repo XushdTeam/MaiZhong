@@ -42,13 +42,10 @@ public class SpreadServiceImpl implements SpreadService {
     private TbCarColumnMapper tbCarColumnMapper;
     @Autowired
     private TbFeedbackMapper tbFeedbackMapper;
-
     @Autowired
     private TbConsultMapper tbConsultMapper;
-
     @Autowired
     private TbCarBrandLineMapper tbCarBrandLineMapper;
-
     @Autowired
     private JedisClient jedisClient;
 
@@ -67,8 +64,8 @@ public class SpreadServiceImpl implements SpreadService {
     @Value("${DIC_KEY}")
     private String DIC_KEY;
 
-    @Value("${CAR_BRAND_LINE}")
-    private String CAR_BRAND_LINE;
+    @Value("${CAR_SERIES}")
+    private String CAR_SERIES;
 
     /**
      * 获取发布广告信息
@@ -106,7 +103,7 @@ public class SpreadServiceImpl implements SpreadService {
 
         //缓存命中
         try {
-            String json = jedisClient.get(CAR_BRAND_LINE);
+            String json = jedisClient.get(CAR_SERIES);
             if (StringUtils.isNotBlank(json)) {
                 List<TbCarBrand> brands=JsonUtils.jsonToList(json, TbCarBrand.class);
                 return JsonResult.OK(brands.subList(0,10));
@@ -237,7 +234,8 @@ public class SpreadServiceImpl implements SpreadService {
                 CarShowIndex car_show = new CarShowIndex(Long.valueOf(keyValue.getKey()), keyValue.getValue());
                 List<CarIndexDetail> carIndexList = new ArrayList<>();
                 for (CarColumnJoinCar carColumnJoinCar : list) {
-                    carIndexList.add(new CarIndexDetail(carColumnJoinCar.getCarId(), carColumnJoinCar.getName() + carColumnJoinCar.getYearSku(), carColumnJoinCar.getShopPrice(), carColumnJoinCar.getImage()));
+                    carIndexList.add(new CarIndexDetail(carColumnJoinCar.getCarId(), carColumnJoinCar.getName(),carColumnJoinCar.getFactoryPrice(),
+                            carColumnJoinCar.getImage(),carColumnJoinCar.getReservePrice(),carColumnJoinCar.getSellPrice()));
                 }
                 car_show.setArry(carIndexList);
                 carShowList.add(car_show);
@@ -321,7 +319,7 @@ public class SpreadServiceImpl implements SpreadService {
         TbCarBrandExample example = new TbCarBrandExample();
         TbCarBrandExample.Criteria criteria = example.createCriteria();
         criteria.andDelflagEqualTo(0);
-        example.setOrderByClause("brand_sequence ASC,id ASC");
+        example.setOrderByClause("id ASC");
         List<TbCarBrand> list = tbCarBrandMapper.selectByExample(example);
 
         //写入缓存
@@ -338,7 +336,7 @@ public class SpreadServiceImpl implements SpreadService {
     public JsonResult getSeriesByBrand(Long brandId) {
         //缓存命中
         try {
-            String json = jedisClient.hget(CAR_BRAND_LINE,brandId+"");
+            String json = jedisClient.hget(CAR_SERIES,brandId+"");
             if (StringUtils.isNotBlank(json)) {
                 List<TbCarBrandLine> tbCarBrandLineList=JsonUtils.jsonToList(json, TbCarBrandLine.class);
                 return JsonResult.OK(tbCarBrandLineList);
@@ -355,18 +353,23 @@ public class SpreadServiceImpl implements SpreadService {
         //写入缓存
         try {
             String jsonStr = JsonUtils.objectToJson(list);
-            jedisClient.hset(CAR_BRAND_LINE, jsonStr,brandId+"");
+            jedisClient.hset(CAR_SERIES,brandId+"", jsonStr);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return JsonResult.OK(list);
     }
 
+    /**
+     * 获取前十车系 key 存为hot
+     * @return
+     */
+
     @Override
     public JsonResult getHotSeries() {
         //缓存命中
         try {
-            String json = jedisClient.hget(CAR_BRAND_LINE,"hot");
+            String json = jedisClient.hget(CAR_SERIES,"hot");
             if (StringUtils.isNotBlank(json)) {
                 List<TbCarBrandLine> tbCarBrandLineList=JsonUtils.jsonToList(json, TbCarBrandLine.class);
                 return JsonResult.OK(tbCarBrandLineList);
@@ -383,7 +386,7 @@ public class SpreadServiceImpl implements SpreadService {
         //写入缓存
         try {
             String jsonStr = JsonUtils.objectToJson(list);
-            jedisClient.hset(CAR_BRAND_LINE, jsonStr,"hot");
+            jedisClient.hset(CAR_SERIES,"hot", jsonStr);
         } catch (Exception e) {
             e.printStackTrace();
         }

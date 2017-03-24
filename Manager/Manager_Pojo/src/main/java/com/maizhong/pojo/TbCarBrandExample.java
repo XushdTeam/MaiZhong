@@ -164,6 +164,76 @@ public class TbCarBrandExample {
             return (Criteria) this;
         }
 
+        public Criteria andInitialIsNull() {
+            addCriterion("initial is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInitialIsNotNull() {
+            addCriterion("initial is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInitialEqualTo(String value) {
+            addCriterion("initial =", value, "initial");
+            return (Criteria) this;
+        }
+
+        public Criteria andInitialNotEqualTo(String value) {
+            addCriterion("initial <>", value, "initial");
+            return (Criteria) this;
+        }
+
+        public Criteria andInitialGreaterThan(String value) {
+            addCriterion("initial >", value, "initial");
+            return (Criteria) this;
+        }
+
+        public Criteria andInitialGreaterThanOrEqualTo(String value) {
+            addCriterion("initial >=", value, "initial");
+            return (Criteria) this;
+        }
+
+        public Criteria andInitialLessThan(String value) {
+            addCriterion("initial <", value, "initial");
+            return (Criteria) this;
+        }
+
+        public Criteria andInitialLessThanOrEqualTo(String value) {
+            addCriterion("initial <=", value, "initial");
+            return (Criteria) this;
+        }
+
+        public Criteria andInitialLike(String value) {
+            addCriterion("initial like", value, "initial");
+            return (Criteria) this;
+        }
+
+        public Criteria andInitialNotLike(String value) {
+            addCriterion("initial not like", value, "initial");
+            return (Criteria) this;
+        }
+
+        public Criteria andInitialIn(List<String> values) {
+            addCriterion("initial in", values, "initial");
+            return (Criteria) this;
+        }
+
+        public Criteria andInitialNotIn(List<String> values) {
+            addCriterion("initial not in", values, "initial");
+            return (Criteria) this;
+        }
+
+        public Criteria andInitialBetween(String value1, String value2) {
+            addCriterion("initial between", value1, value2, "initial");
+            return (Criteria) this;
+        }
+
+        public Criteria andInitialNotBetween(String value1, String value2) {
+            addCriterion("initial not between", value1, value2, "initial");
+            return (Criteria) this;
+        }
+
         public Criteria andBrandNameIsNull() {
             addCriterion("brand_name is null");
             return (Criteria) this;
