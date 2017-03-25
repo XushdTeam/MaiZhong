@@ -1,12 +1,10 @@
 package com.maizhong.rest.service;
 
+import com.maizhong.common.dto.CarBrandDTO;
+import com.maizhong.common.dto.KeyObject;
+import com.maizhong.common.dto.KeyValue;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.result.JsonResult;
-import com.maizhong.pojo.TbCarBrand;
-import com.maizhong.pojo.TbCarBrandLine;
-import com.maizhong.pojo.TbCarType;
-import com.maizhong.pojo.TbDictionary;
-import com.maizhong.pojo.vo.SearchResult;
 
 import java.util.List;
 import java.util.Map;
@@ -21,17 +19,20 @@ public interface SearchService {
     public JsonResult syncIndex();
 
 
-    public JsonResult searchDoc(PageSearchParam param);
+    Map<String,Object> searchDoc(String queryString, String[] sortString, Integer pageIndex, String highTiken);
 
-    List<TbDictionary> searchDicList(Long typeId);
+    public JsonResult getSearchResult(String queryString, String sortString, String carBrand, String carSeries, String price, String capacity, String carYear, String pageIndex);
 
-    List<TbCarBrand> searchCarBrandList();
 
-    List<TbCarType> searchCarType();
+    List<Object> getCarSeriesList(String brandId,String seriesId);
 
-    JsonResult searchBrandLineList(Long brandId);
+    JsonResult getSearchBase(String brandId, String seriesId);
 
-    SearchResult searchPageResult(PageSearchParam param);
+    List<CarBrandDTO> getCarBrandHot();
 
-    List<TbCarBrandLine> searchCarBrandLineList(String car_brand);
+    List<KeyObject> syncCarBrandGroup();
+
+    List<KeyObject> getCarBrandGroupByInitial();
+
+    void  testT();
 }

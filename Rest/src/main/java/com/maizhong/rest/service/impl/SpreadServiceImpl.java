@@ -319,7 +319,7 @@ public class SpreadServiceImpl implements SpreadService {
         /*step2 品牌*/
         List<CarBrandDTO> carBrandHot = getCarBrandHot();
         /*step3 车型*/
-        List<CarTypeDTO> carType = getCarType();
+        List<carTypeDTO> carType = getCarType();
 
         return JsonResult.OK(new IndexBaseDTO(carBrandHot,listGg,carType));
     }
@@ -400,12 +400,12 @@ public class SpreadServiceImpl implements SpreadService {
         }
     }
 
-    private List<CarTypeDTO> getCarType(){
+    private List<carTypeDTO> getCarType(){
         //缓存命中
         try {
             String carTypeJson = jedisClient.get(CAR_TYPE);
             if (StringUtils.isNotBlank(carTypeJson)) {
-                return JsonUtils.jsonToList(carTypeJson, CarTypeDTO.class);
+                return JsonUtils.jsonToList(carTypeJson, carTypeDTO.class);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -415,9 +415,9 @@ public class SpreadServiceImpl implements SpreadService {
         criteria.andDelflagEqualTo(0);
         example.setOrderByClause("type_sequence ASC,id ASC");
         List<TbCarType> list = tbCarTypeMapper.selectByExample(example);
-        List<CarTypeDTO> resList = Lists.newArrayList();
+        List<carTypeDTO> resList = Lists.newArrayList();
         for (TbCarType tbCarType : list) {
-            resList.add(new CarTypeDTO(tbCarType.getId(),tbCarType.getTypeName(),tbCarType.getTypeImg()));
+            resList.add(new carTypeDTO(tbCarType.getId(),tbCarType.getTypeName(),tbCarType.getTypeImg()));
         }
         //写入缓存
         try {

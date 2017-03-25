@@ -49,7 +49,12 @@
         <!--扫描pojo包 使用别名-->
         <property name="typeAliasesPackage" value="com.maizhong.pojo"/>
         <!--扫描sql配置文件 mapper需要的xml-->
-        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <property name="mapperLocations">
+            <array>
+                <value>classpath:mapper/*.xml</value>
+                <value>classpath:mapper/ext/*.xml</value>
+            </array>
+        </property>
     </bean>
     <!-- 配置扫描包，加载mapper代理对象 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
