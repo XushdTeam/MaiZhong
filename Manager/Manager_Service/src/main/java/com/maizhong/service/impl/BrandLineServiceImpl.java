@@ -1,8 +1,9 @@
 package com.maizhong.service.impl;
 
-import com.alibaba.druid.sql.visitor.functions.If;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.common.collect.Lists;
+import com.maizhong.common.dto.CarBrandDTO;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
@@ -11,7 +12,6 @@ import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.common.utils.SqlUtils;
 import com.maizhong.dao.JedisClient;
 import com.maizhong.mapper.TbCarBrandLineMapper;
-import com.maizhong.pojo.TbCar;
 import com.maizhong.pojo.TbCarBrand;
 import com.maizhong.pojo.TbCarBrandLine;
 import com.maizhong.pojo.TbCarBrandLineExample;
@@ -21,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -33,7 +32,6 @@ public class BrandLineServiceImpl implements BrandLineService {
     @Autowired
     private BrandService brandService;
 
-
     @Autowired
     private TbCarBrandLineMapper tbCarBrandLineMapper;
 
@@ -42,6 +40,13 @@ public class BrandLineServiceImpl implements BrandLineService {
 
     @Value("${CAR_SERIES}")
     private String CAR_SERIES;
+    @Value("${CAR_SERIES_ID}")
+    private String CAR_SERIES_ID;
+    @Value("${CAR_SERIES_HOT}")
+    private String CAR_SERIES_HOT;
+    @Value("${CAR_BRAND_HOT}")
+    private String CAR_BRAND_HOT;
+
 
 
     @Override
@@ -189,40 +194,67 @@ public class BrandLineServiceImpl implements BrandLineService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        try {
+            jedisClient.del(CAR_SERIES_ID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            jedisClient.del(CAR_SERIES_HOT);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        List<TbCarBrand> list=brandService.getCarBrandList();
+        List<TbCarBrand> list = brandService.getCarBrandList();
 
-        for (TbCarBrand brand:list){
+        for (TbCarBrand brand : list) {
             TbCarBrandLineExample example = new TbCarBrandLineExample();
             TbCarBrandLineExample.Criteria criteria = example.createCriteria();
             criteria.andDelflagEqualTo(0);
             criteria.andBrandIdEqualTo(brand.getId());
             List<TbCarBrandLine> list2 = tbCarBrandLineMapper.selectByExample(example);
+            //写入车系ID对应名称
+            for (TbCarBrandLine brandLine:list2){
+                try {
+                    jedisClient.hset(CAR_SERIES_ID,brandLine.getId()+"",brandLine.getLineName());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             //写入缓存
             try {
                 String jsonStr = JsonUtils.objectToJson(list2);
-                jedisClient.hset(CAR_SERIES,brand.getId()+"", jsonStr);
+                jedisClient.hset(CAR_SERIES, brand.getId() + "", jsonStr);
             } catch (Exception e) {
                 e.printStackTrace();
-                return OperateEnum.FAILE;
             }
         }
 
-       /* //写入热门车型
-        PageHelper.startPage(1,10);
-        TbCarBrandLineExample example = new TbCarBrandLineExample();
-        TbCarBrandLineExample.Criteria criteria = example.createCriteria();
-        criteria.andDelflagEqualTo(0);
-        example.setOrderByClause("line_sequence ASC");
-        List<TbCarBrandLine> listHot = tbCarBrandLineMapper.selectByExample(example);
+        //写入热门车系
+        String jsonBrand = jedisClient.get(CAR_BRAND_HOT);
+        List<CarBrandDTO> carBrandList=JsonUtils.jsonToList(jsonBrand,CarBrandDTO.class);
+        //获取每个热门品牌的首个车系
+        List<TbCarBrandLine> resList = Lists.newArrayList();
+        for (CarBrandDTO tbCarBrand : carBrandList) {
+            TbCarBrandLineExample example = new TbCarBrandLineExample();
+            TbCarBrandLineExample.Criteria criteria = example.createCriteria();
+            criteria.andBrandIdEqualTo(tbCarBrand.getId());
+            criteria.andDelflagEqualTo(0);
+            example.setOrderByClause("line_sequence ASC");
+            List<TbCarBrandLine> listHot = tbCarBrandLineMapper.selectByExample(example);
+            if (listHot != null && listHot.size() > 0) {
+                TbCarBrandLine tbCarBrandLine = listHot.get(0);
+                resList.add(tbCarBrandLine);
+            }
+        }
         //写入缓存
         try {
-            String jsonStr = JsonUtils.objectToJson(listHot);
-            jedisClient.hset(CAR_SERIES,"hot", jsonStr);
+            String carSeriesHot = JsonUtils.objectToJson(resList);
+            jedisClient.set(CAR_SERIES_HOT, carSeriesHot);
         } catch (Exception e) {
             e.printStackTrace();
-            return OperateEnum.FAILE;
-        }*/
+        }
+
         return OperateEnum.SUCCESS;
     }
 }

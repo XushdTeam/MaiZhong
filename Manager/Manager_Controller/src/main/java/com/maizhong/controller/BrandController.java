@@ -193,6 +193,16 @@ public class BrandController {
         List<TbCarBrand> list = JsonUtils.jsonToList(brandService.getCarBrandListAll(), TbCarBrand.class);
         return JsonResult.OK(list);
     }
+
+    /**
+     * 更新品牌相关缓存--品牌/id  品牌/相关信息
+     * @return
+     */
+    @RequestMapping("/brand/updateBrandRedis")
+    @ResponseBody
+    public JsonResult updateBrandRedis(){
+        return brandService.updateBrandRedis();
+    }
 }
 
 

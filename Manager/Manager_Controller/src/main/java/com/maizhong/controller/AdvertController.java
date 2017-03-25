@@ -67,7 +67,6 @@ public class AdvertController {
     }
 
 
-
     /**
      * 广告新增和修改
      * @param id
@@ -198,7 +197,6 @@ public class AdvertController {
     }
 
 
-
     /**
      * 根据广告Id取消已发布广告
      * @param id
@@ -213,4 +211,14 @@ public class AdvertController {
         return JsonResult.build(result);
     }
 
+ /*   *//**
+     * 同步广告缓存--获取首页的时候自动获取  修改的时候 执行删除缓存操作
+     * @return
+     *//*
+    @RequestMapping(value = "/advert/updateAdvertRedis")
+    @ResponseBody
+    public JsonResult updateAdvertRedis() {
+        JsonResult result = advertPublishService.updateAdvertRedis();
+        return result;
+    }*/
 }

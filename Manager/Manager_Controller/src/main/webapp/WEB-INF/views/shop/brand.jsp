@@ -39,6 +39,7 @@
                     <div class="l-list">
                         <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit"  data-href="${handleUrl}/new"><i class="fa fa-plus"></i></i>新增品牌</a>
                         <a class="layui-btn layui-btn-small do-action" data-type="doRefresh" data-href="${baseUrl}"><i class="fa fa-refresh"></i>刷新</a>
+                        <a class="layui-btn layui-btn-small layui-btn-warm do-action" data-type="doAjax" data-href="/brand/updateBrandRedis"><i class="fa fa-exchange"></i>同步缓存</a>
                     </div>
                 </div>
             </div>

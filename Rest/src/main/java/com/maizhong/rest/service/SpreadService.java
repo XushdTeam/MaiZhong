@@ -22,8 +22,6 @@ public interface SpreadService {
 
     OperateEnum insertConsult(String phone,String type);
 
-    JsonResult getSeriesByBrand(Long brandId);
-
     JsonResult getHotSeries();
 
     JsonResult getIndexBase();

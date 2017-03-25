@@ -73,7 +73,7 @@
                         <td><img src="{{ item.brandImg }}" width="50" height="50"/></td>
                         <td>{{ item.brandName }}</td>
                         <td>{{ item.brandSequence}}</td>
-                        <td align="center">{{# if (item.status) { }}
+                        <td>{{# if (item.status) { }}
                             <i class="fa fa-toggle-on unlock"></i>
                             {{# } else { }}
                             <i class="fa fa-toggle-off islock"></i>

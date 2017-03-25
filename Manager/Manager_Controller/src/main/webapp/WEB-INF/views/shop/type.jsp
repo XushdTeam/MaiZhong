@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="layui-inline">
-                    <button class="layui-btn layui-btn-warm" lay-submit  lay-filter="btnsearch">搜索</button>
+                    <button class="layui-btn layui-btn-warm" lay-submit lay-filter="btnsearch">搜索</button>
                 </div>
             </form>
         </div>
@@ -37,15 +37,19 @@
                 <div class="box-wrap">
                     <a class="menu-btn"></a>
                     <div class="l-list">
-                        <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit"  data-href="${handleUrl}/new"><i class="fa fa-plus"></i></i>新增类别</a>
-                        <a class="layui-btn layui-btn-small do-action" data-type="doRefresh" data-href="${baseUrl}"><i class="fa fa-refresh"></i>刷新</a>
+                        <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit"
+                           data-href="${handleUrl}/new"><i class="fa fa-plus"></i></i>新增类别</a>
+                        <a class="layui-btn layui-btn-small do-action" data-type="doRefresh" data-href="${baseUrl}"><i
+                                class="fa fa-refresh"></i>刷新</a>
+                        <a class="layui-btn layui-btn-small layui-btn-warm do-action" data-type="doAjax"
+                           data-href="/type/updateTypeRedis"><i class="fa fa-exchange"></i>同步缓存</a>
                     </div>
                 </div>
             </div>
         </div>
         <!--/工具栏-->
         <!--列表-->
-        <div class="fhui-admin-table-container"  id="list" data-href = "${listUrl}">
+        <div class="fhui-admin-table-container" id="list" data-href="${listUrl}">
             <table class="layui-table" lay-skin="line">
                 <colgroup>
                     <col width="5%">
@@ -80,8 +84,12 @@
                             {{# } }}
                         </td>
                         <td>
-                            <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit" data-href="${handleUrl}/{{item.id}}"><i class="icon-edit  fa fa-pencil-square-o"></i>编辑</a>
-                            <a class="layui-btn layui-btn-small layui-btn-danger do-action" data-type="doDelete" data-text="确定删除<span class=red>{{item.typeName}}</span>吗？" data-href="${deleteUrl}/{{item.id}}"><i class="icon-trash-o  fa fa-trash-o"></i>删除</a>
+                            <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit"
+                               data-href="${handleUrl}/{{item.id}}"><i
+                                    class="icon-edit  fa fa-pencil-square-o"></i>编辑</a>
+                            <a class="layui-btn layui-btn-small layui-btn-danger do-action" data-type="doDelete"
+                               data-text="确定删除<span class=red>{{item.typeName}}</span>吗？"
+                               data-href="${deleteUrl}/{{item.id}}"><i class="icon-trash-o  fa fa-trash-o"></i>删除</a>
                         </td>
                     </tr>
                     {{#  }); }}
@@ -98,7 +106,7 @@
     </div>
     <script type="text/javascript" src="/resources/js/event.js"></script>
     <script type="text/javascript">
-        layui.use("pagelist",function(){
+        layui.use("pagelist", function () {
             layui.pagelist.basePagingInit(8);
         });
     </script>
