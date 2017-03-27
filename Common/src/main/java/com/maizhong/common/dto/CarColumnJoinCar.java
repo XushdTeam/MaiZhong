@@ -31,104 +31,18 @@ public class CarColumnJoinCar {
 
     private String name;
 
-    private String yearSku;
-
-    private String capacity;
-
-    private String asname;
-
     private String sellpoint;
 
     private Long reservePrice;
 
     private Long sellPrice;
 
-    private String shopPrice;
+    private String factoryPrice;
 
     private String image;
 
     //
 
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getYearSku() {
-        return yearSku;
-    }
-
-    public void setYearSku(String yearSku) {
-        this.yearSku = yearSku;
-    }
-
-    public String getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(String capacity) {
-        this.capacity = capacity;
-    }
-
-    public String getAsname() {
-        return asname;
-    }
-
-    public void setAsname(String asname) {
-        this.asname = asname;
-    }
-
-    public String getSellpoint() {
-        return sellpoint;
-    }
-
-    public void setSellpoint(String sellpoint) {
-        this.sellpoint = sellpoint;
-    }
-
-    public Long getReservePrice() {
-        return reservePrice;
-    }
-
-    public void setReservePrice(Long reservePrice) {
-        this.reservePrice = reservePrice;
-    }
-
-    public Long getSellPrice() {
-        return sellPrice;
-    }
-
-    public void setSellPrice(Long sellPrice) {
-        this.sellPrice = sellPrice;
-    }
-
-    public String getShopPrice() {
-        return shopPrice;
-    }
-
-    public void setShopPrice(String shopPrice) {
-        this.shopPrice = shopPrice;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     public Long getId() {
         return id;
@@ -176,5 +90,82 @@ public class CarColumnJoinCar {
 
     public void setDeflag(Integer deflag) {
         this.deflag = deflag;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSellpoint() {
+        return sellpoint;
+    }
+
+    public void setSellpoint(String sellpoint) {
+        this.sellpoint = sellpoint;
+    }
+
+    public Long getReservePrice() {
+        return reservePrice;
+    }
+
+    public void setReservePrice(Long reservePrice) {
+        this.reservePrice = reservePrice;
+    }
+
+    public Long getSellPrice() {
+        return sellPrice;
+    }
+
+    public void setSellPrice(Long sellPrice) {
+        this.sellPrice = sellPrice;
+    }
+
+    public String getFactoryPrice() {
+        return factoryPrice;
+    }
+
+    public void setFactoryPrice(String factoryPrice) {
+        this.factoryPrice = factoryPrice;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public CarColumnJoinCar() {
+    }
+
+    public CarColumnJoinCar(Long id, Long carId, Integer columnId, Integer carSort, Integer status, Integer deflag, String columnName,
+                            String number, String name, String sellpoint, Long reservePrice, Long sellPrice, String factoryPrice, String image) {
+        this.id = id;
+        this.carId = carId;
+        this.columnId = columnId;
+        this.carSort = carSort;
+        this.status = status;
+        this.deflag = deflag;
+        this.columnName = columnName;
+        this.number = number;
+        this.name = name;
+        this.sellpoint = sellpoint;
+        this.reservePrice = reservePrice;
+        this.sellPrice = sellPrice;
+        this.factoryPrice = factoryPrice;
+        this.image = image;
     }
 }

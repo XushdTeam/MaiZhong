@@ -3,6 +3,8 @@ package com.maizhong.pojo;
 public class TbCarBrand {
     private Long id;
 
+    private String initial;
+
     private String brandName;
 
     private String brandImg;
@@ -19,6 +21,14 @@ public class TbCarBrand {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getInitial() {
+        return initial;
+    }
+
+    public void setInitial(String initial) {
+        this.initial = initial == null ? null : initial.trim();
     }
 
     public String getBrandName() {

@@ -12,17 +12,13 @@
   
   <resultMap extends="BaseResultMap" id="ColumnJoinCar"  type="com.maizhong.common.dto.CarColumnJoinCar">
     <result column="number" jdbcType="VARCHAR" property="number" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="year_sku" jdbcType="VARCHAR" property="yearSku" />
-    <result column="capacity" jdbcType="VARCHAR" property="capacity" />
-    <result column="asname" jdbcType="VARCHAR" property="asname" />
+    <result column="car_type" jdbcType="VARCHAR" property="name" />
     <result column="sellpoint" jdbcType="VARCHAR" property="sellpoint" />
     <result column="reserve_price" jdbcType="DECIMAL" property="reservePrice" />
     <result column="sell_price" jdbcType="DECIMAL" property="sellPrice" />
-    <result column="shop_price" jdbcType="VARCHAR" property="shopPrice" />
+    <result column="car_factory_price" jdbcType="VARCHAR" property="factoryPrice" />
     <result column="image" jdbcType="VARCHAR" property="image" />
   </resultMap>
-  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -241,9 +237,9 @@
   </update>
 
   <select id="getListByColumn" resultMap="ColumnJoinCar">
-    SELECT A.*,B.number, B.name,B.year_sku, B.capacity, B.asname,
-    B.sellpoint, B.reserve_price, B.sell_price, B.shop_price, B.image
-    FROM tb_car_column A LEFT JOIN tb_car B ON A.car_id = B.id LEFT JOIN tb_dictionary C ON C.id=A.column_id
+    SELECT A.*,B.number,
+    B.sellpoint, B.reserve_price, B.sell_price, B.image,D.car_type,D.car_factory_price
+    FROM tb_car_column A LEFT JOIN tb_car B ON A.car_id = B.id LEFT JOIN tb_dictionary C ON C.id=A.column_id LEFT JOIN tb_car_base D ON B.base_id=D.id
     WHERE A.deflag=0  AND C.`status`=1
     <if test="status!=null">
      AND A.status=#{status,jdbcType=BIGINT}

@@ -78,10 +78,12 @@ public class SpreadController {
         return JsonResult.build(result);
     }
 
+/*
     @RequestMapping(value = "/getSeriesByBrand/{brandId}")
     public JsonResult getSeriesByBrand(@PathVariable("brandId") Long brandId) {
         return spreadService.getSeriesByBrand(brandId);
     }
+*/
 
     @RequestMapping(value = "/getHotSeries")
     public JsonResult getHotSeries() {

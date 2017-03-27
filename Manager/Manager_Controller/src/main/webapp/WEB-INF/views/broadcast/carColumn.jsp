@@ -44,7 +44,7 @@
                     <a class="menu-btn"></a>
                     <div class="l-list">
                         <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit"
-                           data-href="${handleUrl}/new"><i class="fa fa-plus"></i></i>添加汽车</a>
+                           data-href="${handleUrl}/new"><i class="fa fa-plus"></i>添加汽车</a>
                         <a class="layui-btn layui-btn-small do-action" data-type="doRefresh" data-href="${baseUrl}"><i
                                 class="fa fa-refresh"></i>刷新</a>
                         <a class="layui-btn layui-btn-small layui-btn-warm do-action" data-type="doAjax" data-href="${redisUrl}"><i class="fa fa-exchange"></i>同步缓存</a>
@@ -88,7 +88,7 @@
                         <td><img src="{{ item.image }}" width="50" height="50"/></td>
                         <td>{{ item.columnName }}</td>
                         <td>{{ item.carSort }}</td>
-                        <td align="center">{{# if (item.status) { }}
+                        <td>{{# if (item.status) { }}
                             <i class="fa fa-toggle-on unlock"></i>
                             {{# } else { }}
                             <i class="fa fa-toggle-off islock"></i>

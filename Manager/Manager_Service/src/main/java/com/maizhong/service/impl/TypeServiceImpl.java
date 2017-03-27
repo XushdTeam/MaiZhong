@@ -2,16 +2,22 @@ package com.maizhong.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.common.collect.Lists;
+import com.maizhong.common.dto.CarTypeDTO;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.enums.OperateEnum;
+import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.common.utils.SqlUtils;
+import com.maizhong.dao.JedisClient;
 import com.maizhong.mapper.TbCarTypeMapper;
 import com.maizhong.pojo.TbCarType;
 import com.maizhong.pojo.TbCarTypeExample;
 import com.maizhong.service.TypeService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +34,12 @@ public class TypeServiceImpl implements TypeService {
 
     @Autowired
     TbCarTypeMapper tbCarTypeMapper;
+    @Autowired
+    private JedisClient jedisClient;
+
+
+    @Value("${CAR_TYPE}")
+    private String CAR_TYPE;
 
 
     @Override
@@ -60,7 +72,6 @@ public class TypeServiceImpl implements TypeService {
     }
 
 
-
     @Override
     public String getCarTypeListAll() {
 
@@ -70,7 +81,7 @@ public class TypeServiceImpl implements TypeService {
         criteria.andStatusEqualTo(1);
         example.setOrderByClause("Type_sequence ASC,id ASC");
         List<TbCarType> list = tbCarTypeMapper.selectByExample(example);
-        return  JsonUtils.objectToJson(list);
+        return JsonUtils.objectToJson(list);
     }
 
     @Override
@@ -80,17 +91,17 @@ public class TypeServiceImpl implements TypeService {
         TbCarTypeExample.Criteria criteria = tbCarTypeExample.createCriteria();
         criteria.andTypeNameEqualTo(tbCarType.getTypeName());
         List<TbCarType> carType = tbCarTypeMapper.selectByExample(tbCarTypeExample);
-        if (carType.size() > 0){
+        if (carType.size() > 0) {
             return OperateEnum.NAME_REPEAT;
         }
 
-            int res = tbCarTypeMapper.insertSelective(tbCarType);
-            if (res > 0) {
-                return OperateEnum.SUCCESS;
-            } else {
-                return OperateEnum.FAILE;
-            }
+        int res = tbCarTypeMapper.insertSelective(tbCarType);
+        if (res > 0) {
+            return OperateEnum.SUCCESS;
+        } else {
+            return OperateEnum.FAILE;
         }
+    }
 
     @Override
     public OperateEnum updateCarType(TbCarType tbCarType) {
@@ -123,5 +134,32 @@ public class TypeServiceImpl implements TypeService {
         carType.setTypeImg(carTypeAdvertImgUrl);
         int res = tbCarTypeMapper.updateByPrimaryKeySelective(carType);
         return res;
+    }
+
+    //更新汽车种类缓存
+    @Override
+    public JsonResult updateTypeRedis() {
+        try {
+          jedisClient.del(CAR_TYPE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        TbCarTypeExample example = new TbCarTypeExample();
+        TbCarTypeExample.Criteria criteria = example.createCriteria();
+        criteria.andDelflagEqualTo(0);
+        example.setOrderByClause("type_sequence ASC,id ASC");
+        List<TbCarType> list = tbCarTypeMapper.selectByExample(example);
+        List<CarTypeDTO> resList = Lists.newArrayList();
+        for (TbCarType tbCarType : list) {
+            resList.add(new CarTypeDTO(tbCarType.getId(), tbCarType.getTypeName(), tbCarType.getTypeImg()));
+        }
+        //写入缓存
+        try {
+            String jsonStr = JsonUtils.objectToJson(resList);
+            jedisClient.set(CAR_TYPE, jsonStr);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return JsonResult.build(OperateEnum.SUCCESS);
     }
 }
