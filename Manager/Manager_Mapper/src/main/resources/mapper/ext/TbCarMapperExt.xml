@@ -2,151 +2,120 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.maizhong.mapper.ext.TbCarMapperExt" >
 
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
+        </where>
+    </sql>
 
-
-  <resultMap id="ExtResultMap" type="com.maizhong.pojo.vo.TbCarVo">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="number" jdbcType="VARCHAR" property="number" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="car_brand" jdbcType="VARCHAR" property="carBrand" />
-    <result column="car_type" jdbcType="VARCHAR" property="carType" />
-    <result column="year_sku" jdbcType="VARCHAR" property="yearSku" />
-    <result column="color" jdbcType="VARCHAR" property="color" />
-    <result column="capacity" jdbcType="VARCHAR" property="capacity" />
-    <result column="gearbox" jdbcType="VARCHAR" property="gearbox" />
-    <result column="asname" jdbcType="VARCHAR" property="asname" />
-    <result column="sellpoint" jdbcType="VARCHAR" property="sellpoint" />
-    <result column="reserve_price" jdbcType="DECIMAL" property="reservePrice" />
-    <result column="sell_price" jdbcType="DECIMAL" property="sellPrice" />
-    <result column="shop_price" jdbcType="VARCHAR" property="shopPrice" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="image" jdbcType="VARCHAR" property="image" />
-    <result column="unable" jdbcType="INTEGER" property="unable" />
-    <result column="weight" jdbcType="INTEGER" property="weight" />
-  </resultMap>
 
 
     <resultMap id="baseCarMap" type="com.maizhong.pojo.vo.TbCarBaseVo">
         <id column="id" jdbcType="BIGINT" property="id" />
         <result column="car_color" jdbcType="VARCHAR" property="color" />
-        <result column="car_type" jdbcType="VARCHAR" property="carTypeName" />
-    </resultMap>
-
-
-    <resultMap extends="ExtResultMap" id="ExtResultMapWithBLOBs" type="com.maizhong.pojo.vo.TbCarVo">
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-        <result column="details" jdbcType="LONGVARCHAR" property="details" />
+        <result column="car_type" jdbcType="VARCHAR" property="carName" />
+        <result column="car_level" jdbcType="VARCHAR" property="carTypeName" />
+        <result column="car_year" jdbcType="VARCHAR" property="carYear" />
     </resultMap>
 
 
 
-  <select id="findListNotContainsDesc" parameterType="com.maizhong.pojo.TbCarExample" resultMap="ExtResultMap">
-      select
+  <select id="findListNotContainsDesc" parameterType="com.maizhong.pojo.TbCarExample" resultType="com.maizhong.pojo.vo.TbCarVo">
+      SELECT
       c.id id,
       c.number number,
-      c.name name,
-      b.brand_name car_brand,
-      t.type_name car_type,
-      c.year_sku year_sku,
-      d1.dic_name color,
-      c.capacity ,
-      d2.dic_name gearbox,
-      c.asname,
-      c.sellpoint,
-      c.reserve_price,
-      c.sell_price,
-      c.shop_price,
-      c.update_time,
-      c.image,
-      c.unable,
-      c.weight
+      d.car_brand carBrand,
+      d.car_level carType,
+      d.car_series carBrandLine,
+      d.car_type name,
+      d.car_color carColor,
+      d.car_displacement capacity,
+      d.car_gearbox gearbox,
+      c.sellpoint sellpoint,
+      c.reserve_price reservePrice,
+      c.sell_price sellPrice,
+      c.update_time updateTime,
+      c.image  image,
+      c.unable  unable,
+      c.weight  weight,
+      c.stock_num  stockNum,
+      c.sell_num sellNum,
+      bu.business_name	business
       from
       tb_car c
-      JOIN tb_car_brand b on  c.car_brand = b.id
-      JOIN  tb_car_type t ON c.car_type = t.id
-      left JOIN  tb_dictionary d1 on c.color = d1.id
-      left JOIN  tb_dictionary d2 on c.gearbox = d2.id
+      LEFT JOIN tb_car_base d ON c.base_id = d.id
+      LEFT JOIN tb_business bu ON c.business_id = bu.id
       <if test="_parameter != null">
         <include refid="Example_Where_Clause" />
       </if>
-      <if test="orderByClause != null">
-        order by ${orderByClause}
-      </if>
   </select>
 
-
-    <select id="findList" parameterType="com.maizhong.pojo.TbCarExample" resultMap="ExtResultMapWithBLOBs">
-        select
-        c.id id,
-        c.number number,
-        c.name name,
-        b.brand_name car_brand,
-        t.type_name car_type,
-        c.year_sku year_sku,
-        d1.dic_name color,
-        c.capacity ,
-        d2.dic_name gearbox,
-        c.asname,
-        c.sellpoint,
-        c.reserve_price,
-        c.sell_price,
-        c.shop_price,
-        c.create_time,
-        c.update_time,
-        c.image,
-        c.unable,
-        c.weight,
-        c.details
-        from
-        tb_car c
-        JOIN tb_car_brand b on  c.car_brand = b.id
-        JOIN  tb_car_type t ON c.car_type = t.id
-        left JOIN  tb_dictionary d1 on c.color = d1.id
-        left JOIN  tb_dictionary d2 on c.gearbox = d2.id
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause" />
-        </if>
-        <if test="orderByClause != null">
-            order by ${orderByClause}
-        </if>
+    <select id="findDocsForSolrStore" resultType="com.maizhong.pojo.vo.TbCarVo" >
+          SELECT
+              c.id id,
+              c.number number,
+              c.car_brand carBrand,
+              d.car_type name,
+              c.car_type carType,
+              d.car_year carYear,
+              c.car_brand_line carBrandLine,
+              c.details  details,
+              c.color carColor,
+              d.car_displacement capacity,
+              d.car_gearbox gearbox,
+              c.sellpoint sellpoint,
+              c.reserve_price reservePrice,
+              c.sell_price sellPrice,
+              c.create_time createTime,
+              c.update_time updateTime,
+              c.sell_num sellNum,
+              d.car_factory_price shopPrice,
+              c.smimage smimage,
+              c.image  image,
+              c.unable  unable,
+              c.weight  weight,
+              d.car_brand carBrandCopy,
+              d.car_series carBrandLineCopy,
+              d.car_level carTypeCopy
+              from
+              tb_car c
+              LEFT JOIN tb_car_base d ON c.base_id = d.id
     </select>
 
 
     <select id="findByCarYearAndCarSeres"  resultMap="baseCarMap">
         SELECT
-        id,car_type,car_color
+        id,car_type,car_color,car_level,car_year
         FROM
         tb_car_base
         WHERE
-        car_series = ${carSeries} AND car_year = ${carYear}
+        car_series = #{carSeries}
+        <if test="carYear != null and carYear !='' ">
+            AND car_year = #{carYear}
+        </if>
     </select>
 </mapper>

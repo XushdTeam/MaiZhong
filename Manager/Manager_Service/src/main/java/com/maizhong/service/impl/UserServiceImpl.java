@@ -49,9 +49,14 @@ public class UserServiceImpl implements UserService {
         TbUserExample systemUserExample = new TbUserExample();
         TbUserExample.Criteria criteria = systemUserExample.createCriteria();
         criteria.andUserPhoneEqualTo(userPhone).andDelflagEqualTo(0);
-        List<TbUser> systemUsers = tbUserMapper.selectByExample(systemUserExample);
-        if (systemUsers == null || systemUsers.size() == 0) return null;
-        return systemUsers.get(0);
+        try {
+            List<TbUser> systemUsers = tbUserMapper.selectByExample(systemUserExample);
+            if (systemUsers == null || systemUsers.size() == 0) return null;
+            return systemUsers.get(0);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @ServiceLog(module = "用户管理", methods = "用户列表")

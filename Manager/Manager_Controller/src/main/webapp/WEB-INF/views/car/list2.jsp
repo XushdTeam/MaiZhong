@@ -101,44 +101,37 @@
                             </font>
                             <%--<button class="layui-btn layui-btn-mini" >上一页</button>--%>
                         </th>
-                        <%--车型主键',--%>
                         <%--'汽车编号 ',--%>
                         <th>编号</th>
                         <%--'车型名称 类似奥迪a4',--%>
-                        <th>车型</th>
-                        <%--'外键链接车辆品牌  类似奥迪',--%>
                         <th>品牌</th>
                         <%--'外键  链接车辆类型',--%>
-                        <th>类型</th>
+                        <th>结构</th>
                         <%--年款式 类似 奥迪a42016款',--%>
-                        <th>年款</th>
+                        <th>型号</th>
                         <%--'车辆颜色  外联数据字典表',--%>
                         <th>颜色</th>
                         <%--'汽车排量 1.7L',--%>
                         <th>排量</th>
                         <th>变速箱类型</th>
                         <%--'变速箱类型 外联数据字典表 ',--%>
-                        <th>别名</th>
-                        <%--MMENT '车辆别名  用于搜索',--%>
                         <th>卖点</th>
                         <%--MMENT '车辆卖点 用于搜索',--%>
                         <th>订金</th>
                         <%--LL COMMENT '订金价格',--%>
                         <th>售价</th>
-                        <%--ULL COMMENT '售价',--%>
-                        <th>厂家指导价</th>
-                        <%--MMENT '厂家指导价  字符串存储的一个价格区间',--%>
-                        <th>修改时间</th>
-                        <%--ENT '添加时间',--%>
                         <%--ENT '修改时间',--%>
+                        <th>修改时间</th>
                         <th>图片</th>
                         <%--MMENT '商品图片，多张图片中间用符号分割',--%>
                         <th>上架</th>
                         <%--COMMENT '是否可用 用于搜索时是否展示',--%>
-                        <th>详情</th>
                         <%--'商品详情的存储字段',--%>
                         <th>权重</th>
-                        <%--' COMMENT '权重',--%>
+                        <th>库存</th>
+                        <th>销量</th>
+                        <th>所属商家</th>
+                        <th>详情</th>
                         <th>操作</th>
                     </tr>
                     </thead>
@@ -147,43 +140,33 @@
                         {{#  layui.each(d.rows, function(index, item){ }}
                         <tr>
                             <td style="display: none;"><input type="checkbox" name="selectNum" value="{{ item.id }}"></td>
-                        <%--车型主键',--%>
                             <%--<td>{{ item.id }}</td>--%>
                         <%--'汽车编号 ',--%>
                             <td>{{ item.number }}</td>
                         <%--'车型名称 类似奥迪a4',--%>
-                            <td>{{ item.name }}</td>
+                            <td>{{ item.carBrand }}</td>
                         <%--'外键链接车辆品牌  类似奥迪',--%>
-                            <td>{{ item.carBrand }}</td><%--此字段需要遍历--%>
+                            <td>{{ item.carType }}</td><%--此字段需要遍历--%>
                         <%--'外键  链接车辆类型',--%>
-                            <td>{{ item.carType }}</td>
+                            <td>{{ item.name }}</td>
                         <%--年款式 类似 奥迪a42016款',--%>
-                            <td>{{ item.yearSku }}</td>
-                        <%--'车辆颜色  外联数据字典表',--%>
                             <td>{{ item.color }}</td>
-                        <%--'汽车排量 1.7L',--%>
+                        <%--'车辆颜色  外联数据字典表',--%>
                             <td>{{ item.capacity }}</td>
-                        <%--'变速箱类型 外联数据字典表 ',--%>
+                        <%--'汽车排量 1.7L',--%>
                             <td>{{ item.gearbox }}</td>
-                        <%--MMENT '车辆别名  用于搜索',--%>
-                            <td>{{ item.asname }}</td>
-                        <%--MMENT '车辆卖点 用于搜索',--%>
                             <td>{{ item.sellpoint }}</td>
                         <%--LL COMMENT '订金价格',--%>
                             <td>{{ item.reservePrice }}</td>
                         <%--ULL COMMENT '售价',--%>
                             <td>{{ item.sellPrice }}</td>
-                        <%--MMENT '厂家指导价  字符串存储的一个价格区间',--%>
-                            <td>{{ item.shopPrice }}</td>
-                        <%--ENT '添加时间',--%>
                         <%--ENT '修改时间',--%>
                             <td>{{ item.updateTime }}</td>
                         <%--MMENT '商品图片，多张图片中间用符号分割',--%>
                             <td>
                                 <span style="display: none;" class="imageHideText">{{ item.image }}</span>
-                                <img src="">
+                                <img src="{{ item.image }}" style="width: 40px;height: 20px">
                             </td>
-                        <%--COMMENT '是否可用 用于搜索时是否展示',--%>
                             <%--<td>{{ item.unable }}</td>--%>
                             <td align="center">{{# if (item.unable==1) { }}
                                 <i class="fa fa-toggle-on unlock"></i>
@@ -191,10 +174,12 @@
                                 <i class="fa fa-toggle-off islock"></i>
                                 {{# } }}
                             </td>
+                            <td>{{ item.weight }}</td>
+                            <td>{{ item.stockNum }}</td>
+                            <td>{{ item.sellNum }}</td>
+                            <td>{{ item.business }}</td>
                             <td><a href="javascript:;" onclick="seeDesc('{{ item.id }}','{{ item.name}}')">查看详情</a></td>
                         <%--'商品详情的存储字段',--%>
-                            <td>{{ item.weight }}</td>
-                        <%--' COMMENT '权重',--%>
                             <td>
                                 <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit" data-href="${editCarUrl}/{{item.id}}"><i class="icon-edit  fa fa-pencil-square-o"></i>编辑</a>
                                 <a class="layui-btn layui-btn-small layui-btn-danger do-action" data-type="doDelete" data-text="确定删除<span class=red>{{item.name}}</span>吗？" data-href="${deleteUrl}/{{item.id}}"><i class="icon-trash-o  fa fa-trash-o"></i>删除</a>

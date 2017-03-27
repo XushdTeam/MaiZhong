@@ -4,7 +4,14 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <head>
     <jsp:include page="../common/head.jsp"/>
-    <title>车辆信息修改</title>
+    <title>
+        <c:if test="${car!=null}">
+            车辆信息修改
+        </c:if>
+        <c:if test="${car==null}">
+            添加车辆信息
+        </c:if>
+    </title>
     <!-- 引入kindEditor插件 -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/kindeditor-4.1.10/themes/default/default.css">
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/kindeditor-4.1.10/kindeditor-all-min.js" charset="utf-8"></script>
@@ -15,7 +22,13 @@
     <blockquote class="layui-elem-quote fhui-admin-main_hd">
         <h2>
             <a class="layui-btn layui-btn-small do-action" id="returnList" data-type="doAddEdit" data-href="/car/list"><i class="layui-icon">&#xe603;</i> 返回</a>
-            汽车属性修改
+            <h2 style="display: inline">汽车添加</h2>
+            <c:if test="${car!=null}">
+                车辆信息修改
+            </c:if>
+            <c:if test="${car==null}">
+                添加车辆
+            </c:if>
         </h2>
     </blockquote>
     <div class="y-role">
@@ -26,7 +39,7 @@
             <div class="layui-field-box">
 
                 <form class="layui-form" action="${updateCarUrl}"  method="post">
-                        <input type="hidden" name="id" id="idInput" value="${car.id}">
+                    <input type="hidden" name="id" id="idInput" value="${car.id}">
                     <div class="layui-input-block">
                         <div class="layui-form-item layui-input-inline"  style="width: 50%">
                             <label class="layui-form-label">汽车编号</label>
@@ -165,11 +178,11 @@
                         <div class="layui-form-item layui-input-inline">
                             <label class="layui-form-label">是否上架</label>
                             <div class="layui-input-inline">
-                                <c:if test="${car.unable==1}">
+                                <c:if test="${car==null||car.unable==1}">
                                     <input type="radio" name="unable" value="1" title="上架"  checked="checked">
                                     <input type="radio" name="unable" value="0" title="下架">
                                 </c:if>
-                                <c:if test="${car.unable!=1}">
+                                <c:if test="${car!=null&&car.unable!=1}">
                                     <input type="radio" name="unable" value="1" title="上架" >
                                     <input type="radio" name="unable" value="0" title="下架"  checked="checked">
                                 </c:if>
@@ -355,23 +368,35 @@
             //TODO  颜色遍历
         });
 
-        //页面刷新方法  用于颜色回显
-        if($("#car_base").val()!=null&&$("#car_base").val()!=""){
-            var color = $("#car_base :selected").data("color").split(";");
-            //判断是否达成颜色显示条件
-            if(color&&color.length>0&&color[0]!=""){
-                $.each(color,function(i,e){
-                    if(e=='${car.color}'){
-                        $("#car_color").append("<option value='"+e+"' selected >"+e+"</option>");
-                    }else{
-                        $("#car_color").append("<option value='"+e+"'  >"+e+"</option>");
-                    }
-                })
-                $("#car_color").append("<option value=''>请选择</option>");
-                $("#car_color_box").show();
-                form.render('select');
+        <c:if test="${car!=null}">
+
+            //        图片回显
+            $.each($("#hiddenImgs").val().split(","),function(i,e){
+                if($.trim(e).length > 0){
+                    $("#imagesShow").append('<div class="layui-input-block" ><a href="'+e+'"  target="_blank"><img  style="width: 690px;height: 366px"  src="'+e+'"></a><button type="button" class="layui-btn layui-btn-warm" onclick="delImage(this)">删除<button/></div>');
+                }
+            });
+
+
+            //页面刷新方法  用于颜色回显
+            if($("#car_base").val()!=null&&$("#car_base").val()!=""){
+                var color = $("#car_base :selected").data("color").split(";");
+                //判断是否达成颜色显示条件
+                if(color&&color.length>0&&color[0]!=""){
+                    $.each(color,function(i,e){
+                        if(e=='${car.color}'){
+                            $("#car_color").append("<option value='"+e+"' selected >"+e+"</option>");
+                        }else{
+                            $("#car_color").append("<option value='"+e+"'  >"+e+"</option>");
+                        }
+                    })
+                    $("#car_color").append("<option value=''>请选择</option>");
+                    $("#car_color_box").show();
+                    form.render('select');
+                }
             }
-        }
+        </c:if>
+
 
     });
 
@@ -428,18 +453,6 @@
                 });
             });
         });
-    })
-
-
-    $(function(){
-//        图片回显
-        $.each($("#hiddenImgs").val().split(","),function(i,e){
-            if($.trim(e).length > 0){
-                $("#imagesShow").append('<div class="layui-input-block" ><a href="'+e+'"  target="_blank"><img  style="width: 690px;height: 366px"  src="'+e+'"></a><button type="button" class="layui-btn layui-btn-warm" onclick="delImage(this)">删除<button/></div>');
-            }
-        });
-//        汽车详情回显
-//        itemAddEditor.insertHtml($("#cardetails").html()+""+"test");
     })
 
 

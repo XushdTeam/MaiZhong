@@ -3,6 +3,7 @@
 <mapper namespace="com.maizhong.mapper.TbCarBrandMapper">
   <resultMap id="BaseResultMap" type="com.maizhong.pojo.TbCarBrand">
     <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="initial" jdbcType="VARCHAR" property="initial" />
     <result column="brand_name" jdbcType="VARCHAR" property="brandName" />
     <result column="brand_img" jdbcType="VARCHAR" property="brandImg" />
     <result column="brand_sequence" jdbcType="INTEGER" property="brandSequence" />
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, brand_name, brand_img, brand_sequence, status, delflag
+    id, initial, brand_name, brand_img, brand_sequence, status, delflag
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.pojo.TbCarBrandExample" resultMap="BaseResultMap">
     select
@@ -101,18 +102,21 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.maizhong.pojo.TbCarBrand">
-    insert into tb_car_brand (id, brand_name, brand_img, 
-      brand_sequence, status, delflag
-      )
-    values (#{id,jdbcType=BIGINT}, #{brandName,jdbcType=VARCHAR}, #{brandImg,jdbcType=VARCHAR}, 
-      #{brandSequence,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{delflag,jdbcType=INTEGER}
-      )
+    insert into tb_car_brand (id, initial, brand_name, 
+      brand_img, brand_sequence, status, 
+      delflag)
+    values (#{id,jdbcType=BIGINT}, #{initial,jdbcType=VARCHAR}, #{brandName,jdbcType=VARCHAR}, 
+      #{brandImg,jdbcType=VARCHAR}, #{brandSequence,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{delflag,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.pojo.TbCarBrand">
     insert into tb_car_brand
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
+      </if>
+      <if test="initial != null">
+        initial,
       </if>
       <if test="brandName != null">
         brand_name,
@@ -133,6 +137,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=BIGINT},
+      </if>
+      <if test="initial != null">
+        #{initial,jdbcType=VARCHAR},
       </if>
       <if test="brandName != null">
         #{brandName,jdbcType=VARCHAR},
@@ -163,6 +170,9 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
+      <if test="record.initial != null">
+        initial = #{record.initial,jdbcType=VARCHAR},
+      </if>
       <if test="record.brandName != null">
         brand_name = #{record.brandName,jdbcType=VARCHAR},
       </if>
@@ -186,6 +196,7 @@
   <update id="updateByExample" parameterType="map">
     update tb_car_brand
     set id = #{record.id,jdbcType=BIGINT},
+      initial = #{record.initial,jdbcType=VARCHAR},
       brand_name = #{record.brandName,jdbcType=VARCHAR},
       brand_img = #{record.brandImg,jdbcType=VARCHAR},
       brand_sequence = #{record.brandSequence,jdbcType=INTEGER},
@@ -198,6 +209,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.pojo.TbCarBrand">
     update tb_car_brand
     <set>
+      <if test="initial != null">
+        initial = #{initial,jdbcType=VARCHAR},
+      </if>
       <if test="brandName != null">
         brand_name = #{brandName,jdbcType=VARCHAR},
       </if>
@@ -218,7 +232,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.maizhong.pojo.TbCarBrand">
     update tb_car_brand
-    set brand_name = #{brandName,jdbcType=VARCHAR},
+    set initial = #{initial,jdbcType=VARCHAR},
+      brand_name = #{brandName,jdbcType=VARCHAR},
       brand_img = #{brandImg,jdbcType=VARCHAR},
       brand_sequence = #{brandSequence,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},

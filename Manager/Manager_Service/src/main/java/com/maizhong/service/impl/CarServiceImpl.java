@@ -9,12 +9,12 @@ import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.common.target.ServiceLog;
 import com.maizhong.common.utils.TimeUtils;
+import com.maizhong.mapper.TbCarBrandLineMapper;
+import com.maizhong.mapper.TbCarBrandMapper;
 import com.maizhong.mapper.TbCarMapper;
 import com.maizhong.mapper.TbCarPropMapper;
 import com.maizhong.mapper.ext.TbCarMapperExt;
-import com.maizhong.pojo.TbCar;
-import com.maizhong.pojo.TbCarExample;
-import com.maizhong.pojo.TbCarPropExample;
+import com.maizhong.pojo.*;
 import com.maizhong.pojo.vo.TbCarBaseVo;
 import com.maizhong.pojo.vo.TbCarVo;
 import com.maizhong.service.CarService;
@@ -43,6 +43,9 @@ public class CarServiceImpl implements CarService {
     @Resource
     private TbCarPropMapper carPropMapper;
 
+    @Resource
+    private TbCarBrandLineMapper tbCarBrandLineMapper;
+
     @Value("${PAGESIZE}")
     private  static Integer PAGESIZE;
 
@@ -55,19 +58,30 @@ public class CarServiceImpl implements CarService {
         if (car==null){
             return JsonResult.Error("数据错误");
         }
+        /*
+            改动之后的数据特点
+                重点关键字  车系
+                            分类
+                            编号
+                            定金
+                            根据定位的数据查询 填充字段  暂无   可不查询
+                            商家
+                            库存
+                            销量
+         */
 
         //number`'汽车编号 ',  `name`'车型名称 类似奥迪a4',
-//        if (car.getNumber()==null||car.getName()==null||StringUtils.isBlank(car.getNumber())||StringUtils.isBlank(car.getName()+"")){
-//            return JsonResult.Error("编号或者名称不可以为空");
-//        }
+        if (car.getNumber()==null||StringUtils.isBlank(car.getNumber())){
+            return JsonResult.Error("编号或者名称不可以为空");
+        }
         //car_brand`  '外键链接车辆品牌  类似奥迪',`car_type` '外键  链接车辆类型',
-//        if (car.getCarType()==null||car.getCarBrand()==null||StringUtils.isBlank(car.getCarType()+"")||StringUtils.isBlank(car.getCarBrand()+"")){
-//            return JsonResult.Error("品牌和类型是必选项");
-//        }
-        //`year_sku`  '年款式 类似 奥迪a42016款',
-//        if (car.getYearSku()==null||StringUtils.isBlank(car.getYearSku()+"")){
-//            return JsonResult.Error("车辆年份不可以为空");
-//        }
+        if (car.getCarType()==null||car.getCarBrand()==null||StringUtils.isBlank(car.getCarType()+"")||StringUtils.isBlank(car.getCarBrand()+"")){
+            return JsonResult.Error("品牌和类型是必选项");
+        }
+        //`baseId`  连接基础库Id  暂时先不考虑基础库Id出现异常现象
+        if (car.getBaseId()==null||StringUtils.isBlank(car.getBaseId()+"")){
+            return JsonResult.Error("库中车辆数据不可以为空");
+        }
 
         //订金价格',
         if (car.getReservePrice()==null||car.getSellPrice()==null||StringUtils.isBlank(car.getReservePrice()+"")||StringUtils.isBlank(car.getSellPrice()+"")){
@@ -83,6 +97,12 @@ public class CarServiceImpl implements CarService {
         }
         //desc` text NOT NULL COMMENT '商品详情的存储字段',
         //weight` int(11) DEFAULT '100' COMMENT '权重',
+
+        //TODO  商家  暂时存放死数据
+        car.setBusinessId(7L);
+        //设置销售数量
+        car.setSellNum(0);
+
 
         int insert = tbCarMapper.insertSelective(car);
 
@@ -119,19 +139,26 @@ public class CarServiceImpl implements CarService {
         if (car==null){
             return JsonResult.Error("数据错误");
         }
+        TbCar oldCar = null;
 
         //  `number`'汽车编号 ', id 主键
         if (car.getNumber()==null||car.getId()==null||StringUtils.isBlank(car.getId()+"")||StringUtils.isBlank(car.getNumber()+"")){
             return JsonResult.Error("编号或者Id为空了");
+        }else{
+            oldCar = tbCarMapper.selectByPrimaryKey(car.getId());
+        }
+
+        if (oldCar==null){
+            return JsonResult.Error("数据错误");
         }
         //品牌类型
         if (car.getCarType()==null||car.getCarBrand()==null||StringUtils.isBlank(car.getCarType()+"")||StringUtils.isBlank(car.getCarBrand()+"")){
             return JsonResult.Error("品牌和类型是必选项");
         }
-        // `year_sku 年款式
-//        if ( car.getYearSku()==null||StringUtils.isBlank(car.getYearSku()+"")){
-//            return JsonResult.Error("车辆年份不可以为空");
-//        }
+        //`baseId`  连接基础库Id  暂时先不考虑基础库Id出现异常现象
+        if (car.getBaseId()==null||StringUtils.isBlank(car.getBaseId()+"")){
+            return JsonResult.Error("库中车辆数据错误");
+        }
         //    '订金价格',
         if (car.getReservePrice()==null||car.getSellPrice()==null||StringUtils.isBlank(car.getReservePrice()+"")||StringUtils.isBlank(car.getSellPrice()+"")){
             return JsonResult.Error("车辆卖价和定金不可以为空");
@@ -142,6 +169,8 @@ public class CarServiceImpl implements CarService {
         if (car.getUnable()==null||StringUtils.isBlank(car.getUnable()+"")){
             car.setUnable(1);
         }
+
+
 
         //修改方法
         return  tbCarMapper.updateByPrimaryKeySelective(car)==1?JsonResult.OK("修改成功"):JsonResult.Error("修改失败");
@@ -208,7 +237,6 @@ public class CarServiceImpl implements CarService {
             if (param.getFiled("carBrand")!=null){
                 criteria.andCarBrandEqualTo(Long.parseLong(param.getFiled("carBrand")));
             }
-
             //价格区间放弃
             /*if (StringUtils.isNotBlank(param.getFiled("queryString"))&&!param.getFiled("queryString").contains("=")){
                 criteria.andNameLike("%"+param.getFiled("queryString")+"%");
@@ -226,14 +254,29 @@ public class CarServiceImpl implements CarService {
     }
 
 
+    /**
+     *   根据车系和年份定位车系
+     *      年份可以为空
+      * @param carSeries
+     * @param carYear
+     * @return
+     */
     @Override
-    public JsonResult findBaseCar(String carSeries, String carYear){
-        if (StringUtils.isBlank(carSeries)||StringUtils.isBlank(carYear)){
+    public JsonResult findBaseCar(Long carSeries, String carYear){
+        if (carSeries==null&&StringUtils.isBlank(carSeries+"")){
             return JsonResult.Error("数据错误");
         }
-        List<TbCarBaseVo> list = tbCarMapperExt.findByCarYearAndCarSeres(carSeries, carYear);
-        if (list!=null){
-            return JsonResult.OK(list);
+        //指定carYear 为0时 时间属性不生效
+        if (StringUtils.isBlank(carYear)||"0".equals(carYear)){
+            carYear=null;
+        }
+        TbCarBrandLine brandLine = tbCarBrandLineMapper.selectByPrimaryKey(carSeries);
+
+        if(brandLine!=null&&StringUtils.isNotBlank(brandLine.getLineName())){
+            List<TbCarBaseVo> list = tbCarMapperExt.findByCarYearAndCarSeres(brandLine.getLineName(), carYear);
+            if (list!=null){
+                return JsonResult.OK(list);
+            }
         }
         return JsonResult.Error("数据错误");
     }

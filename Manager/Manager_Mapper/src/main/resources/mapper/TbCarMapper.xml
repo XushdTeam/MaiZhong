@@ -8,7 +8,8 @@
     <result column="car_brand" jdbcType="BIGINT" property="carBrand" />
     <result column="car_brand_line" jdbcType="BIGINT" property="carBrandLine" />
     <result column="car_type" jdbcType="BIGINT" property="carType" />
-    <result column="color" jdbcType="BIGINT" property="color" />
+    <result column="car_year" jdbcType="VARCHAR" property="carYear" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
     <result column="sellpoint" jdbcType="VARCHAR" property="sellpoint" />
     <result column="reserve_price" jdbcType="DECIMAL" property="reservePrice" />
     <result column="sell_price" jdbcType="DECIMAL" property="sellPrice" />
@@ -84,9 +85,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, number, base_id, car_brand, car_brand_line, car_type, color, sellpoint, reserve_price, 
-    sell_price, create_time, update_time, smimage, image, business_id, stock_num, sell_num, 
-    unable, weight
+    id, number, base_id, car_brand, car_brand_line, car_type, car_year, color, sellpoint, 
+    reserve_price, sell_price, create_time, update_time, smimage, image, business_id, 
+    stock_num, sell_num, unable, weight
   </sql>
   <sql id="Blob_Column_List">
     details
@@ -142,18 +143,20 @@
   <insert id="insert" parameterType="com.maizhong.pojo.TbCar">
     insert into tb_car (id, number, base_id, 
       car_brand, car_brand_line, car_type, 
-      color, sellpoint, reserve_price, 
-      sell_price, create_time, update_time, 
-      smimage, image, business_id, 
-      stock_num, sell_num, unable, 
-      weight, details)
+      car_year, color, sellpoint, 
+      reserve_price, sell_price, create_time, 
+      update_time, smimage, image, 
+      business_id, stock_num, sell_num, 
+      unable, weight, details
+      )
     values (#{id,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{baseId,jdbcType=BIGINT}, 
       #{carBrand,jdbcType=BIGINT}, #{carBrandLine,jdbcType=BIGINT}, #{carType,jdbcType=BIGINT}, 
-      #{color,jdbcType=BIGINT}, #{sellpoint,jdbcType=VARCHAR}, #{reservePrice,jdbcType=DECIMAL}, 
-      #{sellPrice,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{smimage,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{businessId,jdbcType=BIGINT}, 
-      #{stockNum,jdbcType=INTEGER}, #{sellNum,jdbcType=INTEGER}, #{unable,jdbcType=INTEGER}, 
-      #{weight,jdbcType=INTEGER}, #{details,jdbcType=LONGVARCHAR})
+      #{carYear,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, #{sellpoint,jdbcType=VARCHAR}, 
+      #{reservePrice,jdbcType=DECIMAL}, #{sellPrice,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{smimage,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{businessId,jdbcType=BIGINT}, #{stockNum,jdbcType=INTEGER}, #{sellNum,jdbcType=INTEGER}, 
+      #{unable,jdbcType=INTEGER}, #{weight,jdbcType=INTEGER}, #{details,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.pojo.TbCar">
     insert into tb_car
@@ -175,6 +178,9 @@
       </if>
       <if test="carType != null">
         car_type,
+      </if>
+      <if test="carYear != null">
+        car_year,
       </if>
       <if test="color != null">
         color,
@@ -238,8 +244,11 @@
       <if test="carType != null">
         #{carType,jdbcType=BIGINT},
       </if>
+      <if test="carYear != null">
+        #{carYear,jdbcType=VARCHAR},
+      </if>
       <if test="color != null">
-        #{color,jdbcType=BIGINT},
+        #{color,jdbcType=VARCHAR},
       </if>
       <if test="sellpoint != null">
         #{sellpoint,jdbcType=VARCHAR},
@@ -309,8 +318,11 @@
       <if test="record.carType != null">
         car_type = #{record.carType,jdbcType=BIGINT},
       </if>
+      <if test="record.carYear != null">
+        car_year = #{record.carYear,jdbcType=VARCHAR},
+      </if>
       <if test="record.color != null">
-        color = #{record.color,jdbcType=BIGINT},
+        color = #{record.color,jdbcType=VARCHAR},
       </if>
       <if test="record.sellpoint != null">
         sellpoint = #{record.sellpoint,jdbcType=VARCHAR},
@@ -364,7 +376,8 @@
       car_brand = #{record.carBrand,jdbcType=BIGINT},
       car_brand_line = #{record.carBrandLine,jdbcType=BIGINT},
       car_type = #{record.carType,jdbcType=BIGINT},
-      color = #{record.color,jdbcType=BIGINT},
+      car_year = #{record.carYear,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
       sellpoint = #{record.sellpoint,jdbcType=VARCHAR},
       reserve_price = #{record.reservePrice,jdbcType=DECIMAL},
       sell_price = #{record.sellPrice,jdbcType=DECIMAL},
@@ -390,7 +403,8 @@
       car_brand = #{record.carBrand,jdbcType=BIGINT},
       car_brand_line = #{record.carBrandLine,jdbcType=BIGINT},
       car_type = #{record.carType,jdbcType=BIGINT},
-      color = #{record.color,jdbcType=BIGINT},
+      car_year = #{record.carYear,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
       sellpoint = #{record.sellpoint,jdbcType=VARCHAR},
       reserve_price = #{record.reservePrice,jdbcType=DECIMAL},
       sell_price = #{record.sellPrice,jdbcType=DECIMAL},
@@ -425,8 +439,11 @@
       <if test="carType != null">
         car_type = #{carType,jdbcType=BIGINT},
       </if>
+      <if test="carYear != null">
+        car_year = #{carYear,jdbcType=VARCHAR},
+      </if>
       <if test="color != null">
-        color = #{color,jdbcType=BIGINT},
+        color = #{color,jdbcType=VARCHAR},
       </if>
       <if test="sellpoint != null">
         sellpoint = #{sellpoint,jdbcType=VARCHAR},
@@ -477,7 +494,8 @@
       car_brand = #{carBrand,jdbcType=BIGINT},
       car_brand_line = #{carBrandLine,jdbcType=BIGINT},
       car_type = #{carType,jdbcType=BIGINT},
-      color = #{color,jdbcType=BIGINT},
+      car_year = #{carYear,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
       sellpoint = #{sellpoint,jdbcType=VARCHAR},
       reserve_price = #{reservePrice,jdbcType=DECIMAL},
       sell_price = #{sellPrice,jdbcType=DECIMAL},
@@ -500,7 +518,8 @@
       car_brand = #{carBrand,jdbcType=BIGINT},
       car_brand_line = #{carBrandLine,jdbcType=BIGINT},
       car_type = #{carType,jdbcType=BIGINT},
-      color = #{color,jdbcType=BIGINT},
+      car_year = #{carYear,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
       sellpoint = #{sellpoint,jdbcType=VARCHAR},
       reserve_price = #{reservePrice,jdbcType=DECIMAL},
       sell_price = #{sellPrice,jdbcType=DECIMAL},

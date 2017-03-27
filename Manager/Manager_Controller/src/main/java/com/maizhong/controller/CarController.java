@@ -8,6 +8,7 @@ import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.pojo.TbCar;
 import com.maizhong.pojo.TbCarBrand;
 import com.maizhong.pojo.TbCarType;
+import com.maizhong.pojo.vo.TbCarBaseVo;
 import com.maizhong.service.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -123,17 +124,17 @@ public class CarController {
     @RequestMapping("/add")
     public String addCar(Model model){
         model.addAttribute("insertUrl","/car/insert");
-        model.addAttribute("seepropUrl","/carProp/prop");
+//        model.addAttribute("seepropUrl","/carProp/prop");
         model.addAttribute("lineListUrl","/carBrandLine/list");
-        model.addAttribute("findBaseCar","/car/findBaseCar");
+        model.addAttribute("findBaseCarUrl","/car/overall");
 
 
 
         //数据准备
         model.addAttribute("carTypeList", JsonUtils.jsonToList(typeService.getCarTypeListAll(), TbCarType.class));
         model.addAttribute("carBrandList",JsonUtils.jsonToList(brandService.getCarBrandListAll(), TbCarBrand.class));
-        model.addAttribute("colorList",dicService.getDicListByParent(4L));
-        model.addAttribute("gaerboxList",dicService.getDicListByParent(9L));
+//        model.addAttribute("colorList",dicService.getDicListByParent(4L));
+//        model.addAttribute("gaerboxList",dicService.getDicListByParent(9L));
 //        model.addAttribute("colorList",dicService.getDicListByParent(Long.parseLong(COLOR_CAR_DIC)));
 //        model.addAttribute("gaerboxList",dicService.getDicListByParent(Long.parseLong(GAERBOX_CAR_DIC)));
 
@@ -203,27 +204,28 @@ public class CarController {
         model.addAttribute("updateCarUrl","/car/update");
         model.addAttribute("seepropUrl","/carProp/prop");
         model.addAttribute("lineListUrl","/carBrandLine/list");
+        model.addAttribute("findBaseCarUrl","/car/overall");
 
+        /*
+            数据填充  重点
+                    根据车型查找车系
+                    根据车系和年份确认款式
+         */
+
+        //数据查询与填充
+        TbCar car = carService.findCarById(id);
+        model.addAttribute("car",car);
 
         //数据准备
         model.addAttribute("carTypeList", JsonUtils.jsonToList(typeService.getCarTypeListAll(), TbCarType.class));
         model.addAttribute("carBrandList",JsonUtils.jsonToList(brandService.getCarBrandListAll(), TbCarBrand.class));
-//        model.addAttribute("colorList",dicService.getDicListByParent(Long.parseLong(COLOR_CAR_DIC)));
-//        model.addAttribute("gaerboxList",dicService.getDicListByParent(Long.parseLong(GAERBOX_CAR_DIC)));
-        model.addAttribute("colorList",dicService.getDicListByParent(4L));
-        model.addAttribute("gaerboxList",dicService.getDicListByParent(9L));
-
-
-
-        //数据查询与填充
-        TbCar car = carService.findCarById(id);
 
         //数据准备  车系列表
-        JsonResult result = brandLineService.getCarBrandLineList(car.getCarBrand());
+        model.addAttribute("lineList",brandLineService.getCarBrandLineList(car.getCarBrand()).getData());
+        //  设置基础列表
+        model.addAttribute("carBaseVoList",carService.findBaseCar(car.getCarBrandLine(),car.getCarYear()).getData());
 
-        model.addAttribute("lineList",result.getData());
 
-        model.addAttribute("car",car);
 
         return "/car/update";
     }
@@ -236,7 +238,7 @@ public class CarController {
      */
     @RequestMapping("/overall/{carSeries}/{carYear}")
     @ResponseBody
-    public JsonResult findBaseCar(@PathVariable("carSeries")String carSeries,@PathVariable("carYear") String carYear){
+    public JsonResult findBaseCar(@PathVariable("carSeries")Long carSeries,@PathVariable("carYear") String carYear){
         return carService.findBaseCar(carSeries,carYear);
     }
 
