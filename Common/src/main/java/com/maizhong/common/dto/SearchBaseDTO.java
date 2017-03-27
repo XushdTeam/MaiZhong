@@ -9,33 +9,72 @@ import java.util.Map;
  */
 public class SearchBaseDTO {
 
-    private List<CarBrandDto> carBrandhot;
+    private String brandName;
+    private Boolean isBrandHot = false;
+    private String seriesName;
+    private Boolean isSeriesHot = false;
 
-    private Map<String,List<KeyValue>> carBrandAll;
+    private List<KeyValue> carBrandhot;
 
-    private List<KeyValue> carSeriesList;
+    private List<KeyObject> carBrandAll;
 
-    public List<CarBrandDto> getCarBrandhot() {
-        return carBrandhot;
+    private List<Object> carSeriesAll;
+
+    public String getBrandName() {
+        return brandName;
     }
 
-    public void setCarBrandhot(List<CarBrandDto> carBrandhot) {
-        this.carBrandhot = carBrandhot;
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
     }
 
-    public Map<String, List<KeyValue>> getCarBrandAll() {
+    public String getSeriesName() {
+        return seriesName;
+    }
+
+    public void setSeriesName(String seriesName) {
+        this.seriesName = seriesName;
+    }
+
+    public List<KeyObject> getCarBrandAll() {
         return carBrandAll;
     }
 
-    public void setCarBrandAll(Map<String, List<KeyValue>> carBrandAll) {
+    public void setCarBrandAll(List<KeyObject> carBrandAll) {
         this.carBrandAll = carBrandAll;
     }
 
-    public List<KeyValue> getCarSeriesList() {
-        return carSeriesList;
+
+    public Boolean getBrandHot() {
+        return isBrandHot;
     }
 
-    public void setCarSeriesList(List<KeyValue> carSeriesList) {
-        this.carSeriesList = carSeriesList;
+    public void setBrandHot(Boolean brandHot) {
+        isBrandHot = brandHot;
+    }
+
+    public Boolean getSeriesHot() {
+        return isSeriesHot;
+    }
+
+    public void setSeriesHot(Boolean seriesHot) {
+        isSeriesHot = seriesHot;
+    }
+
+
+    public List<KeyValue> getCarBrandhot() {
+        return carBrandhot;
+    }
+
+    public void setCarBrandhot(List<KeyValue> carBrandhot) {
+        this.carBrandhot = carBrandhot;
+    }
+
+    public List<Object> getCarSeriesAll() {
+        return carSeriesAll;
+    }
+
+    public void setCarSeriesAll(List<Object> carSeriesAll) {
+        this.carSeriesAll = carSeriesAll;
     }
 }
