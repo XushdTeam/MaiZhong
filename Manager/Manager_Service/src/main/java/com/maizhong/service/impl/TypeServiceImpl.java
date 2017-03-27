@@ -3,7 +3,7 @@ package com.maizhong.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
-import com.maizhong.common.dto.CarTypeDTO;
+import com.maizhong.common.dto.carTypeDTO;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
@@ -15,7 +15,6 @@ import com.maizhong.mapper.TbCarTypeMapper;
 import com.maizhong.pojo.TbCarType;
 import com.maizhong.pojo.TbCarTypeExample;
 import com.maizhong.service.TypeService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -149,9 +148,9 @@ public class TypeServiceImpl implements TypeService {
         criteria.andDelflagEqualTo(0);
         example.setOrderByClause("type_sequence ASC,id ASC");
         List<TbCarType> list = tbCarTypeMapper.selectByExample(example);
-        List<CarTypeDTO> resList = Lists.newArrayList();
+        List<carTypeDTO> resList = Lists.newArrayList();
         for (TbCarType tbCarType : list) {
-            resList.add(new CarTypeDTO(tbCarType.getId(), tbCarType.getTypeName(), tbCarType.getTypeImg()));
+            resList.add(new carTypeDTO(tbCarType.getId(), tbCarType.getTypeName(), tbCarType.getTypeImg()));
         }
         //写入缓存
         try {
