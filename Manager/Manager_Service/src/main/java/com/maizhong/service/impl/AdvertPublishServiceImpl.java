@@ -6,6 +6,7 @@ import com.maizhong.common.dto.KeyValue;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.enums.DicParentEnum;
 import com.maizhong.common.enums.OperateEnum;
+import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.common.utils.DicRedisUtils;
 import com.maizhong.common.utils.JsonUtils;
@@ -77,22 +78,22 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
 
     @Override
     public OperateEnum changeSort(String meth, Long id) {
-        int res=0;
+        int res = 0;
 
         if (StringUtils.equals("top", meth)) {
             //置顶
-          res= tbAdvertPublishMapper.topSort(id);
+            res = tbAdvertPublishMapper.topSort(id);
 
         } else if (StringUtils.equals("up", meth)) {
-            res= tbAdvertPublishMapper.upSort(id);
+            res = tbAdvertPublishMapper.upSort(id);
         } else {
-            res= tbAdvertPublishMapper.downSort(id);
+            res = tbAdvertPublishMapper.downSort(id);
         }
         if (res > 0) {
             TbAdvertPublish tbAdvertPublish = tbAdvertPublishMapper.selectByPrimaryKey(id);
-            Long advertId=tbAdvertPublish.getAdvertId();
+            Long advertId = tbAdvertPublish.getAdvertId();
             TbAdvert tbAdvert = tbAdvertMapper.selectByPrimaryKey(advertId);
-            jedisClient.hdel(AD_HOME,tbAdvert.getAdvertType()+"");
+            jedisClient.hdel(AD_HOME, tbAdvert.getAdvertType() + "");
             return OperateEnum.SUCCESS;
         } else {
             return OperateEnum.FAILE;
@@ -118,7 +119,7 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
         }
         int res = tbAdvertPublishMapper.insertSelective(tbAdvertPublish);
         if (res > 0) {
-            jedisClient.hdel(AD_HOME,tbAdvert.getAdvertType()+"");
+            jedisClient.hdel(AD_HOME, tbAdvert.getAdvertType() + "");
             return OperateEnum.SUCCESS;
         } else {
             return OperateEnum.FAILE;
@@ -135,15 +136,15 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
     @Override
     public PageResult getAdvertPublishList(PageSearchParam param) {
         PageHelper.startPage(param.getPageIndex(), param.getPageSize());
-        Long typeId=null;
+        Long typeId = null;
         if (param.getFiled("advertType") != null) {
-            typeId= Long.valueOf(param.getFiled("advertType"));
+            typeId = Long.valueOf(param.getFiled("advertType"));
         }
         int startPage = (param.getPageIndex() - 1) * param.getPageSize();
         List<TbAdvertPublishJoinAdvert> list = tbAdvertPublishMapper.getAdvertPublishByType(typeId);
-        String json=jedisClient.hget(DIC_KEY, DicParentEnum.ADTYPE.getState()+"");
+        String json = jedisClient.hget(DIC_KEY, DicParentEnum.ADTYPE.getState() + "");
         for (TbAdvertPublishJoinAdvert tbAdvert : list) {
-            tbAdvert.setTypeName(DicRedisUtils.getDicFormRedisById(tbAdvert.getAdvertType()+"",json));
+            tbAdvert.setTypeName(DicRedisUtils.getDicFormRedisById(tbAdvert.getAdvertType() + "", json));
         }
         PageInfo pageInfo = new PageInfo(list);
         return new PageResult(pageInfo);
@@ -155,7 +156,6 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
      * @param tbAdvertPublish
      * @return
      */
-
 
 
     /**
@@ -182,7 +182,7 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
 
         int ret = tbAdvertPublishMapper.deleteByPrimaryKey(id);
         if (ret > 0 && count > 0) {
-            jedisClient.hdel(AD_HOME,tbAdvert.getAdvertType()+"");
+            jedisClient.hdel(AD_HOME, tbAdvert.getAdvertType() + "");
             return OperateEnum.SUCCESS;
         } else {
             return OperateEnum.FAILE;
@@ -208,8 +208,6 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
         }
 
         TbAdvertPublish tbAdvertPublish = list.get(0);
-
-
         int count = 0;
 
         if (tbAdvert == null) {
@@ -218,11 +216,9 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
             tbAdvert.setPublishState(0);
             count = tbAdvertMapper.updateByPrimaryKeySelective(tbAdvert);
         }
-
         int ret = tbAdvertPublishMapper.deleteByPrimaryKey(tbAdvertPublish.getId());
-
         if (ret > 0 && count > 0) {
-            jedisClient.hdel(AD_HOME,tbAdvert.getAdvertType()+"");
+            jedisClient.hdel(AD_HOME, tbAdvert.getAdvertType() + "");
             return OperateEnum.SUCCESS;
         } else {
             return OperateEnum.FAILE;
@@ -243,9 +239,9 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
 
     @Override
     public List<KeyValue> getAdvertTypeList() {
-        String json=jedisClient.hget(DIC_KEY,DicParentEnum.ADTYPE.getState()+"");
-        List<KeyValue> list= JsonUtils.jsonToList(json,KeyValue.class);
-        return  list;
+        String json = jedisClient.hget(DIC_KEY, DicParentEnum.ADTYPE.getState() + "");
+        List<KeyValue> list = JsonUtils.jsonToList(json, KeyValue.class);
+        return list;
     }
 
 }

@@ -11,7 +11,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>迈众汽车</title>
@@ -28,7 +27,7 @@
             <script type="text/javascript">
                 $(function(){
                     var images_height = '600px';
-                    var ad_data = ${adJson};
+                    var ad_data = ${ggList};
                     var images_count = ad_data.length;
                     for(var j=0;j<images_count+1;j++){
                         $('.banner ul').append('<li></li>')
@@ -36,15 +35,15 @@
                     //轮播圆点按钮节点
                     for(var j=0;j<images_count;j++){
                         if(j==0){
-                            $('.banner ol').append('<li class="current" data-url="'+ad_data[j].url+'"></li>')
+                            $('.banner ol').append('<li class="current" data-url="'+ad_data[j].ggUrl+'"></li>')
                         }else{
-                            $('.banner ol').append('<li data-url="'+ad_data[j].url+'"></li>')
+                            $('.banner ol').append('<li data-url="'+ad_data[j].ggUrl+'"></li>')
                         }
                     }
                     //载入图片
-                    $('.banner ul li').css('background-image','url('+ad_data[0].img+')');
+                    $('.banner ul li').css('background-image','url('+ad_data[0].ggImg+')');
                     $.each(ad_data,function(key,value){
-                        $('.banner ul li').eq(key).css('background-image','url('+value.img +')');
+                        $('.banner ul li').eq(key).css('background-image','url('+value.ggImg +')');
                     });
                     $('.banner').css('height',images_height);
                     $('.banner ul').css('width',(images_count+1)*100+'%');
@@ -135,7 +134,7 @@
         </div>
         <ul class="navs">
             <li><a href="/">首页</a></li>
-            <li><a href="">我要买车</a></li>
+            <li><a href="/car/list.html">我要买车</a></li>
             <li><a href="/sale.html">我要卖车</a></li>
             <li><a href="">服务保障</a></li>
         </ul><!--navs end-->
@@ -217,7 +216,7 @@
             <c:forEach items="${cbList}" var="item" >
                 <li>
                     <a href="#">
-                        <span><img src="${item.img}"></span>
+                        <span><img src="${item.imgUrl}"></span>
                         <span>${item.name}</span>
                     </a>
                 </li>
@@ -228,7 +227,7 @@
         <p class="p2">车系种类
             <span>
                 <c:forEach items="${ctList}" var="item"  varStatus="stat">
-                    <a href="#">${item.name}</a>
+                    <a href="#">${item.typeName}</a>
                     <c:if test="${!stat.last}" >/</c:if>
                 </c:forEach>
             </span>
@@ -238,8 +237,8 @@
             <c:forEach items="${ctList}" var="item" >
                 <li>
                     <a href="#">
-                        <span><img src="${item.img}"></span>
-                        <span>${item.name}</span>
+                        <span><img src="${item.typeImg}"></span>
+                        <span>${item.typeName}</span>
                     </a>
                 </li>
             </c:forEach>

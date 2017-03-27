@@ -3,8 +3,11 @@ package com.maizhong.service;
 
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.enums.OperateEnum;
+import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.pojo.TbCarBrand;
+
+import java.util.List;
 
 /**
  * Description:品牌服务接口
@@ -28,6 +31,8 @@ public interface BrandService {
      * @return
      */
     PageResult getCarBrandList(PageSearchParam param);
+
+    List<TbCarBrand> getCarBrandList();
 
 
     /**
@@ -70,4 +75,5 @@ public interface BrandService {
     int updateBrandAdvert(String carBrandAdvertImgUrl, long id);
 
 
+    JsonResult updateBrandRedis();
 }

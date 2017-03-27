@@ -2,16 +2,21 @@ package com.maizhong.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.common.collect.Lists;
+import com.maizhong.common.dto.CarBrandDTO;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.enums.OperateEnum;
+import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.common.utils.SqlUtils;
+import com.maizhong.dao.JedisClient;
 import com.maizhong.mapper.TbCarBrandMapper;
 import com.maizhong.pojo.TbCarBrand;
 import com.maizhong.pojo.TbCarBrandExample;
 import com.maizhong.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,8 +34,24 @@ public class BrandServiceImpl implements BrandService {
     @Autowired
     private TbCarBrandMapper tbCarBrandMapper;
 
+    @Autowired
+    private JedisClient jedisClient;
+
+    //基础库汽车品牌
+    @Value("${CAR_BRAND}")
+    private String CAR_BRAND;
+
+    //汽车品牌ID 和名称
+    @Value("${CAR_BRAND_ID}")
+    private String CAR_BRAND_ID;
+
+    //基础库汽车品牌ID 和名称
+    @Value("${CAR_BRAND_HOT}")
+    private String CAR_BRAND_HOT;
+
     /**
      * 根据Id获取品牌对象
+     *
      * @param id
      * @return
      */
@@ -47,6 +68,7 @@ public class BrandServiceImpl implements BrandService {
 
     /**
      * 根据参数查询品牌列表
+     *
      * @param param
      * @return
      */
@@ -59,7 +81,7 @@ public class BrandServiceImpl implements BrandService {
         if (param.getFiled("brandName") != null) {
             criteria.andBrandNameLike(SqlUtils.getLikeSql(param.getFiled("brandName")));
         }
-         //查询出未删除的
+        //查询出未删除的
         criteria.andDelflagEqualTo(0);
         example.setOrderByClause("brand_sequence ASC,id ASC");
         List<TbCarBrand> list = tbCarBrandMapper.selectByExample(example);
@@ -69,25 +91,37 @@ public class BrandServiceImpl implements BrandService {
         return new PageResult(pageInfo);
     }
 
-    /**
-     * 查询出所有状态为1 未删除的品牌信息
-     * @return
-     */
-
     @Override
-    public String getCarBrandListAll() {
-
+    public List<TbCarBrand> getCarBrandList() {
         TbCarBrandExample example = new TbCarBrandExample();
         TbCarBrandExample.Criteria criteria = example.createCriteria();
         criteria.andDelflagEqualTo(0);
         criteria.andStatusEqualTo(1);
         example.setOrderByClause("brand_sequence ASC,id ASC");
         List<TbCarBrand> list = tbCarBrandMapper.selectByExample(example);
-        return  JsonUtils.objectToJson(list);
+        return list;
+    }
+
+    /**
+     * 查询出所有状态为1 未删除的品牌信息
+     *
+     * @return
+     */
+
+    @Override
+    public String getCarBrandListAll() {
+        TbCarBrandExample example = new TbCarBrandExample();
+        TbCarBrandExample.Criteria criteria = example.createCriteria();
+        criteria.andDelflagEqualTo(0);
+        criteria.andStatusEqualTo(1);
+        example.setOrderByClause("brand_sequence ASC,id ASC");
+        List<TbCarBrand> list = tbCarBrandMapper.selectByExample(example);
+        return JsonUtils.objectToJson(list);
     }
 
     /**
      * 添加品牌信息含LOGO
+     *
      * @param tbCarBrand
      * @return
      */
@@ -98,19 +132,20 @@ public class BrandServiceImpl implements BrandService {
         TbCarBrandExample.Criteria criteria = tbCarBrandExample.createCriteria();
         criteria.andBrandNameEqualTo(tbCarBrand.getBrandName());
         List<TbCarBrand> carBrand = tbCarBrandMapper.selectByExample(tbCarBrandExample);
-        if (carBrand.size() > 0){
+        if (carBrand.size() > 0) {
             return OperateEnum.NAME_REPEAT;
         }
-            int res = tbCarBrandMapper.insertSelective(tbCarBrand);
-            if (res > 0) {
-                return OperateEnum.SUCCESS;
-            } else {
-                return OperateEnum.FAILE;
-            }
+        int res = tbCarBrandMapper.insertSelective(tbCarBrand);
+        if (res > 0) {
+            return OperateEnum.SUCCESS;
+        } else {
+            return OperateEnum.FAILE;
         }
+    }
 
     /**
      * 更新品牌信息
+     *
      * @param tbCarBrand
      * @return
      */
@@ -126,6 +161,7 @@ public class BrandServiceImpl implements BrandService {
 
     /**
      * 根据id删除品牌信息 delflag设置为1
+     *
      * @param id
      * @return
      */
@@ -144,6 +180,7 @@ public class BrandServiceImpl implements BrandService {
 
     /**
      * 修改品牌Logo
+     *
      * @param carBrandAdvertImgUrl
      * @param id
      * @return
@@ -158,4 +195,77 @@ public class BrandServiceImpl implements BrandService {
         int res = tbCarBrandMapper.updateByPrimaryKeySelective(carBrand);
         return res;
     }
+
+    private List<TbCarBrand> getCarBrand(int rows){
+        try {
+            List<TbCarBrand> list = jedisClient.getObjectList(CAR_BRAND, TbCarBrand.class, 0, rows);
+            return list;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 更新品牌缓存
+     * @return
+     */
+    @Override
+    public JsonResult updateBrandRedis() {
+
+       //删除品牌信息缓存
+        try {
+            jedisClient.del(CAR_BRAND);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //删除品牌ID对应品牌
+        try {
+            jedisClient.del(CAR_BRAND_ID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //删除热门品牌 top10
+        try {
+            jedisClient.del(CAR_BRAND_HOT);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        TbCarBrandExample example = new TbCarBrandExample();
+        TbCarBrandExample.Criteria criteria = example.createCriteria();
+        criteria.andDelflagEqualTo(0);
+        example.setOrderByClause("brand_sequence ASC,id ASC");
+        List<TbCarBrand> list = tbCarBrandMapper.selectByExample(example);
+
+        //写入品牌详情缓存
+        try {
+            jedisClient.setObjectList(CAR_BRAND, list);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       //写入品牌信息  key：id  value：brandName
+        for (TbCarBrand brand:list){
+            try {
+                jedisClient.hset(CAR_BRAND_ID,brand.getId()+"",brand.getBrandName());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        //写入热门品牌信息到缓存
+        List<TbCarBrand> carBrandList= getCarBrand(9);
+        List<CarBrandDTO> resList = Lists.newArrayList();
+        for (TbCarBrand tbCarBrand : carBrandList) {
+            resList.add(new CarBrandDTO(tbCarBrand.getId(),tbCarBrand.getBrandName(),tbCarBrand.getBrandImg()));
+        }
+        try {
+            String carBrandHot = JsonUtils.objectToJson(resList);
+            jedisClient.set(CAR_BRAND_HOT,carBrandHot);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return JsonResult.build(OperateEnum.SUCCESS);
+    }
+
 }

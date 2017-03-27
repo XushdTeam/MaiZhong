@@ -40,13 +40,10 @@ public class SpreadServiceImpl implements SpreadService {
     private TbCarColumnMapper tbCarColumnMapper;
     @Autowired
     private TbFeedbackMapper tbFeedbackMapper;
-
     @Autowired
     private TbConsultMapper tbConsultMapper;
-
     @Autowired
     private TbCarBrandLineMapper tbCarBrandLineMapper;
-
     @Autowired
     private JedisClient jedisClient;
 
@@ -66,8 +63,8 @@ public class SpreadServiceImpl implements SpreadService {
     @Value("${DIC_KEY}")
     private String DIC_KEY;
 
-    @Value("${CAR_BRAND_LINE}")
-    private String CAR_BRAND_LINE;
+    @Value("${CAR_SERIES}")
+    private String CAR_SERIES;
 
     //热门10中 车的品牌
     @Value("${CAR_BRAND_HOT}")
@@ -153,7 +150,8 @@ public class SpreadServiceImpl implements SpreadService {
                 CarShowIndex car_show = new CarShowIndex(Long.valueOf(keyValue.getKey()), keyValue.getValue());
                 List<CarIndexDetail> carIndexList = new ArrayList<>();
                 for (CarColumnJoinCar carColumnJoinCar : list) {
-                    carIndexList.add(new CarIndexDetail(carColumnJoinCar.getCarId(), carColumnJoinCar.getName() + carColumnJoinCar.getYearSku(), carColumnJoinCar.getShopPrice(), carColumnJoinCar.getImage()));
+                    carIndexList.add(new CarIndexDetail(carColumnJoinCar.getCarId(), carColumnJoinCar.getName(),carColumnJoinCar.getFactoryPrice(),
+                            carColumnJoinCar.getImage(),carColumnJoinCar.getReservePrice(),carColumnJoinCar.getSellPrice()));
                 }
                 car_show.setArry(carIndexList);
                 carShowList.add(car_show);
@@ -199,6 +197,12 @@ public class SpreadServiceImpl implements SpreadService {
         }
     }
 
+    /**
+     * 用户咨询
+     * @param phone
+     * @param type
+     * @return
+     */
     @Override
     public OperateEnum insertConsult(String phone,String type) {
         TbConsult tbConsult=new TbConsult();
@@ -219,70 +223,17 @@ public class SpreadServiceImpl implements SpreadService {
         }
     }
 
-   /* *//**
-     * 获取所有品牌
+
+    /**
+     * 获取前十车系 key 存为hot
      * @return
-     *//*
-    @Override
-    public JsonResult getAllBrand() {
-        //缓存命中
-        try {
-            List<TbCarBrand> list = jedisClient.getObjectList(CAR_BRAND,TbCarBrand.class,0,-1);
-            if(list!=null&&list.size()>0){
-                return JsonResult.OK(list);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        TbCarBrandExample example = new TbCarBrandExample();
-        TbCarBrandExample.Criteria criteria = example.createCriteria();
-        criteria.andDelflagEqualTo(0);
-        example.setOrderByClause("brand_sequence ASC,id ASC");
-        List<TbCarBrand> list = tbCarBrandMapper.selectByExample(example);
-
-        //写入缓存
-        try {
-            jedisClient.setObjectList(CAR_BRAND,list);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return JsonResult.OK(list);
-    }*/
-
-    @Override
-    public JsonResult getSeriesByBrand(Long brandId) {
-        //缓存命中
-        try {
-            String json = jedisClient.hget(CAR_BRAND_LINE,brandId+"");
-            if (StringUtils.isNotBlank(json)) {
-                List<TbCarBrandLine> tbCarBrandLineList=JsonUtils.jsonToList(json, TbCarBrandLine.class);
-                return JsonResult.OK(tbCarBrandLineList);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        TbCarBrandLineExample example = new TbCarBrandLineExample();
-        TbCarBrandLineExample.Criteria criteria = example.createCriteria();
-        criteria.andDelflagEqualTo(0);
-        criteria.andBrandIdEqualTo(brandId);
-        example.setOrderByClause("line_name ASC");
-        List<TbCarBrandLine> list = tbCarBrandLineMapper.selectByExample(example);
-        //写入缓存
-        try {
-            String jsonStr = JsonUtils.objectToJson(list);
-            jedisClient.hset(CAR_BRAND_LINE, jsonStr,brandId+"");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return JsonResult.OK(list);
-    }
+     */
 
     @Override
     public JsonResult getHotSeries() {
         //缓存命中
         try {
-            String json = jedisClient.hget(CAR_BRAND_LINE,"hot");
+            String json = jedisClient.hget(CAR_SERIES,"hot");
             if (StringUtils.isNotBlank(json)) {
                 List<TbCarBrandLine> tbCarBrandLineList=JsonUtils.jsonToList(json, TbCarBrandLine.class);
                 return JsonResult.OK(tbCarBrandLineList);
@@ -299,7 +250,7 @@ public class SpreadServiceImpl implements SpreadService {
         //写入缓存
         try {
             String jsonStr = JsonUtils.objectToJson(list);
-            jedisClient.hset(CAR_BRAND_LINE, jsonStr,"hot");
+            jedisClient.hset(CAR_SERIES,"hot", jsonStr);
         } catch (Exception e) {
             e.printStackTrace();
         }

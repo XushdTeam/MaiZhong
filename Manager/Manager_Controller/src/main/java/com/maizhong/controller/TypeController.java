@@ -195,6 +195,16 @@ public class TypeController {
         List<TbCarType> list = JsonUtils.jsonToList(typeService.getCarTypeListAll(), TbCarType.class);
         return JsonResult.OK(list);
     }
+
+    /**
+     * 更新汽车种类缓存
+     * @return
+     */
+    @RequestMapping("/type/updateTypeRedis")
+    @ResponseBody
+    public  JsonResult updateTypeRedis(){
+        return typeService.updateTypeRedis();
+    }
 }
 
 

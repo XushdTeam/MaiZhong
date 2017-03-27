@@ -30,12 +30,20 @@
                 </div>
             </div>
             <div class="layui-form-item">
+                <label class="layui-form-label">品牌首字母</label>
+                <div class="layui-input-block">
+                    <input name="initial" autocomplete="off" lay-verify="number" maxlength="1"
+                           placeholder="务必大写！！" class="layui-input" type="text">
+                </div>
+            </div>
+            <div class="layui-form-item">
                 <label class="layui-form-label">品牌顺序</label>
                 <div class="layui-input-block">
                     <input name="brandSequence" autocomplete="off" lay-verify="number" maxlength="50"
                            placeholder="品牌顺序" class="layui-input" type="text">
                 </div>
             </div>
+
             <div class="layui-form-item">
                 <label class="layui-form-label">是否启用</label>
                 <div class="layui-input-block">

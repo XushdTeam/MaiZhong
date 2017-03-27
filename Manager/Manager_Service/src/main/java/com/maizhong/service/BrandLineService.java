@@ -53,4 +53,20 @@ public interface BrandLineService {
      */
     JsonResult deleteById(Long id);
 
+    /**
+     * 根据id获取车系
+      * @param id
+     * @return
+     */
+    TbCarBrandLine getSeriesById(Long id);
+
+    PageResult getSeriesList(PageSearchParam param, Long id);
+
+    OperateEnum updateSeries(TbCarBrandLine tbCarBrandLine);
+
+    OperateEnum insertSeries(TbCarBrandLine tbCarBrandLine);
+
+    OperateEnum updateRedis();
+
+    Long getBaseUrl(String id);
 }
