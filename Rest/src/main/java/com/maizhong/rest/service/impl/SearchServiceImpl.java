@@ -18,6 +18,7 @@ import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -103,11 +104,23 @@ public class SearchServiceImpl implements SearchService {
                 //字符串处理
                 String capacity = vo.getCapacity();
                 if (StringUtils.isNotBlank(capacity)) {
-                    document.addField("car_capacity",capacity.replaceAll("[^0-9\\.]",""));
+                    if (capacity.contains("T")||capacity.contains("L")){
+                        document.addField("car_capacity",capacity.replaceAll("[^0-9\\.]",""));
+                    }else{
+                        document.addField("car_capacity",0.0);
+                    }
                 }
                 String shopPrice = vo.getShopPrice();
                 if (StringUtils.isNotBlank(shopPrice)) {
-                    document.addField("car_shopPrice",shopPrice.replaceAll("[^0-9\\.]", ""));
+                    String[] split = shopPrice.split("~");
+                    if (split.length>0){
+                        if (split.length==1){
+                            document.addField("car_shopPrice",shopPrice.replaceAll("[^0-9\\.]", ""));
+                        }else if (split.length==2){
+                            document.addField("car_shopPrice",split[1].replaceAll("[^0-9\\.]", ""));
+                        }
+                    }
+
                 }
 
                 //正常数据录入
@@ -171,6 +184,7 @@ public class SearchServiceImpl implements SearchService {
         solrQuery.setRows(PAGESIZE);
 
 
+
         //排序
         if (sortString!=null&&sortString.length==2){
             solrQuery.addSort(sortString[0],
@@ -215,22 +229,27 @@ public class SearchServiceImpl implements SearchService {
                     tbCarDTO.setName(solrDocument.get("car_name").toString());
                 }
 
-                try {
+//                    BeanUtils.copyProperties(solrDocument,tbCarDTO);
 
-                    //数据填充
-                    tbCarDTO.setNumber(solrDocument.get("car_number").toString());
-                    tbCarDTO.setName(solrDocument.get("car_name").toString());
-                    tbCarDTO.setSellpoint(solrDocument.get("car_sellpoint").toString());
-                    tbCarDTO.setShopPrice(Double.parseDouble(solrDocument.get("car_shopPrice").toString()));
-                    tbCarDTO.setImage(solrDocument.get("car_image").toString());
-                    tbCarDTO.setReservePrice(Double.parseDouble(solrDocument.get("car_reservePrice").toString()));
-                    tbCarDTO.setSellPrice(Double.parseDouble(solrDocument.get("car_sellPrice").toString()));
 
-                    tbCarVos.add(tbCarDTO);
-
-                }catch (NullPointerException e){
-                    continue;
+                //数据填充
+                tbCarDTO.setNumber(getValue(solrDocument,"car_number"));
+//                    tbCarDTO.setName(solrDocument.get("car_name").toString());
+                tbCarDTO.setSellpoint(getValue(solrDocument,"car_sellpoint"));
+                String car_shopPrice = getValue(solrDocument, "car_shopPrice");
+                if (!"".equals(car_shopPrice+"")){
+                    tbCarDTO.setShopPrice(Double.parseDouble(car_shopPrice));
                 }
+                tbCarDTO.setImage(getValue(solrDocument,"car_image"));
+                tbCarDTO.setReservePrice(Double.parseDouble(getValue(solrDocument,"car_reservePrice")));
+                String car_sellPrice = getValue(solrDocument, "car_sellPrice");
+                if (!"".equals(car_sellPrice+"")){
+
+                    tbCarDTO.setSellPrice(Double.parseDouble(car_sellPrice));
+                }
+//                    tbCarDTO.setSellPrice(Double.parseDouble(getValue(solrDocument,"car_sellPrice")));
+
+                tbCarVos.add(tbCarDTO);
             }
 
             //结果处理
@@ -259,6 +278,18 @@ public class SearchServiceImpl implements SearchService {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+    /**
+     * 从solrDocument中获取数据  避免toString时候的空指针  pojo字段名字起错了我好方。。
+     * @param map
+     * @param key
+     * @return
+     */
+    private String  getValue(Map<String,Object> map,String key){
+        Object o =  map.get(key);
+        return o==null?"":o.toString();
     }
 
     /***
@@ -298,18 +329,20 @@ public class SearchServiceImpl implements SearchService {
             //如果车系存在  使用车系进行搜索  页面返回数据同样为 id
             if (StringUtils.isNotBlank(carSeries)){
                 querysb.append("car_brandLine:").append(carSeries);
+                bo = false;
                 //反之  使用车型搜索
             }else if (StringUtils.isNotBlank(carBrand)){
                 querysb.append("car_brand:").append(carBrand);
+                bo = false;
             }
-            bo = false;
+
 
             //售价   目前使用数据  市场指导价格  非售价
             if (StringUtils.isNotBlank(price)){
                 String[] split =price.replaceAll("[^0-9\\-\\.]", "").split("-");
-                if (split.length==2){
-                    querysb.append(bo?"  ":" AND  ").append("car_shopPrice:")
-                            .append("[").append("".equals(split[0])?"*":split[0]).append(" TO ").append("".equals(split[1])?"*":split[1]).append("]");
+                if (split.length==1||split.length==2){
+                    querysb.append(bo?"  ":" AND  ").append("car_sellPrice:")
+                            .append("[").append("".equals(split[0])?"*":split[0]).append(" TO ").append(split.length==2?("".equals(split[1])?"*":split[1]):"*").append("]");
                 }
                 bo = false;
             }
@@ -317,9 +350,9 @@ public class SearchServiceImpl implements SearchService {
             //排量
             if (StringUtils.isNotBlank(capacity)){
                 String[] split =capacity.replaceAll("[^0-9\\-\\.]", "").split("-");
-                if (split.length==2){
+                if (split.length==1||split.length==2){
                     querysb.append(bo?"  ":" AND  ").append("car_capacity:")
-                            .append("[").append("".equals(split[0])?"*":split[0]).append(" TO ").append("".equals(split[1])?"*":split[1]).append("]");
+                            .append("[").append("".equals(split[0])?"*":split[0]).append(" TO ").append(split.length==2?("".equals(split[1])?"*":split[1]):"*").append("]");
                 }
                 bo = false;
             }
