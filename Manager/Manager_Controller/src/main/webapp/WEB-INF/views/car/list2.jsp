@@ -181,7 +181,7 @@
                             <td><a href="javascript:;" onclick="seeDesc('{{ item.id }}','{{ item.name}}')">查看详情</a></td>
                         <%--'商品详情的存储字段',--%>
                             <td>
-                                <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit" data-href="${editCarUrl}/{{item.id}}"><i class="icon-edit  fa fa-pencil-square-o"></i>编辑</a>
+                                <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit" data-href="${editCarUrl}?id={{item.id}}"><i class="icon-edit  fa fa-pencil-square-o"></i>编辑</a>
                                 <a class="layui-btn layui-btn-small layui-btn-danger do-action" data-type="doDelete" data-text="确定删除<span class=red>{{item.name}}</span>吗？" data-href="${deleteUrl}/{{item.id}}"><i class="icon-trash-o  fa fa-trash-o"></i>删除</a>
                             </td>
                         </tr>

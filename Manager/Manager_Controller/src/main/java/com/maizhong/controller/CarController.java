@@ -10,6 +10,7 @@ import com.maizhong.pojo.TbCarBrand;
 import com.maizhong.pojo.TbCarType;
 import com.maizhong.pojo.vo.TbCarBaseVo;
 import com.maizhong.service.*;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -76,11 +77,11 @@ public class CarController {
     public String list(Model model){
         model.addAttribute("carListUrl","/car/findAll");
         model.addAttribute("carTypeListUrl","/car/type");
-        model.addAttribute("carAddUrl","/car/add");
+        model.addAttribute("carAddUrl","/car/modify");
         model.addAttribute("cartypeUrl","/type/findAll");
         model.addAttribute("carBrandType","/brand/findAll");
         model.addAttribute("deleteUrl","/car/deleteCar");
-        model.addAttribute("editCarUrl","/car/updateUI");
+        model.addAttribute("editCarUrl","/car/modify");
 
 
 
@@ -242,4 +243,47 @@ public class CarController {
         return carService.findBaseCar(carSeries,carYear);
     }
 
+
+    @RequestMapping("/modify")
+    public String modifyCar(Long id,Model model){
+
+
+
+        model.addAttribute("seepropUrl","/carProp/prop");
+        model.addAttribute("lineListUrl","/carBrandLine/list");
+        model.addAttribute("findBaseCarUrl","/car/overall");
+
+        /*
+            数据填充  重点
+                    根据车型查找车系
+                    根据车系和年份确认款式
+         */
+        if (id!=null&&StringUtils.isNotBlank(id+"")){
+            //数据查询与填充
+            TbCar car = carService.findCarById(id);
+            model.addAttribute("car",car);
+            model.addAttribute("updateCarUrl","/car/update");
+
+
+            //数据准备  车系列表
+            model.addAttribute("lineList",brandLineService.getCarBrandLineList(car.getCarBrand()).getData());
+            //  设置基础列表
+            model.addAttribute("carBaseVoList",carService.findBaseCar(car.getCarBrandLine(),car.getCarYear()).getData());
+
+        }else{
+            model.addAttribute("updateCarUrl","/car/insert");
+        }
+
+
+
+        //数据准备
+        model.addAttribute("carTypeList", JsonUtils.jsonToList(typeService.getCarTypeListAll(), TbCarType.class));
+        model.addAttribute("carBrandList",JsonUtils.jsonToList(brandService.getCarBrandListAll(), TbCarBrand.class));
+
+
+
+
+
+        return "/car/car";
+    }
 }

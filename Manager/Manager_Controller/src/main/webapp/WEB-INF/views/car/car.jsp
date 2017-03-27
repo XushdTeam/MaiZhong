@@ -20,21 +20,24 @@
 <body>
 <div  class="main-wrap">
     <blockquote class="layui-elem-quote fhui-admin-main_hd">
-        <h2>
+        <%--<h2>--%>
             <a class="layui-btn layui-btn-small do-action" id="returnList" data-type="doAddEdit" data-href="/car/list"><i class="layui-icon">&#xe603;</i> 返回</a>
-            <h2 style="display: inline">汽车添加</h2>
-            <c:if test="${car!=null}">
-                车辆信息修改
-            </c:if>
-            <c:if test="${car==null}">
-                添加车辆
-            </c:if>
-        </h2>
+            <h2 style="display: inline">
+                <c:if test="${car!=null}">
+                    车辆信息修改
+                </c:if>
+                <c:if test="${car==null}">
+                    添加车辆
+                </c:if>
+            </h2>
+        <%--</h2>--%>
     </blockquote>
     <div class="y-role">
         <fieldset class="layui-elem-field">
             <legend>车型
-                <a class="layui-btn layui-btn-small do-action" id="toProp" data-type="doAddEdit" data-href="${seepropUrl}/"><i class="layui-icon">&#xe609;</i>点击查看属性</a>
+                <c:if test="${car!=null}">
+                    <a class="layui-btn layui-btn-small do-action" id="toProp" data-type="doAddEdit" data-href="${seepropUrl}/"><i class="layui-icon">&#xe609;</i>点击查看属性</a>
+                </c:if>
             </legend>
             <div class="layui-field-box">
 
