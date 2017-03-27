@@ -1,5 +1,6 @@
 package com.maizhong.portal.service;
 
+import com.maizhong.common.dto.IndexBaseDTO;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.pojo.TbFeedback;
 
@@ -12,14 +13,10 @@ import java.util.Map;
  */
 public interface IndexService {
 
-
-    String getAdvert(int advertType);
-
-    List<Map> getCarBrand();
-
-    List<Map> getCarType();
-
     String getFeedBackUrl();
 
     boolean saveFeedback(TbFeedback feedback);
+
+
+    Map<String,Object> getIndexBase();
 }

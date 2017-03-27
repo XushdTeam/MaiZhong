@@ -2,6 +2,7 @@ package com.maizhong.portal.service.impl;
 
 
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
+import com.maizhong.common.dto.IndexBaseDTO;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
@@ -27,92 +28,11 @@ public class IndexServiceImpl implements IndexService {
     @Value("${REST_URL}")
     private String REST_URL;
 
-    @Value("${AD_INTERFACE}")
-    private String AD_INTERFACE;
-
-    @Value("${CAR_BRAND}")
-    private String CAR_BRAND;
-
-    @Value("${CAR_TYPE}")
-    private String CAR_TYPE;
+    @Value("${INDEXBASE_URL}")
+    private String INDEXBASE_URL;
 
     @Value("${FEEDBACK}")
     private String FEEDB_ACK;
-
-    /**
-     * 获取
-     *
-     * @param advertType
-     * @return
-     */
-    @Override
-    public String getAdvert(int advertType) {
-
-        //调用服务层服务
-        String result = HttpClientUtil.doGet(REST_URL + AD_INTERFACE + advertType);
-        if (StringUtils.isNotBlank(result)) {
-            List<Map<String, String>> resultList = JsonUtils.jsonResultToList(result);
-            List<Map> list = new ArrayList<>();
-            for (Map<String, String> resultMap : resultList) {
-                Map<String, String> map = new HashMap<>();
-                map.put("img", resultMap.get("advertImg"));
-                map.put("url", resultMap.get("advertUrl"));
-                list.add(map);
-            }
-            return JsonUtils.objectToJson(list);
-        } else {
-            return null;
-        }
-
-
-    }
-
-
-    /**
-     * 获取汽车品牌
-     *
-     * @return
-     */
-    @Override
-    public List<Map> getCarBrand() {
-
-        //调用服务层服务
-        String result = HttpClientUtil.doGet(REST_URL + CAR_BRAND);
-
-        List<Map<String, String>> resultList = JsonUtils.jsonResultToList(result);
-        List<Map> list = new ArrayList<>();
-        for (Map<String, String> resultMap : resultList) {
-            Map<String, String> map = new HashMap<>();
-            map.put("img", resultMap.get("brandImg"));
-            map.put("id", resultMap.get("brandId"));
-            map.put("name", resultMap.get("brandName"));
-            list.add(map);
-        }
-        return list;
-    }
-
-    /**
-     * 获取车型
-     *
-     * @return
-     */
-    @Override
-    public List<Map> getCarType() {
-
-        //调用服务层服务
-        String result = HttpClientUtil.doGet(REST_URL + CAR_TYPE);
-
-        List<Map<String, String>> resultList = JsonUtils.jsonResultToList(result);
-        List<Map> list = new ArrayList<>();
-        for (Map<String, String> resultMap : resultList) {
-            Map<String, String> map = new HashMap<>();
-            map.put("img", resultMap.get("typeImg"));
-            map.put("id", resultMap.get("typeId"));
-            map.put("name", resultMap.get("typeName"));
-            list.add(map);
-        }
-        return list;
-    }
 
     @Override
     public String getFeedBackUrl() {
@@ -135,6 +55,22 @@ public class IndexServiceImpl implements IndexService {
         JsonResult result = JsonUtils.jsonToPojo(res, JsonResult.class);
         if (result.getStatus() == 200) return true;
         return false;
+    }
+
+    /**
+     * 首页数据初次获取
+     * @author Xushd
+     * @return
+     */
+
+    @Override
+    public Map<String,Object> getIndexBase() {
+
+        String res = HttpClientUtil.doGet(REST_URL+INDEXBASE_URL);
+        JsonResult result = JsonUtils.jsonToPojo(res,JsonResult.class);
+        Map<String,Object> map = (Map) result.getData();
+        if(result.getStatus()==200)return map;
+        return null;
     }
 
 }

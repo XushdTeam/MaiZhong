@@ -1,6 +1,8 @@
 package com.maizhong.portal.controller;
 
+import com.maizhong.common.dto.IndexBaseDTO;
 import com.maizhong.common.result.JsonResult;
+import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.pojo.TbFeedback;
 import com.maizhong.portal.service.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +32,10 @@ public class IndexController {
     @RequestMapping(value = "/index")
     public String index(Model model) {
 
-        String adJson = indexService.getAdvert(14);
-        List<Map> cbList = indexService.getCarBrand();
-        List<Map> ctList = indexService.getCarType();
-        model.addAttribute("adJson", adJson);
-        model.addAttribute("cbList", cbList);
-        model.addAttribute("ctList", ctList);
+        Map<String,Object> map =  indexService.getIndexBase();
+        model.addAttribute("ggList", JsonUtils.objectToJson(map.get("ggDTOs")));
+        model.addAttribute("cbList", map.get("carBrand"));
+        model.addAttribute("ctList", map.get("carType"));
         return "index";
     }
 
