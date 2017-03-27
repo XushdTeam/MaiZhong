@@ -7,21 +7,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+
 /**
  * Created by YangF on 2017/3/27.
  */
-@RequestMapping("/detail")
 @RestController
 public class DetailController {
 
 
+    @Resource
     private DetailService detailService;
 
-    @RequestMapping("/{id}")
+    @RequestMapping("/detail/{id}")
     public JsonResult getDetailById(@PathVariable Long id){
         return detailService.getDetailById(id);
     }
-
-
-
 }
