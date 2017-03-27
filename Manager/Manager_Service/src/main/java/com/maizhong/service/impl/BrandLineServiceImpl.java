@@ -48,10 +48,9 @@ public class BrandLineServiceImpl implements BrandLineService {
     private String CAR_BRAND_HOT;
 
 
-
     @Override
     public TbCarBrandLine getCarBrandLineByid(Long id) {
-        return id==null?null:tbCarBrandLineMapper.selectByPrimaryKey(id);
+        return id == null ? null : tbCarBrandLineMapper.selectByPrimaryKey(id);
     }
 
     /**
@@ -62,7 +61,7 @@ public class BrandLineServiceImpl implements BrandLineService {
      */
     @Override
     public JsonResult getCarBrandLineList(Long brandId) {
-        if (brandId==null) return JsonResult.Error("系统错误");
+        if (brandId == null) return JsonResult.Error("请刷新后重试");
         TbCarBrandLineExample example = new TbCarBrandLineExample();
         example.createCriteria().andBrandIdEqualTo(brandId);
         List<TbCarBrandLine> list = tbCarBrandLineMapper.selectByExample(example);
@@ -72,22 +71,22 @@ public class BrandLineServiceImpl implements BrandLineService {
 
     @Override
     public JsonResult insertCarBrandLine(TbCarBrandLine tbCarBrandLine) {
-        if (tbCarBrandLine==null||tbCarBrandLine.getBrandId()==null){
-            return JsonResult.Error("错误的数据");
+        if (tbCarBrandLine == null || tbCarBrandLine.getBrandId() == null) {
+            return JsonResult.Error("请刷新后重试");
         }
-        if (tbCarBrandLine.getStatus()!=null){
-            if (tbCarBrandLine.getStatus()==1){
+        if (tbCarBrandLine.getStatus() != null) {
+            if (tbCarBrandLine.getStatus() == 1) {
                 tbCarBrandLine.setDelflag(0);
-            }else{
+            } else {
                 tbCarBrandLine.setDelflag(1);
             }
-        }else{
+        } else {
             tbCarBrandLine.setStatus(1);
             tbCarBrandLine.setDelflag(0);
         }
 
         //TODO 缓存处理 预留
-        if (tbCarBrandLine.getShowFlag()!=null&&tbCarBrandLine.getShowFlag()==1){
+        if (tbCarBrandLine.getShowFlag() != null && tbCarBrandLine.getShowFlag() == 1) {
 
         }
 
@@ -98,22 +97,22 @@ public class BrandLineServiceImpl implements BrandLineService {
     @Override
     public JsonResult updateCarBrandLine(TbCarBrandLine tbCarBrandLine) {
 
-        if (tbCarBrandLine==null||tbCarBrandLine.getId()==null||tbCarBrandLine.getBrandId()==null){
+        if (tbCarBrandLine == null || tbCarBrandLine.getId() == null || tbCarBrandLine.getBrandId() == null) {
             return JsonResult.Error("错误的数据");
         }
-        if (tbCarBrandLine.getStatus()!=null){
-            if (tbCarBrandLine.getStatus()==1){
+        if (tbCarBrandLine.getStatus() != null) {
+            if (tbCarBrandLine.getStatus() == 1) {
                 tbCarBrandLine.setDelflag(0);
-            }else{
+            } else {
                 tbCarBrandLine.setDelflag(1);
             }
-        }else{
+        } else {
             tbCarBrandLine.setStatus(1);
             tbCarBrandLine.setDelflag(0);
         }
 
         //TODO 缓存处理 预留
-        if (tbCarBrandLine.getShowFlag()!=null&&tbCarBrandLine.getShowFlag()==1){
+        if (tbCarBrandLine.getShowFlag() != null && tbCarBrandLine.getShowFlag() == 1) {
 
         }
         tbCarBrandLineMapper.updateByPrimaryKeySelective(tbCarBrandLine);
@@ -123,9 +122,9 @@ public class BrandLineServiceImpl implements BrandLineService {
 
     @Override
     public JsonResult deleteById(Long id) {
-        if (id==null)
-            return JsonResult.Error("数据错误");
-        TbCarBrandLine tbCarBrandLine=tbCarBrandLineMapper.selectByPrimaryKey(id);
+        if (id == null)
+            return JsonResult.Error("请刷新后重试");
+        TbCarBrandLine tbCarBrandLine = tbCarBrandLineMapper.selectByPrimaryKey(id);
         tbCarBrandLine.setDelflag(1);
         tbCarBrandLineMapper.updateByPrimaryKey(tbCarBrandLine);
         return JsonResult.OK("删除成功");
@@ -133,12 +132,13 @@ public class BrandLineServiceImpl implements BrandLineService {
 
     /**
      * 根据id获取车系
+     *
      * @param id
      * @return
      */
     @Override
     public TbCarBrandLine getSeriesById(Long id) {
-        TbCarBrandLine tbCarBrandLine=tbCarBrandLineMapper.selectByPrimaryKey(id);
+        TbCarBrandLine tbCarBrandLine = tbCarBrandLineMapper.selectByPrimaryKey(id);
         return tbCarBrandLine;
     }
 
@@ -152,6 +152,7 @@ public class BrandLineServiceImpl implements BrandLineService {
         }
         criteria.andBrandIdEqualTo(id);
         criteria.andDelflagEqualTo(0);
+        example.setOrderByClause("line_sequence ASC");
         List<TbCarBrandLine> list = tbCarBrandLineMapper.selectByExample(example);
         PageInfo pageInfo = new PageInfo(list);
         return new PageResult(pageInfo);
@@ -173,8 +174,9 @@ public class BrandLineServiceImpl implements BrandLineService {
         TbCarBrandLineExample tbCarBrandLineExample = new TbCarBrandLineExample();
         TbCarBrandLineExample.Criteria criteria = tbCarBrandLineExample.createCriteria();
         criteria.andLineNameEqualTo(tbCarBrandLine.getLineName());
+        criteria.andDelflagEqualTo(0);
         List<TbCarBrandLine> tbCarBrandLines = tbCarBrandLineMapper.selectByExample(tbCarBrandLineExample);
-        if (tbCarBrandLines.size() > 0){
+        if (tbCarBrandLines.size() > 0) {
             return OperateEnum.NAME_REPEAT;
         }
 
@@ -214,9 +216,9 @@ public class BrandLineServiceImpl implements BrandLineService {
             criteria.andBrandIdEqualTo(brand.getId());
             List<TbCarBrandLine> list2 = tbCarBrandLineMapper.selectByExample(example);
             //写入车系ID对应名称
-            for (TbCarBrandLine brandLine:list2){
+            for (TbCarBrandLine brandLine : list2) {
                 try {
-                    jedisClient.hset(CAR_SERIES_ID,brandLine.getId()+"",brandLine.getLineName());
+                    jedisClient.hset(CAR_SERIES_ID, brandLine.getId() + "", brandLine.getLineName());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -232,7 +234,7 @@ public class BrandLineServiceImpl implements BrandLineService {
 
         //写入热门车系
         String jsonBrand = jedisClient.get(CAR_BRAND_HOT);
-        List<CarBrandDTO> carBrandList=JsonUtils.jsonToList(jsonBrand,CarBrandDTO.class);
+        List<CarBrandDTO> carBrandList = JsonUtils.jsonToList(jsonBrand, CarBrandDTO.class);
         //获取每个热门品牌的首个车系
         List<TbCarBrandLine> resList = Lists.newArrayList();
         for (CarBrandDTO tbCarBrand : carBrandList) {
@@ -256,5 +258,16 @@ public class BrandLineServiceImpl implements BrandLineService {
         }
 
         return OperateEnum.SUCCESS;
+    }
+
+    @Override
+    public Long getBaseUrl(String id) {
+        TbCarBrandLine tbCarBrandLine = getCarBrandLineByid(Long.valueOf(id));
+        String baseUrl = null;
+        Long brandId = null;
+        if (tbCarBrandLine != null && tbCarBrandLine.getBrandId() != null) {
+            brandId = tbCarBrandLine.getBrandId();
+        }
+        return brandId;
     }
 }

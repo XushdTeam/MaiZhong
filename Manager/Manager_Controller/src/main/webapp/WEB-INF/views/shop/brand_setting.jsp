@@ -37,6 +37,13 @@
                                        placeholder="用户名称，50字符内" class="layui-input" type="text">
                             </div>
                         </div>
+                         <div class="layui-form-item">
+                            <label class="layui-form-label">品牌首字母</label>
+                            <div class="layui-input-block">
+                                <input name="initial" autocomplete="off" value="${brand.initial}" lay-verify="required" maxlength="1"
+                                       placeholder="品牌首字母，务必大写" class="layui-input" type="text">
+                            </div>
+                        </div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">显示顺序</label>
                             <div class="layui-input-block">

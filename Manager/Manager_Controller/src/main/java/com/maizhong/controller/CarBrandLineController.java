@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  * Created by yangF on 2017/3/16.
  */
 @Controller
-public class TbCarBrandLineController {
+public class CarBrandLineController {
 
     @Autowired
     private BrandLineService brandLineService;
@@ -47,43 +47,50 @@ public class TbCarBrandLineController {
 
     @ControllerLog(module = "车系管理", methods = "车系列表")
     @RequestMapping(value = "/series/list/{id}")
-    public String seriesList(@PathVariable Long id,Model model) {
+    public String seriesList(@PathVariable Long id, Model model) {
         model.addAttribute("baseUrl", "/series");
         model.addAttribute("brandIdS", id);
-        model.addAttribute("listUrl", "/series/listUrl/"+id);
+        model.addAttribute("listUrl", "/series/listUrl/" + id);
         model.addAttribute("handleSeries", "/series/list");
         model.addAttribute("handleUrl", "/series/handle");
         model.addAttribute("deleteUrl", "/series/delete");
-        return  "shop/series";
+        return "shop/series";
     }
 
     @ControllerLog(module = "车系管理", methods = "车系列表")
-    @RequestMapping(value = "/series/listUrl/{id}",method = RequestMethod.POST)
+    @RequestMapping(value = "/series/listUrl/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult seriesList(@PathVariable Long id,PageSearchParam param) {
-        PageResult result=brandLineService.getSeriesList(param,id);
+    public JsonResult seriesList(@PathVariable Long id, PageSearchParam param) {
+        PageResult result = brandLineService.getSeriesList(param, id);
         return JsonResult.OK(result);
     }
 
 
     /**
      * 车系新增和修改
+     *
      * @param id
      * @param model
      * @return
      */
     @RequestMapping(value = "/series/handle/{type}/{id}")
-    public String handle(@PathVariable String id,@PathVariable String type, Model model) {
+    public String handle(@PathVariable String id, @PathVariable String type, Model model) {
 
-        model.addAttribute("baseUrl", "/series");
         if (StringUtils.equals("new", type)) {
             //新增
+            model.addAttribute("baseUrl", "/series/list/" + id);
             model.addAttribute("brandIdS", id);
             model.addAttribute("handle", "车系管理/新增车系");
             model.addAttribute("saveUrl", "/series/save");
             return "shop/series_add";
         } else {
             TbCarBrandLine series = brandLineService.getSeriesById(Long.valueOf(id));
+            Long brandId=brandLineService.getBaseUrl(id);
+            if (brandId==null){
+                model.addAttribute("baseUrl","/series");
+            }else {
+                model.addAttribute("baseUrl","/series/list/"+brandId);
+            }
             model.addAttribute("series", series);
             model.addAttribute("handle", "车系管理/车系修改");
             model.addAttribute("saveUrl", "/series/update");
@@ -93,6 +100,7 @@ public class TbCarBrandLineController {
 
     /**
      * 车系新增
+     *
      * @param tbCarBrandLine
      * @return
      */
@@ -108,6 +116,7 @@ public class TbCarBrandLineController {
 
     /**
      * 根据Id删除车系
+     *
      * @param id
      * @return
      */
@@ -117,13 +126,14 @@ public class TbCarBrandLineController {
     @ResponseBody
     public JsonResult carSeriesDelete(@PathVariable Long id) {
         //车系删除
-        if (id==null)
+        if (id == null)
             return JsonResult.Error("错误");
         return brandLineService.deleteById(id);
     }
 
     /**
      * 车系信息修改
+     *
      * @param tbCarBrandLine
      * @return
      */
@@ -138,14 +148,15 @@ public class TbCarBrandLineController {
 
     /**
      * 车系缓存更新
+     *
      * @return
      */
     @ControllerLog(module = "车系管理", methods = "插入车系缓存")
     @RequestMapping(value = "/series/updateRedis")
     @ResponseBody
     public JsonResult updateRedis() {
-       OperateEnum result=brandLineService.updateRedis();
-        return  JsonResult.build(result);
+        OperateEnum result = brandLineService.updateRedis();
+        return JsonResult.build(result);
     }
 
 }

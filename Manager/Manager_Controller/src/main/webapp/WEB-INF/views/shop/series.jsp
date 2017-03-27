@@ -38,7 +38,8 @@
                     <a class="menu-btn"></a>
                     <div class="l-list">
                         <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit"  data-href="/series/handle/new/${brandIdS}"><i class="fa fa-plus"></i></i>新增车系</a>
-                        <a class="layui-btn layui-btn-small do-action" data-type="doRefresh" data-href="${baseUrl}"><i class="fa fa-refresh"></i>刷新</a>
+                        <a class="layui-btn layui-btn-small do-action" data-type="doRefresh" data-href="/series/list/${brandIdS}"><i class="fa fa-refresh"></i>刷新</a>
+                        <a class="layui-btn layui-btn-small do-action" data-type="doRefresh" data-href="/series"><i class="fa fa-refresh"></i>返回品牌列表</a>
                     </div>
                 </div>
             </div>

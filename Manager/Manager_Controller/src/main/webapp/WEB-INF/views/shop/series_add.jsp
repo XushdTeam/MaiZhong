@@ -37,7 +37,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">是否启用</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="status" value="1" title="启用">
+                    <input type="radio" name="status" value="1" title="启用" checked="checked">
                     <input type="radio" name="status" value="0" title="停用">
                 </div>
             </div>

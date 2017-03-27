@@ -67,4 +67,6 @@ public interface BrandLineService {
     OperateEnum insertSeries(TbCarBrandLine tbCarBrandLine);
 
     OperateEnum updateRedis();
+
+    Long getBaseUrl(String id);
 }
