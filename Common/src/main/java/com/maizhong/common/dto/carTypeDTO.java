@@ -4,7 +4,7 @@ package com.maizhong.common.dto;
  * 汽车类型DTO
  * Created by Xushd on 2017/3/23.
  */
-public class CarTypeDTO {
+public class carTypeDTO {
 
     private Long id;
 
@@ -12,13 +12,13 @@ public class CarTypeDTO {
 
     private String typeImg;
 
-    public CarTypeDTO(Long id, String typeName, String typeImg) {
+    public carTypeDTO(Long id, String typeName, String typeImg) {
         this.id = id;
         this.typeName = typeName;
         this.typeImg = typeImg;
     }
 
-    public CarTypeDTO() {
+    public carTypeDTO() {
     }
 
     public Long getId() {

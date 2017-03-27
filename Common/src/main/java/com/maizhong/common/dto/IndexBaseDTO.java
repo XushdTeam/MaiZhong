@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class IndexBaseDTO {
 
-    private List<CarBrandDto> carBrand;
+    private List<CarBrandDTO> carBrand;
 
     private List<GgDTO> ggDTOs;
 
@@ -18,11 +18,11 @@ public class IndexBaseDTO {
     }
 
 
-    public List<CarBrandDto> getCarBrand() {
+    public List<CarBrandDTO> getCarBrand() {
         return carBrand;
     }
 
-    public void setCarBrand(List<CarBrandDto> carBrand) {
+    public void setCarBrand(List<CarBrandDTO> carBrand) {
         this.carBrand = carBrand;
     }
 
@@ -42,7 +42,7 @@ public class IndexBaseDTO {
         this.carType = carType;
     }
 
-    public IndexBaseDTO(List<CarBrandDto> carBrand, List<GgDTO> ggDTOs, List<carTypeDTO> carType) {
+    public IndexBaseDTO(List<CarBrandDTO> carBrand, List<GgDTO> ggDTOs, List<carTypeDTO> carType) {
         this.carBrand = carBrand;
         this.ggDTOs = ggDTOs;
         this.carType = carType;
