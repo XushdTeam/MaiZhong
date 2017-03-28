@@ -27,7 +27,8 @@
     <div class="car-sale-wrap">
         <div class="main search-opt">
             <div class="search" id="switchCarShop">
-                <input type="text" value="" data-default="请输入品牌、车系搜索" class="entry-box s-input fl ui-autocomplete-input" id="search_search" name="q" data-addtop="+6" data-addwidth="36" data-carcount="1" autocomplete="off" style="color: rgb(191, 191, 191);"><a href="javascript:;" class="s-btn" for="search_search"></a>
+                <input type="text" value="${queryStr}" placeholder="请输入品牌、车系搜索" class="entry-box s-input fl ui-autocomplete-input" id="search_search" name="q"  autocomplete="off" style="color: rgb(191, 191, 191);">
+                <a href="javascript:;" class="s-btn" for="search_search"></a>
             </div>
             <div class="select-result">
                 <span class="has-condition">当前已选条件</span>
@@ -233,29 +234,48 @@
         <div class="filter clearfix" id="J_Filter"  >
             <div class="fi_left">全部汽车资源（${total}）</div>
             <div class="fi_right">
-                <a class="fSort <c:if test="${sort=='d'}">fSort-cur</c:if>" href="/car/s_d_1_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html" title="点击后恢复默认排序"  >默认排序<i class="f-ico-arrow-d"></i></a>
-                <a <c:if test="${sort=='h'}">class="fSort fSort-cur" href="/car/s_h_${method}_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html"</c:if>
-                   <c:if test="${sort!='h'}">class="fSort " href="/car/s_h_1_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html"</c:if>title="点击后按人气从高到低"  >人气<i class="f-ico-triangle-mt"></i><i class="f-ico-triangle-mb"></i>
-                </a>
-                <a <c:if test="${sort=='t'}">class="fSort fSort-cur"href="/car/s_t_${method}_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html"</c:if>
-                   <c:if test="${sort!='t'}">class="fSort" href="/car/s_t_1_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html"</c:if>>最新<i class="f-ico-triangle-mt"></i><i class="f-ico-triangle-mb"></i>
-                </a>
-                <a <c:if test="${sort=='p'}">class="fSort Sort-cur" href="/car/s_p_${method}_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html"</c:if>
-                   <c:if test="${sort!='p'}"> class="fSort" href="/car/s_p_1_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html"</c:if>>价格<i class="f-ico-triangle-mt"></i><i class="f-ico-triangle-mb"></i>
-                </a>
-            </div>        </div>
+                <a class="fSort <c:if test="${sort=='d'}">fSort-cur</c:if>" href="/car/s_d_1_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>" >默认排序</a>
+                <c:if test="${sort=='h'}">
+                    <a class="fSort fSort-cur" href="/car/s_h_${method}_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>">人气
+                        <c:if test="${method==1}"><i class="f-ico-arrow-d"><img src="/resources/img/35.png"></i></c:if>
+                        <c:if test="${method!=1}"><i class="f-ico-arrow-d"><img src="/resources/img/34.png"></i></c:if>
+                    </a>
+                </c:if>
+                <c:if test="${sort!='h'}">
+                    <a class="fSort" href="/car/s_h_1_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>">人气</a>
+                </c:if>
+                <c:if test="${sort=='t'}">
+                    <a class="fSort fSort-cur"href="/car/s_t_${method}_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>">最新
+                        <c:if test="${method==1}"><i class="f-ico-arrow-d"><img src="/resources/img/35.png"></i></c:if>
+                        <c:if test="${method!=1}"><i class="f-ico-arrow-d"><img src="/resources/img/34.png"></i></c:if>
+                    </a>
+                </c:if>
+                <c:if test="${sort!='t'}">
+                    <a class="fSort" href="/car/s_t_1_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>">最新</a>
+                </c:if>
+                <c:if test="${sort=='p'}">
+                    <a class="fSort fSort-cur"href="/car/s_p_${method}_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>" >价格
+                        <c:if test="${method==1}"><i class="f-ico-arrow-d"><img src="/resources/img/35.png"></i></c:if>
+                        <c:if test="${method!=1}"><i class="f-ico-arrow-d"><img src="/resources/img/34.png"></i></c:if>
+                    </a>
+                </c:if>
+                <c:if test="${sort!='p'}">
+                    <a class="fSort"href="/car/s_p_1_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>" >价格</a>
+                </c:if>
+            </div>
+        </div>
         <div style="clear:both"></div>
-        <div class="view grid-nosku views" id="J_ItemList" >
+        <div class="view grid-nosku views" id="J_ItemList" style="min-height: 400px;">
             <c:forEach items="${carList}" var="c">
             <div class="product">
                 <div class="product-iWrap">
                     <div class="productImg-wrap">
-                        <a href=" " class="productImg" target="_blank" >
-                            <img src="${c.image}">
+                        <a href="/car/${c.id}/detail.html" class="productImg" target="_blank" >
+                            <img src="/resources/img/default.png" data-src="${c.image}">
                         </a>
                     </div><!--productImg-wrap end-->
                     <p class="productTitle">
-                        <a href=" " target="_blank"   >
+                        <a href="/car/${c.id}/detail.html" target="_blank"   >
                             ${c.name}
                         </a>
                     </p>
@@ -273,7 +293,7 @@
             <c:if test="${tp>0}">
                 <b class="ui-page-num">
                     <c:if test="${cur>1}">
-                        <a class="ui-page-prev" href="/car/s_${sort}_${method}_${cur-1}/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html" >上一页</a>
+                        <a class="ui-page-prev" href="/car/s_${sort}_${method}_${cur-1}/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>" >上一页</a>
                     </c:if>
                     <c:if test="${cur==1}">
                         <a class="ui-page-prev" >上一页</a>
@@ -285,7 +305,7 @@
                                     <a class="ui-page-cur">${i}</a>
                                 </c:when>
                                 <c:otherwise>
-                                    <a href="/car/s_${sort}_${method}_${i}/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html">${i}</a>
+                                    <a href="/car/s_${sort}_${method}_${i}/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>">${i}</a>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -298,7 +318,7 @@
                                         <a class="ui-page-cur">${i}</a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="/car/s_${sort}_${method}_${i}/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html">${i}</a>
+                                        <a href="/car/s_${sort}_${method}_${i}/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>">${i}</a>
                                     </c:otherwise>
                                 </c:choose>
                             </c:forEach>
@@ -311,7 +331,7 @@
                                             <a class="ui-page-cur">${j}</a>
                                         </c:when>
                                         <c:otherwise>
-                                            <a href="/car/s_${sort}_${method}_${j}/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html">${j}</a>
+                                            <a href="/car/s_${sort}_${method}_${j}/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>">${j}</a>
                                         </c:otherwise>
                                     </c:choose>
                                 </c:if>
@@ -319,7 +339,7 @@
                         </c:if>
                     </c:if>
                     <c:if test="${cur<tp}">
-                        <a class="ui-page-prev" href="/car/s_${sort}_${method}_${cur+1}/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html" >上一页</a>
+                        <a class="ui-page-prev" href="/car/s_${sort}_${method}_${cur+1}/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>" >下一页</a>
                     </c:if>
                     <c:if test="${cur==tp}">
                         <a class="ui-page-next" >下一页</a>
@@ -330,6 +350,7 @@
     </div>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>
+<script src="/resources/script/lazy-load-img.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(function(){
         $(".brand-more").click(function(){
@@ -376,8 +397,42 @@
                     window.location.href="/car/cb_${bId}/cs_${sId}/cp_"+ps+"-"+pe+"/cv_${vId}/list.html";
                 }
             }
+            if(ps==0&&pe==0){
+                $(".error").show();
+            }
         });
+        $(".s-btn").click(function(){
 
+            var searchStr = $("#search_search").val().trim();
+            if(searchStr=='')return;
+            window.location.href="/car/list.html?s="+searchStr;
+
+        });
+        window.lazyLoadImg = new LazyLoadImg({
+            el: document.querySelector('#J_ItemList'),
+            mode: 'diy', //默认模式，将显示原图，diy模式，将自定义剪切，默认剪切居中部分
+            time: 300, // 设置一个检测时间间隔
+            complete: true, //页面内所有数据图片加载完成后，是否自己销毁程序，true默认销毁，false不销毁
+            position: { // 只要其中一个位置符合条件，都会触发加载机制
+                top: 0, // 元素距离顶部
+                right: 0, // 元素距离右边
+                bottom: 0, // 元素距离下面
+                left: 0 // 元素距离左边
+            },
+            diy: { //设置图片剪切规则，diy模式时才有效果
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center center'
+            },
+            before: function () { // 图片加载之前执行方法
+            },
+            success: function (el) { // 图片加载成功执行方法
+                el.classList.add('success')
+            },
+            error: function (el) { // 图片加载失败执行方法
+                el.src = '/resources/img/default.png'
+            }
+        });
     })
 </script>
 </body>

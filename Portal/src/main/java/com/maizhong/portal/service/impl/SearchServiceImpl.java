@@ -93,7 +93,8 @@ public class SearchServiceImpl implements SearchService {
                 volume =param.get("v"),
                 sort = param.get("s"),
                 method = param.get("m"),
-                page = param.get("pe");
+                page = param.get("pe"),
+                qs = param.get("qs");
         //STEP1 获取查询 基本数据
         Map<String,String> param1 = Maps.newHashMap();
         param1.put("brandId",param.get("b"));
@@ -150,39 +151,42 @@ public class SearchServiceImpl implements SearchService {
         }
         //STEP2 获取solr查询结果
         Map<String,String> param2 = Maps.newHashMap();
-       // param2.put("queryString","");
-        if(sort.equals("d")){
-            param2.put("sortString","");
-        }else if(sort.equals("h")){
-            if(method.equals("1")){
-                param2.put("sortString","car_weight-asc");
+        if(StringUtils.isNotBlank(qs)){
+            param2.put("queryString",qs);
+        }else {
+            if(sort.equals("d")){
+                param2.put("sortString","");
+            }else if(sort.equals("h")){
+                if(method.equals("1")){
+                    param2.put("sortString","car_weight-asc");
+                }else{
+                    param2.put("sortString","car_weight-des");
+                }
+            }else if(sort.equals("p")){
+                if(method.equals("1")){
+                    param2.put("sortString","car_sellPrice-asc");
+                }else{
+                    param2.put("sortString","car_sellPrice-des");
+                }
             }else{
-                param2.put("sortString","car_weight-des");
+                if(method.equals("1")){
+                    param2.put("sortString","car_year-asc");
+                }else{
+                    param2.put("sortString","car_year-des");
+                }
             }
-        }else if(sort.equals("p")){
-            if(method.equals("1")){
-                param2.put("sortString","car_sellPrice-asc");
-            }else{
-                param2.put("sortString","car_sellPrice-des");
+            if(!brandId.equals("0")){
+                param2.put("carBrand",brandId);
             }
-        }else{
-            if(method.equals("1")){
-                param2.put("sortString","car_year-asc");
-            }else{
-                param2.put("sortString","car_year-des");
+            if(!seriseId.equals("0")){
+                param2.put("carSeries",seriseId);
             }
-        }
-        if(!brandId.equals("0")){
-            param2.put("carBrand",brandId);
-        }
-        if(!seriseId.equals("0")){
-            param2.put("carSeries",seriseId);
-        }
-        if(!price.equals("0")){
-            param2.put("sellPrice",price);
-        }
-        if(!volume.equals("0")){
-            param2.put("capacity",volume);
+            if(!price.equals("0")){
+                param2.put("sellPrice",price);
+            }
+            if(!volume.equals("0")){
+                param2.put("capacity",volume);
+            }
         }
         param2.put("pageIndex",page==null?"1":page);
         String res2 = HttpClientUtil.doGet(REST_URL+SEARCH_SOLR,param2);
@@ -202,7 +206,7 @@ public class SearchServiceImpl implements SearchService {
         }else{
             model.addAttribute("method","1");
         }
-
+        model.addAttribute("queryStr",qs);
         return model;
     }
 }
