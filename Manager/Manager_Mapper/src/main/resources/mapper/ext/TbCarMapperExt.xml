@@ -118,4 +118,43 @@
             AND car_year = #{carYear}
         </if>
     </select>
+
+
+    <select id="findDetailsByCarId" parameterType="java.lang.Long"  resultType="java.util.HashMap">
+         SELECT
+            c.id,
+            base.car_type name,
+            c.car_brand brandId,
+	        base.car_brand brandName,
+            c.sell_price,
+            base.car_factory_price shop_price,
+            c.sellpoint,
+            c.image image,
+            c.smimage,
+            c.create_time,
+            base.car_door,
+            base.car_seat,
+            base.car_bodywork,
+            base.car_gearbox,
+            base.car_size,
+            base.car_displacement,
+            base.car_z_mm,
+            base.car_mar_power,
+            base.car_fuel_label,
+            base.car_max_power_speed,
+            base.car_l_test,
+            base.car_hs_factory,
+            base.car_environment_standards,
+            base.car_maxspeed,
+            base.car_warranty,
+            base.car_gearbox,
+            base.car_engine,
+            base.car_luggage,
+            base.car_drive_mode
+        FROM
+        tb_car c,
+        tb_car_base base
+        where c.base_id = base.id
+        and c.id = #{id}
+    </select>
 </mapper>

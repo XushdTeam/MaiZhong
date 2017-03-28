@@ -201,7 +201,7 @@ public class SearchServiceImpl implements SearchService {
             solrQuery.setHighlight(true);
 
             solrQuery.addHighlightField("car_name");
-            solrQuery.setHighlightSimplePre("<font style='color:red'>");
+            solrQuery.setHighlightSimplePre("<font style='color:red;weight:bold;'>");
             solrQuery.setHighlightSimplePost("</font>");
         }
 
@@ -380,6 +380,10 @@ public class SearchServiceImpl implements SearchService {
 
 
         Map<String,Object> map = searchDoc(querysb.toString(),sortArray,i,highTiken?queryString:"");
+        if (map==null||map.size()==0){
+            map = searchDoc("*:*",null,1,"");
+        }
+
 
         return JsonResult.OK(map);
     }
