@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="BRest:war">
+    <output-path>$PROJECT_DIR$/BRest/target</output-path>
+    <root id="archive" name="BRest.war">
+      <element id="artifact" artifact-name="BRest:war exploded" />
+    </root>
+  </artifact>
+</component>
