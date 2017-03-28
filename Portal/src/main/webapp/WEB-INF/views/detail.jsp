@@ -20,6 +20,8 @@
 <body>
 <jsp:include page="head.jsp"></jsp:include>
 
+
+
 <div class="infoTop">
     <a href="/">首页</a>
     <span class="cut">&nbsp;&gt;&nbsp;</span>
@@ -37,7 +39,7 @@
         <div class="pro1" style="padding-top:10px;padding-left:0px">${car.name}</div>
         <p class="j_color">进口车型 详询经销商</p>
         <div class="jiage2"><p>准价：</p><span class="red">￥${car.sell_price}</span></div>
-        <div class="jiage2"><p>市场价：</p><span class="red">￥${car.shop_price}</span></div>
+        <div class="jiage2 jiage3"><p>市场价：<span class="red2">￥${car.shop_price}</span></p></div>
         <table class="cd_m_info_desc" cellspacing="0" border="0">
             <tbody>
             <tr>
@@ -72,7 +74,6 @@
                 <li class="current"><a href="#one">购车流程</a></li>
                 <li class=""><a href="#two">配置参数</a></li>
                 <li class=""><a href="#tree">车系图片</a></li>
-                <li class=""><a href="#four">认证证书</a></li>
 
             </ul>
             <div class="btns">
@@ -174,42 +175,31 @@
 
 
             <div class="sec bnspic">
-                <div class="big_pic">
                     <ul>
-                        <li class="on"><a href="#"><img src="img/xq_1.jpg"   /> </a></li>
-                        <li><a href="#"><img src="img/xq_2.jpg" /> </a></li>
-                        <li><a href="#"><img src="img/xq_3.jpg"  /> </a></li>
-                        <li><a href="#"><img src="img/xq_4.jpg" /> </a></li>
-                        <li><a href="#"><img src="img/xq_2.jpg"  /> </a></li>
-                        <li><a href="#"><img src="img/xq_3.jpg" /> </a></li>
+                        <li class="on"><a href="#"><img src="../../resources/img/xq_1.jpg"  width="100%"  /> </a></li>
+                        <li><a href="#"><img src="../../resources/img/xq_1.jpg"  width="100%" /> </a></li>
+                        <li><a href="#"><img src="../../resources/img/xq_1.jpg"  width="100%"  /> </a></li>
+                        <li><a href="#"><img src="../../resources/img/xq_1.jpg"  width="100%" /> </a></li>
+                        <li><a href="#"><img src="../../resources/img/xq_1.jpg"  width="100%"  /> </a></li>
+                        <li><a href="#"><img src="../../resources/img/xq_1.jpg"  width="100%" /> </a></li>
                     </ul>
-                </div><!-- /big_pic -->
-
-                <div class="small_pic clearfix">
-                    <ul>
-                        <li class="on"><a href="#"><img src="img/xq_1.jpg" alt="图片说明" /></a></li>
-                        <li><a href="#"><img src="img/xq_2.jpg" alt="图片说明" /></a></li>
-                        <li><a href="#"><img src="img/xq_3.jpg" alt="图片说明" /></a></li>
-                        <li><a href="#"><img src="img/xq_4.jpg" alt="图片说明" /></a></li>
-                        <li><a href="#"><img src="img/xq_2.jpg" alt="图片说明" /></a></li>
-                        <li><a href="#"><img src="img/xq_3.jpg" alt="图片说明" /></a></li>
-                    </ul>
-                </div><!-- /small_pic -->
             </div>
         </div><!--xq_img end-->
 
 
         <div class="clear"></div>
-        <h2 id="four"><strong>认证证书</strong></h2>
+      <%--  <h2 id="four"><strong>认证证书</strong></h2>
         <div class="zs">
             <img src="img/zs.jpg">
-        </div>
+        </div>--%>
 
 
     </div><!--xi_qi end-->
 
 </div>
 <jsp:include page="footer.jsp"></jsp:include>
+<!--广告-->
+<div id="floatright" style="position: absolute; z-index: 10; "><a href="#"><img src="../../resources/img/logo.png" border="0"></a></div>
 <script>
    $(function () {
        var nav = $("#mynav"),mtop = 0,zindex = 999,
@@ -243,6 +233,27 @@
            $(".big_pic li:nth-child("+preNumber+")").addClass("on");
        });
    });
+</script>
+
+<script>
+    window.onload = function(){
+        var ad = new FloatAd({
+            //nodeLink : "<a href='#'><img src='img/weixin_qurode.png' border=0 /></a>" ,
+            floatObj : "floatright",
+            x : 10,
+            y : 250,
+            locate : "right"
+        });
+        ad.play();
+        var ad2 = new FloatAd({
+            nodeLink : "<a href='#'><img src='../../resources/img/logo.png' border=0 /></a>" ,
+            floatObj : "floatleft",
+            x : 10,
+            y : 250,
+            locate : "left"
+        })
+        ad2.play();
+    }
 </script>
 </body>
 </html>

@@ -173,7 +173,6 @@
     <div class="re_con">
         <dl>
             <dt><img src="/resources/img/bg_re.jpg"></dt>
-            <dd class="dd1"></dd>
             <dd class="dd2">
                 <h2>科鲁兹经典</h2>
                 <p>2015经典款 1.5L 自动挡/手动挡</p>
@@ -184,7 +183,7 @@
                     <li>4、安全性高</li>
                 </ul>
                 <div class="bors"><a href="">预约看车</a></div>
-                <div class="bort">400-054-9494</div>
+                <div class="bort">24小时热线：400-054-9494</div>
             </dd>
         </dl>
     </div>
@@ -266,16 +265,16 @@
 <!--新闻热点-->
 <div class="new">
     <div class="new_con">
-        <div class="new_left">
+
             <dl>
                 <a href="/news.html?newsId=1">
                     <dt><img src="/resources/img/new.jpg"></dt>
                 </a>
                 <dd><a href="/news.html?newsId=1">国内中型车市场的竞争非常激烈，用中坚力量这个词来形容它们是非常合适的，对于选购中型车的消费者来说，最受人关注的是价格，无论是配置、舒适性还是动力表现都较为均衡的车型。接下来给您推荐3款各具特色和性格的合资中型车。</a></dd>
             </dl>
-        </div><!--new_left-->
 
-        <div class="new_right">
+
+
             <dl>
                 <a href="/news.html?newsId=2">
                     <dt><img src="/resources/img/new_2.jpg"></dt>
@@ -291,7 +290,7 @@
                 <dd class="dd1"><a href="/news.html?newsId=3">稳妥的选择 3款豪华中大型车推荐</a></dd>
                 <dd><a href="/news.html?newsId=3">国内豪华品牌中大型车市场销量前三的位置一直都被奥迪A6L、宝马5系、奔驰E级牢牢占据着，除了被不少企业和机关当作公务用车之外，不少消费者也看中了该级别车型宽大的车内空间和丰富的配置，将其作为家用车使用。</a></dd>
             </dl>
-        </div><!--new_right-->
+
     </div><!--new_con-->
 </div>
 <!--新闻热点 end-->
@@ -315,6 +314,10 @@
     </div><!--fooot_cen end-->
 </div>
 <!--footer 结束-->
+
+
+
+
 <div class="sidebar sidebar-new">
     <a href="javascript:void(0);" class="sBtn free" id="sphone"><i></i>免费电话</a>
     <a href="javascript:void(0);" class="toTop"><i></i>返回顶部</a>
@@ -327,6 +330,7 @@
 <div class="free-phone-error" style="display:none;"><span style="color: red">请输入正确的手机号</span></div>
 <script src="/resources/script/doT.min.js" type="text/javascript"></script>
 <script src="/resources/script/lazy-load-img.min.js" type="text/javascript"></script>
+
 <script>
 
     var is = false;
@@ -440,5 +444,6 @@
         // lazyLoadImg.destroy() // 销毁图片懒加载程序
     })()
 </script>
+
 </body>
 </html>

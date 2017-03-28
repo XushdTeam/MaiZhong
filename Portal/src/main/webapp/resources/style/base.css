@@ -248,16 +248,11 @@ img,input{vertical-align:middle; outline:none}
 /*新闻*/
 .new{ background: #F1F1F1; padding: 50px 0; margin-top: 30px; overflow: hidden;}
 .new .new_con{ width: 1200px; margin: 0px auto}
-.new_left{ width: 478px; float: left;}
-.new_left dl{ background: #fff; padding-bottom: 20px; width: 478px}
-.new_left dl dt img{ width: 100%}
-.new_left dl dd{ line-height: 35px; font-size: 14px; padding-left: 20px}
-.new_right{ width: 698px; float: right; overflow: hidden;}
-.new_right dl{ background: #fff; overflow: hidden; margin-bottom: 20px}
-.new_right dl dt{ float: left; width: 250px}
-.new_right dl dd{ float: right;width:400px;}
-.new_right dl dd.dd1 a{ font-size: 16px; color: #333; padding: 12px 0px; display: block;}
-.new_right dl dd{ padding: 15px 30px 0 0 ; font-size: 14px; line-height: 24px}
+.new_con dl{ background: #fff; padding-bottom: 20px; width: 380px; float: left; margin-right: 26px}
+.new_con dl:nth-child(2){ float: right; margin-right: 0}
+.new_con dl dt img{ width:380px; height: 257px}
+.new_con dl dd{ line-height: 35px; font-size: 14px; padding-left: 20px}
+
 
 /*list*/
 .tuijian{ width: 1200px; margin: 0 auto}
@@ -283,18 +278,18 @@ img,input{vertical-align:middle; outline:none}
 
 /*热销*/
 .re_xiao{ background: #eee ;padding: 40px 0;}
-.re_con{ width: 1200px; margin: 0px auto; background: #fff; text-align: center; padding: 40px 0}
-.re_con dl{ position: relative;}
-.re_con dl dd.dd1{background:url(../img/r_bg.png) no-repeat left top  ;width:147px; height: 150px; position:absolute; top: -14px; left: 90px}
-.re_con dl dd.dd2{ width: 385px; height: 319px; background: #fff; position: absolute; right: 95px; top: 27px}
+.re_con{ width: 1200px; margin: 0px auto; text-align: center; padding: 40px 0}
+.re_con dl{ position: relative; width: 1200px;}
+.re_con dl dt img{ width: 1200px;}
+.re_con dl dd.dd2{ width: 455px; height: 369px; background: #fff; position: absolute; right: 35px; top: 27px}
 .re_con dl dd.dd2 h2{ line-height: 45px; text-align: left; color: #000; padding: 0 0 0 16px}
 .re_con dl dd.dd2 p{ font-size: 14px;padding: 0 0 0 16px; text-align: left;}
 .heads a{ font-size: 14px; color: #999; font-weight: 500; float: right;}
-.bors{ width: 350px; background: #c40000; height: 45px; border-radius:3px; line-height: 45px; margin-left: 20px}
-.bors a{ color: #fff}
-.re_con ul{ overflow: hidden; padding: 20px 0; color:#af7f4c}
+.bors{ width: 350px; background: #c40000; height: 45px; border-radius:3px; line-height: 45px; margin:50px auto 0}
+.bors a{ color: #fff;font-size:20px;}
+.re_con ul{ overflow: hidden; padding: 20px 0; color:#666; width: 350px; margin: 20px auto; border: 2px solid #e5e5e5}
 .re_con ul li{ float: left; width: 150px; font-size: 18px; line-height: 35px; height: 35px;text-align: left; padding: 0 0 0 20px}
-.bort{ width: 350px; height: 45px; border-radius:3px; line-height: 45px; margin-left: 20px; border: 1px solid #999; margin-top: 20px; font-size: 18px; color: #000; font-weight: bold;}
+.bort{ width: 350px; height: 45px;  line-height: 45px;  font-size: 16px; color: #000; margin:0 auto 0}
 /*banner  nav*/
 .banner .left:hover , .banner .right:hover{ background-color: rgba(0, 0, 0, 0.31);}
 .nav_sec{ height: 600px; position: absolute;top: 0; left: 0; width: 100%; background: rgba(0,0,0,0.3);}
@@ -305,7 +300,7 @@ img,input{vertical-align:middle; outline:none}
 .nav_top .navs{ float: left; width: 480px;}
 .nav_top .navs li a{ float: left; padding: 0 15px; margin-right: 30px; color: #fff; font-size: 16px}
 .nav_top .navs li a:hover{ color: #c40000;  transition:color 0.5s;-webkit-transition:color 0.5s;}
-.call{ width: 300px; float: left;}
+.call{ width: 300px; float: right; text-align: right}
 .call .span_one a{ color: #fff; font-size: 24px; font-weight: bold;}
 .call .span_one{ margin-right: 30px}
 .call span,.call span a{ font-size: 14px; color: #fff}
