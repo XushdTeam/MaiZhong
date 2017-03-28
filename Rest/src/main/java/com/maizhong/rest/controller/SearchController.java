@@ -37,7 +37,7 @@ public class SearchController {
 
     /***
      * 返回车系列表数据
-     * @param
+     * @param brandId,seriesID
      * @return
      */
     @RequestMapping("/getSearchBase")
@@ -55,8 +55,8 @@ public class SearchController {
             try {
                 queryString = new String(queryString.getBytes("iso-8859-1"),"utf-8");
             } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
                 queryString = queryString;
+                e.printStackTrace();
             }
         }
 
