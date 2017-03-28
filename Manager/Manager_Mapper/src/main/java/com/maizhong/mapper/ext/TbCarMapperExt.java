@@ -15,4 +15,5 @@ public interface TbCarMapperExt {
     public List<TbCarVo> findListNotContainsDesc(TbCarExample tbCarExample);
     public List<TbCarBaseVo> findByCarYearAndCarSeres(@Param("carSeries") String carSeries,@Param("carYear") String carYear);
     public List<TbCarVo> findDocsForSolrStore();
+    public List<Map<String,Object>> findDetailsByCarId(Long id);
 }
