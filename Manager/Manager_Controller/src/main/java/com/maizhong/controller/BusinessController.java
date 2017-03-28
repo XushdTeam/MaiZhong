@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 /**
- * Description:汽车类别控制器
+ * Description:店铺管理控制器
  * User: 王存浩
  * Date: 2017-03-06
  * Time: 10:56
@@ -124,7 +124,7 @@ public class BusinessController {
     @ControllerLog(module = "店铺管理", methods = "删除店铺")
     @RequestMapping(value = "/business/delete/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult carTypeDelete(@PathVariable long id) {
+    public JsonResult businessDelete(@PathVariable long id) {
         //店铺删除
         OperateEnum result = businessService.deleteBusinessById(id);
         return JsonResult.build(result);

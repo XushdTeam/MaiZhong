@@ -8,28 +8,28 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>店铺管理</title>
+    <title>店铺管理员</title>
     <jsp:include page="../common/head.jsp"/>
 </head>
 <body>
 <div class="main-wrap">
     <blockquote class="layui-elem-quote fhui-admin-main_hd">
-        <h2>店铺管理</h2>
+        <h2>店铺管理员</h2>
     </blockquote>
     <div class="y-role">
         <div class="search-bar">
             <!--查询区-->
             <form class="layui-form layui-form-pane">
-                <div class="layui-inline">
+               <%-- <div class="layui-inline">
                     <label class="layui-form-label">店铺名称</label>
                     <div class="layui-input-inline">
                         <input type="text" name="businessName" value="" placeholder="店铺名称" class="layui-input">
                     </div>
-                </div>
+                </div>--%>
                 <div class="layui-inline">
-                    <label class="layui-form-label">手机号</label>
+                    <label class="layui-form-label">用户名称</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="mobilePhone" value="" placeholder="手机号" class="layui-input">
+                        <input type="text" name="userName" value="" placeholder="用户名称" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-inline">
@@ -43,7 +43,6 @@
                 <div class="box-wrap">
                     <a class="menu-btn"></a>
                     <div class="l-list">
-                        <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit"  data-href="${handleUrl}/new"><i class="fa fa-plus"></i></i>添加店铺</a>
                         <a class="layui-btn layui-btn-small do-action" data-type="doRefresh" data-href="${baseUrl}"><i class="fa fa-refresh"></i>刷新</a>
                     </div>
                 </div>
@@ -59,22 +58,14 @@
                     <col width="10%">
                     <col width="10%">
                     <col width="5%">
-                    <col width="10%">
-                    <col width="10%">
-                    <col width="10%">
-                    <col width="5%">
-                    <col width="25%">
+                    <col width="60%">
                 </colgroup>
                 <thead>
                 <tr>
                     <th>编号</th>
                     <th>店铺名称</th>
-                    <th>LOGO</th>
-                    <th>地址</th>
-                    <th>负责人</th>
-                    <th>手机号</th>
-                    <th>座机</th>
-                    <th>邮箱</th>
+                    <th>用户名称</th>
+                    <th>手机号码</th>
                     <th>状态</th>
                     <th>操作</th>
 
@@ -84,14 +75,10 @@
                 <script id="tpl" type="text/html">
                     {{#  layui.each(d.rows, function(index, item){ }}
                     <tr>
-                        <td>{{ item.number }}</td>
+                        <td>{{ item.id }}</td>
                         <td>{{ item.businessName }}</td>
-                        <td><img src="{{ item.logo }}" width="100" height="40"/></td>
-                        <td>{{ item.address }}</td>
-                        <td>{{ item.linkman}}</td>
-                        <td>{{ item.mobilePhone}}</td>
-                        <td>{{ item.telephone}}</td>
-                        <td>{{ item.email}}</td>
+                        <td>{{ item.userName }}</td>
+                        <td>{{ item.userPhone }}</td>
                         <td>{{# if (item.status) { }}
                             <i class="fa fa-toggle-on unlock"></i>
                             {{# } else { }}
@@ -99,9 +86,8 @@
                             {{# } }}
                         </td>
                         <td>
-                            <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit" data-href="${handleUrl}/{{item.id}}"><i class="icon-edit  fa fa-pencil-square-o"></i>编辑</a>
-                            <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit" data-href="/businessUser/handle/new/{{item.id}}"><i class="icon-edit  fa fa-pencil-square-o"></i>添加管理员</a>
-                            <a class="layui-btn layui-btn-small layui-btn-danger do-action" data-type="doDelete" data-text="确定删除<span class=red>{{item.businessName}}</span>吗？" data-href="${deleteUrl}/{{item.id}}"><i class="icon-trash-o  fa fa-trash-o"></i>删除</a>
+                            <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit" data-href="${handleUrl}/{{item.id}}/{{item.id}}"><i class="icon-edit  fa fa-pencil-square-o"></i>编辑</a>
+                            <a class="layui-btn layui-btn-small layui-btn-danger do-action" data-type="doDelete" data-text="确定删除<span class=red>{{item.userName}}</span>吗？" data-href="${deleteUrl}/{{item.id}}"><i class="icon-trash-o  fa fa-trash-o"></i>删除</a>
                         </td>
                     </tr>
                     {{#  }); }}
