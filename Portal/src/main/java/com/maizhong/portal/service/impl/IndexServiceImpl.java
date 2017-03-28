@@ -34,6 +34,9 @@ public class IndexServiceImpl implements IndexService {
     @Value("${FEEDBACK}")
     private String FEEDB_ACK;
 
+    @Value("${CAR_DETAIL}")
+    private String CAR_DETAIL;
+
     @Override
     public String getFeedBackUrl() {
         return REST_URL + FEEDB_ACK;
@@ -70,6 +73,17 @@ public class IndexServiceImpl implements IndexService {
         JsonResult result = JsonUtils.jsonToPojo(res,JsonResult.class);
         Map<String,Object> map = (Map) result.getData();
         if(result.getStatus()==200)return map;
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> getCarDetail(String carId) {
+
+        String res = HttpClientUtil.doGet(REST_URL+CAR_DETAIL+carId);
+        JsonResult result = JsonUtils.jsonToPojo(res,JsonResult.class);
+        if(result.getStatus()==200){
+            return (Map<String, Object>) result.getData();
+        }
         return null;
     }
 

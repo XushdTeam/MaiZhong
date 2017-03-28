@@ -8,6 +8,7 @@ import com.maizhong.portal.service.SearchService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.annotation.Resource;
 import javax.annotation.Resources;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Map;
 
@@ -50,8 +52,8 @@ public class SearchController {
         return "search";
     }
 
-    @RequestMapping(value = "/car/list.html")
-    public String carList(Model model){
+    @RequestMapping(value = "/car/list.html",method = RequestMethod.GET)
+    public String carList(Model model,String s){
         Map<String,String> param = Maps.newHashMap();
         param.put("s","d");
         param.put("m","1");
@@ -60,6 +62,15 @@ public class SearchController {
         param.put("p","0");
         param.put("v","0");
         param.put("pe","1");
+        if(StringUtils.isNotBlank(s)){
+            try {
+                param.put("qs", new String(s.getBytes("ISO8859-1"),"UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }else{
+            param.put("qs","");
+        }
         model = searchService.getSearchResult(param,model);
         return "search";
 
@@ -80,6 +91,7 @@ public class SearchController {
                              @PathVariable String seriseId,
                              @PathVariable String price,
                              @PathVariable String volume,
+                             String s,
                              Model model) {
         Map<String,String> param = Maps.newHashMap();
         param.put("s","d");
@@ -89,6 +101,16 @@ public class SearchController {
         param.put("p",price);
         param.put("v",volume);
         param.put("pe","1");
+
+        if(StringUtils.isNotBlank(s)){
+            try {
+                param.put("qs", new String(s.getBytes("ISO8859-1"),"UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }else{
+            param.put("qs","");
+        }
 
         model = searchService.getSearchResult(param,model);
         return "search";
@@ -109,6 +131,7 @@ public class SearchController {
                     @PathVariable String price,
                     @PathVariable String volume,
                     @PathVariable String page,
+                    String s,
                     Model model){
 
         Map<String,String> param = Maps.newHashMap();
@@ -119,7 +142,15 @@ public class SearchController {
         param.put("p",price);
         param.put("v",volume);
         param.put("pe",page);
-
+        if(StringUtils.isNotBlank(s)){
+            try {
+                param.put("qs", new String(s.getBytes("ISO8859-1"),"UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }else{
+            param.put("qs","");
+        }
         model = searchService.getSearchResult(param,model);
 
         return "search";

@@ -1,19 +1,15 @@
 package com.maizhong.portal.controller;
 
-import com.maizhong.common.dto.IndexBaseDTO;
-import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.pojo.TbFeedback;
 import com.maizhong.portal.service.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -135,5 +131,17 @@ public class IndexController {
     }
 
 
+    /**
+     * 汽车详情页面
+     * @param carId
+     * @return
+     */
+    @RequestMapping(value = "/car/{carId}/detail.html")
+    public String detail(@PathVariable String carId, Model model){
+
+        Map<String,Object> map = indexService.getCarDetail(carId);
+        model.addAttribute("car",map);
+        return "detail";
+    }
 
 }

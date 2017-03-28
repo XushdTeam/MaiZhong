@@ -116,6 +116,8 @@
                         window.open(url,"_blank");
                     })
                 });
+
+
             </script>
         </ul>
         <ol>
@@ -138,26 +140,14 @@
             <li><a href="/sale.html">我要卖车</a></li>
             <li><a href="">服务保障</a></li>
         </ul><!--navs end-->
+
+        <div class="s_froms">
+            <input type="text" id="search1"><a class="s1"><span class="ss">搜索</span></a>
+        </div>
         <!--call-->
         <div class="call">
             <span class="span_one"><a href="">400-090-0494</a></span>
-                <span><a href="#" onclick="return false;" class="openlogin">登录</a> / <a href="#" onclick="return false;"
-                                                                                        class="reg">注册</a></span>
         </div>
-        <!--sec-->
-        <from action="#" method="post" name="1" id="s_from" class="">
-            <div class="s_froms">
-                <input type="text"><span class="ss">搜索</span>
-                <div class="sec_hide">
-                    <ul>
-                        <li><a href="#">大众汽车</a></li>
-                        <li><a href="#">大众汽车</a></li>
-                        <li><a href="#">大众汽车</a></li>
-                        <li><a href="#">大众汽车</a></li>
-                    </ul>
-                </div>
-            </div><!--s_from end-->
-        </from>
     </div><!--nav_top end-->
 </div><!--nav_tops end-->
 <!--搜索框-->
@@ -165,8 +155,8 @@
 <div class="secs">
     <from action="#" method="post" name="1" id="s_from" class="">
         <div class="s_from">
-            <input type="text"><span class="ss">立即搜索</span>
-            <p class="mai"><a href="#">我要置换</a></p>
+            <input type="text" id="search2"><span class="ss s2"><a href="#" style="display: block">立即搜索</a></span>
+            <p class="mai"><a href="/sale.html">我要置换</a></p>
             <div class="sec_hide">
                 <ul>
 
@@ -206,16 +196,16 @@
         <p>汽车品牌
             <span>
                 <c:forEach items="${cbList}" var="item"  varStatus="stat">
-                    <a href="#">${item.name}</a>
+                    <a href="/car/cb_${item.id}/cs_0/cp_0/cv_0/list.html">${item.name}</a>
                     <c:if test="${!stat.last}" >/</c:if>
                 </c:forEach>
             </span>
-            <a href="" class="fr more">查看更多</a>
+            <a href="/car/list.html" class="fr more">查看更多</a>
         </p>
         <ul class="lists">
             <c:forEach items="${cbList}" var="item" >
                 <li>
-                    <a href="#">
+                    <a href="/car/cb_${item.id}/cs_0/cp_0/cv_0/list.html">
                         <span><img src="${item.imgUrl}"></span>
                         <span>${item.name}</span>
                     </a>
@@ -231,7 +221,6 @@
                     <c:if test="${!stat.last}" >/</c:if>
                 </c:forEach>
             </span>
-            <a href="" class="fr more">查看更多</a>
         </p>
         <ul class="lists lists2">
             <c:forEach items="${ctList}" var="item" >
@@ -258,7 +247,7 @@
                 {{ for(var j=0, a_l=it[i]['arry'].length; j<a_l; j++) { }}
                 <dl class="{{if(j==3){}}last{{}}}">
                     <dd>
-                        <a href="{{=it[i]['arry'][j].id}}" class="cars-info">
+                        <a href="car/{{=it[i]['arry'][j].id}}/detail.html" class="cars-info">
                             <img src="/resources/img/default.png" data-src="{{=it[i]['arry'][j].img}}" width="360" height="240">
                             <p>{{=it[i]['arry'][j].name}}</p>
                             <p><span>{{=it[i]['arry'][j].price}}</span></p>
@@ -369,6 +358,34 @@
                     $("#list").html(evalText(data));
                 });
 
+            }
+
+        });
+        $(".s1").click(function(){
+            var searchStr = $("#search1").val().trim();
+            if(searchStr=='')return;
+            window.location.href="/car/list.html?s="+searchStr;
+
+        });
+        $(".s2 a").click(function(){
+            var searchStr = $("#search2").val().trim();
+            if(searchStr=='')return;
+            window.location.href="/car/list.html?s="+searchStr;
+
+        });
+        $('#search1').on('keypress',function(event){
+            if(event.keyCode == 13){
+                var searchStr = $("#search1").val().trim();
+                if(searchStr=='')return;
+                window.location.href="/car/list.html?s="+searchStr;
+            }
+
+        });
+        $('#search2').on('keypress',function(event){
+            if(event.keyCode == 13){
+                var searchStr = $("#search2").val().trim();
+                if(searchStr=='')return;
+                window.location.href="/car/list.html?s="+searchStr;
             }
 
         });
