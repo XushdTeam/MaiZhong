@@ -1,19 +1,31 @@
 package com.maizhong.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 public class TbMember {
+    /*附加字段*/
+    @NotBlank(message = "验证码为空")
+    private String verifyCode;
+
+    //附加字段
+    private List<String> roleName;
+
+
     private Long id;
 
+    @NotBlank(message = "账号为空")
     private String mobile;
 
     private String memberName;
 
     private Integer sex;
 
+    @NotBlank(message = "密码为空")
     private String password;
 
     private String telephone;
@@ -35,6 +47,22 @@ public class TbMember {
     private Integer status;
 
     private Integer delflag;
+
+    public String getVerifyCode() {
+        return verifyCode;
+    }
+
+    public void setVerifyCode(String verifyCode) {
+        this.verifyCode = verifyCode;
+    }
+
+    public List<String> getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(List<String> roleName) {
+        this.roleName = roleName;
+    }
 
     public Long getId() {
         return id;
