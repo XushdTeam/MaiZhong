@@ -55,8 +55,14 @@ public class UserServiceImpl implements UserService {
         HashMap<String, String> param = new HashMap<>();
         param.put("username",username);
         param.put("password",password);
+        String resultJson = null;
+        try{
+            resultJson = HttpClientUtil.doPost(BUSINESS_USER_URL,param);
+        }catch(Exception e){
+            e.printStackTrace();
+            return JsonResult.Error("服务器繁忙,请稍后再试");
+        }
 
-        String resultJson = HttpClientUtil.doPost(BUSINESS_USER_URL,param);
 
         if (StringUtils.isNotBlank(resultJson)){
             JsonResult result = JsonUtils.jsonToPojo(resultJson, JsonResult.class);
