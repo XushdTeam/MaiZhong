@@ -81,19 +81,23 @@
                 <colgroup>
                     <col width="5%">
                     <col width="10%">
-                    <col width="11%">
-                    <col width="8%">
-                    <col width="8%">
-                    <col width="30%">
-                    <col width="30%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="20%">
+                    <col width="15%">
                 </colgroup>
                 <thead>
                 <tr>
                     <th>编号</th>
+                    <th>咨询类型</th>
                     <th>手机号</th>
                     <th>咨询时间</th>
-                    <th>咨询类型</th>
+                    <th>处理时间</th>
                     <th>处理状态</th>
+                    <th>处理人员</th>
                     <th style="text-align: center;">备注</th>
                     <th>操作</th>
                 </tr>
@@ -103,20 +107,23 @@
                     {{#  layui.each(d.rows, function(index, item){ }}
                     <tr>
                         <td>{{ item.id }}</td>
-                        <td>{{ item.phone }}</td>
-                        <td>{{ item.consultTime}}</td>
                         <td align="center">{{# if (item.type==0) { }}
                             新车
                             {{# } else { }}
-                           二手车
+                            二手车
                             {{# } }}
                         </td>
-                        <td align="center">{{# if (item.status) { }}
+                        <td>{{ item.phone }}</td>
+                        <td>{{ item.consultTime}}</td>
+                        <td>{{ item.handleTime}}</td>
+
+                        <td >{{# if (item.status) { }}
                            已处理
                             {{# } else { }}
                           未处理
                             {{# } }}
                         </td>
+                        <td>{{ item.serviceName}}</td>
                         <td align="center">{{# if (item.remark==null) { }}
                             {{# } else { }}
                            {{ item.remark }}

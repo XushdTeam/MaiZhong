@@ -50,6 +50,13 @@
                        </div>
                    </div>
                    <div class="layui-form-item">
+                       <label class="layui-form-label">处理人员姓名</label>
+                       <div class="layui-input-block">
+                           <input name="serviceName" autocomplete="off" value="${consult.serviceName}"
+                                  class="layui-input" type="text">
+                       </div>
+                   </div>
+                   <div class="layui-form-item">
                        <label class="layui-form-label">备注</label>
                        <div class="layui-input-block">
                            <input name="remark" autocomplete="off" value="${consult.remark}"

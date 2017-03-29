@@ -8,6 +8,7 @@
     <result column="consult_time" jdbcType="TIMESTAMP" property="consultTime" />
     <result column="handle_time" jdbcType="TIMESTAMP" property="handleTime" />
     <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="service_name" jdbcType="VARCHAR" property="serviceName" />
     <result column="service_id" jdbcType="BIGINT" property="serviceId" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="delflag" jdbcType="INTEGER" property="delflag" />
@@ -71,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, phone, type, consult_time, handle_time, status, service_id, remark, delflag
+    id, phone, type, consult_time, handle_time, status, service_name, service_id, remark, 
+    delflag
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.pojo.TbConsultExample" resultMap="BaseResultMap">
     select
@@ -106,12 +108,12 @@
   <insert id="insert" parameterType="com.maizhong.pojo.TbConsult">
     insert into tb_consult (id, phone, type, 
       consult_time, handle_time, status, 
-      service_id, remark, delflag
-      )
+      service_name, service_id, remark, 
+      delflag)
     values (#{id,jdbcType=BIGINT}, #{phone,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
       #{consultTime,jdbcType=TIMESTAMP}, #{handleTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
-      #{serviceId,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, #{delflag,jdbcType=INTEGER}
-      )
+      #{serviceName,jdbcType=VARCHAR}, #{serviceId,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, 
+      #{delflag,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.pojo.TbConsult">
     insert into tb_consult
@@ -133,6 +135,9 @@
       </if>
       <if test="status != null">
         status,
+      </if>
+      <if test="serviceName != null">
+        service_name,
       </if>
       <if test="serviceId != null">
         service_id,
@@ -162,6 +167,9 @@
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
+      </if>
+      <if test="serviceName != null">
+        #{serviceName,jdbcType=VARCHAR},
       </if>
       <if test="serviceId != null">
         #{serviceId,jdbcType=BIGINT},
@@ -201,6 +209,9 @@
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
       </if>
+      <if test="record.serviceName != null">
+        service_name = #{record.serviceName,jdbcType=VARCHAR},
+      </if>
       <if test="record.serviceId != null">
         service_id = #{record.serviceId,jdbcType=BIGINT},
       </if>
@@ -223,6 +234,7 @@
       consult_time = #{record.consultTime,jdbcType=TIMESTAMP},
       handle_time = #{record.handleTime,jdbcType=TIMESTAMP},
       status = #{record.status,jdbcType=INTEGER},
+      service_name = #{record.serviceName,jdbcType=VARCHAR},
       service_id = #{record.serviceId,jdbcType=BIGINT},
       remark = #{record.remark,jdbcType=VARCHAR},
       delflag = #{record.delflag,jdbcType=INTEGER}
@@ -248,6 +260,9 @@
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
       </if>
+      <if test="serviceName != null">
+        service_name = #{serviceName,jdbcType=VARCHAR},
+      </if>
       <if test="serviceId != null">
         service_id = #{serviceId,jdbcType=BIGINT},
       </if>
@@ -267,6 +282,7 @@
       consult_time = #{consultTime,jdbcType=TIMESTAMP},
       handle_time = #{handleTime,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=INTEGER},
+      service_name = #{serviceName,jdbcType=VARCHAR},
       service_id = #{serviceId,jdbcType=BIGINT},
       remark = #{remark,jdbcType=VARCHAR},
       delflag = #{delflag,jdbcType=INTEGER}

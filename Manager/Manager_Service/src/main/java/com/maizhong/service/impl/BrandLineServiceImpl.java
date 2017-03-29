@@ -124,10 +124,12 @@ public class BrandLineServiceImpl implements BrandLineService {
     public JsonResult deleteById(Long id) {
         if (id == null)
             return JsonResult.Error("请刷新后重试");
-        TbCarBrandLine tbCarBrandLine = tbCarBrandLineMapper.selectByPrimaryKey(id);
-        tbCarBrandLine.setDelflag(1);
-        tbCarBrandLineMapper.updateByPrimaryKey(tbCarBrandLine);
-        return JsonResult.OK("删除成功");
+       int res= tbCarBrandLineMapper.deleteByPrimaryKey(id);
+        if (res>0){
+            return JsonResult.OK("删除成功");
+        }
+        return JsonResult.Error("请刷新后重试");
+
     }
 
     /**

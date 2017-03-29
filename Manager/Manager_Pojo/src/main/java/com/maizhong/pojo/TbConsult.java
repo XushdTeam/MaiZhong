@@ -11,12 +11,16 @@ public class TbConsult {
     private String phone;
 
     private Integer type;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date consultTime;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date handleTime;
 
     private Integer status;
+
+    private String serviceName;
 
     private Long serviceId;
 
@@ -48,8 +52,6 @@ public class TbConsult {
         this.type = type;
     }
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public Date getConsultTime() {
         return consultTime;
     }
@@ -58,8 +60,6 @@ public class TbConsult {
         this.consultTime = consultTime;
     }
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public Date getHandleTime() {
         return handleTime;
     }
@@ -74,6 +74,14 @@ public class TbConsult {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName == null ? null : serviceName.trim();
     }
 
     public Long getServiceId() {

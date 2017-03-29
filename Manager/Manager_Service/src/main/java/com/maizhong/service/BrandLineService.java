@@ -8,6 +8,8 @@ import com.maizhong.common.result.PageResult;
 import com.maizhong.pojo.TbCarBrand;
 import com.maizhong.pojo.TbCarBrandLine;
 
+import java.util.List;
+
 /**
  * Description:车型  品牌子类
  * User: yangF
@@ -69,4 +71,5 @@ public interface BrandLineService {
     OperateEnum updateRedis();
 
     Long getBaseUrl(String id);
+
 }

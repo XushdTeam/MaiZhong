@@ -9,11 +9,12 @@ import com.maizhong.common.target.ControllerLog;
 import com.maizhong.pojo.TbCarBrandLine;
 import com.maizhong.service.BrandLineService;
 import com.maizhong.service.BrandService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by yangF on 2017/3/16.
@@ -63,6 +64,12 @@ public class CarBrandLineController {
     public JsonResult seriesList(@PathVariable Long id, PageSearchParam param) {
         PageResult result = brandLineService.getSeriesList(param, id);
         return JsonResult.OK(result);
+    }
+
+    @RequestMapping(value = "/carBrandLine/list/{id}")
+    @ResponseBody
+    public JsonResult getSeriesByBrand(@PathVariable Long id){
+        return brandLineService.getCarBrandLineList(id);
     }
 
 
