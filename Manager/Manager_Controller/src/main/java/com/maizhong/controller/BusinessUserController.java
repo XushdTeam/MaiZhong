@@ -6,7 +6,9 @@ import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.common.target.ControllerLog;
 import com.maizhong.common.utils.JsonUtils;
+import com.maizhong.pojo.TbBusiness;
 import com.maizhong.pojo.TbBusinessUser;
+import com.maizhong.service.BusinessService;
 import com.maizhong.service.BusinessUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +34,14 @@ public class BusinessUserController {
     @Autowired
     private BusinessUserService businessUserService;
 
+    @Autowired
+    private BusinessService businessService;
+
     //@RequiresPermissions("/businessUser")
     @RequestMapping(value = "/businessUser", method = RequestMethod.GET)
     public String carType(Model model) {
-
+        List<TbBusiness> businessListAll = businessService.getBusinessListAll();
+        model.addAttribute("businessList", businessListAll);
         model.addAttribute("baseUrl", "/businessUser");
         model.addAttribute("listUrl", "/businessUser/list");
         model.addAttribute("handleUrl", "/businessUser/handle");
@@ -63,7 +69,7 @@ public class BusinessUserController {
      */
     @RequestMapping(value = "/getBusinessUserListAll", method = RequestMethod.GET)
     @ResponseBody
-    public String typeListAll() {
+    public String businessUserListAll() {
         return businessUserService.getBusinessUserListAll();
     }
 

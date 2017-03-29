@@ -18,15 +18,13 @@
     <!-- 启用默认配置 -->
     <mvc:annotation-driven/>
 
-    <!-- 配置拦截器 -->
+<!--     配置拦截器-->
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <bean class="com.maizhong.bRest.filter.UserFilter" />
         </mvc:interceptor>
     </mvc:interceptors>
-
-
 
     <mvc:resources location="/static/" mapping="/static/**"/>
 

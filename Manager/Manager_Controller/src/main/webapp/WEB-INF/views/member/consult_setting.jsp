@@ -50,9 +50,9 @@
                        </div>
                    </div>
                    <div class="layui-form-item">
-                       <label class="layui-form-label">处理人员姓名</label>
+                       <label class="layui-form-label">客服姓名</label>
                        <div class="layui-input-block">
-                           <input name="serviceName" autocomplete="off" value="${consult.serviceName}"
+                           <input name="serviceName" autocomplete="off" value="${consult.serviceName}" lay-verify="required" maxlength="20"
                                   class="layui-input" type="text">
                        </div>
                    </div>

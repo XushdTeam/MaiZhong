@@ -10,14 +10,12 @@ import com.maizhong.pojo.TbBusiness;
 import com.maizhong.service.BusinessService;
 import com.maizhong.service.FileUploadService;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.util.List;
 
 /**
@@ -53,7 +51,8 @@ public class BusinessController {
     }
 
     /**
-     * 汽车类别获取 分页 查询
+     * 获取 分页 查询
+     *
      * @param param
      * @return
      */
@@ -67,17 +66,23 @@ public class BusinessController {
 
 
     /**
-     *获取所有店铺 不含删除和停用
+     * 获取所有店铺 不含删除和停用
+     *
      * @return
      */
     @RequestMapping(value = "/getBusinessListAll", method = RequestMethod.GET)
     @ResponseBody
     public String typeListAll() {
-        return businessService.getBusinessListAll();
+        List<TbBusiness> businessListAll = businessService.getBusinessListAll();
+        if (businessListAll != null && businessListAll.size() > 0) {
+            return JsonUtils.objectToJson(businessListAll);
+        }
+        return null;
     }
 
     /**
      * 店铺新增和修改
+     *
      * @param id
      * @param model
      * @return
@@ -103,6 +108,7 @@ public class BusinessController {
 
     /**
      * 店铺新增
+     *
      * @param tbBusiness
      * @return
      */
@@ -111,16 +117,17 @@ public class BusinessController {
     @RequestMapping(value = "/business/save", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult businessSave(TbBusiness tbBusiness) {
-            OperateEnum res = businessService.insertBusiness(tbBusiness);
-            return JsonResult.build(res);
+        OperateEnum res = businessService.insertBusiness(tbBusiness);
+        return JsonResult.build(res);
     }
 
     /**
      * 店铺删除
+     *
      * @param id
      * @return
      */
-  //  @RequiresPermissions("/business/delete")
+    //  @RequiresPermissions("/business/delete")
     @ControllerLog(module = "店铺管理", methods = "删除店铺")
     @RequestMapping(value = "/business/delete/{id}", method = RequestMethod.POST)
     @ResponseBody
@@ -132,10 +139,11 @@ public class BusinessController {
 
     /**
      * 店铺信息修改
+     *
      * @param tbBusiness
      * @return
      */
-   // @RequiresPermissions("/business/update")
+    // @RequiresPermissions("/business/update")
     @ControllerLog(module = "店铺管理", methods = "店铺信息修改")
     @RequestMapping(value = "/business/update", method = RequestMethod.POST)
     @ResponseBody
@@ -146,6 +154,7 @@ public class BusinessController {
 
     /**
      * 店铺LOGO修改
+     *
      * @param filedata
      * @param id
      * @return
@@ -156,7 +165,7 @@ public class BusinessController {
     @ResponseBody
     public JsonResult businessLogoUpdate(@RequestParam(value = "logo", required = false) MultipartFile filedata, @PathVariable String id) {
 
-        JsonResult jsonResult = fileUploadService.uploadImg(filedata, logoImgFilepathKey==null?"/business":logoImgFilepathKey);
+        JsonResult jsonResult = fileUploadService.uploadImg(filedata, logoImgFilepathKey == null ? "/business" : logoImgFilepathKey);
         if (jsonResult.getStatus() == 200) {
             int res = businessService.updateBusinessLogo(jsonResult.getData().toString(), Long.parseLong(id));
             if (res > 0) {
@@ -172,6 +181,7 @@ public class BusinessController {
 
     /**
      * 店铺Logo图片上传
+     *
      * @param filedata
      * @return
      */
@@ -179,15 +189,15 @@ public class BusinessController {
     @RequestMapping(value = "/business/logo/upload", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult bussinessUpload(@RequestParam(value = "businessLogo", required = false) MultipartFile filedata) {
-        JsonResult jsonResult = fileUploadService.uploadImg(filedata, logoImgFilepathKey==null?"/business":logoImgFilepathKey);
-        return  jsonResult;
+        JsonResult jsonResult = fileUploadService.uploadImg(filedata, logoImgFilepathKey == null ? "/business" : logoImgFilepathKey);
+        return jsonResult;
     }
 
 
     @RequestMapping("/business/findAll")
     @ResponseBody
-    public JsonResult findAll(){
-        List<TbBusiness> list = JsonUtils.jsonToList(businessService.getBusinessListAll(), TbBusiness.class);
+    public JsonResult findAll() {
+        List<TbBusiness> list = businessService.getBusinessListAll();
         return JsonResult.OK(list);
     }
 }
