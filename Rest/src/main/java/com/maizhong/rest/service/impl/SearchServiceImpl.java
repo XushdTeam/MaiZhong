@@ -542,7 +542,7 @@ public class SearchServiceImpl implements SearchService {
 
         List<KeyObject> result = new ArrayList<>();
 
-        for(char i='A';i<'Z';i++){
+        for(char i='A';i<='Z';i++){
             if (map.get(i+"")==null){
                 continue;
             }

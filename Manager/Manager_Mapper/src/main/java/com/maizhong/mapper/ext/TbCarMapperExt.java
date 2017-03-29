@@ -17,5 +17,6 @@ public interface TbCarMapperExt {
     public List<TbCarVo> findDocsForSolrStore();
     public List<Map<String,Object>> findDetailsByCarId(Long id);
 
-    public List<Map<String,Object>> findByBussinessId(Long businessId);
+    public List<Map<String,Object>> findByBussinessId(@Param("businessId")Long businessId,@Param("carSeries") Long carSeries,@Param("brandId") Long brandId,@Param("carYear")String carYear,
+                                                        @Param("date")String date,@Param("sortString")String sortString);
 }

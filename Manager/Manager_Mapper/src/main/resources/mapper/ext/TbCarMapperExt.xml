@@ -72,6 +72,9 @@
       <if test="_parameter != null">
         <include refid="Example_Where_Clause" />
       </if>
+      <if test="orderByClause != null">
+          order by ${orderByClause}
+      </if>
   </select>
 
     <select id="findDocsForSolrStore" resultType="com.maizhong.pojo.vo.TbCarVo" >
@@ -161,7 +164,7 @@
 
 
 
-    <select id="findByBussinessId" parameterType="java.lang.Long"  resultType="java.util.HashMap">
+    <select id="findByBussinessId" resultType="java.util.HashMap">
         SELECT
           c.id id,
           c.number number,
@@ -181,11 +184,26 @@
           c.issale issale,
           c.unable  unable,
           c.stock_num  stockNum,
-          c.sell_num sellNum,
-          bu.business_name	business
+          c.sell_num sellNum
           from
           tb_car c
           LEFT JOIN tb_car_base d ON c.base_id = d.id
-          AND c.business_id = #{businessId}
+          WHERE  c.business_id = #{businessId}
+        <if test="carSeries != null and carSeries !='' ">
+            AND c.car_brand_line =  #{carYear}
+        </if>
+        <if test="carYear != null and carYear !='' ">
+            AND c.car_year =  #{carYear}
+        </if>
+        <if test="brandId != null and brandId !='' ">
+            AND c.car_brand = #{brandId}
+        </if>
+        <if test="date != null and date !='' ">
+            ${date}
+        </if>
+
+        <if test="sortString != null and sortString !='' ">
+            ORDER BY  ${sortString}
+        </if>
     </select>
 </mapper>

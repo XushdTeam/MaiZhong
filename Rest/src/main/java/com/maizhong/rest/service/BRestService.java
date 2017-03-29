@@ -2,8 +2,6 @@ package com.maizhong.rest.service;
 
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.pojo.TbCar;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Created by yangF on 2017/3/28.
@@ -25,8 +23,16 @@ public interface BRestService {
 
 
 
-    public JsonResult userLogin(String username,String password);
+    JsonResult findBrandsByCatch();
+    JsonResult findSeriesByCatch(String brandId);
+
+    JsonResult findSkuBySeriesAndYear(String seriesId, String year);
+
+    public JsonResult userLogin(String username, String password);
     
     //商品查询接口
-    JsonResult selectCarByBussiness(Long businessId);
+    JsonResult selectCarByBussiness(Long businessId, Long carSeries, Long brandId,
+                                    String date, String carYear, Integer start, Integer pageSize, String sortString);
+
+    JsonResult findCarInfoById(Long id);
 }

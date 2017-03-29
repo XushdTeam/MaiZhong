@@ -31,14 +31,25 @@ public class BRestController {
     //数据添加
     @RequestMapping("/car/insert")
     public JsonResult insertCar(TbCar car){
-        return null;
+        return bRestService.insertCar(car);
     }
 
     //数据修改
-    @RequestMapping("/car/update")
+    @RequestMapping("/car/modify")
     public JsonResult updateCar(TbCar tbCar){
+        if (tbCar!=null){
+            if (tbCar.getId()!=null){
+                return bRestService.insertCar(tbCar);
+            }
+            return bRestService.updateCar(tbCar);
+        }
+        return JsonResult.Error("数据错误，请检查数据");
+    }
 
-        return null;
+    @RequestMapping("/car/info/{id}")
+    public JsonResult findInfo(@PathVariable Long id){
+        //TODO
+        return  bRestService.findCarInfoById(id);
     }
 
     //数据删除
@@ -54,14 +65,44 @@ public class BRestController {
     }
 
     //商品查询接口
-    @RequestMapping("/car/find/{businessId}")
-    public JsonResult selectCarList(@PathVariable("businessId") Long businessId){
-        return bRestService.selectCarByBussiness(businessId);
+    @RequestMapping("/car/find")
+    public JsonResult selectCarList(@RequestParam("businessId") Long businessId, Long carSeries, Long brandId,
+                                    String date, String carYear, Integer currentPage, String sortString) {
+        Integer pageSize = 10;
+        return bRestService.selectCarByBussiness(businessId,carSeries,brandId,date,carYear,currentPage,pageSize,sortString);
     }
+
+
 
 
     @RequestMapping("/user")
     public JsonResult userLogin(String username,String password){
         return bRestService.userLogin(username,password);
     }
+
+
+
+    @RequestMapping("/getCarBrand")
+    public JsonResult getCarSeriesByBrand(){
+        return bRestService.findBrandsByCatch();
+    }
+
+
+    @RequestMapping("/getCarSeriesByBrand/{brandId}")
+    public JsonResult getCarSeriesByBrand(@PathVariable String brandId){
+        return bRestService.findSeriesByCatch(brandId);
+    }
+
+
+    @RequestMapping("/getCarSeriesByBrand/{seriesId}/{caryear}")
+    public JsonResult getCarSeriesByBrand(@PathVariable String seriesId,@PathVariable String caryear){
+        if (caryear.equals("0")||caryear.equals("")){
+            caryear = null;
+        }
+        return bRestService.findSkuBySeriesAndYear(seriesId,caryear);
+    }
+
+
+
+
 }

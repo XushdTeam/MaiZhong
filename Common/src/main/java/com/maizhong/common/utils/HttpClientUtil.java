@@ -105,7 +105,7 @@ public class HttpClientUtil {
         return resultString;
     }
 
-    public static String doPost(String url, Map<String, Object> param) {
+    public static String doPost(String url) {
         return doPost(url, null);
     }
 
