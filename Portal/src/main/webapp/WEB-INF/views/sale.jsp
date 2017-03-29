@@ -60,6 +60,7 @@
     </div>
 </div>
 <!--mains end-->
+
 <div class="newCarSaleCon-tit">卖车者说</div>
 <div class="newCarSaleCon-say">
     <ul>
@@ -67,7 +68,7 @@
             <div class="header-box pr">
                 <span class="header-box-l">
                   <img src="/resources/img/user_h4.png"></span>
-            <span class="header-box-r">n
+            <span class="header-box-r">
                   <strong>刁先生：</strong>儿子毕业已成家，想换一辆7座的大车。感觉迈众这样的大平台卖车让人放心，不会发生价格欺诈，就选择在这里卖车。迈众的报价符合心理预期，检测人员和服务人员都很专业，解释也比较到位，手续不复杂、很方便。
             </span>
             </div>
@@ -91,7 +92,7 @@
         </li>
     </ul>
 </div><!--newCarSaleCon-say end-->
-<div class="">
+<div class="bg_color bg_s">
     <div class="newCarSaleCon-tit">卖车小知识</div>
     <div class="newCar-question-list">
         <ul class="cFaq">

@@ -249,6 +249,7 @@ img,input{vertical-align:middle; outline:none}
 .new{ background: #F1F1F1; padding: 50px 0; margin-top: 30px; overflow: hidden;}
 .new .new_con{ width: 1200px; margin: 0px auto}
 .new_con dl{ background: #fff; padding-bottom: 20px; width: 380px; float: left; margin-right: 26px}
+.new_con dl:hover{ box-shadow: 5px 5px 5px #ccc}
 .new_con dl:nth-child(2){ float: right; margin-right: 0}
 .new_con dl dt img{ width:380px; height: 257px}
 .new_con dl dd{ line-height: 35px; font-size: 14px; padding-left: 20px}
@@ -256,13 +257,14 @@ img,input{vertical-align:middle; outline:none}
 
 /*list*/
 .tuijian{ width: 1200px; margin: 0 auto}
-.tuijian h2{ color: #666; line-height: 45px; margin-top: 20px; height: 45px;font-weight: 500; border-bottom:1px solid #eee; font-size: 22px;}
+.tuijian h2{ color: #666; line-height: 45px; margin-top: 20px; height: 45px;font-weight: 500; font-size: 22px;}
 .tuijian dl{ border: 1px solid #ccc; width:274px; float: left; margin:10px 32px 0 0}
+.tuijian dl:hover{ box-shadow: 0px 3px 8px #ccc}
 .tuijian dl dd img{ width: 100%;border-bottom: 1px solid #E6E5E5;}
-.tuijian dl dd p{ line-height: 45px;}
+.tuijian dl dd p{ line-height: 45px; white-space: nowrap; text-overflow:ellipsis; overflow: hidden}
 .tuijian dl.last{ float: right; margin-right: 0;}
 .tuijian dl dd p{ font-size: 15px; padding: 0 10px}
-.tuijian dl dd p span{ color: #c40000; font-size: 19px; margin-left: 0px}
+.tuijian dl dd p span{ color: #e72116; font-size: 19px; margin-left: 0px}
 /*品牌*/
 .index_cen{ width: 1200px; margin: 40px auto 0; border: 1px solid #eee; overflow: hidden;}
 .index_cen .pin p{ color: #333; line-height: 55px; font-size: 22px; border-bottom: 1px solid #eee; text-indent: 1em}
@@ -277,29 +279,29 @@ img,input{vertical-align:middle; outline:none}
 .pin .more{ margin-right: 26px}
 
 /*热销*/
-.re_xiao{ background: #eee ;padding: 40px 0;}
-.re_con{ width: 1200px; margin: 0px auto; text-align: center; padding: 40px 0}
-.re_con dl{ position: relative; width: 1200px;}
-.re_con dl dt img{ width: 1200px;}
-.re_con dl dd.dd2{ width: 455px; height: 369px; background: #fff; position: absolute; right: 35px; top: 27px}
-.re_con dl dd.dd2 h2{ line-height: 45px; text-align: left; color: #000; padding: 0 0 0 16px}
-.re_con dl dd.dd2 p{ font-size: 14px;padding: 0 0 0 16px; text-align: left;}
+.re_xiao{ background: #eee ;padding: 20px 0;}
+.re_con{ width: 1200px; margin: 0px auto; text-align: center; padding: 30px 0}
+.re_con dl img{ width: 96%; margin: 0 auto}
+.re_con dl{ position: relative; width: 1200px; background: #fff; padding: 20px 0}
+.re_con dl dd.dd2{ width: 405px; height: 319px; position: absolute; right: 65px; top: 70px}
+.re_con dl dd.dd2 h2{ line-height: 45px; text-align: left; color: #000; padding: 25px 0 0 26px; font-size: 24px;}
+.re_con dl dd.dd2 p{ font-size: 14px;padding: 3px 0 0 26px; text-align: left;}
 .heads a{ font-size: 14px; color: #999; font-weight: 500; float: right;}
-.bors{ width: 350px; background: #c40000; height: 45px; border-radius:3px; line-height: 45px; margin:50px auto 0}
+.bors{ width: 350px; background: #e72116; height: 45px; border-radius:3px; line-height: 45px; margin:30px auto 0}
 .bors a{ color: #fff;font-size:20px;}
-.re_con ul{ overflow: hidden; padding: 20px 0; color:#666; width: 350px; margin: 20px auto; border: 2px solid #e5e5e5}
-.re_con ul li{ float: left; width: 150px; font-size: 18px; line-height: 35px; height: 35px;text-align: left; padding: 0 0 0 20px}
-.bort{ width: 350px; height: 45px;  line-height: 45px;  font-size: 16px; color: #000; margin:0 auto 0}
+.re_con ul{ overflow: hidden; padding: 0px 0; color:#666; width: 350px; margin: 20px auto; }
+.re_con ul li{ float: left; width: 150px; font-size: 18px; line-height: 35px; height:35px;text-align: left;}
+.bort{ width: 350px; height: 45px;  line-height: 45px;  font-size: 19px; color: #999; margin:9px auto 0}
 /*banner  nav*/
 .banner .left:hover , .banner .right:hover{ background-color: rgba(0, 0, 0, 0.31);}
 .nav_sec{ height: 600px; position: absolute;top: 0; left: 0; width: 100%; background: rgba(0,0,0,0.3);}
 .nav_s{ overflow: hidden; width: 100%; z-index: 1000; position: absolute;top: 0;height: 75px}
-.nav_top{ width: 1200px; margin: 0 auto; overflow: hidden; padding: 20px 0; position: absolute; top: 12%;left: 20%}
+.nav_top{ width: 1200px; margin: 0 auto; overflow: hidden; padding: 20px 0;}
 .nav_top .logo{ float: left; width: 200px;margin-top: -15px;}
 .nav_top .logo span{ font-size: 16px; color:#fff; padding-left: 10px}
 .nav_top .navs{ float: left; width: 480px;}
 .nav_top .navs li a{ float: left; padding: 0 15px; margin-right: 30px; color: #fff; font-size: 16px}
-.nav_top .navs li a:hover{ color: #c40000;  transition:color 0.5s;-webkit-transition:color 0.5s;}
+.nav_top .navs li a:hover{ color: #e72116;  transition:color 0.5s;-webkit-transition:color 0.5s;}
 .call{ width: 300px; float: right; text-align: right}
 .call .span_one a{ color: #fff; font-size: 24px; font-weight: bold;}
 .call .span_one{ margin-right: 30px}
@@ -308,17 +310,18 @@ img,input{vertical-align:middle; outline:none}
 
 /*搜索框*/
 .s_froms{ width: 300px; float: left; display: none; margin-top: -7px}
-.s_froms input{ width: 200px; height: 34px; line-height: 34px; float: left;}
-.s_froms span.ss{ height: 34px; line-height: 34px; width: 60px; text-align: center; background: #c40000;color: #fff; float: left; font-size: 16px;}
+.s_froms input{ width: 200px; height: 30px; line-height: 34px; float: left; border: 1px solid #ccc; border-right:none }
+.s_froms span.ss{ height: 34px; line-height: 34px; width: 60px; text-align: center; background: #e72116;color: #fff; float: left; font-size: 16px;}
 .s_froms .sec_hide{background: rgba(255,255,255,0.5); width:140px; clear: both; border: 1px solid #999; display: none}
 .s_froms .sec_hide li{ padding: 10px 10px; font-size: 16px; color: #000; cursor: pointer; border-bottom: 1px solid #eee}
 .s_froms .sec_hide li a{ color: #000}
 .s_from{ display: block;}
-.s_from input{height: 50px;  background: none; border: 2px solid #f5f5f5; width: 480px;color: #f5f5f5; padding: 16px 0px 15px 8px; float: left; background:rgba(0,0,0,0.3);}
+.s_from input{  background: none; border: 2px solid #f5f5f5; width: 480px;color: #f5f5f5;height: 44px; float: left; background:rgba(0,0,0,0.3);
+    margin:0;}
 .s_from span.ss{ height: 50px; line-height: 50px; width: 150px; text-align: center; background: #f5f5f5;color: #000; float: left; font-size: 16px;}
 .s_from span a{ color: #000}
-.s_from .mai a{ width: 150px; float: right; background: #C40000; text-align: center; line-height: 50px; color: #fff; font-size: 16px;}
-.s_from .mai a:hover{ background: #fff;color: #C40000;transition:background 0.5s;-webkit-transition:background 0.5s;transition:color 0.5s;-webkit-transition:color 0.5s;}
+.s_from .mai a{ width: 150px; float: right; background: #e72116; text-align: center; line-height: 50px; color: #fff; font-size: 16px;}
+.s_from .mai a:hover{ background: #fff;color: #e72116;transition:background 0.5s;-webkit-transition:background 0.5s;transition:color 0.5s;-webkit-transition:color 0.5s;}
 .s_from .sec_hide{background: rgba(255,255,255,0.5); width: 540px; clear: both; border: 1px solid #999; display: none}
 .s_from .sec_hide li{ padding: 10px 10px; font-size: 16px; color: #000; cursor: pointer; border-bottom: 1px solid #eee}
 .s_from .sec_hide li a{ color: #000}
@@ -380,7 +383,7 @@ img,input{vertical-align:middle; outline:none}
 .A_con .left{ width: 210px; float: left;background:#fff; overflow: hidden; min-height: 750px}
 .A_con .left ul li{ display: block;line-height:75px; text-indent: 1.5em; font-size: 16px; height: 75px; border-bottom: 1px solid #eee; cursor: pointer;}
 .A_con .left ul li span{ font-family: '宋体'; float: right; margin-right: 15px;}
-.A_con .left ul li.cun{ background: #c40000; color: #fff;}
+.A_con .left ul li.cun{ background: #e72116; color: #fff;}
 .A_con .left ul li.cun a{ display: block; color: #fff;}
 .A_con .left ul li a{ display: block;}
 
@@ -395,9 +398,9 @@ img,input{vertical-align:middle; outline:none}
 .A_form textarea{ vertical-align: top; width: 500px; height: 230px;color: #999;font-family: '微软雅黑'; outline: none; border-radius: 8px; padding: 20px 0px 0 20px ; border: 1px solid #ccc}
 .A_form label{ font-size: 16px;color: #666; padding-right: 10px}
 .A_form input{ height: 40px; line-height: 40px; border-radius: 8px; border: 1px solid #ccc; width: 200px; padding-left: 20px}
-.A_form button{ width: 150px; line-height:50px; color: #c40000; margin-left: 80px; border: none; font-size: 16px; border: 1px solid #c40000; border-radius: 8px; text-align: center; height: 50px}
+.A_form button{ width: 150px; line-height:50px; color: #e72116; margin-left: 80px; border: none; font-size: 16px; border: 1px solid #e72116; border-radius: 8px; text-align: center; height: 50px}
 .A_con .right .xq{ line-height: 30px; text-indent: 2em;}
-.A_con .right h4{color: #c40000; font-size: 16px; padding:10px 0}
+.A_con .right h4{color: #e72116; font-size: 16px; padding:10px 0}
 .A_con .right div p{ line-height: 36px;}
 
 /*FOOTER*/
@@ -421,7 +424,8 @@ img,input{vertical-align:middle; outline:none}
 .ban_form .h_cens{width: 285px; text-align: center; margin: 15px auto}
 .ban_form input{ vertical-align: top;}
 .ban_form .calls{width: 285px; text-align: center; margin: 23px auto; font-size: 24px; color: #399afe}
-.bg_color{ background: #f5f5f5; overflow: hidden;}
+.bg_color{ background: #f5f5f5; overflow: hidden; }
+.bg_s{margin-top: 40px; border-top: 1px solid #eee}
 .bg_color .ma_cen{ width: 1200px; margin:0 auto}
 .bg_color .ma_cen dl{ float: left; width: 25%;  text-align: center; padding:20px 0;}
 .bg_color .ma_cen dl dt{ font-size: 36px; line-height: 55px; height: 55px; width: 55px; border: 2px solid #399afe; border-radius: 112px; margin: 0 auto;color: #399afe}
@@ -432,10 +436,12 @@ img,input{vertical-align:middle; outline:none}
     height: 70px;
     border-bottom: 1px solid #E6E5E5;
     color: #1B1B1B;
-    font-size: 20px;
+    font-size: 24px;
     line-height: 70px;
     margin: 0 auto;
     padding-top: 30px;
+    text-align: center;
+    color: #399afe;
 }
 .header-box{ overflow: hidden; height: 140px}
 .newCarSaleCon-say {
@@ -443,7 +449,7 @@ img,input{vertical-align:middle; outline:none}
     height: auto;
     overflow: hidden;
     margin: 0 auto;
-    margin-bottom: 50px;
+    margin-bottom: 90px;
 }
 .newCarSaleCon-say ul li.bor {
     border-right: 1px solid #E6E5E5;
@@ -481,6 +487,9 @@ img,input{vertical-align:middle; outline:none}
 }
 .newCar-question-list .cFaq li {
     padding: 15px 0;
+    width: 40%;
+    float: left;
+    margin-right: 10%;
 }
 .newCar-question-list .cFaq li em {
     font-size: 18px;
@@ -501,7 +510,7 @@ img,input{vertical-align:middle; outline:none}
     width: 1200px;
     height: auto;
     overflow: hidden;
-    margin: 0 auto;
+    margin: 30px auto 50px;
 }
 /*新闻*/
 .A_colocr{ background: #F5F5F5; overflow: hidden;}
@@ -509,7 +518,7 @@ img,input{vertical-align:middle; outline:none}
 .A_con .left{ width: 210px; float: left;background:#fff; overflow: hidden; min-height: 750px}
 .A_con .left ul li{ display: block;line-height:75px; text-indent: 1.5em; font-size: 16px; height: 75px; border-bottom: 1px solid #eee; cursor: pointer;}
 .A_con .left ul li span{ font-family: '宋体'; float: right; margin-right: 15px;}
-.A_con .left ul li.cun{ background: #c40000; color: #fff;}
+.A_con .left ul li.cun{ background: #e72116; color: #fff;}
 .A_con .right{float: right;background:#fff; overflow: hidden; width: 800px; min-height: 700px; padding-bottom: 50px}
 .A_con .right div{ font-size: 14px; line-height: 25px; width: 700px; margin:15px auto 0}
 .A_con .right h3{ font-size:24px; line-height: 45px; height: 45px; font-weight: 500; padding: 10px 0; border-bottom: 1px solid #eee; width: 700px; margin: 20px auto 0;color: #000}
@@ -521,9 +530,9 @@ img,input{vertical-align:middle; outline:none}
 .A_form textarea{ vertical-align: top; width: 500px; height: 230px;color: #999;font-family: '微软雅黑'; outline: none; border-radius: 8px; padding: 20px 0px 0 20px ; border: 1px solid #ccc}
 .A_form label{ font-size: 16px;color: #666; padding-right: 10px}
 .A_form input{ height: 40px; line-height: 40px; border-radius: 8px; border: 1px solid #ccc; width: 200px; padding-left: 20px}
-.A_form button{ width: 150px; line-height:50px; color: #c40000; margin-left: 80px; border: none; font-size: 16px; border: 1px solid #c40000; border-radius: 8px; text-align: center; height: 50px}
+.A_form button{ width: 150px; line-height:50px; color: #e72116; margin-left: 80px; border: none; font-size: 16px; border: 1px solid #e72116; border-radius: 8px; text-align: center; height: 50px}
 .A_con .right .xq{ line-height: 30px; text-indent: 2em;}
-.A_con .right h4{color: #c40000; font-size: 16px; padding:10px 0}
+.A_con .right h4{color: #e72116; font-size: 16px; padding:10px 0}
 .A_con .right div p{ line-height: 36px;}
 
 .X_con{ width: 1100px; margin:30px auto; border: 1px solid #eee;background: #fff;padding: 50px; overflow: hidden;}
@@ -542,13 +551,13 @@ img,input{vertical-align:middle; outline:none}
 .x_right dl{ width: 250px; margin:20px auto; background: #fff;padding-bottom: 10px; border-radius: 7px}
 .x_right dl dd{ text-align: center; font-size: 16px; line-height: 25px;}
 .x_right dl dt{text-align: center; width: 250px}
-.x_right dl dd.dd1{ color: #c40000;}
+.x_right dl dd.dd1{ color: #e72116;}
 .x_right h2{ color: #333; font-weight: 500 ; border-bottom: 1px solid #fff; padding-left: 22px}
 .nav_tops a,.nav_tops span{ color: #666 !important}
 
 
 .haeder{ border-bottom: 1px solid #ccc; overflow: hidden; height: 75px}
-.haeder .span_one a{ color: #c40000 !important}
+.haeder .span_one a{ color: #e72116 !important}
 .haeder .logo span{ font-size:12px;}
 /*二级页导航不定位*/
 .haeder .nav_tops {
@@ -557,3 +566,6 @@ img,input{vertical-align:middle; outline:none}
 }
 
 .more{float: right;}
+table.cd_m_info_desc {
+    background: #f5f5f5;
+}

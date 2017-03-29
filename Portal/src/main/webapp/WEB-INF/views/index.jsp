@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <%--
   Created by IntelliJ IDEA.
   User: Xushd
@@ -11,6 +12,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>迈众汽车</title>
