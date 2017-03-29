@@ -28,6 +28,7 @@
         <property name="blockWhenExhausted" value="false"/>
     </bean>
 
+
     <!--jedis 客户端单机版-->
     <bean id="redisClient" class="redis.clients.jedis.JedisPool">
         <constructor-arg name="host" value="192.168.3.189"></constructor-arg>

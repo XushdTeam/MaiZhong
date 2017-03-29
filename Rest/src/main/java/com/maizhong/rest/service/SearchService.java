@@ -34,5 +34,4 @@ public interface SearchService {
 
     List<KeyObject> getCarBrandGroupByInitial();
 
-    void  testT();
 }

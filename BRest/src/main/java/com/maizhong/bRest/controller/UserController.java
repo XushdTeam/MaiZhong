@@ -1,8 +1,7 @@
-package com.maizhong.bRest.controlloer;
+package com.maizhong.bRest.controller;
 
 import com.maizhong.bRest.service.UserService;
 import com.maizhong.common.result.JsonResult;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,19 +19,8 @@ public class UserController {
 
 
     @RequestMapping("/login")
-    public JsonResult login(@RequestParam("username") String username,@RequestParam("password") String password){
-
-
-
-        return null;
+    public JsonResult login( String username,String password){
+        return userService.login(username,password);
     }
-
-
-    @RequestMapping("/online")
-    public JsonResult isOnline(@RequestParam("token") String token){
-        return null;
-    }
-
-
 
 }
