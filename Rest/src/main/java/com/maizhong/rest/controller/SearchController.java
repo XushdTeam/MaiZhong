@@ -63,11 +63,4 @@ public class SearchController {
         JsonResult jsonResult = searchService.getSearchResult(queryString, sortString, carBrand, carSeries, sellPrice, capacity, carYear, pageIndex);
         return jsonResult;
     }
-
-
-    @RequestMapping("/test")
-    public void testT(){
-        searchService.testT();
-    }
-
 }

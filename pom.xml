@@ -13,6 +13,7 @@
         <module>Portal</module>
         <module>Z_Mybatis</module>
         <module>Rest</module>
+        <module>BRest</module>
     </modules>
 
     <packaging>pom</packaging>

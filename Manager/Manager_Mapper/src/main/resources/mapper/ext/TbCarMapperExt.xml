@@ -157,4 +157,35 @@
         where c.base_id = base.id
         and c.id = #{id}
     </select>
+
+
+
+
+    <select id="findByBussinessId" parameterType="java.lang.Long"  resultType="java.util.HashMap">
+        SELECT
+          c.id id,
+          c.number number,
+          d.car_brand carBrand,
+          d.car_level carType,
+          d.car_series carSeries,
+          d.car_type name,
+          d.car_color carColor,
+          d.car_displacement capacity,
+          d.car_gearbox gearbox,
+          c.sellpoint sellpoint,
+          c.reserve_price reservePrice,
+          c.sell_price sellPrice,
+          c.create_time createTime,
+          c.smimage smimage,
+          c.image  image,
+          c.issale issale,
+          c.unable  unable,
+          c.stock_num  stockNum,
+          c.sell_num sellNum,
+          bu.business_name	business
+          from
+          tb_car c
+          LEFT JOIN tb_car_base d ON c.base_id = d.id
+          AND c.business_id = #{businessId}
+    </select>
 </mapper>

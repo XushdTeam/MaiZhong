@@ -84,9 +84,10 @@ public class SearchServiceImpl implements SearchService {
     public Integer PAGESIZE ;
 
 
-
-
-
+    /**
+     * solr索引同步
+     * @return
+     */
     @Override
     public JsonResult syncIndex() {
         try {
@@ -294,6 +295,8 @@ public class SearchServiceImpl implements SearchService {
 
     /***
      * 查询入口
+     *      SearchDoc 数据准备页面
+     *
      * @param queryString
      * @param sortString
      * @param carBrand
@@ -437,8 +440,8 @@ public class SearchServiceImpl implements SearchService {
      *  数据填充
      *      rest接口方法
      *          填充数据
-     *              list hotcarBrand
-     *              list hotcarSeries
+     *              list hotcarBrand 热门汽车品牌
+     *              list hotcarSeries   车系
      * @param brandId
      * @return
      */
@@ -500,7 +503,12 @@ public class SearchServiceImpl implements SearchService {
     }
 
 
-
+    /**
+     *  缓存查询
+     *        数据  热门品牌
+     *
+     * @return
+     */
     @Override
     public List<CarBrandDTO> getCarBrandHot() {
         String json = jedisClient.get(CAR_BRAND_HOT);
@@ -551,6 +559,7 @@ public class SearchServiceImpl implements SearchService {
 
     /***
      * 缓存查询
+     *      数据  根据首字母分组的品牌
      * @return
      */
     @Override
@@ -566,11 +575,4 @@ public class SearchServiceImpl implements SearchService {
         return car_brand_group;
     }
 
-    @Override
-    public void testT() {
-        tbCarMapperExt.findListNotContainsDesc(null);
-        tbCarMapperExt.findByCarYearAndCarSeres(null,null);
-        tbCarMapperExt.findDocsForSolrStore();
-
-    }
 }

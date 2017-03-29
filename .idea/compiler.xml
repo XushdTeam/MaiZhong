@@ -22,6 +22,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="BRest" />
         <module name="Common" />
         <module name="Manager_Controller" />
         <module name="Manager_Mapper" />
@@ -33,6 +34,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.7">
+      <module name="BRest" target="1.7" />
       <module name="Common" target="1.7" />
       <module name="MaiZhong" target="1.7" />
       <module name="Manager" target="1.7" />
