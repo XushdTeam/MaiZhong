@@ -65,14 +65,14 @@ public class BusinessServiceImpl implements BusinessService {
 
 
     @Override
-    public String getBusinessListAll() {
+    public List<TbBusiness> getBusinessListAll() {
 
         TbBusinessExample example = new TbBusinessExample();
         TbBusinessExample.Criteria criteria = example.createCriteria();
         criteria.andDelflagEqualTo(0);
         criteria.andStatusEqualTo(1);
         List<TbBusiness> list = tbBusinessMapper.selectByExample(example);
-        return JsonUtils.objectToJson(list);
+        return list;
     }
 
     @Override

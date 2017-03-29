@@ -63,10 +63,9 @@ public class BusinessUserServiceImpl implements BusinessUserService {
         if (param.getFiled("userName") != null && !Objects.equals(param.getFiled("userName"), "")) {
             criteria.andUserNameLike(SqlUtils.getLikeSql(param.getFiled("userName")));
         }
-      /*  if (param.getFiled("business_id") != null && !Objects.equals(param.getFiled("business_id"), "")) {
-            criteria.andBusinessIdEqualTo(Long.valueOf(param.getFiled("business_id")));
+       if (param.getFiled("businessId") != null && !Objects.equals(param.getFiled("businessId"), "")) {
+            criteria.andBusinessIdEqualTo(Long.valueOf(param.getFiled("businessId")));
         }
-*/
         List<TbBusinessUser> list = tbBusinessUserMapper.selectByExample(example);
 
         for (TbBusinessUser user : list) {

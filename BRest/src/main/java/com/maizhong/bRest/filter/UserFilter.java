@@ -59,10 +59,9 @@ public class UserFilter extends HandlerInterceptorAdapter {
             if (StringUtils.isNotBlank(token)){
                 String hget = jedisClient.hget(BUSSINESSUSER_PREFIX + token, BUSSINESSUSER_INFO);
                 if (StringUtils.isNotBlank(hget)){
-                    jedisClient.expire(BUSSINESSUSER_PREFIX + token,3600);
+                    jedisClient.expire(BUSSINESSUSER_PREFIX + token,900);
 
                     UserInfo info = JsonUtils.jsonToPojo(hget, UserInfo.class);
-
                     //需要用到token数据 用于提取用户信息
                     request.setAttribute("token",token);
                     request.setAttribute("userInfo",info);

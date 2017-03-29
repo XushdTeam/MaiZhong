@@ -199,7 +199,6 @@
 </div>
 <jsp:include page="footer.jsp"></jsp:include>
 <!--广告-->
-<div id="floatright" style="position: absolute; z-index: 10; "><a href="#"><img src="../../resources/img/logo.png" border="0"></a></div>
 <script>
    $(function () {
        var nav = $("#mynav"),mtop = 0,zindex = 999,
@@ -235,25 +234,5 @@
    });
 </script>
 
-<script>
-    window.onload = function(){
-        var ad = new FloatAd({
-            //nodeLink : "<a href='#'><img src='img/weixin_qurode.png' border=0 /></a>" ,
-            floatObj : "floatright",
-            x : 10,
-            y : 250,
-            locate : "right"
-        });
-        ad.play();
-        var ad2 = new FloatAd({
-            nodeLink : "<a href='#'><img src='../../resources/img/logo.png' border=0 /></a>" ,
-            floatObj : "floatleft",
-            x : 10,
-            y : 250,
-            locate : "left"
-        })
-        ad2.play();
-    }
-</script>
 </body>
 </html>
