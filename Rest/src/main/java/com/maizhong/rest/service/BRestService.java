@@ -23,8 +23,10 @@ public interface BRestService {
     //下架方法
     JsonResult unable(String id, Integer unalbe);
 
-    //商品查询接口
-    public JsonResult selectCarList(TbCar tbCar);
+
 
     public JsonResult userLogin(String username,String password);
+    
+    //商品查询接口
+    JsonResult selectCarByBussiness(Long businessId);
 }

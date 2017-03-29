@@ -1,6 +1,7 @@
 package com.maizhong.bRest.filter;
 
 
+import com.maizhong.common.dto.UserInfo;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.dao.JedisClient;
 import org.apache.commons.lang3.StringUtils;
@@ -59,6 +60,12 @@ public class UserFilter extends HandlerInterceptorAdapter {
                 String hget = jedisClient.hget(BUSSINESSUSER_PREFIX + token, BUSSINESSUSER_INFO);
                 if (StringUtils.isNotBlank(hget)){
                     jedisClient.expire(BUSSINESSUSER_PREFIX + token,3600);
+
+                    UserInfo info = JsonUtils.jsonToPojo(hget, UserInfo.class);
+
+                    //需要用到token数据 用于提取用户信息
+                    request.setAttribute("token",token);
+                    request.setAttribute("userInfo",info);
                     return true;
                 }
             }

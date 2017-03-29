@@ -95,6 +95,7 @@ public class UserServiceImpl implements UserService {
         return JsonResult.Error("登录失败，用户名或者密码错误");
     }
 
+
     @Override
     public JsonResult isOnline(String token) {
         if (StringUtils.isNotBlank(token)){

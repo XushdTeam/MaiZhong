@@ -5,7 +5,9 @@ import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.mapper.TbBusinessMapper;
 import com.maizhong.mapper.TbBusinessUserMapper;
 import com.maizhong.mapper.TbCarMapper;
+import com.maizhong.mapper.ext.TbCarMapperExt;
 import com.maizhong.pojo.*;
+import com.maizhong.pojo.vo.TbCarVo;
 import com.maizhong.rest.service.BRestService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,8 @@ public class BRestServiceImpl implements BRestService {
     @Resource
     private TbCarMapper tbCarMapper;
 
+    @Resource
+    private TbCarMapperExt tbCarMapperExt;
 
     @Resource
     private TbBusinessMapper tbBusinessMapper;
@@ -166,20 +170,19 @@ public class BRestServiceImpl implements BRestService {
      *         此汽车方法根据外来参数返回数据
      *         不可频繁调用此方法
      *         此方法不添加缓存
-     * @param tbCar
+     * @param businessId
      * @return
      */
     @Override
-    public JsonResult selectCarList(TbCar tbCar) {
-        TbCarExample example = new TbCarExample();
-        if (tbCar!=null){
-            TbCarExample.Criteria criteria = example.createCriteria();
-            if (tbCar.getBusinessId()!=null){
-                criteria.andBusinessIdEqualTo(tbCar.getBusinessId());
-            }
-            //TODO
+    public JsonResult selectCarByBussiness(Long businessId) {
+        if (businessId==null){
+            return JsonResult.Error("信息错误");
         }
-        return null;
+        TbCarExample example = new TbCarExample();
+        TbCarExample.Criteria criteria = example.createCriteria();
+        criteria.andBusinessIdEqualTo(businessId);
+        List<Map<String, Object>> cars = tbCarMapperExt.findByBussinessId(businessId);
+        return JsonResult.OK(cars);
     }
 
 

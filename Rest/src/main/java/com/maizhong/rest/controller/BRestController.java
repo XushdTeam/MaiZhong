@@ -54,9 +54,9 @@ public class BRestController {
     }
 
     //商品查询接口
-    @RequestMapping("/car/find")
-    public JsonResult selectCarList(TbCar tbCar){
-        return null;
+    @RequestMapping("/car/find/{businessId}")
+    public JsonResult selectCarList(@PathVariable("businessId") Long businessId){
+        return bRestService.selectCarByBussiness(businessId);
     }
 
 
