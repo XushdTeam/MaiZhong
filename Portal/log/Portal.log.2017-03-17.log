@@ -1,364 +1,70 @@
-2017-03-17 15:30:31.700 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
-2017-03-17 15:30:31.836 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Fri Mar 17 15:30:31 CST 2017]; root of context hierarchy
-2017-03-17 15:30:31.900 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring-service.xml]
-2017-03-17 15:30:32.319 [localhost-startStop-1] INFO  o.s.c.support.PropertySourcesPlaceholderConfigurer - Loading properties file from class path resource [resource.properties]
-2017-03-17 15:30:32.328 [localhost-startStop-1] WARN  o.s.web.context.support.XmlWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt
-org.springframework.beans.factory.BeanInitializationException: Could not load properties; nested exception is java.io.FileNotFoundException: class path resource [resource.properties] cannot be opened because it does not exist
-	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.postProcessBeanFactory(PropertySourcesPlaceholderConfigurer.java:151) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:265) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:162) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:606) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:462) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:434) [spring-web-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306) [spring-web-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106) [spring-web-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4939) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5434) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at java.util.concurrent.FutureTask.run(FutureTask.java:262) [na:1.7.0_80]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145) [na:1.7.0_80]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615) [na:1.7.0_80]
-	at java.lang.Thread.run(Thread.java:745) [na:1.7.0_80]
-Caused by: java.io.FileNotFoundException: class path resource [resource.properties] cannot be opened because it does not exist
-	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:172) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.core.io.support.EncodedResource.getInputStream(EncodedResource.java:151) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.core.io.support.PropertiesLoaderUtils.fillProperties(PropertiesLoaderUtils.java:98) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:175) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.core.io.support.PropertiesLoaderSupport.mergeProperties(PropertiesLoaderSupport.java:156) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.postProcessBeanFactory(PropertySourcesPlaceholderConfigurer.java:142) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	... 16 common frames omitted
-2017-03-17 15:30:32.329 [localhost-startStop-1] ERROR org.springframework.web.context.ContextLoader - Context initialization failed
-org.springframework.beans.factory.BeanInitializationException: Could not load properties; nested exception is java.io.FileNotFoundException: class path resource [resource.properties] cannot be opened because it does not exist
-	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.postProcessBeanFactory(PropertySourcesPlaceholderConfigurer.java:151) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:265) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:162) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:606) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:462) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:434) ~[spring-web-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306) ~[spring-web-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106) [spring-web-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4939) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5434) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at java.util.concurrent.FutureTask.run(FutureTask.java:262) [na:1.7.0_80]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145) [na:1.7.0_80]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615) [na:1.7.0_80]
-	at java.lang.Thread.run(Thread.java:745) [na:1.7.0_80]
-Caused by: java.io.FileNotFoundException: class path resource [resource.properties] cannot be opened because it does not exist
-	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:172) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.core.io.support.EncodedResource.getInputStream(EncodedResource.java:151) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.core.io.support.PropertiesLoaderUtils.fillProperties(PropertiesLoaderUtils.java:98) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:175) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.core.io.support.PropertiesLoaderSupport.mergeProperties(PropertiesLoaderSupport.java:156) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.postProcessBeanFactory(PropertySourcesPlaceholderConfigurer.java:142) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	... 16 common frames omitted
-2017-03-17 15:34:58.693 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
-2017-03-17 15:34:58.767 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Fri Mar 17 15:34:58 CST 2017]; root of context hierarchy
-2017-03-17 15:34:58.803 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring-service.xml]
-2017-03-17 15:34:59.097 [localhost-startStop-1] INFO  o.s.c.support.PropertySourcesPlaceholderConfigurer - Loading properties file from URL [file:/D:/workspace/MaiZhong/Portal/target/classes/resource/resource.properties]
-2017-03-17 15:34:59.124 [localhost-startStop-1] WARN  o.s.web.context.support.XmlWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'indexServiceImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private java.lang.String com.maizhong.portal.service.impl.IndexServiceImpl.REST_URL; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'REST_URL' in string value "${REST_URL}"
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1210) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:434) [spring-web-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306) [spring-web-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106) [spring-web-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4939) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5434) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at java.util.concurrent.FutureTask.run(FutureTask.java:262) [na:1.7.0_80]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145) [na:1.7.0_80]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615) [na:1.7.0_80]
-	at java.lang.Thread.run(Thread.java:745) [na:1.7.0_80]
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private java.lang.String com.maizhong.portal.service.impl.IndexServiceImpl.REST_URL; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'REST_URL' in string value "${REST_URL}"
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:561) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	... 22 common frames omitted
-Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'REST_URL' in string value "${REST_URL}"
-	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:174) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:126) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:204) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:178) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer$2.resolveStringValue(PropertySourcesPlaceholderConfigurer.java:175) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:801) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:955) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:942) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:533) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	... 24 common frames omitted
-2017-03-17 15:34:59.125 [localhost-startStop-1] ERROR org.springframework.web.context.ContextLoader - Context initialization failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'indexServiceImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private java.lang.String com.maizhong.portal.service.impl.IndexServiceImpl.REST_URL; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'REST_URL' in string value "${REST_URL}"
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1210) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:434) ~[spring-web-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306) ~[spring-web-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106) [spring-web-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4939) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5434) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at java.util.concurrent.FutureTask.run(FutureTask.java:262) [na:1.7.0_80]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145) [na:1.7.0_80]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615) [na:1.7.0_80]
-	at java.lang.Thread.run(Thread.java:745) [na:1.7.0_80]
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private java.lang.String com.maizhong.portal.service.impl.IndexServiceImpl.REST_URL; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'REST_URL' in string value "${REST_URL}"
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:561) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	... 22 common frames omitted
-Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'REST_URL' in string value "${REST_URL}"
-	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:174) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:126) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:204) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:178) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer$2.resolveStringValue(PropertySourcesPlaceholderConfigurer.java:175) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:801) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:955) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:942) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:533) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	... 24 common frames omitted
-2017-03-17 17:28:11.006 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
-2017-03-17 17:28:11.118 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Fri Mar 17 17:28:11 CST 2017]; root of context hierarchy
-2017-03-17 17:28:11.157 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring-service.xml]
-2017-03-17 17:28:11.412 [localhost-startStop-1] INFO  o.s.c.support.PropertySourcesPlaceholderConfigurer - Loading properties file from URL [file:/D:/workspace/MaiZhong/Portal/target/classes/resource/resource.properties]
-2017-03-17 17:28:11.452 [localhost-startStop-1] WARN  o.s.web.context.support.XmlWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'indexServiceImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private java.lang.String com.maizhong.portal.service.impl.IndexServiceImpl.AD_INTERFACE; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'AD_INTERFACE' in string value "${AD_INTERFACE}"
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1210) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:434) [spring-web-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306) [spring-web-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106) [spring-web-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4939) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5434) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at java.util.concurrent.FutureTask.run(FutureTask.java:262) [na:1.7.0_80]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145) [na:1.7.0_80]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615) [na:1.7.0_80]
-	at java.lang.Thread.run(Thread.java:745) [na:1.7.0_80]
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private java.lang.String com.maizhong.portal.service.impl.IndexServiceImpl.AD_INTERFACE; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'AD_INTERFACE' in string value "${AD_INTERFACE}"
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:561) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	... 22 common frames omitted
-Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'AD_INTERFACE' in string value "${AD_INTERFACE}"
-	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:174) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:126) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:204) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:178) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer$2.resolveStringValue(PropertySourcesPlaceholderConfigurer.java:175) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:801) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:955) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:942) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:533) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	... 24 common frames omitted
-2017-03-17 17:28:11.458 [localhost-startStop-1] ERROR org.springframework.web.context.ContextLoader - Context initialization failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'indexServiceImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private java.lang.String com.maizhong.portal.service.impl.IndexServiceImpl.AD_INTERFACE; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'AD_INTERFACE' in string value "${AD_INTERFACE}"
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1210) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:434) ~[spring-web-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306) ~[spring-web-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106) [spring-web-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4939) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5434) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549) [tomcat-embed-core-7.0.47.jar:7.0.47]
-	at java.util.concurrent.FutureTask.run(FutureTask.java:262) [na:1.7.0_80]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145) [na:1.7.0_80]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615) [na:1.7.0_80]
-	at java.lang.Thread.run(Thread.java:745) [na:1.7.0_80]
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private java.lang.String com.maizhong.portal.service.impl.IndexServiceImpl.AD_INTERFACE; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'AD_INTERFACE' in string value "${AD_INTERFACE}"
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:561) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	... 22 common frames omitted
-Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'AD_INTERFACE' in string value "${AD_INTERFACE}"
-	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:174) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:126) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:204) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:178) ~[spring-core-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer$2.resolveStringValue(PropertySourcesPlaceholderConfigurer.java:175) ~[spring-context-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:801) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:955) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:942) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:533) ~[spring-beans-4.1.7.RELEASE.jar:4.1.7.RELEASE]
-	... 24 common frames omitted
-2017-03-17 17:31:05.703 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
-2017-03-17 17:31:05.787 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Fri Mar 17 17:31:05 CST 2017]; root of context hierarchy
-2017-03-17 17:31:05.829 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring-service.xml]
-2017-03-17 17:31:06.140 [localhost-startStop-1] INFO  o.s.c.support.PropertySourcesPlaceholderConfigurer - Loading properties file from URL [file:/D:/workspace/MaiZhong/Portal/target/classes/resource/resource.properties]
-2017-03-17 17:31:06.175 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 470 ms
-2017-03-17 17:31:06.212 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization started
-2017-03-17 17:31:06.214 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:31:06 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 17:31:06.215 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring_mvc.xml]
-2017-03-17 17:31:06.562 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/index]}" onto public java.lang.String com.maizhong.portal.controller.IndexController.index(org.springframework.ui.Model)
-2017-03-17 17:31:06.562 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/test/to/{url}]}" onto public java.lang.String com.maizhong.portal.controller.TestController.test(java.lang.String)
-2017-03-17 17:31:06.563 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/search/]}" onto public java.lang.String com.maizhong.portal.controller.SearchController.searchIndex(com.maizhong.common.dto.PageSearchParam,org.springframework.ui.Model)
-2017-03-17 17:31:06.604 [localhost-startStop-1] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.1.1.Final
-2017-03-17 17:31:07.058 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:31:06 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 17:31:07.114 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:31:06 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 17:31:07.497 [localhost-startStop-1] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
-2017-03-17 17:31:07.520 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization completed in 1308 ms
-2017-03-17 17:42:33.713 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
-2017-03-17 17:42:33.837 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Fri Mar 17 17:42:33 CST 2017]; root of context hierarchy
-2017-03-17 17:42:33.882 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring-service.xml]
-2017-03-17 17:42:34.248 [localhost-startStop-1] INFO  o.s.c.support.PropertySourcesPlaceholderConfigurer - Loading properties file from URL [file:/D:/workspace/MaiZhong/Portal/target/classes/resource/resource.properties]
-2017-03-17 17:42:34.286 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 570 ms
-2017-03-17 17:42:34.327 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization started
-2017-03-17 17:42:34.331 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:42:34 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 17:42:34.333 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring_mvc.xml]
-2017-03-17 17:42:34.673 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/index]}" onto public java.lang.String com.maizhong.portal.controller.IndexController.index(org.springframework.ui.Model)
-2017-03-17 17:42:34.674 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/test/to/{url}]}" onto public java.lang.String com.maizhong.portal.controller.TestController.test(java.lang.String)
-2017-03-17 17:42:34.674 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/search/]}" onto public java.lang.String com.maizhong.portal.controller.SearchController.searchIndex(com.maizhong.common.dto.PageSearchParam,org.springframework.ui.Model)
-2017-03-17 17:42:34.719 [localhost-startStop-1] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.1.1.Final
-2017-03-17 17:42:35.474 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:42:34 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 17:42:35.536 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:42:34 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 17:42:35.649 [localhost-startStop-1] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
-2017-03-17 17:42:35.672 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization completed in 1344 ms
-2017-03-17 17:43:35.995 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
-2017-03-17 17:43:36.173 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Fri Mar 17 17:43:36 CST 2017]; root of context hierarchy
-2017-03-17 17:43:36.221 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring-service.xml]
-2017-03-17 17:43:36.582 [localhost-startStop-1] INFO  o.s.c.support.PropertySourcesPlaceholderConfigurer - Loading properties file from URL [file:/D:/workspace/MaiZhong/Portal/target/classes/resource/resource.properties]
-2017-03-17 17:43:36.617 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 618 ms
-2017-03-17 17:43:36.657 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization started
-2017-03-17 17:43:36.659 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:43:36 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 17:43:36.660 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring_mvc.xml]
-2017-03-17 17:43:36.977 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/index]}" onto public java.lang.String com.maizhong.portal.controller.IndexController.index(org.springframework.ui.Model)
-2017-03-17 17:43:36.977 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/test/to/{url}]}" onto public java.lang.String com.maizhong.portal.controller.TestController.test(java.lang.String)
-2017-03-17 17:43:36.978 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/search/]}" onto public java.lang.String com.maizhong.portal.controller.SearchController.searchIndex(com.maizhong.common.dto.PageSearchParam,org.springframework.ui.Model)
-2017-03-17 17:43:37.023 [localhost-startStop-1] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.1.1.Final
-2017-03-17 17:43:37.480 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:43:36 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 17:43:37.542 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:43:36 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 17:43:37.922 [localhost-startStop-1] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
-2017-03-17 17:43:37.947 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization completed in 1290 ms
-2017-03-17 17:44:28.911 [http-bio-8080-exec-4] WARN  org.springframework.web.servlet.PageNotFound - No mapping found for HTTP request with URI [/search.html] in DispatcherServlet with name 'maizhong-portal'
-2017-03-17 17:45:09.028 [http-bio-8080-exec-5] WARN  org.springframework.web.servlet.PageNotFound - No mapping found for HTTP request with URI [/search.html] in DispatcherServlet with name 'maizhong-portal'
-2017-03-17 17:45:28.464 [http-bio-8080-exec-5] WARN  org.springframework.web.servlet.PageNotFound - No mapping found for HTTP request with URI [/search.html] in DispatcherServlet with name 'maizhong-portal'
-2017-03-17 17:45:36.694 [http-bio-8080-exec-5] WARN  org.springframework.web.servlet.PageNotFound - No mapping found for HTTP request with URI [/search.html] in DispatcherServlet with name 'maizhong-portal'
-2017-03-17 17:51:20.403 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
-2017-03-17 17:51:20.520 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Fri Mar 17 17:51:20 CST 2017]; root of context hierarchy
-2017-03-17 17:51:20.570 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring-service.xml]
-2017-03-17 17:51:20.933 [localhost-startStop-1] INFO  o.s.c.support.PropertySourcesPlaceholderConfigurer - Loading properties file from URL [file:/D:/workspace/MaiZhong/Portal/target/classes/resource/resource.properties]
-2017-03-17 17:51:20.983 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 576 ms
-2017-03-17 17:51:21.023 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization started
-2017-03-17 17:51:21.027 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:51:21 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 17:51:21.028 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring_mvc.xml]
-2017-03-17 17:51:21.529 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/index]}" onto public java.lang.String com.maizhong.portal.controller.IndexController.index(org.springframework.ui.Model)
-2017-03-17 17:51:21.530 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/test/to/{url}]}" onto public java.lang.String com.maizhong.portal.controller.TestController.test(java.lang.String)
-2017-03-17 17:51:21.531 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/search/]}" onto public java.lang.String com.maizhong.portal.controller.SearchController.searchIndex(com.maizhong.common.dto.PageSearchParam,org.springframework.ui.Model)
-2017-03-17 17:51:21.584 [localhost-startStop-1] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.1.1.Final
-2017-03-17 17:51:22.120 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:51:21 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 17:51:22.166 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:51:21 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 17:51:22.249 [localhost-startStop-1] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
-2017-03-17 17:51:22.267 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization completed in 1243 ms
-2017-03-17 17:52:15.992 [http-bio-8080-exec-1] WARN  org.springframework.web.servlet.PageNotFound - No mapping found for HTTP request with URI [/search.html] in DispatcherServlet with name 'maizhong-portal'
-2017-03-17 17:54:27.693 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
-2017-03-17 17:54:27.789 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Fri Mar 17 17:54:27 CST 2017]; root of context hierarchy
-2017-03-17 17:54:27.836 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring-service.xml]
-2017-03-17 17:54:28.149 [localhost-startStop-1] INFO  o.s.c.support.PropertySourcesPlaceholderConfigurer - Loading properties file from URL [file:/D:/workspace/MaiZhong/Portal/target/classes/resource/resource.properties]
-2017-03-17 17:54:28.189 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 494 ms
-2017-03-17 17:54:28.229 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization started
-2017-03-17 17:54:28.232 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:54:28 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 17:54:28.234 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring_mvc.xml]
-2017-03-17 17:54:28.573 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/index]}" onto public java.lang.String com.maizhong.portal.controller.IndexController.index(org.springframework.ui.Model)
-2017-03-17 17:54:28.574 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/test/to/{url}]}" onto public java.lang.String com.maizhong.portal.controller.TestController.test(java.lang.String)
-2017-03-17 17:54:28.574 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/search/]}" onto public java.lang.String com.maizhong.portal.controller.SearchController.searchIndex(com.maizhong.common.dto.PageSearchParam,org.springframework.ui.Model)
-2017-03-17 17:54:28.616 [localhost-startStop-1] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.1.1.Final
-2017-03-17 17:54:29.200 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:54:28 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 17:54:29.292 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:54:28 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 17:54:29.422 [localhost-startStop-1] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
-2017-03-17 17:54:29.448 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization completed in 1219 ms
-2017-03-17 17:58:11.514 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
-2017-03-17 17:58:11.607 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Fri Mar 17 17:58:11 CST 2017]; root of context hierarchy
-2017-03-17 17:58:11.650 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring-service.xml]
-2017-03-17 17:58:12.009 [localhost-startStop-1] INFO  o.s.c.support.PropertySourcesPlaceholderConfigurer - Loading properties file from URL [file:/D:/workspace/MaiZhong/Portal/target/classes/resource/resource.properties]
-2017-03-17 17:58:12.052 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 535 ms
-2017-03-17 17:58:12.092 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization started
-2017-03-17 17:58:12.095 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:58:12 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 17:58:12.096 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring_mvc.xml]
-2017-03-17 17:58:12.475 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/index]}" onto public java.lang.String com.maizhong.portal.controller.IndexController.index(org.springframework.ui.Model)
-2017-03-17 17:58:12.475 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/test/to/{url}]}" onto public java.lang.String com.maizhong.portal.controller.TestController.test(java.lang.String)
-2017-03-17 17:58:12.476 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/search/]}" onto public java.lang.String com.maizhong.portal.controller.SearchController.searchIndex(com.maizhong.common.dto.PageSearchParam,org.springframework.ui.Model)
-2017-03-17 17:58:12.521 [localhost-startStop-1] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.1.1.Final
-2017-03-17 17:58:13.221 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:58:12 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 17:58:13.291 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:58:12 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 17:58:13.398 [localhost-startStop-1] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
-2017-03-17 17:58:13.422 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization completed in 1330 ms
-2017-03-17 17:58:57.821 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
-2017-03-17 17:58:57.912 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Fri Mar 17 17:58:57 CST 2017]; root of context hierarchy
-2017-03-17 17:58:57.954 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring-service.xml]
-2017-03-17 17:58:58.319 [localhost-startStop-1] INFO  o.s.c.support.PropertySourcesPlaceholderConfigurer - Loading properties file from URL [file:/D:/workspace/MaiZhong/Portal/target/classes/resource/resource.properties]
-2017-03-17 17:58:58.362 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 538 ms
-2017-03-17 17:58:58.398 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization started
-2017-03-17 17:58:58.403 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:58:58 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 17:58:58.404 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring_mvc.xml]
-2017-03-17 17:58:58.715 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/index]}" onto public java.lang.String com.maizhong.portal.controller.IndexController.index(org.springframework.ui.Model)
-2017-03-17 17:58:58.716 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/test/to/{url}]}" onto public java.lang.String com.maizhong.portal.controller.TestController.test(java.lang.String)
-2017-03-17 17:58:58.717 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/search/]}" onto public java.lang.String com.maizhong.portal.controller.SearchController.searchIndex(com.maizhong.common.dto.PageSearchParam,org.springframework.ui.Model)
-2017-03-17 17:58:58.757 [localhost-startStop-1] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.1.1.Final
-2017-03-17 17:58:59.412 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:58:58 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 17:58:59.464 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:58:58 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 17:58:59.557 [localhost-startStop-1] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
-2017-03-17 17:58:59.579 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization completed in 1181 ms
-2017-03-17 18:23:45.336 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
-2017-03-17 18:23:45.447 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Fri Mar 17 18:23:45 CST 2017]; root of context hierarchy
-2017-03-17 18:23:45.493 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring-service.xml]
-2017-03-17 18:23:45.877 [localhost-startStop-1] INFO  o.s.c.support.PropertySourcesPlaceholderConfigurer - Loading properties file from URL [file:/D:/workspace/MaiZhong/Portal/target/classes/resource/resource.properties]
-2017-03-17 18:23:45.926 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 586 ms
-2017-03-17 18:23:45.970 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization started
-2017-03-17 18:23:45.973 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 18:23:45 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 18:23:45.974 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring_mvc.xml]
-2017-03-17 18:23:46.334 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/index]}" onto public java.lang.String com.maizhong.portal.controller.IndexController.index(org.springframework.ui.Model)
-2017-03-17 18:23:46.335 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/test/to/{url}]}" onto public java.lang.String com.maizhong.portal.controller.TestController.test(java.lang.String)
-2017-03-17 18:23:46.336 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/search/]}" onto public java.lang.String com.maizhong.portal.controller.SearchController.searchIndex(com.maizhong.common.dto.PageSearchParam,org.springframework.ui.Model)
-2017-03-17 18:23:46.381 [localhost-startStop-1] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.1.1.Final
-2017-03-17 18:23:46.923 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 18:23:45 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 18:23:46.996 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 18:23:45 CST 2017]; parent: Root WebApplicationContext
-2017-03-17 18:23:47.111 [localhost-startStop-1] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
-2017-03-17 18:23:47.143 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization completed in 1173 ms
-2017-03-17 18:26:22.293 [http-bio-8080-exec-9] WARN  org.springframework.web.servlet.PageNotFound - No mapping found for HTTP request with URI [/search.html] in DispatcherServlet with name 'maizhong-portal'
+2017-03-17 12:01:57.409 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2017-03-17 12:01:57.498 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Fri Mar 17 12:01:57 CST 2017]; root of context hierarchy
+2017-03-17 12:01:57.539 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring-service.xml]
+2017-03-17 12:01:57.886 [localhost-startStop-1] INFO  o.s.c.support.PropertySourcesPlaceholderConfigurer - Loading properties file from class path resource [resource.properties]
+2017-03-17 12:01:57.894 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-03-17 12:01:57.931 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 519 ms
+2017-03-17 12:01:57.970 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization started
+2017-03-17 12:01:57.974 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 12:01:57 CST 2017]; parent: Root WebApplicationContext
+2017-03-17 12:01:57.975 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring_mvc.xml]
+2017-03-17 12:01:58.145 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-03-17 12:01:58.310 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/index]}" onto public java.lang.String com.maizhong.portal.controller.IndexController.index(org.springframework.ui.Model)
+2017-03-17 12:01:58.360 [localhost-startStop-1] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.1.1.Final
+2017-03-17 12:01:58.840 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 12:01:57 CST 2017]; parent: Root WebApplicationContext
+2017-03-17 12:01:58.960 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 12:01:57 CST 2017]; parent: Root WebApplicationContext
+2017-03-17 12:01:59.078 [localhost-startStop-1] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2017-03-17 12:01:59.103 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization completed in 1133 ms
+2017-03-17 17:46:01.155 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2017-03-17 17:46:01.262 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Fri Mar 17 17:46:01 CST 2017]; root of context hierarchy
+2017-03-17 17:46:01.315 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring-service.xml]
+2017-03-17 17:46:01.655 [localhost-startStop-1] INFO  o.s.c.support.PropertySourcesPlaceholderConfigurer - Loading properties file from class path resource [resource.properties]
+2017-03-17 17:46:01.664 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-03-17 17:46:01.701 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 543 ms
+2017-03-17 17:46:01.737 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization started
+2017-03-17 17:46:01.741 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:46:01 CST 2017]; parent: Root WebApplicationContext
+2017-03-17 17:46:01.742 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring_mvc.xml]
+2017-03-17 17:46:01.897 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-03-17 17:46:02.043 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/index]}" onto public java.lang.String com.maizhong.portal.controller.IndexController.index(org.springframework.ui.Model)
+2017-03-17 17:46:02.089 [localhost-startStop-1] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.1.1.Final
+2017-03-17 17:46:02.558 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:46:01 CST 2017]; parent: Root WebApplicationContext
+2017-03-17 17:46:02.618 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 17:46:01 CST 2017]; parent: Root WebApplicationContext
+2017-03-17 17:46:02.737 [localhost-startStop-1] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2017-03-17 17:46:02.763 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization completed in 1026 ms
+2017-03-17 18:14:42.137 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2017-03-17 18:14:42.227 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Fri Mar 17 18:14:42 CST 2017]; root of context hierarchy
+2017-03-17 18:14:42.274 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring-service.xml]
+2017-03-17 18:14:42.620 [localhost-startStop-1] INFO  o.s.c.support.PropertySourcesPlaceholderConfigurer - Loading properties file from class path resource [resource.properties]
+2017-03-17 18:14:42.626 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-03-17 18:14:42.661 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 521 ms
+2017-03-17 18:14:42.699 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization started
+2017-03-17 18:14:42.703 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 18:14:42 CST 2017]; parent: Root WebApplicationContext
+2017-03-17 18:14:42.704 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring_mvc.xml]
+2017-03-17 18:14:42.862 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-03-17 18:14:43.015 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/index]}" onto public java.lang.String com.maizhong.portal.controller.IndexController.index(org.springframework.ui.Model)
+2017-03-17 18:14:43.059 [localhost-startStop-1] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.1.1.Final
+2017-03-17 18:14:43.504 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 18:14:42 CST 2017]; parent: Root WebApplicationContext
+2017-03-17 18:14:43.626 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 18:14:42 CST 2017]; parent: Root WebApplicationContext
+2017-03-17 18:14:43.758 [localhost-startStop-1] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2017-03-17 18:14:43.784 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization completed in 1085 ms
+2017-03-17 18:15:51.828 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2017-03-17 18:15:51.918 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Fri Mar 17 18:15:51 CST 2017]; root of context hierarchy
+2017-03-17 18:15:51.971 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring-service.xml]
+2017-03-17 18:15:52.321 [localhost-startStop-1] INFO  o.s.c.support.PropertySourcesPlaceholderConfigurer - Loading properties file from class path resource [resource.properties]
+2017-03-17 18:15:52.328 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-03-17 18:15:52.362 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 531 ms
+2017-03-17 18:15:52.399 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization started
+2017-03-17 18:15:52.404 [localhost-startStop-1] INFO  o.s.web.context.support.XmlWebApplicationContext - Refreshing WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 18:15:52 CST 2017]; parent: Root WebApplicationContext
+2017-03-17 18:15:52.406 [localhost-startStop-1] INFO  o.s.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring/spring_mvc.xml]
+2017-03-17 18:15:52.559 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2017-03-17 18:15:52.707 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/index]}" onto public java.lang.String com.maizhong.portal.controller.IndexController.index(org.springframework.ui.Model)
+2017-03-17 18:15:52.751 [localhost-startStop-1] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 5.1.1.Final
+2017-03-17 18:15:53.201 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 18:15:52 CST 2017]; parent: Root WebApplicationContext
+2017-03-17 18:15:53.255 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-portal-servlet': startup date [Fri Mar 17 18:15:52 CST 2017]; parent: Root WebApplicationContext
+2017-03-17 18:15:53.361 [localhost-startStop-1] INFO  o.s.web.servlet.handler.SimpleUrlHandlerMapping - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+2017-03-17 18:15:53.388 [localhost-startStop-1] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'maizhong-portal': initialization completed in 988 ms
+2017-03-17 18:27:48.270 [http-bio-8080-exec-8] INFO  org.apache.http.impl.execchain.RetryExec - I/O exception (java.net.NoRouteToHostException) caught when processing request to {}->http://192.168.3.192:8080: No route to host: connect
+2017-03-17 18:27:48.272 [http-bio-8080-exec-8] INFO  org.apache.http.impl.execchain.RetryExec - Retrying request to {}->http://192.168.3.192:8080
+2017-03-17 18:27:48.274 [http-bio-8080-exec-8] INFO  org.apache.http.impl.execchain.RetryExec - I/O exception (java.net.NoRouteToHostException) caught when processing request to {}->http://192.168.3.192:8080: No route to host: connect
+2017-03-17 18:27:48.274 [http-bio-8080-exec-8] INFO  org.apache.http.impl.execchain.RetryExec - Retrying request to {}->http://192.168.3.192:8080
+2017-03-17 18:27:48.284 [http-bio-8080-exec-8] INFO  org.apache.http.impl.execchain.RetryExec - I/O exception (java.net.NoRouteToHostException) caught when processing request to {}->http://192.168.3.192:8080: No route to host: connect
+2017-03-17 18:27:48.292 [http-bio-8080-exec-8] INFO  org.apache.http.impl.execchain.RetryExec - Retrying request to {}->http://192.168.3.192:8080

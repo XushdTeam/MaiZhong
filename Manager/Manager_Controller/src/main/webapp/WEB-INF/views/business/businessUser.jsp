@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>店铺管理员</title>
@@ -20,12 +21,19 @@
         <div class="search-bar">
             <!--查询区-->
             <form class="layui-form layui-form-pane">
-               <%-- <div class="layui-inline">
+
+                <div class="layui-form-item layui-input-inline">
                     <label class="layui-form-label">店铺名称</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="businessName" value="" placeholder="店铺名称" class="layui-input">
+                    <div class="layui-input-block" style="width: 50%">
+                        <select name="businessId">
+                            <option value="">请选择店铺</option>
+                            <c:forEach items="${businessList}" var="business">
+                                <option value="${business.id}">${business.businessName}</option>
+                            </c:forEach>
+                            <option value="">全部店铺</option>
+                        </select>
                     </div>
-                </div>--%>
+                </div>
                 <div class="layui-inline">
                     <label class="layui-form-label">用户名称</label>
                     <div class="layui-input-inline">
@@ -108,7 +116,6 @@
             layui.pagelist.basePagingInit(8);
         });
     </script>
-</div>
 </div>
 </body>
 </html>

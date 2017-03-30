@@ -15,6 +15,7 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,7 @@ public class HttpClientUtil {
             if (param != null) {
                 for (String key : param.keySet()) {
                     builder.addParameter(key, param.get(key));
+
                 }
             }
             URI uri = builder.build();
@@ -105,7 +107,7 @@ public class HttpClientUtil {
         return resultString;
     }
 
-    public static String doPost(String url, Map<String, Object> param) {
+    public static String doPost(String url) {
         return doPost(url, null);
     }
 

@@ -1,12 +1,7 @@
 package com.maizhong.common.result;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.maizhong.common.enums.AuthEnum;
 import com.maizhong.common.enums.OperateEnum;
-
-import java.util.List;
 
 /**
  * 自定义Json 返回对象

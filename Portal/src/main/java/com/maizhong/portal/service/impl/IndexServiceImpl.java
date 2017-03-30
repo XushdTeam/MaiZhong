@@ -1,21 +1,15 @@
 package com.maizhong.portal.service.impl;
 
 
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
-import com.maizhong.common.dto.IndexBaseDTO;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
-import com.maizhong.pojo.TbAdvert;
 import com.maizhong.pojo.TbFeedback;
 import com.maizhong.portal.service.IndexService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

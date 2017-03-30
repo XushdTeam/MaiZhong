@@ -31,17 +31,6 @@ public class UserFilter extends HandlerInterceptorAdapter {
     @Resource
     private JedisClient jedisClient;
 
-
-
-    @Value("${LOGIN_URL}")
-    private  String LOGIN_URL;
-
-    @Value("${BUSSINESSUSER_PREFIX}")
-    private String BUSSINESSUSER_PREFIX;
-
-    @Value("${BUSSINESSUSER_INFO}")
-    private String BUSSINESSUSER_INFO;
-
     /**
      * 方法执行前 检查请求头中携带的参数
      *
@@ -54,15 +43,14 @@ public class UserFilter extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestURI = request.getRequestURI();
-        if (StringUtils.isBlank(requestURI)||!LOGIN_URL.equals(requestURI)){
+        if (StringUtils.isBlank(requestURI)&&!"/bRest/login".equals(requestURI)&&!"/bRest/upload".equals(requestURI)){
             String token = request.getHeader("Authorization");
             if (StringUtils.isNotBlank(token)){
-                String hget = jedisClient.hget(BUSSINESSUSER_PREFIX + token, BUSSINESSUSER_INFO);
+                String hget = jedisClient.hget("BUSSINESSUSER" + token, "BUSSINESSUSER_INFO");
                 if (StringUtils.isNotBlank(hget)){
-                    jedisClient.expire(BUSSINESSUSER_PREFIX + token,3600);
+                    jedisClient.expire("BUSSINESSUSER" + token,900);
 
                     UserInfo info = JsonUtils.jsonToPojo(hget, UserInfo.class);
-
                     //需要用到token数据 用于提取用户信息
                     request.setAttribute("token",token);
                     request.setAttribute("userInfo",info);

@@ -101,8 +101,11 @@
                             </font>
                             <%--<button class="layui-btn layui-btn-mini" >上一页</button>--%>
                         </th>
+                        <th>上架</th>
                         <%--'汽车编号 ',--%>
+
                         <th>编号</th>
+
                         <%--'车型名称 类似奥迪a4',--%>
                         <th>品牌</th>
                         <%--'外键  链接车辆类型',--%>
@@ -124,7 +127,6 @@
                         <th>修改时间</th>
                         <th>图片</th>
                         <%--MMENT '商品图片，多张图片中间用符号分割',--%>
-                        <th>上架</th>
                         <%--COMMENT '是否可用 用于搜索时是否展示',--%>
                         <%--'商品详情的存储字段',--%>
                         <th>权重</th>
@@ -141,6 +143,16 @@
                         <tr>
                             <td style="display: none;"><input type="checkbox" name="selectNum" value="{{ item.id }}"></td>
                             <%--<td>{{ item.id }}</td>--%>
+                            <%--<td>{{ item.unable }}</td>--%>
+                            <td align="center">
+                                <a href="javascript:;" value="{{ item.unable }}" data-id="{{ item.id }}"  onclick="isSale(this)">
+                                    {{# if (item.unable==1) { }}
+                                    <i class="fa fa-toggle-on unlock"></i>
+                                    {{# } else { }}
+                                    <i class="fa fa-toggle-off islock"></i>
+                                    {{# } }}
+                                </a>
+                            </td>
                         <%--'汽车编号 ',--%>
                             <td>{{ item.number }}</td>
                         <%--'车型名称 类似奥迪a4',--%>
@@ -166,13 +178,6 @@
                             <td>
                                 <span style="display: none;" class="imageHideText">{{ item.image }}</span>
                                 <img src="{{ item.image }}" style="width: 40px;height: 20px">
-                            </td>
-                            <%--<td>{{ item.unable }}</td>--%>
-                            <td align="center">{{# if (item.unable==1) { }}
-                                <i class="fa fa-toggle-on unlock"></i>
-                                {{# } else { }}
-                                <i class="fa fa-toggle-off islock"></i>
-                                {{# } }}
                             </td>
                             <td>{{ item.weight }}</td>
                             <td>{{ item.stockNum }}</td>
@@ -225,6 +230,18 @@
                     content:content
                 });
             },"json");
+        }
+
+        function isSale(Obj){
+            if($(Obj).val()==1){
+                $(Obj).html('<i class="fa fa-toggle-off islock"></i>');
+                $(Obj).val(0)
+            }else{
+
+                $(Obj).html('<i class="fa fa-toggle-on unlock"></i>');
+                $(Obj).val(0)
+            }
+
         }
 
     </script>

@@ -9,12 +9,14 @@ import com.maizhong.mapper.ext.TbCarMapperExt;
 import com.maizhong.pojo.*;
 import com.maizhong.pojo.vo.SearchResult;
 import com.maizhong.pojo.vo.TbCarVo;
+import com.maizhong.rest.service.DataSyncService;
 import com.maizhong.rest.service.SearchService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
@@ -56,6 +58,10 @@ public class SearchServiceImpl implements SearchService {
     @Resource
     private TbCarBrandMapper tbCarBrandMapper;
 
+
+    @Resource
+    private DataSyncService dataSyncService;
+
     @Value("${CAR_BRAND}")
     private String CAR_BRAND;
 
@@ -86,79 +92,19 @@ public class SearchServiceImpl implements SearchService {
 
     /**
      * solr索引同步
+     *
+     *
+     *
      * @return
      */
     @Override
     public JsonResult syncIndex() {
         try {
-            //数据准备
-            List<TbCarVo> vos = tbCarMapperExt.findDocsForSolrStore();
-
-            //数据转换
-            List<SolrInputDocument> docs = new ArrayList<>();
-
-            SolrInputDocument document;
-            for (TbCarVo vo:vos) {
-                document = new SolrInputDocument();
-
-
-                //字符串处理
-                String capacity = vo.getCapacity();
-                if (StringUtils.isNotBlank(capacity)) {
-                    if (capacity.contains("T")||capacity.contains("L")){
-                        document.addField("car_capacity",capacity.replaceAll("[^0-9\\.]",""));
-                    }else{
-                        document.addField("car_capacity",0.0);
-                    }
-                }
-                String shopPrice = vo.getShopPrice();
-                if (StringUtils.isNotBlank(shopPrice)) {
-                    String[] split = shopPrice.split("~");
-                    if (split.length>0){
-                        if (split.length==1){
-                            document.addField("car_shopPrice",shopPrice.replaceAll("[^0-9\\.]", ""));
-                        }else if (split.length==2){
-                            document.addField("car_shopPrice",split[1].replaceAll("[^0-9\\.]", ""));
-                        }
-                    }
-
-                }
-
-                //正常数据录入
-                document.addField("id",vo.getId());
-                document.addField("car_number",vo.getNumber());
-                document.addField("car_name",vo.getName());
-                document.addField("car_brand",vo.getCarBrand());
-                document.addField("car_brandLine",vo.getCarBrandLine());
-                document.addField("car_type",vo.getCarType());
-                document.addField("car_year",vo.getCarYear());
-                document.addField("car_color",vo.getCarColor());
-                document.addField("car_gearbox",vo.getGearbox());
-                document.addField("car_sellpoint",vo.getSellpoint());
-                document.addField("car_sellPrice",vo.getSellPrice());
-                document.addField("car_reservePrice",vo.getReservePrice());
-                document.addField("car_createTime",vo.getCreateTime());
-                document.addField("car_updateTime",vo.getUpdateTime());
-                document.addField("car_image",vo.getImage());
-                document.addField("car_smImage",vo.getSmimage());
-                document.addField("car_details",vo.getDetails());
-                document.addField("car_sellNum",vo.getSellNum());
-
-
-                //copy  solr域同时存放 品牌id和 品牌名称  类似的数据
-                    //id 用于分类搜索  名称用于 中文搜索
-                document.addField("car_brand_copy",vo.getCarBrandCopy());
-                document.addField("car_brandLine_copy",vo.getCarBrandLineCopy());
-                document.addField("car_type_copy",vo.getCarTypeCopy());
-                //权值调整
-                //未理解   放弃 在添加索引方面进行权重操作  改为搜索时计算公式
-//                document.setDocumentBoost(Short.parseShort(vo.getWeight()));
-                document.addField("weight",vo.getWeight());
-                docs.add(document);
-            }
-
-            solrServer.add(docs);
+            UpdateResponse response = solrServer.deleteByQuery("*:*");
             solrServer.commit();
+            //数据准备与调用
+            List<TbCarVo> vos = tbCarMapperExt.findDocsForSolrStore(null);
+            dataSyncService.addSolrDocUseVo(vos);
         } catch (Exception e) {
             e.printStackTrace();
             return JsonResult.Error("索引添加失败");
@@ -542,7 +488,7 @@ public class SearchServiceImpl implements SearchService {
 
         List<KeyObject> result = new ArrayList<>();
 
-        for(char i='A';i<'Z';i++){
+        for(char i='A';i<='Z';i++){
             if (map.get(i+"")==null){
                 continue;
             }

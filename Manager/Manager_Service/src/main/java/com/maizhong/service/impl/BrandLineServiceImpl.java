@@ -94,6 +94,11 @@ public class BrandLineServiceImpl implements BrandLineService {
         return JsonResult.OK("添加成功");
     }
 
+    /**
+     *
+     * @param tbCarBrandLine
+     * @return
+     */
     @Override
     public JsonResult updateCarBrandLine(TbCarBrandLine tbCarBrandLine) {
 

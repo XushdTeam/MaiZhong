@@ -6,6 +6,8 @@ import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.pojo.TbBusiness;
 
+import java.util.List;
+
 /**
  * Description:店铺管理服务接口
  * User: 王存浩
@@ -35,7 +37,7 @@ public interface BusinessService {
      * @return
      */
 
-    public String getBusinessListAll();
+    public List<TbBusiness> getBusinessListAll();
 
 
 

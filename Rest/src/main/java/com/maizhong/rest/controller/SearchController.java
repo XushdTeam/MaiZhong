@@ -31,7 +31,6 @@ public class SearchController {
     @RequestMapping("/sync")
     @ResponseBody
     public JsonResult testOfSync(){
-        System.out.println("方法执行中");
         return searchService.syncIndex();
     }
 

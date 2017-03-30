@@ -20,6 +20,7 @@
     <result column="business_id" jdbcType="BIGINT" property="businessId" />
     <result column="stock_num" jdbcType="INTEGER" property="stockNum" />
     <result column="sell_num" jdbcType="INTEGER" property="sellNum" />
+    <result column="issale" jdbcType="INTEGER" property="issale" />
     <result column="unable" jdbcType="INTEGER" property="unable" />
     <result column="weight" jdbcType="INTEGER" property="weight" />
   </resultMap>
@@ -87,7 +88,7 @@
   <sql id="Base_Column_List">
     id, number, base_id, car_brand, car_brand_line, car_type, car_year, color, sellpoint, 
     reserve_price, sell_price, create_time, update_time, smimage, image, business_id, 
-    stock_num, sell_num, unable, weight
+    stock_num, sell_num, issale, unable, weight
   </sql>
   <sql id="Blob_Column_List">
     details
@@ -147,16 +148,16 @@
       reserve_price, sell_price, create_time, 
       update_time, smimage, image, 
       business_id, stock_num, sell_num, 
-      unable, weight, details
-      )
+      issale, unable, weight, 
+      details)
     values (#{id,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{baseId,jdbcType=BIGINT}, 
       #{carBrand,jdbcType=BIGINT}, #{carBrandLine,jdbcType=BIGINT}, #{carType,jdbcType=BIGINT}, 
       #{carYear,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, #{sellpoint,jdbcType=VARCHAR}, 
       #{reservePrice,jdbcType=DECIMAL}, #{sellPrice,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{smimage,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
       #{businessId,jdbcType=BIGINT}, #{stockNum,jdbcType=INTEGER}, #{sellNum,jdbcType=INTEGER}, 
-      #{unable,jdbcType=INTEGER}, #{weight,jdbcType=INTEGER}, #{details,jdbcType=LONGVARCHAR}
-      )
+      #{issale,jdbcType=INTEGER}, #{unable,jdbcType=INTEGER}, #{weight,jdbcType=INTEGER}, 
+      #{details,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.pojo.TbCar">
     insert into tb_car
@@ -214,6 +215,9 @@
       </if>
       <if test="sellNum != null">
         sell_num,
+      </if>
+      <if test="issale != null">
+        issale,
       </if>
       <if test="unable != null">
         unable,
@@ -279,6 +283,9 @@
       </if>
       <if test="sellNum != null">
         #{sellNum,jdbcType=INTEGER},
+      </if>
+      <if test="issale != null">
+        #{issale,jdbcType=INTEGER},
       </if>
       <if test="unable != null">
         #{unable,jdbcType=INTEGER},
@@ -354,6 +361,9 @@
       <if test="record.sellNum != null">
         sell_num = #{record.sellNum,jdbcType=INTEGER},
       </if>
+      <if test="record.issale != null">
+        issale = #{record.issale,jdbcType=INTEGER},
+      </if>
       <if test="record.unable != null">
         unable = #{record.unable,jdbcType=INTEGER},
       </if>
@@ -388,6 +398,7 @@
       business_id = #{record.businessId,jdbcType=BIGINT},
       stock_num = #{record.stockNum,jdbcType=INTEGER},
       sell_num = #{record.sellNum,jdbcType=INTEGER},
+      issale = #{record.issale,jdbcType=INTEGER},
       unable = #{record.unable,jdbcType=INTEGER},
       weight = #{record.weight,jdbcType=INTEGER},
       details = #{record.details,jdbcType=LONGVARCHAR}
@@ -415,6 +426,7 @@
       business_id = #{record.businessId,jdbcType=BIGINT},
       stock_num = #{record.stockNum,jdbcType=INTEGER},
       sell_num = #{record.sellNum,jdbcType=INTEGER},
+      issale = #{record.issale,jdbcType=INTEGER},
       unable = #{record.unable,jdbcType=INTEGER},
       weight = #{record.weight,jdbcType=INTEGER}
     <if test="_parameter != null">
@@ -475,6 +487,9 @@
       <if test="sellNum != null">
         sell_num = #{sellNum,jdbcType=INTEGER},
       </if>
+      <if test="issale != null">
+        issale = #{issale,jdbcType=INTEGER},
+      </if>
       <if test="unable != null">
         unable = #{unable,jdbcType=INTEGER},
       </if>
@@ -506,6 +521,7 @@
       business_id = #{businessId,jdbcType=BIGINT},
       stock_num = #{stockNum,jdbcType=INTEGER},
       sell_num = #{sellNum,jdbcType=INTEGER},
+      issale = #{issale,jdbcType=INTEGER},
       unable = #{unable,jdbcType=INTEGER},
       weight = #{weight,jdbcType=INTEGER},
       details = #{details,jdbcType=LONGVARCHAR}
@@ -530,6 +546,7 @@
       business_id = #{businessId,jdbcType=BIGINT},
       stock_num = #{stockNum,jdbcType=INTEGER},
       sell_num = #{sellNum,jdbcType=INTEGER},
+      issale = #{issale,jdbcType=INTEGER},
       unable = #{unable,jdbcType=INTEGER},
       weight = #{weight,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}

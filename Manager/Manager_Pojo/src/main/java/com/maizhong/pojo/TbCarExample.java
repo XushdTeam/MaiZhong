@@ -1,5 +1,6 @@
 package com.maizhong.pojo;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -695,52 +696,52 @@ public class TbCarExample {
             return (Criteria) this;
         }
 
-        public Criteria andReservePriceEqualTo(Long value) {
+        public Criteria andReservePriceEqualTo(BigDecimal value) {
             addCriterion("reserve_price =", value, "reservePrice");
             return (Criteria) this;
         }
 
-        public Criteria andReservePriceNotEqualTo(Long value) {
+        public Criteria andReservePriceNotEqualTo(BigDecimal value) {
             addCriterion("reserve_price <>", value, "reservePrice");
             return (Criteria) this;
         }
 
-        public Criteria andReservePriceGreaterThan(Long value) {
+        public Criteria andReservePriceGreaterThan(BigDecimal value) {
             addCriterion("reserve_price >", value, "reservePrice");
             return (Criteria) this;
         }
 
-        public Criteria andReservePriceGreaterThanOrEqualTo(Long value) {
+        public Criteria andReservePriceGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("reserve_price >=", value, "reservePrice");
             return (Criteria) this;
         }
 
-        public Criteria andReservePriceLessThan(Long value) {
+        public Criteria andReservePriceLessThan(BigDecimal value) {
             addCriterion("reserve_price <", value, "reservePrice");
             return (Criteria) this;
         }
 
-        public Criteria andReservePriceLessThanOrEqualTo(Long value) {
+        public Criteria andReservePriceLessThanOrEqualTo(BigDecimal value) {
             addCriterion("reserve_price <=", value, "reservePrice");
             return (Criteria) this;
         }
 
-        public Criteria andReservePriceIn(List<Long> values) {
+        public Criteria andReservePriceIn(List<BigDecimal> values) {
             addCriterion("reserve_price in", values, "reservePrice");
             return (Criteria) this;
         }
 
-        public Criteria andReservePriceNotIn(List<Long> values) {
+        public Criteria andReservePriceNotIn(List<BigDecimal> values) {
             addCriterion("reserve_price not in", values, "reservePrice");
             return (Criteria) this;
         }
 
-        public Criteria andReservePriceBetween(Long value1, Long value2) {
+        public Criteria andReservePriceBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("reserve_price between", value1, value2, "reservePrice");
             return (Criteria) this;
         }
 
-        public Criteria andReservePriceNotBetween(Long value1, Long value2) {
+        public Criteria andReservePriceNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("reserve_price not between", value1, value2, "reservePrice");
             return (Criteria) this;
         }
@@ -755,52 +756,52 @@ public class TbCarExample {
             return (Criteria) this;
         }
 
-        public Criteria andSellPriceEqualTo(Long value) {
+        public Criteria andSellPriceEqualTo(BigDecimal value) {
             addCriterion("sell_price =", value, "sellPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellPriceNotEqualTo(Long value) {
+        public Criteria andSellPriceNotEqualTo(BigDecimal value) {
             addCriterion("sell_price <>", value, "sellPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellPriceGreaterThan(Long value) {
+        public Criteria andSellPriceGreaterThan(BigDecimal value) {
             addCriterion("sell_price >", value, "sellPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellPriceGreaterThanOrEqualTo(Long value) {
+        public Criteria andSellPriceGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("sell_price >=", value, "sellPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellPriceLessThan(Long value) {
+        public Criteria andSellPriceLessThan(BigDecimal value) {
             addCriterion("sell_price <", value, "sellPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellPriceLessThanOrEqualTo(Long value) {
+        public Criteria andSellPriceLessThanOrEqualTo(BigDecimal value) {
             addCriterion("sell_price <=", value, "sellPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellPriceIn(List<Long> values) {
+        public Criteria andSellPriceIn(List<BigDecimal> values) {
             addCriterion("sell_price in", values, "sellPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellPriceNotIn(List<Long> values) {
+        public Criteria andSellPriceNotIn(List<BigDecimal> values) {
             addCriterion("sell_price not in", values, "sellPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellPriceBetween(Long value1, Long value2) {
+        public Criteria andSellPriceBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("sell_price between", value1, value2, "sellPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellPriceNotBetween(Long value1, Long value2) {
+        public Criteria andSellPriceNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("sell_price not between", value1, value2, "sellPrice");
             return (Criteria) this;
         }
@@ -1242,6 +1243,66 @@ public class TbCarExample {
 
         public Criteria andSellNumNotBetween(Integer value1, Integer value2) {
             addCriterion("sell_num not between", value1, value2, "sellNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssaleIsNull() {
+            addCriterion("issale is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssaleIsNotNull() {
+            addCriterion("issale is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssaleEqualTo(Integer value) {
+            addCriterion("issale =", value, "issale");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssaleNotEqualTo(Integer value) {
+            addCriterion("issale <>", value, "issale");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssaleGreaterThan(Integer value) {
+            addCriterion("issale >", value, "issale");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssaleGreaterThanOrEqualTo(Integer value) {
+            addCriterion("issale >=", value, "issale");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssaleLessThan(Integer value) {
+            addCriterion("issale <", value, "issale");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssaleLessThanOrEqualTo(Integer value) {
+            addCriterion("issale <=", value, "issale");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssaleIn(List<Integer> values) {
+            addCriterion("issale in", values, "issale");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssaleNotIn(List<Integer> values) {
+            addCriterion("issale not in", values, "issale");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssaleBetween(Integer value1, Integer value2) {
+            addCriterion("issale between", value1, value2, "issale");
+            return (Criteria) this;
+        }
+
+        public Criteria andIssaleNotBetween(Integer value1, Integer value2) {
+            addCriterion("issale not between", value1, value2, "issale");
             return (Criteria) this;
         }
 

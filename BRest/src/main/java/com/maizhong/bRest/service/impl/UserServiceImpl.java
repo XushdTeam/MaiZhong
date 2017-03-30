@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
 
                     if (StringUtils.isNotBlank(jsonInfo)) {
                         jedisClient.hset(BUSSINESSUSER_PREFIX + token, BUSSINESSUSER_INFO, jsonInfo);
-                        jedisClient.expire(BUSSINESSUSER_PREFIX + token, 3600);
+                        jedisClient.expire(BUSSINESSUSER_PREFIX + token, 900);
                     }
 
                     Map<String,Object> realResult = new HashMap<>();
