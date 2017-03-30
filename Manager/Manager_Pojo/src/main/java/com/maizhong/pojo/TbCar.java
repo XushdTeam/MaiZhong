@@ -1,5 +1,6 @@
 package com.maizhong.pojo;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class TbCar {
@@ -21,9 +22,9 @@ public class TbCar {
 
     private String sellpoint;
 
-    private Long reservePrice;
+    private BigDecimal reservePrice;
 
-    private Long sellPrice;
+    private BigDecimal sellPrice;
 
     private Date createTime;
 
@@ -38,6 +39,8 @@ public class TbCar {
     private Integer stockNum;
 
     private Integer sellNum;
+
+    private Integer issale;
 
     private Integer unable;
 
@@ -117,19 +120,19 @@ public class TbCar {
         this.sellpoint = sellpoint == null ? null : sellpoint.trim();
     }
 
-    public Long getReservePrice() {
+    public BigDecimal getReservePrice() {
         return reservePrice;
     }
 
-    public void setReservePrice(Long reservePrice) {
+    public void setReservePrice(BigDecimal reservePrice) {
         this.reservePrice = reservePrice;
     }
 
-    public Long getSellPrice() {
+    public BigDecimal getSellPrice() {
         return sellPrice;
     }
 
-    public void setSellPrice(Long sellPrice) {
+    public void setSellPrice(BigDecimal sellPrice) {
         this.sellPrice = sellPrice;
     }
 
@@ -187,6 +190,14 @@ public class TbCar {
 
     public void setSellNum(Integer sellNum) {
         this.sellNum = sellNum;
+    }
+
+    public Integer getIssale() {
+        return issale;
+    }
+
+    public void setIssale(Integer issale) {
+        this.issale = issale;
     }
 
     public Integer getUnable() {

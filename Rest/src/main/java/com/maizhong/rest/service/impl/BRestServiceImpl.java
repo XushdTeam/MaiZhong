@@ -208,7 +208,7 @@ public class BRestServiceImpl implements BRestService {
         pageSize = 10;
         Integer start = 0;
         if (currentPage != null){
-            start = 1 ;
+            start = currentPage ;
         }
         PageHelper.startPage(start,pageSize);
         if (StringUtils.isNotBlank(sortString)){

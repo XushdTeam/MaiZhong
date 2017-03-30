@@ -94,7 +94,7 @@
                         <div class="layui-form-item layui-input-inline">
                             <label class="layui-form-label">汽车车系</label>
                             <div class="layui-input-inline">
-                                <select name="carBrandLine" id="carBrandLine" lay-verify="required">
+                                <select name="carBrandLine" id="carBrandLine" lay-filter="carBase" lay-verify="required">
                                     <option value=""></option>
                                     <c:forEach items="${lineList}" var="line">
                                         <c:if test="${car.carBrandLine==line.id}">
@@ -137,7 +137,7 @@
                                         <c:if test="${car.baseId==baseVo.id}">
                                             <option value="${baseVo.id}"    data-year='${baseVo.carYear}'  data-color='${baseVo.color}'  selected="selected">${baseVo.carName}</option>
                                         </c:if>
-                                        <c:if test="${car.carBrandLine!=baseVo.id}">
+                                        <c:if test="${car.baseId!=baseVo.id}">
                                             <option value="${baseVo.id}"  data-year='${baseVo.carYear}'  data-color='${baseVo.color}'>${baseVo.carName}</option>
                                         </c:if>
                                     </c:forEach>
@@ -330,6 +330,7 @@
             $("#car_base").append("<option value=''>请选择</option>");
 
             if($("#carYear").val()==""||$("#carBrandLine").val()==""){
+                form.render('select');
                 return;
             }else{
                 //显示最终的车型

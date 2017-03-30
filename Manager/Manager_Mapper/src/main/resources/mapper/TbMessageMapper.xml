@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.maizhong.mapper.TbDictionaryMapper">
-  <resultMap id="BaseResultMap" type="com.maizhong.pojo.TbDictionary">
+<mapper namespace="com.maizhong.mapper.TbMessageMapper">
+  <resultMap id="BaseResultMap" type="com.maizhong.pojo.TbMessage">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="dic_name" jdbcType="VARCHAR" property="dicName" />
-    <result column="parent" jdbcType="BIGINT" property="parent" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="delflag" jdbcType="INTEGER" property="delflag" />
-    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="message_type" jdbcType="VARCHAR" property="messageType" />
+    <result column="message_info" jdbcType="VARCHAR" property="messageInfo" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="other_info" jdbcType="VARCHAR" property="otherInfo" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, dic_name, parent, status, delflag, create_user, create_time
+    id, message_type, message_info, create_time, other_info
   </sql>
-  <select id="selectByExample" parameterType="com.maizhong.pojo.TbDictionaryExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.maizhong.pojo.TbMessageExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tb_dictionary
+    from tb_message
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,105 +86,85 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tb_dictionary
+    from tb_message
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from tb_dictionary
+    delete from tb_message
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.maizhong.pojo.TbDictionaryExample">
-    delete from tb_dictionary
+  <delete id="deleteByExample" parameterType="com.maizhong.pojo.TbMessageExample">
+    delete from tb_message
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.maizhong.pojo.TbDictionary">
-    insert into tb_dictionary (id, dic_name, parent, 
-      status, delflag, create_user, 
-      create_time)
-    values (#{id,jdbcType=BIGINT}, #{dicName,jdbcType=VARCHAR}, #{parent,jdbcType=BIGINT}, 
-      #{status,jdbcType=INTEGER}, #{delflag,jdbcType=INTEGER}, #{createUser,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.maizhong.pojo.TbMessage">
+    insert into tb_message (id, message_type, message_info, 
+      create_time, other_info)
+    values (#{id,jdbcType=BIGINT}, #{messageType,jdbcType=VARCHAR}, #{messageInfo,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{otherInfo,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.maizhong.pojo.TbDictionary">
-    insert into tb_dictionary
+  <insert id="insertSelective" parameterType="com.maizhong.pojo.TbMessage">
+    insert into tb_message
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="dicName != null">
-        dic_name,
+      <if test="messageType != null">
+        message_type,
       </if>
-      <if test="parent != null">
-        parent,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="delflag != null">
-        delflag,
-      </if>
-      <if test="createUser != null">
-        create_user,
+      <if test="messageInfo != null">
+        message_info,
       </if>
       <if test="createTime != null">
         create_time,
+      </if>
+      <if test="otherInfo != null">
+        other_info,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="dicName != null">
-        #{dicName,jdbcType=VARCHAR},
+      <if test="messageType != null">
+        #{messageType,jdbcType=VARCHAR},
       </if>
-      <if test="parent != null">
-        #{parent,jdbcType=BIGINT},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="delflag != null">
-        #{delflag,jdbcType=INTEGER},
-      </if>
-      <if test="createUser != null">
-        #{createUser,jdbcType=VARCHAR},
+      <if test="messageInfo != null">
+        #{messageInfo,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="otherInfo != null">
+        #{otherInfo,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.maizhong.pojo.TbDictionaryExample" resultType="java.lang.Long">
-    select count(*) from tb_dictionary
+  <select id="countByExample" parameterType="com.maizhong.pojo.TbMessageExample" resultType="java.lang.Long">
+    select count(*) from tb_message
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update tb_dictionary
+    update tb_message
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.dicName != null">
-        dic_name = #{record.dicName,jdbcType=VARCHAR},
+      <if test="record.messageType != null">
+        message_type = #{record.messageType,jdbcType=VARCHAR},
       </if>
-      <if test="record.parent != null">
-        parent = #{record.parent,jdbcType=BIGINT},
-      </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=INTEGER},
-      </if>
-      <if test="record.delflag != null">
-        delflag = #{record.delflag,jdbcType=INTEGER},
-      </if>
-      <if test="record.createUser != null">
-        create_user = #{record.createUser,jdbcType=VARCHAR},
+      <if test="record.messageInfo != null">
+        message_info = #{record.messageInfo,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.otherInfo != null">
+        other_info = #{record.otherInfo,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -194,50 +172,40 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update tb_dictionary
+    update tb_message
     set id = #{record.id,jdbcType=BIGINT},
-      dic_name = #{record.dicName,jdbcType=VARCHAR},
-      parent = #{record.parent,jdbcType=BIGINT},
-      status = #{record.status,jdbcType=INTEGER},
-      delflag = #{record.delflag,jdbcType=INTEGER},
-      create_user = #{record.createUser,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+      message_type = #{record.messageType,jdbcType=VARCHAR},
+      message_info = #{record.messageInfo,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      other_info = #{record.otherInfo,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.pojo.TbDictionary">
-    update tb_dictionary
+  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.pojo.TbMessage">
+    update tb_message
     <set>
-      <if test="dicName != null">
-        dic_name = #{dicName,jdbcType=VARCHAR},
+      <if test="messageType != null">
+        message_type = #{messageType,jdbcType=VARCHAR},
       </if>
-      <if test="parent != null">
-        parent = #{parent,jdbcType=BIGINT},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="delflag != null">
-        delflag = #{delflag,jdbcType=INTEGER},
-      </if>
-      <if test="createUser != null">
-        create_user = #{createUser,jdbcType=VARCHAR},
+      <if test="messageInfo != null">
+        message_info = #{messageInfo,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="otherInfo != null">
+        other_info = #{otherInfo,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.maizhong.pojo.TbDictionary">
-    update tb_dictionary
-    set dic_name = #{dicName,jdbcType=VARCHAR},
-      parent = #{parent,jdbcType=BIGINT},
-      status = #{status,jdbcType=INTEGER},
-      delflag = #{delflag,jdbcType=INTEGER},
-      create_user = #{createUser,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+  <update id="updateByPrimaryKey" parameterType="com.maizhong.pojo.TbMessage">
+    update tb_message
+    set message_type = #{messageType,jdbcType=VARCHAR},
+      message_info = #{messageInfo,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      other_info = #{otherInfo,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
