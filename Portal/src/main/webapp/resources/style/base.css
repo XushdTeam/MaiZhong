@@ -283,15 +283,15 @@ img,input{vertical-align:middle; outline:none}
 .re_con{ width: 1200px; margin: 0px auto; text-align: center; padding: 30px 0}
 .re_con dl img{ width: 96%; margin: 0 auto}
 .re_con dl{ position: relative; width: 1200px; background: #fff; padding: 20px 0}
-.re_con dl dd.dd2{ width: 405px; height: 319px; position: absolute; right: 65px; top: 70px}
-.re_con dl dd.dd2 h2{ line-height: 45px; text-align: left; color: #000; padding: 25px 0 0 26px; font-size: 24px;}
-.re_con dl dd.dd2 p{ font-size: 14px;padding: 3px 0 0 26px; text-align: left;}
+.re_con dl dd.dd2{ width: 425px; height: 319px; position: absolute; right: 65px; top: 120px}
+.re_con dl dd.dd2 h2{ line-height: 45px; color: #000; padding: 25px 0 0 26px; font-size: 24px;}
+.re_con dl dd.dd2 p{ font-size:26px;padding: 13px 0 0 26px; font-weight: bold;color: #000}
 .heads a{ font-size: 14px; color: #999; font-weight: 500; float: right;}
-.bors{ width: 350px; background: #e72116; height: 45px; border-radius:3px; line-height: 45px; margin:30px auto 0}
+.bors{ width: 150px; background: #e72116; height: 45px; border-radius:3px; line-height: 45px; margin:30px auto 0}
 .bors a{ color: #fff;font-size:20px;}
 .re_con ul{ overflow: hidden; padding: 0px 0; color:#666; width: 350px; margin: 20px auto; }
 .re_con ul li{ float: left; width: 150px; font-size: 18px; line-height: 35px; height:35px;text-align: left;}
-.bort{ width: 350px; height: 45px;  line-height: 45px;  font-size: 19px; color: #999; margin:9px auto 0}
+.bort{ width: 350px; height: 45px;  line-height: 45px;  font-size: 19px; color: #000; margin:9px auto 0}
 /*banner  nav*/
 .banner .left:hover , .banner .right:hover{ background-color: rgba(0, 0, 0, 0.31);}
 .nav_sec{ height: 600px; position: absolute;top: 0; left: 0; width: 100%; background: rgba(0,0,0,0.3);}
@@ -301,7 +301,8 @@ img,input{vertical-align:middle; outline:none}
 .nav_top .logo span{ font-size: 16px; color:#fff; padding-left: 10px}
 .nav_top .navs{ float: left; width: 480px;}
 .nav_top .navs li a{ float: left; padding: 0 15px; margin-right: 30px; color: #fff; font-size: 16px}
-.nav_top .navs li a:hover{ color: #e72116;  transition:color 0.5s;-webkit-transition:color 0.5s;}
+.navs li a:hover{ color: #e72116;  transition:color 0.5s;-webkit-transition:color 0.5s;}
+.nav_top .navs li:hover{ color: #e72116;  transition:color 0.5s;-webkit-transition:color 0.5s;}
 .call{ width: 300px; float: right; text-align: right}
 .call .span_one a{ color: #fff; font-size: 24px; font-weight: bold;}
 .call .span_one{ margin-right: 30px}
