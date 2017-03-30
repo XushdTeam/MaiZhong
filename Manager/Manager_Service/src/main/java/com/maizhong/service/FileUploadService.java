@@ -12,8 +12,8 @@ public interface FileUploadService {
     /**
      * 图片上传服务
      * @param filedata 文件
-     * @param pathKey 分类路径
+     * @param key 分类路径
      * @return
      */
-    JsonResult uploadImg(MultipartFile filedata,String pathKey);
+    JsonResult uploadImg(MultipartFile filedata,String key);
 }
