@@ -1,17 +1,10 @@
 package com.maizhong.common.utils;
 
 
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.maizhong.common.result.JsonResult;
 
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,76 +14,49 @@ import java.util.Map;
  */
 public class JsonUtils {
 
-    // 定义jackson对象
-    private static final ObjectMapper MAPPER = new ObjectMapper();
-
     /**
      * 对象转化成json字符串
      * @param object
      * @return
      */
     public static String objectToJson(Object object) {
-        try {
-            String string = MAPPER.writeValueAsString(object);
-            return string;
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return JSON.toJSONString(object);
     }
-
 
     /**
      *  将json结果集转化为对象
      * @param jsonData
-     * @param beanType
+     * @param clazz
      * @param <T>
      * @return
      */
-    public static <T> T jsonToPojo(String jsonData, Class<T> beanType) {
-        try {
-            T t = MAPPER.readValue(jsonData, beanType);
-            return t;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    public static <T> T jsonToPojo(String jsonData, Class<T> clazz) {
+        return JSON.parseObject(jsonData, clazz);
     }
 
     /**
      * json字符串转LIST
-     * @param jsonStr
-     * @param beanType
+     * @param jsonData
+     * @param clazz
      * @param <T>
      * @return
      */
-    public static <T>List<T> jsonToList(String jsonStr, Class<T> beanType){
+    public static <T>List<T> jsonToList(String jsonData, Class<T> clazz){
 
-        JavaType javaType = MAPPER.getTypeFactory().constructParametricType(List.class, beanType);
-        try {
-            List<T> list = MAPPER.readValue(jsonStr, javaType);
-            return list;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
+        return JSON.parseArray(jsonData, clazz);
 
     }
 
     public static List<Map<String,String>> jsonResultToList(String jsonResult){
         try {
-            JsonNode jsonNode = MAPPER.readTree(jsonResult);
-            JsonNode data = jsonNode.get("data");
-            if (data.isArray() && data.size() > 0) {
-                List<Map<String,String>> list = MAPPER.readValue(data.traverse(),
-                        MAPPER.getTypeFactory().constructCollectionType(List.class, Map.class));
-                return list;
-            }
+            JsonResult result = jsonToPojo(jsonResult,JsonResult.class);
+
+            return JSON.parseObject(result.getData().toString(),
+                    new TypeReference<List<Map<String, String>>>() {
+                    });
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return null;
     }
 

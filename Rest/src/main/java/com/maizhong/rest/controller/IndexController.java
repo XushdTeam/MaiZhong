@@ -1,5 +1,6 @@
 package com.maizhong.rest.controller;
 
+import com.google.common.collect.Maps;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.pojo.RestInterface;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 首页控制器
@@ -77,6 +79,8 @@ public class IndexController {
         }
 
     }
+
+
 
 }
 

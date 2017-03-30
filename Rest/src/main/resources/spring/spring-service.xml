@@ -25,26 +25,6 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <!--AOP 事务-->
-    <aop:config>
-        <aop:pointcut id="serviceMethods" expression="execution(* com.maizhong.rest.service.*.*(..))"/>
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods" order="2"/>
-    </aop:config>
+    <tx:annotation-driven transaction-manager="transactionManager" />
 
-    <tx:advice id="txAdvice" transaction-manager="transactionManager">
-        <tx:attributes>
-            <!-- 传播行为 -->
-            <!--没有事务创建事务-->
-            <tx:method name="save*" propagation="REQUIRED"/>
-            <tx:method name="insert*" propagation="REQUIRED"/>
-            <tx:method name="add*" propagation="REQUIRED"/>
-            <tx:method name="create*" propagation="REQUIRED"/>
-            <tx:method name="delete*" propagation="REQUIRED"/>
-            <tx:method name="update*" propagation="REQUIRED"/>
-            <!--没有事务 如果当前有事务则在事务中进行-->
-            <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
-            <tx:method name="select*" propagation="SUPPORTS" read-only="true"/>
-            <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
-        </tx:attributes>
-    </tx:advice>
 </beans>

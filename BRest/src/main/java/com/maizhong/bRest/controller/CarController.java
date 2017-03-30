@@ -1,13 +1,13 @@
 package com.maizhong.bRest.controller;
 
 import com.maizhong.bRest.service.CarService;
+import com.maizhong.bRest.service.ImgUploadService;
 import com.maizhong.common.dto.UserInfo;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.pojo.TbCar;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +20,9 @@ public class CarController {
 
     @Resource
     private CarService carService;
+
+    @Autowired
+    private ImgUploadService imgUploadService;
 
 
 
@@ -98,6 +101,12 @@ public class CarController {
     public JsonResult deleteCar(@PathVariable String carid){
         return carService.deleteCar(carid);
 
+    }
+
+    @RequestMapping(value = "/upload")
+    public String uploadImg(@RequestParam(value = "img", required = false)MultipartFile filedata){
+        String res = imgUploadService.uploadImg(filedata);
+        return res;
     }
 
 
