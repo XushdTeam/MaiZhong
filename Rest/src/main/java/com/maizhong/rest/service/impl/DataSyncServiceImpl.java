@@ -52,21 +52,54 @@ public class DataSyncServiceImpl implements DataSyncService {
     public String syncCar(List<TbMessage> messages) {
 
         //判断出类型片段
+        ArrayList<Long> delCarIds = new ArrayList<>();
+        ArrayList<Long> addCarIds = new ArrayList<>();
         for (TbMessage message:messages) {
             switch (message.getMessageInfo()){
                 case "car" :
                     switch (message.getMessageType()){
-                        case "modify":;
-                        case "insert":;
+                        case "delete":
+                            delCarIds.add(Long.valueOf(message.getOtherInfo()));
+                            break;
+                        case "modify":
+                            //添加不需要删除文档
+                            delCarIds.add(Long.valueOf(message.getOtherInfo()));
+                        case "insert":
+                            //无论添加修改 都需要进行文档添加 所以使用穿透
+                            addCarIds.add(Long.valueOf(message.getOtherInfo()));
+                            break;
                     }
                     break;
             }
         }
-
-
-
         return null;
     }
+
+
+
+    /**
+     * 查询所有需要添加的汽车信息
+     * @param ids
+     * @return
+     */
+    private List<TbCarVo>  findVosByIds(List<Long> ids){
+
+        if (ids==null||ids.size()>0){
+            return null;
+        }
+
+        TbCarExample example = new TbCarExample();
+        for (Long id:ids) {
+            TbCarExample.Criteria or = example.or();
+            or.andIdEqualTo(id);
+        }
+        List<TbCarVo> list = tbCarMapperExt.findListNotContainsDesc(example);
+        return list;
+    }
+
+    /**
+     *
+     */
 
 
     @Resource

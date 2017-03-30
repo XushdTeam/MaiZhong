@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.maizhong.common.dto.KeyObject;
 import com.maizhong.common.result.JsonResult;
+import com.maizhong.common.result.PageResult;
 import com.maizhong.common.utils.IDUtils;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.dao.JedisClient;
@@ -223,7 +224,7 @@ public class BRestServiceImpl implements BRestService {
 
         PageInfo<Map<String, Object>> info = new PageInfo<>(cars);
 
-        return JsonResult.OK(info);
+        return JsonResult.OK(new PageResult(info));
     }
 
     /**

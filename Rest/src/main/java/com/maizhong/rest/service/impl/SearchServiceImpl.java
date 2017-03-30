@@ -101,11 +101,10 @@ public class SearchServiceImpl implements SearchService {
     public JsonResult syncIndex() {
         try {
             UpdateResponse response = solrServer.deleteByQuery("*:*");
+            solrServer.commit();
             //数据准备与调用
             List<TbCarVo> vos = tbCarMapperExt.findDocsForSolrStore(null);
-
             dataSyncService.addSolrDocUseVo(vos);
-            solrServer.commit();
         } catch (Exception e) {
             e.printStackTrace();
             return JsonResult.Error("索引添加失败");
