@@ -1,5 +1,6 @@
 package com.maizhong.bRest.service;
 
+import com.maizhong.common.result.JsonResult;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -8,6 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 public interface ImgUploadService {
 
 
-    String uploadImg(MultipartFile filedata);
+    JsonResult uploadImg(MultipartFile filedata, String key);
 
 }

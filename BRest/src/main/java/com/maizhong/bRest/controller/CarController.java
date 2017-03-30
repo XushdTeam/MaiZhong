@@ -103,9 +103,14 @@ public class CarController {
 
     }
 
+    /**
+     * 图片上传
+     * @param filedata
+     * @return
+     */
     @RequestMapping(value = "/upload")
-    public String uploadImg(@RequestParam(value = "img", required = false)MultipartFile filedata){
-        String res = imgUploadService.uploadImg(filedata);
+    public JsonResult uploadImg(@RequestParam(value = "file", required = false)MultipartFile filedata){
+        JsonResult res = imgUploadService.uploadImg(filedata,"carimg/");
         return res;
     }
 
