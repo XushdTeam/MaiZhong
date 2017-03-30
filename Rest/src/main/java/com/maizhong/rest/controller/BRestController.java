@@ -38,7 +38,7 @@ public class BRestController {
     @RequestMapping("/car/modify")
     public JsonResult updateCar(TbCar tbCar){
         if (tbCar!=null){
-            if (tbCar.getId()!=null){
+            if (tbCar.getId()==null){
                 return bRestService.insertCar(tbCar);
             }
             return bRestService.updateCar(tbCar);
