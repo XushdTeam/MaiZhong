@@ -44,9 +44,6 @@
             <if test="carType != null">
                 car_type,
             </if>
-            <if test="brandSequence != null">
-                brand_sequence,
-            </if>
             <if test="carYear != null">
                 car_year,
             </if>
@@ -63,13 +60,16 @@
                 car_l_oil,
             </if>
             <if test="carZMm != null">
-                car_z_mmx,
+                car_z_mm,
             </if>
             <if test="carWarranty != null">
                 car_warranty,
             </if>
             <if test="carFuelLabel != null">
                 car_fuel_label,
+            </if>
+            <if test="carEnvironmentStandards != null">
+                car_environment_standards,
             </if>
             <if test="carLuggage != null">
                 car_luggage,
@@ -101,12 +101,8 @@
             <if test="carDriveMode != null">
                 car_drive_mode,
             </if>
-            is_user_add
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=BIGINT},
-            </if>
             <if test="carBrand != null">
                 #{carBrand,jdbcType=VARCHAR},
             </if>
@@ -122,10 +118,66 @@
             <if test="carYear != null">
                 #{carYear,jdbcType=VARCHAR},
             </if>
-            <if test="delflag != null">
-                #{delflag,jdbcType=INTEGER},
+            <if test="carFactoryPrice != null">
+                #{carFactoryPrice,jdbcType=VARCHAR},
             </if>
-            1
+            <if test="carSize != null">
+                #{carSize,jdbcType=VARCHAR},
+            </if>
+            <if test="carLevel != null">
+                #{carLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="carLOil != null">
+                #{carLOil,jdbcType=VARCHAR},
+            </if>
+            <if test="carZMm != null">
+                #{carZMm,jdbcType=VARCHAR},
+            </if>
+            <if test="carWarranty != null">
+                #{carWarranty,jdbcType=VARCHAR},
+            </if>
+            <if test="carFuelLabel != null">
+                #{carFuelLabel,jdbcType=VARCHAR},
+            </if>
+            <if test="carEnvironmentStandards != null">
+                #{carEnvironmentStandards,jdbcType=VARCHAR},
+            </if>
+            <if test="carLuggage != null">
+                #{carLuggage,jdbcType=VARCHAR},
+            </if>
+            <if test="carColor != null">
+                #{carColor,jdbcType=VARCHAR},
+            </if>
+            <if test="carDisplacement != null">
+                #{carDisplacement,jdbcType=VARCHAR},
+            </if>
+            <if test="carEngine != null">
+                #{carEngine,jdbcType=VARCHAR},
+            </if>
+            <if test="carMarPower != null">
+                #{carMarPower,jdbcType=VARCHAR},
+            </if>
+
+            <if test="carHsFactory != null">
+                #{carHsFactory,jdbcType=VARCHAR},
+            </if>
+            <if test="carGearbox != null">
+                #{carGearbox,jdbcType=VARCHAR},
+            </if>
+            <if test="carMaxTorque != null">
+                #{carMaxTorque,jdbcType=VARCHAR},
+            </if>
+            <if test="carMaxspeed != null">
+                #{carMaxspeed,jdbcType=VARCHAR},
+            </if>
+            <if test="carDriveMode != null">
+                #{carDriveMode,jdbcType=VARCHAR},
+            </if>
+
+
+
+
+
         </trim>
     </insert>
 </mapper>

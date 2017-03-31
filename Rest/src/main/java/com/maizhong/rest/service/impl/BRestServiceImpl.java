@@ -9,6 +9,7 @@ import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.common.utils.IDUtils;
 import com.maizhong.common.utils.JsonUtils;
+import com.maizhong.common.utils.TimeUtils;
 import com.maizhong.dao.JedisClient;
 import com.maizhong.mapper.*;
 import com.maizhong.mapper.ext.TbCarBaseMapperExt;
@@ -17,13 +18,11 @@ import com.maizhong.pojo.*;
 import com.maizhong.pojo.vo.TbCarBaseVo;
 import com.maizhong.rest.service.BRestService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by YangF on 2017/3/28.
@@ -53,6 +52,14 @@ public class BRestServiceImpl implements BRestService {
 
     @Resource
     private JedisClient jedisClient;
+
+
+    @Value("${CAR_SERIES}")
+    private String CAR_SERIES;
+    @Value("${CAR_BRAND_ID}")
+    private String CAR_BRAND_ID;
+    @Value("${CAR_SERIES_ID}")
+    private String CAR_SERIES_ID;
 
 
     private String verifyCar(TbCar car) {
@@ -369,11 +376,65 @@ public class BRestServiceImpl implements BRestService {
         TbCarBrandLineExample.Criteria criteria = tbCarBrandLineExample.createCriteria();
         criteria.andLineNameEqualTo(tbCarBrandLine.getLineName());
         criteria.andDelflagEqualTo(0);
+        criteria.andBrandIdEqualTo(brandId);
         List<TbCarBrandLine> tbCarBrandLines = tbCarBrandLineMapper.selectByExample(tbCarBrandLineExample);
         if (tbCarBrandLines.size() > 0) {
             return OperateEnum.NAME_REPEAT;
         }
         int res = tbCarBrandLineMapper.insertSelective(tbCarBrandLine);
+        if (res > 0) {
+            jedisClient.hdel(CAR_SERIES, brandId + "");
+            TbCarBrandLineExample example = new TbCarBrandLineExample();
+            TbCarBrandLineExample.Criteria criteria2 = example.createCriteria();
+            criteria2.andDelflagEqualTo(0);
+            criteria2.andBrandIdEqualTo(brandId);
+            List<TbCarBrandLine> list2 = tbCarBrandLineMapper.selectByExample(example);
+            //写入缓存
+            try {
+                String jsonStr = JsonUtils.objectToJson(list2);
+                jedisClient.hset(CAR_SERIES, brandId + "", jsonStr);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return OperateEnum.SUCCESS;
+        }
+        return OperateEnum.FAILE;
+    }
+
+    /**
+     * 添加汽车基础数据
+     *
+     * @param carBaseDTO
+     * @return
+     */
+    @Override
+    public OperateEnum insertCarCarBase(CarBaseDTO carBaseDTO) {
+        if (carBaseDTO == null) {
+            return OperateEnum.FAILE;
+        }
+        String brandId = carBaseDTO.getCarBrand();
+        String carSeries = carBaseDTO.getCarSeries();
+        String initial = null;
+        try {
+            initial = tbCarBrandMapper.selectByPrimaryKey(Long.valueOf(brandId)).getInitial();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            brandId = jedisClient.hget(CAR_BRAND_ID, brandId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            carSeries = jedisClient.hget(CAR_SERIES_ID, carSeries);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        carBaseDTO.setCarBrand(brandId);
+        carBaseDTO.setCarSeries(carSeries);
+        carBaseDTO.setInitial(initial);
+        int res = tbCarBaseMapperExt.insertSelective(carBaseDTO);
         if (res > 0) {
             return OperateEnum.SUCCESS;
         } else {
@@ -382,15 +443,37 @@ public class BRestServiceImpl implements BRestService {
     }
 
     @Override
-    public OperateEnum insertCarCarBase(CarBaseDTO carBaseDTO) {
-        if (carBaseDTO==null){
-            return OperateEnum.FAILE;
+    public JsonResult getShopCount(Long businessId) {
+        long totalCarNumber = tbCarMapper.totalCarNumber(businessId);
+        long totalBrandNumber = tbCarMapper.totalBrandNumber(businessId);
+        long totalSeriesNumber = tbCarMapper.totalSeriesNumber(businessId);
+        long shopCarNumber = tbCarMapper.shopCarNumber(businessId);
+        long shopBrandNumber = tbCarMapper.shopBrandNumber(businessId);
+        long shopSeriesNumber = tbCarMapper.shopSeriesNumber(businessId);
+        TbCarExample example=new TbCarExample();
+        List<String> dateList=new ArrayList<>();
+        List<Long> numberList=new ArrayList<>();
+        for (int i=6;i>=0;i--){
+           dateList.add(TimeUtils.getDateBeforeDay(i));
+            Long num=0L;
+            if (i==0){
+               num= tbCarMapper.weekNumber(TimeUtils.getDateBeforeDay(i),TimeUtils.getDateBeforeDay(-1),businessId);
+            }else {
+               num= tbCarMapper.weekNumber(TimeUtils.getDateBeforeDay(i),TimeUtils.getDateBeforeDay(i-1),businessId);
+            }
+            numberList.add(num);
         }
-        int res = tbCarBaseMapperExt.insertSelective(carBaseDTO);
-        if (res>0){
-            return OperateEnum.SUCCESS;
-        }else {
-            return  OperateEnum.FAILE;
-        }
+        Map<String,Object> map=new HashMap<>();
+        map.put("totalCarNumber",totalCarNumber);
+        map.put("shopCarNumber",shopCarNumber);
+        map.put("totalBrandNumber",totalBrandNumber);
+        map.put("shopBrandNumber",shopBrandNumber);
+        map.put("totalSeriesNumber",totalSeriesNumber);
+        map.put("shopSeriesNumber",shopSeriesNumber);
+        map.put("dateList",dateList);
+        map.put("numberList",numberList);
+       return JsonResult.build(200,"获取成功",map);
     }
+
+
 }

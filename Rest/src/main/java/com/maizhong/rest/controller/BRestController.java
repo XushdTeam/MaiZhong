@@ -126,5 +126,14 @@ public class BRestController {
         return JsonResult.build(operateEnum);
     }
 
-
+    /**
+     * 统计4s店信息
+     * @param businessId
+     * @return
+     */
+    @RequestMapping(value = "/getShopCount/{businessId}",method = RequestMethod.GET)
+    public JsonResult getShopCount(@PathVariable("businessId") Long businessId){
+       JsonResult result= bRestService.getShopCount(businessId);
+        return result;
+    }
 }

@@ -42,4 +42,6 @@ public interface BRestService {
     OperateEnum insertSeries(Long brandId, String seriesName);
 
     OperateEnum insertCarCarBase(CarBaseDTO carBaseDTO);
+
+    JsonResult getShopCount(Long businessId);
 }
