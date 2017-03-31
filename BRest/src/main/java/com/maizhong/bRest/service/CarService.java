@@ -24,9 +24,15 @@ public interface CarService {
 
     JsonResult getCarTypeBySeries(String seriesId, String caryear);
 
-    JsonResult modifyCar(TbCar tbCar);
-
     JsonResult getCarById(String carid);
 
     JsonResult deleteCar(String carid);
+
+    JsonResult modifyCar(String id,String baseId, String carBrand, String carBrandLine, String sellpoint, String sellPrice, String stockNum, String image, String smimage, String businessId,String carYear);
+
+    JsonResult findList(String businessId, String brandId, String carSeries, String date, String carYear, Integer currentPage, String sortString);
+
+    JsonResult getCarDetail(String carId);
+
+    JsonResult saveSerise(String brandId, String seriseName);
 }
