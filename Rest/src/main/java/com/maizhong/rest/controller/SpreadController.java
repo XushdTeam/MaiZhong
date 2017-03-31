@@ -100,4 +100,5 @@ public class SpreadController {
         JsonResult result = spreadService.getIndexBase();
         return result;
     }
+
 }

@@ -2,16 +2,16 @@ package com.maizhong.rest.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.maizhong.common.dto.CarBaseDTO;
 import com.maizhong.common.dto.KeyObject;
+import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.common.utils.IDUtils;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.dao.JedisClient;
-import com.maizhong.mapper.TbBusinessMapper;
-import com.maizhong.mapper.TbBusinessUserMapper;
-import com.maizhong.mapper.TbCarBrandMapper;
-import com.maizhong.mapper.TbCarMapper;
+import com.maizhong.mapper.*;
+import com.maizhong.mapper.ext.TbCarBaseMapperExt;
 import com.maizhong.mapper.ext.TbCarMapperExt;
 import com.maizhong.pojo.*;
 import com.maizhong.pojo.vo.TbCarBaseVo;
@@ -46,16 +46,18 @@ public class BRestServiceImpl implements BRestService {
 
     @Resource
     private TbCarBrandMapper tbCarBrandMapper;
-
+    @Resource
+    private TbCarBrandLineMapper tbCarBrandLineMapper;
+    @Resource
+    private TbCarBaseMapperExt tbCarBaseMapperExt;
 
     @Resource
     private JedisClient jedisClient;
 
 
+    private String verifyCar(TbCar car) {
 
-    private String verifyCar(TbCar car){
-
-        if (car==null){
+        if (car == null) {
             return "数据错误";
         }
 
@@ -64,21 +66,21 @@ public class BRestServiceImpl implements BRestService {
 //            return "编号或者名称不可以为空";
 //        }
         //car_brand   外键链接车辆品牌  类似奥迪  car_type  外键  链接车辆类型',
-        if (car.getCarBrand()==null||StringUtils.isBlank(car.getCarBrand()+"")){
+        if (car.getCarBrand() == null || StringUtils.isBlank(car.getCarBrand() + "")) {
             return "请选择汽车品牌";
         }
         //`baseId`  连接基础库Id
-        if (car.getBaseId()==null||StringUtils.isBlank(car.getBaseId()+"")){
+        if (car.getBaseId() == null || StringUtils.isBlank(car.getBaseId() + "")) {
             return "库中车辆数据不可以为空";
         }
 
         //订金价格',
-        if (car.getSellPrice()==null||StringUtils.isBlank(car.getSellPrice()+"")){
+        if (car.getSellPrice() == null || StringUtils.isBlank(car.getSellPrice() + "")) {
             return "车辆卖价不可以为空";
         }
 
         //如果商家ID不为空  返回数据
-        if (car.getBusinessId()==null){
+        if (car.getBusinessId() == null) {
             return "账户处于不安全环境下，请联系网站管理员或重试";
         }
 
@@ -86,14 +88,13 @@ public class BRestServiceImpl implements BRestService {
     }
 
 
-
     /***
      * 外接 汽车添加接口
-     *             重点
-     *                  商店id
-     *                  添加数量
-     *                  编号
-     *                  手动填充的数据  ： 暂无
+     * 重点
+     * 商店id
+     * 添加数量
+     * 编号
+     * 手动填充的数据  ： 暂无
      *
      * @param car
      * @return
@@ -102,14 +103,14 @@ public class BRestServiceImpl implements BRestService {
     public JsonResult insertCar(TbCar car) {
 
         String meaasge = verifyCar(car);
-        if (meaasge!=null){
+        if (meaasge != null) {
             return JsonResult.Error(meaasge);
         }
         String name = IDUtils.genImageName();
         car.setNumber(name);
 
         //添加时间
-        if (car.getCreateTime()==null){
+        if (car.getCreateTime() == null) {
             car.setCreateTime(new Date());
         }
         //修改时间',
@@ -128,11 +129,11 @@ public class BRestServiceImpl implements BRestService {
 
         int insert = tbCarMapper.insertSelective(car);
 
-        if (insert==1){
+        if (insert == 1) {
             //id 回显  mapper未修改
 //            return JsonResult.OK(car.getId());
-            return  JsonResult.OK("添加成功");
-        } else{
+            return JsonResult.OK("添加成功");
+        } else {
             return JsonResult.Error("网络异常 请联系管理员");
         }
     }
@@ -143,10 +144,10 @@ public class BRestServiceImpl implements BRestService {
 
         verifyCar(tbCar);
 
-        if (tbCar!=null){
-            if (tbCar.getId()!=null){
+        if (tbCar != null) {
+            if (tbCar.getId() != null) {
                 TbCar oldTbCar = tbCarMapper.selectByPrimaryKey(tbCar.getId());
-                if (oldTbCar!=null){
+                if (oldTbCar != null) {
 
                     tbCar.setNumber(null);
                     tbCar.setUnable(null);
@@ -165,7 +166,7 @@ public class BRestServiceImpl implements BRestService {
     @Override
     public JsonResult deleteCar(String id) {
         Long longId = null;
-        if (id!=null){
+        if (id != null) {
             longId = Long.parseLong(id);
         }
         int i = tbCarMapper.deleteByPrimaryKey(longId);
@@ -176,16 +177,16 @@ public class BRestServiceImpl implements BRestService {
     @Override
     public JsonResult unable(String id, Integer unalbe) {
         TbCar tbCar = new TbCar();
-        if (id!=null){
+        if (id != null) {
             Long longId = Long.parseLong(id);
             tbCar.setId(longId);
-            if (unalbe!=null&&unalbe==1){
+            if (unalbe != null && unalbe == 1) {
                 tbCar.setUnable(unalbe);
-            }else{
+            } else {
                 tbCar.setUnable(0);
             }
             tbCarMapper.updateByPrimaryKeySelective(tbCar);
-            JsonResult.OK(unalbe==1?"上架成功":"下架成功");
+            JsonResult.OK(unalbe == 1 ? "上架成功" : "下架成功");
         }
         return JsonResult.Error("系统错误，请检查网络");
     }
@@ -193,9 +194,10 @@ public class BRestServiceImpl implements BRestService {
 
     /***
      * 外接系统
-     *         此汽车方法根据外来参数返回数据
-     *         不可频繁调用此方法
-     *         此方法不添加缓存
+     * 此汽车方法根据外来参数返回数据
+     * 不可频繁调用此方法
+     * 此方法不添加缓存
+     *
      * @return
      */
     @Override
@@ -204,29 +206,29 @@ public class BRestServiceImpl implements BRestService {
                                            Integer currentPage, Integer pageSize, String sortString) {
 
 
-        if (businessId==null){
+        if (businessId == null) {
             return JsonResult.Error("账号状态异常，请联系管理员");
         }
 
         //分页
         pageSize = 10;
         Integer start = 0;
-        if (currentPage != null){
-            start = currentPage ;
+        if (currentPage != null) {
+            start = currentPage;
         }
-        PageHelper.startPage(start,pageSize);
-        if (StringUtils.isNotBlank(sortString)){
+        PageHelper.startPage(start, pageSize);
+        if (StringUtils.isNotBlank(sortString)) {
             //TODO  未确定排序格式
             sortString = null;
         }
-        if (StringUtils.isBlank(carYear)||"0".equals(carYear)){
+        if (StringUtils.isBlank(carYear) || "0".equals(carYear)) {
             carYear = null;
         }
-        if (StringUtils.isNotBlank(date)){
+        if (StringUtils.isNotBlank(date)) {
             //TODO  未确定时间格式
             date = null;
         }
-        List<Map<String, Object>> cars = tbCarMapperExt.findByBussinessId(businessId,carSeries,brandId,carYear,date,sortString);
+        List<Map<String, Object>> cars = tbCarMapperExt.findByBussinessId(businessId, carSeries, brandId, carYear, date, sortString);
 
         PageInfo<Map<String, Object>> info = new PageInfo<>(cars);
 
@@ -235,6 +237,7 @@ public class BRestServiceImpl implements BRestService {
 
     /**
      * 根据汽车id获取汽车信息
+     *
      * @param id
      * @return
      */
@@ -246,7 +249,7 @@ public class BRestServiceImpl implements BRestService {
 
 
     /***
-     *  返回汽车品牌
+     * 返回汽车品牌
      *
      * @return
      */
@@ -254,13 +257,12 @@ public class BRestServiceImpl implements BRestService {
     public JsonResult findBrandsByCatch() {
 
         String s = jedisClient.get("CAR_BRAND_GROUP");
-        List<KeyObject> car_brand_group =null;
-        if (s!=null){
+        List<KeyObject> car_brand_group = null;
+        if (s != null) {
             car_brand_group = JsonUtils.jsonToList(s, KeyObject.class);
         }
-        return  JsonResult.OK(car_brand_group);
+        return JsonResult.OK(car_brand_group);
     }
-
 
 
     /***
@@ -270,35 +272,37 @@ public class BRestServiceImpl implements BRestService {
      */
     @Override
     public JsonResult findSeriesByCatch(String brandId) {
-        String brand = jedisClient.hget("CAR_SERIES",brandId);
+        String brand = jedisClient.hget("CAR_SERIES", brandId);
         List<TbCarBrandLine> list = JsonUtils.jsonToList(brand, TbCarBrandLine.class);
-        return  JsonResult.OK(list);
+        return JsonResult.OK(list);
     }
 
     /**
      * 根据车系  与 年份 返回 年款式
-     * @param seriesId  year
+     *
+     * @param seriesId year
      * @return
      */
     @Override
     public JsonResult findSkuBySeriesAndYear(String seriesId, String year) {
-        if (seriesId==null){
+        if (seriesId == null) {
             return JsonResult.Error("data error");
         }
         String name = jedisClient.hget("CAR_SERIES_ID", seriesId);
 
         List<TbCarBaseVo> vos = tbCarMapperExt.findByCarYearAndCarSeres(name, year);
-        return  JsonResult.OK(vos);
+        return JsonResult.OK(vos);
     }
 
 
     /**
-     *  根据 bussiness 返回 商户信息
+     * 根据 bussiness 返回 商户信息
+     *
      * @param username,password
      * @return
      */
     @Override
-    public JsonResult userLogin(String username,String password) {
+    public JsonResult userLogin(String username, String password) {
 
         TbBusinessUserExample example = new TbBusinessUserExample();
         TbBusinessUserExample.Criteria criteria = example.createCriteria();
@@ -310,22 +314,22 @@ public class BRestServiceImpl implements BRestService {
 
         //登陆成功  添加用户至缓存    用户未关联商户 禁止登陆
         //  用户缓存重复添加
-        if (users!=null&&users.size()==1&&users.get(0).getBusinessId()!=null) {
+        if (users != null && users.size() == 1 && users.get(0).getBusinessId() != null) {
             TbBusinessUser user = users.get(0);
             Map<String, Object> userInfo = new HashMap<>();
 
             TbBusiness business = tbBusinessMapper.selectByPrimaryKey(user.getBusinessId());
 
-            if (business!=null){
-                userInfo.put("businessName",business.getBusinessName());
-                userInfo.put("businessId",business.getId());
-                userInfo.put("businessLogo",business.getLogo());
-                userInfo.put("businessAdress",business.getAddress());
-                userInfo.put("userName",user.getUserName());
-                userInfo.put("userId",user.getId());
-                userInfo.put("userAdvert",user.getUserAdvert());
-                userInfo.put("userPhone",user.getUserPhone());
-                userInfo.put("userEmail",user.getUserEmail());
+            if (business != null) {
+                userInfo.put("businessName", business.getBusinessName());
+                userInfo.put("businessId", business.getId());
+                userInfo.put("businessLogo", business.getLogo());
+                userInfo.put("businessAdress", business.getAddress());
+                userInfo.put("userName", user.getUserName());
+                userInfo.put("userId", user.getId());
+                userInfo.put("userAdvert", user.getUserAdvert());
+                userInfo.put("userPhone", user.getUserPhone());
+                userInfo.put("userEmail", user.getUserEmail());
 
 
                 return JsonResult.OK(userInfo);
@@ -336,13 +340,57 @@ public class BRestServiceImpl implements BRestService {
 
 
     @Override
-    public JsonResult getDetailsByCarId(Long id){
+    public JsonResult getDetailsByCarId(Long id) {
         List<Map<String, Object>> list = tbCarMapperExt.findDetailsByCarId(id);
-        if (list!=null&&list.size()>0){
+        if (list != null && list.size() > 0) {
             return JsonResult.OK(list.get(0));
         }
         return JsonResult.Error("数据错误");
     }
 
 
+    @Override
+    public OperateEnum insertSeries(Long brandId, String seriesName) {
+        if (brandId == null || StringUtils.isBlank(seriesName)) {
+            return OperateEnum.FAILE;
+        }
+        TbCarBrandLine tbCarBrandLine = new TbCarBrandLine();
+        try {
+            tbCarBrandLine.setBrandId(brandId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return OperateEnum.FAILE;
+        }
+        tbCarBrandLine.setDelflag(0);
+        tbCarBrandLine.setLineName(seriesName);
+        tbCarBrandLine.setLineSequence(999);
+        tbCarBrandLine.setStatus(1);
+        TbCarBrandLineExample tbCarBrandLineExample = new TbCarBrandLineExample();
+        TbCarBrandLineExample.Criteria criteria = tbCarBrandLineExample.createCriteria();
+        criteria.andLineNameEqualTo(tbCarBrandLine.getLineName());
+        criteria.andDelflagEqualTo(0);
+        List<TbCarBrandLine> tbCarBrandLines = tbCarBrandLineMapper.selectByExample(tbCarBrandLineExample);
+        if (tbCarBrandLines.size() > 0) {
+            return OperateEnum.NAME_REPEAT;
+        }
+        int res = tbCarBrandLineMapper.insertSelective(tbCarBrandLine);
+        if (res > 0) {
+            return OperateEnum.SUCCESS;
+        } else {
+            return OperateEnum.FAILE;
+        }
+    }
+
+    @Override
+    public OperateEnum insertCarCarBase(CarBaseDTO carBaseDTO) {
+        if (carBaseDTO==null){
+            return OperateEnum.FAILE;
+        }
+        int res = tbCarBaseMapperExt.insertSelective(carBaseDTO);
+        if (res>0){
+            return OperateEnum.SUCCESS;
+        }else {
+            return  OperateEnum.FAILE;
+        }
+    }
 }

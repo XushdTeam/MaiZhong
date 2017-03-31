@@ -1,14 +1,13 @@
 package com.maizhong.rest.controller;
 
+import com.maizhong.common.dto.CarBaseDTO;
+import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.target.ServiceLog;
 import com.maizhong.pojo.TbCar;
 import com.maizhong.rest.service.BRestService;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -104,6 +103,28 @@ public class BRestController {
     }
 
 
+    /**
+     * 根据品牌Id和车系名称添加车系
+     * @param brandId
+     * @param seriesName
+     * @return
+     */
+    @RequestMapping(value = "/insertCarSeries", method = RequestMethod.POST)
+    public JsonResult insertCarSeries(Long brandId, String seriesName) {
+        OperateEnum operateEnum = bRestService.insertSeries(brandId, seriesName);
+        return JsonResult.build(operateEnum);
+    }
+
+
+    /**
+     * 添加基础库
+     * @return
+     */
+    @RequestMapping(value = "/insertCarBase", method = RequestMethod.POST)
+    public JsonResult insertCarCarBase(CarBaseDTO carBaseDTO) {
+        OperateEnum operateEnum = bRestService.insertCarCarBase(carBaseDTO);
+        return JsonResult.build(operateEnum);
+    }
 
 
 }

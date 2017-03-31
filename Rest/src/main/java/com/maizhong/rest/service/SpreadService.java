@@ -25,4 +25,5 @@ public interface SpreadService {
     JsonResult getHotSeries();
 
     JsonResult getIndexBase();
+
 }
