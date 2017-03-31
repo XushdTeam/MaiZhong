@@ -35,4 +35,6 @@ public interface BRestService {
                                     String date, String carYear, Integer start, Integer pageSize, String sortString);
 
     JsonResult findCarInfoById(Long id);
+
+    JsonResult getDetailsByCarId(Long id);
 }

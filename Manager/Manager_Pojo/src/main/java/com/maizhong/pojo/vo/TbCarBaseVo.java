@@ -9,6 +9,15 @@ public class TbCarBaseVo {
     private String carName;
     private String color;
     private String carYear;
+    private String shopPrice;
+
+    public String getShopPrice() {
+        return shopPrice;
+    }
+
+    public void setShopPrice(String shopPrice) {
+        this.shopPrice = shopPrice;
+    }
 
     public String getCarYear() {
         return carYear;

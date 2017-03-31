@@ -199,7 +199,10 @@ public class BRestServiceImpl implements BRestService {
      * @return
      */
     @Override
-    public JsonResult selectCarByBussiness(Long businessId, Long carSeries, Long brandId, String date, String carYear, Integer currentPage, Integer pageSize, String sortString) {
+    public JsonResult selectCarByBussiness(Long businessId, Long carSeries,
+                                           Long brandId, String date, String carYear,
+                                           Integer currentPage, Integer pageSize, String sortString) {
+
 
         if (businessId==null){
             return JsonResult.Error("账号状态异常，请联系管理员");
@@ -215,6 +218,9 @@ public class BRestServiceImpl implements BRestService {
         if (StringUtils.isNotBlank(sortString)){
             //TODO  未确定排序格式
             sortString = null;
+        }
+        if (StringUtils.isBlank(carYear)||"0".equals(carYear)){
+            carYear = null;
         }
         if (StringUtils.isNotBlank(date)){
             //TODO  未确定时间格式
@@ -326,6 +332,16 @@ public class BRestServiceImpl implements BRestService {
             }
         }
         return JsonResult.Error("登陆失败，用户名或者密码不匹配");
+    }
+
+
+    @Override
+    public JsonResult getDetailsByCarId(Long id){
+        List<Map<String, Object>> list = tbCarMapperExt.findDetailsByCarId(id);
+        if (list!=null&&list.size()>0){
+            return JsonResult.OK(list.get(0));
+        }
+        return JsonResult.Error("数据错误");
     }
 
 

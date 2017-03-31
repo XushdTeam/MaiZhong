@@ -10,6 +10,7 @@ import com.maizhong.pojo.TbCarBrand;
 import com.maizhong.pojo.TbCarType;
 import com.maizhong.pojo.vo.TbCarBaseVo;
 import com.maizhong.service.*;
+import com.sun.tools.javac.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -82,6 +83,8 @@ public class CarController {
         model.addAttribute("carBrandType","/brand/findAll");
         model.addAttribute("deleteUrl","/car/deleteCar");
         model.addAttribute("editCarUrl","/car/modify");
+        model.addAttribute("betchanableUrl","/car/isanable");
+
 
 
 
@@ -116,32 +119,6 @@ public class CarController {
         }
     }
 
-
-    /***
-     * 添加汽车UI页面
-     * @param model
-     * @return
-     */
-    @RequestMapping("/add")
-    public String addCar(Model model){
-        model.addAttribute("insertUrl","/car/insert");
-//        model.addAttribute("seepropUrl","/carProp/prop");
-        model.addAttribute("lineListUrl","/carBrandLine/list");
-        model.addAttribute("findBaseCarUrl","/car/overall");
-
-
-
-        //数据准备
-        model.addAttribute("carTypeList", JsonUtils.jsonToList(typeService.getCarTypeListAll(), TbCarType.class));
-        model.addAttribute("carBrandList",JsonUtils.jsonToList(brandService.getCarBrandListAll(), TbCarBrand.class));
-//        model.addAttribute("colorList",dicService.getDicListByParent(4L));
-//        model.addAttribute("gaerboxList",dicService.getDicListByParent(9L));
-//        model.addAttribute("colorList",dicService.getDicListByParent(Long.parseLong(COLOR_CAR_DIC)));
-//        model.addAttribute("gaerboxList",dicService.getDicListByParent(Long.parseLong(GAERBOX_CAR_DIC)));
-
-
-        return "/car/add";
-    }
 
 
     /**
@@ -187,49 +164,6 @@ public class CarController {
         return carService.updateCar(tbCar);
     }
 
-
-
-
-
-
-    /***
-     *  修改页面跳转
-     *
-     * @param id
-     * @param model
-     * @return
-     */
-    @RequestMapping("/updateUI/{id}")
-    public String updateUI(@PathVariable("id") Long id,Model model){
-
-        model.addAttribute("updateCarUrl","/car/update");
-        model.addAttribute("seepropUrl","/carProp/prop");
-        model.addAttribute("lineListUrl","/carBrandLine/list");
-        model.addAttribute("findBaseCarUrl","/car/overall");
-
-        /*
-            数据填充  重点
-                    根据车型查找车系
-                    根据车系和年份确认款式
-         */
-
-        //数据查询与填充
-        TbCar car = carService.findCarById(id);
-        model.addAttribute("car",car);
-
-        //数据准备
-        model.addAttribute("carTypeList", JsonUtils.jsonToList(typeService.getCarTypeListAll(), TbCarType.class));
-        model.addAttribute("carBrandList",JsonUtils.jsonToList(brandService.getCarBrandListAll(), TbCarBrand.class));
-
-        //数据准备  车系列表
-        model.addAttribute("lineList",brandLineService.getCarBrandLineList(car.getCarBrand()).getData());
-        //  设置基础列表
-        model.addAttribute("carBaseVoList",carService.findBaseCar(car.getCarBrandLine(),car.getCarYear()).getData());
-
-
-
-        return "/car/update";
-    }
 
 
     /**
@@ -286,4 +220,11 @@ public class CarController {
 
         return "/car/car";
     }
+
+
+    @RequestMapping("/isanable")
+    public JsonResult isAnable(List<Long> ids,Integer unable){
+        return carService.updateCarStatus(ids,unable);
+    }
+
 }
