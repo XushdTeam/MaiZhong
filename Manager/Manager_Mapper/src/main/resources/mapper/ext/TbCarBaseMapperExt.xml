@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maizhong.mapper.ext.TbCarBaseMapperExt" >
+
+    <resultMap id="baseCarMap" type="com.maizhong.pojo.vo.TbCarBaseVo">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="car_brand" jdbcType="VARCHAR" property="carBrand" />
+        <result column="initial" jdbcType="VARCHAR" property="initial" />
+        <result column="car_series" jdbcType="VARCHAR" property="carSeries" />
+        <result column="car_type" jdbcType="VARCHAR" property="carType" />
+        <result column="car_year" jdbcType="VARCHAR" property="carYear" />
+        <result column="car_factory_price" jdbcType="VARCHAR" property="carFactoryPrice" />
+        <result column="car_size" jdbcType="VARCHAR" property="carSize" />
+        <result column="car_level" jdbcType="VARCHAR" property="carLevel" />
+        <result column="car_l_oil" jdbcType="VARCHAR" property="carLOil" />
+        <result column="car_z_mm" jdbcType="VARCHAR" property="carZMm" />
+        <result column="car_warranty" jdbcType="VARCHAR" property="carWarranty" />
+        <result column="car_fuel_label" jdbcType="VARCHAR" property="carFuelLabel" />
+        <result column="car_environment_standards" jdbcType="VARCHAR" property="carEnvironmentStandards" />
+        <result column="car_luggage" jdbcType="VARCHAR" property="carLuggage" />
+        <result column="car_color" jdbcType="VARCHAR" property="carColor" />
+        <result column="car_displacement" jdbcType="VARCHAR" property="carDisplacement" />
+        <result column="car_engine" jdbcType="VARCHAR" property="carEngine" />
+        <result column="car_mar_power" jdbcType="VARCHAR" property="carMarPower" />
+        <result column="car_hs_factory" jdbcType="VARCHAR" property="carHsFactory" />
+        <result column="car_gearbox" jdbcType="VARCHAR" property="carGearbox" />
+        <result column="car_max_torque" jdbcType="VARCHAR" property="carMaxTorque" />
+        <result column="car_maxspeed" jdbcType="VARCHAR" property="carMaxspeed" />
+        <result column="car_drive_mode" jdbcType="VARCHAR" property="carDriveMode" />
+    </resultMap>
+
+    <insert id="insertSelective" parameterType="com.maizhong.common.dto.CarBaseDTO">
+        insert into tb_car_base
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="carBrand != null">
+                car_brand,
+            </if>
+            <if test="initial != null">
+                initial,
+            </if>
+            <if test="carSeries != null">
+                car_series,
+            </if>
+            <if test="carType != null">
+                car_type,
+            </if>
+            <if test="brandSequence != null">
+                brand_sequence,
+            </if>
+            <if test="carYear != null">
+                car_year,
+            </if>
+            <if test="carFactoryPrice != null">
+                car_factory_price,
+            </if>
+            <if test="carSize != null">
+                car_size,
+            </if>
+            <if test="carLevel != null">
+                car_level,
+            </if>
+            <if test="carLOil != null">
+                car_l_oil,
+            </if>
+            <if test="carZMm != null">
+                car_z_mmx,
+            </if>
+            <if test="carWarranty != null">
+                car_warranty,
+            </if>
+            <if test="carFuelLabel != null">
+                car_fuel_label,
+            </if>
+            <if test="carLuggage != null">
+                car_luggage,
+            </if>
+            <if test="carColor != null">
+                car_color,
+            </if>
+            <if test="carDisplacement != null">
+                car_displacement,
+            </if>
+            <if test="carEngine != null">
+                car_engine,
+            </if>
+            <if test="carMarPower != null">
+                car_mar_power,
+            </if>
+            <if test="carHsFactory != null">
+                car_hs_factory,
+            </if>
+            <if test="carGearbox != null">
+                car_gearbox,
+            </if>
+            <if test="carMaxTorque != null">
+                car_max_torque,
+            </if>
+            <if test="carMaxspeed != null">
+                car_maxspeed,
+            </if>
+            <if test="carDriveMode != null">
+                car_drive_mode,
+            </if>
+            is_user_add
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="carBrand != null">
+                #{carBrand,jdbcType=VARCHAR},
+            </if>
+            <if test="initial != null">
+                #{initial,jdbcType=VARCHAR},
+            </if>
+            <if test="carSeries != null">
+                #{carSeries,jdbcType=VARCHAR},
+            </if>
+            <if test="carType != null">
+                #{carType,jdbcType=VARCHAR},
+            </if>
+            <if test="carYear != null">
+                #{carYear,jdbcType=VARCHAR},
+            </if>
+            <if test="delflag != null">
+                #{delflag,jdbcType=INTEGER},
+            </if>
+            1
+        </trim>
+    </insert>
+</mapper>

@@ -3,6 +3,7 @@ package com.maizhong.bRest.controller;
 import com.maizhong.bRest.service.CarService;
 import com.maizhong.bRest.service.ImgUploadService;
 import com.maizhong.common.dto.UserInfo;
+import com.maizhong.common.exception.UploadException;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.pojo.TbCar;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +28,20 @@ public class CarController {
 
 
     @RequestMapping("/car/list")
-    public JsonResult findList(TbCar tbCar,HttpServletRequest request){
+    public JsonResult findList(
+            String brandId,
+            String carSeries,
+            String date,
+            String carYear,
+            Integer currentPage,
+            String sortString,
+            HttpServletRequest request){
 
         //数据填充
         UserInfo userInfo = (UserInfo) request.getAttribute("userInfo");
-        if (userInfo.getBusinessId()!=null){
-            tbCar.setBusinessId(Long.parseLong(userInfo.getBusinessId()));
-        }
-        return carService.findList(tbCar);
+
+        return carService.findList(userInfo.getBusinessId(),brandId,carSeries,
+                date,carYear,currentPage,sortString);
     }
 
     /**
@@ -70,15 +77,26 @@ public class CarController {
 
     /**
      *汽车添加和修改
-     * @param tbCar
      * @return
      */
     @RequestMapping(value = "/car/modify",method = RequestMethod.POST)
-    public JsonResult updateCar(TbCar tbCar,HttpServletRequest request){
+    public JsonResult updateCar(
+            String id,
+            String baseId,
+            String carBrand,
+            String carBrandLine,
+            String sellpoint,
+            String sellPrice,
+            String carYear,
+            String stockNum,
+            String image,
+            String smimage,
+            HttpServletRequest request){
         UserInfo userInfo= (UserInfo) request.getAttribute("userInfo");
+
         if (userInfo!=null&&userInfo.getBusinessId()!=null){
-            tbCar.setBusinessId(Long.valueOf(userInfo.getBusinessId()));
-            return carService.modifyCar(tbCar);
+           return carService.modifyCar(id,baseId,carBrand,carBrandLine,sellpoint,
+                   sellPrice,stockNum,image,smimage,userInfo.getBusinessId(),carYear);
         }
         return  JsonResult.Error("操作失败！请刷新后重新！");
     }
@@ -108,11 +126,50 @@ public class CarController {
      * @param filedata
      * @return
      */
-    @RequestMapping(value = "/upload")
-    public JsonResult uploadImg(@RequestParam(value = "file", required = false)MultipartFile filedata){
-        JsonResult res = imgUploadService.uploadImg(filedata,"carimg/");
+    @RequestMapping(value = "/upload/body")
+    public JsonResult uploadImgBody(@RequestParam(value = "file", required = false)MultipartFile filedata) throws UploadException {
+        JsonResult res = imgUploadService.uploadImg(filedata, "carbody/");
+        if (res.getStatus() == 200) {
+            return res;
+        } else {
+            throw new UploadException(res.getMessage());
+        }
+    }
+    /**
+     * 图片上传
+     * @param filedata
+     * @return
+     */
+    @RequestMapping(value = "/upload/head")
+    public JsonResult uploadImgHead(@RequestParam(value = "file", required = false)MultipartFile filedata) throws UploadException {
+        JsonResult res = imgUploadService.uploadImg(filedata, "carhead/");
+        if (res.getStatus() == 200) {
+            return res;
+        } else {
+            throw new UploadException(res.getMessage());
+        }
+    }
+
+    /**
+     * 汽车详情
+     * @param carId
+     * @return
+     */
+    @RequestMapping(value = "/cardetail/{carId}")
+    public JsonResult getCarDetail(@PathVariable String carId){
+        JsonResult res = this.carService.getCarDetail(carId);
         return res;
     }
 
-
+    /**
+     * 车系添加
+     * @param brandId
+     * @param seriseName
+     * @return
+     */
+    @RequestMapping(value = "/car/serise/save")
+    public JsonResult saveSerise(String brandId,String seriseName){
+        JsonResult res = this.carService.saveSerise(brandId,seriseName);
+        return res;
+    }
 }
