@@ -59,15 +59,16 @@ public class BRestController {
     }
 
     //商品下架
-    @RequestMapping("/car/unable/{id}")
+    @RequestMapping("/car/detail/{id}")
     public JsonResult unable(@PathVariable("id") String id){
-        return null;
+        return bRestService.getDetailsByCarId(Long.valueOf(id));
     }
 
     //商品查询接口
     @RequestMapping("/car/find")
     public JsonResult selectCarList(@RequestParam("businessId") Long businessId, Long carSeries, Long brandId,
                                     String date, String carYear, Integer currentPage, String sortString) {
+
         Integer pageSize = 10;
         return bRestService.selectCarByBussiness(businessId,carSeries,brandId,date,carYear,currentPage,pageSize,sortString);
     }

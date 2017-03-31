@@ -40,6 +40,7 @@
         <result column="car_type" jdbcType="VARCHAR" property="carName" />
         <result column="car_level" jdbcType="VARCHAR" property="carTypeName" />
         <result column="car_year" jdbcType="VARCHAR" property="carYear" />
+        <result column="shop_price" jdbcType="VARCHAR" property="shopPrice" />
     </resultMap>
 
 
@@ -112,7 +113,7 @@
 
     <select id="findByCarYearAndCarSeres"  resultMap="baseCarMap">
         SELECT
-        id,car_type,car_color,car_level,car_year
+        id,car_type,car_color,car_level,car_year,car_factory_price shop_price
         FROM
         tb_car_base
         WHERE
@@ -128,6 +129,8 @@
             c.id,
             base.car_type name,
             c.car_brand brandId,
+            c.car_brand_line seriesId,
+            base.car_series,
 	        base.car_brand brandName,
             c.sell_price,
             base.car_factory_price shop_price,

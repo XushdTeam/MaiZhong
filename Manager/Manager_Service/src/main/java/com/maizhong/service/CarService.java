@@ -4,6 +4,7 @@ import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.pojo.TbCar;
+import java.util.List;
 
 /**
  * Created by yangF on 2017/3/7.
@@ -21,4 +22,6 @@ public interface CarService {
     public JsonResult updateCar(TbCar car);
 
     JsonResult findBaseCar(Long carSeries, String carYear);
+
+    JsonResult updateCarStatus(List<Long> ids, Integer unable);
 }

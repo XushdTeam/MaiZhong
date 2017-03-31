@@ -185,13 +185,13 @@ public class CarServiceImpl implements CarService {
     @Override
     public JsonResult deleteCar(Long id) {
         if (id!=null){
-            //清除汽车属性表
-            if(tbCarMapper.deleteByPrimaryKey(id)>0){
-                TbCarPropExample example = new TbCarPropExample();
-                example.createCriteria().andCarIdEqualTo(id);
-                carPropMapper.deleteByExample(example);
-            }
+            tbCarMapper.deleteByPrimaryKey(id);
             JsonResult.build(OperateEnum.SUCCESS);
+            //清除汽车属性表
+//
+//                TbCarPropExample example = new TbCarPropExample();
+//                example.createCriteria().andCarIdEqualTo(id);
+//                carPropMapper.deleteByExample(example);
         }
         return JsonResult.build(OperateEnum.FAILE);
     }
@@ -279,5 +279,32 @@ public class CarServiceImpl implements CarService {
             }
         }
         return JsonResult.Error("数据错误");
+    }
+
+
+    /**
+     * 批量修改汽车状态
+     * @param ids
+     * @param unable
+     * @return
+     */
+    @Override
+    public JsonResult updateCarStatus(List<Long> ids, Integer unable) {
+        if (ids==null||ids.size()==0||(unable!=1&&unable!=2)){
+            return JsonResult.Error("数据错误");
+        }
+        TbCarExample example = new TbCarExample();
+        for (Long id:ids) {
+            if (id==null||id==0){
+                continue;
+            }
+            TbCarExample.Criteria or = example.or();
+            or.andIdEqualTo(id);
+        }
+        TbCar car = new TbCar();
+        car.setUnable(unable);
+
+        tbCarMapper.updateByExampleSelective(car, example);
+        return JsonResult.OK("修改成功");
     }
 }

@@ -84,6 +84,7 @@
                         <a class="menu-btn"></a>
                         <div class="l-list">
                             <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit" data-href="${carAddUrl}"><i class="fa fa-plus"></i>新增</a>
+                            <a class="layui-btn layui-btn-small "  onclick="betchUnable()" ><i class="layui-icon">&#xe609;</i>批量审核</a>
                             <a class="layui-btn layui-btn-small do-action" data-type="doRefresh" data-href="${baseUrl}"><i class="fa fa-refresh"></i>刷新</a>
                         </div>
                     </div>
@@ -95,13 +96,8 @@
                 <table class="layui-table" lay-skin="line">
                     <thead>
                     <tr>
-                        <th style="display: none">
-                            <font color="aqua">
-                                <a href="javascript:;" ></a>
-                            </font>
-                            <%--<button class="layui-btn layui-btn-mini" >上一页</button>--%>
-                        </th>
-                        <th>上架</th>
+                        <th><input type="checkbox" id="selAll" onclick="selAllBtn(this)"   ></th>
+                        <th>审核状态</th>
                         <%--'汽车编号 ',--%>
 
                         <th>编号</th>
@@ -113,14 +109,14 @@
                         <%--年款式 类似 奥迪a42016款',--%>
                         <th>型号</th>
                         <%--'车辆颜色  外联数据字典表',--%>
-                        <th>颜色</th>
+                        <%--<th>颜色</th>--%>
                         <%--'汽车排量 1.7L',--%>
                         <th>排量</th>
-                        <th>变速箱类型</th>
+                        <%--<th>变速箱类型</th>--%>
                         <%--'变速箱类型 外联数据字典表 ',--%>
                         <th>卖点</th>
                         <%--MMENT '车辆卖点 用于搜索',--%>
-                        <th>订金</th>
+                        <%--<th>订金</th>--%>
                         <%--LL COMMENT '订金价格',--%>
                         <th>售价</th>
                         <%--ENT '修改时间',--%>
@@ -141,17 +137,19 @@
                     <script id="tpl" type="text/html">
                         {{#  layui.each(d.rows, function(index, item){ }}
                         <tr>
-                            <td style="display: none;"><input type="checkbox" name="selectNum" value="{{ item.id }}"></td>
+                            <td ><input type="checkbox" onclick="isSale(this)" name="selectNum" value="{{ item.id }}"></td>
                             <%--<td>{{ item.id }}</td>--%>
                             <%--<td>{{ item.unable }}</td>--%>
                             <td align="center">
-                                <a href="javascript:;" value="{{ item.unable }}" data-id="{{ item.id }}"  onclick="isSale(this)">
                                     {{# if (item.unable==1) { }}
-                                    <i class="fa fa-toggle-on unlock"></i>
+                                    <i class="layui-icon">&#x1005;</i>通过
+                                    <%--<i class="fa fa-toggle-on unlock"></i>--%>
+                                    {{# } else if (item.unable==0) { }}
+                                    <i class="layui-icon">&#xe63a;</i>待审核
+                                    <%--<i class="fa fa-toggle-off islock"></i>--%>
                                     {{# } else { }}
-                                    <i class="fa fa-toggle-off islock"></i>
-                                    {{# } }}
-                                </a>
+                                    <i class="layui-icon">&#x1007;</i>违规
+                                    {{# }}}
                             </td>
                         <%--'汽车编号 ',--%>
                             <td>{{ item.number }}</td>
@@ -162,14 +160,14 @@
                         <%--'外键  链接车辆类型',--%>
                             <td>{{ item.name }}</td>
                         <%--年款式 类似 奥迪a42016款',--%>
-                            <td>{{ item.color }}</td>
+                            <%--<td>{{ item.color }}</td>--%>
                         <%--'车辆颜色  外联数据字典表',--%>
-                            <td>{{ item.capacity }}</td>
+                            <%--<td>{{ item.capacity }}</td>--%>
                         <%--'汽车排量 1.7L',--%>
                             <td>{{ item.gearbox }}</td>
                             <td>{{ item.sellpoint }}</td>
                         <%--LL COMMENT '订金价格',--%>
-                            <td>{{ item.reservePrice }}</td>
+                            <%--<td>{{ item.reservePrice }}</td>--%>
                         <%--ULL COMMENT '售价',--%>
                             <td>{{ item.sellPrice }}</td>
                         <%--ENT '修改时间',--%>
@@ -207,9 +205,10 @@
     <script type="text/javascript" src="/resources/js/event.js"></script>
     <script src="/resources/js/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript">
-        layui.use("pagelist",function(){
-            var pagelist = layui.pagelist;
-            var form = layui.form();
+        layui.use(["pagelist","layer"],function(){
+            layer = layui.layer,
+                    pagelist = layui.pagelist;
+
             pagelist.basePagingInit(15);
             pagelist.carListInit();
         });
@@ -232,16 +231,51 @@
             },"json");
         }
 
-        function isSale(Obj){
-            if($(Obj).val()==1){
-                $(Obj).html('<i class="fa fa-toggle-off islock"></i>');
-                $(Obj).val(0)
+        function selAllBtn(Obj){
+            if($(Obj).attr("value")=="1"){
+                $("input[name='selectNum']").removeAttr("checked");
+                $(Obj).attr("value","0")
             }else{
-
-                $(Obj).html('<i class="fa fa-toggle-on unlock"></i>');
-                $(Obj).val(0)
+                $("input[name='selectNum']").attr("checked",true);
+                $(Obj).attr("value","1")
             }
+        }
 
+        function betchUnable(){
+
+
+            layer.open({
+                type: 1
+                ,offset: 'auto'
+                ,id: 'LAY_demo'
+                ,content: '<div style="padding: 20px 100px;">'+ "审核选中的汽车信息" +'</div>'
+                ,btn: ['审核通过', '全部置为违规']
+                ,btnAlign: 'c' //按钮居中
+                ,yes: function(){
+                    layer.closeAll();
+                    realFun(1)
+                },btn2: function(){
+                    layer.closeAll();
+                    realFun(2)
+                }
+            });
+        }
+
+
+        function realFun(btn){
+            var param = "";
+            $("input[name='selectNum']:checked").each(function(i,e){
+                param += (i==0?"?ids=":"&ids=")+$(this).val();
+            });
+            if(param!=""){
+                $.post("${betchanableUrl}"+param,{"unable":btn},function(data){
+                },"json");
+            }else{
+                layer.msg('当前勾选的车辆为空哦', {
+                    time: 10000,
+                    btn:"确认"
+                });
+            }
         }
 
     </script>
