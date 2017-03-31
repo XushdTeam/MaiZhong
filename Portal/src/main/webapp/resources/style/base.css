@@ -7,6 +7,9 @@ a{color:#666;text-decoration:none;cursor:pointer;blr:expression(this.onFocus=thi
 .center{ text-align:center}ul li,ol{ list-style:none}a:hover{ color:#f00}img{border:0}.clear{ clear: both;}
 img,input{vertical-align:middle; outline:none}
 
+/*微信公众号*/
+.rem{ display: none}
+
 
 .sidebar{
     position: fixed;
