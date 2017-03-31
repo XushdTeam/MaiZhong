@@ -178,12 +178,12 @@
             <dd class="dd2">
                 <h2>科鲁兹经典</h2>
                 <p>2015经典款 1.5L 自动挡/手动挡</p>
-                <ul>
+               <%-- <ul>
                     <li>1、外观大气</li>
                     <li>2、低油耗</li>
                     <li>3、操控精准</li>
                     <li>4、安全性高</li>
-                </ul>
+                </ul>--%>
                 <div class="bors"><a href="">预约看车</a></div>
                 <div class="bort">24小时热线：400-054-9494</div>
             </dd>
