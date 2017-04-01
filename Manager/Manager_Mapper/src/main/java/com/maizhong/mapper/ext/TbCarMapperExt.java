@@ -19,4 +19,7 @@ public interface TbCarMapperExt {
 
     public List<Map<String,Object>> findByBussinessId(@Param("businessId")Long businessId,@Param("carSeries") Long carSeries,@Param("brandId") Long brandId,@Param("carYear")String carYear,
                                                         @Param("date")String date,@Param("sortString")String sortString);
+    public List<Map<String,Object>> findByBasePropToCount(Long baseId);
+
+    public String  findPriceByTypeToCount(@Param("type") String type,@Param("factory") String factory,@Param("gearbox") String gearbox,@Param("series") String series);
 }

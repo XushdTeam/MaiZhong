@@ -10,7 +10,7 @@ import com.maizhong.pojo.TbCarBrand;
 import com.maizhong.pojo.TbCarType;
 import com.maizhong.pojo.vo.TbCarBaseVo;
 import com.maizhong.service.*;
-import com.sun.tools.javac.util.List;
+import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -223,7 +223,7 @@ public class CarController {
 
 
     @RequestMapping("/isanable")
-    public JsonResult isAnable(List<Long> ids,Integer unable){
+    public JsonResult isAnable(Long[] ids,Integer unable){
         return carService.updateCarStatus(ids,unable);
     }
 
