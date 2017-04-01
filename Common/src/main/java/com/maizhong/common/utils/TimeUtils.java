@@ -15,6 +15,7 @@ import java.util.Date;
 public class TimeUtils {
 
     private static final String format_default = "yyyy-MM-dd HH:mm:ss";
+    private static final String format_default_s = "yyyy-MM-dd";
     private static final DateTimeFormatter format = DateTimeFormat.forPattern(format_default);
     /**
      * 获取当期时间 "yyyy-MM-dd HH:mm:ss"
@@ -23,6 +24,15 @@ public class TimeUtils {
     public static String getNowTime(){
         DateTime dateTime = new DateTime();
         return dateTime.toString(format_default);
+    }
+
+    /**
+     * 获取前一天时间
+     * @param date
+     * @return
+     */
+    public static String getFormatDateTime(DateTime date){
+        return date.toString(format_default_s);
     }
 
     /**
@@ -43,6 +53,11 @@ public class TimeUtils {
     public static Date getDateBefore(int day){
         DateTime dateTime = new DateTime();
         return dateTime.minusDays(day).toDate();
+    }
+
+    public static String getDateBeforeDay(int day){
+        DateTime dateTime = new DateTime();
+        return getFormatDateTime(dateTime.minusDays(day));
     }
 
     /**
