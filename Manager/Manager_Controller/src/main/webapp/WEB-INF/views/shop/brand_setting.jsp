@@ -40,7 +40,7 @@
                          <div class="layui-form-item">
                             <label class="layui-form-label">品牌首字母</label>
                             <div class="layui-input-block">
-                                <input name="initial" autocomplete="off" value="${brand.initial}" lay-verify="required" maxlength="1"
+                                <input name="initial" autocomplete="off" value="${brand.initial}" lay-verify="letter"
                                        placeholder="品牌首字母，务必大写" class="layui-input" type="text">
                             </div>
                         </div>
@@ -89,6 +89,11 @@
         var $ = layui.jquery,
                 app = layui.app,
                 form = layui.form();
+        form.verify({
+            letter: [
+                /^[A-Z]$/,'必须为大写首字母！'
+            ]
+        });
 
         //初始化bar
         app.fixBar();
@@ -97,7 +102,9 @@
             var url = $(filedata.elem).data("href");
             app.ajaxPost(url,filedata.field,function(e,r){
                if(e){app.layerAlertE(e)}
-               else{app.layerAlertS(r.message)}
+               else{app.layerAlertS(r.message); app.time(function () {
+                   app.route("${baseUrl}");
+               });}
             });
             return false;
         });
@@ -117,6 +124,9 @@
                 if (res.status == 200) {
                     app.layerAlertS(res.message);
                     document.getElementById("imgShow").src= res.data;
+                    app.time(function () {
+                        app.route("${baseUrl}");
+                    });
                 } else {
                     app.layerAlertE(res.message);
     }

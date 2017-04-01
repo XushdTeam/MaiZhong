@@ -32,6 +32,7 @@ img,input{vertical-align:middle; outline:none}
 .jiage2 .red{ font-family:'微软雅黑'; font-size:25px; font-weight:bold; color:#e72116;margin-left:20px; display:block; float:left}
 .jiage2 .blue{background:#FE8F1B;color:#fff;padding:4px}
 .p5 .two{ background: #666;color: #fff }
+.jqzoom img{ height: 400px}
 /*middle/*/
 .right{width:205px;float:right;margin-right:10px}
 .fx{ margin-left: 25px}
@@ -438,7 +439,7 @@ ol, ul {list-style: none;}
 .tuijian dl dd p{ font-size: 15px; padding: 0 10px}
 .tuijian dl dd p span{ color: #e72116; font-size: 19px; margin-left: 50px}
 .heads a{ font-size: 14px; color: #999; font-weight: 500; float: right;}
-.footer{ background: #000; overflow: hidden;}
+.footer{ background: #000; overflow: hidden; padding-bottom: 30px}
 .foot_cen{ width: 1200px; margin: 0 auto}
 .n_f_m_c{ width: 75%; overflow: hidden; border-bottom: 1px solid #ccc; float: left;}
 .n_f_m_c a{ font-size: 16px; font-weight: bold; padding: 10px 10px; display: block; margin: 20px 0; float: left;color: #ccc}

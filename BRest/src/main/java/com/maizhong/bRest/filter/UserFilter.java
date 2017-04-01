@@ -43,10 +43,13 @@ public class UserFilter extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestURI = request.getRequestURI();
-        if (StringUtils.isBlank(requestURI)&&!"/bRest/login".equals(requestURI)&&!"/bRest/upload".equals(requestURI)){
+        if (!StringUtils.isBlank(requestURI)
+                &&!"/bRest/login".equals(requestURI)
+                &&!"/bRest/upload/body".equals(requestURI)
+                &&!"/bRest/upload/head".equals(requestURI)){
             String token = request.getHeader("Authorization");
             if (StringUtils.isNotBlank(token)){
-                String hget = jedisClient.hget("BUSSINESSUSER" + token, "BUSSINESSUSER_INFO");
+                String hget = jedisClient.hget("BUSSINESSUSER:" + token, "BUSSINESSUSER_INFO");
                 if (StringUtils.isNotBlank(hget)){
                     jedisClient.expire("BUSSINESSUSER" + token,900);
 

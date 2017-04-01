@@ -22,7 +22,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">用户名</label>
                 <div class="layui-input-block">
-                    <input name="userName" autocomplete="off" lay-verify="required" maxlength="20"
+                    <input name="userName" autocomplete="off" lay-verify="required"
                            placeholder="用户名" class="layui-input" type="text" value="${businessUser.userName}" >
                     <input name="id" value="${businessUser.id}" type="hidden">
                 </div>
@@ -37,7 +37,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">手机号</label>
                 <div class="layui-input-block">
-                    <input name="userPhone" autocomplete="off" lay-verify="required" maxlength="20"
+                    <input name="userPhone" autocomplete="off" lay-verify="phone"
                            placeholder="手机号" class="layui-input" type="text" value="${businessUser.userPhone}" >
                 </div>
             </div>
@@ -62,6 +62,11 @@
             var $ = layui.jquery,
                     form = layui.form(),
                     app = layui.app;
+            form.verify({
+                account: [
+                    /^[a-zA-Z0-9_]{1,20}$/,'用户名为字母数字下划线！'
+                ]
+            });
             app.fixBar();
             form.on("submit(btnsubmit)", function (formdata) {
                 var url = $(formdata.elem).data("href");

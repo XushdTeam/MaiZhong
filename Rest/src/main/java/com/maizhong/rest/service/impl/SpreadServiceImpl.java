@@ -275,6 +275,7 @@ public class SpreadServiceImpl implements SpreadService {
         return JsonResult.OK(new IndexBaseDTO(carBrandHot,listGg,carType));
     }
 
+
     /**
      * 广告信息获取
      * @author Xushd

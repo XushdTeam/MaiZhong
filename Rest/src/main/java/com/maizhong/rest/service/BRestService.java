@@ -1,5 +1,7 @@
 package com.maizhong.rest.service;
 
+import com.maizhong.common.dto.CarBaseDTO;
+import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.pojo.TbCar;
 
@@ -37,4 +39,9 @@ public interface BRestService {
     JsonResult findCarInfoById(Long id);
 
     JsonResult getDetailsByCarId(Long id);
+    OperateEnum insertSeries(Long brandId, String seriesName);
+
+    OperateEnum insertCarCarBase(CarBaseDTO carBaseDTO);
+
+    JsonResult getShopCount(Long businessId);
 }

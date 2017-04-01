@@ -25,14 +25,14 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">品牌名称</label>
                 <div class="layui-input-block">
-                    <input name="brandName" autocomplete="off" lay-verify="required" maxlength="50"
+                    <input name="brandName" autocomplete="off" lay-verify="required" maxlength="30"
                            placeholder="汽车品牌名称" class="layui-input" type="text">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">品牌首字母</label>
                 <div class="layui-input-block">
-                    <input name="initial" autocomplete="off" lay-verify="number" maxlength="1"
+                    <input name="initial" autocomplete="off" lay-verify="letter"
                            placeholder="务必大写！！" class="layui-input" type="text">
                 </div>
             </div>
@@ -79,7 +79,11 @@
             var $ = layui.jquery,
                     form = layui.form(),
                     app = layui.app;
-
+            form.verify({
+                letter: [
+                    /^[A-Z]$/,'必须为大写首字母！'
+                ]
+            });
             /**
              * 绑定上传事件
              */

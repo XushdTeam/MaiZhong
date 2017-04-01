@@ -4,6 +4,7 @@ import com.maizhong.pojo.TbCar;
 import com.maizhong.pojo.TbCarExample;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface TbCarMapper {
@@ -34,4 +35,11 @@ public interface TbCarMapper {
     int updateByPrimaryKeyWithBLOBs(TbCar record);
 
     int updateByPrimaryKey(TbCar record);
+    long totalCarNumber(@Param("businessId") Long businessId);
+    long totalBrandNumber(@Param("businessId") Long businessId);
+    long totalSeriesNumber(@Param("businessId") Long businessId);
+    long shopCarNumber(@Param("businessId") Long businessId);
+    long shopBrandNumber(@Param("businessId") Long businessId);
+    long shopSeriesNumber(@Param("businessId") Long businessId);
+    long weekNumber(@Param("startTime") String startTime,@Param("endTime") String endTime,@Param("businessId") Long businessId);
 }
