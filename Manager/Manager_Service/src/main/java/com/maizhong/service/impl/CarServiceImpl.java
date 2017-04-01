@@ -289,8 +289,8 @@ public class CarServiceImpl implements CarService {
      * @return
      */
     @Override
-    public JsonResult updateCarStatus(List<Long> ids, Integer unable) {
-        if (ids==null||ids.size()==0||(unable!=1&&unable!=2)){
+    public JsonResult updateCarStatus(Long[] ids, Integer unable) {
+        if (ids==null||ids.length==0||(unable!=1&&unable!=2)){
             return JsonResult.Error("数据错误");
         }
         TbCarExample example = new TbCarExample();

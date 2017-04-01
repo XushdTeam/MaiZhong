@@ -265,10 +265,18 @@
         function realFun(btn){
             var param = "";
             $("input[name='selectNum']:checked").each(function(i,e){
-                param += (i==0?"?ids=":"&ids=")+$(this).val();
+                param += (i==0?"?ids[":"&ids[")+i+"]="+$(this).val();
             });
             if(param!=""){
-                $.post("${betchanableUrl}"+param,{"unable":btn},function(data){
+                $.post("${betchanableUrl}"+param,{"unable":btn},function(result){
+                    var messgae = "操作失败";
+                    if(result.status==200){
+                       messgae = result.message;
+                    }
+                    layer.msg(messgae, {
+                        time: 10000,
+                        btn:"确认"
+                    });
                 },"json");
             }else{
                 layer.msg('当前勾选的车辆为空哦', {

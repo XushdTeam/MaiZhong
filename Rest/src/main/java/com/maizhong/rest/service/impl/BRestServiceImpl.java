@@ -124,8 +124,11 @@ public class BRestServiceImpl implements BRestService {
         car.setUpdateTime(new Date());
         //unable   借用此接口  默认不可用  需要后台进行处理
 //        if (car.getUnable()==null||StringUtils.isBlank(car.getUnable()+"")){
-        car.setUnable(0);
+        //TODO  暂时设置为 可用
+        car.setUnable(1);
 //        }
+
+
 
 
         //权重搜索字段默认用户不可修改    置为0
@@ -164,6 +167,7 @@ public class BRestServiceImpl implements BRestService {
 
 
                     tbCarMapper.updateByPrimaryKeySelective(tbCar);
+                    return JsonResult.OK("修改成功");
                 }
             }
         }

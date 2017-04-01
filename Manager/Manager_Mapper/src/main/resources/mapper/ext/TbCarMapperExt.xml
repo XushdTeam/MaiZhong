@@ -209,4 +209,14 @@
             ORDER BY  ${sortString}
         </if>
     </select>
+
+
+
+    <select id="findByBasePropToCount" parameterType="java.lang.Long"  resultType="java.util.HashMap">
+       SELECT car_series seriesName,car_type name,car_displacement displacement,car_gearbox gearbox,car_factory factory,car_factory_price shopPrice FROM tb_car_base WHERE id = #{baseId}
+    </select>
+
+    <select id="findPriceByTypeToCount"   resultType="java.lang.String">
+        SELECT car_factory_price  FROM tb_car_base where car_factory = #{factory} AND car_gearbox = #{gearbox}  AND car_series = #{series} AND car_type LIKE "%"#{type}"%" ORDER BY car_year DESC LIMIT 0,1
+    </select>
 </mapper>
