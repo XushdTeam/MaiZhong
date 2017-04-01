@@ -13,26 +13,26 @@ img,input{vertical-align:middle; outline:none}
 /*-------产品详情------------*/
 .font2{ font-size:12px; border:1px solid #ccc;padding:5px 17px;background:url(../img/images/c_81.jpg) no-repeat right center}
 .sousuo span{background:#000; color:#fff;margin:0px 0 0 10px; display:block;width:60px; float:left; text-align:center;line-height:32px}
-.pro .left{ float:left;width:670px;display:inline}
-.pro_details_topcenter{width:480px; float:right}
+.pro .left{ float:left;width:500px;display:inline}
+.pro_details_topcenter{width:640px; float:right}
 .pro{width:1200px;overflow:hidden; margin: 0 auto}
 .p5{ clear:both}
-.p5 a{background:#e72116;line-height:35px; float:left;margin:10px 0 0 20px;color:#FFF;padding:0 40px;margin-bottom:10px; font-weight:bold; font-size:14px}
-.pro1{font-size:20px; font-family:'黑体';font-weight:bold;padding:5px 0;color:#333}
-.pro_details_topcenter div{padding:5px 20px}
+.p5 a{background:#e72116;line-height:48px; float:left;margin:5px 20px 0 0px;color:#FFF;padding:0 70px;margin-bottom:10px; font-weight:bold; font-size:14px; border-radius: 3px;}
+.pro1{font-size:20px; font-family:'黑体';font-weight:bold;padding:0px 0 9px 0;color:#333}
 .pro_details_kuang{height:15px;margin:5px 0}
 .pro_details_kuang a{margin-left:10px;border:1px solid #ccc;padding:12px 5px;}
 .nav_topright_fuwu{margin:5px 0 0 10px}
 .nav_topright_fuwu a{border:1px solid #ccc;padding:6px}
-.jiage2{clear:both;background:#F5F5F5; overflow:hidden;zoom:1; padding: 14px 20px !important}
-.j_color{ color: #e72116}
+.jiage2{clear:both;background:#F5F5F5; overflow:hidden;zoom:1; padding: 9px 20px !important; font-size: 14px;}
+.j_color{ color: #e72116; line-height: 30px; }
 .jiage3 p{ text-decoration: line-through}
 .jiage3 .red2{ font-size: 16px;}
-.jiage2 p{ float:left}
+.jiage2 p{ float:left; font-size: 14px;}
 .jiage2 .red{ font-family:'微软雅黑'; font-size:25px; font-weight:bold; color:#e72116;margin-left:20px; display:block; float:left}
 .jiage2 .blue{background:#FE8F1B;color:#fff;padding:4px}
 .p5 .two{ background: #666;color: #fff }
 .jqzoom img{ height: 400px}
+.reds{ padding-left: 20px;color: #e72116; font-size: 16px;}
 /*middle/*/
 .right{width:205px;float:right;margin-right:10px}
 .fx{ margin-left: 25px}
@@ -42,10 +42,13 @@ img,input{vertical-align:middle; outline:none}
 .conten .p6 a{ padding:0 23px;border-left:1px solid #ccc; float:left}
 .ones{ padding-left: 30px}
 .f_lei{ float: left; width: 60px;}
-.cd_m_info_desc td span{ display:block; padding: 5px 0; font-size: 14px;}
-.cd_m_info_desc{ border: 0; margin: 5px 0 25px}
+.cd_m_info_desc td span{ display:block; padding: 3px 0; font-size: 18px;}
+.cd_m_info_desc{ border: 0; margin: 5px 0 10px; padding: 10px 0}
 .cd_m_info_desc td{ width: 160px;  text-align: center;padding:0px 10px; }
-.cd_m_info_desc_val{ font-size: 16px; line-height: 30px;}
+.cd_m_info_desc_val{ font-size: 18px; line-height: 30px;color: #e72116}
+.cd_m_info_desc_val a{ color: #e72116}
+.cd_m_info_desc .cd_m_info_desc_key{ font-size: 14px !important;}
+.soles{ color: #fff; background: #e72116; padding: 10px 10px; font-size: 16px;border-top-right-radius: 3px; border-top-left-radius: 3px;}
 
 .bor{ border-bottom: 1px solid #e5e5e5 }
 .cd_m_info_desc td:nth-child(2){ border-left:1px solid #e5e5e5; border-right:1px solid #e5e5e5; }
@@ -747,8 +750,9 @@ ul.zhunxinche .num {margin-top: -6px;color: #e72116; font-size: 30px; width: 40p
 
 .car-sale-wrap{ width: 1208px; margin: 0 auto }
 .search-opt{margin-top:20px;position:relative;}
-.search-opt .select{height:205px;border:#f4f4f4 1px solid;border-bottom:0;border-radius:4px;width:1208px;margin:10px auto 0;font:normal 14px/24px "Microsoft Yahei";position:relative;}
-.search-opt .select-con{height:50px;border-bottom:#f4f4f4 1px solid;position:relative;}
+.search-opt .select{height:205px;border:#f4f4f4 1px solid;border-bottom:0;border-radius:4px;
+    width:1208px;margin:10px auto 0;font:normal 14px/24px "Microsoft Yahei";position:relative; }
+.search-opt .select-con{height:50px;border-bottom:#f4f4f4 1px solid;position:relative}
 .search-opt .select dl{zoom:1;position:relative;line-height:24px;float:left;}
 .search-opt .select dl:after{content:" ";display:block;clear:both;height:0;overflow:hidden}
 .search-opt dt{width:55px;height:50px;padding-left:10px;line-height:50px;text-align:center;margin-right:10px;color:#666;float:left;}

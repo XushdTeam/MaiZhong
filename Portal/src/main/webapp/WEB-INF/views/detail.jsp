@@ -32,14 +32,16 @@
 <div class="pro">
     <div class="left">
         <div class="jqzoom">
-            <img src="${car.image}" width="670px" />
+            <img src="${car.image}" width="500px" />
         </div>
     </div><!--left/-->
     <div class="pro_details_topcenter">
-        <div class="pro1" style="padding-top:10px;padding-left:0px">${car.name}</div>
+        <div class="pro1" style="padding-left:0px">${car.name}</div>
         <p class="j_color">进口车型 详询经销商</p>
-        <div class="jiage2"><p>准价：</p><span class="red">￥${car.sell_price}</span></div>
-        <div class="jiage2 jiage3"><p>市场价：<span class="red2">￥${car.shop_price}</span></p></div>
+
+        <p class="soles">保障车源，保障质量，保障价格，保障售后</p>
+        <div class="jiage2"><p>准价：</p><span class="red">￥${car.sell_price}</span>  &nbsp;&nbsp;&nbsp;本平台优惠价格</div>
+        <div class="jiage2 jiage3"><p>市场价：<span class="red2">￥${car.shop_price}</span> &nbsp;&nbsp;&nbsp;</p> <span class="reds">其他平台或4s店价格</span></div>
         <table class="cd_m_info_desc" cellspacing="0" border="0">
             <tbody>
             <tr>
