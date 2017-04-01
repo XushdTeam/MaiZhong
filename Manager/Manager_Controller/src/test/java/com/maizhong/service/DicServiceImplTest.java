@@ -20,10 +20,10 @@ import java.util.List;
 /**
  * Created by Xushd on 2017/3/14.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath:spring/spring-*.xml"})
+/*@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations={"classpath:spring/spring-*.xml"})*/
 public class DicServiceImplTest {
-
+/*
     @Autowired
     private JedisClient jedisClient;
 
@@ -36,6 +36,6 @@ public class DicServiceImplTest {
 
 
 
-    }
+    }*/
 
 }
