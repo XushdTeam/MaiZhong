@@ -15,6 +15,7 @@ public class CarBaseDTO {
     private String carYear;//年款
     private String carFactoryPrice;//厂商指导价
     private String carSize;//长宽高
+    private String carFactory;//厂商
     private String carLevel;//级别
     private String carLOil;//工信部油耗
     private String carZMm;//轴距
@@ -94,6 +95,14 @@ public class CarBaseDTO {
 
     public void setCarSize(String carSize) {
         this.carSize = carSize;
+    }
+
+    public String getCarFactory() {
+        return carFactory;
+    }
+
+    public void setCarFactory(String carFactory) {
+        this.carFactory = carFactory;
     }
 
     public String getCarLevel() {
@@ -228,10 +237,11 @@ public class CarBaseDTO {
     }
 
     public CarBaseDTO(Long id, String carBrand, String initial, String carSeries, String carType, String carYear,
-                      String carFactoryPrice, String carSize, String carLevel, String carLOil, String carZMm,
-                      String carWarranty, String carFuelLabel, String carEnvironmentStandards, String carLuggage,
-                      String carColor, String carDisplacement, String carEngine, String carMarPower, String carHsFactory,
-                      String carGearbox, String carMaxTorque, String carMaxspeed, String carDriveMode) {
+                      String carFactoryPrice, String carSize, String carFactory, String carLevel, String carLOil,
+                      String carZMm, String carWarranty, String carFuelLabel, String carEnvironmentStandards,
+                      String carLuggage, String carColor, String carDisplacement, String carEngine,
+                      String carMarPower, String carHsFactory, String carGearbox, String carMaxTorque,
+                      String carMaxspeed, String carDriveMode) {
         this.id = id;
         this.carBrand = carBrand;
         this.initial = initial;
@@ -240,6 +250,7 @@ public class CarBaseDTO {
         this.carYear = carYear;
         this.carFactoryPrice = carFactoryPrice;
         this.carSize = carSize;
+        this.carFactory = carFactory;
         this.carLevel = carLevel;
         this.carLOil = carLOil;
         this.carZMm = carZMm;
