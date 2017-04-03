@@ -41,14 +41,14 @@ public class BRestServiceImpl implements BRestService {
 
     @Resource
     private TbBusinessUserMapper tbBusinessUserMapper;
-
-
     @Resource
     private TbCarBrandMapper tbCarBrandMapper;
     @Resource
     private TbCarBrandLineMapper tbCarBrandLineMapper;
     @Resource
     private TbCarBaseMapperExt tbCarBaseMapperExt;
+    @Resource
+    private TbCarFactoryMapper tbCarFactoryMapper;
 
     @Resource
     private JedisClient jedisClient;
@@ -127,8 +127,6 @@ public class BRestServiceImpl implements BRestService {
         //TODO  暂时设置为 可用
         car.setUnable(1);
 //        }
-
-
 
 
         //权重搜索字段默认用户不可修改    置为0
@@ -299,8 +297,13 @@ public class BRestServiceImpl implements BRestService {
         if (seriesId == null) {
             return JsonResult.Error("data error");
         }
-        String name = jedisClient.hget("CAR_SERIES_ID", seriesId);
-
+        TbCarBrandLine tbCarBrandLine = new TbCarBrandLine();
+        try {
+            tbCarBrandLine = tbCarBrandLineMapper.selectByPrimaryKey(Long.valueOf(seriesId));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        String name = tbCarBrandLine.getLineName();
         List<TbCarBaseVo> vos = tbCarMapperExt.findByCarYearAndCarSeres(name, year);
         return JsonResult.OK(vos);
     }
@@ -361,7 +364,7 @@ public class BRestServiceImpl implements BRestService {
 
 
     @Override
-    public OperateEnum insertSeries(Long brandId, String seriesName) {
+    public OperateEnum insertSeries(Long brandId, Long factoryId,String seriesName) {
         if (brandId == null || StringUtils.isBlank(seriesName)) {
             return OperateEnum.FAILE;
         }
@@ -372,19 +375,20 @@ public class BRestServiceImpl implements BRestService {
             e.printStackTrace();
             return OperateEnum.FAILE;
         }
-        tbCarBrandLine.setDelflag(0);
-        tbCarBrandLine.setLineName(seriesName);
-        tbCarBrandLine.setLineSequence(999);
-        tbCarBrandLine.setStatus(1);
         TbCarBrandLineExample tbCarBrandLineExample = new TbCarBrandLineExample();
         TbCarBrandLineExample.Criteria criteria = tbCarBrandLineExample.createCriteria();
         criteria.andLineNameEqualTo(tbCarBrandLine.getLineName());
         criteria.andDelflagEqualTo(0);
-        criteria.andBrandIdEqualTo(brandId);
+        criteria.andFactoryIdEqualTo(factoryId);
         List<TbCarBrandLine> tbCarBrandLines = tbCarBrandLineMapper.selectByExample(tbCarBrandLineExample);
         if (tbCarBrandLines.size() > 0) {
             return OperateEnum.NAME_REPEAT;
         }
+        tbCarBrandLine.setDelflag(0);
+        tbCarBrandLine.setLineName(seriesName);
+        tbCarBrandLine.setLineSequence(999);
+        tbCarBrandLine.setStatus(1);
+        tbCarBrandLine.setFactoryId(factoryId);
         int res = tbCarBrandLineMapper.insertSelective(tbCarBrandLine);
         if (res > 0) {
             jedisClient.hdel(CAR_SERIES, brandId + "");
@@ -454,30 +458,115 @@ public class BRestServiceImpl implements BRestService {
         long shopCarNumber = tbCarMapper.shopCarNumber(businessId);
         long shopBrandNumber = tbCarMapper.shopBrandNumber(businessId);
         long shopSeriesNumber = tbCarMapper.shopSeriesNumber(businessId);
-        TbCarExample example=new TbCarExample();
-        List<String> dateList=new ArrayList<>();
-        List<Long> numberList=new ArrayList<>();
-        for (int i=6;i>=0;i--){
-           dateList.add(TimeUtils.getDateBeforeDay(i));
-            Long num=0L;
-            if (i==0){
-               num= tbCarMapper.weekNumber(TimeUtils.getDateBeforeDay(i),TimeUtils.getDateBeforeDay(-1),businessId);
-            }else {
-               num= tbCarMapper.weekNumber(TimeUtils.getDateBeforeDay(i),TimeUtils.getDateBeforeDay(i-1),businessId);
+        TbCarExample example = new TbCarExample();
+        List<String> dateList = new ArrayList<>();
+        List<Long> numberList = new ArrayList<>();
+        for (int i = 6; i >= 0; i--) {
+            dateList.add(TimeUtils.getDateBeforeDay(i));
+            Long num = 0L;
+            if (i == 0) {
+                num = tbCarMapper.weekNumber(TimeUtils.getDateBeforeDay(i), TimeUtils.getDateBeforeDay(-1), businessId);
+            } else {
+                num = tbCarMapper.weekNumber(TimeUtils.getDateBeforeDay(i), TimeUtils.getDateBeforeDay(i - 1), businessId);
             }
             numberList.add(num);
         }
-        Map<String,Object> map=new HashMap<>();
-        map.put("totalCarNumber",totalCarNumber);
-        map.put("shopCarNumber",shopCarNumber);
-        map.put("totalBrandNumber",totalBrandNumber);
-        map.put("shopBrandNumber",shopBrandNumber);
-        map.put("totalSeriesNumber",totalSeriesNumber);
-        map.put("shopSeriesNumber",shopSeriesNumber);
-        map.put("dateList",dateList);
-        map.put("numberList",numberList);
-       return JsonResult.build(200,"获取成功",map);
+        Map<String, Object> map = new HashMap<>();
+        map.put("totalCarNumber", totalCarNumber);
+        map.put("shopCarNumber", shopCarNumber);
+        map.put("totalBrandNumber", totalBrandNumber);
+        map.put("shopBrandNumber", shopBrandNumber);
+        map.put("totalSeriesNumber", totalSeriesNumber);
+        map.put("shopSeriesNumber", shopSeriesNumber);
+        map.put("dateList", dateList);
+        map.put("numberList", numberList);
+        return JsonResult.build(200, "获取成功", map);
     }
 
+    /**
+     * 根据品牌获取厂商
+     *
+     * @param brandId
+     * @return
+     */
+    @Override
+    public JsonResult findFactoryByBrand(String brandId) {
+        TbCarFactoryExample tbCarFactoryExample = new TbCarFactoryExample();
+        TbCarFactoryExample.Criteria criteria = tbCarFactoryExample.createCriteria();
+        try {
+            criteria.andBrandIdEqualTo(Long.valueOf(brandId));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return JsonResult.Error("网络错误，请刷新后重试");
+        }
+        List<TbCarFactory> tbCarFactories = tbCarFactoryMapper.selectByExample(tbCarFactoryExample);
+
+        if (tbCarFactories != null && tbCarFactories.size() > 0) {
+            return JsonResult.OK(tbCarFactories);
+        }
+        return JsonResult.OK();
+
+    }
+
+  //根据汽车厂商获取车系
+    @Override
+    public JsonResult getSeriesByFactory(String factoryId) {
+        TbCarBrandLineExample tbCarBrandLineExample=new TbCarBrandLineExample();
+        TbCarBrandLineExample.Criteria criteria = tbCarBrandLineExample.createCriteria();
+        try {
+            criteria.andFactoryIdEqualTo(Long.valueOf(factoryId));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return JsonResult.Error("网络错误，请刷新后重试！");
+        }
+        List<TbCarBrandLine> tbCarBrandLines = tbCarBrandLineMapper.selectByExample(tbCarBrandLineExample);
+        if (tbCarBrandLines!=null&&tbCarBrandLines.size()>0){
+            return JsonResult.OK(tbCarBrandLines);
+        }
+        return JsonResult.OK();
+    }
+
+    /*//插入汽车厂商
+    @Override
+    public JsonResult getFactoryByBrand() {
+        TbCarBrandExample example = new TbCarBrandExample();
+        List<TbCarBrand> brands = tbCarBrandMapper.selectByExample(example);
+        for (TbCarBrand brand : brands) {
+            String brandName = brand.getBrandName();
+            List<String> list = tbCarFactoryMapper.getFactoryByBrand(brandName);
+            for (String factoryName : list) {
+                TbCarFactory tbCarFactory = new TbCarFactory();
+                tbCarFactory.setFactoryName(factoryName);
+                tbCarFactory.setBrandId(brand.getId());
+                tbCarFactoryMapper.insert(tbCarFactory);
+            }
+        }
+        return JsonResult.OK("插入成功");
+    }
+*/
+
+    /**
+     * 插入车系
+     * @return
+     */
+    /*@Override
+    public JsonResult getSeriesByFactory() {
+        TbCarFactoryExample example=new TbCarFactoryExample();
+        List<TbCarFactory> list = tbCarFactoryMapper.selectByExample(example);
+        for (TbCarFactory factory:list){
+            String factoryName = factory.getFactoryName();
+          String  brandName = jedisClient.hget(CAR_BRAND_ID, String.valueOf(factory.getBrandId()));
+            List<String> seriesByFactory = tbCarBrandLineMapper.getSeriesByFactory(factoryName,brandName);
+            for (String series:seriesByFactory){
+                TbCarBrandLine tbCarBrandLine=new TbCarBrandLine();
+                tbCarBrandLine.setBrandId(factory.getBrandId());
+                tbCarBrandLine.setLineName(series);
+                tbCarBrandLine.setFactoryId(factory.getId());
+                tbCarBrandLineMapper.insert(tbCarBrandLine);
+            }
+        }
+        return JsonResult.OK("插入成功！");
+    }
+*/
 
 }
