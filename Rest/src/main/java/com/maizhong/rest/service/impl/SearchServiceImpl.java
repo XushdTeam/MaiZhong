@@ -12,6 +12,7 @@ import com.maizhong.pojo.vo.TbCarVo;
 import com.maizhong.rest.service.DataSyncService;
 import com.maizhong.rest.service.SearchService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.concurrent.ConstantInitializer;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -359,7 +360,8 @@ public class SearchServiceImpl implements SearchService {
         String s = null;
         //如果 车型存在值  返回车型下的车系
         if (brandId!=null&&!"0".equals(brandId)){
-            s = jedisClient.hget(CAR_SERIES,brandId);
+            //s = jedisClient.hget(CAR_SERIES,brandId);
+            s = jedisClient.hget("BRAND_FACTORY_SERISE",brandId);
         }
         List<TbCarBrandLine> lines = null;
         if (StringUtils.isNotBlank(s)){
@@ -403,8 +405,62 @@ public class SearchServiceImpl implements SearchService {
         SearchBaseDTO searchBaseDTO = new SearchBaseDTO();
 
         //数据填充
-        //      热门品牌
-        searchBaseDTO.setCarSeriesAll(this.getCarSeriesList(brandId,seriesId));
+
+        // 获取热门车系
+        if(StringUtils.isBlank(brandId)||brandId.equals("0")){
+            String json = jedisClient.get(CAR_SERIES_HOT);
+            List<TbCarBrandLine> list = JsonUtils.jsonToList(json,TbCarBrandLine.class);
+            searchBaseDTO.setCarSeriseHot(list);
+            //存放 品牌下所有
+            searchBaseDTO.setCarSeriesAll(new ArrayList<>());
+
+            searchBaseDTO.setsL(10);
+        } else {
+            List<TbCarBrandLine> list = new ArrayList<>();
+            if(StringUtils.isNotBlank(seriesId)&&!seriesId.equals("0")){
+                String seriseName = jedisClient.hget(CAR_SERIES_ID,seriesId);
+                TbCarBrandLine bline = new TbCarBrandLine();
+                bline.setBrandId(Long.valueOf(brandId));
+                bline.setId(Long.valueOf(seriesId));
+                bline.setLineName(seriseName);
+                list.add(bline);
+            }
+            String json = jedisClient.hget(CAR_SERIES,brandId);
+            if(StringUtils.isNotBlank(json)){
+                List<TbCarBrandLine> list1 = JsonUtils.jsonToList(json,TbCarBrandLine.class);
+                int length = list1.size();
+                searchBaseDTO.setsL(length);
+                if(list1.size()>10){
+                    length =10;
+                }
+                for (int i=0;i<length;i++){
+                    if(String.valueOf(list1.get(i).getId()).equals(seriesId))continue;
+                    list.add(list1.get(i));
+                }
+            } else {
+                json = jedisClient.get(CAR_SERIES_HOT);
+                List<TbCarBrandLine> list1 = JsonUtils.jsonToList(json,TbCarBrandLine.class);
+                for (TbCarBrandLine tbCarBrandLine : list1) {
+                    if(String.valueOf(tbCarBrandLine.getId()).equals(seriesId))continue;
+                    list.add(tbCarBrandLine);
+
+                }
+                searchBaseDTO.setsL(10);
+
+            }
+
+
+            searchBaseDTO.setCarSeriseHot(list);
+
+            json = jedisClient.hget("BRAND_FACTORY_SERISE",brandId);
+
+            searchBaseDTO.setCarSeriesAll(JsonUtils.jsonToList(json,Map.class));
+
+
+
+        }
+
+
 
         //热门品牌
         List<CarBrandDTO>  hotCarBrand= this.getCarBrandHot();
@@ -417,6 +473,7 @@ public class SearchServiceImpl implements SearchService {
             hotCarBrandList.add(new KeyValue(carBrandDto.getId().toString(),carBrandDto.getName()));
         }
         searchBaseDTO.setCarBrandhot(hotCarBrandList);
+
 
         //全部全部
         searchBaseDTO.setCarBrandAll(this.getCarBrandGroupByInitial());
@@ -436,9 +493,11 @@ public class SearchServiceImpl implements SearchService {
         }
 
         //车系  名称
+
         if (seriesId!=null&&!"0".equals(seriesId)){
             //TODO
             searchBaseDTO.setSeriesName(jedisClient.hget(CAR_SERIES_ID,seriesId));
+
 //            String s = jedisClient.hget(CAR_SERIES, brandId);
 //            List<TbCarBrandLine> list = JsonUtils.jsonToList(s, TbCarBrandLine.class);
 //            for (TbCarBrandLine tbCarSeries:list) {

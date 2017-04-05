@@ -23,5 +23,5 @@ public interface CarService {
 
     JsonResult findBaseCar(Long carSeries, String carYear);
 
-    JsonResult updateCarStatus(Long[] ids, Integer unable);
+    JsonResult updateCarStatus(String ids, Integer unable);
 }
