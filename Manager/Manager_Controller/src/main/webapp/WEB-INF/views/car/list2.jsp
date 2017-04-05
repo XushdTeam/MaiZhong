@@ -85,6 +85,7 @@
                         <div class="l-list">
                             <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit" data-href="${carAddUrl}"><i class="fa fa-plus"></i>新增</a>
                             <a class="layui-btn layui-btn-small "  onclick="betchUnable()" ><i class="layui-icon">&#xe609;</i>批量审核</a>
+                            <a class="layui-btn layui-btn-small "  onclick="betchIssale()" ><i class="layui-icon">&#xe609;</i>批量上/下线</a>
                             <a class="layui-btn layui-btn-small do-action" data-type="doRefresh" data-href="${baseUrl}"><i class="fa fa-refresh"></i>刷新</a>
                         </div>
                     </div>
@@ -127,7 +128,7 @@
                         <%--'商品详情的存储字段',--%>
                         <th>权重</th>
                         <th>库存</th>
-                        <th>销量</th>
+                        <th>是否上线</th>
                         <th>所属商家</th>
                         <th>详情</th>
                         <th>操作</th>
@@ -179,12 +180,25 @@
                             </td>
                             <td>{{ item.weight }}</td>
                             <td>{{ item.stockNum }}</td>
-                            <td>{{ item.sellNum }}</td>
+                            <td>{{# if (item.issale) { }}
+                                <i class="fa fa-toggle-on unlock"></i>
+                                {{# } else { }}
+                                <i class="fa fa-toggle-off islock"></i>
+                                {{# } }}
+                            </td>
                             <td>{{ item.business }}</td>
                             <td><a href="javascript:;" onclick="seeDesc('{{ item.id }}','{{ item.name}}')">查看详情</a></td>
                         <%--'商品详情的存储字段',--%>
                             <td>
-                                <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit" data-href="${editCarUrl}?id={{item.id}}"><i class="icon-edit  fa fa-pencil-square-o"></i>编辑</a>
+                                {{# if (item.issale) { }}
+                                <a class="layui-btn layui-btn-small do-action" data-type="doAndRefresh"
+                                   data-href="${changeSale}?id={{item.id}}"><i
+                                        class="icon-edit  fa fa-pencil-square-o"></i>下线</a>
+                                {{# } else { }}
+                                <a class="layui-btn layui-btn-small do-action" data-type="doAndRefresh"
+                                   data-href="${changeSale}?id={{item.id}}"><i
+                                        class="icon-edit  fa fa-pencil-square-o"></i>上线</a>
+                                {{# } }}
                                 <a class="layui-btn layui-btn-small layui-btn-danger do-action" data-type="doDelete" data-text="确定删除<span class=red>{{item.name}}</span>吗？" data-href="${deleteUrl}/{{item.id}}"><i class="icon-trash-o  fa fa-trash-o"></i>删除</a>
                             </td>
                         </tr>
@@ -242,8 +256,6 @@
         }
 
         function betchUnable(){
-
-
             layer.open({
                 type: 1
                 ,offset: 'auto'
@@ -261,6 +273,24 @@
             });
         }
 
+        function betchIssale(){
+            layer.open({
+                type: 1
+                ,offset: 'auto'
+                ,id: 'LAY_demo'
+                ,content: '<div style="padding: 20px 100px;">'+ "上/下线选中的汽车" +'</div>'
+                ,btn: ['全部上线', '全部下线']
+                ,btnAlign: 'c' //按钮居中
+                ,yes: function(){
+                    layer.closeAll();
+                    realFun2(1)
+                },btn2: function(){
+                    layer.closeAll();
+                    realFun2(0)
+                }
+            });
+        }
+
 
         function realFun(btn){
             var param = [];
@@ -272,6 +302,25 @@
                     var messgae = "操作失败";
                     if(result.status==200){
                       location.reload();
+                    }
+                },"json");
+            }else{
+                layer.msg('当前勾选的车辆为空哦', {
+                    time: 10000,
+                    btn:"确认"
+                });
+            }
+        }
+        function realFun2(btn){
+            var param = [];
+            $("input[name='selectNum']:checked").each(function(i,e){
+                param.push($(this).val());
+            });
+            if(param.length!=0){
+                $.post("${issale}?ids="+param.join(","),{"issale":btn},function(result){
+                    var messgae = "操作失败";
+                    if(result.status==200){
+                        location.reload();
                     }
                 },"json");
             }else{

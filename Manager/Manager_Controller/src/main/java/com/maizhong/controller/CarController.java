@@ -84,7 +84,8 @@ public class CarController {
         model.addAttribute("deleteUrl","/car/deleteCar");
         model.addAttribute("editCarUrl","/car/modify");
         model.addAttribute("betchanableUrl","/car/isanable");
-
+        model.addAttribute("changeSale","/car/changeSale");
+        model.addAttribute("issale","/car/issale");
 
 
 
@@ -164,6 +165,19 @@ public class CarController {
         return carService.updateCar(tbCar);
     }
 
+ /**
+     * 上线下线汽车
+     * */
+    @ControllerLog(module = "汽车管理",methods = "汽车更改")
+    @RequestMapping("/changeSale")
+    @ResponseBody
+    public  JsonResult changeSale(Long id){
+        if (id==null){
+            return JsonResult.Error("数据错误");
+        }
+        return carService.changeSale(id);
+    }
+
 
 
     /**
@@ -227,5 +241,11 @@ public class CarController {
    public JsonResult isAnable(String ids, Integer unable){
        return carService.updateCarStatus(ids,unable);
    }
+
+    @RequestMapping("/issale")
+    @ResponseBody
+    public JsonResult isSale(String ids, Integer issale){
+        return carService.updateCarIssale(ids,issale);
+    }
 
 }
