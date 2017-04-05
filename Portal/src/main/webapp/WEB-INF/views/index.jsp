@@ -23,7 +23,7 @@
 
 </head>
 <!--首页头部开始-->
-<div class="htmleaf-container" style="background-image: url('/resources/img/home_phload.jpg'); width: 1903px;">
+<div class="htmleaf-container" style="background-image: url('/resources/img/home_phload.jpg'); width: 1903px; height:600px">
     <div class="banner">
         <ul>
             <script type="text/javascript">
