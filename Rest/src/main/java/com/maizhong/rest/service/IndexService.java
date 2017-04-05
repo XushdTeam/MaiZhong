@@ -17,4 +17,9 @@ public interface IndexService {
     JsonResult getInterfaceList(PageSearchParam pageSearchParam);
 
     JsonResult saveInterface(RestInterface restInterface);
+
+    JsonResult SetFactoryRedis();
+
+    JsonResult SetBrandFactorySerise();
+
 }
