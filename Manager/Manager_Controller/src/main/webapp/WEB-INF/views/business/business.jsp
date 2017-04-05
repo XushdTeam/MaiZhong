@@ -58,7 +58,6 @@
                     <col width="10%">
                     <col width="5%">
                     <col width="10%">
-                    <col width="10%">
                     <col width="5%">
                     <col width="10%">
                     <col width="10%">
@@ -72,7 +71,6 @@
                     <th>店铺名称</th>
                     <th>LOGO</th>
                     <th>地址</th>
-                    <th>坐标</th>
                     <th>负责人</th>
                     <th>手机号</th>
                     <th>座机</th>
@@ -90,7 +88,6 @@
                         <td>{{ item.businessName }}</td>
                         <td><img src="{{ item.logo }}" width="100" height="40"/></td>
                         <td>{{ item.address }}</td>
-                        <td>{{ item.location }}</td>
                         <td>{{ item.linkman}}</td>
                         <td>{{ item.mobilePhone}}</td>
                         <td>{{ item.telephone}}</td>
@@ -103,6 +100,7 @@
                         </td>
                         <td>
                             <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit" data-href="${handleUrl}/{{item.id}}"><i class="icon-edit  fa fa-pencil-square-o"></i>编辑</a>
+                            <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit" data-href="${detailUrl}/{{item.id}}"><i class="icon-edit  fa fa-pencil-square-o"></i>查看</a>
                             <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit" data-href="/businessUser/handle/new/{{item.id}}"><i class="icon-edit  fa fa-pencil-square-o"></i>添加管理员</a>
                             <a class="layui-btn layui-btn-small layui-btn-danger do-action" data-type="doDelete" data-text="确定删除<span class=red>{{item.businessName}}</span>吗？" data-href="${deleteUrl}/{{item.id}}"><i class="icon-trash-o  fa fa-trash-o"></i>删除</a>
                         </td>
