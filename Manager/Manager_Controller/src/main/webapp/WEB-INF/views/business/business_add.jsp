@@ -77,6 +77,7 @@
                 <div class="layui-input-block">
                     <input name="location" autocomplete="off" lay-verify="required" maxlength="100"
                            placeholder="地址坐标" class="layui-input" type="text">
+                    <a href="http://api.map.baidu.com/lbsapi/getpoint/index.html" target="view_window" style="color: red;">去查询坐标</a>
                 </div>
             </div>
             <div class="layui-form-item">

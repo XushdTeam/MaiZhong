@@ -263,20 +263,16 @@
 
 
         function realFun(btn){
-            var param = "";
+            var param = [];
             $("input[name='selectNum']:checked").each(function(i,e){
-                param += (i==0?"?ids[":"&ids[")+i+"]="+$(this).val();
+                param.push($(this).val());
             });
-            if(param!=""){
-                $.post("${betchanableUrl}"+param,{"unable":btn},function(result){
+            if(param.length!=0){
+                $.post("${betchanableUrl}?ids="+param.join(","),{"unable":btn},function(result){
                     var messgae = "操作失败";
                     if(result.status==200){
-                       messgae = result.message;
+                      location.reload();
                     }
-                    layer.msg(messgae, {
-                        time: 10000,
-                        btn:"确认"
-                    });
                 },"json");
             }else{
                 layer.msg('当前勾选的车辆为空哦', {

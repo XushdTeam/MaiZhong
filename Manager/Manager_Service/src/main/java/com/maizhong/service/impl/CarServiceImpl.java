@@ -289,17 +289,18 @@ public class CarServiceImpl implements CarService {
      * @return
      */
     @Override
-    public JsonResult updateCarStatus(Long[] ids, Integer unable) {
-        if (ids==null||ids.length==0||(unable!=1&&unable!=2)){
+    public JsonResult updateCarStatus(String ids, Integer unable) {
+        String[] split = ids.split(",");
+        if (split==null||split.length==0||(unable!=1&&unable!=2)){
             return JsonResult.Error("数据错误");
         }
         TbCarExample example = new TbCarExample();
-        for (Long id:ids) {
-            if (id==null||id==0){
+        for (String id:split) {
+            if (StringUtils.isBlank(id)){
                 continue;
             }
             TbCarExample.Criteria or = example.or();
-            or.andIdEqualTo(id);
+            or.andIdEqualTo(Long.valueOf(id));
         }
         TbCar car = new TbCar();
         car.setUnable(unable);
