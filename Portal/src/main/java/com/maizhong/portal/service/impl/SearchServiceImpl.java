@@ -7,6 +7,7 @@ import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.pojo.vo.SearchResult;
 import com.maizhong.portal.service.SearchService;
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,10 @@ public class SearchServiceImpl implements SearchService {
     public SearchResult search(PageSearchParam pageSearchParam) {
         return null;
     }
+
+    private static String[] carLevel={"不限","SUV","跑车","MPV","面包","皮卡","商务","中型车","中大型车","大型车","小型车","微型车","轻客","紧凑型车"};
+    private static String[] carLevelSearch={"0","SUV","跑车","MPV","微面","皮卡","中大型车","中型车","中大型车","大型车","小型车","微","轻客","紧凑型车"};
+
 
     /**
      * 查询基础信息
@@ -85,7 +90,15 @@ public class SearchServiceImpl implements SearchService {
                 sort = param.get("s"),
                 method = param.get("m"),
                 page = param.get("pe"),
+                vt = param.get("t"),
                 qs = param.get("qs");
+        int vt_int = 0 ;
+        try {
+            vt_int = Integer.parseInt(vt);
+        }catch (Exception e){
+
+        }
+
         //STEP1 获取查询 基本数据
         Map<String,String> param1 = Maps.newHashMap();
         param1.put("brandId",param.get("b"));
@@ -98,9 +111,9 @@ public class SearchServiceImpl implements SearchService {
             model.addAttribute("bOut",map.get("brandHot"));
             model.addAttribute("bAll",map.get("carBrandAll"));
             model.addAttribute("bN",map.get("brandName"));
-            List<Object> list = (List<Object>) map.get("carSeriesAll");
             model.addAttribute("sAll",map.get("carSeriesAll"));
-            model.addAttribute("sL",list.size());
+            model.addAttribute("sHot",map.get("carSeriseHot"));
+            model.addAttribute("sL",map.get("sL"));
             model.addAttribute("sN",map.get("seriesName"));
             model.addAttribute("bId",brandId);
             model.addAttribute("sId",seriseId);
@@ -178,6 +191,9 @@ public class SearchServiceImpl implements SearchService {
             if(!volume.equals("0")){
                 param2.put("capacity",volume);
             }
+            if(!vt.equals("0")){
+                param2.put("carType",carLevelSearch[vt_int]);
+            }
         }
         param2.put("pageIndex",page==null?"1":page);
         String res2 = HttpClientUtil.doGet(REST_URL+SEARCH_SOLR,param2);
@@ -198,6 +214,11 @@ public class SearchServiceImpl implements SearchService {
             model.addAttribute("method","1");
         }
         model.addAttribute("queryStr",qs);
+        model.addAttribute("vT",vt_int);
+        model.addAttribute("tN",carLevel[vt_int]);
+
+
+
         return model;
     }
 }
