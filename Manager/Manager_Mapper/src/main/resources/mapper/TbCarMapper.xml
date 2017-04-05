@@ -144,6 +144,9 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.maizhong.pojo.TbCar">
+        <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
     insert into tb_car (id, number, base_id, 
       car_brand, car_brand_line, car_type, 
       car_year, color, sellpoint, 
@@ -162,6 +165,10 @@
       #{details,jdbcType=LONGVARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.maizhong.pojo.TbCar">
+        <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+
         insert into tb_car
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">

@@ -28,6 +28,8 @@ public class SearchController {
 
 
 
+
+
     @RequestMapping("/sync")
     @ResponseBody
     public JsonResult testOfSync(){
@@ -61,5 +63,12 @@ public class SearchController {
 
         JsonResult jsonResult = searchService.getSearchResult(queryString, sortString, carBrand, carSeries,carType,sellPrice, capacity, carYear, pageIndex);
         return jsonResult;
+    }
+
+
+    @RequestMapping("/syncTosolr")
+    @ResponseBody
+    public JsonResult syncTosolr(String delId,String insertId){
+        return searchService.syncTosolr(delId,insertId);
     }
 }

@@ -334,9 +334,10 @@ public class SearchServiceImpl implements SearchService {
 
 
         Map<String,Object> map = searchDoc(querysb.toString(),sortArray,i,highTiken?queryString:"");
-        if (map==null||map.size()==0){
-            map = searchDoc("*:*",null,1,"");
-        }
+        //查询数据为空的处理
+//        if (map==null||map.size()==0){
+//            map = searchDoc("*:*",null,1,"");
+//        }
 
 
         return JsonResult.OK(map);
@@ -524,6 +525,30 @@ public class SearchServiceImpl implements SearchService {
             car_brand_group = syncCarBrandGroup();
         }
         return car_brand_group;
+    }
+
+    @Override
+    public JsonResult syncTosolr(final String delId,final String insertId) {
+        if (StringUtils.isBlank(delId)&&StringUtils.isBlank(insertId)){
+            return JsonResult.Error("数据错误");
+        }
+        try {
+            //防备以后传递多参数  方法执行速度过慢
+            new Thread("solr数据同步线程"){
+                @Override
+                public void run(){
+                    try {
+                        dataSyncService.dataSyncOfSingle(Long.parseLong(delId),Long.parseLong(insertId));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }.start();
+            return JsonResult.OK("数据同步请求已发送");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return JsonResult.Error("同步失败");
     }
 
 }
