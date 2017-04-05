@@ -4,6 +4,7 @@ package com.maizhong.rest.controller;
 import com.maizhong.common.dto.CarShowIndex;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
+import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.pojo.TbFeedback;
 import com.maizhong.rest.service.SpreadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,17 +36,13 @@ public class SpreadController {
     /**
      * 首页分栏数据
      *
-     * @param jsoncallback
      * @return JSONP
      */
 
     @RequestMapping(value = "/getHomeItemContent", method = RequestMethod.GET)
-    public Object getHomeItemContent(String jsoncallback) {
+    public JsonResult getHomeItemContent() {
         List<CarShowIndex> list = spreadService.getHomeItem();
-        MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(list);
-        mappingJacksonValue.setJsonpFunction(jsoncallback);
-        return mappingJacksonValue;
-
+        return JsonResult.OK(list);
     }
 
     /**

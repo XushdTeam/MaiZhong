@@ -39,9 +39,17 @@ public interface BRestService {
     JsonResult findCarInfoById(Long id);
 
     JsonResult getDetailsByCarId(Long id);
-    OperateEnum insertSeries(Long brandId, String seriesName);
+    OperateEnum insertSeries(Long brandId,Long factoryId, String seriesName);
 
     OperateEnum insertCarCarBase(CarBaseDTO carBaseDTO);
 
     JsonResult getShopCount(Long businessId);
+
+    JsonResult findFactoryByBrand(String brandId);
+
+    JsonResult getSeriesByFactory(String factoryId);
+
+/*    JsonResult getFactoryByBrand();*/
+
+  /*  JsonResult getSeriesByFactory();*/
 }

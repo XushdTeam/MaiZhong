@@ -13,7 +13,7 @@
     <jsp:include page="../common/head.jsp"/>
 </head>
 <body>
-<div class="main-wrap">
+<div class="main-wrap" data-href="${baseUrl}">
     <blockquote class="layui-elem-quote fhui-admin-main_hd">
         <h2>店铺添加</h2>
     </blockquote>
@@ -72,7 +72,13 @@
                            placeholder="店铺地址" class="layui-input" type="text">
                 </div>
             </div>
-
+            <div class="layui-form-item">
+                <label class="layui-form-label">地址坐标</label>
+                <div class="layui-input-block">
+                    <input name="location" autocomplete="off" lay-verify="required" maxlength="100"
+                           placeholder="地址坐标" class="layui-input" type="text">
+                </div>
+            </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">是否启用</label>
                 <div class="layui-input-block">

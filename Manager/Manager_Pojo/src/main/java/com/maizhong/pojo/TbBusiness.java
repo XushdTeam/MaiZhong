@@ -1,5 +1,7 @@
 package com.maizhong.pojo;
 
+import java.util.Date;
+
 public class TbBusiness {
     private Long id;
 
@@ -11,6 +13,8 @@ public class TbBusiness {
 
     private String address;
 
+    private String location;
+
     private String linkman;
 
     private String telephone;
@@ -18,6 +22,8 @@ public class TbBusiness {
     private String mobilePhone;
 
     private String email;
+
+    private Date createTime;
 
     private Integer status;
 
@@ -63,6 +69,14 @@ public class TbBusiness {
         this.address = address == null ? null : address.trim();
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location == null ? null : location.trim();
+    }
+
     public String getLinkman() {
         return linkman;
     }
@@ -93,6 +107,14 @@ public class TbBusiness {
 
     public void setEmail(String email) {
         this.email = email == null ? null : email.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Integer getStatus() {

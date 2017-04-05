@@ -9,6 +9,7 @@
     <result column="show_flag" jdbcType="INTEGER" property="showFlag" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="delflag" jdbcType="INTEGER" property="delflag" />
+    <result column="factory_id" jdbcType="BIGINT" property="factoryId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, brand_id, line_name, line_sequence, show_flag, status, delflag
+    id, brand_id, line_name, line_sequence, show_flag, status, delflag, factory_id
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.pojo.TbCarBrandLineExample" resultMap="BaseResultMap">
     select
@@ -104,10 +105,10 @@
   <insert id="insert" parameterType="com.maizhong.pojo.TbCarBrandLine">
     insert into tb_car_brand_line (id, brand_id, line_name, 
       line_sequence, show_flag, status, 
-      delflag)
+      delflag, factory_id)
     values (#{id,jdbcType=BIGINT}, #{brandId,jdbcType=BIGINT}, #{lineName,jdbcType=VARCHAR}, 
       #{lineSequence,jdbcType=INTEGER}, #{showFlag,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
-      #{delflag,jdbcType=INTEGER})
+      #{delflag,jdbcType=INTEGER}, #{factoryId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.pojo.TbCarBrandLine">
     insert into tb_car_brand_line
@@ -133,6 +134,9 @@
       <if test="delflag != null">
         delflag,
       </if>
+      <if test="factoryId != null">
+        factory_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -155,6 +159,9 @@
       </if>
       <if test="delflag != null">
         #{delflag,jdbcType=INTEGER},
+      </if>
+      <if test="factoryId != null">
+        #{factoryId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -188,6 +195,9 @@
       <if test="record.delflag != null">
         delflag = #{record.delflag,jdbcType=INTEGER},
       </if>
+      <if test="record.factoryId != null">
+        factory_id = #{record.factoryId,jdbcType=BIGINT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -201,7 +211,8 @@
       line_sequence = #{record.lineSequence,jdbcType=INTEGER},
       show_flag = #{record.showFlag,jdbcType=INTEGER},
       status = #{record.status,jdbcType=INTEGER},
-      delflag = #{record.delflag,jdbcType=INTEGER}
+      delflag = #{record.delflag,jdbcType=INTEGER},
+      factory_id = #{record.factoryId,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +238,9 @@
       <if test="delflag != null">
         delflag = #{delflag,jdbcType=INTEGER},
       </if>
+      <if test="factoryId != null">
+        factory_id = #{factoryId,jdbcType=BIGINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -237,7 +251,14 @@
       line_sequence = #{lineSequence,jdbcType=INTEGER},
       show_flag = #{showFlag,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
-      delflag = #{delflag,jdbcType=INTEGER}
+      delflag = #{delflag,jdbcType=INTEGER},
+      factory_id = #{factoryId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+<!--  <select id="getSeriesByFactory"  resultType="java.lang.String">
+    SELECT DISTINCT car_series  FROM tb_car_base WHERE car_factory = #{factoryName,jdbcType=VARCHAR}
+     AND car_brand = #{brandName,jdbcType=VARCHAR}  GROUP BY car_series;
+  </select>-->
 </mapper>

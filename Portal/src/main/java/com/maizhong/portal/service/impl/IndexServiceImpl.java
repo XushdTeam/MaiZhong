@@ -1,11 +1,13 @@
 package com.maizhong.portal.service.impl;
 
 
+import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.pojo.TbFeedback;
 import com.maizhong.portal.service.IndexService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,9 @@ public class IndexServiceImpl implements IndexService {
 
     @Value("${CAR_DETAIL}")
     private String CAR_DETAIL;
+
+    @Value("${HOME_ITEMCONTENT}")
+    private String HOME_ITEMCONTENT;
 
     @Override
     public String getFeedBackUrl() {
@@ -79,6 +84,16 @@ public class IndexServiceImpl implements IndexService {
             return (Map<String, Object>) result.getData();
         }
         return null;
+    }
+
+    @Override
+    public JsonResult getHomeItemContent() {
+
+        String res = HttpClientUtil.doGet(REST_URL+HOME_ITEMCONTENT);
+        if(StringUtils.isNotBlank(res)){
+            return JsonUtils.jsonToPojo(res,JsonResult.class);
+        }
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
     }
 
 }

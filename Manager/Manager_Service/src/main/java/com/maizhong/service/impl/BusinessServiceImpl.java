@@ -30,7 +30,12 @@ public class BusinessServiceImpl implements BusinessService {
     @Autowired
     private TbBusinessMapper tbBusinessMapper;
 
-
+    /**
+     * 根据id获取店铺对象
+     *
+     * @param id
+     * @return
+     */
     @Override
     public TbBusiness getBusinessByid(Long id) {
         TbBusinessExample tbBusinessExample = new TbBusinessExample();
@@ -42,6 +47,12 @@ public class BusinessServiceImpl implements BusinessService {
         return tbBusinesses.get(0);
     }
 
+    /**
+     * 获取店铺列表
+     *
+     * @param param
+     * @return
+     */
     @Override
     public PageResult getBusinessList(PageSearchParam param) {
         PageHelper.startPage(param.getPageIndex(), param.getPageSize());
@@ -49,10 +60,10 @@ public class BusinessServiceImpl implements BusinessService {
         TbBusinessExample example = new TbBusinessExample();
         TbBusinessExample.Criteria criteria = example.createCriteria();
         criteria.andDelflagEqualTo(0);
-        if (param.getFiled("businessName") != null&& !Objects.equals(param.getFiled("businessName"), "")) {
+        if (param.getFiled("businessName") != null && !Objects.equals(param.getFiled("businessName"), "")) {
             criteria.andBusinessNameLike(SqlUtils.getLikeSql(param.getFiled("businessName")));
         }
-        if (param.getFiled("mobilePhone") != null&& !Objects.equals(param.getFiled("mobilePhone"), "")) {
+        if (param.getFiled("mobilePhone") != null && !Objects.equals(param.getFiled("mobilePhone"), "")) {
             criteria.andMobilePhoneEqualTo(param.getFiled("mobilePhone"));
         }
 
@@ -63,7 +74,11 @@ public class BusinessServiceImpl implements BusinessService {
         return new PageResult(pageInfo);
     }
 
-
+    /**
+     * 获取所有上线店铺
+     *
+     * @return
+     */
     @Override
     public List<TbBusiness> getBusinessListAll() {
 
@@ -75,12 +90,19 @@ public class BusinessServiceImpl implements BusinessService {
         return list;
     }
 
+    /**
+     * 店铺添加
+     *
+     * @param tbBusiness
+     * @return
+     */
     @Override
     public OperateEnum insertBusiness(TbBusiness tbBusiness) {
 
         TbBusinessExample tbBusinessExample = new TbBusinessExample();
         TbBusinessExample.Criteria criteria = tbBusinessExample.createCriteria();
         criteria.andBusinessNameEqualTo(tbBusiness.getBusinessName());
+        criteria.andDelflagEqualTo(0);
         List<TbBusiness> tbBusinessList = tbBusinessMapper.selectByExample(tbBusinessExample);
         if (tbBusinessList.size() > 0) {
             return OperateEnum.NAME_REPEAT;
@@ -93,6 +115,12 @@ public class BusinessServiceImpl implements BusinessService {
         }
     }
 
+    /**
+     * 店铺更新
+     *
+     * @param tbBusiness
+     * @return
+     */
     @Override
     public OperateEnum updateBusiness(TbBusiness tbBusiness) {
         int res = tbBusinessMapper.updateByPrimaryKeySelective(tbBusiness);
@@ -103,6 +131,12 @@ public class BusinessServiceImpl implements BusinessService {
         }
     }
 
+    /**
+     * 店铺删除
+     *
+     * @param id
+     * @return
+     */
     @Override
     public OperateEnum deleteBusinessById(long id) {
         TbBusiness tbBusiness = new TbBusiness();
@@ -116,6 +150,13 @@ public class BusinessServiceImpl implements BusinessService {
         }
     }
 
+    /**
+     * 更新4S店logo
+     *
+     * @param logo
+     * @param id
+     * @return
+     */
     @Override
     public int updateBusinessLogo(String logo, long id) {
         //更新4S店铺LOGO示例图片

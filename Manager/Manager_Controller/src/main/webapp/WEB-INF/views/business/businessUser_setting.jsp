@@ -13,7 +13,7 @@
     <jsp:include page="../common/head.jsp"/>
 </head>
 <body>
-<div class="main-wrap">
+<div class="main-wrap" data-href="${baseUrl}">
     <blockquote class="layui-elem-quote fhui-admin-main_hd">
         <h2>管理员添加</h2>
     </blockquote>

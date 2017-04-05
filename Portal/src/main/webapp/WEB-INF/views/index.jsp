@@ -23,7 +23,7 @@
 
 </head>
 <!--首页头部开始-->
-<div class="htmleaf-container" style="background-image: url('/resources/img/home_phload.jpg'); width: 1903px;">
+<div class="htmleaf-container" style="background-image: url('/resources/img/home_phload.jpg'); width: 1903px; height:600px">
     <div class="banner">
         <ul>
             <script type="text/javascript">
@@ -356,12 +356,11 @@
                 $(".call").show();
                 $(".s_froms").hide();
             }
-            if($(document).scrollTop()>=500&& !is){
+            if($(document).scrollTop()>=500 && !is){
                 is = true;
-                var URL = "http://192.168.3.192:8080/rest/getHomeItemContent?jsoncallback=?";
-                $.getJSON(URL,function(data){
+                $.getJSON("/getHomeItemContent.action",function(res){
                     var evalText = doT.template($("#list-tmpl").text());
-                    $("#list").html(evalText(data));
+                    $("#list").html(evalText(res.data));
                 });
 
             }
