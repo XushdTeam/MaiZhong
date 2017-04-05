@@ -69,6 +69,13 @@ public class SearchController {
     @RequestMapping("/syncTosolr")
     @ResponseBody
     public JsonResult syncTosolr(String delId,String insertId){
+        if (StringUtils.isBlank(delId)){
+            delId=null;
+        }
+        if (StringUtils.isBlank(insertId)){
+            insertId=null;
+        }
+
         return searchService.syncTosolr(delId,insertId);
     }
 }

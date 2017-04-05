@@ -597,7 +597,7 @@ public class SearchServiceImpl implements SearchService {
                 @Override
                 public void run(){
                     try {
-                        dataSyncService.dataSyncOfSingle(Long.parseLong(delId),Long.parseLong(insertId));
+                        dataSyncService.dataSyncOfSingle(delId==null?null:Long.parseLong(delId),insertId==null?null:Long.parseLong(insertId));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
