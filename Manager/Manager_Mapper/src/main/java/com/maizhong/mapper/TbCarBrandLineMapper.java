@@ -28,4 +28,6 @@ public interface TbCarBrandLineMapper {
     int updateByPrimaryKeySelective(TbCarBrandLine record);
 
     int updateByPrimaryKey(TbCarBrandLine record);
+
+   /*List<String> getSeriesByFactory(@Param("factoryName") String factoyName,@Param("brandName") String brandName);*/
 }

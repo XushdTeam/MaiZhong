@@ -7,10 +7,12 @@
     <result column="business_name" jdbcType="VARCHAR" property="businessName" />
     <result column="logo" jdbcType="VARCHAR" property="logo" />
     <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
     <result column="linkman" jdbcType="VARCHAR" property="linkman" />
     <result column="telephone" jdbcType="VARCHAR" property="telephone" />
     <result column="mobile_phone" jdbcType="VARCHAR" property="mobilePhone" />
     <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="delflag" jdbcType="INTEGER" property="delflag" />
   </resultMap>
@@ -73,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, number, business_name, logo, address, linkman, telephone, mobile_phone, email, 
-    status, delflag
+    id, number, business_name, logo, address, location, linkman, telephone, mobile_phone, 
+    email, create_time, status, delflag
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.pojo.TbBusinessExample" resultMap="BaseResultMap">
     select
@@ -108,13 +110,15 @@
   </delete>
   <insert id="insert" parameterType="com.maizhong.pojo.TbBusiness">
     insert into tb_business (id, number, business_name, 
-      logo, address, linkman, 
-      telephone, mobile_phone, email, 
-      status, delflag)
+      logo, address, location, 
+      linkman, telephone, mobile_phone, 
+      email, create_time, status, 
+      delflag)
     values (#{id,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{businessName,jdbcType=VARCHAR}, 
-      #{logo,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{linkman,jdbcType=VARCHAR}, 
-      #{telephone,jdbcType=VARCHAR}, #{mobilePhone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{delflag,jdbcType=INTEGER})
+      #{logo,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, 
+      #{linkman,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{mobilePhone,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{delflag,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.pojo.TbBusiness">
     insert into tb_business
@@ -134,6 +138,9 @@
       <if test="address != null">
         address,
       </if>
+      <if test="location != null">
+        location,
+      </if>
       <if test="linkman != null">
         linkman,
       </if>
@@ -145,6 +152,9 @@
       </if>
       <if test="email != null">
         email,
+      </if>
+      <if test="createTime != null">
+        create_time,
       </if>
       <if test="status != null">
         status,
@@ -169,6 +179,9 @@
       <if test="address != null">
         #{address,jdbcType=VARCHAR},
       </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
       <if test="linkman != null">
         #{linkman,jdbcType=VARCHAR},
       </if>
@@ -180,6 +193,9 @@
       </if>
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
@@ -213,6 +229,9 @@
       <if test="record.address != null">
         address = #{record.address,jdbcType=VARCHAR},
       </if>
+      <if test="record.location != null">
+        location = #{record.location,jdbcType=VARCHAR},
+      </if>
       <if test="record.linkman != null">
         linkman = #{record.linkman,jdbcType=VARCHAR},
       </if>
@@ -224,6 +243,9 @@
       </if>
       <if test="record.email != null">
         email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
@@ -243,10 +265,12 @@
       business_name = #{record.businessName,jdbcType=VARCHAR},
       logo = #{record.logo,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=VARCHAR},
+      location = #{record.location,jdbcType=VARCHAR},
       linkman = #{record.linkman,jdbcType=VARCHAR},
       telephone = #{record.telephone,jdbcType=VARCHAR},
       mobile_phone = #{record.mobilePhone,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
       status = #{record.status,jdbcType=INTEGER},
       delflag = #{record.delflag,jdbcType=INTEGER}
     <if test="_parameter != null">
@@ -268,6 +292,9 @@
       <if test="address != null">
         address = #{address,jdbcType=VARCHAR},
       </if>
+      <if test="location != null">
+        location = #{location,jdbcType=VARCHAR},
+      </if>
       <if test="linkman != null">
         linkman = #{linkman,jdbcType=VARCHAR},
       </if>
@@ -279,6 +306,9 @@
       </if>
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
@@ -295,10 +325,12 @@
       business_name = #{businessName,jdbcType=VARCHAR},
       logo = #{logo,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
       linkman = #{linkman,jdbcType=VARCHAR},
       telephone = #{telephone,jdbcType=VARCHAR},
       mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=INTEGER},
       delflag = #{delflag,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}

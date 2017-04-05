@@ -4,6 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.maizhong.common.dto.CarBrandDTO;
+import com.maizhong.common.dto.KeyObject;
+import com.maizhong.common.dto.KeyValue;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
@@ -19,7 +21,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Description:汽车品牌接口实现
@@ -48,6 +53,8 @@ public class BrandServiceImpl implements BrandService {
     //基础库汽车品牌ID 和名称
     @Value("${CAR_BRAND_HOT}")
     private String CAR_BRAND_HOT;
+    @Value("${CAR_BRAND_GROUP}")
+    private String CAR_BRAND_GROUP;
 
     /**
      * 根据Id获取品牌对象
@@ -213,6 +220,13 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public JsonResult updateBrandRedis() {
 
+        //删除品牌按字母分组
+        try {
+            jedisClient.del(CAR_BRAND_GROUP);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
        //删除品牌信息缓存
         try {
             jedisClient.del(CAR_BRAND);
@@ -265,6 +279,37 @@ public class BrandServiceImpl implements BrandService {
         }catch (Exception e){
             e.printStackTrace();
         }
+
+        //写入品牌分组
+
+        List<TbCarBrand> carBrands = tbCarBrandMapper.selectByExample(null);
+
+        if (carBrands==null||carBrands.size()==0){
+            jedisClient.set(CAR_BRAND_GROUP,"");
+        }
+
+        Map<String, List<KeyValue>> map = new HashMap<>();
+
+        List<KeyValue> list2 = null;
+        for (TbCarBrand carBrand:carBrands) {
+            list2 = map.get(carBrand.getInitial());
+            if (list2==null){
+                list2 = new ArrayList<>();
+            }
+            list2.add(new KeyValue(carBrand.getId()+"",carBrand.getBrandName()));
+            map.put(carBrand.getInitial(),list2);
+        }
+
+        List<KeyObject> result = new ArrayList<>();
+
+        for(char i='A';i<='Z';i++){
+            if (map.get(i+"")==null){
+                continue;
+            }
+            result.add(new KeyObject(i+"",map.get(i+"")));
+        }
+        jedisClient.set(CAR_BRAND_GROUP,JsonUtils.objectToJson(result));
+
         return JsonResult.build(OperateEnum.SUCCESS);
     }
 

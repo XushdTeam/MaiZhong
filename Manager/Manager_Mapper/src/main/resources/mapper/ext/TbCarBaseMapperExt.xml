@@ -7,6 +7,7 @@
         <result column="car_brand" jdbcType="VARCHAR" property="carBrand" />
         <result column="initial" jdbcType="VARCHAR" property="initial" />
         <result column="car_series" jdbcType="VARCHAR" property="carSeries" />
+        <result column="car_factory" jdbcType="VARCHAR" property="carFactory" />
         <result column="car_type" jdbcType="VARCHAR" property="carType" />
         <result column="car_year" jdbcType="VARCHAR" property="carYear" />
         <result column="car_factory_price" jdbcType="VARCHAR" property="carFactoryPrice" />
@@ -46,6 +47,9 @@
             </if>
             <if test="carYear != null">
                 car_year,
+            </if>
+            <if test="carFactory != null">
+                car_factory,
             </if>
             <if test="carFactoryPrice != null">
                 car_factory_price,
@@ -117,6 +121,9 @@
             </if>
             <if test="carYear != null">
                 #{carYear,jdbcType=VARCHAR},
+            </if>
+            <if test="carFactory != null">
+                #{carFactory,jdbcType=VARCHAR},
             </if>
             <if test="carFactoryPrice != null">
                 #{carFactoryPrice,jdbcType=VARCHAR},

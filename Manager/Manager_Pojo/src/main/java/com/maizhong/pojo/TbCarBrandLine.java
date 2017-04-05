@@ -15,6 +15,8 @@ public class TbCarBrandLine {
 
     private Integer delflag;
 
+    private Long factoryId;
+
     public Long getId() {
         return id;
     }
@@ -69,5 +71,13 @@ public class TbCarBrandLine {
 
     public void setDelflag(Integer delflag) {
         this.delflag = delflag;
+    }
+
+    public Long getFactoryId() {
+        return factoryId;
+    }
+
+    public void setFactoryId(Long factoryId) {
+        this.factoryId = factoryId;
     }
 }

@@ -50,6 +50,7 @@ public class BRestServiceImpl implements BRestService {
     @Resource
     private TbCarFactoryMapper tbCarFactoryMapper;
 
+
     @Resource
     private JedisClient jedisClient;
 
@@ -377,7 +378,7 @@ public class BRestServiceImpl implements BRestService {
         }
         TbCarBrandLineExample tbCarBrandLineExample = new TbCarBrandLineExample();
         TbCarBrandLineExample.Criteria criteria = tbCarBrandLineExample.createCriteria();
-        criteria.andLineNameEqualTo(tbCarBrandLine.getLineName());
+        criteria.andLineNameEqualTo(seriesName);
         criteria.andDelflagEqualTo(0);
         criteria.andFactoryIdEqualTo(factoryId);
         List<TbCarBrandLine> tbCarBrandLines = tbCarBrandLineMapper.selectByExample(tbCarBrandLineExample);
@@ -434,13 +435,21 @@ public class BRestServiceImpl implements BRestService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        TbCarBrandLine tbCarBrandLine=new TbCarBrandLine();
         try {
-            carSeries = jedisClient.hget(CAR_SERIES_ID, carSeries);
-        } catch (Exception e) {
+            tbCarBrandLine = tbCarBrandLineMapper.selectByPrimaryKey(Long.valueOf(carSeries));
+        } catch (NumberFormatException e) {
             e.printStackTrace();
         }
+        TbCarFactory tbCarFactory =new TbCarFactory();
+        try {
+            tbCarFactory=   tbCarFactoryMapper.selectByPrimaryKey(Long.valueOf(carBaseDTO.getCarFactory()));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        carBaseDTO.setCarFactory(tbCarFactory.getFactoryName());
         carBaseDTO.setCarBrand(brandId);
-        carBaseDTO.setCarSeries(carSeries);
+        carBaseDTO.setCarSeries(tbCarBrandLine.getLineName());
         carBaseDTO.setInitial(initial);
         int res = tbCarBaseMapperExt.insertSelective(carBaseDTO);
         if (res > 0) {

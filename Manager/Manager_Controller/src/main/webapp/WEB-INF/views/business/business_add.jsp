@@ -72,7 +72,13 @@
                            placeholder="店铺地址" class="layui-input" type="text">
                 </div>
             </div>
-
+            <div class="layui-form-item">
+                <label class="layui-form-label">地址坐标</label>
+                <div class="layui-input-block">
+                    <input name="location" autocomplete="off" lay-verify="required" maxlength="100"
+                           placeholder="地址坐标" class="layui-input" type="text">
+                </div>
+            </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">是否启用</label>
                 <div class="layui-input-block">

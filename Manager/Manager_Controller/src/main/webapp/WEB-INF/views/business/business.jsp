@@ -56,6 +56,7 @@
                 <colgroup>
                     <col width="5%">
                     <col width="10%">
+                    <col width="5%">
                     <col width="10%">
                     <col width="10%">
                     <col width="5%">
@@ -63,7 +64,7 @@
                     <col width="10%">
                     <col width="10%">
                     <col width="5%">
-                    <col width="25%">
+                    <col width="20%">
                 </colgroup>
                 <thead>
                 <tr>
@@ -71,6 +72,7 @@
                     <th>店铺名称</th>
                     <th>LOGO</th>
                     <th>地址</th>
+                    <th>坐标</th>
                     <th>负责人</th>
                     <th>手机号</th>
                     <th>座机</th>
@@ -88,6 +90,7 @@
                         <td>{{ item.businessName }}</td>
                         <td><img src="{{ item.logo }}" width="100" height="40"/></td>
                         <td>{{ item.address }}</td>
+                        <td>{{ item.location }}</td>
                         <td>{{ item.linkman}}</td>
                         <td>{{ item.mobilePhone}}</td>
                         <td>{{ item.telephone}}</td>
