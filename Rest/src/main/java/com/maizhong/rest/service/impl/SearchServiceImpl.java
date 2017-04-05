@@ -254,8 +254,7 @@ public class SearchServiceImpl implements SearchService {
      * @return
      */
     @Override
-    public JsonResult getSearchResult(String queryString, String sortString, String carBrand, String carSeries, String price, String capacity, String carYear, String pageIndex) {
-
+    public JsonResult getSearchResult(String queryString, String sortString, String carBrand, String carSeries,String carType,String price, String capacity, String carYear, String pageIndex) {
 
 
         //初始化查询字段
@@ -282,6 +281,12 @@ public class SearchServiceImpl implements SearchService {
                 //反之  使用车型搜索
             }else if (StringUtils.isNotBlank(carBrand)){
                 querysb.append("car_brand:").append(carBrand);
+                bo = false;
+            }
+
+
+            if (StringUtils.isNotBlank(carType)){
+                querysb.append(bo?"  ":" AND  ").append("car_type_copy:").append(carType);
                 bo = false;
             }
 

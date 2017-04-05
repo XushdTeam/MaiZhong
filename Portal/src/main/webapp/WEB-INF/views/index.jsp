@@ -356,12 +356,11 @@
                 $(".call").show();
                 $(".s_froms").hide();
             }
-            if($(document).scrollTop()>=500&& !is){
+            if($(document).scrollTop()>=500 && !is){
                 is = true;
-                var URL = "http://192.168.3.192:8080/rest/getHomeItemContent?jsoncallback=?";
-                $.getJSON(URL,function(data){
+                $.getJSON("/getHomeItemContent.action",function(res){
                     var evalText = doT.template($("#list-tmpl").text());
-                    $("#list").html(evalText(data));
+                    $("#list").html(evalText(res.data));
                 });
 
             }
