@@ -12,7 +12,7 @@
     <jsp:include page="../common/head.jsp"/>
 </head>
 <body>
-<div class="main-wrap">
+<div class="main-wrap" data-href="${baseUrl}">
     <blockquote class="layui-elem-quote fhui-admin-main_hd">
         <h2>车系管理</h2>
     </blockquote>
