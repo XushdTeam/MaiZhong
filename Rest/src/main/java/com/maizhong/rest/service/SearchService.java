@@ -34,4 +34,5 @@ public interface SearchService {
 
     List<KeyObject> getCarBrandGroupByInitial();
 
+    JsonResult syncTosolr(String delId, String insertId);
 }

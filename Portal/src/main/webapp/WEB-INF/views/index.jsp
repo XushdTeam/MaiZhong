@@ -194,10 +194,10 @@
 <!--品牌 车型-->
 <div class="index_cen">
     <div class="pin">
-        <p>汽车品牌
+        <p>热门品牌
             <span>
                 <c:forEach items="${cbList}" var="item"  varStatus="stat">
-                    <a href="/car/cb_${item.id}/cs_0/cp_0/cv_0/list.html">${item.name}</a>
+                    <a href="/car/cb_${item.id}/cs_0/cp_0/cv_0/p_0/list.html">${item.name}</a>
                     <c:if test="${!stat.last}" >/</c:if>
                 </c:forEach>
             </span>
@@ -206,7 +206,7 @@
         <ul class="lists">
             <c:forEach items="${cbList}" var="item" >
                 <li>
-                    <a href="/car/cb_${item.id}/cs_0/cp_0/cv_0/list.html">
+                    <a href="/car/cb_${item.id}/cs_0/cp_0/cv_0/p_0/list.html">
                         <span><img src="${item.imgUrl}"></span>
                         <span>${item.name}</span>
                     </a>
@@ -215,18 +215,18 @@
         </ul><!--lists end-->
         <div class="clear"></div>
 
-        <p class="p2">车系种类
+        <p class="p2">热门车型
             <span>
-                <c:forEach items="${ctList}" var="item"  varStatus="stat">
-                    <a href="#">${item.typeName}</a>
+                <c:forEach items="${ctList}" var="item"  varStatus="stat" begin="0" end="5">
+                    <a href="/car/cb_0/cs_0/cp_0/cv_0/p_${item.id}/list.html">${item.typeName}</a>
                     <c:if test="${!stat.last}" >/</c:if>
                 </c:forEach>
             </span>
         </p>
         <ul class="lists lists2">
-            <c:forEach items="${ctList}" var="item" >
+            <c:forEach items="${ctList}" var="item" begin="0" end="5">
                 <li>
-                    <a href="#">
+                    <a href="/car/cb_0/cs_0/cp_0/cv_0/p_${item.id}/list.html">
                         <span><img src="${item.typeImg}"></span>
                         <span>${item.typeName}</span>
                     </a>
@@ -251,7 +251,7 @@
                         <a href="car/{{=it[i]['arry'][j].id}}/detail.html" class="cars-info">
                             <img src="/resources/img/default.png" data-src="{{=it[i]['arry'][j].img}}" width="360" height="240">
                             <p>{{=it[i]['arry'][j].name}}</p>
-                            <p><span>{{=it[i]['arry'][j].price}}</span></p>
+                            <p><span>{{=it[i]['arry'][j].sellPrice}} 万</span></p>
                         </a>
                     </dd>
                 </dl>

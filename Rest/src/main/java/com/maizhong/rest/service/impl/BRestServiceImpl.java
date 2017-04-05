@@ -37,6 +37,9 @@ public class BRestServiceImpl implements BRestService {
     private TbCarMapperExt tbCarMapperExt;
 
     @Resource
+    private TbMessageMapper tbMessageMapper;
+
+    @Resource
     private TbBusinessMapper tbBusinessMapper;
 
     @Resource

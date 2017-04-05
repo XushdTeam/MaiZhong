@@ -62,6 +62,7 @@ public class SearchController {
         param.put("p","0");
         param.put("v","0");
         param.put("pe","1");
+        param.put("t","0");
         if(StringUtils.isNotBlank(s)){
             try {
                 param.put("qs", new String(s.getBytes("ISO8859-1"),"UTF-8"));
@@ -86,11 +87,12 @@ public class SearchController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/car/cb_{brandId}/cs_{seriseId}/cp_{price}/cv_{volume}/list.html")
+    @RequestMapping(value = "/car/cb_{brandId}/cs_{seriseId}/cp_{price}/cv_{volume}/p_{level}/list.html")
     public String searchlist(@PathVariable String brandId,
                              @PathVariable String seriseId,
                              @PathVariable String price,
                              @PathVariable String volume,
+                             @PathVariable String level,
                              String s,
                              Model model) {
         Map<String,String> param = Maps.newHashMap();
@@ -101,6 +103,7 @@ public class SearchController {
         param.put("p",price);
         param.put("v",volume);
         param.put("pe","1");
+        param.put("t",level);
 
         if(StringUtils.isNotBlank(s)){
             try {
@@ -122,7 +125,7 @@ public class SearchController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/car/s_{sort}_{method}_{page}/cb_{brandId}/cs_{seriseId}/cp_{price}/cv_{volume}/list.html",method = RequestMethod.GET)
+    @RequestMapping(value = "/car/s_{sort}_{method}_{page}/cb_{brandId}/cs_{seriseId}/cp_{price}/cv_{volume}/p_{level}/list.html",method = RequestMethod.GET)
     public String searchListMore(
                     @PathVariable String sort,
                     @PathVariable String method,
@@ -131,6 +134,7 @@ public class SearchController {
                     @PathVariable String price,
                     @PathVariable String volume,
                     @PathVariable String page,
+                    @PathVariable String level,
                     String s,
                     Model model){
 
@@ -142,6 +146,7 @@ public class SearchController {
         param.put("p",price);
         param.put("v",volume);
         param.put("pe",page);
+        param.put("t",level);
         if(StringUtils.isNotBlank(s)){
             try {
                 param.put("qs", new String(s.getBytes("ISO8859-1"),"UTF-8"));

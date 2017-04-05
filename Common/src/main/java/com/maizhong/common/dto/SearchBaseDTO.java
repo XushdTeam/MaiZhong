@@ -14,11 +14,31 @@ public class SearchBaseDTO {
     private String seriesName;
     private Boolean isSeriesHot = false;
 
+    private int sL;
+
+    public int getsL() {
+        return sL;
+    }
+
+    public void setsL(int sL) {
+        this.sL = sL;
+    }
+
     private List<KeyValue> carBrandhot;
+
+    public Object getCarSeriseHot() {
+        return carSeriseHot;
+    }
+
+    public void setCarSeriseHot(Object carSeriseHot) {
+        this.carSeriseHot = carSeriseHot;
+    }
+
+    private Object carSeriseHot;
 
     private List<KeyObject> carBrandAll;
 
-    private List<Object> carSeriesAll;
+    private Object carSeriesAll;
 
     public String getBrandName() {
         return brandName;
@@ -70,11 +90,12 @@ public class SearchBaseDTO {
         this.carBrandhot = carBrandhot;
     }
 
-    public List<Object> getCarSeriesAll() {
+
+    public Object getCarSeriesAll() {
         return carSeriesAll;
     }
 
-    public void setCarSeriesAll(List<Object> carSeriesAll) {
+    public void setCarSeriesAll(Object carSeriesAll) {
         this.carSeriesAll = carSeriesAll;
     }
 }
