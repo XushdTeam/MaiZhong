@@ -37,52 +37,6 @@ public class DataSyncServiceImpl implements DataSyncService {
     private TbMessageMapper tbMessageMapper;
 
 
-    /**
-     *  * 数据同步方法
-     *      获取消息表中所有的数据
-     *      遍历数据  成功后删除
-     *                  失败后事务回滚
-     *                  返回成功失败数量
-     *
-     * @param messages
-     * @return
-     */
-    //TODO 事务配置与控制
-    @Override
-    public String syncCar(List<TbMessage> messages) throws Exception {
-
-        //判断出类型片段
-        ArrayList<Long> delCarIds = new ArrayList<>();
-        ArrayList<Long> addCarIds = new ArrayList<>();
-        for (TbMessage message:messages) {
-            switch (message.getMessageInfo()){
-                case "car" :
-                    switch (message.getMessageType()){
-                        case "delete":
-                            delCarIds.add(Long.valueOf(message.getOtherInfo()));
-                            break;
-                        case "modify":
-                            //添加不需要删除文档
-                            delCarIds.add(Long.valueOf(message.getOtherInfo()));
-                        case "insert":
-                            //无论添加修改 都需要进行文档添加 所以使用穿透
-                            addCarIds.add(Long.valueOf(message.getOtherInfo()));
-                            break;
-                    }
-                    break;
-            }
-        }
-
-        List<TbCarVo> vos = this.findVosByIds(addCarIds);
-        this.addSolrDocUseVo(vos);
-
-
-        return null;
-    }
-
-
-
-
 
 
     /**
@@ -92,7 +46,7 @@ public class DataSyncServiceImpl implements DataSyncService {
      */
     private List<TbCarVo>  findVosByIds(List<Long> ids){
 
-        if (ids==null||ids.size()>0){
+        if (ids==null||ids.size()==0){
             return null;
         }
 
@@ -193,16 +147,56 @@ public class DataSyncServiceImpl implements DataSyncService {
     }
 
 
-
-    private void addSingleSolrDoc(List<Long> ids){
-        TbCarExample example = new TbCarExample();
-//        example.createCriteria().andIdEqualTo();
-        List<TbCarVo> list = tbCarMapperExt.findDocsForSolrStore(example);
-        if (list==null&&list.size()==0){
-            return;
+    /**
+     * solr  删除方法
+     *
+     *      ids为空时删除全部   就是任性
+     *
+     * @param ids
+     * @throws Exception
+     */
+    @Override
+    public void deleteAll(List<String> ids) throws Exception {
+        StringBuffer sb  = new StringBuffer();
+        if (ids!=null){
+            solrServer.deleteById(ids);
+        }else{
+            solrServer.deleteByQuery("*:*");
         }
-        TbCarVo vo  = list.get(0);
     }
+
+
+    /**
+     * 方法  数据同步  添加方法
+     * @param delId
+     * @param insertId
+     * @throws Exception
+     */
+    @Override
+    public void dataSyncOfSingle(Long delId, Long insertId) throws Exception {
+        if (delId!=null){
+            solrServer.deleteById(String.valueOf(delId));
+        }
+        if (insertId!=null){
+            ArrayList<Long> ids = new ArrayList<>();
+            ids.add(insertId);
+            List<TbCarVo> vos = findVosByIds(ids);
+            if (vos!=null&&vos.size()>0){
+                addSolrDocUseVo(vos);
+            }
+        }
+    }
+
+
+//    private void addSingleSolrDoc(List<Long> ids){
+//        TbCarExample example = new TbCarExample();
+////        example.createCriteria().andIdEqualTo();
+//        List<TbCarVo> list = tbCarMapperExt.findDocsForSolrStore(example);
+//        if (list==null&&list.size()==0){
+//            return;
+//        }
+//        TbCarVo vo  = list.get(0);
+//    }
 
 
 }

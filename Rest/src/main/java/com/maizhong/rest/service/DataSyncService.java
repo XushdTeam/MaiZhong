@@ -9,7 +9,10 @@ import java.util.List;
  * Created by yangF on 2017/3/30.
  */
 public interface DataSyncService {
-    String syncCar(List<TbMessage> messages) throws Exception;
 
     void addSolrDocUseVo(List<TbCarVo> vos) throws Exception;
+
+    void deleteAll(List<String> ids) throws Exception;
+
+    void dataSyncOfSingle(Long delId, Long insertId) throws Exception;
 }
