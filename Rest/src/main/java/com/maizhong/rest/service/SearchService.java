@@ -21,7 +21,7 @@ public interface SearchService {
 
     Map<String,Object> searchDoc(String queryString, String[] sortString, Integer pageIndex, String highTiken);
 
-    public JsonResult getSearchResult(String queryString, String sortString, String carBrand, String carSeries, String price, String capacity, String carYear, String pageIndex);
+    public JsonResult getSearchResult(String queryString, String sortString, String carBrand, String carSeries,String carType, String price, String capacity, String carYear, String pageIndex);
 
 
     List<Object> getCarSeriesList(String brandId,String seriesId);

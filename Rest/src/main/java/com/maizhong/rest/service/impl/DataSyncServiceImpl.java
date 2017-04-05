@@ -49,7 +49,7 @@ public class DataSyncServiceImpl implements DataSyncService {
      */
     //TODO 事务配置与控制
     @Override
-    public String syncCar(List<TbMessage> messages) {
+    public String syncCar(List<TbMessage> messages) throws Exception {
 
         //判断出类型片段
         ArrayList<Long> delCarIds = new ArrayList<>();
@@ -72,8 +72,16 @@ public class DataSyncServiceImpl implements DataSyncService {
                     break;
             }
         }
+
+        List<TbCarVo> vos = this.findVosByIds(addCarIds);
+        this.addSolrDocUseVo(vos);
+
+
         return null;
     }
+
+
+
 
 
 
@@ -186,13 +194,15 @@ public class DataSyncServiceImpl implements DataSyncService {
 
 
 
-    private void addSingSolrDoc(List<Long> ids){
+    private void addSingleSolrDoc(List<Long> ids){
         TbCarExample example = new TbCarExample();
 //        example.createCriteria().andIdEqualTo();
         List<TbCarVo> list = tbCarMapperExt.findDocsForSolrStore(example);
         if (list==null&&list.size()==0){
             return;
         }
-            TbCarVo vo  = list.get(0);
+        TbCarVo vo  = list.get(0);
     }
+
+
 }
