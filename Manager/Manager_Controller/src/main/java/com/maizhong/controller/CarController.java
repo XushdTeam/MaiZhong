@@ -222,9 +222,9 @@ public class CarController {
     }
 
 
-    @RequestMapping("/isanable")
-    public JsonResult isAnable(List<Long> ids, Integer unable){
-        return carService.updateCarStatus(ids,unable);
-    }
+//    @RequestMapping("/isanable")
+//    public JsonResult isAnable(List<Long> ids, Integer unable){
+//        return carService.updateCarStatus(ids,unable);
+//    }
 
 }

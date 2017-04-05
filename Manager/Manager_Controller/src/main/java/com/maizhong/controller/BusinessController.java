@@ -46,6 +46,8 @@ public class BusinessController {
         model.addAttribute("listUrl", "/business/list");
         model.addAttribute("handleUrl", "/business/handle");
         model.addAttribute("deleteUrl", "/business/delete");
+        model.addAttribute("detailUrl", "/business/detail");
+
 
         return "business/business";
     }
@@ -152,6 +154,11 @@ public class BusinessController {
         return JsonResult.build(result);
     }
 
+    @RequestMapping(value = "/business/detail/{id}")
+    public String detail(@PathVariable String id){
+        TbBusiness business = businessService.getBusinessByid(Long.valueOf(id));
+        return "business_d";
+    }
     /**
      * 店铺LOGO修改
      *
