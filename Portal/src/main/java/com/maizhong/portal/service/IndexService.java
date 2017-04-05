@@ -21,4 +21,6 @@ public interface IndexService {
     Map<String,Object> getIndexBase();
 
     Map<String,Object> getCarDetail(String carId);
+
+    JsonResult getHomeItemContent();
 }

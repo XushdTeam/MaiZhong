@@ -1,5 +1,6 @@
 package com.maizhong.portal.controller;
 
+import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.pojo.TbFeedback;
 import com.maizhong.portal.service.IndexService;
@@ -10,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -142,6 +144,12 @@ public class IndexController {
         Map<String,Object> map = indexService.getCarDetail(carId);
         model.addAttribute("car",map);
         return "detail";
+    }
+
+    @RequestMapping(value = "/getHomeItemContent")
+    @ResponseBody
+    public JsonResult getHomeItemContent(){
+        return indexService.getHomeItemContent();
     }
 
 }
