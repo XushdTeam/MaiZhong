@@ -240,6 +240,8 @@ public class SearchServiceImpl implements SearchService {
         return o==null?"":o.toString();
     }
 
+
+    private static String[] carLevelSearch={"0","SUV","跑车","MPV","微面","皮卡","中大型车","中型车","中大型车","大型车","小型车","微","轻客","紧凑型车"};
     /***
      * 查询入口
      *      SearchDoc 数据准备页面
@@ -287,8 +289,15 @@ public class SearchServiceImpl implements SearchService {
 
 
             if (StringUtils.isNotBlank(carType)){
-                querysb.append(bo?"  ":" AND  ").append("car_type_copy:").append(carType);
-                bo = false;
+                try {
+                    int i = Integer.parseInt(carType);
+                    if (i!=0){
+                        querysb.append(bo?"  ":" AND  ").append("car_type_copy:").append(carLevelSearch[i]);
+                        bo = false;
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
 
 

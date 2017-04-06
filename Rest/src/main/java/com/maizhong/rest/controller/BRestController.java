@@ -75,9 +75,18 @@ public class BRestController {
 
     @RequestMapping("/user")
     public JsonResult userLogin(String username, String password) {
-        return bRestService.userLogin(username, password);
+        return bRestService.loginOfCatch(username, password);
     }
 
+    @RequestMapping("/user/online")
+    public JsonResult isOnline(String token) {
+
+//        判断token格式 ||token.length()!=32
+        if (StringUtils.isBlank(token)){
+            return JsonResult.Error("令牌错误");
+        }
+        return bRestService.isOnline(token);
+    }
 
     /**
      * 获取所有汽车品牌 分首字母

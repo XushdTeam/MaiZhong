@@ -65,6 +65,12 @@ public class BRestServiceImpl implements BRestService {
     @Value("${CAR_SERIES_ID}")
     private String CAR_SERIES_ID;
 
+    @Value("${BUSSINESSUSER_PREFIX}")
+    private String BUSSINESSUSER_PREFIX;
+
+    @Value("${BUSSINESSUSER_INFO}")
+    private String BUSSINESSUSER_INFO;
+
 
     private String verifyCar(TbCar car) {
 
@@ -358,6 +364,37 @@ public class BRestServiceImpl implements BRestService {
 
 
     @Override
+    public JsonResult loginOfCatch(String username, String password) {
+        JsonResult result = userLogin(username, password);
+        if (result.getStatus()==200){
+            Map<String,Object> data = (Map<String, Object>) result.getData();
+            if (data!=null&&data.size()>0){
+                //生成Token
+                String token = UUID.randomUUID().toString().replace("-","");
+
+                //redis 模拟缓存 添加到缓存命中
+                String jsonInfo = JsonUtils.objectToJson(data);
+
+                if (StringUtils.isNotBlank(jsonInfo)) {
+                    jedisClient.hset(BUSSINESSUSER_PREFIX + token, BUSSINESSUSER_INFO, jsonInfo);
+                    jedisClient.expire(BUSSINESSUSER_PREFIX + token, 900);
+                }
+
+                Map<String,Object> realResult = new HashMap<>();
+
+                realResult.put("token",token);
+                realResult.put("userInfo",data);
+
+                return JsonResult.OK(realResult);
+            }
+            return JsonResult.Error("登录失败，用户名或者密码错误");
+        }
+        return result;
+    }
+
+
+
+    @Override
     public JsonResult getDetailsByCarId(Long id) {
         List<Map<String, Object>> list = tbCarMapperExt.findDetailsByCarId(id);
         if (list != null && list.size() > 0) {
@@ -536,6 +573,25 @@ public class BRestServiceImpl implements BRestService {
             return JsonResult.OK(tbCarBrandLines);
         }
         return JsonResult.OK();
+    }
+
+    @Override
+    public JsonResult isOnline(String token) {
+        if (StringUtils.isNotBlank(token)){
+            String json = jedisClient.hget(BUSSINESSUSER_PREFIX + token, BUSSINESSUSER_INFO);
+            if (StringUtils.isNotBlank(json)){
+                jedisClient.expire(BUSSINESSUSER_PREFIX + token,60);
+                Map<String,Object> map = JsonUtils.jsonToPojo(json, Map.class);
+                if (map!=null){
+
+                    Map<Object, Object> result = new HashMap<>();
+                    result.put("userInfo",map);
+
+                    return JsonResult.OK(result);
+                }
+            }
+        }
+        return JsonResult.Error("未登录");
     }
 
     /*//插入汽车厂商
