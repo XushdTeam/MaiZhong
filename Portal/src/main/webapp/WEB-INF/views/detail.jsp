@@ -90,7 +90,8 @@
     </div><!--car-options end-->
 </div>
 <div class="bg_co">
-    <div id="one" class="shoppin">
+    <div  id="one"></div>
+    <div class="shoppin">
         <div class="d-item car-information">
             <div class="container">
 
@@ -131,8 +132,8 @@
         </div>
     </div><!--#one end-->
     <div class="xi_qi">
-
-        <h2 id="two"><strong>配置参数</strong></h2>
+        <div  id="two"></div>
+        <h2><strong>配置参数</strong></h2>
         <div class="parameters clearFix" >
             <div class="item performance">
                 <h4>概览</h4>
@@ -176,7 +177,7 @@
             </div><!--item end-->
         </div><!--parameters end-->
         <div class="clear"></div>
-
+        <div ></div>
         <h2 id="tree"><strong>车系图片</strong></h2>
         <div class="xq_img">
 

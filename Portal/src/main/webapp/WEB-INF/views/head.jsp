@@ -20,7 +20,7 @@
         </ul><!--navs end-->
         <!--call-->
         <div class="call">
-            <span class="span_one"><a href="">400-090-0494</a></span>
+            <span class="span_one"><a href="">010-8025-8108</a></span>
         </div>
     </div><!--nav_top end-->
 </div>
