@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.maizhong.common.dto.CarBaseDTO;
 import com.maizhong.common.dto.KeyObject;
+import com.maizhong.common.dto.UserInfo;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
@@ -340,21 +341,20 @@ public class BRestServiceImpl implements BRestService {
         //  用户缓存重复添加
         if (users != null && users.size() == 1 && users.get(0).getBusinessId() != null) {
             TbBusinessUser user = users.get(0);
-            Map<String, Object> userInfo = new HashMap<>();
+            UserInfo userInfo = new UserInfo();
 
             TbBusiness business = tbBusinessMapper.selectByPrimaryKey(user.getBusinessId());
 
             if (business != null) {
-                userInfo.put("businessName", business.getBusinessName());
-                userInfo.put("businessId", business.getId());
-                userInfo.put("businessLogo", business.getLogo());
-                userInfo.put("businessAdress", business.getAddress());
-                userInfo.put("userName", user.getUserName());
-                userInfo.put("userId", user.getId());
-                userInfo.put("userAdvert", user.getUserAdvert());
-                userInfo.put("userPhone", user.getUserPhone());
-                userInfo.put("userEmail", user.getUserEmail());
-
+                userInfo.setBusinessAdress(business.getBusinessName());
+                userInfo.setBusinessId(business.getId()==null?null:business.getId().toString());
+                userInfo.setBusinessLogo(business.getLogo());
+                userInfo.setBusinessAdress( business.getAddress());
+                userInfo.setUserName( user.getUserName());
+                userInfo.setUserAdvert(user.getId()==null?null:user.getId().toString());
+                userInfo.setUserAdvert( user.getUserAdvert());
+                userInfo.setUserPhone( user.getUserPhone());
+                userInfo.setUserEmail( user.getUserEmail());
 
                 return JsonResult.OK(userInfo);
             }
@@ -367,13 +367,13 @@ public class BRestServiceImpl implements BRestService {
     public JsonResult loginOfCatch(String username, String password) {
         JsonResult result = userLogin(username, password);
         if (result.getStatus()==200){
-            Map<String,Object> data = (Map<String, Object>) result.getData();
-            if (data!=null&&data.size()>0){
+            UserInfo userInfo = (UserInfo) result.getData();
+            if (userInfo!=null){
                 //生成Token
                 String token = UUID.randomUUID().toString().replace("-","");
 
                 //redis 模拟缓存 添加到缓存命中
-                String jsonInfo = JsonUtils.objectToJson(data);
+                String jsonInfo = JsonUtils.objectToJson(userInfo);
 
                 if (StringUtils.isNotBlank(jsonInfo)) {
                     jedisClient.hset(BUSSINESSUSER_PREFIX + token, BUSSINESSUSER_INFO, jsonInfo);
@@ -383,7 +383,7 @@ public class BRestServiceImpl implements BRestService {
                 Map<String,Object> realResult = new HashMap<>();
 
                 realResult.put("token",token);
-                realResult.put("userInfo",data);
+                realResult.put("userInfo",userInfo);
 
                 return JsonResult.OK(realResult);
             }
@@ -581,11 +581,11 @@ public class BRestServiceImpl implements BRestService {
             String json = jedisClient.hget(BUSSINESSUSER_PREFIX + token, BUSSINESSUSER_INFO);
             if (StringUtils.isNotBlank(json)){
                 jedisClient.expire(BUSSINESSUSER_PREFIX + token,60);
-                Map<String,Object> map = JsonUtils.jsonToPojo(json, Map.class);
-                if (map!=null){
+                UserInfo info = JsonUtils.jsonToPojo(json, UserInfo.class);
+                if (info!=null){
 
                     Map<Object, Object> result = new HashMap<>();
-                    result.put("userInfo",map);
+                    result.put("userInfo",info);
 
                     return JsonResult.OK(result);
                 }
