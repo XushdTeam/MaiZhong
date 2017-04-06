@@ -57,6 +57,23 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>com.belerweb</groupId>
+            <artifactId>pinyin4j</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wltea.ik-analyzer</groupId>
+            <artifactId>ik-analyzer</artifactId>
+            <version>3.2.8</version>
+            <scope>system</scope>
+            <systemPath>C:/Users/Administrator/.m2/repository/org/wltea/ik-analyzer/IKAnalyzer3.2.8.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-core</artifactId>
+            <version>4.10.3</version>
+        </dependency>
     </dependencies>
 
     <build>

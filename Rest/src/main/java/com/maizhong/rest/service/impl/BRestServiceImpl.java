@@ -8,6 +8,7 @@ import com.maizhong.common.dto.UserInfo;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
+import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.IDUtils;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.common.utils.TimeUtils;
@@ -18,6 +19,7 @@ import com.maizhong.mapper.ext.TbCarMapperExt;
 import com.maizhong.pojo.*;
 import com.maizhong.pojo.vo.TbCarBaseVo;
 import com.maizhong.rest.service.BRestService;
+import com.maizhong.rest.service.SearchService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -30,6 +32,9 @@ import java.util.*;
  */
 @Service
 public class BRestServiceImpl implements BRestService {
+
+    @Resource
+    private SearchService searchService;
 
     @Resource
     private TbCarMapper tbCarMapper;
@@ -172,9 +177,9 @@ public class BRestServiceImpl implements BRestService {
                     tbCar.setUnable(null);
                     tbCar.setSellNum(null);
                     tbCar.setWeight(null);
+                    tbCar.setIssale(0);
                     tbCar.setUpdateTime(new Date());
-
-
+                    searchService.syncTosolr(String.valueOf(tbCar.getId()), null);
                     tbCarMapper.updateByPrimaryKeySelective(tbCar);
                     return JsonResult.OK("修改成功");
                 }
@@ -346,15 +351,15 @@ public class BRestServiceImpl implements BRestService {
             TbBusiness business = tbBusinessMapper.selectByPrimaryKey(user.getBusinessId());
 
             if (business != null) {
-                userInfo.setBusinessName(business.getBusinessName()==null?"":business.getBusinessName());
-                userInfo.setBusinessId(business.getId()==null?"":business.getId().toString());
-                userInfo.setBusinessLogo(business.getLogo()==null?"":business.getLogo());
-                userInfo.setBusinessAdress( business.getAddress()==null?"":business.getAddress());
-                userInfo.setUserName( user.getUserName()==null?"":user.getUserName());
-                userInfo.setUserId(user.getId()==null?"":(user.getId().toString()));
-                userInfo.setUserAdvert( user.getUserAdvert()==null?"":user.getUserAdvert());
-                userInfo.setUserPhone( user.getUserPhone()==null?"":user.getUserPhone());
-                userInfo.setUserEmail( user.getUserEmail()==null?"":user.getUserEmail());
+                userInfo.setBusinessName(business.getBusinessName() == null ? "" : business.getBusinessName());
+                userInfo.setBusinessId(business.getId() == null ? "" : business.getId().toString());
+                userInfo.setBusinessLogo(business.getLogo() == null ? "" : business.getLogo());
+                userInfo.setBusinessAdress(business.getAddress() == null ? "" : business.getAddress());
+                userInfo.setUserName(user.getUserName() == null ? "" : user.getUserName());
+                userInfo.setUserId(user.getId() == null ? "" : (user.getId().toString()));
+                userInfo.setUserAdvert(user.getUserAdvert() == null ? "" : user.getUserAdvert());
+                userInfo.setUserPhone(user.getUserPhone() == null ? "" : user.getUserPhone());
+                userInfo.setUserEmail(user.getUserEmail() == null ? "" : user.getUserEmail());
 
                 return JsonResult.OK(userInfo);
             }
@@ -366,11 +371,11 @@ public class BRestServiceImpl implements BRestService {
     @Override
     public JsonResult loginOfCatch(String username, String password) {
         JsonResult result = userLogin(username, password);
-        if (result.getStatus()==200){
+        if (result.getStatus() == 200) {
             UserInfo userInfo = (UserInfo) result.getData();
-            if (userInfo!=null){
+            if (userInfo != null) {
                 //生成Token
-                String token = UUID.randomUUID().toString().replace("-","");
+                String token = UUID.randomUUID().toString().replace("-", "");
 
                 //redis 模拟缓存 添加到缓存命中
                 String jsonInfo = JsonUtils.objectToJson(userInfo);
@@ -380,10 +385,10 @@ public class BRestServiceImpl implements BRestService {
                     jedisClient.expire(BUSSINESSUSER_PREFIX + token, 900);
                 }
 
-                Map<String,Object> realResult = new HashMap<>();
+                Map<String, Object> realResult = new HashMap<>();
 
-                realResult.put("token",token);
-                realResult.put("userInfo",userInfo);
+                realResult.put("token", token);
+                realResult.put("userInfo", userInfo);
 
                 return JsonResult.OK(realResult);
             }
@@ -391,7 +396,6 @@ public class BRestServiceImpl implements BRestService {
         }
         return result;
     }
-
 
 
     @Override
@@ -405,7 +409,7 @@ public class BRestServiceImpl implements BRestService {
 
 
     @Override
-    public OperateEnum insertSeries(Long brandId, Long factoryId,String seriesName) {
+    public OperateEnum insertSeries(Long brandId, Long factoryId, String seriesName) {
         if (brandId == null || StringUtils.isBlank(seriesName)) {
             return OperateEnum.FAILE;
         }
@@ -475,15 +479,15 @@ public class BRestServiceImpl implements BRestService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        TbCarBrandLine tbCarBrandLine=new TbCarBrandLine();
+        TbCarBrandLine tbCarBrandLine = new TbCarBrandLine();
         try {
             tbCarBrandLine = tbCarBrandLineMapper.selectByPrimaryKey(Long.valueOf(carSeries));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
-        TbCarFactory tbCarFactory =new TbCarFactory();
+        TbCarFactory tbCarFactory = new TbCarFactory();
         try {
-            tbCarFactory=   tbCarFactoryMapper.selectByPrimaryKey(Long.valueOf(carBaseDTO.getCarFactory()));
+            tbCarFactory = tbCarFactoryMapper.selectByPrimaryKey(Long.valueOf(carBaseDTO.getCarFactory()));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
@@ -557,10 +561,10 @@ public class BRestServiceImpl implements BRestService {
 
     }
 
-  //根据汽车厂商获取车系
+    //根据汽车厂商获取车系
     @Override
     public JsonResult getSeriesByFactory(String factoryId) {
-        TbCarBrandLineExample tbCarBrandLineExample=new TbCarBrandLineExample();
+        TbCarBrandLineExample tbCarBrandLineExample = new TbCarBrandLineExample();
         TbCarBrandLineExample.Criteria criteria = tbCarBrandLineExample.createCriteria();
         try {
             criteria.andFactoryIdEqualTo(Long.valueOf(factoryId));
@@ -569,7 +573,7 @@ public class BRestServiceImpl implements BRestService {
             return JsonResult.Error("网络错误，请刷新后重试！");
         }
         List<TbCarBrandLine> tbCarBrandLines = tbCarBrandLineMapper.selectByExample(tbCarBrandLineExample);
-        if (tbCarBrandLines!=null&&tbCarBrandLines.size()>0){
+        if (tbCarBrandLines != null && tbCarBrandLines.size() > 0) {
             return JsonResult.OK(tbCarBrandLines);
         }
         return JsonResult.OK();
@@ -577,16 +581,16 @@ public class BRestServiceImpl implements BRestService {
 
     @Override
     public JsonResult isOnline(String token) {
-        if (StringUtils.isNotBlank(token)){
+        if (StringUtils.isNotBlank(token)) {
             String json = jedisClient.hget(BUSSINESSUSER_PREFIX + token, BUSSINESSUSER_INFO);
-            if (StringUtils.isNotBlank(json)){
-                jedisClient.expire(BUSSINESSUSER_PREFIX + token,60*60);
+            if (StringUtils.isNotBlank(json)) {
+                jedisClient.expire(BUSSINESSUSER_PREFIX + token, 60 * 60);
                 UserInfo info = JsonUtils.jsonToPojo(json, UserInfo.class);
 //                if (info!=null){
 //
 //                    Map<Object, Object> result = new HashMap<>();
 //                    result.put("userInfo",info);
-                    return JsonResult.OK(info);
+                return JsonResult.OK(info);
 //                }
             }
         }
