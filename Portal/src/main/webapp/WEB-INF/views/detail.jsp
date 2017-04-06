@@ -41,10 +41,10 @@
         <p class="j_color">进口车型 详询经销商</p>
         <br/>
         <p class="soles">保障车源，保障质量，保障价格，保障售后</p>
-        <br/>
+
 
         <div class="jiage2"><p>准价：</p><span class="red">￥${car.sell_price} 万</span>  &nbsp;&nbsp;&nbsp;本平台优惠价格</div>
-        <br/>
+
         <div class="jiage2 jiage3"><p>市场价：<span class="red2">￥${car.shop_price}</span> &nbsp;&nbsp;&nbsp;</p> <span class="reds">其他平台或4s店价格</span></div>
         <br/>
         <table class="cd_m_info_desc" cellspacing="0" border="0">
