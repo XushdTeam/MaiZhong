@@ -269,7 +269,7 @@ public class SearchServiceImpl implements SearchService {
 
 
         if (StringUtils.isNotBlank(queryString)){
-            querysb.append("car_keywords:"+queryString);
+            querysb.append("car_keywords:*"+queryString+"*");
             highTiken = true;
         }else{
             //如果查询string为空   遍历条件  添加条件

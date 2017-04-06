@@ -346,12 +346,12 @@ public class BRestServiceImpl implements BRestService {
             TbBusiness business = tbBusinessMapper.selectByPrimaryKey(user.getBusinessId());
 
             if (business != null) {
-                userInfo.setBusinessAdress(business.getBusinessName());
+                userInfo.setBusinessName(business.getBusinessName());
                 userInfo.setBusinessId(business.getId()==null?null:business.getId().toString());
                 userInfo.setBusinessLogo(business.getLogo());
                 userInfo.setBusinessAdress( business.getAddress());
                 userInfo.setUserName( user.getUserName());
-                userInfo.setUserAdvert(user.getId()==null?null:user.getId().toString());
+                userInfo.setUserId(user.getId()==null?null:(user.getId().toString()));
                 userInfo.setUserAdvert( user.getUserAdvert());
                 userInfo.setUserPhone( user.getUserPhone());
                 userInfo.setUserEmail( user.getUserEmail());
@@ -580,15 +580,14 @@ public class BRestServiceImpl implements BRestService {
         if (StringUtils.isNotBlank(token)){
             String json = jedisClient.hget(BUSSINESSUSER_PREFIX + token, BUSSINESSUSER_INFO);
             if (StringUtils.isNotBlank(json)){
-                jedisClient.expire(BUSSINESSUSER_PREFIX + token,60);
+                jedisClient.expire(BUSSINESSUSER_PREFIX + token,60*60);
                 UserInfo info = JsonUtils.jsonToPojo(json, UserInfo.class);
-                if (info!=null){
-
-                    Map<Object, Object> result = new HashMap<>();
-                    result.put("userInfo",info);
-
-                    return JsonResult.OK(result);
-                }
+//                if (info!=null){
+//
+//                    Map<Object, Object> result = new HashMap<>();
+//                    result.put("userInfo",info);
+                    return JsonResult.OK(info);
+//                }
             }
         }
         return JsonResult.Error("未登录");
