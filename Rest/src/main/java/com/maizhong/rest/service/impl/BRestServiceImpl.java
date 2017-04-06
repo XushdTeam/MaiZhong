@@ -587,7 +587,7 @@ public class BRestServiceImpl implements BRestService {
                     Map<Object, Object> result = new HashMap<>();
                     result.put("userInfo",map);
 
-                    return JsonResult.OK(map);
+                    return JsonResult.OK(result);
                 }
             }
         }
