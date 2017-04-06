@@ -15,6 +15,7 @@ import com.maizhong.pojo.TbBusinessUser;
 import com.maizhong.pojo.TbBusinessUserExample;
 import com.maizhong.service.BusinessService;
 import com.maizhong.service.BusinessUserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -90,12 +91,28 @@ public class BusinessUserServiceImpl implements BusinessUserService {
         return JsonUtils.objectToJson(list);
     }
 
+    /**
+     * 添加用户
+     * @param tbBusinessUser
+     * @return
+     */
     @Override
     public OperateEnum insertBusinessUser(TbBusinessUser tbBusinessUser) {
-        int res = tbBusinessUserMapper.insertSelective(tbBusinessUser);
-        if (res > 0) {
-            return OperateEnum.SUCCESS;
-        } else {
+        if (tbBusinessUser!=null&& StringUtils.isNoneBlank(tbBusinessUser.getUserName())){
+            TbBusinessUserExample example=new TbBusinessUserExample();
+            TbBusinessUserExample.Criteria criteria = example.createCriteria();
+            criteria.andUserNameEqualTo(tbBusinessUser.getUserName());
+            List<TbBusinessUser> tbBusinessUsers = tbBusinessUserMapper.selectByExample(example);
+            if (tbBusinessUsers!=null&&tbBusinessUsers.size()>0){
+                return OperateEnum.NAME_REPEAT;
+            }
+            int res = tbBusinessUserMapper.insertSelective(tbBusinessUser);
+            if (res > 0) {
+                return OperateEnum.SUCCESS;
+            } else {
+                return OperateEnum.FAILE;
+            }
+        }else {
             return OperateEnum.FAILE;
         }
     }

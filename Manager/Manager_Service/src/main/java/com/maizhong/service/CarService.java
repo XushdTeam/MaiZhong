@@ -28,4 +28,6 @@ public interface CarService {
     JsonResult changeSale(Long id);
 
     JsonResult updateCarIssale(String ids, Integer issale);
+
+    PageResult findListSaleToShow(PageSearchParam param);
 }

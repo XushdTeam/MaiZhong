@@ -227,29 +227,31 @@ public class CarServiceImpl implements CarService {
 
         TbCarExample.Criteria criteria = example.createCriteria();
         //添加查询条件 queryString
-        if (param != null) {
 
-            //添加时间条件
-            if (param.getFiled("timeBegin") != null) {
-                criteria.andUpdateTimeGreaterThan(TimeUtils.getDate(param.getFiled("timeBegin")));
-            }
-            if (param.getFiled("timeEnd") != null) {
-                criteria.andUpdateTimeLessThan(TimeUtils.getDate(param.getFiled("timeEnd")));
-            }
 
-            //添加品牌与类型
-            if (param.getFiled("carType") != null) {
-                criteria.andCarTypeEqualTo(Long.parseLong(param.getFiled("carType")));
-            }
-            if (param.getFiled("carBrand") != null) {
-                criteria.andCarBrandEqualTo(Long.parseLong(param.getFiled("carBrand")));
-            }
-            //价格区间放弃
-            /*if (StringUtils.isNotBlank(param.getFiled("queryString"))&&!param.getFiled("queryString").contains("=")){
-                criteria.andNameLike("%"+param.getFiled("queryString")+"%");
-            }*/
+        //添加时间条件
+        if (param.getFiled("timeBegin") != null) {
+            criteria.andUpdateTimeGreaterThan(TimeUtils.getDate(param.getFiled("timeBegin")));
+        }
+        if (param.getFiled("timeEnd") != null) {
+            criteria.andUpdateTimeLessThan(TimeUtils.getDate(param.getFiled("timeEnd")));
+        }
+        //添加品牌与类型
+        if (param.getFiled("carType") != null) {
+            criteria.andCarTypeEqualTo(Long.parseLong(param.getFiled("carType")));
+        }
+        if (param.getFiled("carBrand") != null) {
+            criteria.andCarBrandEqualTo(Long.parseLong(param.getFiled("carBrand")));
+        }
+        if (param.getFiled("businessId") != null) {
+            criteria.andBusinessIdEqualTo(Long.valueOf(param.getFiled("businessId")));
+        }
+        if (param.getFiled("unable") != null) {
+            criteria.andUnableEqualTo(Integer.valueOf(param.getFiled("unable")));
         }
 
+        criteria.andUnableNotEqualTo(1);
+        criteria.andIssaleEqualTo(0);
         //查询
         List<TbCarVo> list = tbCarMapperExt.findListNotContainsDesc(example);
         PageInfo pageInfo = null;
@@ -335,16 +337,26 @@ public class CarServiceImpl implements CarService {
             return JsonResult.Error("数据错误");
         }
         tbCarMapper.updateByPrimaryKeySelective(tbCar);
-        if (issale==0){
+        if (issale == 0) {
             Map<String, String> map = new HashMap<>();
             map.put("delId", null);
             map.put("insertId", String.valueOf(id));
-            HttpClientUtil.doPost(BASE_URL + "/syncTosolr", map);
-        }else {
+            try {
+                HttpClientUtil.doPost(BASE_URL + "/syncTosolr", map);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return JsonResult.Error("solr同步失败");
+            }
+        } else {
             Map<String, String> map = new HashMap<>();
             map.put("delId", String.valueOf(id));
             map.put("insertId", null);
-            HttpClientUtil.doPost(BASE_URL + "/syncTosolr", map);
+            try {
+                HttpClientUtil.doPost(BASE_URL + "/syncTosolr", map);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return JsonResult.Error("solr同步失败");
+            }
         }
 
         return JsonResult.OK("修改成功！");
@@ -368,7 +380,7 @@ public class CarServiceImpl implements CarService {
         car.setIssale(issale);
 
         tbCarMapper.updateByExampleSelective(car, example);
-       //同步solr
+        //同步solr
         for (String id : split) {
             if (StringUtils.isBlank(id)) {
                 continue;
@@ -386,5 +398,63 @@ public class CarServiceImpl implements CarService {
             }
         }
         return JsonResult.OK("修改成功！");
+    }
+
+    /**
+     * 查询审核通过的汽车
+     *
+     * @param param
+     * @return
+     */
+    @Override
+    public PageResult findListSaleToShow(PageSearchParam param) {
+        if (param == null) {
+            param = new PageSearchParam();
+        }
+        if (param.getPageSize() == 0) {
+            param.setPageSize(PAGESIZE);
+        }
+        //开启分页
+        Page page = PageHelper.startPage(param.getPageIndex(), param.getPageSize());
+
+        //添加条件
+        TbCarExample example = new TbCarExample();
+
+        TbCarExample.Criteria criteria = example.createCriteria();
+        //添加查询条件 queryString
+        if (param != null) {
+
+            //添加时间条件
+            if (param.getFiled("timeBegin") != null) {
+                criteria.andUpdateTimeGreaterThan(TimeUtils.getDate(param.getFiled("timeBegin")));
+            }
+            if (param.getFiled("timeEnd") != null) {
+                criteria.andUpdateTimeLessThan(TimeUtils.getDate(param.getFiled("timeEnd")));
+            }
+
+            //添加品牌与类型
+            if (param.getFiled("carType") != null) {
+                criteria.andCarTypeEqualTo(Long.parseLong(param.getFiled("carType")));
+            }
+            if (param.getFiled("carBrand") != null) {
+                criteria.andCarBrandEqualTo(Long.parseLong(param.getFiled("carBrand")));
+            }
+            if (param.getFiled("isSale") != null) {
+                criteria.andIssaleEqualTo(Integer.valueOf(param.getFiled("isSale")));
+            }
+            if (param.getFiled("businessId") != null) {
+                criteria.andBusinessIdEqualTo(Long.valueOf(param.getFiled("businessId")));
+            }
+            criteria.andUnableEqualTo(1);
+        }
+
+        //查询
+        List<TbCarVo> list = tbCarMapperExt.findListNotContainsDesc(example);
+        PageInfo pageInfo = null;
+        if (list != null) {
+            pageInfo = new PageInfo(list);
+        }
+
+        return new PageResult(pageInfo);
     }
 }
