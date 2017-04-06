@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Xushd
@@ -38,22 +39,26 @@
     <div class="pro_details_topcenter">
         <div class="pro1" style="padding-left:0px">${car.name}</div>
         <p class="j_color">进口车型 详询经销商</p>
-
+        <br/>
         <p class="soles">保障车源，保障质量，保障价格，保障售后</p>
-        <div class="jiage2"><p>准价：</p><span class="red">￥${car.sell_price}</span>  &nbsp;&nbsp;&nbsp;本平台优惠价格</div>
+        <br/>
+
+        <div class="jiage2"><p>准价：</p><span class="red">￥${car.sell_price} 万</span>  &nbsp;&nbsp;&nbsp;本平台优惠价格</div>
+        <br/>
         <div class="jiage2 jiage3"><p>市场价：<span class="red2">￥${car.shop_price}</span> &nbsp;&nbsp;&nbsp;</p> <span class="reds">其他平台或4s店价格</span></div>
+        <br/>
         <table class="cd_m_info_desc" cellspacing="0" border="0">
             <tbody>
-            <tr>
-                <td>
-                      <span class="cd_m_info_desc_val">
-                            <a class="cd_m_innerlink1" href=" " target="_blank">2.8万公里</a>
-                      </span>
-                    <span class="cd_m_info_desc_key bor">表显里程</span>
-                </td>
-                <td><span class="cd_m_info_desc_val">2015-10</span><span class="cd_m_info_desc_key bor">上牌时间</span></td>
-                <td><span class="cd_m_info_desc_val">2017-03-22</span><span class="cd_m_info_desc_key bor">上架时间</span></td>
-            </tr>
+            <%--<tr>--%>
+                <%--<td>--%>
+                      <%--<span class="cd_m_info_desc_val">--%>
+                            <%--<a class="cd_m_innerlink1" href=" " target="_blank">2.8万公里</a>--%>
+                      <%--</span>--%>
+                    <%--<span class="cd_m_info_desc_key bor">表显里程</span>--%>
+                <%--</td>--%>
+                <%--<td><span class="cd_m_info_desc_val">2015-10</span><span class="cd_m_info_desc_key bor">上牌时间</span></td>--%>
+                <%--<td><span class="cd_m_info_desc_val">2017-03-22</span><span class="cd_m_info_desc_key bor">上架时间</span></td>--%>
+            <%--</tr>--%>
 
             <tr>
                 <td><span class="cd_m_info_desc_val">国Ⅳ(国Ⅴ)</span><span class="cd_m_info_desc_key">排放标准</span></td>
@@ -178,12 +183,9 @@
 
             <div class="sec bnspic">
                     <ul>
-                        <li class="on"><a href="#"><img src="../../resources/img/xq_1.jpg"  width="100%"  /> </a></li>
-                        <li><a href="#"><img src="../../resources/img/xq_1.jpg"  width="100%" /> </a></li>
-                        <li><a href="#"><img src="../../resources/img/xq_1.jpg"  width="100%"  /> </a></li>
-                        <li><a href="#"><img src="../../resources/img/xq_1.jpg"  width="100%" /> </a></li>
-                        <li><a href="#"><img src="../../resources/img/xq_1.jpg"  width="100%"  /> </a></li>
-                        <li><a href="#"><img src="../../resources/img/xq_1.jpg"  width="100%" /> </a></li>
+                        <c:forEach items="${imgArry}" var="simg">
+                            <li class="on"><a href="#"><img src="${simg}"  width="100%"  /> </a></li>
+                        </c:forEach>
                     </ul>
             </div>
         </div><!--xq_img end-->
