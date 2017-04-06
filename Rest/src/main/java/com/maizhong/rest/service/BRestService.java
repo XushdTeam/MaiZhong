@@ -24,6 +24,8 @@ public interface BRestService {
     JsonResult unable(String id, Integer unalbe);
 
 
+    JsonResult loginOfCatch(String username, String password);
+
 
     JsonResult findBrandsByCatch();
     JsonResult findSeriesByCatch(String brandId);
@@ -48,6 +50,8 @@ public interface BRestService {
     JsonResult findFactoryByBrand(String brandId);
 
     JsonResult getSeriesByFactory(String factoryId);
+
+    JsonResult isOnline(String token);
 
 /*    JsonResult getFactoryByBrand();*/
 

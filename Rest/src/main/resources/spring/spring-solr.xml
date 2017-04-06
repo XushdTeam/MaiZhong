@@ -5,6 +5,7 @@
 
     <bean name="solrServer" class="org.apache.solr.client.solrj.impl.HttpSolrServer">
          <constructor-arg name="baseURL" value="http://192.168.3.191:8080/solr"></constructor-arg>
+         <!--<constructor-arg name="baseURL" value="http://127.0.0.1:8080/solr"></constructor-arg>-->
     </bean>
 
 </beans>

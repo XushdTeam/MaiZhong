@@ -55,7 +55,7 @@ public class DataSyncServiceImpl implements DataSyncService {
             TbCarExample.Criteria or = example.or();
             or.andIdEqualTo(id);
         }
-        List<TbCarVo> list = tbCarMapperExt.findListNotContainsDesc(example);
+        List<TbCarVo> list = tbCarMapperExt.findDocsForSolrStore(example);
         return list;
     }
 

@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.maizhong.common.dto.CarBaseDTO;
 import com.maizhong.common.dto.KeyObject;
+import com.maizhong.common.dto.UserInfo;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
@@ -64,6 +65,12 @@ public class BRestServiceImpl implements BRestService {
     private String CAR_BRAND_ID;
     @Value("${CAR_SERIES_ID}")
     private String CAR_SERIES_ID;
+
+    @Value("${BUSSINESSUSER_PREFIX}")
+    private String BUSSINESSUSER_PREFIX;
+
+    @Value("${BUSSINESSUSER_INFO}")
+    private String BUSSINESSUSER_INFO;
 
 
     private String verifyCar(TbCar car) {
@@ -334,27 +341,57 @@ public class BRestServiceImpl implements BRestService {
         //  用户缓存重复添加
         if (users != null && users.size() == 1 && users.get(0).getBusinessId() != null) {
             TbBusinessUser user = users.get(0);
-            Map<String, Object> userInfo = new HashMap<>();
+            UserInfo userInfo = new UserInfo();
 
             TbBusiness business = tbBusinessMapper.selectByPrimaryKey(user.getBusinessId());
 
             if (business != null) {
-                userInfo.put("businessName", business.getBusinessName());
-                userInfo.put("businessId", business.getId());
-                userInfo.put("businessLogo", business.getLogo());
-                userInfo.put("businessAdress", business.getAddress());
-                userInfo.put("userName", user.getUserName());
-                userInfo.put("userId", user.getId());
-                userInfo.put("userAdvert", user.getUserAdvert());
-                userInfo.put("userPhone", user.getUserPhone());
-                userInfo.put("userEmail", user.getUserEmail());
-
+                userInfo.setBusinessName(business.getBusinessName()==null?"":business.getBusinessName());
+                userInfo.setBusinessId(business.getId()==null?"":business.getId().toString());
+                userInfo.setBusinessLogo(business.getLogo()==null?"":business.getLogo());
+                userInfo.setBusinessAdress( business.getAddress()==null?"":business.getAddress());
+                userInfo.setUserName( user.getUserName()==null?"":user.getUserName());
+                userInfo.setUserId(user.getId()==null?"":(user.getId().toString()));
+                userInfo.setUserAdvert( user.getUserAdvert()==null?"":user.getUserAdvert());
+                userInfo.setUserPhone( user.getUserPhone()==null?"":user.getUserPhone());
+                userInfo.setUserEmail( user.getUserEmail()==null?"":user.getUserEmail());
 
                 return JsonResult.OK(userInfo);
             }
         }
         return JsonResult.Error("登陆失败，用户名或者密码不匹配");
     }
+
+
+    @Override
+    public JsonResult loginOfCatch(String username, String password) {
+        JsonResult result = userLogin(username, password);
+        if (result.getStatus()==200){
+            UserInfo userInfo = (UserInfo) result.getData();
+            if (userInfo!=null){
+                //生成Token
+                String token = UUID.randomUUID().toString().replace("-","");
+
+                //redis 模拟缓存 添加到缓存命中
+                String jsonInfo = JsonUtils.objectToJson(userInfo);
+
+                if (StringUtils.isNotBlank(jsonInfo)) {
+                    jedisClient.hset(BUSSINESSUSER_PREFIX + token, BUSSINESSUSER_INFO, jsonInfo);
+                    jedisClient.expire(BUSSINESSUSER_PREFIX + token, 900);
+                }
+
+                Map<String,Object> realResult = new HashMap<>();
+
+                realResult.put("token",token);
+                realResult.put("userInfo",userInfo);
+
+                return JsonResult.OK(realResult);
+            }
+            return JsonResult.Error("登录失败，用户名或者密码错误");
+        }
+        return result;
+    }
+
 
 
     @Override
@@ -536,6 +573,24 @@ public class BRestServiceImpl implements BRestService {
             return JsonResult.OK(tbCarBrandLines);
         }
         return JsonResult.OK();
+    }
+
+    @Override
+    public JsonResult isOnline(String token) {
+        if (StringUtils.isNotBlank(token)){
+            String json = jedisClient.hget(BUSSINESSUSER_PREFIX + token, BUSSINESSUSER_INFO);
+            if (StringUtils.isNotBlank(json)){
+                jedisClient.expire(BUSSINESSUSER_PREFIX + token,60*60);
+                UserInfo info = JsonUtils.jsonToPojo(json, UserInfo.class);
+//                if (info!=null){
+//
+//                    Map<Object, Object> result = new HashMap<>();
+//                    result.put("userInfo",info);
+                    return JsonResult.OK(info);
+//                }
+            }
+        }
+        return JsonResult.Error("未登录");
     }
 
     /*//插入汽车厂商

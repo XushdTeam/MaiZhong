@@ -23,7 +23,7 @@ img,input{vertical-align:middle; outline:none}
 .pro_details_kuang a{margin-left:10px;border:1px solid #ccc;padding:12px 5px;}
 .nav_topright_fuwu{margin:5px 0 0 10px}
 .nav_topright_fuwu a{border:1px solid #ccc;padding:6px}
-.jiage2{clear:both;background:#F5F5F5; overflow:hidden;zoom:1; padding: 9px 20px !important; font-size: 14px;}
+.jiage2{clear:both;background:#F5F5F5; overflow:hidden;zoom:1; padding:17px 20px !important; font-size: 14px;}
 .j_color{ color: #e72116; line-height: 30px; }
 .jiage3 p{ text-decoration: line-through}
 .jiage3 .red2{ font-size: 16px;}
@@ -43,7 +43,7 @@ img,input{vertical-align:middle; outline:none}
 .ones{ padding-left: 30px}
 .f_lei{ float: left; width: 60px;}
 .cd_m_info_desc td span{ display:block; padding: 3px 0; font-size: 18px;}
-.cd_m_info_desc{ border: 0; margin: 5px 0 10px; padding: 10px 0}
+.cd_m_info_desc{ border: 0; margin: 0px 0 10px; padding: 10px 0}
 .cd_m_info_desc td{ width: 160px;  text-align: center;padding:0px 10px; }
 .cd_m_info_desc_val{ font-size: 18px; line-height: 30px;color: #e72116}
 .cd_m_info_desc_val a{ color: #e72116}

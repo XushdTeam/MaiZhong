@@ -272,7 +272,8 @@
                 <a href="/news.html?newsId=1">
                     <dt><img src="/resources/img/new.jpg"></dt>
                 </a>
-                <dd><a href="/news.html?newsId=1">国内中型车市场的竞争非常激烈，用中坚力量这个词来形容它们是非常合适的，对于选购中型车的消费者来说，最受人关注的是价格，无论是配置、舒适性还是动力表现都较为均衡的车型。接下来给您推荐3款各具特色和性格的合资中型车。</a></dd>
+                <dd class="dd1"><a href="/news.html?newsId=3">将于4月7日上市 江淮推3款新能源车型</a></dd>
+                <dd><a href="/news.html?newsId=1">日前，我们从江淮汽车官方获悉，旗下新能源车型iEV6E、iEV7以及2017款iEV4车型将于4月7日正式上市。其中iEV6E为全新车型，iEV7和新款iEV4在外观以及续航能力上进行了升级。</a></dd>
             </dl>
 
 
@@ -281,16 +282,16 @@
                 <a href="/news.html?newsId=2">
                     <dt><img src="/resources/img/new_2.jpg"></dt>
                 </a>
-                <dd class="dd1"><a href="/news.html?newsId=2">稳妥的选择 3款豪华中大型车推荐</a></dd>
-                <dd><a href="/news.html?newsId=2">国内豪华品牌中大型车市场销量前三的位置一直都被奥迪A6L、宝马5系、奔驰E级牢牢占据着，除了被不少企业和机关当作公务用车之外，不少消费者也看中了该级别车型宽大的车内空间和丰富的配置，将其作为家用车使用。</a></dd>
+                <dd class="dd1"><a href="/news.html?newsId=2">造型/配置均有提升 实拍2017款景逸X3</a></dd>
+                <dd><a href="/news.html?newsId=2">最近的一些日子里，东风风行推出了不少改款、换代车型，如2016年12月上市的2017款景逸X5、2017年3月份上市的现款景逸X3、本月（4月）8日将要上市的新款菱智M5L（点击车型名称进入相关文章）</a></dd>
             </dl>
 
             <dl>
                 <a href="/news.html?newsId=3">
                     <dt><img src="/resources/img/new_4.jpg"></dt>
                 </a>
-                <dd class="dd1"><a href="/news.html?newsId=3">稳妥的选择 3款豪华中大型车推荐</a></dd>
-                <dd><a href="/news.html?newsId=3">国内豪华品牌中大型车市场销量前三的位置一直都被奥迪A6L、宝马5系、奔驰E级牢牢占据着，除了被不少企业和机关当作公务用车之外，不少消费者也看中了该级别车型宽大的车内空间和丰富的配置，将其作为家用车使用。</a></dd>
+                <dd class="dd1"><a href="/news.html?newsId=3">空间\运动\舒适 3款各有强项的合资中型车</a></dd>
+                <dd><a href="/news.html?newsId=3">国内中型车市场的竞争非常激烈，用中坚力量这个词来形容它们是非常合适的，对于选购中型车的消费者来说，最受人关注的是价格，无论是配置、舒适性还是动力表现都较为均衡的车型。</a></dd>
             </dl>
 
     </div><!--new_con-->
