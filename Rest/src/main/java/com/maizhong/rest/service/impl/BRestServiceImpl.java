@@ -583,9 +583,9 @@ public class BRestServiceImpl implements BRestService {
                 jedisClient.expire(BUSSINESSUSER_PREFIX + token,60);
                 Map<String,Object> map = JsonUtils.jsonToPojo(json, Map.class);
                 if (map!=null){
-//
-//                    Map<Object, Object> result = new HashMap<>();
-//                    result.put("userInfo",map);
+
+                    Map<Object, Object> result = new HashMap<>();
+                    result.put("userInfo",map);
 
                     return JsonResult.OK(map);
                 }
