@@ -122,7 +122,7 @@ public class SearchServiceImpl implements SearchService {
     public Map<String,Object> searchDoc(String queryString, String[] sortString,Integer pageIndex,String highTiken) {
 
         SolrQuery solrQuery = new SolrQuery(queryString);
-
+//        defType:edismax, mm:80%
 
         //添加分页信息
         if (pageIndex==null||pageIndex<1){
@@ -269,7 +269,7 @@ public class SearchServiceImpl implements SearchService {
 
 
         if (StringUtils.isNotBlank(queryString)){
-            querysb.append("car_keywords:*"+queryString+"*");
+            querysb.append("car_keywords:"+queryString+"");
             highTiken = true;
         }else{
             //如果查询string为空   遍历条件  添加条件

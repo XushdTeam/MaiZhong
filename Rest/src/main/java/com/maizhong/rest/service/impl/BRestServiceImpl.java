@@ -346,15 +346,15 @@ public class BRestServiceImpl implements BRestService {
             TbBusiness business = tbBusinessMapper.selectByPrimaryKey(user.getBusinessId());
 
             if (business != null) {
-                userInfo.setBusinessName(business.getBusinessName());
-                userInfo.setBusinessId(business.getId()==null?null:business.getId().toString());
-                userInfo.setBusinessLogo(business.getLogo());
-                userInfo.setBusinessAdress( business.getAddress());
-                userInfo.setUserName( user.getUserName());
-                userInfo.setUserId(user.getId()==null?null:(user.getId().toString()));
-                userInfo.setUserAdvert( user.getUserAdvert());
-                userInfo.setUserPhone( user.getUserPhone());
-                userInfo.setUserEmail( user.getUserEmail());
+                userInfo.setBusinessName(business.getBusinessName()==null?"":business.getBusinessName());
+                userInfo.setBusinessId(business.getId()==null?"":business.getId().toString());
+                userInfo.setBusinessLogo(business.getLogo()==null?"":business.getLogo());
+                userInfo.setBusinessAdress( business.getAddress()==null?"":business.getAddress());
+                userInfo.setUserName( user.getUserName()==null?"":user.getUserName());
+                userInfo.setUserId(user.getId()==null?"":(user.getId().toString()));
+                userInfo.setUserAdvert( user.getUserAdvert()==null?"":user.getUserAdvert());
+                userInfo.setUserPhone( user.getUserPhone()==null?"":user.getUserPhone());
+                userInfo.setUserEmail( user.getUserEmail()==null?"":user.getUserEmail());
 
                 return JsonResult.OK(userInfo);
             }
