@@ -171,6 +171,7 @@ public class DataSyncServiceImpl implements DataSyncService {
         }else{
             solrServer.deleteByQuery("*:*");
         }
+        solrServer.commit();
     }
 
 
@@ -190,9 +191,10 @@ public class DataSyncServiceImpl implements DataSyncService {
             ids.add(insertId);
             List<TbCarVo> vos = findVosByIds(ids);
             if (vos!=null&&vos.size()>0){
-                addSolrDocUseVo(vos);
+                this.addSolrDocUseVo(vos);
             }
         }
+        solrServer.commit();
     }
 
 
