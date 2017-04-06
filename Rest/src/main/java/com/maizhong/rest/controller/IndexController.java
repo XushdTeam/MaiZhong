@@ -80,6 +80,22 @@ public class IndexController {
 
     }
 
+    @RequestMapping(value = "/SetFactoryRedis")
+    @ResponseBody
+    public JsonResult SetFactoryRedis(){
+
+        JsonResult result = indexService.SetFactoryRedis();
+        return result;
+    }
+
+    @RequestMapping(value = "/SetBrandFactorySerise")
+    @ResponseBody
+    public JsonResult SetBrandFactorySerise(){
+
+        JsonResult result = indexService.SetBrandFactorySerise();
+        return result;
+    }
+
 
 
 }

@@ -256,6 +256,7 @@ img,input{vertical-align:middle; outline:none}
 .new_con dl:nth-child(2){ float: right; margin-right: 0}
 .new_con dl dt img{ width:380px; height: 257px}
 .new_con dl dd{ line-height: 35px; font-size: 14px; padding-left: 20px}
+.new_con dl .dd1 a{color: #000; font-size: 16px;}
 
 
 /*list*/
@@ -417,9 +418,9 @@ img,input{vertical-align:middle; outline:none}
 .rem{ width: 10%; float: right; text-align: center; margin-top: -30px}
 
 /*卖车*/
-.bans{ background: url(../img/ban.jpg) no-repeat center center; background-size:cover; height: 450px}
+.bans{ background: url(../img/ban.jpg) no-repeat center center; background-size:cover; height: 687px}
 .ban_cen{ width: 1200px; margin: 0 auto;}
-.ban_form{ width: 350px; background: #fff; float: right; margin-top: 60px; padding-bottom: 30px; box-shadow: 1px 0px 5px #ccc}
+.ban_form{ width: 350px; background: #fff; float: right; margin-top: 120px; padding-bottom: 30px; box-shadow: 1px 0px 5px #ccc}
 .ban_cen .p_top{ background: #399afe; line-height: 55px;color: #fff; text-align: center; font-size: 18px; padding-top: 15px}
 .ban_cen .p_top span{ font-size: 36px;}
 .ban_cen .inputs{ display: block; width: 280px; margin: 20px auto 20px; line-height: 32px; border: 1px solid #eee; padding-left: 5px}

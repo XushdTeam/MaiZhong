@@ -8,6 +8,7 @@ import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.common.target.ServiceLog;
+import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.TimeUtils;
 import com.maizhong.mapper.TbCarBrandLineMapper;
 import com.maizhong.mapper.TbCarBrandMapper;
@@ -24,7 +25,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yangF on 2017/3/7.
@@ -47,15 +50,16 @@ public class CarServiceImpl implements CarService {
     private TbCarBrandLineMapper tbCarBrandLineMapper;
 
     @Value("${PAGESIZE}")
-    private  static Integer PAGESIZE;
-
+    private Integer PAGESIZE;
     @Value("${POINTPRICE}")
-    private  static Integer POINTPRICE;
+    private Integer POINTPRICE;
+    @Value("${BASE_URL}")
+    private String BASE_URL;
 
-    @ServiceLog(module = "汽车管理",methods = "汽车添加")
+    @ServiceLog(module = "汽车管理", methods = "汽车添加")
     @Override
     public JsonResult addTbCar(TbCar car) {
-        if (car==null){
+        if (car == null) {
             return JsonResult.Error("数据错误");
         }
         /*
@@ -71,20 +75,20 @@ public class CarServiceImpl implements CarService {
          */
 
         //number`'汽车编号 ',  `name`'车型名称 类似奥迪a4',
-        if (car.getNumber()==null||StringUtils.isBlank(car.getNumber())){
+        if (car.getNumber() == null || StringUtils.isBlank(car.getNumber())) {
             return JsonResult.Error("编号或者名称不可以为空");
         }
         //car_brand`  '外键链接车辆品牌  类似奥迪',`car_type` '外键  链接车辆类型',
-        if (car.getCarType()==null||car.getCarBrand()==null||StringUtils.isBlank(car.getCarType()+"")||StringUtils.isBlank(car.getCarBrand()+"")){
+        if (car.getCarType() == null || car.getCarBrand() == null || StringUtils.isBlank(car.getCarType() + "") || StringUtils.isBlank(car.getCarBrand() + "")) {
             return JsonResult.Error("品牌和类型是必选项");
         }
         //`baseId`  连接基础库Id  暂时先不考虑基础库Id出现异常现象
-        if (car.getBaseId()==null||StringUtils.isBlank(car.getBaseId()+"")){
+        if (car.getBaseId() == null || StringUtils.isBlank(car.getBaseId() + "")) {
             return JsonResult.Error("库中车辆数据不可以为空");
         }
 
         //订金价格',
-        if (car.getReservePrice()==null||car.getSellPrice()==null||StringUtils.isBlank(car.getReservePrice()+"")||StringUtils.isBlank(car.getSellPrice()+"")){
+        if (car.getReservePrice() == null || car.getSellPrice() == null || StringUtils.isBlank(car.getReservePrice() + "") || StringUtils.isBlank(car.getSellPrice() + "")) {
             return JsonResult.Error("车辆卖价和定金不可以为空");
         }
         //添加时间',
@@ -92,7 +96,7 @@ public class CarServiceImpl implements CarService {
         //修改时间',
         car.setUpdateTime(new Date());
         //unable` '是否可用 用于搜索时是否展示',
-        if (car.getUnable()==null||StringUtils.isBlank(car.getUnable()+"")){
+        if (car.getUnable() == null || StringUtils.isBlank(car.getUnable() + "")) {
             car.setUnable(1);
         }
         //desc` text NOT NULL COMMENT '商品详情的存储字段',
@@ -106,85 +110,87 @@ public class CarServiceImpl implements CarService {
 
         int insert = tbCarMapper.insertSelective(car);
 
-        if (insert==1){
+        if (insert == 1) {
             JsonResult build = JsonResult.build(OperateEnum.SUCCESS);
             //以后改成number？？？ 预留一下
             build.setData(car.getId());
             return build;
-        } else{
+        } else {
             return JsonResult.Error("网络异常 请联系管理员");
         }
     }
 
     /**
      * 根据id查询方法
+     *
      * @param id
      * @return
      */
     @Override
     public TbCar findCarById(Long id) {
-        return id==null?null:tbCarMapper.selectByPrimaryKey(id);
+        return id == null ? null : tbCarMapper.selectByPrimaryKey(id);
     }
 
 
     /**
      * 修改方法
+     *
      * @param car
      * @return
      */
-    @ServiceLog(module = "汽车管理",methods = "汽车修改")
+    @ServiceLog(module = "汽车管理", methods = "汽车修改")
     @Override
-    public JsonResult updateCar(TbCar car){
+    public JsonResult updateCar(TbCar car) {
 
-        if (car==null){
+        if (car == null) {
             return JsonResult.Error("数据错误");
         }
         TbCar oldCar = null;
 
         //  `number`'汽车编号 ', id 主键
-        if (car.getNumber()==null||car.getId()==null||StringUtils.isBlank(car.getId()+"")||StringUtils.isBlank(car.getNumber()+"")){
+        if (car.getNumber() == null || car.getId() == null || StringUtils.isBlank(car.getId() + "") || StringUtils.isBlank(car.getNumber() + "")) {
             return JsonResult.Error("编号或者Id为空了");
-        }else{
+        } else {
             oldCar = tbCarMapper.selectByPrimaryKey(car.getId());
         }
 
-        if (oldCar==null){
+        if (oldCar == null) {
             return JsonResult.Error("数据错误");
         }
         //品牌类型
-        if (car.getCarType()==null||car.getCarBrand()==null||StringUtils.isBlank(car.getCarType()+"")||StringUtils.isBlank(car.getCarBrand()+"")){
+        if (car.getCarType() == null || car.getCarBrand() == null || StringUtils.isBlank(car.getCarType() + "") || StringUtils.isBlank(car.getCarBrand() + "")) {
             return JsonResult.Error("品牌和类型是必选项");
         }
         //`baseId`  连接基础库Id  暂时先不考虑基础库Id出现异常现象
-        if (car.getBaseId()==null||StringUtils.isBlank(car.getBaseId()+"")){
+        if (car.getBaseId() == null || StringUtils.isBlank(car.getBaseId() + "")) {
             return JsonResult.Error("库中车辆数据错误");
         }
         //    '订金价格',
-        if (car.getReservePrice()==null||car.getSellPrice()==null||StringUtils.isBlank(car.getReservePrice()+"")||StringUtils.isBlank(car.getSellPrice()+"")){
+        if (car.getReservePrice() == null || car.getSellPrice() == null || StringUtils.isBlank(car.getReservePrice() + "") || StringUtils.isBlank(car.getSellPrice() + "")) {
             return JsonResult.Error("车辆卖价和定金不可以为空");
         }
         //  '修改时间',
         car.setUpdateTime(new Date());
         //  unable` '是否可用 用于搜索时是否展示',
-        if (car.getUnable()==null||StringUtils.isBlank(car.getUnable()+"")){
+        if (car.getUnable() == null || StringUtils.isBlank(car.getUnable() + "")) {
             car.setUnable(1);
         }
 
 
-
         //修改方法
-        return  tbCarMapper.updateByPrimaryKeySelective(car)==1?JsonResult.OK("修改成功"):JsonResult.Error("修改失败");
+        return tbCarMapper.updateByPrimaryKeySelective(car) == 1 ? JsonResult.OK("修改成功") : JsonResult.Error("修改失败");
     }
 
     /***
      * 删除方法
+     *
      * @param id
      * @return
      */
-    @ServiceLog(module = "汽车管理",methods = "汽车删除")
+    @ServiceLog(module = "汽车管理", methods = "汽车删除")
     @Override
     public JsonResult deleteCar(Long id) {
-        if (id!=null){
+        if (id != null) {
             tbCarMapper.deleteByPrimaryKey(id);
             JsonResult.build(OperateEnum.SUCCESS);
             //清除汽车属性表
@@ -198,18 +204,19 @@ public class CarServiceImpl implements CarService {
 
     /****
      * 汽车 列表查询
+     * <p>
+     * 汽车属性不包含 详情
+     * 汽车实体为TbCarVo
      *
-     *      汽车属性不包含 详情
-     *      汽车实体为TbCarVo
      * @param param
      * @return
      */
     @Override
     public PageResult findListToShow(PageSearchParam param) {
-        if (param==null){
-            param=new PageSearchParam();
+        if (param == null) {
+            param = new PageSearchParam();
         }
-        if (param.getPageSize()==0){
+        if (param.getPageSize() == 0) {
             param.setPageSize(PAGESIZE);
         }
         //开启分页
@@ -220,21 +227,21 @@ public class CarServiceImpl implements CarService {
 
         TbCarExample.Criteria criteria = example.createCriteria();
         //添加查询条件 queryString
-        if (param!=null){
+        if (param != null) {
 
             //添加时间条件
-            if (param.getFiled("timeBegin")!=null){
+            if (param.getFiled("timeBegin") != null) {
                 criteria.andUpdateTimeGreaterThan(TimeUtils.getDate(param.getFiled("timeBegin")));
             }
-            if (param.getFiled("timeEnd")!=null){
+            if (param.getFiled("timeEnd") != null) {
                 criteria.andUpdateTimeLessThan(TimeUtils.getDate(param.getFiled("timeEnd")));
             }
 
             //添加品牌与类型
-            if (param.getFiled("carType")!=null){
+            if (param.getFiled("carType") != null) {
                 criteria.andCarTypeEqualTo(Long.parseLong(param.getFiled("carType")));
             }
-            if (param.getFiled("carBrand")!=null){
+            if (param.getFiled("carBrand") != null) {
                 criteria.andCarBrandEqualTo(Long.parseLong(param.getFiled("carBrand")));
             }
             //价格区间放弃
@@ -244,9 +251,9 @@ public class CarServiceImpl implements CarService {
         }
 
         //查询
-        List<TbCarVo> list=tbCarMapperExt.findListNotContainsDesc(example);
+        List<TbCarVo> list = tbCarMapperExt.findListNotContainsDesc(example);
         PageInfo pageInfo = null;
-        if (list!=null){
+        if (list != null) {
             pageInfo = new PageInfo(list);
         }
 
@@ -255,26 +262,27 @@ public class CarServiceImpl implements CarService {
 
 
     /**
-     *   根据车系和年份定位车系
-     *      年份可以为空
-      * @param carSeries
+     * 根据车系和年份定位车系
+     * 年份可以为空
+     *
+     * @param carSeries
      * @param carYear
      * @return
      */
     @Override
-    public JsonResult findBaseCar(Long carSeries, String carYear){
-        if (carSeries==null&&StringUtils.isBlank(carSeries+"")){
+    public JsonResult findBaseCar(Long carSeries, String carYear) {
+        if (carSeries == null && StringUtils.isBlank(carSeries + "")) {
             return JsonResult.Error("数据错误");
         }
         //指定carYear 为0时 时间属性不生效
-        if (StringUtils.isBlank(carYear)||"0".equals(carYear)){
-            carYear=null;
+        if (StringUtils.isBlank(carYear) || "0".equals(carYear)) {
+            carYear = null;
         }
         TbCarBrandLine brandLine = tbCarBrandLineMapper.selectByPrimaryKey(carSeries);
 
-        if(brandLine!=null&&StringUtils.isNotBlank(brandLine.getLineName())){
+        if (brandLine != null && StringUtils.isNotBlank(brandLine.getLineName())) {
             List<TbCarBaseVo> list = tbCarMapperExt.findByCarYearAndCarSeres(brandLine.getLineName(), carYear);
-            if (list!=null){
+            if (list != null) {
                 return JsonResult.OK(list);
             }
         }
@@ -284,19 +292,20 @@ public class CarServiceImpl implements CarService {
 
     /**
      * 批量修改汽车状态
+     *
      * @param ids
      * @param unable
      * @return
      */
     @Override
     public JsonResult updateCarStatus(String ids, Integer unable) {
-        String[] split = ids.split(",");
-        if (split==null||split.length==0||(unable!=1&&unable!=2)){
+        if (ids == null || (unable != 1 && unable != 2)) {
             return JsonResult.Error("数据错误");
         }
+        String[] split = ids.split(",");
         TbCarExample example = new TbCarExample();
-        for (String id:split) {
-            if (StringUtils.isBlank(id)){
+        for (String id : split) {
+            if (StringUtils.isBlank(id)) {
                 continue;
             }
             TbCarExample.Criteria or = example.or();
@@ -306,6 +315,76 @@ public class CarServiceImpl implements CarService {
         car.setUnable(unable);
 
         tbCarMapper.updateByExampleSelective(car, example);
+
         return JsonResult.OK("修改成功");
+    }
+
+
+    @Override
+    public JsonResult changeSale(Long id) {
+        Integer issale = 0;
+        TbCar tbCar = tbCarMapper.selectByPrimaryKey(id);
+        if (tbCar != null) {
+            issale = tbCar.getIssale();
+            if (issale == 1) {
+                tbCar.setIssale(0);
+            } else {
+                tbCar.setIssale(1);
+            }
+        } else {
+            return JsonResult.Error("数据错误");
+        }
+        tbCarMapper.updateByPrimaryKeySelective(tbCar);
+        if (issale==0){
+            Map<String, String> map = new HashMap<>();
+            map.put("delId", null);
+            map.put("insertId", String.valueOf(id));
+            HttpClientUtil.doPost(BASE_URL + "/syncTosolr", map);
+        }else {
+            Map<String, String> map = new HashMap<>();
+            map.put("delId", String.valueOf(id));
+            map.put("insertId", null);
+            HttpClientUtil.doPost(BASE_URL + "/syncTosolr", map);
+        }
+
+        return JsonResult.OK("修改成功！");
+    }
+
+    @Override
+    public JsonResult updateCarIssale(String ids, Integer issale) {
+        if (ids == null || (issale != 1 && issale != 0)) {
+            return JsonResult.Error("数据错误");
+        }
+        String[] split = ids.split(",");
+        TbCarExample example = new TbCarExample();
+        for (String id : split) {
+            if (StringUtils.isBlank(id)) {
+                continue;
+            }
+            TbCarExample.Criteria or = example.or();
+            or.andIdEqualTo(Long.valueOf(id));
+        }
+        TbCar car = new TbCar();
+        car.setIssale(issale);
+
+        tbCarMapper.updateByExampleSelective(car, example);
+       //同步solr
+        for (String id : split) {
+            if (StringUtils.isBlank(id)) {
+                continue;
+            }
+            if (issale == 1) {
+                Map<String, String> map = new HashMap<>();
+                map.put("delId", "");
+                map.put("insertId", id);
+                HttpClientUtil.doPost(BASE_URL + "/syncTosolr", map);
+            } else {
+                Map<String, String> map = new HashMap<>();
+                map.put("delId", id);
+                map.put("insertId", "");
+                HttpClientUtil.doPost(BASE_URL + "/syncTosolr", map);
+            }
+        }
+        return JsonResult.OK("修改成功！");
     }
 }

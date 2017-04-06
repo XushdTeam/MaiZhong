@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 /**
@@ -154,11 +155,18 @@ public class BusinessController {
         return JsonResult.build(result);
     }
 
+    /**
+     * 店铺详情
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/business/detail/{id}")
-    public String detail(@PathVariable String id){
+    public String detail(@PathVariable String id,Model model) {
         TbBusiness business = businessService.getBusinessByid(Long.valueOf(id));
-        return "business_d";
+        model.addAttribute("business",business);
+        return "business/business_d";
     }
+
     /**
      * 店铺LOGO修改
      *

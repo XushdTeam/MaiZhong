@@ -62,6 +62,7 @@
       c.update_time updateTime,
       c.image  image,
       c.unable  unable,
+      c.issale  issale,
       c.weight  weight,
       c.stock_num  stockNum,
       c.sell_num sellNum,

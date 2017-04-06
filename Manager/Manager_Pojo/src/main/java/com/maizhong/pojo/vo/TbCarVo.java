@@ -39,6 +39,7 @@ public class TbCarVo {
     private String image;
     //    <th>上架</th>
     private Integer unable;
+    private Integer issale;
     //    <th>库存</th>
     private Integer stockNum;
     //    <th>销量</th>
@@ -68,7 +69,13 @@ public class TbCarVo {
     }
 
 
+    public Integer getIssale() {
+        return issale;
+    }
 
+    public void setIssale(Integer issale) {
+        this.issale = issale;
+    }
 
     public String getCarBrandCopy() {
         return carBrandCopy;

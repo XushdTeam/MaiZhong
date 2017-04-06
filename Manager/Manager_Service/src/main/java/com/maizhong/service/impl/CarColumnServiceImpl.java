@@ -61,7 +61,13 @@ public class CarColumnServiceImpl implements CarColumnService {
         }
 
         List<CarColumnJoinCar> list = tbCarColumnMapper.getListByColumn(null,columnId);
-        String json=jedisClient.hget(DIC_KEY, DicParentEnum.CMID.getState()+"");
+        String json= null;
+        try {
+            json = jedisClient.hget(DIC_KEY, DicParentEnum.CMID.getState()+"");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new PageResult(null);
+        }
 
         for (CarColumnJoinCar carColumnJoinCar : list) {
            carColumnJoinCar.setColumnName(DicRedisUtils.getDicFormRedisById(carColumnJoinCar.getColumnId()+"",json));
@@ -98,7 +104,11 @@ public class CarColumnServiceImpl implements CarColumnService {
 
         int res = tbCarColumnMapper.insertSelective(tbCarColumn);
         if (res > 0) {
-            jedisClient.del(CM_CONTENT);
+            try {
+                jedisClient.del(CM_CONTENT);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return OperateEnum.SUCCESS;
         } else {
             return OperateEnum.FAILE;
@@ -107,23 +117,32 @@ public class CarColumnServiceImpl implements CarColumnService {
 
     @Override
     public List<KeyValue> getColumnList() {
-        String json=jedisClient.hget(DIC_KEY, DicParentEnum.CMID.getState()+"");
+        String json= null;
+        try {
+            json = jedisClient.hget(DIC_KEY, DicParentEnum.CMID.getState()+"");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
         List<KeyValue> list= JsonUtils.jsonToList(json,KeyValue.class);
         return list;
     }
-
+//删除栏目
     @Override
     public OperateEnum deleteColumnCarById(long id) {
-        int columnId=tbCarColumnMapper.selectByPrimaryKey(id).getColumnId();
         int ret = tbCarColumnMapper.deleteByPrimaryKey(id);
         if (ret > 0) {
-           jedisClient.del(CM_CONTENT);
+            try {
+                jedisClient.del(CM_CONTENT);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return OperateEnum.SUCCESS;
         } else {
             return OperateEnum.FAILE;
         }
     }
-
+//更新栏目
     @Override
     public TbCarColumn getCarColumnByid(Long id) {
         TbCarColumnExample tbCarColumnExample = new TbCarColumnExample();
@@ -138,7 +157,11 @@ public class CarColumnServiceImpl implements CarColumnService {
     public OperateEnum updateCarColumn(TbCarColumn tbCarColumn) {
        int res= tbCarColumnMapper.updateByPrimaryKeySelective(tbCarColumn);
         if (res > 0) {
-            jedisClient.del(CM_CONTENT);//可能修改类型，所以所有类型全部删除
+            try {
+                jedisClient.del(CM_CONTENT);//可能修改类型，所以所有类型全部删除
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return OperateEnum.SUCCESS;
         } else {
             return OperateEnum.FAILE;
