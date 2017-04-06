@@ -3,6 +3,7 @@ package com.maizhong.rest.service.impl;
 import com.maizhong.common.dto.*;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.JsonUtils;
+import com.maizhong.common.utils.PinYinUtils;
 import com.maizhong.dao.JedisClient;
 import com.maizhong.mapper.TbCarBrandMapper;
 import com.maizhong.mapper.ext.TbCarMapperExt;
@@ -267,9 +268,9 @@ public class SearchServiceImpl implements SearchService {
         //排序字段  避免null指针 所以放在这里
         String[] sortArray = null;
 
-
         if (StringUtils.isNotBlank(queryString)){
-            querysb.append("car_keywords:"+queryString+"");
+            //TODO   更改为拼音搜索
+            querysb.append("car_keywords:"+PinYinUtils.cnToPinYin(queryString));
             highTiken = true;
         }else{
             //如果查询string为空   遍历条件  添加条件

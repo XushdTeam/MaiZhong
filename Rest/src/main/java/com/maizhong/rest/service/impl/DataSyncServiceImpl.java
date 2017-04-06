@@ -1,5 +1,6 @@
 package com.maizhong.rest.service.impl;
 
+import com.maizhong.common.utils.PinYinUtils;
 import com.maizhong.mapper.TbMessageMapper;
 import com.maizhong.mapper.ext.TbCarMapperExt;
 import com.maizhong.pojo.TbCarExample;
@@ -7,17 +8,24 @@ import com.maizhong.pojo.TbMessage;
 import com.maizhong.pojo.vo.TbCarVo;
 import com.maizhong.rest.service.DataSyncService;
 
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.stereotype.Service;
+import org.wltea.analyzer.lucene.IKAnalyzer;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+
+import static org.aspectj.bridge.Version.text;
 
 /**
  * 数据同步方法
@@ -185,6 +193,23 @@ public class DataSyncServiceImpl implements DataSyncService {
                 addSolrDocUseVo(vos);
             }
         }
+    }
+
+
+    public String pinYinAnalysis(String initString) throws IOException {
+
+        StringBuffer sb = new StringBuffer();
+
+        IKAnalyzer analyzer = new IKAnalyzer(true);
+        StringReader reader = new StringReader(initString);
+        TokenStream ts = analyzer.tokenStream("", reader);
+        CharTermAttribute term = ts.getAttribute(CharTermAttribute.class);
+        while(ts.incrementToken()){
+            sb.append(PinYinUtils.cnToPinYin(term.toString())).append("  ");
+        }
+        analyzer.close();
+        reader.close();
+        return sb.toString();
     }
 
 
