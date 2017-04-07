@@ -463,6 +463,76 @@ public class TbCarColumnExample {
             addCriterion("deflag not between", value1, value2, "deflag");
             return (Criteria) this;
         }
+
+        public Criteria andCarNumberIsNull() {
+            addCriterion("car_number is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarNumberIsNotNull() {
+            addCriterion("car_number is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarNumberEqualTo(String value) {
+            addCriterion("car_number =", value, "carNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarNumberNotEqualTo(String value) {
+            addCriterion("car_number <>", value, "carNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarNumberGreaterThan(String value) {
+            addCriterion("car_number >", value, "carNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarNumberGreaterThanOrEqualTo(String value) {
+            addCriterion("car_number >=", value, "carNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarNumberLessThan(String value) {
+            addCriterion("car_number <", value, "carNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarNumberLessThanOrEqualTo(String value) {
+            addCriterion("car_number <=", value, "carNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarNumberLike(String value) {
+            addCriterion("car_number like", value, "carNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarNumberNotLike(String value) {
+            addCriterion("car_number not like", value, "carNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarNumberIn(List<String> values) {
+            addCriterion("car_number in", values, "carNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarNumberNotIn(List<String> values) {
+            addCriterion("car_number not in", values, "carNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarNumberBetween(String value1, String value2) {
+            addCriterion("car_number between", value1, value2, "carNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarNumberNotBetween(String value1, String value2) {
+            addCriterion("car_number not between", value1, value2, "carNumber");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -17,6 +17,7 @@ import com.maizhong.mapper.TbCarMapper;
 import com.maizhong.pojo.TbCar;
 import com.maizhong.pojo.TbCarColumn;
 import com.maizhong.pojo.TbCarColumnExample;
+import com.maizhong.pojo.TbCarExample;
 import com.maizhong.service.CarColumnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -83,9 +84,17 @@ public class CarColumnServiceImpl implements CarColumnService {
      */
     @Override
     public OperateEnum insertCarColumn(TbCarColumn tbCarColumn) {
-        TbCar tbCar = tbCarMapper.selectByPrimaryKey(tbCarColumn.getCarId());
-        if (tbCar==null){
+        if (tbCarColumn==null||tbCarColumn.getCarNumber()==null){
+            return OperateEnum.FAILE;
+        }
+        TbCarExample tbCarExample=new TbCarExample();
+        TbCarExample.Criteria criteriaCar = tbCarExample.createCriteria();
+        criteriaCar.andNumberEqualTo(String.valueOf(tbCarColumn.getCarNumber()));
+        List<TbCar> tbCars = tbCarMapper.selectByExample(tbCarExample);
+        if (tbCars==null||tbCars.size()<1){
             return OperateEnum.NO_CAR;
+        }else {
+            tbCarColumn.setCarId(tbCars.get(0).getId());
         }
 
         TbCarColumnExample tbCarColumnExample= new TbCarColumnExample();
