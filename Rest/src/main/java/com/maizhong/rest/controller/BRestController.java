@@ -40,7 +40,6 @@ public class BRestController {
             if (tbCar.getId() == null) {
                 return bRestService.insertCar(tbCar);
             }
-            tbCar.setIssale(0);
             return bRestService.updateCar(tbCar);
         }
         return JsonResult.Error("数据错误，请检查数据");

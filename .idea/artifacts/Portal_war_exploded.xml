@@ -39,6 +39,7 @@
           <element id="library" level="project" name="Maven: com.dyuproject.protostuff:protostuff-runtime:1.0.8" />
           <element id="library" level="project" name="Maven: com.dyuproject.protostuff:protostuff-collectionschema:1.0.8" />
           <element id="library" level="project" name="Maven: com.google.collections:google-collections:1.0" />
+          <element id="library" level="project" name="Maven: com.belerweb:pinyin4j:2.5.1" />
           <element id="archive" name="Manager_Mapper-1.0.0.jar">
             <element id="module-output" name="Manager_Mapper" />
           </element>

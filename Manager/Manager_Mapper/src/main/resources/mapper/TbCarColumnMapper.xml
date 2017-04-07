@@ -8,8 +8,8 @@
     <result column="car_sort" jdbcType="INTEGER" property="carSort" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="deflag" jdbcType="INTEGER" property="deflag" />
+    <result column="car_number" jdbcType="VARCHAR" property="carNumber" />
   </resultMap>
-  
   <resultMap extends="BaseResultMap" id="ColumnJoinCar"  type="com.maizhong.common.dto.CarColumnJoinCar">
     <result column="number" jdbcType="VARCHAR" property="number" />
     <result column="car_type" jdbcType="VARCHAR" property="name" />
@@ -19,6 +19,7 @@
     <result column="car_factory_price" jdbcType="VARCHAR" property="factoryPrice" />
     <result column="image" jdbcType="VARCHAR" property="image" />
   </resultMap>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -78,7 +79,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, car_id, column_id, car_sort, status, deflag
+    id, car_id, column_id, car_sort, status, deflag, car_number
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.pojo.TbCarColumnExample" resultMap="BaseResultMap">
     select
@@ -112,11 +113,11 @@
   </delete>
   <insert id="insert" parameterType="com.maizhong.pojo.TbCarColumn">
     insert into tb_car_column (id, car_id, column_id, 
-      car_sort, status, deflag
-      )
+      car_sort, status, deflag, 
+      car_number)
     values (#{id,jdbcType=BIGINT}, #{carId,jdbcType=BIGINT}, #{columnId,jdbcType=INTEGER}, 
-      #{carSort,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{deflag,jdbcType=INTEGER}
-      )
+      #{carSort,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{deflag,jdbcType=INTEGER}, 
+      #{carNumber,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.pojo.TbCarColumn">
     insert into tb_car_column
@@ -139,6 +140,9 @@
       <if test="deflag != null">
         deflag,
       </if>
+      <if test="carNumber != null">
+        car_number,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -158,6 +162,9 @@
       </if>
       <if test="deflag != null">
         #{deflag,jdbcType=INTEGER},
+      </if>
+      <if test="carNumber != null">
+        #{carNumber,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -188,6 +195,9 @@
       <if test="record.deflag != null">
         deflag = #{record.deflag,jdbcType=INTEGER},
       </if>
+      <if test="record.carNumber != null">
+        car_number = #{record.carNumber,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -200,7 +210,8 @@
       column_id = #{record.columnId,jdbcType=INTEGER},
       car_sort = #{record.carSort,jdbcType=INTEGER},
       status = #{record.status,jdbcType=INTEGER},
-      deflag = #{record.deflag,jdbcType=INTEGER}
+      deflag = #{record.deflag,jdbcType=INTEGER},
+      car_number = #{record.carNumber,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -223,6 +234,9 @@
       <if test="deflag != null">
         deflag = #{deflag,jdbcType=INTEGER},
       </if>
+      <if test="carNumber != null">
+        car_number = #{carNumber,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -232,7 +246,8 @@
       column_id = #{columnId,jdbcType=INTEGER},
       car_sort = #{carSort,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
-      deflag = #{deflag,jdbcType=INTEGER}
+      deflag = #{deflag,jdbcType=INTEGER},
+      car_number = #{carNumber,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 
@@ -242,7 +257,7 @@
     FROM tb_car_column A LEFT JOIN tb_car B ON A.car_id = B.id LEFT JOIN tb_dictionary C ON C.id=A.column_id LEFT JOIN tb_car_base D ON B.base_id=D.id
     WHERE A.deflag=0  AND C.`status`=1
     <if test="status!=null">
-     AND A.status=#{status,jdbcType=BIGINT}
+      AND A.status=#{status,jdbcType=BIGINT}
     </if>
     <if test="columnId!=null">
       AND A.column_id=#{columnId,jdbcType=BIGINT}
