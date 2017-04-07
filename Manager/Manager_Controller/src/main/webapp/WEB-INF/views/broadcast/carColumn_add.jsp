@@ -24,10 +24,10 @@
     <div class="site-text site-block">
         <form class="layui-form layui-form-pane">
             <div class="layui-form-item">
-                <label class="layui-form-label">汽车ID</label>
+                <label class="layui-form-label">汽车编号</label>
                 <div class="layui-input-block">
-                    <input name="carId" autocomplete="off" lay-verify="number" maxlength="50"
-                           placeholder="汽车对应ID" class="layui-input" type="text">
+                    <input name="carNumber" autocomplete="off" lay-verify="number" maxlength="50"
+                           placeholder="汽车对应编号" class="layui-input" type="text">
                 </div>
             </div>
             <div class="layui-form-item">

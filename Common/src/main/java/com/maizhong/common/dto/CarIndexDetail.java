@@ -1,5 +1,7 @@
 package com.maizhong.common.dto;
 
+import java.math.BigDecimal;
+
 /**
  * Description:首页汽车显示的信息
  * User: 王存浩
@@ -11,8 +13,8 @@ public class CarIndexDetail {
     private String name;
     private String factoryPrice;
     private String img;
-    private Long reservePrice;
-    private Long sellPrice;
+    private BigDecimal reservePrice;
+    private BigDecimal sellPrice;
 
     public Long getId() {
         return id;
@@ -46,26 +48,26 @@ public class CarIndexDetail {
         this.img = img;
     }
 
-    public Long getReservePrice() {
+    public BigDecimal getReservePrice() {
         return reservePrice;
     }
 
-    public void setReservePrice(Long reservePrice) {
+    public void setReservePrice(BigDecimal reservePrice) {
         this.reservePrice = reservePrice;
     }
 
-    public Long getSellPrice() {
+    public BigDecimal getSellPrice() {
         return sellPrice;
     }
 
-    public void setSellPrice(Long sellPrice) {
+    public void setSellPrice(BigDecimal sellPrice) {
         this.sellPrice = sellPrice;
     }
 
     public CarIndexDetail() {
     }
 
-    public CarIndexDetail(Long id, String name, String factoryPrice, String img, Long reservePrice, Long sellPrice) {
+    public CarIndexDetail(Long id, String name, String factoryPrice, String img, BigDecimal reservePrice, BigDecimal sellPrice) {
         this.id = id;
         this.name = name;
         this.factoryPrice = factoryPrice;

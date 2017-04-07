@@ -57,19 +57,17 @@
         <div class="fhui-admin-table-container" id="list" data-href="${listUrl}">
             <table class="layui-table" lay-skin="line">
                 <colgroup>
-                    <col width="5%">
                     <col width="10%">
                     <col width="10%">
                     <col width="10%">
                     <col width="10%">
                     <col width="10%">
                     <col width="10%">
-                    <col width="35%">
+                    <col width="40%">
                 </colgroup>
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>汽车ID</th>
+                    <th>汽车编号</th>
                     <th>名称</th>
                     <th>汽车图片</th>
                     <th>所属栏目</th>
@@ -82,8 +80,7 @@
                 <script id="tpl" type="text/html">
                     {{#  layui.each(d.rows, function(index, item){ }}
                     <tr>
-                        <td>{{ item.id }}</td>
-                        <td>{{ item.carId }}</td>
+                        <td>{{ item.number }}</td>
                         <td>{{ item.name }}</td>
                         <td><img src="{{ item.image }}" width="50" height="50"/></td>
                         <td>{{ item.columnName }}</td>
