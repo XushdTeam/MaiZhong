@@ -188,17 +188,35 @@ public class BRestServiceImpl implements BRestService {
         return JsonResult.Error("修改失败，数据错误");
     }
 
+    /**
+     * 根据id删除汽车
+     * @param id
+     * @return
+     */
     @Override
     public JsonResult deleteCar(String id) {
         Long longId = null;
         if (id != null) {
             longId = Long.parseLong(id);
+        }else {
+            return JsonResult.Error("数据错误，请刷新后重试");
         }
-        int i = tbCarMapper.deleteByPrimaryKey(longId);
+
+        TbCar tbCar = tbCarMapper.selectByPrimaryKey(longId);
+        if (tbCar==null||tbCar.getId()==null){
+            return  JsonResult.Error("删除的商品不存在");
+        }
+        if (tbCar.getIssale()==1){
+            return JsonResult.Error("汽车已上线，请先联系管理员下架");
+        }
+        tbCar.setIssale(0);
+        tbCar.setUnable(0);
+        tbCar.setDelflag(1);
+        tbCarMapper.updateByPrimaryKeySelective(tbCar);
         return JsonResult.OK("删除成功");
     }
 
-    //下架方法
+    //是否审核
     @Override
     public JsonResult unable(String id, Integer unalbe) {
         TbCar tbCar = new TbCar();
@@ -595,6 +613,44 @@ public class BRestServiceImpl implements BRestService {
             }
         }
         return JsonResult.Error("未登录");
+    }
+
+    @Override
+    public JsonResult updateUserPwd(Long id, String oldPassword, String newPassword, String reNewPassword) {
+        if (!StringUtils.equals(newPassword, reNewPassword)) {
+            return JsonResult.Error("两次密码不一致");
+        } else {
+            if (StringUtils.equals(oldPassword,newPassword))return JsonResult.Error("新密码不能和原密码相同！");
+            TbBusinessUser tbBusinessUser = tbBusinessUserMapper.selectByPrimaryKey(id);
+            if (tbBusinessUser != null && tbBusinessUser.getId() != null) {
+                if (!StringUtils.equals(tbBusinessUser.getPassword(), oldPassword)) {
+                    return JsonResult.Error("原密码不匹配！");
+                } else {
+                    tbBusinessUser.setPassword(newPassword);
+                    tbBusinessUserMapper.updateByPrimaryKeySelective(tbBusinessUser);
+                    return JsonResult.OK("修改成功！");
+                }
+            } else {
+                return JsonResult.Error("数据错误，请刷新后重试！");
+            }
+        }
+    }
+
+    /**
+     * 根据店铺id获取店铺信息
+     * @param id
+     * @return
+     */
+    @Override
+    public JsonResult getBusinessById(Long id) {
+        if (id==null){
+            return JsonResult.Error("数据错误，请刷新后重试！");
+        }
+        TbBusiness tbBusiness = tbBusinessMapper.selectByPrimaryKey(id);
+        if (tbBusiness!=null){
+           return JsonResult.OK(tbBusiness);
+        }
+        return JsonResult.Error("数据有误，请刷新后重试!");
     }
 
     /*//插入汽车厂商

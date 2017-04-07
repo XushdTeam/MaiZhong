@@ -48,6 +48,16 @@ public class TbCar {
 
     private String details;
 
+    private Integer delflag;
+
+    public Integer getDelflag() {
+        return delflag;
+    }
+
+    public void setDelflag(Integer delflag) {
+        this.delflag = delflag;
+    }
+
     public Long getId() {
         return id;
     }
