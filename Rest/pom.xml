@@ -65,9 +65,10 @@
         <dependency>
             <groupId>org.wltea.ik-analyzer</groupId>
             <artifactId>ik-analyzer</artifactId>
-            <version>3.2.8</version>
+            <version>2012FF_u1</version>
             <scope>system</scope>
-            <systemPath>C:/Users/Administrator/.m2/repository/org/wltea/ik-analyzer/IKAnalyzer3.2.8.jar</systemPath>
+            <!--<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/IKAnalyzer2012FF_u1.jar</systemPath>-->
+            <systemPath>C:/Users/Administrator/Desktop/ik/IKAnalyzer2012FF_u1.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.apache.lucene</groupId>

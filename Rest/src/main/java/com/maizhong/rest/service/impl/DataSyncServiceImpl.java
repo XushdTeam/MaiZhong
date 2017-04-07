@@ -20,6 +20,8 @@ import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.stereotype.Service;
+import org.wltea.analyzer.core.IKSegmenter;
+import org.wltea.analyzer.core.Lexeme;
 import org.wltea.analyzer.lucene.IKAnalyzer;
 
 import javax.annotation.Resource;
@@ -142,16 +144,24 @@ public class DataSyncServiceImpl implements DataSyncService {
             document.addField("car_brand_copy",vo.getCarBrandCopy());
             document.addField("car_brandLine_copy",vo.getCarBrandLineCopy());
             document.addField("car_type_copy",vo.getCarTypeCopy());
+
+            //拼音转换
+            StringBuffer sb = new StringBuffer();
+            sb.append(this.pinYinAnalysis(vo.getName()))
+                    .append(this.pinYinAnalysis(vo.getCarBrandCopy()))
+                    .append(this.pinYinAnalysis(vo.getCarBrandLineCopy()))
+                    .append(this.pinYinAnalysis(vo.getCarTypeCopy()));
+            document.addField("car_pinyin_copy",sb.toString());
+
+
             //权值调整
-            //未理解   放弃 在添加索引方面进行权重操作  改为搜索时计算公式
+            //未理解   放弃在添加索引方面进行权重操作  改为搜索时计算公式
 //                document.setDocumentBoost(Short.parseShort(vo.getWeight()));
             document.addField("weight",vo.getWeight());
             docs.add(document);
-
-
-            solrServer.add(docs);
-            solrServer.commit();
         }
+        solrServer.add(docs);
+        solrServer.commit();
     }
 
 
@@ -198,22 +208,36 @@ public class DataSyncServiceImpl implements DataSyncService {
     }
 
 
+    /**
+     * solr用方法
+     *          讲文字转换为拼音
+     *          字符串为 拼接 中间使用 分割 每个字符串转换为首字母与全拼形势
+     *              例：  文字  ==》 wenzi wz
+     *                  2017/4/6  更改  首字母拼写放弃使用
+     *
+     * @param initString
+     * @return
+     * @throws IOException
+     */
+    @Override
     public String pinYinAnalysis(String initString) throws IOException {
-
         StringBuffer sb = new StringBuffer();
-
-        IKAnalyzer analyzer = new IKAnalyzer(true);
-        StringReader reader = new StringReader(initString);
-        TokenStream ts = analyzer.tokenStream("", reader);
-        CharTermAttribute term = ts.getAttribute(CharTermAttribute.class);
-        while(ts.incrementToken()){
-            sb.append(PinYinUtils.cnToPinYin(term.toString())).append("  ");
+        if(StringUtils.isBlank(initString)){
+            return "";
         }
-        analyzer.close();
-        reader.close();
+        StringReader sr=new StringReader(initString);
+        IKSegmenter ik=new IKSegmenter(sr, true);
+        Lexeme lex=null;
+        while((lex=ik.next())!=null){
+            String lexemeText = lex.getLexemeText();
+            if (lexemeText.matches("(19[0-9][0-9]|200|201[0-9])")){
+                lexemeText = lexemeText.replaceAll("[^0-9]","");
+            }
+            sb.append( PinYinUtils.cnToPinYin(lex.getLexemeText())).append(" ");
+//            .append(PinYinUtils.cnToFirstSpell(lex.getLexemeText())).append(" ");
+        }
         return sb.toString();
     }
-
 
 //    private void addSingleSolrDoc(List<Long> ids){
 //        TbCarExample example = new TbCarExample();

@@ -21,10 +21,10 @@ public interface SearchService {
 
     Map<String,Object> searchDoc(String queryString, String[] sortString, Integer pageIndex, String highTiken);
 
-    public JsonResult getSearchResult(String queryString, String sortString, String carBrand, String carSeries,String carType, String price, String capacity, String carYear, String pageIndex);
 
+    JsonResult getSearchResult(String queryString, String sortString, String carBrand, String carSeries, String carType, String price, String capacity, String carYear, String gearbox, String pageIndex);
 
-    List<Object> getCarSeriesList(String brandId,String seriesId);
+    List<Object> getCarSeriesList(String brandId, String seriesId);
 
     JsonResult getSearchBase(String brandId, String seriesId);
 
