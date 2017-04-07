@@ -101,8 +101,11 @@ public class BroadcastController {
     @RequestMapping(value = "/carColumn/carColumn_add", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult columnCarSave(TbCarColumn tbCarColumn) {
-        OperateEnum res = carColumnService.insertCarColumn(tbCarColumn);
-        return JsonResult.build(res);
+        if(tbCarColumn!=null){
+            OperateEnum res = carColumnService.insertCarColumn(tbCarColumn);
+            return JsonResult.build(res);
+        }
+        return JsonResult.build(OperateEnum.FAILE);
     }
 
 
@@ -144,8 +147,7 @@ public class BroadcastController {
     @RequestMapping(value = "/carColumn/redisUrl")
     @ResponseBody
     public JsonResult dictionaryRedis(){
-        JsonResult result = carColumnService.carColumnRedis();
-        return result;
+        return carColumnService.carColumnRedis();
     }
 
 }

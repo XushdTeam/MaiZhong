@@ -17,6 +17,16 @@ public class CarColumnJoinCar {
 
     private String columnName;
 
+    private String carNumber;
+
+    public String getCarNumber() {
+        return carNumber;
+    }
+
+    public void setCarNumber(String carNumber) {
+        this.carNumber = carNumber;
+    }
+
     public String getColumnName() {
         return columnName;
     }
@@ -42,7 +52,6 @@ public class CarColumnJoinCar {
     private String image;
 
     //
-
 
     public Long getId() {
         return id;
