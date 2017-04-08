@@ -1,520 +1,527 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.maizhong.mapper.TbCarMapper">
-    <resultMap id="BaseResultMap" type="com.maizhong.pojo.TbCar">
-        <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="number" jdbcType="VARCHAR" property="number"/>
-        <result column="base_id" jdbcType="BIGINT" property="baseId"/>
-        <result column="car_brand" jdbcType="BIGINT" property="carBrand"/>
-        <result column="car_brand_line" jdbcType="BIGINT" property="carBrandLine"/>
-        <result column="car_type" jdbcType="BIGINT" property="carType"/>
-        <result column="car_year" jdbcType="VARCHAR" property="carYear"/>
-        <result column="color" jdbcType="VARCHAR" property="color"/>
-        <result column="sellpoint" jdbcType="VARCHAR" property="sellpoint"/>
-        <result column="reserve_price" jdbcType="DECIMAL" property="reservePrice"/>
-        <result column="sell_price" jdbcType="DECIMAL" property="sellPrice"/>
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
-        <result column="smimage" jdbcType="VARCHAR" property="smimage"/>
-        <result column="image" jdbcType="VARCHAR" property="image"/>
-        <result column="business_id" jdbcType="BIGINT" property="businessId"/>
-        <result column="stock_num" jdbcType="INTEGER" property="stockNum"/>
-        <result column="sell_num" jdbcType="INTEGER" property="sellNum"/>
-        <result column="issale" jdbcType="INTEGER" property="issale"/>
-        <result column="unable" jdbcType="INTEGER" property="unable"/>
-        <result column="weight" jdbcType="INTEGER" property="weight"/>
-    </resultMap>
-    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.maizhong.pojo.TbCar">
-        <result column="details" jdbcType="LONGVARCHAR" property="details"/>
-    </resultMap>
-    <sql id="Example_Where_Clause">
-        <where>
-            <foreach collection="oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
+  <resultMap id="BaseResultMap" type="com.maizhong.pojo.TbCar">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="base_id" jdbcType="BIGINT" property="baseId" />
+    <result column="business_id" jdbcType="BIGINT" property="businessId" />
+    <result column="car_brand" jdbcType="BIGINT" property="carBrand" />
+    <result column="car_brand_line" jdbcType="BIGINT" property="carBrandLine" />
+    <result column="car_type" jdbcType="BIGINT" property="carType" />
+    <result column="car_year" jdbcType="VARCHAR" property="carYear" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="sellpoint" jdbcType="VARCHAR" property="sellpoint" />
+    <result column="reserve_price" jdbcType="DECIMAL" property="reservePrice" />
+    <result column="sell_price" jdbcType="DECIMAL" property="sellPrice" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="smimage" jdbcType="VARCHAR" property="smimage" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="stock_num" jdbcType="INTEGER" property="stockNum" />
+    <result column="sell_num" jdbcType="INTEGER" property="sellNum" />
+    <result column="issale" jdbcType="INTEGER" property="issale" />
+    <result column="unable" jdbcType="INTEGER" property="unable" />
+    <result column="weight" jdbcType="INTEGER" property="weight" />
+    <result column="delflag" jdbcType="INTEGER" property="delflag" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.maizhong.pojo.TbCar">
+    <result column="details" jdbcType="LONGVARCHAR" property="details" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
             </foreach>
-        </where>
-    </sql>
-    <sql id="Update_By_Example_Where_Clause">
-        <where>
-            <foreach collection="example.oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
-            </foreach>
-        </where>
-    </sql>
-    <sql id="Base_Column_List">
-    id, number, base_id, car_brand, car_brand_line, car_type, car_year, color, sellpoint, 
-    reserve_price, sell_price, create_time, update_time, smimage, image, business_id, 
-    stock_num, sell_num, issale, unable, weight
+          </trim>
+        </if>
+      </foreach>
+    </where>
   </sql>
-    <sql id="Blob_Column_List">
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, number, base_id, business_id, car_brand, car_brand_line, car_type, car_year, 
+    color, sellpoint, reserve_price, sell_price, create_time, update_time, smimage, image, 
+    stock_num, sell_num, issale, unable, weight, delflag
+  </sql>
+  <sql id="Blob_Column_List">
     details
   </sql>
-    <select id="selectByExampleWithBLOBs" parameterType="com.maizhong.pojo.TbCarExample" resultMap="ResultMapWithBLOBs">
-        select
-        <if test="distinct">
-            distinct
-        </if>
-        <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
-        from tb_car
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-        <if test="orderByClause != null">
-            order by ${orderByClause}
-        </if>
-    </select>
-    <select id="selectByExample" parameterType="com.maizhong.pojo.TbCarExample" resultMap="BaseResultMap">
-        select
-        <if test="distinct">
-            distinct
-        </if>
-        <include refid="Base_Column_List"/>
-        from tb_car
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-        <if test="orderByClause != null">
-            order by ${orderByClause}
-        </if>
-    </select>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
-        select
-        <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
-        from tb_car
-        where id = #{id,jdbcType=BIGINT}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <select id="selectByExampleWithBLOBs" parameterType="com.maizhong.pojo.TbCarExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_car
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.maizhong.pojo.TbCarExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_car
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_car
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from tb_car
     where id = #{id,jdbcType=BIGINT}
   </delete>
-    <delete id="deleteByExample" parameterType="com.maizhong.pojo.TbCarExample">
-        delete from tb_car
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </delete>
-    <insert id="insert" parameterType="com.maizhong.pojo.TbCar">
-        <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
-            SELECT LAST_INSERT_ID() AS id
-        </selectKey>
+  <delete id="deleteByExample" parameterType="com.maizhong.pojo.TbCarExample">
+    delete from tb_car
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maizhong.pojo.TbCar">
     insert into tb_car (id, number, base_id, 
-      car_brand, car_brand_line, car_type, 
-      car_year, color, sellpoint, 
-      reserve_price, sell_price, create_time, 
-      update_time, smimage, image, 
-      business_id, stock_num, sell_num, 
+      business_id, car_brand, car_brand_line, 
+      car_type, car_year, color, 
+      sellpoint, reserve_price, sell_price, 
+      create_time, update_time, smimage, 
+      image, stock_num, sell_num, 
       issale, unable, weight, 
-      details)
+      delflag, details)
     values (#{id,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{baseId,jdbcType=BIGINT}, 
-      #{carBrand,jdbcType=BIGINT}, #{carBrandLine,jdbcType=BIGINT}, #{carType,jdbcType=BIGINT}, 
-      #{carYear,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, #{sellpoint,jdbcType=VARCHAR}, 
-      #{reservePrice,jdbcType=DECIMAL}, #{sellPrice,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{smimage,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
-      #{businessId,jdbcType=BIGINT}, #{stockNum,jdbcType=INTEGER}, #{sellNum,jdbcType=INTEGER}, 
+      #{businessId,jdbcType=BIGINT}, #{carBrand,jdbcType=BIGINT}, #{carBrandLine,jdbcType=BIGINT}, 
+      #{carType,jdbcType=BIGINT}, #{carYear,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{sellpoint,jdbcType=VARCHAR}, #{reservePrice,jdbcType=DECIMAL}, #{sellPrice,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{smimage,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{stockNum,jdbcType=INTEGER}, #{sellNum,jdbcType=INTEGER}, 
       #{issale,jdbcType=INTEGER}, #{unable,jdbcType=INTEGER}, #{weight,jdbcType=INTEGER}, 
-      #{details,jdbcType=LONGVARCHAR})
+      #{delflag,jdbcType=INTEGER}, #{details,jdbcType=LONGVARCHAR})
   </insert>
-    <insert id="insertSelective" parameterType="com.maizhong.pojo.TbCar">
-        <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
-            SELECT LAST_INSERT_ID() AS id
-        </selectKey>
-
-        insert into tb_car
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="number != null">
-                number,
-            </if>
-            <if test="baseId != null">
-                base_id,
-            </if>
-            <if test="carBrand != null">
-                car_brand,
-            </if>
-            <if test="carBrandLine != null">
-                car_brand_line,
-            </if>
-            <if test="carType != null">
-                car_type,
-            </if>
-            <if test="carYear != null">
-                car_year,
-            </if>
-            <if test="color != null">
-                color,
-            </if>
-            <if test="sellpoint != null">
-                sellpoint,
-            </if>
-            <if test="reservePrice != null">
-                reserve_price,
-            </if>
-            <if test="sellPrice != null">
-                sell_price,
-            </if>
-            <if test="createTime != null">
-                create_time,
-            </if>
-            <if test="updateTime != null">
-                update_time,
-            </if>
-            <if test="smimage != null">
-                smimage,
-            </if>
-            <if test="image != null">
-                image,
-            </if>
-            <if test="businessId != null">
-                business_id,
-            </if>
-            <if test="stockNum != null">
-                stock_num,
-            </if>
-            <if test="sellNum != null">
-                sell_num,
-            </if>
-            <if test="issale != null">
-                issale,
-            </if>
-            <if test="unable != null">
-                unable,
-            </if>
-            <if test="weight != null">
-                weight,
-            </if>
-            <if test="details != null">
-                details,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=BIGINT},
-            </if>
-            <if test="number != null">
-                #{number,jdbcType=VARCHAR},
-            </if>
-            <if test="baseId != null">
-                #{baseId,jdbcType=BIGINT},
-            </if>
-            <if test="carBrand != null">
-                #{carBrand,jdbcType=BIGINT},
-            </if>
-            <if test="carBrandLine != null">
-                #{carBrandLine,jdbcType=BIGINT},
-            </if>
-            <if test="carType != null">
-                #{carType,jdbcType=BIGINT},
-            </if>
-            <if test="carYear != null">
-                #{carYear,jdbcType=VARCHAR},
-            </if>
-            <if test="color != null">
-                #{color,jdbcType=VARCHAR},
-            </if>
-            <if test="sellpoint != null">
-                #{sellpoint,jdbcType=VARCHAR},
-            </if>
-            <if test="reservePrice != null">
-                #{reservePrice,jdbcType=DECIMAL},
-            </if>
-            <if test="sellPrice != null">
-                #{sellPrice,jdbcType=DECIMAL},
-            </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="smimage != null">
-                #{smimage,jdbcType=VARCHAR},
-            </if>
-            <if test="image != null">
-                #{image,jdbcType=VARCHAR},
-            </if>
-            <if test="businessId != null">
-                #{businessId,jdbcType=BIGINT},
-            </if>
-            <if test="stockNum != null">
-                #{stockNum,jdbcType=INTEGER},
-            </if>
-            <if test="sellNum != null">
-                #{sellNum,jdbcType=INTEGER},
-            </if>
-            <if test="issale != null">
-                #{issale,jdbcType=INTEGER},
-            </if>
-            <if test="unable != null">
-                #{unable,jdbcType=INTEGER},
-            </if>
-            <if test="weight != null">
-                #{weight,jdbcType=INTEGER},
-            </if>
-            <if test="details != null">
-                #{details,jdbcType=LONGVARCHAR},
-            </if>
-        </trim>
-    </insert>
-    <select id="countByExample" parameterType="com.maizhong.pojo.TbCarExample" resultType="java.lang.Long">
-        select count(*) from tb_car
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </select>
-    <update id="updateByExampleSelective" parameterType="map">
-        update tb_car
-        <set>
-            <if test="record.id != null">
-                id = #{record.id,jdbcType=BIGINT},
-            </if>
-            <if test="record.number != null">
-                number = #{record.number,jdbcType=VARCHAR},
-            </if>
-            <if test="record.baseId != null">
-                base_id = #{record.baseId,jdbcType=BIGINT},
-            </if>
-            <if test="record.carBrand != null">
-                car_brand = #{record.carBrand,jdbcType=BIGINT},
-            </if>
-            <if test="record.carBrandLine != null">
-                car_brand_line = #{record.carBrandLine,jdbcType=BIGINT},
-            </if>
-            <if test="record.carType != null">
-                car_type = #{record.carType,jdbcType=BIGINT},
-            </if>
-            <if test="record.carYear != null">
-                car_year = #{record.carYear,jdbcType=VARCHAR},
-            </if>
-            <if test="record.color != null">
-                color = #{record.color,jdbcType=VARCHAR},
-            </if>
-            <if test="record.sellpoint != null">
-                sellpoint = #{record.sellpoint,jdbcType=VARCHAR},
-            </if>
-            <if test="record.reservePrice != null">
-                reserve_price = #{record.reservePrice,jdbcType=DECIMAL},
-            </if>
-            <if test="record.sellPrice != null">
-                sell_price = #{record.sellPrice,jdbcType=DECIMAL},
-            </if>
-            <if test="record.createTime != null">
-                create_time = #{record.createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="record.updateTime != null">
-                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="record.smimage != null">
-                smimage = #{record.smimage,jdbcType=VARCHAR},
-            </if>
-            <if test="record.image != null">
-                image = #{record.image,jdbcType=VARCHAR},
-            </if>
-            <if test="record.businessId != null">
-                business_id = #{record.businessId,jdbcType=BIGINT},
-            </if>
-            <if test="record.stockNum != null">
-                stock_num = #{record.stockNum,jdbcType=INTEGER},
-            </if>
-            <if test="record.sellNum != null">
-                sell_num = #{record.sellNum,jdbcType=INTEGER},
-            </if>
-            <if test="record.issale != null">
-                issale = #{record.issale,jdbcType=INTEGER},
-            </if>
-            <if test="record.unable != null">
-                unable = #{record.unable,jdbcType=INTEGER},
-            </if>
-            <if test="record.weight != null">
-                weight = #{record.weight,jdbcType=INTEGER},
-            </if>
-            <if test="record.details != null">
-                details = #{record.details,jdbcType=LONGVARCHAR},
-            </if>
-        </set>
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
-    <update id="updateByExampleWithBLOBs" parameterType="map">
-        update tb_car
-        set id = #{record.id,jdbcType=BIGINT},
+  <insert id="insertSelective" parameterType="com.maizhong.pojo.TbCar">
+    insert into tb_car
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="baseId != null">
+        base_id,
+      </if>
+      <if test="businessId != null">
+        business_id,
+      </if>
+      <if test="carBrand != null">
+        car_brand,
+      </if>
+      <if test="carBrandLine != null">
+        car_brand_line,
+      </if>
+      <if test="carType != null">
+        car_type,
+      </if>
+      <if test="carYear != null">
+        car_year,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="sellpoint != null">
+        sellpoint,
+      </if>
+      <if test="reservePrice != null">
+        reserve_price,
+      </if>
+      <if test="sellPrice != null">
+        sell_price,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="smimage != null">
+        smimage,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="stockNum != null">
+        stock_num,
+      </if>
+      <if test="sellNum != null">
+        sell_num,
+      </if>
+      <if test="issale != null">
+        issale,
+      </if>
+      <if test="unable != null">
+        unable,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="delflag != null">
+        delflag,
+      </if>
+      <if test="details != null">
+        details,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="baseId != null">
+        #{baseId,jdbcType=BIGINT},
+      </if>
+      <if test="businessId != null">
+        #{businessId,jdbcType=BIGINT},
+      </if>
+      <if test="carBrand != null">
+        #{carBrand,jdbcType=BIGINT},
+      </if>
+      <if test="carBrandLine != null">
+        #{carBrandLine,jdbcType=BIGINT},
+      </if>
+      <if test="carType != null">
+        #{carType,jdbcType=BIGINT},
+      </if>
+      <if test="carYear != null">
+        #{carYear,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="sellpoint != null">
+        #{sellpoint,jdbcType=VARCHAR},
+      </if>
+      <if test="reservePrice != null">
+        #{reservePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sellPrice != null">
+        #{sellPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="smimage != null">
+        #{smimage,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="stockNum != null">
+        #{stockNum,jdbcType=INTEGER},
+      </if>
+      <if test="sellNum != null">
+        #{sellNum,jdbcType=INTEGER},
+      </if>
+      <if test="issale != null">
+        #{issale,jdbcType=INTEGER},
+      </if>
+      <if test="unable != null">
+        #{unable,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="delflag != null">
+        #{delflag,jdbcType=INTEGER},
+      </if>
+      <if test="details != null">
+        #{details,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maizhong.pojo.TbCarExample" resultType="java.lang.Long">
+    select count(*) from tb_car
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_car
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.number != null">
         number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.baseId != null">
         base_id = #{record.baseId,jdbcType=BIGINT},
-        car_brand = #{record.carBrand,jdbcType=BIGINT},
-        car_brand_line = #{record.carBrandLine,jdbcType=BIGINT},
-        car_type = #{record.carType,jdbcType=BIGINT},
-        car_year = #{record.carYear,jdbcType=VARCHAR},
-        color = #{record.color,jdbcType=VARCHAR},
-        sellpoint = #{record.sellpoint,jdbcType=VARCHAR},
-        reserve_price = #{record.reservePrice,jdbcType=DECIMAL},
-        sell_price = #{record.sellPrice,jdbcType=DECIMAL},
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
-        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-        smimage = #{record.smimage,jdbcType=VARCHAR},
-        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessId != null">
         business_id = #{record.businessId,jdbcType=BIGINT},
+      </if>
+      <if test="record.carBrand != null">
+        car_brand = #{record.carBrand,jdbcType=BIGINT},
+      </if>
+      <if test="record.carBrandLine != null">
+        car_brand_line = #{record.carBrandLine,jdbcType=BIGINT},
+      </if>
+      <if test="record.carType != null">
+        car_type = #{record.carType,jdbcType=BIGINT},
+      </if>
+      <if test="record.carYear != null">
+        car_year = #{record.carYear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.color != null">
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sellpoint != null">
+        sellpoint = #{record.sellpoint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservePrice != null">
+        reserve_price = #{record.reservePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sellPrice != null">
+        sell_price = #{record.sellPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.smimage != null">
+        smimage = #{record.smimage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null">
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stockNum != null">
         stock_num = #{record.stockNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.sellNum != null">
         sell_num = #{record.sellNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.issale != null">
         issale = #{record.issale,jdbcType=INTEGER},
+      </if>
+      <if test="record.unable != null">
         unable = #{record.unable,jdbcType=INTEGER},
+      </if>
+      <if test="record.weight != null">
         weight = #{record.weight,jdbcType=INTEGER},
-        details = #{record.details,jdbcType=LONGVARCHAR}
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
-    <update id="updateByExample" parameterType="map">
-        update tb_car
-        set id = #{record.id,jdbcType=BIGINT},
-        number = #{record.number,jdbcType=VARCHAR},
-        base_id = #{record.baseId,jdbcType=BIGINT},
-        car_brand = #{record.carBrand,jdbcType=BIGINT},
-        car_brand_line = #{record.carBrandLine,jdbcType=BIGINT},
-        car_type = #{record.carType,jdbcType=BIGINT},
-        car_year = #{record.carYear,jdbcType=VARCHAR},
-        color = #{record.color,jdbcType=VARCHAR},
-        sellpoint = #{record.sellpoint,jdbcType=VARCHAR},
-        reserve_price = #{record.reservePrice,jdbcType=DECIMAL},
-        sell_price = #{record.sellPrice,jdbcType=DECIMAL},
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
-        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-        smimage = #{record.smimage,jdbcType=VARCHAR},
-        image = #{record.image,jdbcType=VARCHAR},
-        business_id = #{record.businessId,jdbcType=BIGINT},
-        stock_num = #{record.stockNum,jdbcType=INTEGER},
-        sell_num = #{record.sellNum,jdbcType=INTEGER},
-        issale = #{record.issale,jdbcType=INTEGER},
-        unable = #{record.unable,jdbcType=INTEGER},
-        weight = #{record.weight,jdbcType=INTEGER}
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.pojo.TbCar">
-        update tb_car
-        <set>
-            <if test="number != null">
-                number = #{number,jdbcType=VARCHAR},
-            </if>
-            <if test="baseId != null">
-                base_id = #{baseId,jdbcType=BIGINT},
-            </if>
-            <if test="carBrand != null">
-                car_brand = #{carBrand,jdbcType=BIGINT},
-            </if>
-            <if test="carBrandLine != null">
-                car_brand_line = #{carBrandLine,jdbcType=BIGINT},
-            </if>
-            <if test="carType != null">
-                car_type = #{carType,jdbcType=BIGINT},
-            </if>
-            <if test="carYear != null">
-                car_year = #{carYear,jdbcType=VARCHAR},
-            </if>
-            <if test="color != null">
-                color = #{color,jdbcType=VARCHAR},
-            </if>
-            <if test="sellpoint != null">
-                sellpoint = #{sellpoint,jdbcType=VARCHAR},
-            </if>
-            <if test="reservePrice != null">
-                reserve_price = #{reservePrice,jdbcType=DECIMAL},
-            </if>
-            <if test="sellPrice != null">
-                sell_price = #{sellPrice,jdbcType=DECIMAL},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="smimage != null">
-                smimage = #{smimage,jdbcType=VARCHAR},
-            </if>
-            <if test="image != null">
-                image = #{image,jdbcType=VARCHAR},
-            </if>
-            <if test="businessId != null">
-                business_id = #{businessId,jdbcType=BIGINT},
-            </if>
-            <if test="stockNum != null">
-                stock_num = #{stockNum,jdbcType=INTEGER},
-            </if>
-            <if test="sellNum != null">
-                sell_num = #{sellNum,jdbcType=INTEGER},
-            </if>
-            <if test="issale != null">
-                issale = #{issale,jdbcType=INTEGER},
-            </if>
-            <if test="unable != null">
-                unable = #{unable,jdbcType=INTEGER},
-            </if>
-            <if test="weight != null">
-                weight = #{weight,jdbcType=INTEGER},
-            </if>
-            <if test="details != null">
-                details = #{details,jdbcType=LONGVARCHAR},
-            </if>
-        </set>
-        where id = #{id,jdbcType=BIGINT}
-    </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.maizhong.pojo.TbCar">
+      </if>
+      <if test="record.delflag != null">
+        delflag = #{record.delflag,jdbcType=INTEGER},
+      </if>
+      <if test="record.details != null">
+        details = #{record.details,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update tb_car
+    set id = #{record.id,jdbcType=BIGINT},
+      number = #{record.number,jdbcType=VARCHAR},
+      base_id = #{record.baseId,jdbcType=BIGINT},
+      business_id = #{record.businessId,jdbcType=BIGINT},
+      car_brand = #{record.carBrand,jdbcType=BIGINT},
+      car_brand_line = #{record.carBrandLine,jdbcType=BIGINT},
+      car_type = #{record.carType,jdbcType=BIGINT},
+      car_year = #{record.carYear,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
+      sellpoint = #{record.sellpoint,jdbcType=VARCHAR},
+      reserve_price = #{record.reservePrice,jdbcType=DECIMAL},
+      sell_price = #{record.sellPrice,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      smimage = #{record.smimage,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      stock_num = #{record.stockNum,jdbcType=INTEGER},
+      sell_num = #{record.sellNum,jdbcType=INTEGER},
+      issale = #{record.issale,jdbcType=INTEGER},
+      unable = #{record.unable,jdbcType=INTEGER},
+      weight = #{record.weight,jdbcType=INTEGER},
+      delflag = #{record.delflag,jdbcType=INTEGER},
+      details = #{record.details,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_car
+    set id = #{record.id,jdbcType=BIGINT},
+      number = #{record.number,jdbcType=VARCHAR},
+      base_id = #{record.baseId,jdbcType=BIGINT},
+      business_id = #{record.businessId,jdbcType=BIGINT},
+      car_brand = #{record.carBrand,jdbcType=BIGINT},
+      car_brand_line = #{record.carBrandLine,jdbcType=BIGINT},
+      car_type = #{record.carType,jdbcType=BIGINT},
+      car_year = #{record.carYear,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
+      sellpoint = #{record.sellpoint,jdbcType=VARCHAR},
+      reserve_price = #{record.reservePrice,jdbcType=DECIMAL},
+      sell_price = #{record.sellPrice,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      smimage = #{record.smimage,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      stock_num = #{record.stockNum,jdbcType=INTEGER},
+      sell_num = #{record.sellNum,jdbcType=INTEGER},
+      issale = #{record.issale,jdbcType=INTEGER},
+      unable = #{record.unable,jdbcType=INTEGER},
+      weight = #{record.weight,jdbcType=INTEGER},
+      delflag = #{record.delflag,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.pojo.TbCar">
+    update tb_car
+    <set>
+      <if test="number != null">
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="baseId != null">
+        base_id = #{baseId,jdbcType=BIGINT},
+      </if>
+      <if test="businessId != null">
+        business_id = #{businessId,jdbcType=BIGINT},
+      </if>
+      <if test="carBrand != null">
+        car_brand = #{carBrand,jdbcType=BIGINT},
+      </if>
+      <if test="carBrandLine != null">
+        car_brand_line = #{carBrandLine,jdbcType=BIGINT},
+      </if>
+      <if test="carType != null">
+        car_type = #{carType,jdbcType=BIGINT},
+      </if>
+      <if test="carYear != null">
+        car_year = #{carYear,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="sellpoint != null">
+        sellpoint = #{sellpoint,jdbcType=VARCHAR},
+      </if>
+      <if test="reservePrice != null">
+        reserve_price = #{reservePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sellPrice != null">
+        sell_price = #{sellPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="smimage != null">
+        smimage = #{smimage,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="stockNum != null">
+        stock_num = #{stockNum,jdbcType=INTEGER},
+      </if>
+      <if test="sellNum != null">
+        sell_num = #{sellNum,jdbcType=INTEGER},
+      </if>
+      <if test="issale != null">
+        issale = #{issale,jdbcType=INTEGER},
+      </if>
+      <if test="unable != null">
+        unable = #{unable,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="delflag != null">
+        delflag = #{delflag,jdbcType=INTEGER},
+      </if>
+      <if test="details != null">
+        details = #{details,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.maizhong.pojo.TbCar">
     update tb_car
     set number = #{number,jdbcType=VARCHAR},
       base_id = #{baseId,jdbcType=BIGINT},
+      business_id = #{businessId,jdbcType=BIGINT},
       car_brand = #{carBrand,jdbcType=BIGINT},
       car_brand_line = #{carBrandLine,jdbcType=BIGINT},
       car_type = #{carType,jdbcType=BIGINT},
@@ -527,19 +534,20 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       smimage = #{smimage,jdbcType=VARCHAR},
       image = #{image,jdbcType=VARCHAR},
-      business_id = #{businessId,jdbcType=BIGINT},
       stock_num = #{stockNum,jdbcType=INTEGER},
       sell_num = #{sellNum,jdbcType=INTEGER},
       issale = #{issale,jdbcType=INTEGER},
       unable = #{unable,jdbcType=INTEGER},
       weight = #{weight,jdbcType=INTEGER},
+      delflag = #{delflag,jdbcType=INTEGER},
       details = #{details,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-    <update id="updateByPrimaryKey" parameterType="com.maizhong.pojo.TbCar">
+  <update id="updateByPrimaryKey" parameterType="com.maizhong.pojo.TbCar">
     update tb_car
     set number = #{number,jdbcType=VARCHAR},
       base_id = #{baseId,jdbcType=BIGINT},
+      business_id = #{businessId,jdbcType=BIGINT},
       car_brand = #{carBrand,jdbcType=BIGINT},
       car_brand_line = #{carBrandLine,jdbcType=BIGINT},
       car_type = #{carType,jdbcType=BIGINT},
@@ -552,35 +560,35 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       smimage = #{smimage,jdbcType=VARCHAR},
       image = #{image,jdbcType=VARCHAR},
-      business_id = #{businessId,jdbcType=BIGINT},
       stock_num = #{stockNum,jdbcType=INTEGER},
       sell_num = #{sellNum,jdbcType=INTEGER},
       issale = #{issale,jdbcType=INTEGER},
       unable = #{unable,jdbcType=INTEGER},
-      weight = #{weight,jdbcType=INTEGER}
+      weight = #{weight,jdbcType=INTEGER},
+      delflag = #{delflag,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
 
     <select id="totalCarNumber" resultType="java.lang.Long">
-  SELECT COUNT(id) FROM tb_car;
+  SELECT COUNT(id) FROM tb_car WHERE  delflag=0;
   </select>
     <select id="shopCarNumber" resultType="java.lang.Long">
-   SELECT COUNT(id) FROM tb_car WHERE business_id=#{businessId,jdbcType=BIGINT};
+   SELECT COUNT(id) FROM tb_car WHERE business_id=#{businessId,jdbcType=BIGINT} AND delflag=0;
   </select>
     <select id="totalBrandNumber" resultType="java.lang.Long">
-    SELECT COUNT(DISTINCT car_brand) FROM tb_car;
+    SELECT COUNT(DISTINCT car_brand) FROM tb_car WHERE delflag=0;
   </select>
     <select id="shopBrandNumber" resultType="java.lang.Long">
-    SELECT COUNT(DISTINCT car_brand) FROM tb_car WHERE business_id=#{businessId,jdbcType=BIGINT} ;
+    SELECT COUNT(DISTINCT car_brand) FROM tb_car WHERE business_id=#{businessId,jdbcType=BIGINT} AND delflag=0;
   </select>
     <select id="totalSeriesNumber" resultType="java.lang.Long">
-    SELECT COUNT(DISTINCT car_brand_line) FROM tb_car;
+    SELECT COUNT(DISTINCT car_brand_line) FROM tb_car WHERE delflag=0;
   </select>
     <select id="shopSeriesNumber" resultType="java.lang.Long">
-    SELECT COUNT(DISTINCT car_brand_line) FROM tb_car WHERE business_id=#{businessId,jdbcType=BIGINT} ;
+    SELECT COUNT(DISTINCT car_brand_line) FROM tb_car WHERE business_id=#{businessId,jdbcType=BIGINT} AND delflag=0 ;
   </select>
     <select id="weekNumber" resultType="java.lang.Long">
         SELECT COUNT(id) FROM tb_car WHERE business_id=#{businessId,jdbcType=BIGINT} AND create_time
-         BETWEEN #{startTime,jdbcType=TIMESTAMP}  AND #{endTime,jdbcType=TIMESTAMP};
+         BETWEEN #{startTime,jdbcType=TIMESTAMP}  AND #{endTime,jdbcType=TIMESTAMP} AND  delflag=0;
     </select>
 </mapper>

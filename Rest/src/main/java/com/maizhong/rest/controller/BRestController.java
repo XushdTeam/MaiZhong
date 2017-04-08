@@ -51,11 +51,11 @@ public class BRestController {
         return bRestService.findCarInfoById(id);
     }
 
-    //数据删除
+  /*  //数据删除
     @RequestMapping("/car/delete/{id}")
     public JsonResult delCar(@PathVariable("id") String id) {
         return null;
-    }
+    }*/
 
     //商品下架
     @RequestMapping("/car/detail/{id}")
@@ -82,7 +82,7 @@ public class BRestController {
     public JsonResult isOnline(String token) {
 
 //        判断token格式 ||token.length()!=32
-        if (StringUtils.isBlank(token)){
+        if (StringUtils.isBlank(token)) {
             return JsonResult.Error("令牌错误");
         }
         return bRestService.isOnline(token);
@@ -90,6 +90,7 @@ public class BRestController {
 
     /**
      * 获取所有汽车品牌 分首字母
+     *
      * @return
      */
     @RequestMapping("/getCarBrand")
@@ -99,6 +100,7 @@ public class BRestController {
 
     /**
      * 根据汽车品牌获取汽车厂商
+     *
      * @param brandId
      * @return
      */
@@ -116,6 +118,7 @@ public class BRestController {
 
     /**
      * 根据汽车厂商获取车系
+     *
      * @param factoryId
      * @return
      */
@@ -133,6 +136,7 @@ public class BRestController {
 
     /**
      * 根据品牌获取车系
+     *
      * @param brandId
      * @return
      */
@@ -143,6 +147,7 @@ public class BRestController {
 
     /**
      * 根据车系和年份获取车型
+     *
      * @param seriesId
      * @param caryear
      * @return
@@ -164,8 +169,8 @@ public class BRestController {
      * @return
      */
     @RequestMapping(value = "/insertCarSeries", method = RequestMethod.POST)
-    public JsonResult insertCarSeries(Long brandId, Long factoryId,String seriesName) {
-        OperateEnum operateEnum = bRestService.insertSeries(brandId, factoryId,seriesName);
+    public JsonResult insertCarSeries(Long brandId, Long factoryId, String seriesName) {
+        OperateEnum operateEnum = bRestService.insertSeries(brandId, factoryId, seriesName);
         return JsonResult.build(operateEnum);
     }
 
@@ -193,5 +198,48 @@ public class BRestController {
         return result;
     }
 
+    /**
+     * 修改密码
+     *
+     * @return
+     */
+    @RequestMapping(value = "/updateUserPwd", method = RequestMethod.POST)
+    public JsonResult updateUserPwd(Long id, String oldPassword, String newPassword, String reNewPassword) {
+
+        JsonResult result = null;
+        try {
+            result = bRestService.updateUserPwd(id, oldPassword, newPassword, reNewPassword);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
+     * 根据店铺Id获取店铺信息
+     *
+     * @return
+     */
+    @RequestMapping(value = "/getBusinessById/{id}", method = RequestMethod.GET)
+    public JsonResult getBusinessById(@PathVariable("id") Long id) {
+        JsonResult result = null;
+        try {
+            result = bRestService.getBusinessById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/deleteCarById", method = RequestMethod.POST)
+    public JsonResult deleteCarByid(Long id) {
+        JsonResult result= null;
+        try {
+            result = bRestService.deleteCar(String.valueOf(id));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
 }

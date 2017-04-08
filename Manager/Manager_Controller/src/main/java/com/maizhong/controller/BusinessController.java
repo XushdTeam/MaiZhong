@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -120,6 +121,7 @@ public class BusinessController {
     @RequestMapping(value = "/business/save", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult businessSave(TbBusiness tbBusiness) {
+        tbBusiness.setCreateTime(new Date());
         OperateEnum res = businessService.insertBusiness(tbBusiness);
         return JsonResult.build(res);
     }
