@@ -840,10 +840,22 @@ ul.zhunxinche .num {margin-top: -6px;color: #e72116; font-size: 30px; width: 40p
 .select-box li{float:left;margin-right:15px;}
 .select-box .select-menu{width:100px;margin-top:12px;position:relative;}
 .select-box .menu-selected{height:24px;line-height:24px;text-indent:5px;border:1px solid #e5e5e5;border-radius:1px;-webkit-border-radius:1px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAGCAYAAAD68A/GAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA35pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpmZmY0Y2Y2ZC1iNDVhLTQ4MmQtYmVkYS0yNGE4YWMwNzFjY2QiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MUE0NTA2NTcxNjVFMTFFNkFEMjZCQUZEMTMyNjIyNjEiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MUE0NTA2NTYxNjVFMTFFNkFEMjZCQUZEMTMyNjIyNjEiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6ODJhYWZjNDYtNDNhNS00YTJiLTk5YjItZGJkMmVhOWI1MjU2IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6M2Y1NGJmZDItNTMzYy0xMTc5LWFkNWEtZDU0ZThiZDBjMDY4Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+zwypQwAAAHVJREFUeNpiNDY2vsTAwFAPxOsZsANvIG5kARIpQLwLiL8D8Q40Ra5AvAiIg5iAxCkgDgXiFUDshKTIHohXA3EcEB9kgQruhpq8EYjdoGIgdhYQbwVxWJBMWAPEQkC8HcqvBOJlMEkWNDfNgioGgenIEgABBgCLQRNOzKZyiQAAAABJRU5ErkJggg==) no-repeat 80px center;cursor:pointer;}
-.select-box .menu-selected.active{background:url(/xin/images/new-list/jiantou_up.png) no-repeat 80px center;}
+
 .select-box .menu-selected.selected{border:1px solid #e72116;}
 .select-box .menu{border:1px solid #e5e5e5;background:#fff;position:absolute!important;z-index:10;border-top:0;}
 .select-box .menu dd{display:block;line-height:24px;float:none;padding:0!important;margin:0!important;}
 .select-box .menu a{display:block;line-height:30px;width:98px; height:30px; text-align:left!important;text-indent:5px;padding:0!important;margin:0!important;}
 .select-box .menu .selected a{background:#e72116;color:#fff;}
 .selectednew img{ padding: 0 0 0 15px }
+
+/*详情页*/
+.cd_m_pop_yykc {
+    width: 325px;
+    position: absolute;
+    border: 2px solid #ff5837;
+    font-size: 0;
+    padding: 30px;
+    display: none;
+    background-color: #fff;
+    z-index: 2;
+}

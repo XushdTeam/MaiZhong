@@ -75,6 +75,32 @@
         </p>
     </div><!--pro_details_topcenter end-->
 </div>
+<div class="cd_m_pop_yykc" style="top: 626px; left: 986.5px; display: block;">
+    <input type="hidden" id="type_sale" value="3">
+    <i></i><em></em>
+    <p class="cd_m_pop_yykc_tit">完成预约后，客服专员会及时与您联系确认约车详情</p>
+    <p class="cd_m_pop_yykc_input">
+        <input id="txtYykcPhone" type="text" maxlength="11" style="display: none;">
+        <span style="display: block;">请输入联系电话</span>
+    </p>
+    <p class="cd_m_pop_yykc_errortip" style="visibility: hidden;">
+        请输入联系电话
+    </p>
+    <p class="cd_m_pop_yykc_input">
+        <input id="txtYykcValid" type="text" maxlength="4" style="display: none;">
+        <span>请输入图片验证码</span><a href="javascript:;">
+        <img class="flush_vcode" id="codeimg_appoint" src="/register/get_vcode?r=Sat Apr 08 2017 10:40:30 GMT+0800 (中国标准时间)"></a>
+    </p>
+    <p class="cd_m_pop_yykc_errortip" style="visibility: hidden;">
+        请输入图片验证码
+    </p>
+    <a class="cd_m_pop_yykc_ok">立即预约</a>
+</div>
+
+
+
+
+
 <div class="poss">
     <div class="poss2"></div>
     <div class="car-options clearFix" id="mynav">

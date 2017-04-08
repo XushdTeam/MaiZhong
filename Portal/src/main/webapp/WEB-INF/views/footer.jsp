@@ -10,7 +10,7 @@
 <div class="footer">
     <div class="foot_cen">
         <div class="n_f_m_c">
-            <div class="n_f_m_c">
+            <div class="">
                 <a href="/about.html">关于我们</a>
                 <a href="/help.html">帮助中心</a>
                 <a href="/joinus.html">加入我们</a>
