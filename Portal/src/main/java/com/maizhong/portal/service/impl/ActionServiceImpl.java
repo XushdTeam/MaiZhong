@@ -20,11 +20,24 @@ public class ActionServiceImpl implements ActionService {
     @Value("${PHONE_LINK}")
     private String PHONE_LINK;
 
+    @Value("${PHONE_LINK_CAR}")
+    private String PHONE_LINK_CAR;
+
+
     @Override
     public void doPhoneLink(String phone,String type) {
         Map<String,String> param = new HashMap<>();
         param.put("phone",phone);
         param.put("type",type);
         HttpClientUtil.doPost(REST_URL+PHONE_LINK,param);
+    }
+
+    @Override
+    public void doPhoneLinkDetail(String phone, String type, String carId) {
+        Map<String,String> param = new HashMap<>();
+        param.put("phone",phone);
+        param.put("type",type);
+        param.put("carId",carId);
+        HttpClientUtil.doPost(REST_URL+PHONE_LINK_CAR,param);
     }
 }
