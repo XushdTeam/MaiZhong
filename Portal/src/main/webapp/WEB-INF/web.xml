@@ -73,7 +73,7 @@
     <!-- 错误页 -->
     <error-page>
         <error-code>404</error-code>
-        <location>/index.html</location>
+        <location>/resources/error/404.html</location>
     </error-page>
     <!-- 错误页 -->
     <error-page>

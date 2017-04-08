@@ -100,7 +100,7 @@ img,input{vertical-align:middle; outline:none}
     background: #e72116;
     line-height: 34px;
     width: 280px;
-    padding: 8px;
+    padding: 5px 8px 9px 8px;
     z-index: 99;
 }
 .free-phone input{

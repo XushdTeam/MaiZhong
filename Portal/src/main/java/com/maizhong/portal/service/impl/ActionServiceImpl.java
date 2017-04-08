@@ -21,9 +21,10 @@ public class ActionServiceImpl implements ActionService {
     private String PHONE_LINK;
 
     @Override
-    public void doPhoneLink(String phone) {
+    public void doPhoneLink(String phone,String type) {
         Map<String,String> param = new HashMap<>();
         param.put("phone",phone);
+        param.put("type",type);
         HttpClientUtil.doPost(REST_URL+PHONE_LINK,param);
     }
 }

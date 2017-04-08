@@ -15,12 +15,11 @@
     <meta name="keywords" content="汽车,汽车买卖,汽车网,汽车报价,汽车图片,买车"/>
     <meta name="description" content="迈众汽车为您提供最新汽车报价，汽车图片，汽车价格大全，最精彩的汽车新闻、行情、评测、导购内容，是提供信息最快最全的中国汽车网站。"/>
     <link rel="stylesheet" type="text/css" href="/resources/style/base.css"/>
-    <link rel="stylesheet" type="text/css" href="/resources/style/other.css" />
+    <link rel="stylesheet" type="text/css" href="/resources/style/other.css"/>
     <script src="http://cdn.bootcss.com/jquery/3.2.0/jquery.min.js" type="text/javascript"></script>
 </head>
 <body>
 <jsp:include page="head.jsp"></jsp:include>
-
 
 
 <div class="infoTop">
@@ -33,7 +32,7 @@
 <div class="pro">
     <div class="left">
         <div class="jqzoom">
-            <img src="${car.image}" width="500px" />
+            <img src="${car.image}" width="500px"/>
         </div>
     </div><!--left/-->
     <div class="pro_details_topcenter">
@@ -43,26 +42,29 @@
         <p class="soles">保障车源，保障质量，保障价格，保障售后</p>
 
 
-        <div class="jiage2"><p>准价：</p><span class="red">￥${car.sell_price} 万</span>  &nbsp;&nbsp;&nbsp;本平台优惠价格</div>
+        <div class="jiage2"><p>准价：</p><span class="red">￥${car.sell_price} 万</span> &nbsp;&nbsp;&nbsp;本平台优惠价格</div>
 
-        <div class="jiage2 jiage3"><p>市场价：<span class="red2">￥${car.shop_price}</span> &nbsp;&nbsp;&nbsp;</p> <span class="reds">其他平台或4s店价格</span></div>
+        <div class="jiage2 jiage3"><p>市场价：<span class="red2">￥${car.shop_price}</span> &nbsp;&nbsp;&nbsp;</p> <span
+                class="reds">其他平台或4s店价格</span></div>
         <br/>
         <table class="cd_m_info_desc" cellspacing="0" border="0">
             <tbody>
             <%--<tr>--%>
-                <%--<td>--%>
-                      <%--<span class="cd_m_info_desc_val">--%>
-                            <%--<a class="cd_m_innerlink1" href=" " target="_blank">2.8万公里</a>--%>
-                      <%--</span>--%>
-                    <%--<span class="cd_m_info_desc_key bor">表显里程</span>--%>
-                <%--</td>--%>
-                <%--<td><span class="cd_m_info_desc_val">2015-10</span><span class="cd_m_info_desc_key bor">上牌时间</span></td>--%>
-                <%--<td><span class="cd_m_info_desc_val">2017-03-22</span><span class="cd_m_info_desc_key bor">上架时间</span></td>--%>
+            <%--<td>--%>
+            <%--<span class="cd_m_info_desc_val">--%>
+            <%--<a class="cd_m_innerlink1" href=" " target="_blank">2.8万公里</a>--%>
+            <%--</span>--%>
+            <%--<span class="cd_m_info_desc_key bor">表显里程</span>--%>
+            <%--</td>--%>
+            <%--<td><span class="cd_m_info_desc_val">2015-10</span><span class="cd_m_info_desc_key bor">上牌时间</span></td>--%>
+            <%--<td><span class="cd_m_info_desc_val">2017-03-22</span><span class="cd_m_info_desc_key bor">上架时间</span></td>--%>
             <%--</tr>--%>
 
             <tr>
-                <td><span class="cd_m_info_desc_val">国Ⅳ(国Ⅴ)</span><span class="cd_m_info_desc_key">排放标准</span></td>
-                <td><span class="cd_m_info_desc_val">2.4L/CVT无级变速</span><span class="cd_m_info_desc_key">排量/变速箱</span></td>
+                <td><span class="cd_m_info_desc_val">${car.car_fuel_label}</span><span
+                        class="cd_m_info_desc_key">排放标准</span></td>
+                <td><span class="cd_m_info_desc_val">${car.car_displacement}/${car.car_gearbox}</span><span
+                        class="cd_m_info_desc_key">排量/变速箱</span></td>
                 <td><span class="cd_m_info_desc_val">北京</span><span class="cd_m_info_desc_key">看车地点</span></td>
             </tr>
             </tbody>
@@ -76,12 +78,11 @@
 <div class="poss">
     <div class="poss2"></div>
     <div class="car-options clearFix" id="mynav">
-        <div class="container" >
+        <div class="container">
             <ul class="fl info-select">
                 <li class="current"><a href="#one">购车流程</a></li>
-                <li class=""><a href="#two">配置参数</a></li>
-                <li class=""><a href="#tree">车系图片</a></li>
-
+                <li class=""><a href="#one">配置参数</a></li>
+                <li class=""><a href="#three">车系图片</a></li>
             </ul>
             <div class="btns">
                 <a href="javascript:;" class="appointment J_AppointmentBtn" style="display: none;">预约看车</a>
@@ -89,13 +90,15 @@
         </div>
     </div><!--car-options end-->
 </div>
+<div class="clear"></div>
 <div class="bg_co">
-    <div  id="one"></div>
-    <div class="shoppin">
-        <div class="d-item car-information">
+    <div class="xi_qi">
+        <div class="clear"></div>
+        <div id="one"></div>
+        <div class="d-item car-information" style="padding-bottom: 50px">
             <div class="container">
-
-                <ul class="clearFix zhunxinche">
+                <h2><strong>购车流程</strong></h2>
+                <ul class="clearFix xinche">
                     <li>
                         <div class="num">1</div>
                         <div class="content">
@@ -130,15 +133,14 @@
                 </ul>
             </div>
         </div>
-    </div><!--#one end-->
-    <div class="xi_qi">
-        <div  id="two"></div>
+        <div class="clear"></div>
+        <div id="two"></div>
         <h2><strong>配置参数</strong></h2>
-        <div class="parameters clearFix" >
+        <div class="parameters clearFix">
             <div class="item performance">
                 <h4>概览</h4>
                 <ul id="J_PerformanceParam">
-                    <li><span>车身结构</span>${car.car_door+car.car_seat+car.bodywork}</li>
+                    <li><span>车身结构</span>${car.car_door}门 ${car.car_seat}座 ${car.car_bodywork}</li>
 
                     <li><span>长*宽*高(mm)</span>${car.car_size}</li>
 
@@ -162,7 +164,7 @@
 
                     <li><span>排量(L)</span>${car.car_displacement}</li>
 
-                    <li><span>最大功率(kW)</span>${car.car_max_power}</li>
+                    <li><span>最大功率(kW)</span>${car.car_mar_power}</li>
 
                     <li><span>最大扭矩(N·m)</span>${car.car_max_power_speed}</li>
 
@@ -177,27 +179,17 @@
             </div><!--item end-->
         </div><!--parameters end-->
         <div class="clear"></div>
-        <div ></div>
-        <h2 id="tree"><strong>车系图片</strong></h2>
+        <div id="three"></div>
+        <h2 ><strong>车系图片</strong></h2>
         <div class="xq_img">
-
-
             <div class="sec bnspic">
-                    <ul>
-                        <c:forEach items="${imgArry}" var="simg">
-                            <li class="on"><a href="#"><img src="${simg}"  width="100%"  /> </a></li>
-                        </c:forEach>
-                    </ul>
+                <ul>
+                    <c:forEach items="${imgArry}" var="simg">
+                        <li class="on"><a href="#"><img src="${simg}" width="100%" height="100%"/> </a></li>
+                    </c:forEach>
+                </ul>
             </div>
         </div><!--xq_img end-->
-
-
-        <div class="clear"></div>
-      <%--  <h2 id="four"><strong>认证证书</strong></h2>
-        <div class="zs">
-            <img src="img/zs.jpg">
-        </div>--%>
-
 
     </div><!--xi_qi end-->
 
@@ -205,38 +197,33 @@
 <jsp:include page="footer.jsp"></jsp:include>
 <!--广告-->
 <script>
-   $(function () {
-       var nav = $("#mynav"),mtop = 0,zindex = 999,
-               dftop = nav.offset().top - $(window).scrollTop(),
-               dfleft = nav.offset().left - $(window).scrollLeft(),
-               dfcss = new Array;
-       dfcss[0] = nav.css("position"),
-       dfcss[1] = nav.css("top"),
-       dfcss[2] = nav.css("left"),
-       dfcss[3] = nav.css("zindex"),
-       $(window).scroll(function (e) {
-           if($(this).scrollTop() > dftop){
-               nav.css({
-                   position: "fixed",
-                   top: mtop + "px",
-                   left: dfleft,
-                   "z-index": zindex
-               });
-               $(".J_AppointmentBtn").show();
-           }else{
-               nav.css({position: dfcss[0], top: dfcss[1], left: dfcss[2], "z-index": dfcss[3]});
-               $(".J_AppointmentBtn").hide();
-           }
+    $(function () {
+        var nav = $("#mynav"), mtop = 0, zindex = 999,
+                dftop = 530,
+                dfleft = nav.offset().left - $(window).scrollLeft(),
+                dfcss = new Array;
+        dfcss[0] = nav.css("position"),
+                dfcss[1] = nav.css("top"),
+                dfcss[2] = nav.css("left"),
+                dfcss[3] = nav.css("zindex"),
+                $(window).scroll(function (e) {
+                    if ($(this).scrollTop() > dftop) {
+                        nav.css({
+                            position: "fixed",
+                            top: mtop + "px",
+                            left: dfleft,
+                            "z-index": zindex
+                        });
+                        $(".J_AppointmentBtn").show();
+//                        $(".bg_co").css({top:20+'px'})
+                    } else {
+                        nav.css({position: dfcss[0], top: dfcss[1], left: dfcss[2], "z-index": dfcss[3]});
+                        $(".J_AppointmentBtn").hide();
+                    }
 
-       })
-       $(".small_pic li").mouseover(function(){
-           $(this).siblings().removeClass("on");
-           $(this).addClass("on");
-           var preNumber=$(this).prevAll().size()+1;
-           $(".big_pic li").removeClass("on");
-           $(".big_pic li:nth-child("+preNumber+")").addClass("on");
-       });
-   });
+                })
+
+    });
 </script>
 
 </body>

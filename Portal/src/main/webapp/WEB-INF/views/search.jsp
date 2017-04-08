@@ -35,32 +35,38 @@
                 <dl>
                     <dd class="selectednew">
                         <c:if test="${bN!=null}">
-                            <a href="/car/cb_0/cs_0/cp_${pId}/cv_${vId}/p_${vT}/list.html">
+                            <a href="/car/cb_0/cs_0/cp_${pId}/cv_${vId}/p_${vT}/x_${x}/list.html">
                                 ${bN}
                                 <img src="/resources/img/456.png">
                             </a>
                         </c:if>
                         <c:if test="${sN!=null}">
-                            <a href="/car/cb_${bId}/cs_0/cp_${pId}/cv_${vId}/p_${vT}/list.html">
+                            <a href="/car/cb_${bId}/cs_0/cp_${pId}/cv_${vId}/p_${vT}/x_${x}/list.html">
                                     ${sN}
                                 <img src="/resources/img/456.png">
                             </a>
                         </c:if>
                         <c:if test="${pId!='0'}">
-                            <a href="/car/cb_${bId}/cs_${sId}/cp_0/cv_${vId}/p_${vT}/list.html">
+                            <a href="/car/cb_${bId}/cs_${sId}/cp_0/cv_${vId}/p_${vT}/x_${x}/list.html">
                                     ${pN}
                                 <img src="/resources/img/456.png">
                             </a>
                         </c:if>
                         <c:if test="${vId!='0'}">
-                            <a href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_0/p_${vT}/list.html">
+                            <a href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_0/p_${vT}/x_${x}/list.html">
                                 ${vN}
                                 <img src="/resources/img/456.png">
                             </a>
                         </c:if>
                         <c:if test="${vT!='0'}">
-                            <a href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_0/list.html">
+                            <a href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_0/x_${x}/list.html">
                                     ${tN}
+                                <img src="/resources/img/456.png">
+                            </a>
+                        </c:if>
+                        <c:if test="${x!='0'}">
+                            <a href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/x_0/list.html">
+                                    ${xN}
                                 <img src="/resources/img/456.png">
                             </a>
                         </c:if>
@@ -77,7 +83,7 @@
                                 <dd class="select-all selected"><a >不限</a></dd>
                             </c:when>
                             <c:otherwise>
-                                <dd class="select-all"><a href="/car/cb_0/cs_0/cp_${pId}/cv_${vId}/p_${vT}/list.html">不限</a></dd>
+                                <dd class="select-all"><a href="/car/cb_0/cs_0/cp_${pId}/cv_${vId}/p_${vT}/x_${x}/list.html">不限</a></dd>
                                 <c:if test="${!bOut}">
                                     <dd class="selected">
                                         <a href="" class="spell preventdefault ">
@@ -89,7 +95,7 @@
                         </c:choose>
                         <c:forEach items="${bHot}" var="item">
                             <dd class="<c:if test="${item.key==bId}">selected </c:if>">
-                                <a href="/car/cb_${item.key}/cs_0/cp_${pId}/cv_${vId}/p_${vT}/list.html" class="spell preventdefault" title="${item.value}" >${item.value}</a>
+                                <a href="/car/cb_${item.key}/cs_0/cp_${pId}/cv_${vId}/p_${vT}/x_${x}/list.html" class="spell preventdefault" title="${item.value}" >${item.value}</a>
                             </dd>
                         </c:forEach>
                     </dl>
@@ -102,7 +108,7 @@
                                    <dt>${i.key}</dt>
                                    <dd>
                                        <c:forEach items="${i.object}" var="j">
-                                           <a rel="nofollow" class=" preventdefault" title="${j.value}"  href="/car/cb_${j.key}/cs_0/cp_${pId}/cv_${vId}/p_${vT}/list.html">${j.value}</a>
+                                           <a rel="nofollow" class=" preventdefault" title="${j.value}"  href="/car/cb_${j.key}/cs_0/cp_${pId}/cv_${vId}/p_${vT}/x_${x}/list.html">${j.value}</a>
                                        </c:forEach>
                                    </dd>
                                </dl>
@@ -114,7 +120,7 @@
                                     <dt>${i.key}</dt>
                                     <dd>
                                         <c:forEach items="${i.object}" var="j">
-                                            <a rel="nofollow" class=" preventdefault" title="${j.value}"  href="/car/cb_${j.key}/cs_0/cp_${pId}/cv_${vId}/p_${vT}/list.html">${j.value}</a>
+                                            <a rel="nofollow" class=" preventdefault" title="${j.value}"  href="/car/cb_${j.key}/cs_0/cp_${pId}/cv_${vId}/p_${vT}/x_${x}/list.html">${j.value}</a>
                                         </c:forEach>
                                     </dd>
                                 </dl>
@@ -126,7 +132,7 @@
                                     <dt>${i.key}</dt>
                                     <dd>
                                         <c:forEach items="${i.object}" var="j">
-                                            <a rel="nofollow" class=" preventdefault" title="${j.value}"  href="/car/cb_${j.key}/cs_0/cp_${pId}/cv_${vId}/p_${vT}/list.html">${j.value}</a>
+                                            <a rel="nofollow" class=" preventdefault" title="${j.value}"  href="/car/cb_${j.key}/cs_0/cp_${pId}/cv_${vId}/p_${vT}/x_${x}/list.html">${j.value}</a>
                                         </c:forEach>
                                     </dd>
                                 </dl>
@@ -142,12 +148,12 @@
                                 <dd class="select-all selected"><a >不限</a></dd>
                             </c:when>
                             <c:otherwise>
-                                <dd class="select-all"><a href="/car/cb_${bId}/cs_0/cp_${pId}/cv_${vId}/p_${vT}/list.html">不限</a></dd>
+                                <dd class="select-all"><a href="/car/cb_${bId}/cs_0/cp_${pId}/cv_${vId}/p_${vT}/x_${x}/list.html">不限</a></dd>
                             </c:otherwise>
                         </c:choose>
                         <c:forEach items="${sHot}" var="si" >
                             <dd class="<c:if test="${si.id==sId}">selected </c:if>">
-                                <a href="/car/cb_${si.brandId}/cs_${si.id}/cp_${pId}/cv_${vId}/p_${vT}/list.html" class="spell preventdefault" title="${si.lineName}" >${si.lineName}</a>
+                                <a href="/car/cb_${si.brandId}/cs_${si.id}/cp_${pId}/cv_${vId}/p_${vT}/x_${x}/list.html" class="spell preventdefault" title="${si.lineName}" >${si.lineName}</a>
                             </dd>
                         </c:forEach>
                     </dl>
@@ -163,7 +169,7 @@
                                     <th><em>${si.fN}</em></th>
                                     <td>
                                         <c:forEach items="${si.fSL}" var="sis">
-                                            <a rel="nofollow" class=" preventdefault" title="${sis.sN}"  href="/car/cb_${sis.sBi}/cs_${sis.sI}/cp_${pId}/cv_${vId}/p_${vT}/list.html">${sis.sN}</a>
+                                            <a rel="nofollow" class=" preventdefault" title="${sis.sN}"  href="/car/cb_${sis.sBi}/cs_${sis.sI}/cp_${pId}/cv_${vId}/p_${vT}/x_${x}/list.html">${sis.sN}</a>
                                         </c:forEach>
                                     </td>
                                 </tr>
@@ -176,27 +182,27 @@
                 <div class="select-con">
                     <dl id="select3" class="searchLabel">
                         <dt class="bg3">价格:</dt>
-                        <dd class="select-all <c:if test="${'0'==pId}">selected </c:if>"><a  href="/car/cb_${bId}/cs_${sId}/cp_0/cv_${vId}/p_${vT}/list.html" >不限</a></dd>
+                        <dd class="select-all <c:if test="${'0'==pId}">selected </c:if>"><a  href="/car/cb_${bId}/cs_${sId}/cp_0/cv_${vId}/p_${vT}/x_${x}/list.html" >不限</a></dd>
                         <dd class="<c:if test="${'0-5'==pId}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_0-5/cv_${vId}/p_${vT}/list.html" title="5万以下" class="preventdefault">5万以下</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_0-5/cv_${vId}/p_${vT}/x_${x}/list.html" title="5万以下" class="preventdefault">5万以下</a>
                         </dd>
                         <dd class="<c:if test="${'5-10'==pId}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_5-10/cv_${vId}/p_${vT}/list.html"  title="5-10万" class="preventdefault">5-10万</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_5-10/cv_${vId}/p_${vT}/x_${x}/list.html"  title="5-10万" class="preventdefault">5-10万</a>
                         </dd>
                         <dd class="<c:if test="${'10-15'==pId}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_10-15/cv_${vId}/p_${vT}/list.html"  title="10-15万" class="preventdefault">10-15万</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_10-15/cv_${vId}/p_${vT}/x_${x}/list.html"  title="10-15万" class="preventdefault">10-15万</a>
                         </dd>
                         <dd class="<c:if test="${'15-20'==pId}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_15-20/cv_${vId}/p_${vT}/list.html"  title="15-20万" class="preventdefault">15-20万</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_15-20/cv_${vId}/p_${vT}/x_${x}/list.html"  title="15-20万" class="preventdefault">15-20万</a>
                         </dd>
                         <dd class="<c:if test="${'20-30'==pId}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_20-30/cv_${vId}/p_${vT}/list.html"  title="20-30万" class="preventdefault">20-30万</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_20-30/cv_${vId}/p_${vT}/x_${x}/list.html"  title="20-30万" class="preventdefault">20-30万</a>
                         </dd>
                         <dd class="<c:if test="${'30-50'==pId}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_30-50/cv_${vId}/p_${vT}/list.html"  title="30-50万" class="preventdefault">30-50万</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_30-50/cv_${vId}/p_${vT}/x_${x}/list.html"  title="30-50万" class="preventdefault">30-50万</a>
                         </dd>
                         <dd class="<c:if test="${'50-'==pId}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_50-/cv_${vId}/p_${vT}/list.html"  title="50万以上" class="preventdefault">50万以上</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_50-/cv_${vId}/p_${vT}/x_${x}/list.html"  title="50万以上" class="preventdefault">50万以上</a>
                         </dd>
                     </dl>
                     <div class="price-handle other-price clearfix">
@@ -214,75 +220,89 @@
                 <div class="select-con">
                     <dl id="select4" class="searchLabel">
                         <dt class="bg4">排量:</dt>
-                        <dd class="select-all <c:if test="${'0'==vId}">selected </c:if>"><a  href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_0/p_${vT}/list.html" >不限</a></dd>
+                        <dd class="select-all <c:if test="${'0'==vId}">selected </c:if>"><a  href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_0/p_${vT}/x_${x}/list.html" >不限</a></dd>
                         <dd class="<c:if test="${'0-1.0'==vId}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_0-1.0/p_${vT}/list.html"  title="1.0L以下" class="preventdefault">1.0L以下</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_0-1.0/p_${vT}/x_${x}/list.html"  title="1.0L以下" class="preventdefault">1.0L以下</a>
                         </dd>
                         <dd class="<c:if test="${'1.1-1.6'==vId}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_1.1-1.6/p_${vT}/list.html"  title="1.1L-1.6L" class="preventdefault">1.1L-1.6L</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_1.1-1.6/p_${vT}/x_${x}/list.html"  title="1.1L-1.6L" class="preventdefault">1.1L-1.6L</a>
                         </dd>
                         <dd class="<c:if test="${'1.6-2.0'==vId}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_1.6-2.0/p_${vT}/list.html"  title="1.6L-2.0L" class="preventdefault">1.6L-2.0L</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_1.6-2.0/p_${vT}/x_${x}/list.html"  title="1.6L-2.0L" class="preventdefault">1.6L-2.0L</a>
                         </dd>
                         <dd class="<c:if test="${'2.0-2.5'==vId}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_2.0-2.5/p_${vT}/list.html"  title="2.0L-2.5L" class="preventdefault">2.0L-2.5L</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_2.0-2.5/p_${vT}/x_${x}/list.html"  title="2.0L-2.5L" class="preventdefault">2.0L-2.5L</a>
                         </dd>
                         <dd class="<c:if test="${'2.5-3.0'==vId}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_2.5-3.0/p_${vT}/list.html"  title="2.5L-3.0L" class="preventdefault">2.5L-3.0L</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_2.5-3.0/p_${vT}/x_${x}/list.html"  title="2.5L-3.0L" class="preventdefault">2.5L-3.0L</a>
                         </dd>
                         <dd class="<c:if test="${'3.0-4.0'==vId}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_3.0-4.0/p_${vT}/list.html"  title="3.0L-4.0L" class="preventdefault">3.0L-4.0L</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_3.0-4.0/p_${vT}/x_${x}/list.html"  title="3.0L-4.0L" class="preventdefault">3.0L-4.0L</a>
                         </dd>
                         <dd class="<c:if test="${'4.0-'==vId}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_4.0-/p_${vT}/list.html"  title="4.0L以上" class="preventdefault">4.0L以上</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_4.0-/p_${vT}/x_${x}/list.html"  title="4.0L以上" class="preventdefault">4.0L以上</a>
                         </dd>
                     </dl>
                 </div>
                 <div class="select-con">
                     <dl id="select5" class="searchLabel">
                         <dt class="bg4">车型:</dt>
-                        <dd class="select-all <c:if test="${'0'==vT}">selected </c:if>"><a  href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_0/list.html" >不限</a></dd>
+                        <dd class="select-all <c:if test="${'0'==vT}">selected </c:if>"><a  href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_0/x_${x}/list.html" >不限</a></dd>
                         <dd class="<c:if test="${'1'==vT}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_1/list.html"  title="SUV" class="preventdefault">SUV</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_1/x_${x}/list.html"  title="SUV" class="preventdefault">SUV</a>
                         </dd>
                         <dd class="<c:if test="${'2'==vT}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_2/list.html"  title="跑车" class="preventdefault">跑车</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_2/x_${x}/list.html"  title="跑车" class="preventdefault">跑车</a>
                         </dd>
                         <dd class="<c:if test="${'3'==vT}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_3/list.html"  title="MPV" class="preventdefault">MPV</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_3/x_${x}/list.html"  title="MPV" class="preventdefault">MPV</a>
                         </dd>
                         <dd class="<c:if test="${'4'==vT}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_4/list.html"  title="面包" class="preventdefault">面包</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_4/x_${x}/list.html"  title="面包" class="preventdefault">面包</a>
                         </dd>
                         <dd class="<c:if test="${'5'==vT}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_5/list.html"  title="皮卡" class="preventdefault">皮卡</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_5/x_${x}/list.html"  title="皮卡" class="preventdefault">皮卡</a>
                         </dd>
                         <dd class="<c:if test="${'6'==vT}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_6/list.html"  title="商务" class="preventdefault">商务</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_6/x_${x}/list.html"  title="商务" class="preventdefault">商务</a>
                         </dd>
                         <dd class="<c:if test="${'7'==vT}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_7/list.html"  title="中型车" class="preventdefault">中型车</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_7/x_${x}/list.html"  title="中型车" class="preventdefault">中型车</a>
                         </dd>
                         <dd class="<c:if test="${'8'==vT}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_8/list.html"  title="中大型车" class="preventdefault">中大型车</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_8/x_${x}/list.html"  title="中大型车" class="preventdefault">中大型车</a>
                         </dd>
                         <dd class="<c:if test="${'9'==vT}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_9/list.html"  title="大型车" class="preventdefault">大型车</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_9/x_${x}/list.html"  title="大型车" class="preventdefault">大型车</a>
                         </dd>
                         <dd class="<c:if test="${'10'==vT}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_10/list.html"  title="小型车" class="preventdefault">小型车</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_10/x_${x}/list.html"  title="小型车" class="preventdefault">小型车</a>
                         </dd>
                         <dd class="<c:if test="${'11'==vT}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_11/list.html"  title="微型车" class="preventdefault">微型车</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_11/x_${x}/list.html"  title="微型车" class="preventdefault">微型车</a>
                         </dd>
                         <dd class="<c:if test="${'12'==vT}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_12/list.html"  title="轻客" class="preventdefault">轻客</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_12/x_${x}/list.html"  title="轻客" class="preventdefault">轻客</a>
                         </dd>
                         <dd class="<c:if test="${'13'==vT}">selected </c:if>">
-                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_13/list.html"  title="紧凑型车" class="preventdefault">紧凑型车</a>
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_13/x_${x}/list.html"  title="紧凑型车" class="preventdefault">紧凑型车</a>
                         </dd>
                     </dl>
                 </div>
+
+                <div class="select-con">
+                    <dl id="select6" class="searchLabel">
+                        <dt class="bg4">变速箱:</dt>
+                        <dd class="select-all <c:if test="${'0'==x}">selected </c:if>"><a  href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/x_0/list.html" >不限</a></dd>
+                        <dd class="<c:if test="${'1'==x}">selected </c:if>">
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/x_1/list.html"  title="SUV" class="preventdefault">手动</a>
+                        </dd>
+                        <dd class="<c:if test="${'2'==x}">selected </c:if>">
+                            <a rel="nofollow" href="/car/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/x_2/list.html"  title="SUV" class="preventdefault">自动</a>
+                        </dd>
+                    </dl>
+                </div>
+
             </div>
 
         </div>
@@ -291,33 +311,33 @@
         <div class="filter clearfix" id="J_Filter"  >
             <div class="fi_left">全部汽车资源（${total}）</div>
             <div class="fi_right">
-                <a class="fSort <c:if test="${sort=='d'}">fSort-cur</c:if>" href="/car/s_d_1_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>" >默认排序</a>
+                <a class="fSort <c:if test="${sort=='d'}">fSort-cur</c:if>" href="/car/s_d_1_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/x_${x}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>" >默认排序</a>
                 <c:if test="${sort=='h'}">
-                    <a class="fSort fSort-cur" href="/car/s_h_${method}_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>">人气
+                    <a class="fSort fSort-cur" href="/car/s_h_${method}_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/x_${x}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>">人气
                         <c:if test="${method==1}"><i class="f-ico-arrow-d"><img src="/resources/img/35.png"></i></c:if>
                         <c:if test="${method!=1}"><i class="f-ico-arrow-d"><img src="/resources/img/34.png"></i></c:if>
                     </a>
                 </c:if>
                 <c:if test="${sort!='h'}">
-                    <a class="fSort" href="/car/s_h_1_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>">人气</a>
+                    <a class="fSort" href="/car/s_h_1_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/x_${x}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>">人气</a>
                 </c:if>
                 <c:if test="${sort=='t'}">
-                    <a class="fSort fSort-cur"href="/car/s_t_${method}_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>">最新
+                    <a class="fSort fSort-cur"href="/car/s_t_${method}_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/x_${x}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>">最新
                         <c:if test="${method==1}"><i class="f-ico-arrow-d"><img src="/resources/img/35.png"></i></c:if>
                         <c:if test="${method!=1}"><i class="f-ico-arrow-d"><img src="/resources/img/34.png"></i></c:if>
                     </a>
                 </c:if>
                 <c:if test="${sort!='t'}">
-                    <a class="fSort" href="/car/s_t_1_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>">最新</a>
+                    <a class="fSort" href="/car/s_t_1_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/x_${x}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>">最新</a>
                 </c:if>
                 <c:if test="${sort=='p'}">
-                    <a class="fSort fSort-cur"href="/car/s_p_${method}_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>" >价格
+                    <a class="fSort fSort-cur"href="/car/s_p_${method}_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/x_${x}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>" >价格
                         <c:if test="${method==1}"><i class="f-ico-arrow-d"><img src="/resources/img/35.png"></i></c:if>
                         <c:if test="${method!=1}"><i class="f-ico-arrow-d"><img src="/resources/img/34.png"></i></c:if>
                     </a>
                 </c:if>
                 <c:if test="${sort!='p'}">
-                    <a class="fSort"href="/car/s_p_1_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>" >价格</a>
+                    <a class="fSort"href="/car/s_p_1_1/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/x_${x}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>" >价格</a>
                 </c:if>
             </div>
         </div>
@@ -350,7 +370,7 @@
             <c:if test="${tp>0}">
                 <b class="ui-page-num">
                     <c:if test="${cur>1}">
-                        <a class="ui-page-prev" href="/car/s_${sort}_${method}_${cur-1}/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>" >上一页</a>
+                        <a class="ui-page-prev" href="/car/s_${sort}_${method}_${cur-1}/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/x_${x}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>" >上一页</a>
                     </c:if>
                     <c:if test="${cur==1}">
                         <a class="ui-page-prev" >上一页</a>
@@ -362,7 +382,7 @@
                                     <a class="ui-page-cur">${i}</a>
                                 </c:when>
                                 <c:otherwise>
-                                    <a href="/car/s_${sort}_${method}_${i}/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>">${i}</a>
+                                    <a href="/car/s_${sort}_${method}_${i}/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/x_${x}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>">${i}</a>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -375,7 +395,7 @@
                                         <a class="ui-page-cur">${i}</a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="/car/s_${sort}_${method}_${i}/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>">${i}</a>
+                                        <a href="/car/s_${sort}_${method}_${i}/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/x_${x}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>">${i}</a>
                                     </c:otherwise>
                                 </c:choose>
                             </c:forEach>
@@ -388,7 +408,7 @@
                                             <a class="ui-page-cur">${j}</a>
                                         </c:when>
                                         <c:otherwise>
-                                            <a href="/car/s_${sort}_${method}_${j}/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>">${j}</a>
+                                            <a href="/car/s_${sort}_${method}_${j}/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/x_${x}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>">${j}</a>
                                         </c:otherwise>
                                     </c:choose>
                                 </c:if>
@@ -396,7 +416,7 @@
                         </c:if>
                     </c:if>
                     <c:if test="${cur<tp}">
-                        <a class="ui-page-prev" href="/car/s_${sort}_${method}_${cur+1}/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>" >下一页</a>
+                        <a class="ui-page-prev" href="/car/s_${sort}_${method}_${cur+1}/cb_${bId}/cs_${sId}/cp_${pId}/cv_${vId}/p_${vT}/x_${x}/list.html<c:if test="${queryStr!=''}">?s=${queryStr}</c:if>" >下一页</a>
                     </c:if>
                     <c:if test="${cur==tp}">
                         <a class="ui-page-next" >下一页</a>
@@ -442,16 +462,16 @@
             var ps = Number($("#price_s").val());
             var pe = Number($("#price_e").val());
             if(ps!=0&&pe==0){
-                window.location.href="/car/cb_${bId}/cs_${sId}/cp_"+ps+"-/cv_${vId}/list.html";
+                window.location.href="/car/cb_${bId}/cs_${sId}/cp_"+ps+"-/cv_${vId}/p_${vT}/x_${x}/list.html";
             }
             if(ps==0&&pe!=0){
-                window.location.href="/car/cb_${bId}/cs_${sId}/cp_0-"+pe+"/cv_${vId}/list.html";
+                window.location.href="/car/cb_${bId}/cs_${sId}/cp_0-"+pe+"/cv_${vId}/p_${vT}/x_${x}/list.html";
             }
             if(ps!=0&&pe!=0){
                 if(ps>pe){
                     $("#other-price-error").show();
                 }else{
-                    window.location.href="/car/cb_${bId}/cs_${sId}/cp_"+ps+"-"+pe+"/cv_${vId}/list.html";
+                    window.location.href="/car/cb_${bId}/cs_${sId}/cp_"+ps+"-"+pe+"/cv_${vId}/p_${vT}/x_${x}/list.html";
                 }
             }
             if(ps==0&&pe==0){

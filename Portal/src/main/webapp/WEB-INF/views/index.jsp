@@ -23,7 +23,7 @@
 
 </head>
 <!--首页头部开始-->
-<div class="htmleaf-container" style="background-image: url('/resources/img/home_phload.jpg'); width: 1903px; height:600px">
+<div class="htmleaf-container" style="background-image: url('/resources/img/1.jpg');background-size: 100%; width: 100%; height:600px">
     <div class="banner">
         <ul>
             <script type="text/javascript">
@@ -60,7 +60,7 @@
                         $('.banner ul li').css({width:window_width});
                         clearInterval(timer);
                         nextPlay();
-                        timer = setInterval(nextPlay,2000);
+                        timer = setInterval(nextPlay,5000);
                     });
                     $('.banner ul li').width(window_width);
                     //轮播圆点
@@ -69,7 +69,7 @@
                         //获取当前编号
                         var i = $(this).index();
                         //console.log(i);
-                        $('.banner ul').stop().animate({left:-i*window_width},500);
+                        $('.banner ul').stop().animate({left:-i*window_width},1000);
                         num = i;
                     });
                     //自动播放
@@ -77,10 +77,10 @@
                     function prevPlay(){
                         num--;
                         if(num<0){
-                            $('.banner ul').css({left:-window_width*images_count}).stop().animate({left:-window_width*(images_count-1)},500);
+                            $('.banner ul').css({left:-window_width*images_count}).stop().animate({left:-window_width*(images_count-1)},1000);
                             num=images_count-1;
                         }else{
-                            $('.banner ul').stop().animate({left:-num*window_width},500);
+                            $('.banner ul').stop().animate({left:-num*window_width},1000);
                         }
                         if(num==images_count-1){
                             $('.banner ol li').eq(images_count-1).addClass('current').siblings().removeClass('current');
@@ -92,10 +92,10 @@
                     function nextPlay(){
                         num++;
                         if(num>images_count){
-                            $('.banner ul').css({left:0}).stop().animate({left:-window_width},500);
+                            $('.banner ul').css({left:0}).stop().animate({left:-window_width},1000);
                             num=1;
                         }else{
-                            $('.banner ul').stop().animate({left:-num*window_width},500);
+                            $('.banner ul').stop().animate({left:-num*window_width},1000);
                         }
                         if(num==images_count){
                             $('.banner ol li').eq(0).addClass('current').siblings().removeClass('current');
@@ -103,7 +103,7 @@
                             $('.banner ol li').eq(num).addClass('current').siblings().removeClass('current');
                         }
                     }
-                    timer = setInterval(nextPlay,10000);
+                    timer = setInterval(nextPlay,5000);
                     //播放下一张
                     $('.banner .right').click(function(){
                         nextPlay();
@@ -153,7 +153,7 @@
     </div><!--nav_top end-->
 </div><!--nav_tops end-->
 <!--搜索框-->
-<div style="width: 100%;position: absolute;top: 220px;">
+<div style="width: 100%;position: absolute;top: 160px;">
 <div class="secs">
     <from action="#" method="post" name="1" id="s_from" class="">
         <div class="s_from">
@@ -197,7 +197,7 @@
         <p>热门品牌
             <span>
                 <c:forEach items="${cbList}" var="item"  varStatus="stat">
-                    <a href="/car/cb_${item.id}/cs_0/cp_0/cv_0/p_0/list.html">${item.name}</a>
+                    <a href="/car/cb_${item.id}/cs_0/cp_0/cv_0/p_0/x_0/list.html">${item.name}</a>
                     <c:if test="${!stat.last}" >/</c:if>
                 </c:forEach>
             </span>
@@ -206,7 +206,7 @@
         <ul class="lists">
             <c:forEach items="${cbList}" var="item" >
                 <li>
-                    <a href="/car/cb_${item.id}/cs_0/cp_0/cv_0/p_0/list.html">
+                    <a href="/car/cb_${item.id}/cs_0/cp_0/cv_0/p_0/x_0/list.html">
                         <span><img src="${item.imgUrl}"></span>
                         <span>${item.name}</span>
                     </a>
@@ -218,7 +218,7 @@
         <p class="p2">热门车型
             <span>
                 <c:forEach items="${ctList}" var="item"  varStatus="stat" begin="0" end="5">
-                    <a href="/car/cb_0/cs_0/cp_0/cv_0/p_${item.id}/list.html">${item.typeName}</a>
+                    <a href="/car/cb_0/cs_0/cp_0/cv_0/p_${item.id}/x_0/list.html">${item.typeName}</a>
                     <c:if test="${!stat.last}" >/</c:if>
                 </c:forEach>
             </span>
@@ -226,7 +226,7 @@
         <ul class="lists lists2">
             <c:forEach items="${ctList}" var="item" begin="0" end="5">
                 <li>
-                    <a href="/car/cb_0/cs_0/cp_0/cv_0/p_${item.id}/list.html">
+                    <a href="/car/cb_0/cs_0/cp_0/cv_0/p_${item.id}/x_0/list.html">
                         <span><img src="${item.typeImg}"></span>
                         <span>${item.typeName}</span>
                     </a>
@@ -243,7 +243,7 @@
     <script id="list-tmpl" type="text/x-dot-template">
         {{ for(var i=0,len=it.length;i<len; i++) { }}
         <div class="tuijian">
-            <h2 class="heads"> {{=it[i].name }} <a href="{{=it[i].id}}">更多>></a></h2>
+            <h2 class="heads"> {{=it[i].name }} <a href="/car/list.html">更多>></a></h2>
             <div class="recommend-car-list carList" style="display: block; ">
                 {{ for(var j=0, a_l=it[i]['arry'].length; j<a_l; j++) { }}
                 <dl class="{{if(j==3){}}last{{}}}">
@@ -298,6 +298,7 @@
 </div>
 <!--新闻热点 end-->
 <div class="clear"></div>
+
 <!--footer 开始-->
 <div class="footer">
     <div class="foot_cen">
@@ -309,8 +310,13 @@
         </div><!--n_f_m_c end-->
 
         <div class="pp">
-            <p>Copyright © 2015-2017 迈众 All Rights Reserved 版权所有 迈众汽车信息服务有限公司</p>
-            <p>营业执照京ICP备15036207号-2   京公网安备 31011402001229号 沪通信管自贸【2016】5号 联系电话：021-10106088</p>
+            <p>Copyright © 2017-2020 迈众 All Rights Reserved 版权所有 迈众汽车信息服务有限公司</p>
+            <p>京ICP备17017795号  &nbsp;&nbsp;&nbsp; 联系电话：010-8025-8108 &nbsp;&nbsp;&nbsp;
+            <script type="text/javascript">
+                var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+                document.write(unescape("%3Cspan id='cnzz_stat_icon_1261672623'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261672623' type='text/javascript'%3E%3C/script%3E"));
+            </script>
+            </p>
         </div>
 
 
@@ -328,9 +334,16 @@
 <div class="sList free-phone" id="sidebar-list-sphone" style="display:none;">
     <i></i>
     <input type="text" placeholder="请输入电话号码" class="ipt-box" id="phone" maxlength="11" />
-    <a href="javascript:void(0);" class="free-btn">电话咨询</a>
+    <a href="javascript:void(0);" class="free-btn">提 交</a>
 </div>
-<div class="free-phone-error" style="display:none;"><span style="color: red">请输入正确的手机号</span></div>
+<div class="free-phone-error" style="display:none;">
+    <i class="false"></i>
+    <span style="color: red">请输入正确的手机号</span>
+</div>
+<div class="free-phone-success" style="display:none;">
+    <i class="success"></i>
+    <span style="color: green">我们会尽快给您致电</span>
+</div>
 <script src="/resources/script/doT.min.js" type="text/javascript"></script>
 <script src="/resources/script/lazy-load-img.min.js" type="text/javascript"></script>
 
@@ -345,19 +358,19 @@
             $(this).animate({right:'0px'});
         });
         $(window).scroll(function() {
-            if ($(document).scrollTop()>=230){
+            if ($(document).scrollTop()>=170){
                 $(".nav_s").css("background","#fff").css("position","fixed").css("box-shadow","1px 1px 5px #999")
                 $(".navs a,.logo span").css("color","#666")
                 $(".call").hide();
                 $(".s_froms").show();
             }
-            if ($(document).scrollTop()<=230){
+            if ($(document).scrollTop()<=170){
                 $(".nav_s").css("background","none").css("position","absolute").css("box-shadow","0px 0px 0px #999")
                 $(".navs a,.logo span").css("color","#fff")
                 $(".call").show();
                 $(".s_froms").hide();
             }
-            if($(document).scrollTop()>=500 && !is){
+            if($(document).scrollTop()>=400 && !is){
                 is = true;
                 $.getJSON("/getHomeItemContent.action",function(res){
                     var evalText = doT.template($("#list-tmpl").text());
@@ -429,6 +442,7 @@
         });
         $('#sphone').click(function () {
             $('.free-phone-error').hide();
+            $('.free-phone-success').hide();
             $('#sidebar-list-sphone').toggle();
         });
         $('.free-btn').click(function () {
@@ -438,13 +452,19 @@
                 return false;
             }else{
                 $('.free-phone-error').hide();
-                $.post("/doPhoneLink.action",{phone:phone},function(res){
-                    console.log(123);
-                });
+                if(!sessionStorage.getItem('homePhone')){
+                    $.post("/doPhoneLink.action",{phone:phone,type:'0'},function(res){
+                        $('.free-phone-error').hide();
+                        $('.free-phone-success').show();
+                        sessionStorage.setItem('homePhone',1);
+                    });
+                }else{
+                    $('.free-phone-success').show();
+                }
             }
         });
-        // lazyLoadImg.destroy() // 销毁图片懒加载程序
     })()
+
 </script>
 
 </body>

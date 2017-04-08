@@ -22,8 +22,8 @@ public class ActionController {
      * @return
      */
     @RequestMapping(value = "/doPhoneLink",method = RequestMethod.POST)
-    public JsonResult doPhoneLink(String phone){
-        actionService.doPhoneLink(phone);
+    public JsonResult doPhoneLink(String phone,String type){
+        actionService.doPhoneLink(phone,type);
         return JsonResult.OK();
     }
 }
