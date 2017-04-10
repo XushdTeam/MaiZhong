@@ -3,6 +3,7 @@ package com.maizhong.rest.service;
 import com.maizhong.pojo.TbMessage;
 import com.maizhong.pojo.vo.TbCarVo;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -15,4 +16,6 @@ public interface DataSyncService {
     void deleteAll(List<String> ids) throws Exception;
 
     void dataSyncOfSingle(Long delId, Long insertId) throws Exception;
+
+    String pinYinAnalysis(String initString) throws IOException;
 }

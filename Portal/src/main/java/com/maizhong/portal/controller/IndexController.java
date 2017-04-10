@@ -4,6 +4,7 @@ import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.pojo.TbFeedback;
 import com.maizhong.portal.service.IndexService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -142,6 +143,11 @@ public class IndexController {
     public String detail(@PathVariable String carId, Model model){
 
         Map<String,Object> map = indexService.getCarDetail(carId);
+        String simg = (String) map.get("smimage");
+        if(StringUtils.isNotBlank(simg)){
+            String[] imgArry = simg.split(",");
+            model.addAttribute("imgArry",imgArry);
+        }
         model.addAttribute("car",map);
         return "detail";
     }

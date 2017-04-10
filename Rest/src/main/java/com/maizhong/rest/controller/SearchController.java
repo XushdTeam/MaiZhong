@@ -51,7 +51,7 @@ public class SearchController {
     @RequestMapping("/getSearchResult")
     @ResponseBody
     public JsonResult getSearchResult(String queryString,String sortString, String carBrand,String carType,
-                                      String carSeries,String sellPrice,String capacity,String carYear,String pageIndex){
+                                      String carSeries,String sellPrice,String capacity,String carYear,String gearbox,String pageIndex){
         if (StringUtils.isNotBlank(queryString)){
             try {
                 queryString = new String(queryString.getBytes("iso-8859-1"),"utf-8");
@@ -61,7 +61,7 @@ public class SearchController {
             }
         }
 
-        JsonResult jsonResult = searchService.getSearchResult(queryString, sortString, carBrand, carSeries,carType,sellPrice, capacity, carYear, pageIndex);
+        JsonResult jsonResult = searchService.getSearchResult(queryString, sortString, carBrand, carSeries,carType,sellPrice, capacity, carYear,gearbox, pageIndex);
         return jsonResult;
     }
 

@@ -27,6 +27,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -123,7 +124,7 @@ public class SearchServiceImpl implements SearchService {
     public Map<String,Object> searchDoc(String queryString, String[] sortString,Integer pageIndex,String highTiken) {
 
         SolrQuery solrQuery = new SolrQuery(queryString);
-//        defType:edismax, mm:80%
+//      匹配度   defType:edismax, mm:80%
 
         //添加分页信息
         if (pageIndex==null||pageIndex<1){
@@ -168,17 +169,18 @@ public class SearchServiceImpl implements SearchService {
             for (SolrDocument solrDocument : documents) {
                 tbCarDTO = new TbCarDTO();
                 tbCarDTO.setId(solrDocument.get("id").toString());
+
+
                 // 高亮处理
+
+                tbCarDTO.setName(solrDocument.get("car_name").toString());
+                //如果存在高亮  覆盖
                 if (highlighting!=null) {
                     List<String> names = highlighting.get(solrDocument.get("id")).get("car_name");
                     if (names != null && names.size() > 0) {
                         tbCarDTO.setName(names.get(0));
                     }
-                }else {
-                    tbCarDTO.setName(solrDocument.get("car_name").toString());
                 }
-
-//                    BeanUtils.copyProperties(solrDocument,tbCarDTO);
 
 
                 //数据填充
@@ -193,10 +195,8 @@ public class SearchServiceImpl implements SearchService {
                 tbCarDTO.setReservePrice(Double.parseDouble(getValue(solrDocument,"car_reservePrice")));
                 String car_sellPrice = getValue(solrDocument, "car_sellPrice");
                 if (!"".equals(car_sellPrice+"")){
-
                     tbCarDTO.setSellPrice(Double.parseDouble(car_sellPrice));
                 }
-//                    tbCarDTO.setSellPrice(Double.parseDouble(getValue(solrDocument,"car_sellPrice")));
 
                 tbCarVos.add(tbCarDTO);
             }
@@ -258,7 +258,7 @@ public class SearchServiceImpl implements SearchService {
      * @return
      */
     @Override
-    public JsonResult getSearchResult(String queryString, String sortString, String carBrand, String carSeries,String carType,String price, String capacity, String carYear, String pageIndex) {
+    public JsonResult getSearchResult(String queryString, String sortString, String carBrand, String carSeries, String carType, String price, String capacity, String carYear, String gearbox, String pageIndex) {
 
 
         //初始化查询字段
@@ -268,13 +268,39 @@ public class SearchServiceImpl implements SearchService {
         //排序字段  避免null指针 所以放在这里
         String[] sortArray = null;
 
+
+        //标记  用于判断是否添加 OR 和AND
+        Boolean bo = true;
+
         if (StringUtils.isNotBlank(queryString)){
+
             //TODO   更改为拼音搜索
-            querysb.append("car_keywords:"+PinYinUtils.cnToPinYin(queryString));
+            //姓名匹配 权值*2
+            querysb.append("car_name:").append(queryString).append("^2");
+
+            //年份适用car_year  查询
+            if (queryString.matches("(19[0-9][0-9]|200|201[0-9])")){
+                querysb.append(" AND ").append("car_year:").append(queryString.replaceAll("[^0-9]",""));
+            }
+
+
+            try {
+                String[] pinyinQuery = dataSyncService.pinYinAnalysis(queryString).split(" ");
+                for (String q:pinyinQuery) {
+                    if (StringUtils.isNotBlank(q)){
+                        if (q.matches("(19[0-9][0-9]|200|201[0-9])")){
+                            continue;
+                        }
+                        querysb.append(" OR ").append("car_pinyin_copy:").append(q).append("~0.5");
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             highTiken = true;
         }else{
+
             //如果查询string为空   遍历条件  添加条件
-            Boolean bo = true;
 
             //判断条件    车型和车系为父子关系
             //      注意  页面返回数据为 id   所以使用car_brand搜索
@@ -301,8 +327,25 @@ public class SearchServiceImpl implements SearchService {
                 }
             }
 
+            //变速箱
+            if (StringUtils.isNotBlank(gearbox)){
+                //排除查询
+                querysb.append(bo?"  ":" AND  ").append("1".equals(gearbox)?"-":"").append("car_name:").append("自动");
+            }
+
+
+            //nianfen
+            if (StringUtils.isNotBlank(carYear)){
+                carYear = carYear.replaceAll("[^0-9]", "");
+                if (StringUtils.isNotBlank(carYear)){
+                    querysb.append(bo?"  ":" AND  ").append("car_year:").append(carYear);
+                }
+            }
+
+
 
             //售价   目前使用数据  市场指导价格  非售价
+                    //更改为售价
             if (StringUtils.isNotBlank(price)){
                 String[] split =price.replaceAll("[^0-9\\-\\.]", "").split("-");
                 if (split.length==1||split.length==2){
@@ -390,9 +433,6 @@ public class SearchServiceImpl implements SearchService {
             }
             result.add(line);
         }
-//        for (TbCarBrandLine line:lines) {
-//            result.add(new KeyValue(line.getId()+"",line.getLineName()));
-//        }
         return result;
     }
 
@@ -465,8 +505,6 @@ public class SearchServiceImpl implements SearchService {
             json = jedisClient.hget("BRAND_FACTORY_SERISE",brandId);
 
             searchBaseDTO.setCarSeriesAll(JsonUtils.jsonToList(json,Map.class));
-
-
 
         }
 

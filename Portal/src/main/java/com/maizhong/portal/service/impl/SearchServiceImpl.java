@@ -43,7 +43,7 @@ public class SearchServiceImpl implements SearchService {
     }
 
     private static String[] carLevel={"不限","SUV","跑车","MPV","面包","皮卡","商务","中型车","中大型车","大型车","小型车","微型车","轻客","紧凑型车"};
-    private static String[] carLevelSearch={"0","SUV","跑车","MPV","微面","皮卡","中大型车","中型车","中大型车","大型车","小型车","微","轻客","紧凑型车"};
+    // private static String[] carLevelSearch={"0","SUV","跑车","MPV","微面","皮卡","中大型车","中型车","中大型车","大型车","小型车","微","轻客","紧凑型车"};
 
 
     /**
@@ -91,6 +91,7 @@ public class SearchServiceImpl implements SearchService {
                 method = param.get("m"),
                 page = param.get("pe"),
                 vt = param.get("t"),
+                gear = param.get("x"),
                 qs = param.get("qs");
         int vt_int = 0 ;
         try {
@@ -192,7 +193,10 @@ public class SearchServiceImpl implements SearchService {
                 param2.put("capacity",volume);
             }
             if(!vt.equals("0")){
-                param2.put("carType",carLevelSearch[vt_int]);
+                param2.put("carType",vt_int+"");
+            }
+            if(!gear.equals("0")){
+                param2.put("gearbox",gear+"");
             }
         }
         param2.put("pageIndex",page==null?"1":page);
@@ -216,7 +220,12 @@ public class SearchServiceImpl implements SearchService {
         model.addAttribute("queryStr",qs);
         model.addAttribute("vT",vt_int);
         model.addAttribute("tN",carLevel[vt_int]);
-
+        model.addAttribute("x",gear);
+        if(StringUtils.equals("1",gear)){
+            model.addAttribute("xN","手动");
+        }else{
+            model.addAttribute("xN","自动");
+        }
 
 
         return model;

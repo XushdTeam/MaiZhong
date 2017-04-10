@@ -13,6 +13,8 @@ public class TbCarColumn {
 
     private Integer deflag;
 
+    private String carNumber;
+
     public Long getId() {
         return id;
     }
@@ -59,5 +61,13 @@ public class TbCarColumn {
 
     public void setDeflag(Integer deflag) {
         this.deflag = deflag;
+    }
+
+    public String getCarNumber() {
+        return carNumber;
+    }
+
+    public void setCarNumber(String carNumber) {
+        this.carNumber = carNumber == null ? null : carNumber.trim();
     }
 }

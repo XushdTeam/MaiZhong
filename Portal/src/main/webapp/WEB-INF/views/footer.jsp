@@ -10,7 +10,7 @@
 <div class="footer">
     <div class="foot_cen">
         <div class="n_f_m_c">
-            <div class="n_f_m_c">
+            <div class="">
                 <a href="/about.html">关于我们</a>
                 <a href="/help.html">帮助中心</a>
                 <a href="/joinus.html">加入我们</a>
@@ -19,15 +19,16 @@
         </div>
 
         <div class="pp">
-            <p>业务合作单位：北京迈众汽车信息服务有限公司</p>
-            <p>Copyright © 2015-2017 优估 All Rights Reserved 版权所有迈众汽车（北京）信息服务有限公司</p>
-            <p>营业执照沪ICP备15036207号-2   沪公网安备 31011402001229号 沪通信管自贸【2016】5号 联系电话：021-10106088</p>
+            <p>Copyright © 2017-2020 迈众 All Rights Reserved 版权所有 迈众汽车信息服务有限公司</p>
+            <p>京ICP备17017795号  &nbsp;&nbsp;&nbsp; 联系电话：010-8025-8108 &nbsp;&nbsp;&nbsp;
+                <script type="text/javascript">
+                    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+                    document.write(unescape("%3Cspan id='cnzz_stat_icon_1261672623'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261672623' type='text/javascript'%3E%3C/script%3E"));
+                </script>
+            </p>
         </div>
 
-        <div class="rem">
-            <div><img src="img/er.png"></div>
-            <p>微信公众号</p>
-        </div>
     </div>
 </div>
+
 <!--fooot_cen end-->
