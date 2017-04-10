@@ -1,5 +1,6 @@
 package com.maizhong.common.dto;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class CarColumnJoinCar {
@@ -43,15 +44,16 @@ public class CarColumnJoinCar {
 
     private String sellpoint;
 
-    private Long reservePrice;
+    private BigDecimal reservePrice;
 
-    private Long sellPrice;
+    private BigDecimal sellPrice;
 
     private String factoryPrice;
 
     private String image;
 
     //
+
 
     public Long getId() {
         return id;
@@ -125,19 +127,19 @@ public class CarColumnJoinCar {
         this.sellpoint = sellpoint;
     }
 
-    public Long getReservePrice() {
+    public BigDecimal getReservePrice() {
         return reservePrice;
     }
 
-    public void setReservePrice(Long reservePrice) {
+    public void setReservePrice(BigDecimal reservePrice) {
         this.reservePrice = reservePrice;
     }
 
-    public Long getSellPrice() {
+    public BigDecimal getSellPrice() {
         return sellPrice;
     }
 
-    public void setSellPrice(Long sellPrice) {
+    public void setSellPrice(BigDecimal sellPrice) {
         this.sellPrice = sellPrice;
     }
 
@@ -161,7 +163,8 @@ public class CarColumnJoinCar {
     }
 
     public CarColumnJoinCar(Long id, Long carId, Integer columnId, Integer carSort, Integer status, Integer deflag, String columnName,
-                            String number, String name, String sellpoint, Long reservePrice, Long sellPrice, String factoryPrice, String image) {
+                            String carNumber, String number,
+                            String name, String sellpoint, BigDecimal reservePrice, BigDecimal sellPrice, String factoryPrice, String image) {
         this.id = id;
         this.carId = carId;
         this.columnId = columnId;
@@ -169,6 +172,7 @@ public class CarColumnJoinCar {
         this.status = status;
         this.deflag = deflag;
         this.columnName = columnName;
+        this.carNumber = carNumber;
         this.number = number;
         this.name = name;
         this.sellpoint = sellpoint;

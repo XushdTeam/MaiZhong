@@ -53,6 +53,11 @@ public interface BRestService {
 
     JsonResult isOnline(String token);
 
+    JsonResult updateUserPwd(Long id, String oldPassword, String newPassword, String reNewPassword);
+
+    JsonResult getBusinessById(Long id);
+
+
 /*    JsonResult getFactoryByBrand();*/
 
   /*  JsonResult getSeriesByFactory();*/

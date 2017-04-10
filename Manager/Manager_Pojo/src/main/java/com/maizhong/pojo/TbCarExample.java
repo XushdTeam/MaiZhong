@@ -296,6 +296,66 @@ public class TbCarExample {
             return (Criteria) this;
         }
 
+        public Criteria andBusinessIdIsNull() {
+            addCriterion("business_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdIsNotNull() {
+            addCriterion("business_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdEqualTo(Long value) {
+            addCriterion("business_id =", value, "businessId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdNotEqualTo(Long value) {
+            addCriterion("business_id <>", value, "businessId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdGreaterThan(Long value) {
+            addCriterion("business_id >", value, "businessId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("business_id >=", value, "businessId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdLessThan(Long value) {
+            addCriterion("business_id <", value, "businessId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdLessThanOrEqualTo(Long value) {
+            addCriterion("business_id <=", value, "businessId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdIn(List<Long> values) {
+            addCriterion("business_id in", values, "businessId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdNotIn(List<Long> values) {
+            addCriterion("business_id not in", values, "businessId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdBetween(Long value1, Long value2) {
+            addCriterion("business_id between", value1, value2, "businessId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdNotBetween(Long value1, Long value2) {
+            addCriterion("business_id not between", value1, value2, "businessId");
+            return (Criteria) this;
+        }
+
         public Criteria andCarBrandIsNull() {
             addCriterion("car_brand is null");
             return (Criteria) this;
@@ -1066,66 +1126,6 @@ public class TbCarExample {
             return (Criteria) this;
         }
 
-        public Criteria andBusinessIdIsNull() {
-            addCriterion("business_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessIdIsNotNull() {
-            addCriterion("business_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessIdEqualTo(Long value) {
-            addCriterion("business_id =", value, "businessId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessIdNotEqualTo(Long value) {
-            addCriterion("business_id <>", value, "businessId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessIdGreaterThan(Long value) {
-            addCriterion("business_id >", value, "businessId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("business_id >=", value, "businessId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessIdLessThan(Long value) {
-            addCriterion("business_id <", value, "businessId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessIdLessThanOrEqualTo(Long value) {
-            addCriterion("business_id <=", value, "businessId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessIdIn(List<Long> values) {
-            addCriterion("business_id in", values, "businessId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessIdNotIn(List<Long> values) {
-            addCriterion("business_id not in", values, "businessId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessIdBetween(Long value1, Long value2) {
-            addCriterion("business_id between", value1, value2, "businessId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBusinessIdNotBetween(Long value1, Long value2) {
-            addCriterion("business_id not between", value1, value2, "businessId");
-            return (Criteria) this;
-        }
-
         public Criteria andStockNumIsNull() {
             addCriterion("stock_num is null");
             return (Criteria) this;
@@ -1423,6 +1423,66 @@ public class TbCarExample {
 
         public Criteria andWeightNotBetween(Integer value1, Integer value2) {
             addCriterion("weight not between", value1, value2, "weight");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagIsNull() {
+            addCriterion("delflag is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagIsNotNull() {
+            addCriterion("delflag is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagEqualTo(Integer value) {
+            addCriterion("delflag =", value, "delflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagNotEqualTo(Integer value) {
+            addCriterion("delflag <>", value, "delflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagGreaterThan(Integer value) {
+            addCriterion("delflag >", value, "delflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagGreaterThanOrEqualTo(Integer value) {
+            addCriterion("delflag >=", value, "delflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagLessThan(Integer value) {
+            addCriterion("delflag <", value, "delflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagLessThanOrEqualTo(Integer value) {
+            addCriterion("delflag <=", value, "delflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagIn(List<Integer> values) {
+            addCriterion("delflag in", values, "delflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagNotIn(List<Integer> values) {
+            addCriterion("delflag not in", values, "delflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagBetween(Integer value1, Integer value2) {
+            addCriterion("delflag between", value1, value2, "delflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagNotBetween(Integer value1, Integer value2) {
+            addCriterion("delflag not between", value1, value2, "delflag");
             return (Criteria) this;
         }
     }

@@ -63,15 +63,9 @@ public class SearchController {
         param.put("v","0");
         param.put("pe","1");
         param.put("t","0");
-        if(StringUtils.isNotBlank(s)){
-            try {
-                param.put("qs", new String(s.getBytes("ISO8859-1"),"UTF-8"));
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-        }else{
-            param.put("qs","");
-        }
+        param.put("x","0");
+        param.put("qs",UECODE(s));
+
         model = searchService.getSearchResult(param,model);
         return "search";
 
@@ -87,12 +81,13 @@ public class SearchController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/car/cb_{brandId}/cs_{seriseId}/cp_{price}/cv_{volume}/p_{level}/list.html")
+    @RequestMapping(value = "/car/cb_{brandId}/cs_{seriseId}/cp_{price}/cv_{volume}/p_{level}/x_{gear}/list.html")
     public String searchlist(@PathVariable String brandId,
                              @PathVariable String seriseId,
                              @PathVariable String price,
                              @PathVariable String volume,
                              @PathVariable String level,
+                             @PathVariable String gear,
                              String s,
                              Model model) {
         Map<String,String> param = Maps.newHashMap();
@@ -104,17 +99,8 @@ public class SearchController {
         param.put("v",volume);
         param.put("pe","1");
         param.put("t",level);
-
-        if(StringUtils.isNotBlank(s)){
-            try {
-                param.put("qs", new String(s.getBytes("ISO8859-1"),"UTF-8"));
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-        }else{
-            param.put("qs","");
-        }
-
+        param.put("qs",UECODE(s));
+        param.put("x",gear);
         model = searchService.getSearchResult(param,model);
         return "search";
     }
@@ -125,7 +111,7 @@ public class SearchController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/car/s_{sort}_{method}_{page}/cb_{brandId}/cs_{seriseId}/cp_{price}/cv_{volume}/p_{level}/list.html",method = RequestMethod.GET)
+    @RequestMapping(value = "/car/s_{sort}_{method}_{page}/cb_{brandId}/cs_{seriseId}/cp_{price}/cv_{volume}/p_{level}/x_{gear}/list.html",method = RequestMethod.GET)
     public String searchListMore(
                     @PathVariable String sort,
                     @PathVariable String method,
@@ -135,6 +121,7 @@ public class SearchController {
                     @PathVariable String volume,
                     @PathVariable String page,
                     @PathVariable String level,
+                    @PathVariable String gear,
                     String s,
                     Model model){
 
@@ -147,18 +134,23 @@ public class SearchController {
         param.put("v",volume);
         param.put("pe",page);
         param.put("t",level);
-        if(StringUtils.isNotBlank(s)){
-            try {
-                param.put("qs", new String(s.getBytes("ISO8859-1"),"UTF-8"));
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-        }else{
-            param.put("qs","");
-        }
+        param.put("qs",UECODE(s));
+        param.put("x",gear);
         model = searchService.getSearchResult(param,model);
 
         return "search";
     }
 
+    private String UECODE(String str){
+        if(StringUtils.isNotBlank(str)){
+            try {
+                return  new String(str.getBytes("ISO8859-1"),"UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+                return "";
+            }
+        } else {
+            return "";
+        }
+    }
 }

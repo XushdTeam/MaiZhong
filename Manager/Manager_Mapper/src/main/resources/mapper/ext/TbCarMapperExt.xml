@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.maizhong.mapper.ext.TbCarMapperExt" >
+<mapper namespace="com.maizhong.mapper.ext.TbCarMapperExt">
 
     <sql id="Example_Where_Clause">
         <where>
@@ -20,7 +20,8 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and c.${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -33,53 +34,53 @@
     </sql>
 
 
-
     <resultMap id="baseCarMap" type="com.maizhong.pojo.vo.TbCarBaseVo">
-        <id column="id" jdbcType="BIGINT" property="id" />
-        <result column="car_color" jdbcType="VARCHAR" property="color" />
-        <result column="car_type" jdbcType="VARCHAR" property="carName" />
-        <result column="car_level" jdbcType="VARCHAR" property="carTypeName" />
-        <result column="car_year" jdbcType="VARCHAR" property="carYear" />
-        <result column="shop_price" jdbcType="VARCHAR" property="shopPrice" />
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="car_color" jdbcType="VARCHAR" property="color"/>
+        <result column="car_type" jdbcType="VARCHAR" property="carName"/>
+        <result column="car_level" jdbcType="VARCHAR" property="carTypeName"/>
+        <result column="car_year" jdbcType="VARCHAR" property="carYear"/>
+        <result column="shop_price" jdbcType="VARCHAR" property="shopPrice"/>
     </resultMap>
 
 
+    <select id="findListNotContainsDesc" parameterType="com.maizhong.pojo.TbCarExample"
+            resultType="com.maizhong.pojo.vo.TbCarVo">
+        SELECT
+        c.id id,
+        c.number number,
+        d.car_brand carBrand,
+        d.car_level carType,
+        d.car_series carBrandLine,
+        d.car_type name,
+        d.car_color carColor,
+        d.car_displacement capacity,
+        d.car_gearbox gearbox,
+        c.sellpoint sellpoint,
+        c.reserve_price reservePrice,
+        c.sell_price sellPrice,
+        c.update_time updateTime,
+        c.image image,
+        c.unable unable,
+        c.issale issale,
+        c.weight weight,
+        c.stock_num stockNum,
+        c.sell_num sellNum,
+        bu.business_name business
+        from
+        tb_car c
+        LEFT JOIN tb_car_base d ON c.base_id = d.id
+        LEFT JOIN tb_business bu ON c.business_id = bu.id
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
 
-  <select id="findListNotContainsDesc" parameterType="com.maizhong.pojo.TbCarExample" resultType="com.maizhong.pojo.vo.TbCarVo">
-      SELECT
-      c.id id,
-      c.number number,
-      d.car_brand carBrand,
-      d.car_level carType,
-      d.car_series carBrandLine,
-      d.car_type name,
-      d.car_color carColor,
-      d.car_displacement capacity,
-      d.car_gearbox gearbox,
-      c.sellpoint sellpoint,
-      c.reserve_price reservePrice,
-      c.sell_price sellPrice,
-      c.update_time updateTime,
-      c.image  image,
-      c.unable  unable,
-      c.issale  issale,
-      c.weight  weight,
-      c.stock_num  stockNum,
-      c.sell_num sellNum,
-      bu.business_name	business
-      from
-      tb_car c
-      LEFT JOIN tb_car_base d ON c.base_id = d.id
-      LEFT JOIN tb_business bu ON c.business_id = bu.id
-      <if test="_parameter != null">
-        <include refid="Example_Where_Clause" />
-      </if>
-      <if test="orderByClause != null">
-          order by ${orderByClause}
-      </if>
-  </select>
-
-    <select id="findDocsForSolrStore" parameterType="com.maizhong.pojo.TbCarExample"  resultType="com.maizhong.pojo.vo.TbCarVo" >
+    <select id="findDocsForSolrStore" parameterType="com.maizhong.pojo.TbCarExample"
+            resultType="com.maizhong.pojo.vo.TbCarVo">
           SELECT
               c.id id,
               c.number number,
@@ -108,11 +109,11 @@
               d.car_level carTypeCopy
               from
               tb_car c
-              LEFT JOIN tb_car_base d ON c.base_id = d.id
+              LEFT JOIN tb_car_base d ON c.base_id = d.id AND c.delflag=0
     </select>
 
 
-    <select id="findByCarYearAndCarSeres"  resultMap="baseCarMap">
+    <select id="findByCarYearAndCarSeres" resultMap="baseCarMap">
         SELECT
         id,car_type,car_color,car_level,car_year,car_factory_price shop_price
         FROM
@@ -125,7 +126,7 @@
     </select>
 
 
-    <select id="findDetailsByCarId" parameterType="java.lang.Long"  resultType="java.util.HashMap">
+    <select id="findDetailsByCarId" parameterType="java.lang.Long" resultType="java.util.HashMap">
          SELECT
             c.id,
             base.car_type name,
@@ -166,38 +167,37 @@
     </select>
 
 
-
-
     <select id="findByBussinessId" resultType="java.util.HashMap">
         SELECT
-          c.id id,
-          c.number number,
-          d.car_brand carBrand,
-          d.car_level carType,
-          d.car_series carSeries,
-          d.car_type name,
-          d.car_color carColor,
-          d.car_displacement capacity,
-          d.car_gearbox gearbox,
-          c.sellpoint sellpoint,
-          c.reserve_price reservePrice,
-          c.sell_price sellPrice,
-          c.create_time createTime,
-          c.smimage smimage,
-          c.image  image,
-          c.issale issale,
-          c.unable  unable,
-          c.stock_num  stockNum,
-          c.sell_num sellNum
-          from
-          tb_car c
-          LEFT JOIN tb_car_base d ON c.base_id = d.id
-          WHERE  c.business_id = #{businessId}
+        c.id id,
+        c.number number,
+        d.car_brand carBrand,
+        d.car_level carType,
+        d.car_series carSeries,
+        d.car_type name,
+        d.car_color carColor,
+        d.car_displacement capacity,
+        d.car_gearbox gearbox,
+        c.sellpoint sellpoint,
+        c.reserve_price reservePrice,
+        c.sell_price sellPrice,
+        c.create_time createTime,
+        c.smimage smimage,
+        c.image image,
+        c.issale issale,
+        c.unable unable,
+        c.stock_num stockNum,
+        c.sell_num sellNum
+        from
+        tb_car c
+        LEFT JOIN tb_car_base d ON c.base_id = d.id
+        WHERE c.business_id = #{businessId}
+        AND c.delflag=0
         <if test="carSeries != null and carSeries !='' ">
-            AND c.car_brand_line =  #{carYear}
+            AND c.car_brand_line = #{carYear}
         </if>
         <if test="carYear != null and carYear !='' ">
-            AND c.car_year =  #{carYear}
+            AND c.car_year = #{carYear}
         </if>
         <if test="brandId != null and brandId !='' ">
             AND c.car_brand = #{brandId}
@@ -207,17 +207,16 @@
         </if>
 
         <if test="sortString != null and sortString !='' ">
-            ORDER BY  ${sortString}
+            ORDER BY ${sortString}
         </if>
     </select>
 
 
-
-    <select id="findByBasePropToCount" parameterType="java.lang.Long"  resultType="java.util.HashMap">
+    <select id="findByBasePropToCount" parameterType="java.lang.Long" resultType="java.util.HashMap">
        SELECT car_series seriesName,car_type name,car_displacement displacement,car_gearbox gearbox,car_factory factory,car_factory_price shopPrice FROM tb_car_base WHERE id = #{baseId}
     </select>
 
-    <select id="findPriceByTypeToCount"   resultType="java.lang.String">
+    <select id="findPriceByTypeToCount" resultType="java.lang.String">
         SELECT car_factory_price  FROM tb_car_base where car_factory = #{factory} AND car_gearbox = #{gearbox}  AND car_series = #{series} AND car_type LIKE "%"#{type}"%" ORDER BY car_year DESC LIMIT 0,1
     </select>
 </mapper>
