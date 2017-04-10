@@ -528,6 +528,7 @@ ol, ul {list-style: none;}
 
 /*.bg_co{ background: #f5f5f5; overflow: hidden;}*/
 .xi_qi{ width: 1200px; margin: 20px auto; background: #fff; border: 1px solid #eee; overflow: hidden; padding: 20px}
+.xi_qi h2{ line-height: 80px}
 .shoppin{ width: 1200px; margin: 0 auto; overflow: hidden;}
 .car-information ul {width: 1000px;margin: 30px 0 30px 85px; padding: 30px}
 .car-information ul li {float: left; width: 250px;}
