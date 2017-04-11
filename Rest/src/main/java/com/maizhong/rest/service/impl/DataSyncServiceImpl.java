@@ -233,21 +233,9 @@ public class DataSyncServiceImpl implements DataSyncService {
             if (lexemeText.matches("(19[0-9][0-9]|200|201[0-9])")){
                 lexemeText = lexemeText.replaceAll("[^0-9]","");
             }
-            sb.append( PinYinUtils.cnToPinYin(lex.getLexemeText())).append(" ");
+            sb.append( PinYinUtils.cnToPinYin(lexemeText)).append(" ");
 //            .append(PinYinUtils.cnToFirstSpell(lex.getLexemeText())).append(" ");
         }
         return sb.toString();
     }
-
-//    private void addSingleSolrDoc(List<Long> ids){
-//        TbCarExample example = new TbCarExample();
-////        example.createCriteria().andIdEqualTo();
-//        List<TbCarVo> list = tbCarMapperExt.findDocsForSolrStore(example);
-//        if (list==null&&list.size()==0){
-//            return;
-//        }
-//        TbCarVo vo  = list.get(0);
-//    }
-
-
 }

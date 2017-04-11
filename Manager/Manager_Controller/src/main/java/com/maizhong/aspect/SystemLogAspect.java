@@ -207,21 +207,12 @@ public class SystemLogAspect {
             if (method.getName().equals(methodName)) {
                 Class[] clazzs = method.getParameterTypes();
                 if (clazzs.length == arguments.length) {
-                    map.put("method",method.getAnnotation(ServiceLog. class).methods());
-                    map.put("module",method.getAnnotation(ServiceLog. class).module());
+                    map.put("method",method.getAnnotation(ServiceLog.class).methods());
+                    map.put("module",method.getAnnotation(ServiceLog.class).module());
                     break;
                 }
             }
         }
         return map;
     }
-
-
-
-
-
-
-
-
-
 }
