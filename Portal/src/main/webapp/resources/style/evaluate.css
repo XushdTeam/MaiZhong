@@ -13,7 +13,7 @@ div {outline: 0 none;}
 a:link,a:visited{ color:#333333; text-decoration:none;}
 .fot-red{color:#f84949;}
 .fn-left{float:left;}
-.mt15{margin-top:15px;}
+.mt15{margin-top:15px !important;  }
 .mr5{margin-right:5px;}
 .mr20{margin-right:20px;}
 .colf8{color:#f84949;}
@@ -54,9 +54,9 @@ a:link,a:visited{ color:#333333; text-decoration:none;}
 .select-disabled .icon10-down1{background-position:-160px -60px;}
 .select-disabled .select-selected:hover .icon10-down1{transform:none;-webkit-transform:none;background-position:-160px -60px;}
 
-.selectpop{position:absolute;z-index:200;top:30px;left:0;width:auto;background:url(http://www.autoimg.cn/2scimg/web/website/20140506/shadow_bg.png) repeat scroll 0 0 transparent;padding:2px;display:block;cursor:default;}
+.selectpop{position:absolute;z-index:200;top:30px;left:-260px;width:auto;padding:2px;display:block;cursor:default;}
 .selectpop a,.selectpop a:hover{text-decoration:none;}
-.selectpop .selectpop-box{background-color:#fafbfc;border:1px solid #ccd3e4;padding:10px 0 10px 10px;position:relative;float:left;min-width:150px;_width:165px; left: -260px }
+.selectpop .selectpop-box{background: rgba(255,255,255,0.6);;border:1px solid #ccd3e4;padding:10px 0 10px 10px;position:relative;float:left;min-width:150px;_width:165px;}
 .selectpop .box-width-01{width:343px;height:424px;overflow:hidden;}
 .selectpop .box-width-02{width:640px;height:424px;overflow:hidden;}
 .selectpop .selectpop-box .selectpop-box-prov{float:left;margin-right:10px;_display:inline;}
@@ -91,12 +91,12 @@ a:link,a:visited{ color:#333333; text-decoration:none;}
 .inpnt-mile{border: 1px solid #dfdfdf;font-size:14px;height:28px;line-height:28px;width:162px;margin-right:10px;padding:0 5px; cursor:pointer;}
 .btn-yell{width:137px;height:34px;line-height:34px;background-position:-26px 0px;display:inline-block;font-family:"Î¢ÈíÑÅºÚ";font-size:18px;font-weight:bold;text-align:center;border:1px solid #dd5303;}
 a.btn-yell:link,a.btn-yell:visited{color:#ffffff;}
-.gray6a{color:#6a6a6a;text-align:center;}
+.gray6a{color:#333;text-align:center;}
 /*×ßÊÆ*/
 .trend-cont{width:990px;margin:0 auto;margin-top:10px;background:#f7f7f7;border:1px solid #ebebeb;overflow:hidden;}
-.trend-cont-l{width:625px;float:left;padding-left:14px;padding-bottom:30px;}
+.trend-cont-l{width:625px;float:left;padding-bottom:30px;margin-top: 40px;}
 .trend-cont-l .ch-p{text-align:center;}
-.trend-cont-l .ch-p .gray6a{font-size:14px; line-height:24px;}
+.trend-cont-l .ch-p .gray6a{font-size:14px; line-height:24px; width: 90%; margin:20px auto}
 .trend-cont-l .ch-p-right{margin:35px 0 0 185px;text-align:left;overflow:hidden;}
 .trend-cont-l .ch-p-right i{width:32px;height:32px;float:left;display:block; background-position:0px -69px;margin-top:15px;}
 .trend-cont-l .ch-p-right .ch-p-tx{float:left;font-size:14px;font-weight:bold;color:#666666;padding-left:15px; }
@@ -129,11 +129,11 @@ a.btn-yell:link,a.btn-yell:visited{color:#ffffff;}
 .trend-cont-l .pri-chart-tx{margin-top:5px;}
 .trend-cont-l .pri-chart-tx span{font-size:16px;color:#6a6a6a;float:left;text-align:center;}
 
-.trend-r-tx{padding:15px 0 0 152px;line-height:16px;}
+.trend-r-tx{line-height:16px; text-align: center;}
 .trend-r-tx p{padding-top:15px;color:#666666;}
 .trend-r-tx p .icon1{float: right;width:93px;height:16px;line-height:15px;*line-height:17px;text-align:center;color:#ffffff;position:absolute;display:inline-block; background-position:0 -110px;margin-left:5px;*margin-top:-3px;}
 .trend-r-tx p .icon1:link,.trend-r-tx p .icon1:visited{color:#ffffff;}
-.trend-r-tx .p-tit{font-size:14px;}
+.trend-r-tx .p-tit{font-size:21px;}
 
 .fruitless{margin:130px 0 0 90px;text-align:left;overflow:hidden;}
 .fruitless .icon-car{width:123px;height:90px;float:left;display:block; background-position:0px -130px;}
@@ -141,3 +141,5 @@ a.btn-yell:link,a.btn-yell:visited{color:#ffffff;}
 .fruitless .fruitless-p-tx p{margin:5px 0 17px 0;}
 
 .ic-right{ display:inline-block; width:16px; height:16px; overflow:hidden;background-position:0px -303px;margin:0 5px 0 0;*margin:-1px 3px 0 0;float:left;}
+
+#div_body2 .count-left{ padding: none !important;}

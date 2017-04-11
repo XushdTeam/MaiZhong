@@ -157,7 +157,7 @@
         <!--汽车评估结果页面-->
         <div  class="count" id="div_body2" >
             <%--<div class="trend-cont">--%>
-            <div class="count-left" style="width: 540px;height: 434px;">
+            <div class="" style="width: 540px;height: 434px;">
                 <div id="EvaSuccess" class="trend-cont-l" style="width: 540px;height: 434px;">
 
                     <div class="trend-r-tx" >

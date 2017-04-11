@@ -18,7 +18,6 @@
     <link rel="stylesheet" type="text/css" href="/resources/style/other.css"/>
     <script src="http://cdn.bootcss.com/jquery/3.2.0/jquery.min.js" type="text/javascript"></script>
     <script src="http://cdn.bootcss.com/layer/3.0.1/layer.min.js" type="text/javascript"></script>
-
 </head>
 <body>
 <jsp:include page="head.jsp"></jsp:include>
