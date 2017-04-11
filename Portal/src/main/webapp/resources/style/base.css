@@ -441,7 +441,7 @@ img,input{vertical-align:middle; outline:none}
 /*卖车*/
 .bans{ background: url(../img/ban.jpg) no-repeat center center; background-size:cover; height: 687px}
 .ban_cen{ width: 1200px; margin: 0 auto;}
-.ban_form{ width: 350px; background: #fff; float: right; margin-top: 120px; padding-bottom: 30px; box-shadow: 1px 0px 5px #ccc}
+.ban_form{ width: 350px; background:rgba(255,255,255,0.8); float: right; margin-top: 120px; padding-bottom: 30px; box-shadow: 1px 0px 5px #ccc}
 .ban_cen .p_top{ background: #399afe; line-height: 55px;color: #fff; text-align: center; font-size: 18px; padding-top: 15px}
 .ban_cen .p_top span{ font-size: 36px;}
 .ban_cen .inputs{ display: block; width: 280px; margin: 20px auto 20px; line-height: 32px; border: 1px solid #eee; padding-left: 5px}
@@ -641,3 +641,14 @@ table.cd_m_info_desc {
     -o-transition: all 0.3s ease-out;
     transition: all 0.3s ease-out;
 }
+.pinggu {
+    margin-top: 80px;
+    border: 1px solid #ccc;
+    width: 140px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 35px;
+    background: rgba(0,0,0,0.4)
+}
+
+.pinggu a{ font-size: 14px; color: #fff}

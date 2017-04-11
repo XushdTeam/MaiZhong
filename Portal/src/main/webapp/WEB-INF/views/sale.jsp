@@ -33,7 +33,10 @@
                 </div>
             </from>
             <p class="calls">400-429-0902 免费咨询</p>
+            <div class="pinggu"><a href="#">我要评估</a></div>
         </div>
+
+
     </div><!--ban_cen end-->
 </div>
 <!--ban end-->
