@@ -109,7 +109,7 @@
               d.car_level carTypeCopy
               from
               tb_car c
-              LEFT JOIN tb_car_base d ON c.base_id = d.id AND c.delflag=0
+              LEFT JOIN tb_car_base d ON c.base_id = d.id WHERE c.delflag=0
     </select>
 
 
