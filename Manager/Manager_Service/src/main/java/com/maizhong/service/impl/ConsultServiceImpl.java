@@ -6,14 +6,18 @@ import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.common.utils.TimeUtils;
+import com.maizhong.mapper.TbCarMapper;
 import com.maizhong.mapper.TbConsultMapper;
+import com.maizhong.pojo.TbCar;
 import com.maizhong.pojo.TbConsult;
 import com.maizhong.pojo.TbConsultExample;
 import com.maizhong.pojo.TbMember;
 import com.maizhong.service.ConsultService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,6 +33,8 @@ public class ConsultServiceImpl implements ConsultService {
 
     @Autowired
     private TbConsultMapper tbConsultMapper;
+    @Autowired
+    private TbCarMapper tbCarMapper;
 
     /**
      * 用户咨询列表--分页 条件查询
@@ -61,6 +67,20 @@ public class ConsultServiceImpl implements ConsultService {
         criteria.andDelflagEqualTo(0);
         example.setOrderByClause("id ASC");
         List<TbConsult> list = tbConsultMapper.selectByExample(example);
+
+        for (TbConsult tbConsult:list){
+            if (tbConsult.getCarid()==null){
+                continue;
+            }
+            try {
+                TbCar tbCar = tbCarMapper.selectByPrimaryKey(tbConsult.getCarid());
+                if (tbCar==null) continue;
+                tbConsult.setNumber(tbCar.getNumber());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         PageInfo pageInfo = new PageInfo(list);
         return new PageResult(pageInfo);
     }
@@ -74,6 +94,7 @@ public class ConsultServiceImpl implements ConsultService {
 
     @Override
     public OperateEnum updatConsult(TbConsult tbConsult) {
+        tbConsult.setHandleTime(new Date());
         int res = tbConsultMapper.updateByPrimaryKeySelective(tbConsult);
         if (res > 0) {
             return OperateEnum.SUCCESS;

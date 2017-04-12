@@ -74,7 +74,24 @@ public class SpreadController {
         OperateEnum result = spreadService.insertConsult(phone, type);
         return JsonResult.build(result);
     }
-
+    /**
+     * 用户咨询//详情页
+     *
+     * @param phone 手机号
+     * @param type  种类  0新车 1 二手车
+     * @return
+     */
+    @RequestMapping(value = "/consult/car", method = RequestMethod.POST)
+    public JsonResult insertCarConsult(String phone, String type,String carId) {
+        OperateEnum result = null;
+        try {
+            result = spreadService.insertCarConsult(phone, type,carId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JsonResult.Error("网络错误，请刷新后重试！");
+        }
+        return JsonResult.build(result);
+    }
 /*
     @RequestMapping(value = "/getSeriesByBrand/{brandId}")
     public JsonResult getSeriesByBrand(@PathVariable("brandId") Long brandId) {

@@ -26,4 +26,5 @@ public interface SpreadService {
 
     JsonResult getIndexBase();
 
+    OperateEnum insertCarConsult(String phone, String type, String carId);
 }

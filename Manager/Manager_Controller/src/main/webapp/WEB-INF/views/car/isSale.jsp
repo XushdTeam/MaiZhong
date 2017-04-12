@@ -58,6 +58,13 @@
                         </div>
                     </div>--%>
 
+                        <div class="layui-inline">
+                            <label class="layui-form-label">汽车编号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="number" value="" placeholder="汽车编号" class="layui-input">
+                            </div>
+                        </div>
+
                     <div class="layui-inline">
                         <label class="layui-form-label">品牌</label>
                         <div class="layui-input-inline">

@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.maizhong.pojo.TbConsult">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="carId" jdbcType="BIGINT" property="carid" />
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="consult_time" jdbcType="TIMESTAMP" property="consultTime" />
     <result column="handle_time" jdbcType="TIMESTAMP" property="handleTime" />
@@ -72,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, phone, type, consult_time, handle_time, status, service_name, service_id, remark, 
-    delflag
+    id, phone, carId, type, consult_time, handle_time, status, service_name, service_id, 
+    remark, delflag
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.pojo.TbConsultExample" resultMap="BaseResultMap">
     select
@@ -106,14 +107,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.maizhong.pojo.TbConsult">
-    insert into tb_consult (id, phone, type, 
-      consult_time, handle_time, status, 
-      service_name, service_id, remark, 
-      delflag)
-    values (#{id,jdbcType=BIGINT}, #{phone,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
-      #{consultTime,jdbcType=TIMESTAMP}, #{handleTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
-      #{serviceName,jdbcType=VARCHAR}, #{serviceId,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, 
-      #{delflag,jdbcType=INTEGER})
+    insert into tb_consult (id, phone, carId, 
+      type, consult_time, handle_time, 
+      status, service_name, service_id, 
+      remark, delflag)
+    values (#{id,jdbcType=BIGINT}, #{phone,jdbcType=VARCHAR}, #{carid,jdbcType=BIGINT}, 
+      #{type,jdbcType=INTEGER}, #{consultTime,jdbcType=TIMESTAMP}, #{handleTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{serviceName,jdbcType=VARCHAR}, #{serviceId,jdbcType=BIGINT}, 
+      #{remark,jdbcType=VARCHAR}, #{delflag,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.pojo.TbConsult">
     insert into tb_consult
@@ -123,6 +124,9 @@
       </if>
       <if test="phone != null">
         phone,
+      </if>
+      <if test="carid != null">
+        carId,
       </if>
       <if test="type != null">
         type,
@@ -155,6 +159,9 @@
       </if>
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="carid != null">
+        #{carid,jdbcType=BIGINT},
       </if>
       <if test="type != null">
         #{type,jdbcType=INTEGER},
@@ -197,6 +204,9 @@
       <if test="record.phone != null">
         phone = #{record.phone,jdbcType=VARCHAR},
       </if>
+      <if test="record.carid != null">
+        carId = #{record.carid,jdbcType=BIGINT},
+      </if>
       <if test="record.type != null">
         type = #{record.type,jdbcType=INTEGER},
       </if>
@@ -230,6 +240,7 @@
     update tb_consult
     set id = #{record.id,jdbcType=BIGINT},
       phone = #{record.phone,jdbcType=VARCHAR},
+      carId = #{record.carid,jdbcType=BIGINT},
       type = #{record.type,jdbcType=INTEGER},
       consult_time = #{record.consultTime,jdbcType=TIMESTAMP},
       handle_time = #{record.handleTime,jdbcType=TIMESTAMP},
@@ -247,6 +258,9 @@
     <set>
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="carid != null">
+        carId = #{carid,jdbcType=BIGINT},
       </if>
       <if test="type != null">
         type = #{type,jdbcType=INTEGER},
@@ -278,6 +292,7 @@
   <update id="updateByPrimaryKey" parameterType="com.maizhong.pojo.TbConsult">
     update tb_consult
     set phone = #{phone,jdbcType=VARCHAR},
+      carId = #{carid,jdbcType=BIGINT},
       type = #{type,jdbcType=INTEGER},
       consult_time = #{consultTime,jdbcType=TIMESTAMP},
       handle_time = #{handleTime,jdbcType=TIMESTAMP},

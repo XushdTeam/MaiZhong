@@ -275,6 +275,40 @@ public class SpreadServiceImpl implements SpreadService {
         return JsonResult.OK(new IndexBaseDTO(carBrandHot,listGg,carType));
     }
 
+    /**
+     * 用户咨询 从详情页面
+     * @param phone
+     * @param type
+     * @param carId
+     * @return
+     */
+    @Override
+    public OperateEnum insertCarConsult(String phone, String type, String carId) {
+        TbConsult tbConsult=new TbConsult();
+        tbConsult.setPhone(phone);
+        try {
+            tbConsult.setCarid(Long.valueOf(carId));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return OperateEnum.FAILE;
+        }
+        try {
+            tbConsult.setType(Integer.valueOf(type));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return OperateEnum.FAILE;
+        }
+        tbConsult.setDelflag(0);
+        tbConsult.setStatus(0);
+        tbConsult.setConsultTime(new Date());
+        int res= tbConsultMapper.insert(tbConsult);
+        if (res>0){
+            return OperateEnum.SUCCESS;
+        }else {
+            return  OperateEnum.FAILE;
+        }
+    }
+
 
     /**
      * 广告信息获取

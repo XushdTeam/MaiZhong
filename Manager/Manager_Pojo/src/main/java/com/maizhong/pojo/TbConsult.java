@@ -10,12 +10,14 @@ public class TbConsult {
 
     private String phone;
 
+    private Long carid;
+
     private Integer type;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date consultTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date handleTime;
 
     private Integer status;
@@ -27,6 +29,27 @@ public class TbConsult {
     private String remark;
 
     private Integer delflag;
+
+    //汽车字段
+
+    private  String number;//汽车编号
+    private  String car_type;//汽车名称
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getCar_type() {
+        return car_type;
+    }
+
+    public void setCar_type(String car_type) {
+        this.car_type = car_type;
+    }
 
     public Long getId() {
         return id;
@@ -42,6 +65,14 @@ public class TbConsult {
 
     public void setPhone(String phone) {
         this.phone = phone == null ? null : phone.trim();
+    }
+
+    public Long getCarid() {
+        return carid;
+    }
+
+    public void setCarid(Long carid) {
+        this.carid = carid;
     }
 
     public Integer getType() {

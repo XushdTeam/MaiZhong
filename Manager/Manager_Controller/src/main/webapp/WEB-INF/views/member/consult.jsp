@@ -91,7 +91,7 @@
                 </colgroup>
                 <thead>
                 <tr>
-                    <th>编号</th>
+                    <th>汽车编号</th>
                     <th>咨询类型</th>
                     <th>手机号</th>
                     <th>咨询时间</th>
@@ -106,8 +106,14 @@
                 <script id="tpl" type="text/html">
                     {{#  layui.each(d.rows, function(index, item){ }}
                     <tr>
-                        <td>{{ item.id }}</td>
-                        <td align="center">{{# if (item.type==0) { }}
+
+                        <td>{{# if (item.number==null) { }}
+
+                            {{# } else { }}
+                            {{ item.number }}
+                            {{# } }}
+                        </td>
+                        <td>{{# if (item.type==0) { }}
                             新车
                             {{# } else { }}
                             二手车
@@ -115,26 +121,37 @@
                         </td>
                         <td>{{ item.phone }}</td>
                         <td>{{ item.consultTime}}</td>
-                        <td>{{ item.handleTime}}</td>
 
-                        <td >{{# if (item.status) { }}
-                           已处理
+                        <td>{{# if (item.handleTime==null) { }}
+
                             {{# } else { }}
-                          未处理
+                            {{ item.handleTime}}
                             {{# } }}
                         </td>
-                        <td>{{ item.serviceName}}</td>
+
+                        <td>{{# if (item.status) { }}
+                            已处理
+                            {{# } else { }}
+                            未处理
+                            {{# } }}
+                        </td>
+                        <td>{{# if (item.serviceName==null) { }}
+
+                            {{# } else { }}
+                            {{ item.serviceName}}
+                            {{# } }}
+                        </td>
                         <td align="center">{{# if (item.remark==null) { }}
                             {{# } else { }}
-                           {{ item.remark }}
+                            {{ item.remark }}
                             {{# } }}
                         </td>
                         <td>{{# if (item.status==0) { }}
-                            <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit"
+                            <a class="layui-btn layui-btn-small layui-btn-danger do-action" data-type="doAddEdit"
                                data-href="${handleUrl}/{{item.id}}"><i
                                     class="icon-edit  fa fa-pencil-square-o"></i>处理</a>
                             {{# } else { }}
-                            <a class="layui-btn layui-btn-small layui-btn-danger" ><i
+                            <a class="layui-btn layui-btn-small "><i
                                     class="icon-edit  fa fa-pencil-square-o"></i>已处理</a>
                             {{# } }}
                         </td>

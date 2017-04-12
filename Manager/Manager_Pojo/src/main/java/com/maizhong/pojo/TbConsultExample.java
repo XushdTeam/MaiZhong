@@ -235,6 +235,66 @@ public class TbConsultExample {
             return (Criteria) this;
         }
 
+        public Criteria andCaridIsNull() {
+            addCriterion("carId is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCaridIsNotNull() {
+            addCriterion("carId is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCaridEqualTo(Long value) {
+            addCriterion("carId =", value, "carid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCaridNotEqualTo(Long value) {
+            addCriterion("carId <>", value, "carid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCaridGreaterThan(Long value) {
+            addCriterion("carId >", value, "carid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCaridGreaterThanOrEqualTo(Long value) {
+            addCriterion("carId >=", value, "carid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCaridLessThan(Long value) {
+            addCriterion("carId <", value, "carid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCaridLessThanOrEqualTo(Long value) {
+            addCriterion("carId <=", value, "carid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCaridIn(List<Long> values) {
+            addCriterion("carId in", values, "carid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCaridNotIn(List<Long> values) {
+            addCriterion("carId not in", values, "carid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCaridBetween(Long value1, Long value2) {
+            addCriterion("carId between", value1, value2, "carid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCaridNotBetween(Long value1, Long value2) {
+            addCriterion("carId not between", value1, value2, "carid");
+            return (Criteria) this;
+        }
+
         public Criteria andTypeIsNull() {
             addCriterion("type is null");
             return (Criteria) this;

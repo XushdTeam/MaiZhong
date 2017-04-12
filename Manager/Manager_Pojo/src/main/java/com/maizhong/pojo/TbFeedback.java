@@ -63,7 +63,7 @@ public class TbFeedback {
     }
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     public Date getCreateTime() {
         return createTime;
     }

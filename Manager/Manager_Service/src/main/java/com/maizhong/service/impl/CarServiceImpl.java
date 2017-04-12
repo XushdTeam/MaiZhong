@@ -227,7 +227,7 @@ public class CarServiceImpl implements CarService {
 
         TbCarExample.Criteria criteria = example.createCriteria();
         //添加查询条件 queryString
-
+        criteria.andDelflagEqualTo(0);
 
         //添加时间条件
         if (param.getFiled("timeBegin") != null) {
@@ -444,6 +444,9 @@ public class CarServiceImpl implements CarService {
             }
             if (param.getFiled("businessId") != null) {
                 criteria.andBusinessIdEqualTo(Long.valueOf(param.getFiled("businessId")));
+            }
+            if (param.getFiled("number") != null) {
+                criteria.andNumberEqualTo(param.getFiled("number"));
             }
             criteria.andUnableEqualTo(1);
         }
