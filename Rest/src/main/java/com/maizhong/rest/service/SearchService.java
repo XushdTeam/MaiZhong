@@ -13,6 +13,8 @@ import java.util.Map;
  * Created by yangF on 2017/3/14.
  */
 public interface SearchService {
+    JsonResult del2Solr();
+
     /**
     * 数据库同步索引
     * */

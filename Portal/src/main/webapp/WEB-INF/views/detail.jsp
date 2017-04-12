@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="/resources/style/base.css"/>
     <link rel="stylesheet" type="text/css" href="/resources/style/other.css"/>
     <script src="http://cdn.bootcss.com/jquery/3.2.0/jquery.min.js" type="text/javascript"></script>
+    <script src="http://cdn.bootcss.com/layer/3.0.1/layer.min.js" type="text/javascript"></script>
 </head>
 <body>
 <jsp:include page="head.jsp"></jsp:include>
@@ -25,7 +26,7 @@
 <div class="infoTop">
     <a href="/">首页</a>
     <span class="cut">&nbsp;&gt;&nbsp;</span>
-    <a href="/car/cb_${car.branId}/cs_0/cp_0/cv_0/list.html" title="${car.brandName}">${car.brandName}</a>
+    <a href="/car/cb_${car.brandId}/cs_0/cp_0/cv_0/p_0/x_0/list.html" title="${car.brandName}">${car.brandName}</a>
     <span class="cut">&nbsp;&gt;&nbsp;</span>
     <span>${car.name}</span>
 </div>
@@ -71,47 +72,34 @@
         </table>
 
         <p class="p5">
-            <a href="#" class="one">预约看车</a> <a href="#" class="one two">我要置换</a>
+            <a href="javascript:void(0);" onclick="yykc()" class="one">预约看车</a> <a href="#" class="one two">我要置换</a>
         </p>
+        <div class="cd_m">
+            <div class="cd_m_pop_yykc" style="margin-top: 65px; display: block;">
+                <i></i><em></em>
+                <p class="cd_m_pop_yykc_tit">完成预约后，客服人员会及时与您联系</p>
+                <p class="cd_m_pop_yykc_input">
+                    <input id="txtYykcPhone" type="text" maxlength="11" placeholder="请输入联系电话" >
+                </p>
+                <p class="cd_m_pop_yykc_errortip" >
+                    请输入正确的联系电话
+                </p>
+                <a class="cd_m_pop_yykc_ok" onclick="phone()">立即预约</a>
+            </div>
+        </div>
     </div><!--pro_details_topcenter end-->
 </div>
-<div class="cd_m_pop_yykc" style="top: 626px; left: 986.5px; display: block;">
-    <input type="hidden" id="type_sale" value="3">
-    <i></i><em></em>
-    <p class="cd_m_pop_yykc_tit">完成预约后，客服专员会及时与您联系确认约车详情</p>
-    <p class="cd_m_pop_yykc_input">
-        <input id="txtYykcPhone" type="text" maxlength="11" style="display: none;">
-        <span style="display: block;">请输入联系电话</span>
-    </p>
-    <p class="cd_m_pop_yykc_errortip" style="visibility: hidden;">
-        请输入联系电话
-    </p>
-    <p class="cd_m_pop_yykc_input">
-        <input id="txtYykcValid" type="text" maxlength="4" style="display: none;">
-        <span>请输入图片验证码</span><a href="javascript:;">
-        <img class="flush_vcode" id="codeimg_appoint" src="/register/get_vcode?r=Sat Apr 08 2017 10:40:30 GMT+0800 (中国标准时间)"></a>
-    </p>
-    <p class="cd_m_pop_yykc_errortip" style="visibility: hidden;">
-        请输入图片验证码
-    </p>
-    <a class="cd_m_pop_yykc_ok">立即预约</a>
-</div>
 
-
-
-
-
-<div class="poss">
-    <div class="poss2"></div>
+<div class="poss" >
     <div class="car-options clearFix" id="mynav">
         <div class="container">
             <ul class="fl info-select">
-                <li class="current"><a href="#one">购车流程</a></li>
-                <li class=""><a href="#one">配置参数</a></li>
-                <li class=""><a href="#three">车系图片</a></li>
+                <li class="" id ="li1"><a href="javascript:void(0)" data-jump="1" >购车流程</a></li>
+                <li class="" id ="li2"><a href="javascript:void(0)" data-jump="2" >配置参数</a></li>
+                <li class="" id ="li3"><a href="javascript:void(0)" data-jump="3" >车系图片</a></li>
             </ul>
             <div class="btns">
-                <a href="javascript:;" class="appointment J_AppointmentBtn" style="display: none;">预约看车</a>
+                <a href="javascript:;" class="cd_m_info_fixdh " style="display: none">010-8025-8108</a>
             </div>
         </div>
     </div><!--car-options end-->
@@ -211,7 +199,7 @@
             <div class="sec bnspic">
                 <ul>
                     <c:forEach items="${imgArry}" var="simg">
-                        <li class="on"><a href="#"><img src="${simg}" width="100%" height="100%"/> </a></li>
+                        <li class="on"><a href="javascript:void(0)"><img src="${simg}" width="100%" height="100%"/> </a></li>
                     </c:forEach>
                 </ul>
             </div>
@@ -220,36 +208,102 @@
     </div><!--xi_qi end-->
 
 </div>
+<div class="layerpop" style="display: none;">
+    <p class="cd_m_pop_jjtx_result" style="display: block;">
+        <i></i>
+        <span class="cd_m_pop_jjtx_res_tit" id="cd_m_pop_jjtx_res_tit_car">预约成功</span>
+        <span class="cd_m_pop_jjtx_res_desc" id="cd_m_pop_jjtx_res_desc_car">稍后会有客服与您联系，请您注意接听。</span>
+    </p>
+</div>
 <jsp:include page="footer.jsp"></jsp:include>
 <!--广告-->
 <script>
     $(function () {
-        var nav = $("#mynav"), mtop = 0, zindex = 999,
-                dftop = 530,
+        var nav = $("#mynav"), mtop = 0, zindex = 101,
+                dftop = nav.offset().top,
                 dfleft = nav.offset().left - $(window).scrollLeft(),
                 dfcss = new Array;
         dfcss[0] = nav.css("position"),
                 dfcss[1] = nav.css("top"),
                 dfcss[2] = nav.css("left"),
                 dfcss[3] = nav.css("zindex"),
-                $(window).scroll(function (e) {
-                    if ($(this).scrollTop() > dftop) {
-                        nav.css({
-                            position: "fixed",
-                            top: mtop + "px",
-                            left: dfleft,
-                            "z-index": zindex
-                        });
-                        $(".J_AppointmentBtn").show();
-//                        $(".bg_co").css({top:20+'px'})
-                    } else {
-                        nav.css({position: dfcss[0], top: dfcss[1], left: dfcss[2], "z-index": dfcss[3]});
-                        $(".J_AppointmentBtn").hide();
-                    }
+        $(window).scroll(function (e) {
+            if ($(this).scrollTop() > dftop) {
+                nav.css({
+                    position: "fixed",
+                    top: mtop + "px",
+                    left: dfleft,
+                    "z-index": zindex
+                });
+                $(".cd_m_info_fixdh").show();
+                $(".xi_qi").css({'margin':'100px auto'});//
+            } else {
+                nav.css({position: dfcss[0], top: dfcss[1], left: dfcss[2], "z-index": 98});
+                $(".xi_qi").css({'margin':'20px auto'});
+                $(".cd_m_info_fixdh").hide();
+                $("#li1").removeClass("current")
+            }
 
-                })
+            if($(this).scrollTop()>$('#one').offset().top-100 && $(this).scrollTop() < $('#two').offset().top-100){
 
+                $("#li1").addClass("current").siblings().removeClass("current");
+            }
+
+            if($(this).scrollTop()>$('#two').offset().top-100 && $(this).scrollTop() < $('#three').offset().top-120){
+
+                $("#li2").addClass("current").siblings().removeClass("current");
+            }
+            if($(this).scrollTop()>$('#three').offset().top-120 ){
+
+                $("#li3").addClass("current").siblings().removeClass("current");
+            }
+
+
+        })
+
+        $(".info-select li a").click(function(){
+            var jump = $(this).data('jump');
+
+
+            if(jump == 1){
+                $("html, body").animate({ scrollTop: $('#one').offset().top-100 }, 50);
+            }
+            if(jump == 2){
+                $("html, body").animate({ scrollTop: $('#two').offset().top-80 }, 50);
+            }
+            if(jump == 3){
+                $("html, body").animate({ scrollTop: $('#three').offset().top-80 }, 50);
+            }
+        })
     });
+    function yykc(){
+        $(".cd_m").toggle();
+    }
+    function phone(){
+        var phone = $("#txtYykcPhone").val();
+        if(!(/^1[34578]\d{9}$/.test(phone))){
+            $(".cd_m_pop_yykc_errortip").css("visibility","visible");
+            return false;
+        }else{
+            $('.free-phone-error').hide();
+
+            $.post("/doPhoneLink/${car.id}/detail.action",{phone:phone,type:'0'},function(res){
+                $(".cd_m_pop_yykc_errortip").css("visibility","hidden");
+                $(".cd_m").toggle();
+                layer.open({
+                    type: 1,
+                    shade: false,
+                    offset: '300px',
+                    title: false, //不显示标题
+                    content: $('.layerpop'), //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+
+                });
+            });
+
+
+        }
+    }
+
 </script>
 
 </body>

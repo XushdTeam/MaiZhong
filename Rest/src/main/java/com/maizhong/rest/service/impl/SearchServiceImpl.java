@@ -101,6 +101,27 @@ public class SearchServiceImpl implements SearchService {
      * @return
      */
     @Override
+    public JsonResult del2Solr() {
+        try {
+            UpdateResponse response = solrServer.deleteByQuery("*:*");
+            solrServer.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return JsonResult.Error("索引清空");
+        }
+        return JsonResult.OK("索引清空成功");
+    }
+
+
+
+    /**
+     * solr索引同步
+     *
+     *
+     *
+     * @return
+     */
+    @Override
     public JsonResult syncIndex() {
         try {
             UpdateResponse response = solrServer.deleteByQuery("*:*");

@@ -5,4 +5,6 @@ package com.maizhong.portal.service;
  */
 public interface ActionService {
     void doPhoneLink(String phone,String type);
+
+    void doPhoneLinkDetail(String phone, String type, String carId);
 }

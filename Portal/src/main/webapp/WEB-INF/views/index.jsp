@@ -334,7 +334,7 @@
 <div class="sList free-phone" id="sidebar-list-sphone" style="display:none;">
     <i></i>
     <input type="text" placeholder="请输入电话号码" class="ipt-box" id="phone" maxlength="11" />
-    <a href="javascript:void(0);" class="free-btn">提 交</a>
+    <a href="javascript:void(0);" class="free-btn">咨询</a>
 </div>
 <div class="free-phone-error" style="display:none;">
     <i class="false"></i>

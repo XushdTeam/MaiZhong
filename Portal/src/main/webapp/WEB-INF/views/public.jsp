@@ -24,10 +24,10 @@
     <div class="A_con">
         <div class="left">
             <ul>
-                <li <c:if test="${tab==0}">class="cun"</c:if>><a href="/about.html">关于我们</a></li>
-                <li <c:if test="${tab==1}">class="cun"</c:if>><a href="/help.html">帮助中心</a></li>
-                <li <c:if test="${tab==2}">class="cun"</c:if>><a href="/joinus.html">加入我们</a></li>
-                <li <c:if test="${tab>=3}">class="cun"</c:if>><a href="/feedback.html">用户反馈</a></li>
+                <li <c:if test="${tab==0}">class="cun"</c:if>><a href="/about.html">关于我们 <span>&gt;</span></a></li>
+                <li <c:if test="${tab==1}">class="cun"</c:if>><a href="/help.html">帮助中心 <span>&gt;</span></a></li>
+                <li <c:if test="${tab==2}">class="cun"</c:if>><a href="/joinus.html">加入我们  <span>&gt;</span></a>  </li>
+                <li <c:if test="${tab>=3}">class="cun"</c:if>><a href="/feedback.html">用户反馈  <span>&gt;</span> </a>  </li>
 
             </ul>
         </div>
@@ -96,7 +96,7 @@
                             </div>
                             <div>
                                 <label>联系电话</label>
-                                <input type="text" name="phone" id="phone" placeholder="报答你的方式" maxlength="11" />
+                                <input type="text" name="phone" id="phone" placeholder="您的联系方式" maxlength="11" />
                             </div>
                             <div>
                                 <label>您的称呼</label>

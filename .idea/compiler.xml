@@ -36,6 +36,7 @@
     <bytecodeTargetLevel target="1.7">
       <module name="BRest" target="1.7" />
       <module name="Common" target="1.7" />
+      <module name="dataSync" target="1.5" />
       <module name="MaiZhong" target="1.7" />
       <module name="Manager" target="1.7" />
       <module name="Manager_Controller" target="1.7" />

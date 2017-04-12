@@ -28,7 +28,11 @@ public class SearchController {
 
 
 
-
+    @RequestMapping("/delall")
+    @ResponseBody
+    public JsonResult delall(){
+        return searchService.del2Solr();
+    }
 
     @RequestMapping("/sync")
     @ResponseBody

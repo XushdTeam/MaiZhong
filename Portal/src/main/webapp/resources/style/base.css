@@ -100,7 +100,7 @@ img,input{vertical-align:middle; outline:none}
     background: #e72116;
     line-height: 34px;
     width: 280px;
-    padding: 5px 8px 9px 8px;
+    padding: 6px 8px 9px 8px;
     z-index: 99;
 }
 .free-phone input{
@@ -116,7 +116,7 @@ img,input{vertical-align:middle; outline:none}
 .free-phone .free-btn{
     color: #fff;
     display: inline-block;
-    font-size: 18px;
+    font-size: 16px;
 }
 .free-phone i{
     width: 10px;
@@ -336,14 +336,14 @@ img,input{vertical-align:middle; outline:none}
 
 /*搜索框*/
 .s_froms{ width: 300px; float: left; display: none; margin-top: -7px}
-.s_froms input{ width: 200px; height: 30px; line-height: 34px; float: left; border: 1px solid #ccc; border-right:none }
+.s_froms input{ width: 200px; height: 30px; line-height: 34px; float: left; border: 1px solid #ccc; border-right:none; padding-left: 10px; }
 .s_froms span.ss{ height: 34px; line-height: 34px; width: 60px; text-align: center; background: #e72116;color: #fff; float: left; font-size: 16px;}
 .s_froms .sec_hide{background: rgba(255,255,255,0.5); width:140px; clear: both; border: 1px solid #999; display: none}
 .s_froms .sec_hide li{ padding: 10px 10px; font-size: 16px; color: #000; cursor: pointer; border-bottom: 1px solid #eee}
 .s_froms .sec_hide li a{ color: #000}
 .s_from{ display: block;}
 .s_from input{    font-size: 18px;  background: none; border: 2px solid #f5f5f5; width: 480px;color: #f5f5f5;height: 44px; float: left; background:rgba(0,0,0,0.3);
-    margin:0;}
+    margin:0; padding-left: 10px}
 .s_from span.ss{ height: 50px; line-height: 50px; width: 150px; text-align: center; background: #f5f5f5;color: #000; float: left; font-size: 16px;}
 .s_from span a{ color: #000}
 .s_from .mai a{ width: 150px; float: right; background: #e72116; text-align: center; line-height: 50px; color: #fff; font-size: 16px;}
@@ -441,7 +441,7 @@ img,input{vertical-align:middle; outline:none}
 /*卖车*/
 .bans{ background: url(../img/ban.jpg) no-repeat center center; background-size:cover; height: 687px}
 .ban_cen{ width: 1200px; margin: 0 auto;}
-.ban_form{ width: 350px; background: #fff; float: right; margin-top: 120px; padding-bottom: 30px; box-shadow: 1px 0px 5px #ccc}
+.ban_form{ width: 350px; background:rgba(255,255,255,0.8); float: right; margin-top: 120px; padding-bottom: 30px; box-shadow: 1px 0px 5px #ccc}
 .ban_cen .p_top{ background: #399afe; line-height: 55px;color: #fff; text-align: center; font-size: 18px; padding-top: 15px}
 .ban_cen .p_top span{ font-size: 36px;}
 .ban_cen .inputs{ display: block; width: 280px; margin: 20px auto 20px; line-height: 32px; border: 1px solid #eee; padding-left: 5px}
@@ -641,3 +641,14 @@ table.cd_m_info_desc {
     -o-transition: all 0.3s ease-out;
     transition: all 0.3s ease-out;
 }
+.pinggu {
+    margin-top: 80px;
+    border: 1px solid #ccc;
+    width: 140px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 35px;
+    background: rgba(0,0,0,0.4)
+}
+
+.pinggu a{ font-size: 14px; color: #fff}

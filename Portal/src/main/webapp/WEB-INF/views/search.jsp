@@ -127,7 +127,7 @@
                             </c:forEach>
                         </div>
                         <div class="brand-more brand-left">
-                            <c:forEach items="${bAll}" var="i" begin="11" end="27">
+                            <c:forEach items="${bAll}" var="i" begin="12" end="27">
                                 <dl>
                                     <dt>${i.key}</dt>
                                     <dd>
@@ -427,6 +427,25 @@
     </div>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>
+
+<div class="sidebar sidebar-new">
+    <a href="javascript:void(0);" class="sBtn free" id="sphone"><i></i>免费电话</a>
+    <a href="javascript:void(0);" class="toTop"><i></i>返回顶部</a>
+</div>
+<div class="sList free-phone" id="sidebar-list-sphone" style="display:none;">
+    <i></i>
+    <input type="text" placeholder="请输入电话号码" class="ipt-box" id="phone" maxlength="11" />
+    <a href="javascript:void(0);" class="free-btn">提 交</a>
+</div>
+<div class="free-phone-error" style="display:none;">
+    <i class="false"></i>
+    <span style="color: red">请输入正确的手机号</span>
+</div>
+<div class="free-phone-success" style="display:none;">
+    <i class="success"></i>
+    <span style="color: green">我们会尽快给您致电</span>
+</div>
+
 <script src="/resources/script/lazy-load-img.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(function(){
@@ -508,6 +527,32 @@
             },
             error: function (el) { // 图片加载失败执行方法
                 el.src = '/resources/img/default.png'
+            }
+        });
+        $('.toTop').click(function () {
+            $("html, body").animate({ scrollTop: 0 }, 200);
+        });
+        $('#sphone').click(function () {
+            $('.free-phone-error').hide();
+            $('.free-phone-success').hide();
+            $('#sidebar-list-sphone').toggle();
+        });
+        $('.free-btn').click(function () {
+            var phone = $("#phone").val();
+            if(!(/^1[34578]\d{9}$/.test(phone))){
+                $('.free-phone-error').show();
+                return false;
+            }else{
+                $('.free-phone-error').hide();
+                if(!sessionStorage.getItem('homePhone')){
+                    $.post("/doPhoneLink.action",{phone:phone,type:'0'},function(res){
+                        $('.free-phone-error').hide();
+                        $('.free-phone-success').show();
+                        sessionStorage.setItem('homePhone',1);
+                    });
+                }else{
+                    $('.free-phone-success').show();
+                }
             }
         });
     })

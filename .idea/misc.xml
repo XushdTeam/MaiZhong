@@ -43,6 +43,7 @@
   </component>
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/BRest" />
+    <file type="web" url="file://$PROJECT_DIR$/dataSync" />
     <file type="web" url="file://$PROJECT_DIR$/Manager/Manager_Controller" />
     <file type="web" url="file://$PROJECT_DIR$/Portal" />
     <file type="web" url="file://$PROJECT_DIR$/Rest" />
@@ -70,6 +71,11 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/dataSync/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
