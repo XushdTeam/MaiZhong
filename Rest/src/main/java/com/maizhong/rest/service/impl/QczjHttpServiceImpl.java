@@ -152,7 +152,7 @@ public class QczjHttpServiceImpl implements QczjhttpService {
     public  JsonResult calculatePrice(String bid, String sid, String specId,
                                             String registerYear, String registerMonth,
                                             String selectCarName) {
-        //eva_0为默认值   可用   //可用个屁
+        //eva_0为默认值   可用
         String evaCode = new String("http://www.che168.com/Evaluate/v2/EvaCar.aspx?pgtype=1&pgbid="+bid+"&pgsid="+sid+"&pgspid="+specId+"&pgyear="+registerYear+"&pgmonth="+registerMonth+"&pgpid=110000&pgcid=110100&pgmlg=12&type=1&sellMark=uahp10004");
 
 //        &selectCarName="+selectCarName+"
