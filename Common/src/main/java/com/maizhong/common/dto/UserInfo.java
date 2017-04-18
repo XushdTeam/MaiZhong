@@ -16,6 +16,21 @@ public class UserInfo {
     private String userEmail;
 
 
+    public UserInfo() {
+    }
+
+    public UserInfo(String businessName, String businessId, String businessLogo, String businessAdress, String userName, String userId, String userAdvert, String userPhone, String userEmail) {
+        this.businessName = businessName;
+        this.businessId = businessId;
+        this.businessLogo = businessLogo;
+        this.businessAdress = businessAdress;
+        this.userName = userName;
+        this.userId = userId;
+        this.userAdvert = userAdvert;
+        this.userPhone = userPhone;
+        this.userEmail = userEmail;
+    }
+
     public String getBusinessName() {
         return businessName;
     }

@@ -75,6 +75,7 @@
           <element id="library" level="project" name="Maven: org.apache.zookeeper:zookeeper:3.4.6" />
           <element id="library" level="project" name="Maven: org.codehaus.woodstox:wstx-asl:3.2.7" />
           <element id="library" level="project" name="Maven: org.noggit:noggit:0.5" />
+          <element id="library" level="project" name="Maven: org:analyzer:2012" />
           <element id="library" level="project" name="Maven: org.apache.lucene:lucene-core:4.10.3" />
         </element>
       </element>

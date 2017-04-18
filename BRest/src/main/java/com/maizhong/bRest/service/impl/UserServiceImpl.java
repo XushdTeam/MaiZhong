@@ -30,8 +30,7 @@ public class UserServiceImpl implements UserService {
 
 
 
-    @Resource
-    private JedisClient jedisClient;
+
 
 
     @Value("${BUSSINESSUSER_PREFIX}")
@@ -43,75 +42,49 @@ public class UserServiceImpl implements UserService {
     @Value("${BUSINESS_USER_URL}")
     private String BUSINESS_USER_URL;
 
+    @Value("${BASE_URL}")
+    private String BASE_URL;
+
+    @Value("${BUSINESS_ISONLINE_URL}")
+    private String BUSINESS_ISONLINE_URL;
 
     @Override
     public JsonResult login(String username, String password) {
 
-        if (StringUtils.isBlank(username)||StringUtils.isBlank(password)){
-            return JsonResult.Error("登陆失败,请输入完整的用户名以及密码");
+        if (StringUtils.isBlank(username)){
+            return JsonResult.Error("登陆失败,用户名为空");
         }
-
+        if(StringUtils.isBlank(password)){
+            return JsonResult.Error("登陆失败,密码为空");
+        }
 
         HashMap<String, String> param = new HashMap<>();
         param.put("username",username);
         param.put("password",password);
         String resultJson = null;
         try{
-            resultJson = HttpClientUtil.doPost(BUSINESS_USER_URL,param);
+            resultJson = HttpClientUtil.doPost(BASE_URL+BUSINESS_USER_URL,param);
+            return JsonUtils.jsonToPojo(resultJson,JsonResult.class);
         }catch(Exception e){
             e.printStackTrace();
             return JsonResult.Error("服务器繁忙,请稍后再试");
         }
 
-
-        if (StringUtils.isNotBlank(resultJson)){
-            JsonResult result = JsonUtils.jsonToPojo(resultJson, JsonResult.class);
-            if (result.getStatus()==200){
-                Map<String,Object> map = (Map<String, Object>) result.getData();
-
-                if (map!=null&&map.size()>0){
-                    //生成Token
-                    String token = UUID.randomUUID().toString().replace("-","");
-
-                    //redis 模拟缓存 添加到缓存命中
-                    String jsonInfo = JsonUtils.objectToJson(map);
-
-                    if (StringUtils.isNotBlank(jsonInfo)) {
-                        jedisClient.hset(BUSSINESSUSER_PREFIX + token, BUSSINESSUSER_INFO, jsonInfo);
-                        jedisClient.expire(BUSSINESSUSER_PREFIX + token, 900);
-                    }
-
-                    Map<String,Object> realResult = new HashMap<>();
-
-                    realResult.put("token",token);
-                    realResult.put("userInfo",map);
-
-                    return JsonResult.OK(realResult);
-                }
-            }else{
-                return result;
-            }
-        }
-        return JsonResult.Error("登录失败，用户名或者密码错误");
     }
 
 
     @Override
     public JsonResult isOnline(String token) {
-        if (StringUtils.isNotBlank(token)){
-            String json = jedisClient.hget(BUSSINESSUSER_PREFIX + token, BUSSINESSUSER_INFO);
-            if (StringUtils.isNotBlank(json)){
-                jedisClient.expire(BUSSINESSUSER_PREFIX + token,60);
-                Map<String,Object> map = JsonUtils.jsonToPojo(json, Map.class);
-                if (map!=null){
 
-                    Map<Object, Object> result = new HashMap<>();
-                    result.put("userInfo",map);
-
-                    return JsonResult.OK(result);
-                }
-            }
+        HashMap<String, String> param = new HashMap<>();
+        param.put("token",token);
+        try {
+            String resultJson = HttpClientUtil.doPost(BASE_URL+BUSINESS_ISONLINE_URL, param);
+            return JsonUtils.jsonToPojo(resultJson, JsonResult.class);
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.Error("服务器繁忙,请稍后再试");
         }
-        return JsonResult.Error("未登录");
     }
+
 }

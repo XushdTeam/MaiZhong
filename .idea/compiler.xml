@@ -29,6 +29,7 @@
         <module name="Manager_Pojo" />
         <module name="Manager_Service" />
         <module name="Portal" />
+        <module name="Reckon" />
         <module name="Rest" />
         <module name="Z_Mybatis" />
       </profile>
@@ -44,6 +45,7 @@
       <module name="Manager_Pojo" target="1.7" />
       <module name="Manager_Service" target="1.7" />
       <module name="Portal" target="1.7" />
+      <module name="Reckon" target="1.7" />
       <module name="Rest" target="1.7" />
       <module name="Z_Mybatis" target="1.7" />
     </bytecodeTargetLevel>
