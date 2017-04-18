@@ -6,12 +6,16 @@ import com.maizhong.common.dto.UserInfo;
 import com.maizhong.common.exception.UploadException;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.pojo.TbCar;
+import net.sf.json.JSONNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.tags.Param;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/3/28.
@@ -168,8 +172,92 @@ public class CarController {
      * @return
      */
     @RequestMapping(value = "/car/serise/save")
-    public JsonResult saveSerise(String brandId,String seriseName){
-        JsonResult res = this.carService.saveSerise(brandId,seriseName);
+    public JsonResult saveSerise(String brandId,String seriseName,String factoryId){
+        JsonResult res = this.carService.saveSerise(brandId,seriseName,factoryId);
+        return res;
+    }
+
+    /**
+     * 汽车基础信息录入
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/car/baseInfo/save")
+    public JsonResult saveCarBaseInfo(HttpServletRequest request){
+        Map<String,String> map = new HashMap<>();
+        map.put("carBrand",request.getParameter("carBrand"));
+        map.put("carSeries",request.getParameter("carSeries"));
+        map.put("carType",request.getParameter("carType"));
+        map.put("carYear",request.getParameter("carYear"));
+        map.put("carFactoryPrice",request.getParameter("carFactoryPrice"));
+        map.put("carSize",request.getParameter("carSize"));
+        map.put("carLevel",request.getParameter("carLevel"));
+        map.put("carLOil",request.getParameter("carLOil"));
+        map.put("carZMm",request.getParameter("carZMm"));
+        map.put("carWarranty",request.getParameter("carWarranty"));
+        map.put("carFuelLabel",request.getParameter("carFuelLabel"));
+        map.put("carEnvironmentStandards",request.getParameter("carEnvironmentStandards"));
+        map.put("carLuggage",request.getParameter("carLuggage"));
+        map.put("carColor",request.getParameter("carColor"));
+        map.put("carDisplacement",request.getParameter("carDisplacement"));
+        map.put("carEngine",request.getParameter("carEngine"));
+        map.put("carMarPower",request.getParameter("carMarPower"));
+        map.put("carHsFactory",request.getParameter("carHsFactory"));
+        map.put("carGearbox",request.getParameter("carGearbox"));
+        map.put("carMaxTorque",request.getParameter("carMaxTorque"));
+        map.put("carMaxspeed",request.getParameter("carMaxspeed"));
+        map.put("carDriveMode",request.getParameter("carDriveMode"));
+        map.put("carFactory",request.getParameter("factoryId"));
+
+        JsonResult res = this.carService.saveCarBaseInfo(map);
+        return res;
+    }
+
+    /**
+     * 首页统计数据
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/HomeStatic")
+    public JsonResult getHomeDate(HttpServletRequest request){
+
+        UserInfo userInfo= (UserInfo) request.getAttribute("userInfo");
+        JsonResult res = this.carService.getStatict(userInfo.getBusinessId());
+        return res;
+
+    }
+
+    @RequestMapping(value = "/getFactory/{brandId}")
+    public JsonResult getCarFactoryByBrand(@PathVariable String brandId){
+
+        JsonResult res = this.carService.getFactory(brandId);
+        return res;
+
+    }
+
+    @RequestMapping(value = "/getSeriesByFactory/{factoryId}")
+    public JsonResult getCarSeriseByFactory(@PathVariable String factoryId){
+
+        JsonResult res = this.carService.getCarSeriseByFactory(factoryId);
+        return res;
+    }
+
+    @RequestMapping(value = "/getBussinessInfo")
+    public JsonResult getBussinessInfo(HttpServletRequest request){
+        //数据填充
+        UserInfo userInfo = (UserInfo) request.getAttribute("userInfo");
+        JsonResult res = this.carService.getBussinessInfo(userInfo.getBusinessId());
+        return res;
+    }
+
+    @RequestMapping(value = "/changePass")
+    public JsonResult changePass(String userId,String pass1,String pass2,String pass3){
+        JsonResult res = this.carService.changePass(userId,pass1,pass2,pass3);
+        return res;
+    }
+    @RequestMapping(value = "/delCar/{carId}")
+    public JsonResult changePass(@PathVariable String carId){
+        JsonResult res = this.carService.deleteCar(carId);
         return res;
     }
 }

@@ -11,12 +11,6 @@ import java.util.Map;
  * Created by Administrator on 2017/3/28.
  */
 public interface CarService {
-    //缓存数据需要手动同步
-    List<Map<String, Object>> syncDataToRedis(Long businessId);
-
-    //条件查询  //buzuo le cao
-    //参数无用
-    JsonResult findList(TbCar tbCar);
 
     JsonResult getBrand();
 
@@ -34,5 +28,17 @@ public interface CarService {
 
     JsonResult getCarDetail(String carId);
 
-    JsonResult saveSerise(String brandId, String seriseName);
+    JsonResult saveSerise(String brandId, String seriseName,String factoryId);
+
+    JsonResult saveCarBaseInfo(Map<String, String> map);
+
+    JsonResult getStatict(String businessId);
+
+    JsonResult getFactory(String brandId);
+
+    JsonResult getCarSeriseByFactory(String factoryId);
+
+    JsonResult getBussinessInfo(String businessId);
+
+    JsonResult changePass(String userId, String pass1, String pass2, String pass3);
 }

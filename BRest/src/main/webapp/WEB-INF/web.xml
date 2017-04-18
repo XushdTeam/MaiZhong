@@ -13,7 +13,6 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath:spring/spring-service.xml
-            classpath:spring/spring-jedis.xml
         </param-value>
     </context-param>
     <listener>

@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <classPathEntry location="C:\\Users\\Administrator\\.m2\\repository\\mysql\\mysql-connector-java\\5.1.35\\mysql-connector-java-5.1.35.jar" />
+    <classPathEntry location="C:\\Users\\Xushd\\.m2\\repository\\mysql\\mysql-connector-java\\5.1.35\\mysql-connector-java-5.1.35.jar" />
 
     <context id="testTables" targetRuntime="MyBatis3">
         <commentGenerator>
@@ -46,8 +46,8 @@
 
         <!-- 指定数据库表 -->
 
-        <table schema="" tableName="tb_car_brand_line"/>
-
+        <table schema="" tableName="brand"/>
+        <table schema="" tableName="series"/>
 
        <!-- <table schema="" tableName="system_role"/>
         <table schema="" tableName="system_user_role"/>
