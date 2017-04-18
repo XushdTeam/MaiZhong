@@ -2,6 +2,7 @@ package com.maizhong.rest.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.maizhong.common.result.JsonResult;
+import com.maizhong.rest.service.IndexService;
 import com.maizhong.rest.service.ReckonService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -113,5 +114,12 @@ public class ReckonController {
 
 
 
+    @RequestMapping(value = "/getCarType/{seriesId}",method =RequestMethod.GET)
+    @ResponseBody
+    public JsonResult getCarType(@PathVariable String seriesId){
 
+        JsonResult result = reckonService.getCarType(seriesId);
+
+        return result;
+    }
 }
