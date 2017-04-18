@@ -52,12 +52,7 @@ public class ReckonController {
     @RequestMapping(value = "/SysBrandGroup",method = RequestMethod.GET)
     @ResponseBody
     public JsonResult brandGroupByInitial(){
-        JsonResult result = null;
-        try {
-            result = reckonService.sysBrandGroupByInitial();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        JsonResult result = reckonService.sysBrandGroupByInitial();
         return result;
     }
 
@@ -69,12 +64,7 @@ public class ReckonController {
     @RequestMapping(value = "/GetBrandList")
     @ResponseBody
     public JsonResult getBrandList() {
-        JsonResult result = null;
-        try {
-            result = reckonService.getBrandList();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        JsonResult result  = reckonService.getBrandList();
         return result;
     }
 
@@ -87,14 +77,10 @@ public class ReckonController {
     @ResponseBody
     public JsonResult getSeriesByBrandId(@PathVariable("brandId") String brandId) {
         if (StringUtils.isBlank(brandId)){
-            return JsonResult.Error("品牌Id不能为空");
+            return JsonResult.OK();
         }
-        JsonResult result = null;
-        try {
-            result = reckonService.getSeriesByBrandId(brandId);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        JsonResult result = reckonService.getSeriesByBrandId(brandId);
+
         return result;
     }
 
@@ -108,12 +94,7 @@ public class ReckonController {
     @ResponseBody
     public JsonResult GetProvince() {
 
-        JsonResult result = null;
-        try {
-            result = reckonService.getProvince();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        JsonResult result= reckonService.getProvince();
         return result;
     }
     /**
@@ -121,16 +102,12 @@ public class ReckonController {
      *
      * @return
      */
-    @RequestMapping(value = "/getCity/proviceId",method =RequestMethod.GET)
+    @RequestMapping(value = "/getCity/{proviceId}",method =RequestMethod.GET)
     @ResponseBody
     public JsonResult getCity(@PathVariable("proviceId") String proviceId) {
 
-        JsonResult result = null;
-        try {
-            result = reckonService.getCity(proviceId);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+           JsonResult result = reckonService.getCity(proviceId);
+
         return result;
     }
 

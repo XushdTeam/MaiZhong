@@ -3,9 +3,7 @@ package com.maizhong.rest.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.maizhong.common.dto.KeyObject;
-import com.maizhong.common.dto.KeyValue;
-import com.maizhong.common.dto.SeriesDTO;
+import com.maizhong.common.dto.*;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.HttpClientUtil;
@@ -237,14 +235,73 @@ public class ReckonServiceImpl implements ReckonService {
 
     @Override
     public JsonResult getProvince() {
+        String get = null;
+        try {
+            get = jedisClient.get(PROVINCE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (StringUtils.isNotBlank(get)) {
+            return JsonResult.build(200, "获取成功", JsonUtils.jsonToList(get, ProvinceDTO.class));
+        }
         List<Province> provinces = provinceMapper.selectByExample(null);
-        String result = JsonUtils.objectToJson(provinces);
-        return JsonResult.build(200, "获取省份成功", result);
+        List<ProvinceDTO> provinceDTOList = new ArrayList<>();
+        for (Province province : provinces) {
+            ProvinceDTO dto = new ProvinceDTO();
+            dto.setId(province.getProvId());
+            dto.setName(province.getProvName());
+            provinceDTOList.add(dto);
+        }
+        try {
+            jedisClient.set(PROVINCE, JsonUtils.objectToJson(provinceDTOList));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return JsonResult.build(200, "获取省份成功", provinceDTOList);
     }
 
     @Override
     public JsonResult getCity(String proviceId) {
-        return null;
+        if (StringUtils.isBlank(proviceId)) {
+            return JsonResult.OK();
+        }
+        String get = null;
+        try {
+            get = jedisClient.hget(CITY,proviceId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (StringUtils.isNotBlank(get)) {
+            List<CityDTO> cityDTOList = JsonUtils.jsonToList(get, CityDTO.class);
+            return JsonResult.build(200, "获取城市成功", cityDTOList);
+        }
+
+        CityExample example = new CityExample();
+        CityExample.Criteria criteria = example.createCriteria();
+        try {
+            criteria.andProvIdEqualTo(Integer.valueOf(proviceId));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        example.setOrderByClause("prov_id ASC");
+        List<City> cities = cityMapper.selectByExample(example);
+        if (cities == null || cities.size() == 0) {
+            return JsonResult.OK();
+        }
+        List<CityDTO> cityDTOList = new ArrayList<>();
+        for (City city : cities) {
+            CityDTO dto = new CityDTO();
+            dto.setId(city.getCityId());
+            dto.setName(city.getCityName());
+            dto.setProv(city.getProvId());
+            cityDTOList.add(dto);
+        }
+        try {
+            jedisClient.hset(CITY,proviceId,JsonUtils.objectToJson(cityDTOList));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return JsonResult.build(200, "获取城市成功", cityDTOList);
     }
 }
 
