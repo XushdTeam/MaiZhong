@@ -1,6 +1,7 @@
 package com.maizhong.reckon.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -13,5 +14,9 @@ public class IndexController {
     @RequestMapping(value = "/")
     public String index(){
         return "index";
+    }
+    @RequestMapping(value = "/{page}")
+    public String test(@PathVariable String page){
+        return page;
     }
 }
