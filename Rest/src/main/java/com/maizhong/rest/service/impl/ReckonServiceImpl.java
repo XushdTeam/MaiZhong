@@ -11,10 +11,7 @@ import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.dao.JedisClient;
-import com.maizhong.mapper.BrandMapper;
-import com.maizhong.mapper.CityMapper;
-import com.maizhong.mapper.ProvinceMapper;
-import com.maizhong.mapper.SeriesMapper;
+import com.maizhong.mapper.*;
 import com.maizhong.pojo.*;
 import com.maizhong.rest.service.ReckonService;
 import org.apache.commons.lang3.StringUtils;
@@ -46,6 +43,9 @@ public class ReckonServiceImpl implements ReckonService {
     private ProvinceMapper provinceMapper;
     @Autowired
     private CityMapper cityMapper;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
 
     @Value("${CHE_MODEL}")
@@ -244,6 +244,46 @@ public class ReckonServiceImpl implements ReckonService {
 
     @Override
     public JsonResult getCity(String proviceId) {
+        return null;
+    }
+
+
+    /**
+     * 通过车系获取车型
+     * @param seriesId
+     * @return
+     */
+    @Override
+    public JsonResult getCarType(String seriesId) {
+
+        try {
+            //STEP 1 查看本地缓存是否存在
+            String redisJson = jedisClient.hget("CAR_MODEL",seriesId);
+            if(StringUtils.isNotBlank(redisJson)){
+                //STEP 2 有 直接返回
+                return JsonResult.OK(JSON.parseArray(redisJson));
+            }else{
+                //STEP 3 没有 调用接口
+
+                String res = HttpClientUtil.doGet(CHE_MODEL+"?token="+token+"&seriesId="+seriesId);
+                JSONObject jsonObject = JSON.parseObject(res);
+                JSONArray model_list = jsonObject.getJSONArray("model_list");
+                //STEP 4 放到缓存
+                jedisClient.hset("CAR_MODEL",seriesId,JSON.toJSONString(model_list));
+                //STEP 5 存入数据库
+                for (Object o : model_list) {
+                    Model model = JsonUtils.jsonToPojo(JSON.toJSONString(o), Model.class);
+                    modelMapper.insert(model);
+
+
+                }
+                return JsonResult.OK(model_list);
+
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         return null;
     }
 }

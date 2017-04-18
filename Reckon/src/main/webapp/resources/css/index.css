@@ -23,7 +23,8 @@ img,input{vertical-align:middle; outline:none}
     margin-top: 20px; text-align: center; font-size: 14px; color: #000; cursor: pointer; }
 .guz ul li div input{ border: none }
 .guz ul li div.last{ background: #f05b48; color: #fff; font-size: 24px;  border: none }
-.guz ul li div.img{ background: #fff url(../img/1_03.jpg) no-repeat center right;  }
+.guz ul li div.img{ background: #FFF url(../img/1_03.jpg) no-repeat 235px 17px;
+    background-size: 30px 10px; }
 
 .liu{ background: url(../img/bg2.jpg) no-repeat; height: 521px; overflow: height}
 .liu .l_cen{ width: 1000px; margin:0px auto; overflow: height}

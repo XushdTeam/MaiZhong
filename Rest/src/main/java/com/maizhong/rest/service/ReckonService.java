@@ -20,4 +20,6 @@ public interface ReckonService {
     JsonResult getProvince();
 
     JsonResult getCity(String proviceId);
+
+    JsonResult getCarType(String seriesId);
 }
