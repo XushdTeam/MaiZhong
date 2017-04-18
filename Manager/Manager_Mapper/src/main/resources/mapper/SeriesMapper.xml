@@ -99,7 +99,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.maizhong.pojo.Series">
-    insert into series (series_id, series_name, series_group_name, 
+    insert ignore into series (series_id, series_name, series_group_name,
       update_time)
     values (#{seriesId,jdbcType=INTEGER}, #{seriesName,jdbcType=VARCHAR}, #{seriesGroupName,jdbcType=VARCHAR}, 
       #{updateTime,jdbcType=TIMESTAMP})

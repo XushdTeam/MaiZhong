@@ -7,4 +7,5 @@ package com.maizhong.rest.service;
 public interface ReckonService {
     void getBrandData();
 
+    void getSeriesData();
 }

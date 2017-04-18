@@ -18,10 +18,25 @@ public class ReckonController {
     @Autowired
     private ReckonService reckonService;
 
+    /**
+     * 同步车型库
+     * @return
+     */
     @RequestMapping(value = "/GetBrandData")
     @ResponseBody
     public JsonResult GetBrandData(){
         reckonService.getBrandData();
+        return JsonResult.OK();
+    }
+
+    /**
+     * 同步车系库
+     * @return
+     */
+    @RequestMapping(value = "/GetSeriesData")
+    @ResponseBody
+    public JsonResult GetSeriesData(){
+        reckonService.getSeriesData();
         return JsonResult.OK();
     }
 
