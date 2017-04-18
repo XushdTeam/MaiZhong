@@ -40,7 +40,7 @@ public class ImgUploadServiceImpl implements ImgUploadService {
 
         try {
             if (filedata.isEmpty()) return JsonResult.build(OperateEnum.FILE_EMPTY);
-            if (filedata.getSize() > 500 * 1024) return JsonResult.build(OperateEnum.FILE_SIZE);
+            if (filedata.getSize() > 2000 * 1024) return JsonResult.build(OperateEnum.FILE_SIZE);
 
             Map param = getParam();
             String originalFilename = filedata.getOriginalFilename();
