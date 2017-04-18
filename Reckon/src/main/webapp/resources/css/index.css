@@ -33,7 +33,7 @@ img,input{vertical-align:middle; outline:none}
 .liu .l_cen dl{ float: left;  margin:50px 60px}
 .liu .l_cen dt{ border: 1px solid #f05b48 ;width:127px; height: 127px; border-radius: 100px;}
 .liu .l_cen dt.dt1{ background:url(../img/1-1.png)no-repeat center; }
-.liu .l_cen dt.dt1:hover{ background:#f05b48 url(../images/1.png)no-repeat center; }
+.liu .l_cen dt.dt1:hover{ background:#f05b48 url(../img/1.png)no-repeat center; }
 .liu .l_cen dt.dt2{ background:url(../img/3.png)no-repeat center; }
 .liu .l_cen dt.dt3{ background:url(../img/4.png)no-repeat center; }
 .liu .l_cen dt.dt4{ background:url(../img/2.png)no-repeat center; }
@@ -61,3 +61,74 @@ img,input{vertical-align:middle; outline:none}
 .about .a_cen .abs{ font-size: 24px; margin-top: 20px }
 .about .a_cen p{ font-size: 24px; line-height: 55px; width: 600px; float: left; margin-top: 30px}
 .about .a_cen .right{ width: 600px; float: left; margin-left: 100px; line-height:30px}
+
+
+
+/*a b  c  d*/
+.e_top{ border: 1px solid #eee !important;}
+.e_top .tell{ color: #f05b48;}
+.e_top .t_right a.one{ border: 1px solid #f05b48 !important; color: #f05b48 !important;}
+.bans{ width: 1200px; margin: 0 auto;}
+.x_nav{width: 1200px; margin: 0 auto; line-height: 55px; }
+.x_nav,.x_nav a{ color: #a2a0a0}
+.guj{ width: 1200px; margin: 0 auto; background: #e5e5e5; overflow: hidden; min-height: 520px;}
+.guj .gu{ width: 24.9%;border-right: 1px solid #d2cfcf; min-height: 520px; text-align: center; float: left}
+.guj .gu h2{ font-size:24 ;color: #5c5b5b; font-weight: 500; line-height: 61px; height: 61px; text-align: center; border-bottom:1px solid #d2cfcf }
+.guj .gu span{ font-size: 36px;color: #f05b48; line-height: 60px}
+.guj .gu  p{ font-size: 24px; line-height: 40px;}
+.guj .gu div{ padding: 10px 20; font-size: 12px;color: #999}
+.guj .gu dt{ font-size:20px ;color: #f05b48}
+.guj .gu dd{ padding: 0 10px}
+.guj .gu.none{border: none}
+.guj .gu:hover,.guj .gu.hover{ background: #f05b48;color: #fff !important; }
+
+.guj .gu:hover h2,.guj .gu.hover h2{border-bottom: 1px solid #fff !important;}
+
+.guj .gu:hover span,.guj .gu.hover span,.guj .gu:hover p,.guj .gu.hover p,.guj .gu:hover div,.guj .gu.hover div,.guj .gu:hover dt,.guj .gu.hover dt,
+.guj .gu:hover dd,.guj .gu.hover dd,.guj .gu:hover h2,.guj .gu.hover h2{ color: #fff}
+
+.mc{ background: #f05b48;color: #fff; text-align: center;clear: both; margin: 30px auto; line-height: 85px;  width: 1200px; font-size: 36px;}
+
+
+.lius .l_cen{ width: 1200px; margin:0px auto; overflow: height}
+.lius .l_cen h2{ font-size: 28px; color: #444; padding-top: 36px; font-weight: 500 }
+.lius .l_cen h2 span{ font-size: 18px; color: #999; }
+.lius .l_cen dl{ float: left;  margin:50px 78px}
+.lius .l_cen dt{ border: 1px solid #f05b48 ;width:127px; height: 127px; border-radius: 100px;}
+.lius .l_cen dt.dt1{ background:url(../img/1-1.png)no-repeat center; }
+.lius .l_cen dt.dt1:hover{ background:#f05b48 url(../img/1.png)no-repeat center; }
+.lius .l_cen dt.dt2{ background:url(../img/3.png)no-repeat center; }
+.lius .l_cen dt.dt3{ background:url(../img/4.png)no-repeat center; }
+.lius .l_cen dt.dt4{ background:url(../img/2.png)no-repeat center; }
+.lius .l_cen dd{ width: 127px; text-align: center; font-size: 24px;color: #f05b48; line-height: 45px;}
+
+
+.jiaos{  overflow: hidden; padding-bottom: 80px ; width: 1200px; margin:0 auto; overflow: hidden;}
+
+.jiaos .j_cen{background: #e5e5e5; padding-bottom: 30px}
+.jiaos  h2{ font-size: 28px; color: #444;  font-weight: 500 }
+.jiaos h2 span{ font-size: 18px; color: #666; line-height: 90px; }
+.jiaos .j_cen .one{ background: #f05b48; color: #fff; }
+.jiaos .j_cen .one span{ padding: 0 0 0 10px }
+.jiaos .j_cen div{ width: 1200px; overflow: height ;line-height: 46px;height:46px;}
+.jiaos .j_cen div span{ padding: 0 0 0 10px; line-height: 46px; float: left; display:block; width: 118px}
+.jiaos .j_cen div span.cl_one{ width: 300px; padding: 0 0 0 20px}
+.jiaos .j_cen div span.last{ width: 60px;  }
+.jiaos .j_cen div:hover,.jiao .j_cen div:active{ background: #fff }
+.jiaos .j_cen .one:hover{ background: #f05b48; color: #fff; }
+
+.jingzhun{ width: 1140px; margin: 0 auto; background: #f1f1f1; padding: 40px 30px}
+.jingzhun .jing{ height: 40px; line-height: 40px; margin-top:10px}
+.jingzhun .jing label{ width: 130px; float: left; text-align: right; margin-right: 20px}
+.jingzhun .jing p{ border: 1px solid #b2b2b2; height:38px; background: #eee; padding-left: 20px;color: #999; float: left}
+.jingzhun .jing p.one{ width: 721px ; }
+.jingzhun .jing p.two{ width: 261px ;  }
+.jingzhun .jing p.trr{width: 102px; text-align: center;margin-right: 20px}
+.jingzhun .jing p.for{width: 172px;}
+.jingzhun .jing p.for input{ background: none; border: none; width: 110px}
+.jingzhun .jing span{ padding: 5px  35px;cursor: pointer}
+.jingzhun .jing span.hover{ background: #f05b48;color: #fff;}
+.jingzhun .jing span:hover{ background: #f05b48;color: #fff;}
+.jck label{ height:50px}
+.jingzhun .jing .tell{ margin-top: 20px; overflow: hidden}
+
