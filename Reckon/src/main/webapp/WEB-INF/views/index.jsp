@@ -206,22 +206,22 @@
 
         <dl>
             <dt class="dt1"></dt>
-            <dd>评估</dd>
+            <dd>精准估值</dd>
         </dl>
 
         <dl>
             <dt class="dt2"></dt>
-            <dd>评估</dd>
+            <dd>专业检测</dd>
         </dl>
 
         <dl>
             <dt class="dt3"></dt>
-            <dd>评估</dd>
+            <dd>现场打款</dd>
         </dl>
 
         <dl>
             <dt class="dt4"></dt>
-            <dd>评估</dd>
+            <dd>售后服务</dd>
         </dl>
     </div>
 </div>

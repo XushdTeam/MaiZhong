@@ -48,7 +48,7 @@
 
     <div class="jing">
         <label>颜色：</label>
-       <a href="JavaScript:void(0)"> <img src="../resources/img/y_1.png"></a>
+        <a href="JavaScript:void(0)" class="cen"> <img src="../resources/img/y_1.png"></a>
         <a href="JavaScript:void(0)"> <img src="../resources/img/y_2.png"></a>
         <a href="JavaScript:void(0)"> <img src="../resources/img/y_3.png"></a>
         <a href="JavaScript:void(0)"> <img src="../resources/img/y_4.png"></a>
