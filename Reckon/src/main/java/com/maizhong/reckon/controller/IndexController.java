@@ -53,8 +53,16 @@ public class IndexController {
      * @return
      */
     @RequestMapping(value = "/model/model_series/{seriesId}")
+    @ResponseBody
     public JsonResult getCarType(@PathVariable String seriesId){
         JsonResult result = indexService.getCarType(seriesId);
+        return result;
+    }
+
+    @RequestMapping(value = "/getAllCity")
+    @ResponseBody
+    public JsonResult getAllCity(){
+        JsonResult result = indexService.getAllCity();
         return result;
     }
 }

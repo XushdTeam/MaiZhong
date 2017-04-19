@@ -30,6 +30,10 @@ public class IndexServiceImpl implements IndexService {
             JSONObject object = JSON.parseObject(res);
             IndexDTO indexDTO = new IndexDTO();
             indexDTO.setBrandList(object.getJSONArray("data"));
+            res = HttpClientUtil.doGet(RESTURL+"getProvice");
+            object = JSON.parseObject(res);
+            indexDTO.setProviceList(object.getJSONArray("data"));
+
             return indexDTO;
 
         }catch (Exception e){
@@ -83,5 +87,23 @@ public class IndexServiceImpl implements IndexService {
         }
 
         return null;
+    }
+
+    @Override
+    public JsonResult getAllCity() {
+        try {
+
+            String res = HttpClientUtil.doGet(RESTURL+"getCity/");
+            return JsonUtils.jsonToPojo(res,JsonResult.class);
+
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+
+        }
+
+        return null;
+
     }
 }

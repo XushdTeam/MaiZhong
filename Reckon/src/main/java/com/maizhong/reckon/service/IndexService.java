@@ -13,4 +13,6 @@ public interface IndexService {
     JsonResult getSeries(String brandId);
 
     JsonResult getCarType(String seriesId);
+
+    JsonResult getAllCity();
 }

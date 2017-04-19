@@ -111,7 +111,7 @@ function getSimpleList(a, b, c) {
         f = new RegExp("%id", "g"),
         g = "";
     showLoading(b), "Microsoft Internet Explorer" != navigator.appName || "8." != navigator.appVersion.match(/8./i) && "9." != navigator.appVersion.match(/9./i) ? $.getJSON(metaUrl + "model/model_series/" + a + "", function(a) {
-        d(a)
+        d(a.data)
     }) : $.ajax({
         type: "get",
         contentType: "application/json; charset=utf-8",
@@ -188,6 +188,12 @@ function cleckinput(a, b, c, d) {
         }))), 0 == m) {
         var n = ($("#s_brand").val(), $("#s_series").val(), $("#s_simple").val());
         resetAllHiddenInput();
+        console.log('j'+j);
+        console.log('k'+k);
+        console.log('n'+n);
+        console.log('g'+g);
+        console.log('h'+h);
+        console.log('l'+l);
         var o = siteUrl + "pinggu/v" + j + "c" + k + "m" + n + "r" + g + "-" + h + "g" + l,
             p = $("#version").val();
         p && (o += "?version=" + p), location.href = o
@@ -432,9 +438,9 @@ $(function() {
             c = !0;
         for (var d in a) {
             var e = a[d],
-                f = e.city_id,
-                g = e.city_name,
-                h = e.prov_id;
+                f = e.id,
+                g = e.name,
+                h = e.prov;
             c ? c = !1 : b += ",", b = b + "{'id':'" + f + "', 'name':'" + g + "', 'prov':'" + h + "'}"
         }
         b += "]", $("#cityList").val(b)
@@ -470,9 +476,9 @@ $(function() {
                 easing: "ease"
             })
         }();
-    var c = window.metaDomain + "/location/all_city.json";
+    var c = "/getAllCity";
     "Microsoft Internet Explorer" != navigator.appName || "8." != navigator.appVersion.match(/8./i) && "9." != navigator.appVersion.match(/9./i) ? $.getJSON(c, function(b) {
-        a(b)
+        a(b.data)
     }) : $.ajax({
         url: "service/QueryService.php",
         data: {
@@ -482,20 +488,7 @@ $(function() {
             var c = $.parseJSON(b);
             a(c)
         }
-    }), -$.ajax({
-        url: apiUrl + "api/lib/buy_car_seminar/index",
-        data: {
-            page: 1,
-            format: "jsonp"
-        },
-        type: "get",
-        dataType: "jsonp",
-        success: function(a) {
-            $(a).each(function(b) {
-                b < 8 && $(".img-table").append('<a target="_blank" href="https://www.che300.com/scenario/subject_detail.html?subjectId=' + a[b].id + '"><img src="' + a[b].banner_pic + '?imageView2/1/w/270/h/124"></a>')
-            })
-        }
-    }), $(".fdlink-tab>li").click(function() {
+    }),  $(".fdlink-tab>li").click(function() {
         $(this).addClass("tab-focus").siblings().removeClass("tab-focus");
         var a = $(this).attr("id").split("-")[1],
             b = $(".fdlink-show").find("#fdlist-" + a);
