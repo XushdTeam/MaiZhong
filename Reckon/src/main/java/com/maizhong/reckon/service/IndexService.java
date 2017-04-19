@@ -1,6 +1,7 @@
 package com.maizhong.reckon.service;
 
 import com.maizhong.common.result.JsonResult;
+import com.maizhong.reckon.DTO.GuzhiDTO;
 import com.maizhong.reckon.DTO.IndexDTO;
 
 /**
@@ -15,4 +16,6 @@ public interface IndexService {
     JsonResult getCarType(String seriesId);
 
     JsonResult getAllCity();
+
+    GuzhiDTO getGuZhi(String param);
 }

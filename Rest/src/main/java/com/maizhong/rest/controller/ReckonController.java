@@ -1,5 +1,6 @@
 package com.maizhong.rest.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.rest.service.IndexService;
@@ -124,6 +125,19 @@ public class ReckonController {
 
         JsonResult result = reckonService.getCarType(seriesId);
 
+        return result;
+    }
+
+    /**
+     * 获取估值信息
+     * @param param
+     * @return
+     */
+    @RequestMapping(value = "/guzhi/{param}",method = RequestMethod.GET)
+    @ResponseBody
+    public JsonResult getGuzhi(@PathVariable String param){
+
+        JsonResult result = reckonService.getGuzhi(param);
         return result;
     }
 }

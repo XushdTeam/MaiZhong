@@ -17,10 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.math.BigDecimal;
+import java.util.*;
 
 /**
  * Created by Xushd on 2017/4/18.
@@ -45,6 +43,9 @@ public class ReckonServiceImpl implements ReckonService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private GzrecordMapper gzrecordMapper;
+
 
     @Value("${CHE_MODEL}")
     private String CHE_MODEL;
@@ -54,6 +55,9 @@ public class ReckonServiceImpl implements ReckonService {
 
     @Value("${CHE_SERIES}")
     private String CHE_SERIES;
+
+    @Value("${GUZHI}")
+    private String GUZHI;
 
     @Value("${TOKEN}")
     private String token;
@@ -342,6 +346,67 @@ public class ReckonServiceImpl implements ReckonService {
         } catch (Exception e){
             e.printStackTrace();
         }
+        return null;
+    }
+
+    @Override
+    public JsonResult getGuzhi(String param) {
+        try {
+
+            String redisJson = jedisClient.hget("GUZHI",param);
+
+            if(StringUtils.isNotBlank(redisJson)){
+
+                return JsonResult.OK(JsonUtils.jsonToPojo(redisJson,Gzrecord.class));
+            }
+
+            String[] paramarry = param.split("c|m|r|g");
+            String url = String.format("%s?token=%s&modelId=%s&regDate=%s&mile=%s&zone=%s",GUZHI,token,paramarry[2],paramarry[3],paramarry[4],paramarry[1]);
+
+            String res = HttpClientUtil.doGet(url);
+
+            JSONObject jsonObject = JSON.parseObject(res);
+            JSONArray eval_prices = jsonObject.getJSONArray("eval_prices");
+
+            Gzrecord gzrecord = new Gzrecord();
+            gzrecord.setParam(param);
+            gzrecord.setCity(Integer.valueOf(paramarry[1]));
+            gzrecord.setMail(Integer.valueOf(paramarry[4]));
+            gzrecord.setModelId(Long.valueOf(paramarry[2]));
+            gzrecord.setRegDate(paramarry[3]);
+            gzrecord.setTime(new Date());
+            for (Object eval_price : eval_prices) {
+                JSONObject object = (JSONObject) eval_price;
+
+                if(object.getString("condition").equals("excellent")){
+                    //车况优秀
+                    gzrecord.setPriceMaxA(object.getString("dealer_buy_price"));
+                    gzrecord.setPriceMinA(object.getString("dealer_low_buy_price"));
+                }
+                if(object.getString("condition").equals("good")){
+                    //车况良好
+                    gzrecord.setPriceMaxB(object.getString("dealer_buy_price"));
+                    gzrecord.setPriceMinB(object.getString("dealer_low_buy_price"));
+                }
+                if(object.getString("condition").equals("normal")){
+                    //车况一般
+                    gzrecord.setPriceMaxC(object.getString("dealer_buy_price"));
+                    gzrecord.setPriceMinC(object.getString("dealer_low_buy_price"));
+                    //车况较差
+                    gzrecord.setPriceMaxD(new BigDecimal(object.getInteger("dealer_buy_price")*0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+                    gzrecord.setPriceMinD(new BigDecimal(object.getInteger("dealer_low_buy_price")*0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+                }
+
+            }
+            jedisClient.hset("GUZHI",param,JsonUtils.objectToJson(gzrecord));
+            gzrecordMapper.insert(gzrecord);
+
+            return JsonResult.OK(gzrecord);
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
         return null;
     }
 }

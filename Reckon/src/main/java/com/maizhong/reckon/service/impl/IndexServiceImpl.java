@@ -5,9 +5,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
+import com.maizhong.reckon.DTO.GuzhiDTO;
 import com.maizhong.reckon.DTO.IndexDTO;
 import com.maizhong.reckon.service.IndexService;
-import org.springframework.asm.TypeReference;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -104,6 +104,28 @@ public class IndexServiceImpl implements IndexService {
         }
 
         return null;
+
+    }
+
+    @Override
+    public GuzhiDTO getGuZhi(String param) {
+
+
+        String res = HttpClientUtil.doGet(RESTURL+"guzhi/"+param);
+
+        JSONObject object = JSON.parseObject(res);
+        JSONObject data = object.getJSONObject("data");
+
+        GuzhiDTO guzhiDTO = new GuzhiDTO();
+
+        guzhiDTO.setPriceA(data.getString("priceMinA")+"万~"+data.getString("priceMaxA")+"万");
+        guzhiDTO.setPriceB(data.getString("priceMinB")+"万~"+data.getString("priceMaxB")+"万");
+        guzhiDTO.setPriceC(data.getString("priceMinC")+"万~"+data.getString("priceMaxC")+"万");
+        guzhiDTO.setPriceD(data.getString("priceMinD")+"万~"+data.getString("priceMaxD")+"万");
+
+
+
+        return guzhiDTO;
 
     }
 }
