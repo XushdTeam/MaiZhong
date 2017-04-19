@@ -14,23 +14,23 @@ public class IndexDTO {
     private List<Object> brandList;
 
 
-    private List<KeyValue> cityList;
+    private List<Object> cityList;
 
-    private List<KeyValue> proviceList;
+    private List<Object> proviceList;
 
-    public List<KeyValue> getProviceList() {
+    public List<Object> getProviceList() {
         return proviceList;
     }
 
-    public void setProviceList(List<KeyValue> proviceList) {
+    public void setProviceList(List<Object> proviceList) {
         this.proviceList = proviceList;
     }
 
-    public List<KeyValue> getCityList() {
+    public List<Object> getCityList() {
         return cityList;
     }
 
-    public void setCityList(List<KeyValue> cityList) {
+    public void setCityList(List<Object> cityList) {
         this.cityList = cityList;
     }
 

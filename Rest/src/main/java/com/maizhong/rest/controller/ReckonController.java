@@ -113,7 +113,11 @@ public class ReckonController {
     }
 
 
-
+    /**
+     * 通过车系ID获取车型信息
+     * @param seriesId
+     * @return
+     */
     @RequestMapping(value = "/getCarType/{seriesId}",method =RequestMethod.GET)
     @ResponseBody
     public JsonResult getCarType(@PathVariable String seriesId){
