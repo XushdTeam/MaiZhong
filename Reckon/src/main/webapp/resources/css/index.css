@@ -17,14 +17,7 @@ img,input{vertical-align:middle; outline:none}
 .t_cen .t_right .one{ color: #fff; border: 1px solid #fff; border-radius: 100px; padding: 10px 30px;margin-left:20px;}
 .t_cen .t_right .two{ color: #fff; background: #f05b48; border-radius: 100px; padding: 10px 20px; margin-left:20px;}
 
-.guz{ width: 1200px; margin:0 auto; overflow: height }
-.guz ul{ background: rgba(240,91,72,0.5); width: 366px; height: 352px; margin-top:70px; padding-top:20px }
-.guz ul li div{ background: #fff; line-height: 43px; width: 271px; margin:0 auto; border: 1px solid #999;
-    margin-top: 20px; text-align: center; font-size: 14px; color: #000; cursor: pointer; }
-.guz ul li div input{ border: none }
-.guz ul li div.last{ background: #f05b48; color: #fff; font-size: 24px;  border: none }
-.guz ul li div.img{ background: #FFF url(../img/1_03.jpg) no-repeat 235px 17px;
-    background-size: 30px 10px; }
+.guzs{ width: 1200px; margin:0 auto; overflow: height }
 
 .liu{ background: url(../img/bg2.jpg) no-repeat; height: 521px; overflow: height}
 .liu .l_cen{ width: 1000px; margin:0px auto; overflow: height}
@@ -136,3 +129,5 @@ img,input{vertical-align:middle; outline:none}
 .jingzhun .jing.tells a{ color: #f05b48; border: 1px solid #f05b48; border-radius: 8px; padding: 7px 20px}
 .anniu{ width: 200px; margin: 30px auto;background: #f05b48; color: #fff; text-align: center; height: 65px; font-size: 24px; line-height: 65px;}
 .jing a{ padding: 0 10px}
+
+

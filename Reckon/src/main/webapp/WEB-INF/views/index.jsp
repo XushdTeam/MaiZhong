@@ -33,7 +33,12 @@
         </div>
     </div><!--top end-->
 
+
+
+    <div class="guzs">
     <div class="pinggu">
+
+
         <ul class="pt16">
             <li class="mb13" style="z-index:100">
                 <div class="select_box" id="select1">
@@ -164,6 +169,8 @@
             </li>
         </ul>
         <div class="submit" id="eval">快速估值</div>
+    </div>
+
     </div>
     <%--<!--估值-->--%>
     <%--<div class="guz">--%>
