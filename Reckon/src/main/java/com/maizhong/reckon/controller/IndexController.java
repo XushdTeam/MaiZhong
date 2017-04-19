@@ -72,11 +72,26 @@ public class IndexController {
         return result;
     }
 
+    /**
+     * 跳转到估值页面
+     * @param param
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/guzhi/{param}")
     public String compute(@PathVariable String param,Model model){
 
         GuzhiDTO guzhiDTO = indexService.getGuZhi(param);
         model.addAttribute("result",guzhiDTO);
         return "guzhi";
+    }
+
+    @RequestMapping(value = "/sale")
+    public String sale(Model model){
+        IndexDTO indexDTO = indexService.getIndexDTO();
+
+        model.addAttribute("brandList",indexDTO.getBrandList());
+        model.addAttribute("proviceList",indexDTO.getProviceList());
+        return "jingzhun";
     }
 }
