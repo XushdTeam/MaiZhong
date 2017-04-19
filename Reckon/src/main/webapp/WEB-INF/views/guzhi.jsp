@@ -32,6 +32,14 @@
 
 <div class="x_nav">当前位置 :  <a href="#">首页</a> > <a href="#">二手车评估</a> >  北京2016款 奥迪A3 Limousine 35 TFSI 进取型二手车评估详情</div>
 
+ <div class="can">
+     <dl>
+         <dt><img src="../resources/img/c_1.png"></dt>
+         <dd class="dd1">2016款 奥迪A3 Limousine 35 TFSI 进取型</dd>
+         <dd><span>北京</span>|<span>2016年2月上牌</span>|<span>25万公里</span>|<span>自动</span>|<span>排量1.4L</span>|<span>国5</span>|<span>新车售价19.0万</span></dd>
+     </dl>
+ </div>
+
 <!--估价选项-->
   <div class="guj">
       <div class="gu hover">
