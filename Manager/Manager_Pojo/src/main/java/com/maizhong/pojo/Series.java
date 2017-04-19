@@ -11,6 +11,8 @@ public class Series {
 
     private Date updateTime;
 
+    private String seriesPic;
+
     private Integer brandId;
 
     public Integer getSeriesId() {
@@ -43,6 +45,14 @@ public class Series {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getSeriesPic() {
+        return seriesPic;
+    }
+
+    public void setSeriesPic(String seriesPic) {
+        this.seriesPic = seriesPic == null ? null : seriesPic.trim();
     }
 
     public Integer getBrandId() {

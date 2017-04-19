@@ -32,11 +32,11 @@
 
 <div class="bans"><img src="../resources/img/1-3.jpg"></div>
 
-<div class="x_nav">当前位置 :  <a href="#">首页</a> > <a href="#">二手车评估</a> > ${result.city}  ${result.modelName} 二手车评估详情</div>
+<div class="x_nav">当前位置 :  <a href="/">首页</a> > <a href="javascript:;">估值</a> > ${result.city} &nbsp;${result.modelName} 二手车评估详情</div>
 
  <div class="can">
      <dl>
-         <dt><img src="${result.seriesImg}?imageMogr2/thumbnail/x100"></dt>
+         <dt><img src="${result.seriesImg}?imageMogr2/thumbnail/x100" height="100" width="133"></dt>
          <dd class="dd1">${result.modelName}</dd>
          <dd><span>${result.city}</span>|<span>${result.regdate}上牌</span>|<span>${result.mail}万公里</span>|
              <span>${result.gearType}</span>|<span>排量${result.liter}</span>|<span>${result.dischargeStandard}</span>|

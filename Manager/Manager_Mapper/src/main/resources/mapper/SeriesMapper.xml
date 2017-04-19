@@ -6,6 +6,7 @@
     <result column="series_name" jdbcType="VARCHAR" property="seriesName" />
     <result column="series_group_name" jdbcType="VARCHAR" property="seriesGroupName" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="series_pic" jdbcType="VARCHAR" property="seriesPic" />
     <result column="brand_id" jdbcType="INTEGER" property="brandId" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    series_id, series_name, series_group_name, update_time, brand_id
+    series_id, series_name, series_group_name, update_time, series_pic, brand_id
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.pojo.SeriesExample" resultMap="BaseResultMap">
     select
@@ -100,10 +101,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.maizhong.pojo.Series">
-    insert ignore into series (series_id, series_name, series_group_name,
-      update_time, brand_id)
+    insert into series (series_id, series_name, series_group_name, 
+      update_time, series_pic, brand_id
+      )
     values (#{seriesId,jdbcType=INTEGER}, #{seriesName,jdbcType=VARCHAR}, #{seriesGroupName,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{brandId,jdbcType=INTEGER})
+      #{updateTime,jdbcType=TIMESTAMP}, #{seriesPic,jdbcType=VARCHAR}, #{brandId,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.pojo.Series">
     insert into series
@@ -119,6 +122,9 @@
       </if>
       <if test="updateTime != null">
         update_time,
+      </if>
+      <if test="seriesPic != null">
+        series_pic,
       </if>
       <if test="brandId != null">
         brand_id,
@@ -136,6 +142,9 @@
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="seriesPic != null">
+        #{seriesPic,jdbcType=VARCHAR},
       </if>
       <if test="brandId != null">
         #{brandId,jdbcType=INTEGER},
@@ -163,6 +172,9 @@
       <if test="record.updateTime != null">
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.seriesPic != null">
+        series_pic = #{record.seriesPic,jdbcType=VARCHAR},
+      </if>
       <if test="record.brandId != null">
         brand_id = #{record.brandId,jdbcType=INTEGER},
       </if>
@@ -177,6 +189,7 @@
       series_name = #{record.seriesName,jdbcType=VARCHAR},
       series_group_name = #{record.seriesGroupName,jdbcType=VARCHAR},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      series_pic = #{record.seriesPic,jdbcType=VARCHAR},
       brand_id = #{record.brandId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -194,6 +207,9 @@
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="seriesPic != null">
+        series_pic = #{seriesPic,jdbcType=VARCHAR},
+      </if>
       <if test="brandId != null">
         brand_id = #{brandId,jdbcType=INTEGER},
       </if>
@@ -205,6 +221,7 @@
     set series_name = #{seriesName,jdbcType=VARCHAR},
       series_group_name = #{seriesGroupName,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
+      series_pic = #{seriesPic,jdbcType=VARCHAR},
       brand_id = #{brandId,jdbcType=INTEGER}
     where series_id = #{seriesId,jdbcType=INTEGER}
   </update>

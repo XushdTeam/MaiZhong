@@ -365,6 +365,76 @@ public class SeriesExample {
             return (Criteria) this;
         }
 
+        public Criteria andSeriesPicIsNull() {
+            addCriterion("series_pic is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesPicIsNotNull() {
+            addCriterion("series_pic is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesPicEqualTo(String value) {
+            addCriterion("series_pic =", value, "seriesPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesPicNotEqualTo(String value) {
+            addCriterion("series_pic <>", value, "seriesPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesPicGreaterThan(String value) {
+            addCriterion("series_pic >", value, "seriesPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesPicGreaterThanOrEqualTo(String value) {
+            addCriterion("series_pic >=", value, "seriesPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesPicLessThan(String value) {
+            addCriterion("series_pic <", value, "seriesPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesPicLessThanOrEqualTo(String value) {
+            addCriterion("series_pic <=", value, "seriesPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesPicLike(String value) {
+            addCriterion("series_pic like", value, "seriesPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesPicNotLike(String value) {
+            addCriterion("series_pic not like", value, "seriesPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesPicIn(List<String> values) {
+            addCriterion("series_pic in", values, "seriesPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesPicNotIn(List<String> values) {
+            addCriterion("series_pic not in", values, "seriesPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesPicBetween(String value1, String value2) {
+            addCriterion("series_pic between", value1, value2, "seriesPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesPicNotBetween(String value1, String value2) {
+            addCriterion("series_pic not between", value1, value2, "seriesPic");
+            return (Criteria) this;
+        }
+
         public Criteria andBrandIdIsNull() {
             addCriterion("brand_id is null");
             return (Criteria) this;
