@@ -1,10 +1,10 @@
 package com.maizhong.reckon.controller;
 
+import com.maizhong.common.dto.GuzhiDTO;
 import com.maizhong.common.result.JsonResult;
-import com.maizhong.reckon.DTO.GuzhiDTO;
+
 import com.maizhong.reckon.DTO.IndexDTO;
 import com.maizhong.reckon.service.IndexService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,10 +30,10 @@ public class IndexController {
         model.addAttribute("proviceList",indexDTO.getProviceList());
         return "index";
     }
-    @RequestMapping(value = "/{page}")
-    public String test(@PathVariable String page){
-        return page;
-    }
+//    @RequestMapping(value = "/{page}")
+//    public String test(@PathVariable String page){
+//        return page;
+//    }
 
 
     /**

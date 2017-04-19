@@ -21,7 +21,7 @@ img,input{vertical-align:middle; outline:none}
 
 .guzs{ width: 1200px; margin:0 auto; overflow: height }
 
-.liu{ background: url(../img/bg2.jpg) no-repeat; height: 521px; overflow: height}
+.liu{ background: url(../img/bg2.jpg) no-repeat; height: 521px; overflow: height;}
 .liu .l_cen{ width: 1000px; margin:0px auto; overflow: height}
 .liu .l_cen h2,.liu .l_cen p{ text-align: center; }
 .liu .l_cen h2{ font-size: 36px; color: #444; padding-top: 86px; font-weight: 500 }
@@ -69,12 +69,13 @@ img,input{vertical-align:middle; outline:none}
 .e_top{ border: 1px solid #eee !important;}
 .e_top .tell{ color: #f05b48;}
 .e_top .t_right a.one{ border: 1px solid #f05b48 !important; color: #f05b48 !important;}
+.e_top .t_right a.one:hover{ color: #fff !important;}
 .bans{ width: 1200px; margin: 0 auto;}
 .x_nav{width: 1200px; margin: 0 auto; line-height: 55px; }
 .x_nav,.x_nav a{ color: #a2a0a0}
 
 .can{ width: 1200px; margin: 20px auto;}
-.can dl dt{ width: 100px; float: left; padding: 0 30px; height: 60px;margin-top: 20px}
+.can dl dt{ width: 100px; float: left; padding: 0 30px; }
 .can dl dd{ width: 900px; float: left; line-height: 35px;}
 .can dl dd.dd1{ font-size: 26px ;color: #000}
 .can dl dd span{ padding: 5px 20px;}
@@ -94,7 +95,7 @@ img,input{vertical-align:middle; outline:none}
 .guj .gu:hover span,.guj .gu.hover span,.guj .gu:hover p,.guj .gu.hover p,.guj .gu:hover div,.guj .gu.hover div,.guj .gu:hover dt,.guj .gu.hover dt,
 .guj .gu:hover dd,.guj .gu.hover dd,.guj .gu:hover h2,.guj .gu.hover h2{ color: #fff}
 
-.mc{ background: #f05b48;color: #fff; text-align: center;clear: both; margin: 30px auto; line-height: 85px;  width: 1200px; font-size: 36px;}
+.mc{ background: #f05b48;color: #fff; text-align: center;clear: both; margin: 30px auto; line-height: 85px;  width: 1200px; font-size: 36px; cursor: pointer}
 
 
 .lius .l_cen{ width: 1200px; margin:0px auto; overflow: height}
@@ -129,7 +130,7 @@ img,input{vertical-align:middle; outline:none}
 .jiaos .j_cen .one:hover{ background: #f05b48; color: #fff; }
 
 .jingzhun{ width: 1140px; margin: 0 auto; background: #f1f1f1; padding: 40px 30px}
-.jingzhun .jing{ height: 40px; line-height: 40px; margin-top:10px}
+.jingzhun .jing{ height: 45px; line-height: 40px; margin-top:10px; overflow: hidden}
 .jingzhun .jing label{ width: 130px; float: left; text-align: right; margin-right: 20px}
 .jingzhun .jing p{ border: 1px solid #b2b2b2; height:38px; background: #eee; padding-left: 20px;color: #999; float: left}
 .jingzhun .jing p.one{ width: 721px ; }
@@ -137,16 +138,18 @@ img,input{vertical-align:middle; outline:none}
 .jingzhun .jing p.trr{width: 102px; text-align: center;margin-right: 20px}
 .jingzhun .jing p.for{width: 172px;}
 .jingzhun .jing p.for input{ background: none; border: none; width: 110px}
-.jingzhun .jing span{ padding: 8px  35px;cursor: pointer; border: 1px solid #ccc; margin-right: 20px}
+.jingzhun .jing span{ cursor: pointer; border: 1px solid #ccc; margin-right: 20px; float: left; width: 130px; text-align: center}
 .jingzhun .jing span.hover{ background: #f05b48;color: #fff;}
 .jingzhun .jing span:hover{ background: #f05b48;color: #fff;}
-.jck label{ height:50px}
+.jck label{ height:70px}
 .jingzhun .jing.tell{ margin-top: 50px; overflow: hidden;}
 .jingzhun .jing.tells input{ background: #eee; border: 1px solid #b2b2b2; width: 200px;line-height: 35px; height: 35px;}
 .jingzhun .jing.tells a{ color: #f05b48; border: 1px solid #f05b48; border-radius: 8px; padding: 7px 20px}
 .anniu{ width: 200px; margin: 30px auto;background: #f05b48; color: #fff; text-align: center; height: 65px; font-size: 24px; line-height: 65px;cursor: pointer}
 .jing a{ padding: 0 10px}
 .jing a.cen img{ border:2px solid #f05b48;}
+.jingzhun .jck{ height: 98px;}
+.jingzhun .jck span{ width:320px; height: 42px; margin-bottom: 9px;}
 
 .jiage{ width: 1200px; margin: 0 auto}
 .jiage .jias{ font-size: 60px; font-weight: bold; text-align: center; color: #f05b48; margin-top: 100px}
@@ -184,8 +187,9 @@ img,input{vertical-align:middle; outline:none}
 .yuyue .left .x_left ul li.active,.yuyue .left .x_left ul li:hover{ background: #f05b48;color: #fff;}
 .yuyue .left .x_dl{ overflow: hidden; width: 100%;}
 .yuyue .left .x_dl .x_dt{width: 30px; float: left; height: 50px; vertical-align: top !important; margin-top: 5px;}
-.yuyue .left .x_dl .x_dd{ width: 500px; float: left}
+.yuyue .left .x_dl .x_dd{ width: 300px; float: left}
 .yuyue .left .x_dl .x_dd.x_dd1{ font-size:18px; }
+.yuyue .left .x_right .over{ max-height: 250px; overflow: auto}
 
 .yuyue .left .qu{ margin:30px 0 40px 90px}
 .yuyue .left .quh span{ background: #ccc; font-size: 18px; color: #666; padding: 7px 50px; margin-left: 40px}
@@ -193,6 +197,7 @@ img,input{vertical-align:middle; outline:none}
 .yuyue .left .d_1{ width: 693px;  margin: 0 auto; position: relative;}
 .yuyue .left .d_1 .one{ width: 260px; float: left; margin:15px 0}
 .yuyue .left .d_1 .one div{ background: #fff;color: #000; width:200px; height: 40px; line-height: 40px; text-align: center; font-size: 18px; cursor: pointer}
+.yuyue .left .d_1 .one div input{ height: 41px; line-height: 41px; font-family: "微软雅黑"; font-size: 18px;}
 .yuyue .left .d_1 .one div img{ float: right;margin: 10px 10px 0 0}
 .yuyue .left .d_1 .one1{ margin-left:85px}
 .yuyue .left .d_1 .one input{ border:0; height: 40px; line-height: 40px; padding-left: 20px }
@@ -205,7 +210,7 @@ img,input{vertical-align:middle; outline:none}
 .yuyue .left .d_2 .one div input{ background: #fff;color: #000; width:200px; height: 40px; line-height: 40px;  font-size: 18px; cursor: pointer; padding-left: 20px; border: 0}
 .yuyue .left .d_2 .one1{ margin-left:85px}
 
-.yuyue .left .hid{ width: 400px; background: #fff; height: 400px; overflow: hidden; margin-left: 125px}
+.yuyue .left .hid{ width: 400px; background: #fff; height: 400px; overflow: hidden; margin-left: 85px}
 .yuyue .left .hid span{ display: block; background: none; padding: 5px 5px; float: left; width: 95px; height:  30px; line-height: 30px;
     border:1px solid #ccc; margin: 10px !important; text-align: center; cursor: pointer}
 .yuyue .left .hid span:hover{ border: 1px solid #f05b48;color: #f05b48}

@@ -2,10 +2,10 @@ package com.maizhong.reckon.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.maizhong.common.dto.GuzhiDTO;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
-import com.maizhong.reckon.DTO.GuzhiDTO;
 import com.maizhong.reckon.DTO.IndexDTO;
 import com.maizhong.reckon.service.IndexService;
 import org.springframework.beans.factory.annotation.Value;
@@ -115,17 +115,8 @@ public class IndexServiceImpl implements IndexService {
 
         JSONObject object = JSON.parseObject(res);
         JSONObject data = object.getJSONObject("data");
+        return  JSON.parseObject(data.toJSONString(),GuzhiDTO.class);
 
-        GuzhiDTO guzhiDTO = new GuzhiDTO();
-
-        guzhiDTO.setPriceA(data.getString("priceMinA")+"万~"+data.getString("priceMaxA")+"万");
-        guzhiDTO.setPriceB(data.getString("priceMinB")+"万~"+data.getString("priceMaxB")+"万");
-        guzhiDTO.setPriceC(data.getString("priceMinC")+"万~"+data.getString("priceMaxC")+"万");
-        guzhiDTO.setPriceD(data.getString("priceMinD")+"万~"+data.getString("priceMaxD")+"万");
-
-
-
-        return guzhiDTO;
 
     }
 }

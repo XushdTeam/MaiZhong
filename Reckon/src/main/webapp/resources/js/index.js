@@ -202,7 +202,18 @@ function cleckinput(a, b, c, d) {
  * 重置所有隐藏input
  */
 function resetAllHiddenInput() {
-    $("#s_brand").attr("value", "0"), $("#s_series").attr("value", "0"), $("#s_simple").attr("value", "0"), $("#s_year").attr("value", "0"), $("#s_month").attr("value", "0"), $("#s_province").attr("value", "0"), $("#s_city").attr("value", "0"), $("#_s_brand").attr("value", "0"), $("#_s_series").attr("value", "0"), $("#contact").attr("value", ""), $("#_valnone").html("请 选 择 车 系"), $("#shangpai").html("请 选 择 上 牌 时 间")
+    $("#s_brand").attr("value", "0"),
+    $("#s_series").attr("value", "0"),
+    $("#s_simple").attr("value", "0"),
+    $("#s_year").attr("value", "0"),
+    $("#s_month").attr("value", "0"),
+    $("#s_province").attr("value", "1"),
+    $("#s_city").attr("value", "1"),
+    $("#_s_brand").attr("value", "0"),
+    $("#_s_series").attr("value", "0"),
+    $("#contact").attr("value", ""),
+    $("#_valnone").html("请 选 择 车 系"),
+    $("#shangpai").html("请 选 择 上 牌 时 间")
 }
 
 // function getSeriesList(a, b, c, d, e, f, g) {

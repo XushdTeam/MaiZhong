@@ -1,7 +1,8 @@
 package com.maizhong.reckon.service;
 
+import com.maizhong.common.dto.GuzhiDTO;
 import com.maizhong.common.result.JsonResult;
-import com.maizhong.reckon.DTO.GuzhiDTO;
+
 import com.maizhong.reckon.DTO.IndexDTO;
 
 /**
