@@ -3,9 +3,18 @@ package com.maizhong.rest.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.IAcsClient;
+import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.exceptions.ServerException;
+import com.aliyuncs.profile.DefaultProfile;
+import com.aliyuncs.profile.IClientProfile;
+import com.aliyuncs.sms.model.v20160927.SingleSendSmsRequest;
+import com.aliyuncs.sms.model.v20160927.SingleSendSmsResponse;
 import com.maizhong.common.dto.*;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
+import com.maizhong.common.utils.EncryptUtils;
 import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.dao.JedisClient;
@@ -13,6 +22,7 @@ import com.maizhong.mapper.*;
 import com.maizhong.pojo.*;
 import com.maizhong.rest.service.ReckonService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -41,6 +51,8 @@ public class ReckonServiceImpl implements ReckonService {
     private ProvinceMapper provinceMapper;
     @Autowired
     private CityMapper cityMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -66,6 +78,11 @@ public class ReckonServiceImpl implements ReckonService {
     private String PROVINCE;
     @Value("${CITY}")
     private String CITY;
+    @Value("${SMS_CODE}")
+    private String SMS_CODE;
+    @Value("${LOGIN_TOKEN}")
+    private String LOGIN_TOKEN;
+
 
     @Override
     public void getBrandData() {
@@ -287,7 +304,7 @@ public class ReckonServiceImpl implements ReckonService {
             cityDTOList.add(dto);
         }
         try {
-            jedisClient.set(CITY,JsonUtils.objectToJson(cityDTOList));
+            jedisClient.set(CITY, JsonUtils.objectToJson(cityDTOList));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -297,6 +314,7 @@ public class ReckonServiceImpl implements ReckonService {
 
     /**
      * 通过车系获取车型
+     *
      * @param seriesId
      * @return
      */
@@ -305,22 +323,22 @@ public class ReckonServiceImpl implements ReckonService {
 
         try {
             //STEP 1 查看本地缓存是否存在
-            String redisJson = jedisClient.hget("CAR_MODEL",seriesId);
-            if(StringUtils.isNotBlank(redisJson)){
+            String redisJson = jedisClient.hget("CAR_MODEL", seriesId);
+            if (StringUtils.isNotBlank(redisJson)) {
                 //STEP 2 有 直接返回
                 return JsonResult.OK(JSON.parseArray(redisJson));
-            }else{
+            } else {
                 //STEP 3 没有 调用接口
 
-                String res = HttpClientUtil.doGet(CHE_MODEL+"?token="+token+"&seriesId="+seriesId);
+                String res = HttpClientUtil.doGet(CHE_MODEL + "?token=" + token + "&seriesId=" + seriesId);
                 JSONObject jsonObject = JSON.parseObject(res);
                 JSONArray model_list = jsonObject.getJSONArray("model_list");
                 //STEP 4 放到缓存
-                jedisClient.hset("CAR_MODEL",seriesId,JSON.toJSONString(model_list));
+                jedisClient.hset("CAR_MODEL", seriesId, JSON.toJSONString(model_list));
                 //STEP 5 存入数据库
                 for (Object o : model_list) {
-                    JSONObject object= (JSONObject) o;
-                    Model model=new Model();
+                    JSONObject object = (JSONObject) o;
+                    Model model = new Model();
                     model.setDischargeStandard(object.getString("discharge_standard"));
                     model.setSeriesId(object.getInteger("series_id"));
                     model.setGearType(object.getString("gear_type"));
@@ -339,10 +357,95 @@ public class ReckonServiceImpl implements ReckonService {
                 return JsonResult.OK(model_list);
             }
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 获取验证码
+     *
+     * @param phone
+     * @return
+     */
+    @Override
+    public JsonResult getSMSCode(String phone, String ip) {
+        try {
+            try {
+                jedisClient.del(SMS_CODE + ":" + ip);//重新发送短息时要清空上一次信息
+            } catch (Exception e) {
+                System.out.println("--");
+            }
+            int smsCode = (int) (Math.random() * (9999 - 1000 + 1)) + 1000;//验证码 4位随机数
+            Map<String, String> codeMap = new HashMap<>();
+            codeMap.put("phone", phone);
+            codeMap.put("smsCode", String.valueOf(smsCode));
+            jedisClient.set(SMS_CODE + ":" + ip, JsonUtils.objectToJson(codeMap));//写入缓存
+            jedisClient.expire(SMS_CODE + ":" + ip, 60 * 5);//5分钟过期
+            IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAIZ3jQm7dX5Inv", "1OqUiGxTQeH2afyKhYv6vlPtzh1m2a");
+            DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", "Sms", "sms.aliyuncs.com");
+            IAcsClient client = new DefaultAcsClient(profile);
+            SingleSendSmsRequest request = new SingleSendSmsRequest();
+            request.setSignName("王存浩");//控制台创建的签名名称
+            request.setTemplateCode("SMS_62410574");//控制台创建的模板CODE
+            Map<String, String> map = new HashMap<>();
+            map.put("name", "迈众汽车");//称呼
+            map.put("code", String.valueOf(smsCode));//短信验证码
+            request.setParamString(JsonUtils.objectToJson(map));//短信模板中的变量；数字需要转换为字符串；个人用户每个变量长度必须小于15个字符。"
+            request.setRecNum(phone);//接收号码
+            SingleSendSmsResponse httpResponse = client.getAcsResponse(request);
+        } catch (ServerException e) {
+            e.printStackTrace();
+            return JsonResult.Error("发送失败,请重新发送");
+        } catch (ClientException e) {
+            e.printStackTrace();
+            return JsonResult.Error("发送失败,请重新发送");
+        }
+        return JsonResult.OK("发送成功");
+    }
+
+    /**
+     * 用户登录
+     *
+     * @param smsCode
+     * @return
+     */
+    @Override
+    public JsonResult userLogin(String smsCode, String phone, String ip) {
+        String res = null;
+        try {
+            res = jedisClient.get(SMS_CODE + ":" + ip);//获取缓存内的信息
+        } catch (Exception e) {
+            return JsonResult.Error("请发送验证码");
+        }
+        if (StringUtils.isBlank(res)){
+            return JsonResult.Error("请发送验证码");
+        }
+        Map map = JsonUtils.jsonToPojo(res, Map.class);
+        String reSmsCode = (String) map.get("smsCode");
+        String rePhone = (String) map.get("phone");
+        if (StringUtils.equals(smsCode, reSmsCode) && StringUtils.equals(phone, rePhone)) {
+            String token = EncryptUtils.getSHA256Str(phone + "*#$maizhong%$!*");
+            try {
+                jedisClient.set(LOGIN_TOKEN + ":" + phone, token);
+             /*   jedisClient.expire(LOGIN_TOKEN + ":" + phone, 60 * 60 * 2);  登录用户暂时不设置失效时间*/
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                User user=new User();
+                user.setPhone(phone);
+                user.setStatus(1);
+                user.setDelflag(0);
+                userMapper.insert(user);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return JsonResult.build(200, "登录成功", token);
+        } else {
+            return JsonResult.Error("登录失败，验证码不匹配");
+        }
     }
 }
 

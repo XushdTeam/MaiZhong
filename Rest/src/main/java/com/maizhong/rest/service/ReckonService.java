@@ -22,4 +22,8 @@ public interface ReckonService {
     JsonResult getCity();
 
     JsonResult getCarType(String seriesId);
+
+    JsonResult getSMSCode(String phone,String ip);
+
+    JsonResult userLogin(String smsCode,String phone,String ip);
 }

@@ -126,4 +126,28 @@ public class ReckonController {
 
         return result;
     }
+
+    /**
+     * 获取用户验证码
+     * @param phone
+     * @return
+     */
+    @RequestMapping(value = "getSMSCode",method = RequestMethod.POST)
+    @ResponseBody
+    public  JsonResult getSMSCode(String phone,String ip){
+        JsonResult result=reckonService.getSMSCode(phone,ip);
+        return result;
+    }
+
+    /**
+     * 用户使用验证码进行登录
+     * @param phone
+     * @return
+     */
+    @RequestMapping(value = "userLogin",method = RequestMethod.POST)
+    @ResponseBody
+    public  JsonResult userLogin(String phone,String smsCode,String ip){
+        JsonResult result=reckonService.userLogin(smsCode,phone,ip);
+        return result;
+    }
 }
