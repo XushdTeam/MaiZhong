@@ -8,6 +8,8 @@ public class Model {
 
     private String modelName;
 
+    private Integer seriesId;
+
     private BigDecimal modelPrice;
 
     private Integer modelYear;
@@ -42,6 +44,14 @@ public class Model {
 
     public void setModelName(String modelName) {
         this.modelName = modelName == null ? null : modelName.trim();
+    }
+
+    public Integer getSeriesId() {
+        return seriesId;
+    }
+
+    public void setSeriesId(Integer seriesId) {
+        this.seriesId = seriesId;
     }
 
     public BigDecimal getModelPrice() {

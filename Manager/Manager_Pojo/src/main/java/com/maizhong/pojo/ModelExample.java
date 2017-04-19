@@ -236,6 +236,66 @@ public class ModelExample {
             return (Criteria) this;
         }
 
+        public Criteria andSeriesIdIsNull() {
+            addCriterion("series_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesIdIsNotNull() {
+            addCriterion("series_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesIdEqualTo(Integer value) {
+            addCriterion("series_id =", value, "seriesId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesIdNotEqualTo(Integer value) {
+            addCriterion("series_id <>", value, "seriesId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesIdGreaterThan(Integer value) {
+            addCriterion("series_id >", value, "seriesId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("series_id >=", value, "seriesId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesIdLessThan(Integer value) {
+            addCriterion("series_id <", value, "seriesId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesIdLessThanOrEqualTo(Integer value) {
+            addCriterion("series_id <=", value, "seriesId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesIdIn(List<Integer> values) {
+            addCriterion("series_id in", values, "seriesId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesIdNotIn(List<Integer> values) {
+            addCriterion("series_id not in", values, "seriesId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesIdBetween(Integer value1, Integer value2) {
+            addCriterion("series_id between", value1, value2, "seriesId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSeriesIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("series_id not between", value1, value2, "seriesId");
+            return (Criteria) this;
+        }
+
         public Criteria andModelPriceIsNull() {
             addCriterion("model_price is null");
             return (Criteria) this;

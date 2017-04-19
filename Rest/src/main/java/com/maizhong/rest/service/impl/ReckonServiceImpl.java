@@ -322,6 +322,7 @@ public class ReckonServiceImpl implements ReckonService {
                     JSONObject object= (JSONObject) o;
                     Model model=new Model();
                     model.setDischargeStandard(object.getString("discharge_standard"));
+                    model.setSeriesId(object.getInteger("series_id"));
                     model.setGearType(object.getString("gear_type"));
                     model.setLiter(object.getString("liter"));
                     model.setMaxRegYear(object.getInteger("max_reg_year"));
