@@ -62,11 +62,12 @@ public class ReckonController {
 
     /**
      * 同步品牌首字母分组
+     *
      * @return
      */
-    @RequestMapping(value = "/SysBrandGroup",method = RequestMethod.GET)
+    @RequestMapping(value = "/SysBrandGroup", method = RequestMethod.GET)
     @ResponseBody
-    public JsonResult brandGroupByInitial(){
+    public JsonResult brandGroupByInitial() {
         JsonResult result = reckonService.sysBrandGroupByInitial();
         return result;
     }
@@ -79,7 +80,7 @@ public class ReckonController {
     @RequestMapping(value = "/GetBrandList")
     @ResponseBody
     public JsonResult getBrandList() {
-        JsonResult result  = reckonService.getBrandList();
+        JsonResult result = reckonService.getBrandList();
         return result;
     }
 
@@ -88,10 +89,10 @@ public class ReckonController {
      *
      * @return
      */
-    @RequestMapping(value = "/GetSeriesByBrandId/{brandId}",method =RequestMethod.GET)
+    @RequestMapping(value = "/GetSeriesByBrandId/{brandId}", method = RequestMethod.GET)
     @ResponseBody
     public JsonResult getSeriesByBrandId(@PathVariable("brandId") String brandId) {
-        if (StringUtils.isBlank(brandId)){
+        if (StringUtils.isBlank(brandId)) {
             return JsonResult.OK();
         }
         JsonResult result = reckonService.getSeriesByBrandId(brandId);
@@ -105,23 +106,24 @@ public class ReckonController {
      *
      * @return
      */
-    @RequestMapping(value = "/getProvice",method =RequestMethod.GET)
+    @RequestMapping(value = "/getProvice", method = RequestMethod.GET)
     @ResponseBody
     public JsonResult GetProvince() {
 
-        JsonResult result= reckonService.getProvince();
+        JsonResult result = reckonService.getProvince();
         return result;
     }
+
     /**
      * 获取所有省份
      *
      * @return
      */
-    @RequestMapping(value = "/getCity",method =RequestMethod.GET)
+    @RequestMapping(value = "/getCity", method = RequestMethod.GET)
     @ResponseBody
     public JsonResult getCity() {
 
-           JsonResult result = reckonService.getCity();
+        JsonResult result = reckonService.getCity();
 
         return result;
     }
@@ -129,12 +131,13 @@ public class ReckonController {
 
     /**
      * 通过车系ID获取车型信息
+     *
      * @param seriesId
      * @return
      */
-    @RequestMapping(value = "/getCarType/{seriesId}",method =RequestMethod.GET)
+    @RequestMapping(value = "/getCarType/{seriesId}", method = RequestMethod.GET)
     @ResponseBody
-    public JsonResult getCarType(@PathVariable String seriesId){
+    public JsonResult getCarType(@PathVariable String seriesId) {
 
         JsonResult result = reckonService.getCarType(seriesId);
 
@@ -142,13 +145,40 @@ public class ReckonController {
     }
 
     /**
-     * 获取估值信息
+     *
+     * 获取用户验证码
+     *
+     * @param phone
+     * @return
+     */
+    @RequestMapping(value = "getSMSCode", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult getSMSCode(String phone, String ip) {
+        JsonResult result = reckonService.getSMSCode(phone, ip);
+        return result;
+    }
+
+    /**
+     * 用户使用验证码进行登录
+     *
+     * @param phone
+     * @return
+     */
+    @RequestMapping(value = "userLogin", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult userLogin(String phone, String smsCode, String ip) {
+        JsonResult result = reckonService.userLogin(smsCode, phone, ip);
+        return result;
+    }
+
+    /**
+     * 估值
      * @param param
      * @return
      */
-    @RequestMapping(value = "/guzhi/{param}",method = RequestMethod.GET)
+    @RequestMapping(value = "/guzhi/{param}", method = RequestMethod.GET)
     @ResponseBody
-    public JsonResult getGuzhi(@PathVariable String param){
+    public JsonResult getGuzhi(@PathVariable String param) {
 
         JsonResult result = reckonService.getGuzhi(param);
         return result;

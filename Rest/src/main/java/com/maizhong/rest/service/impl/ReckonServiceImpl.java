@@ -118,7 +118,7 @@ public class ReckonServiceImpl implements ReckonService {
                 seriesMapper.insert(series);
             }
             try {
-                Thread.sleep(100);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -357,11 +357,11 @@ public class ReckonServiceImpl implements ReckonService {
     public JsonResult getGuzhi(String param) {
         try {
 
-             String redisJson = jedisClient.hget("GUZHI",param);
+            String redisJson = jedisClient.hget("GUZHI",param);
 
             if(StringUtils.isNotBlank(redisJson)){
 
-                return JsonResult.OK(JsonUtils.jsonToPojo(redisJson,GuzhiDTO.class));
+                return JsonResult.OK(JsonUtils.jsonToPojo(redisJson,Gzrecord.class));
             }
 
             String[] paramarry = param.split("c|m|r|g");
