@@ -113,10 +113,12 @@ public class ReckonServiceImpl implements ReckonService {
                 series.setSeriesName(object.getString("series_name"));
                 series.setSeriesGroupName(object.getString("series_group_name"));
                 series.setUpdateTime(object.getDate("update_time"));
+                series.setSeriesPic(object.getString("series_pic").replace("\\",""));
+                jedisClient.hset("CAR_SERIES_KEY",object.getString("series_id"),JSON.toJSONString(series));
                 seriesMapper.insert(series);
             }
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -309,7 +311,7 @@ public class ReckonServiceImpl implements ReckonService {
 
         try {
             //STEP 1 查看本地缓存是否存在
-            String redisJson = jedisClient.hget("CAR_MODEL",seriesId);
+            String redisJson = jedisClient.hget("CAR_SERIES_MODEL",seriesId);
             if(StringUtils.isNotBlank(redisJson)){
                 //STEP 2 有 直接返回
                 return JsonResult.OK(JSON.parseArray(redisJson));
@@ -320,7 +322,7 @@ public class ReckonServiceImpl implements ReckonService {
                 JSONObject jsonObject = JSON.parseObject(res);
                 JSONArray model_list = jsonObject.getJSONArray("model_list");
                 //STEP 4 放到缓存
-                jedisClient.hset("CAR_MODEL",seriesId,JSON.toJSONString(model_list));
+                jedisClient.hset("CAR_SERIES_MODEL",seriesId,JSON.toJSONString(model_list));
                 //STEP 5 存入数据库
                 for (Object o : model_list) {
                     JSONObject object= (JSONObject) o;
@@ -339,6 +341,8 @@ public class ReckonServiceImpl implements ReckonService {
                     model.setShortName(object.getString("short_name"));
                     model.setModelPrice(object.getBigDecimal("model_price"));
                     modelMapper.insert(model);
+
+                    jedisClient.hset("CAR_MODEL",model.getModelId()+"",JSON.toJSONString(model));
                 }
                 return JsonResult.OK(model_list);
             }
@@ -353,11 +357,11 @@ public class ReckonServiceImpl implements ReckonService {
     public JsonResult getGuzhi(String param) {
         try {
 
-            String redisJson = jedisClient.hget("GUZHI",param);
+             String redisJson = jedisClient.hget("GUZHI",param);
 
             if(StringUtils.isNotBlank(redisJson)){
 
-                return JsonResult.OK(JsonUtils.jsonToPojo(redisJson,Gzrecord.class));
+                return JsonResult.OK(JsonUtils.jsonToPojo(redisJson,GuzhiDTO.class));
             }
 
             String[] paramarry = param.split("c|m|r|g");
@@ -367,6 +371,8 @@ public class ReckonServiceImpl implements ReckonService {
 
             JSONObject jsonObject = JSON.parseObject(res);
             JSONArray eval_prices = jsonObject.getJSONArray("eval_prices");
+
+
 
             Gzrecord gzrecord = new Gzrecord();
             gzrecord.setParam(param);
@@ -398,16 +404,58 @@ public class ReckonServiceImpl implements ReckonService {
                 }
 
             }
-            jedisClient.hset("GUZHI",param,JsonUtils.objectToJson(gzrecord));
+
+
+
+            GuzhiDTO guzhiDTO = new GuzhiDTO();
+            guzhiDTO.setPriceA(gzrecord.getPriceMinA()+"万~"+gzrecord.getPriceMaxA()+"万");
+            guzhiDTO.setPriceB(gzrecord.getPriceMinB()+"万~"+gzrecord.getPriceMaxB()+"万");
+            guzhiDTO.setPriceC(gzrecord.getPriceMinC()+"万~"+gzrecord.getPriceMaxC()+"万");
+            guzhiDTO.setPriceD(gzrecord.getPriceMinD()+"万~"+gzrecord.getPriceMaxD()+"万");
+
+            String modelRedis = jedisClient.hget("CAR_MODEL",gzrecord.getModelId()+"");
+
+            Model model = JsonUtils.jsonToPojo(modelRedis, Model.class);
+
+            guzhiDTO.setModelName(model.getModelName());
+            guzhiDTO.setDischargeStandard(model.getDischargeStandard());
+            guzhiDTO.setLiter(model.getLiter());
+            guzhiDTO.setModelPrice(model.getModelPrice()+"");
+            guzhiDTO.setGearType(model.getGearType());
+
+            guzhiDTO.setMail(gzrecord.getMail()+"");
+            guzhiDTO.setCity(jedisClient.hget("CITY_KEY",gzrecord.getCity()+""));
+
+            String seriesRedis = jedisClient.hget("CAR_SERIES_KEY",model.getSeriesId()+"");
+
+            guzhiDTO.setSeriesImg(JsonUtils.jsonToPojo(seriesRedis,Series.class).getSeriesPic());
+
+            guzhiDTO.setRegdate(gzrecord.getRegDate().replace("-","年")+"月");
+
+
+            jedisClient.hset("GUZHI",param,JsonUtils.objectToJson(guzhiDTO));
             gzrecordMapper.insert(gzrecord);
 
-            return JsonResult.OK(gzrecord);
+            return JsonResult.OK(guzhiDTO);
 
         } catch (Exception e){
             e.printStackTrace();
         }
 
         return null;
+    }
+
+    @Override
+    public void setRedisCity() {
+
+        CityExample example = new CityExample();
+        List<City> cities = cityMapper.selectByExample(example);
+
+        for (City city : cities) {
+            jedisClient.hset("CITY_KEY",city.getCityId()+"",city.getCityName());
+        }
+
+
     }
 }
 

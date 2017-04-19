@@ -48,6 +48,19 @@ public class ReckonController {
     }
 
     /**
+     * 缓存城市keyvalue
+     * @return
+     */
+    @RequestMapping(value = "/setRedisCity")
+    @ResponseBody
+    public JsonResult setRedisCity(){
+        reckonService.setRedisCity();
+        return JsonResult.OK();
+
+    }
+
+
+    /**
      * 同步品牌首字母分组
      * @return
      */

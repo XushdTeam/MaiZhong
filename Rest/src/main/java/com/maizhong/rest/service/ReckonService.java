@@ -24,4 +24,7 @@ public interface ReckonService {
     JsonResult getCarType(String seriesId);
 
     JsonResult getGuzhi(String param);
+
+    void setRedisCity();
+
 }

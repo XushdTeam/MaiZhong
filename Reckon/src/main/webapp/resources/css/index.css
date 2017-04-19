@@ -75,7 +75,7 @@ img,input{vertical-align:middle; outline:none}
 .x_nav,.x_nav a{ color: #a2a0a0}
 
 .can{ width: 1200px; margin: 20px auto;}
-.can dl dt{ width: 100px; float: left; padding: 0 30px; height: 60px;margin-top: 20px}
+.can dl dt{ width: 100px; float: left; padding: 0 30px; }
 .can dl dd{ width: 900px; float: left; line-height: 35px;}
 .can dl dd.dd1{ font-size: 26px ;color: #000}
 .can dl dd span{ padding: 5px 20px;}
