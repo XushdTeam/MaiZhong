@@ -11,6 +11,8 @@ public class Series {
 
     private Date updateTime;
 
+    private Integer brandId;
+
     public Integer getSeriesId() {
         return seriesId;
     }
@@ -41,5 +43,13 @@ public class Series {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(Integer brandId) {
+        this.brandId = brandId;
     }
 }

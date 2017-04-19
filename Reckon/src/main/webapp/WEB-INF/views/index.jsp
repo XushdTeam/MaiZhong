@@ -18,9 +18,9 @@
     <title>迈众汽车</title>
     <meta name="keywords" content="汽车,汽车买卖,汽车网,汽车报价,汽车图片,买车"/>
     <meta name="description" content="迈众汽车为您提供最新汽车报价，汽车图片，汽车价格大全，最精彩的汽车新闻、行情、评测、导购内容，是提供信息最快最全的中国汽车网站。"/>
-    <link rel="stylesheet" type="text/css" href="/resources/style/base.css" />
     <link rel="stylesheet" type="text/css" href="/resources/css/index.css" />
-    <script src="http://cdn.bootcss.com/jquery/3.2.0/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="/resources/css/guzhi.css" />
+    <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
 </head>
 <body>
 <!--头部开始-->
@@ -33,27 +33,159 @@
         </div>
     </div><!--top end-->
 
-
-    <!--估值-->
-    <div class="guz">
-        <ul>
-            <li>
-                <div class="img">选择车型</div>
+    <div class="pinggu">
+        <ul class="pt16">
+            <li class="mb13" style="z-index:100">
+                <div class="select_box" id="select1">
+                    <div id="valnone">请 选 择 车 型</div>
+                </div>
+                <div class="bg0 lr_158_30 select model" id="select1_1" style="display: none"></div>
+                <div class="ucarselecttype lr_158_30 select model" id="select1_2" style="width: 227px; height: 450px; display: none;">
+                    <div class="ucarselecttype_pinpai " style="width:227px;height:450px">
+                        <div class="ucarselecttype_pinpaitop" id="xzpp" style="width:222px;">请选择品牌</div>
+                        <div class="left_list letters">
+                            <a href="javascript:void(0)" id="letters_0" class="pinpai_num" rel="4">A</a>
+                            <a href="javascript:void(0)" id="letters_1" class="pinpai_num" rel="26">B</a>
+                            <a href="javascript:void(0)" id="letters_2" class="pinpai_num" rel="32">C</a>
+                            <a href="javascript:void(0)" id="letters_3" class="pinpai_num" rel="45">D</a>
+                            <a href="javascript:void(0)" id="letters_4" class="pinpai_num" rel="54">F</a>
+                            <a href="javascript:void(0)" id="letters_5" class="pinpai_num" rel="60">G</a>
+                            <a href="javascript:void(0)" id="letters_6" class="pinpai_num" rel="77">H</a>
+                            <a href="javascript:void(0)" id="letters_7" class="pinpai_num" rel="91">J</a>
+                            <a href="javascript:void(0)" id="letters_8" class="pinpai_num" rel="99">K</a>
+                            <a href="javascript:void(0)" id="letters_9" class="pinpai_num" rel="113">L</a>
+                            <a href="javascript:void(0)" id="letters_10" class="pinpai_num" rel="122">M</a>
+                            <a href="javascript:void(0)" id="letters_11" class="pinpai_num" rel="124">N</a>
+                            <a href="javascript:void(0)" id="letters_12" class="pinpai_num" rel="128">O</a>
+                            <a href="javascript:void(0)" id="letters_13" class="pinpai_num" rel="133">Q</a>
+                            <a href="javascript:void(0)" id="letters_14" class="pinpai_num" rel="137">R</a>
+                            <a href="javascript:void(0)" id="letters_15" class="pinpai_num" rel="150">S</a>
+                            <a href="javascript:void(0)" id="letters_16" class="pinpai_num" rel="154">T</a>
+                            <a href="javascript:void(0)" id="letters_17" class="pinpai_num" rel="160">W</a>
+                            <a href="javascript:void(0)" id="letters_18" class="pinpai_num" rel="169">X</a>
+                            <a href="javascript:void(0)" id="letters_19" class="pinpai_num" rel="177">Y</a>
+                            <a href="javascript:void(0)" id="letters_20" class="pinpai_num" rel="185">Z</a>                                            </div>
+                        <div class="ucarselecttype_pinpaibottom brandgun" style="width:180px;">
+                            <div class="ucarselecttype_pinpaibottom_ul brand">
+                                <c:forEach items="${brandList}" var="i">
+                                    <p id="${i.key}" class="pinpailist" style="background:#e3e3e3;text-align:center">${i.key}</p>
+                                    <c:forEach items="${i.object}" var="j">
+                                        <p class="pinpailist list_1" id="${j.key}" rel="A">${j.value}</p>
+                                    </c:forEach>
+                                </c:forEach>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg0 lr_158_30 select model" style="width: 210px;height: 458px;left: 252px;display: none;" id="select2_1"></div>
+                <div class="ucarselecttype lr_158_30 select model" style="left:260px;width:200px;height:450px;display: none;" id="select2_2">
+                    <div class="ucarselecttype_pinpai" style="width:190px; height:450px;">
+                        <div class="ucarselecttype_pinpaitop" id="xzcx" style="width:190px;">
+                            请选择车系
+                        </div>
+                        <div class="ucarselecttype_pinpaibottom" style="width:190px;">
+                            <div class="ucarselecttype_pinpaibottom_ul series"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg0 lr_158_30 select model" style="width:420px; height:458px; left:463px;display: none;" id="select3_1"></div>
+                <div class="ucarselecttype lr_158_30 select model" style="left:472px;width:411px;height:450px;display: none;" id="select3_2">
+                    <div class="ucarselecttype_pinpai last" style="width:400px;height:450px;">
+                        <div class="ucarselecttype_pinpaitop" id="xzcxing" style="width:400px;">请选择车型</div>
+                        <div class="ucarselecttype_pinpaibottom" style="width:400px;">
+                            <div class="ucarselecttype_pinpaibottom_ul simple"></div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="mb13" style="z-index:99">
+                <div class="select_box" id="select4">请 选 择 年 份</div>
+                <div class="bg1 lr_158_30 sele regDate" id="sele1_1" style="height:365px;display: none;"></div>
+                <div class="ucarselecttype lr_158_30 sele regDate" id="sele1_2" style="width:182px;height:310px;display: none;">
+                    <div class="ucarselecttype_pinpai" style="height:310px;">
+                        <div class="ucarselecttype_pinpaitop selyear" style="width:180px;">选择年份</div>
+                        <div class="ucarselecttype_pinpaibottom" style="height:320px;width:163px; margin-left:7px">
+                            <div class="ucarselecttype_pinpaibottom_ul years"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg1 lr_158_30 sele regDate" id="sele2_1" style="height:365px;left:208px;display: none;"></div>
+                <div class="ucarselecttype lr_158_30 sele regDate" id="sele2_2" style="left:206px;width:182px;height:340px;display: none;">
+                    <div class="ucarselecttype_pinpai" style="height:340px;">
+                        <div class="ucarselecttype_pinpaitop selmonth" style="width:180px;">选择月份</div>
+                        <div class="ucarselecttype_pinpaibottom" style="height:320px;width:165px; margin-left:7px">
+                            <div class="ucarselecttype_pinpaibottom_ul months"></div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="mb13" style="z-index:88">
+                <div class="select_box" id="select5">
+                    北京</div>
+                <div class="bg1 lr_158_30 sel zone" id="sel1_1" style="display: none;"></div>
+                <div class="ucarselecttype lr_158_30 sel zone" id="sel1_2" style="width:182px;height:310px;display: none;">
+                    <div class="ucarselecttype_pinpai" style="height:310px;">
+                        <div class="ucarselecttype_pinpaitop selprov" style="width: 170px;">选择省份</div>
+                        <div class="ucarselecttype_pinpaibottom" style="height:265px;width:165px; margin-left:7px">
+                            <div class="ucarselecttype_pinpaibottom_ul select_province">
+                               <c:forEach items="${proviceList}" var="i" varStatus="status">
+                                   <p class="list_6 province <c:if test="${status.count == 1}">layerbg2</c:if>" id="${i.id}">${i.name}</p>
+                               </c:forEach>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg1 lr_158_30 sel zone" id="sel2_1" style="left:208px;display: none;"></div>
+                <div class="ucarselecttype lr_158_30 sel zone" id="sel2_2" style="left:206px;width:182px;height:310px;display: none;">
+                    <div class="ucarselecttype_pinpai" style="height:310px;">
+                        <div class="ucarselecttype_pinpaitop selcity">选择城市</div>
+                        <div class="ucarselecttype_pinpaibottom" style="height:265px;width:160px; margin-left:7px">
+                            <div class="ucarselecttype_pinpaibottom_ul select_city">
+                                <p class="pinpailist list_7 layerbg2 pinpailisthover" id="1">北京</p>                                                                      </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="mb13" style="z-index:77">
+                <div class="select_box none" id="gongli">
+                    <input name="s_km" type="text" class="numgongli" id="lichengpd" maxlength="6" autocomplete="off" style="padding-left:0;">
+                    <label>万公里</label>
+                </div>
             </li>
             <li>
-                <div class="img">选择年份</div>
-            </li>
-            <li>
-                <div class="img">北京</div>
-            </li>
-            <li>
-                <div><input type="text" name="" />万公里</div>
-            </li>
-            <li>
-                <div class="last">快速估值</div>
+                <input type="hidden" name="s_brand" id="s_brand" value="0">
+                <input type="hidden" name="s_series" id="s_series" value="0">
+                <input type="hidden" name="s_simple" id="s_simple" value="0">
+                <input type="hidden" name="s_year" id="s_year" value="0">
+                <input type="hidden" name="s_mouth" id="s_month" value="0">
+                <input type="hidden" name="s_province" id="s_province" value="1">
+                <input type="hidden" name="s_city" id="s_city" value="1">
+                <input id="cityList" type="hidden" value="">
             </li>
         </ul>
+        <div class="submit" id="eval">快速估值</div>
     </div>
+    <%--<!--估值-->--%>
+    <%--<div class="guz">--%>
+        <%--<ul>--%>
+            <%--<li>--%>
+                <%--<div class="img">选择车型</div>--%>
+
+            <%--</li>--%>
+            <%--<li>--%>
+                <%--<div class="img">选择年份</div>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+                <%--<div class="img">北京</div>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+                <%--<div><input type="text" name="" />万公里</div>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+                <%--<div class="last">快速估值</div>--%>
+            <%--</li>--%>
+        <%--</ul>--%>
+    <%--</div>--%>
     <!--估值end-->
 </div><!--bg_img end-->
 <!--头end-->
@@ -239,5 +371,6 @@
 
 </div>
 <!--关于我们 end-->
+<script src="/resources/js/index.js"></script>
 </body>
 </html>

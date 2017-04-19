@@ -364,6 +364,66 @@ public class SeriesExample {
             addCriterion("update_time not between", value1, value2, "updateTime");
             return (Criteria) this;
         }
+
+        public Criteria andBrandIdIsNull() {
+            addCriterion("brand_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandIdIsNotNull() {
+            addCriterion("brand_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandIdEqualTo(Integer value) {
+            addCriterion("brand_id =", value, "brandId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandIdNotEqualTo(Integer value) {
+            addCriterion("brand_id <>", value, "brandId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandIdGreaterThan(Integer value) {
+            addCriterion("brand_id >", value, "brandId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("brand_id >=", value, "brandId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandIdLessThan(Integer value) {
+            addCriterion("brand_id <", value, "brandId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandIdLessThanOrEqualTo(Integer value) {
+            addCriterion("brand_id <=", value, "brandId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandIdIn(List<Integer> values) {
+            addCriterion("brand_id in", values, "brandId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandIdNotIn(List<Integer> values) {
+            addCriterion("brand_id not in", values, "brandId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandIdBetween(Integer value1, Integer value2) {
+            addCriterion("brand_id between", value1, value2, "brandId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("brand_id not between", value1, value2, "brandId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
