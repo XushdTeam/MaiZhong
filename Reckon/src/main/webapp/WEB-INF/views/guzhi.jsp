@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ page session="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>迈众汽车</title>
@@ -15,8 +18,7 @@
     <title>迈众汽车</title>
     <meta name="keywords" content="汽车,汽车买卖,汽车网,汽车报价,汽车图片,买车"/>
     <meta name="description" content="迈众汽车为您提供最新汽车报价，汽车图片，汽车价格大全，最精彩的汽车新闻、行情、评测、导购内容，是提供信息最快最全的中国汽车网站。"/>
-    <link rel="stylesheet" type="text/css" href="/resources/style/base.css" />
-    <link rel="stylesheet" type="text/css" href="/resources/css/index.css" />
+     <link rel="stylesheet" type="text/css" href="/resources/css/index.css" />
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
 </head>
 <body>
@@ -30,13 +32,15 @@
 
 <div class="bans"><img src="../resources/img/1-3.jpg"></div>
 
-<div class="x_nav">当前位置 :  <a href="#">首页</a> > <a href="#">二手车评估</a> >  北京2016款 奥迪A3 Limousine 35 TFSI 进取型二手车评估详情</div>
+<div class="x_nav">当前位置 :  <a href="#">首页</a> > <a href="#">二手车评估</a> > ${result.city}  ${result.modelName} 二手车评估详情</div>
 
  <div class="can">
      <dl>
-         <dt><img src="../resources/img/c_1.png"></dt>
-         <dd class="dd1">2016款 奥迪A3 Limousine 35 TFSI 进取型</dd>
-         <dd><span>北京</span>|<span>2016年2月上牌</span>|<span>25万公里</span>|<span>自动</span>|<span>排量1.4L</span>|<span>国5</span>|<span>新车售价19.0万</span></dd>
+         <dt><img src="${result.seriesImg}?imageMogr2/thumbnail/x100"></dt>
+         <dd class="dd1">${result.modelName}</dd>
+         <dd><span>${result.city}</span>|<span>${result.regdate}上牌</span>|<span>${result.mail}万公里</span>|
+             <span>${result.gearType}</span>|<span>排量${result.liter}</span>|<span>${result.dischargeStandard}</span>|
+             <span>新车售价${result.modelPrice}万</span></dd>
      </dl>
  </div>
 
