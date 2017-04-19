@@ -17,7 +17,7 @@
     <meta name="description" content="迈众汽车为您提供最新汽车报价，汽车图片，汽车价格大全，最精彩的汽车新闻、行情、评测、导购内容，是提供信息最快最全的中国汽车网站。"/>
     <link rel="stylesheet" type="text/css" href="/resources/style/base.css" />
     <link rel="stylesheet" type="text/css" href="/resources/css/index.css" />
-    <script src="http://cdn.bootcss.com/jquery/3.2.0/jquery.min.js" type="text/javascript"></script>
+    <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
 </head>
 <body>
 <div class="top e_top">
@@ -36,7 +36,7 @@
   <div class="guj">
       <div class="gu hover">
           <h2>车况优秀</h2>
-          <span>8万~12万</span>
+          <span>${result.priceA}</span>
           <p>车况说明</p>
           <div>迈众作为独立第三方价格服务平台，为您
               提供精确的车辆估值服务，让您在交易前充分
@@ -64,8 +64,8 @@
 
 
       <div class="gu">
-          <h2>车况优秀</h2>
-          <span>8万~12万</span>
+          <h2>车况良好</h2>
+          <span>${result.priceB}</span>
           <p>车况说明</p>
           <div>迈众作为独立第三方价格服务平台，为您
               提供精确的车辆估值服务，让您在交易前充分
@@ -93,8 +93,8 @@
 
 
       <div class="gu">
-          <h2>车况优秀</h2>
-          <span>8万~12万</span>
+          <h2>车况一般</h2>
+          <span>${result.priceC}</span>
           <p>车况说明</p>
           <div>迈众作为独立第三方价格服务平台，为您
               提供精确的车辆估值服务，让您在交易前充分
@@ -122,8 +122,8 @@
 
 
       <div class="gu none">
-          <h2>车况优秀</h2>
-          <span>8万~12万</span>
+          <h2>车况较差</h2>
+          <span>${result.priceD}</span>
           <p>车况说明</p>
           <div>迈众作为独立第三方价格服务平台，为您
               提供精确的车辆估值服务，让您在交易前充分
