@@ -22,6 +22,7 @@
 <body class="bgss">
    <div class="box">
         <p class="width"><img src="../resources/img/dl.jpg"></p>
+       <div class="shouj">手机验证登录</div>
        <div class="d_box">
               <form action="#" name="form" vale>
                   <input type="number" name="1" placeholder="手机号"><span>获取验证码</span>
