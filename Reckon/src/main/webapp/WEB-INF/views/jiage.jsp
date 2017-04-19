@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/index.css" />
     <link rel="stylesheet" type="text/css" href="/resources/css/guzhi.css" />
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="/resources/js/js.js" type="text/javascript"></script>
 </head>
 <body>
 <div class="top e_top">
@@ -32,8 +33,19 @@
     <div class="jias"><span>￥</span>450000</div>
     <div class="jzj">精准价</div>
     <div class="pos"></div>
-    <div class="xieyi"><input type="checkbox" name="1" checked>我已阅读并同意《迈众汽车协议》</div>
-    <div class="xies"></div>
+    <a class="xieyi" href=" javascript:showoutc();"><input type="checkbox" name="1" checked>我已阅读并同意《迈众汽车协议》</a>
+
+    <div class="xies">
+        <div class=" regcon">
+            <div class="m-sPopTitle"><strong>服务协议条款</strong><b id="sPopClose" class="m-sPopClose" onClick="closeClause()">×</b></div>
+            <div class="apply_up_content">
+    	<pre class="f-r0">
+		<strong>同意以下服务条款，提交注册信息</strong>
+        </pre>
+            </div>
+            <center><a class="btn btn-blue btn-lg f-size12 b-b0 b-l0 b-t0 b-r0 f-pl50 f-pr50 f-r3" href="javascript:closeClause();">已阅读并同意此条款</a></center>
+        </div>
+    </div>
 
 
     <div class="anniu">立即下单</div>

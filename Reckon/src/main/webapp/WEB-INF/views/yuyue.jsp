@@ -84,12 +84,20 @@
                  <div class="d_1">
                      <div class="one one1">
                          <p>地铁线路</p>
-                         <div>地铁线路<img src="../resources/img/d.jpg"></div>
+                         <div onclick="cun();">地铁线路<img src="../resources/img/d.jpg"></div>
+
                      </div>
+
                      <div class="one">
                          <p>交易时间</p>
                          <div>04-18星期二<img src="../resources/img/d.jpg"></div>
                      </div>
+                 </div>
+                 <div class="hid">
+                     <span class="cun">1号线</span> <span>2号线</span> <span>4号线</span> <span>5号线</span> <span>6号线</span>
+                     <span>7号线</span> <span>8号线</span> <span>9号线</span> <span>10号线</span> <span>14号线</span>
+                     <span>13号线</span> <span>15号线</span> <span>房山线</span> <span>亦庄线</span> <span>八通线</span>
+                     <span>昌平线</span>
                  </div>
                  <div class="d_1">
                     <div class="one one2">
@@ -107,7 +115,7 @@
                  </div>
              </div>
         </div><!--xk end-->
-
+        <div class="clear"></div>
         <h1><span>3</span>联系方式</h1>
          <div class="d_2">
             <div class="one one1">

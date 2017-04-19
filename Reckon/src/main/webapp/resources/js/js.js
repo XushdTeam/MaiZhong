@@ -34,3 +34,17 @@ $(function () {
     })
 })
 
+
+function showoutc(){$(".xies").show();}
+function closeClause(){
+    $(".xies").hide();
+}
+
+
+$(function () {
+    $(".hid").hide();
+})
+
+function cun  () {
+    $(".hid").toggle();
+}
