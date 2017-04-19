@@ -4,6 +4,7 @@ import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.reckon.service.LoginService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -91,6 +92,10 @@ public class LoginServiceImpl implements LoginService {
             map.put("phone",phone);
             map.put("ip",ip);
             String res = HttpClientUtil.doPost(RESTURL + "userLogin/",map);
+            System.out.println(res);
+            if (StringUtils.isBlank(res)){
+                return JsonResult.Error("网络异常，请刷新后重试");
+            }
             return JsonUtils.jsonToPojo(res, JsonResult.class);
         } catch (Exception e) {
             e.printStackTrace();

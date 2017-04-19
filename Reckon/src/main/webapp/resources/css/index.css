@@ -21,7 +21,7 @@ img,input{vertical-align:middle; outline:none}
 
 .guzs{ width: 1200px; margin:0 auto; overflow: height }
 
-.liu{ background: url(../img/bg2.jpg) no-repeat; height: 521px; overflow: height}
+.liu{ background: url(../img/bg2.jpg) no-repeat; height: 521px; overflow: height;}
 .liu .l_cen{ width: 1000px; margin:0px auto; overflow: height}
 .liu .l_cen h2,.liu .l_cen p{ text-align: center; }
 .liu .l_cen h2{ font-size: 36px; color: #444; padding-top: 86px; font-weight: 500 }
@@ -95,7 +95,7 @@ img,input{vertical-align:middle; outline:none}
 .guj .gu:hover span,.guj .gu.hover span,.guj .gu:hover p,.guj .gu.hover p,.guj .gu:hover div,.guj .gu.hover div,.guj .gu:hover dt,.guj .gu.hover dt,
 .guj .gu:hover dd,.guj .gu.hover dd,.guj .gu:hover h2,.guj .gu.hover h2{ color: #fff}
 
-.mc{ background: #f05b48;color: #fff; text-align: center;clear: both; margin: 30px auto; line-height: 85px;  width: 1200px; font-size: 36px;}
+.mc{ background: #f05b48;color: #fff; text-align: center;clear: both; margin: 30px auto; line-height: 85px;  width: 1200px; font-size: 36px; cursor: pointer}
 
 
 .lius .l_cen{ width: 1200px; margin:0px auto; overflow: height}
@@ -130,7 +130,7 @@ img,input{vertical-align:middle; outline:none}
 .jiaos .j_cen .one:hover{ background: #f05b48; color: #fff; }
 
 .jingzhun{ width: 1140px; margin: 0 auto; background: #f1f1f1; padding: 40px 30px}
-.jingzhun .jing{ height: 40px; line-height: 40px; margin-top:10px}
+.jingzhun .jing{ height: 45px; line-height: 40px; margin-top:10px; overflow: hidden}
 .jingzhun .jing label{ width: 130px; float: left; text-align: right; margin-right: 20px}
 .jingzhun .jing p{ border: 1px solid #b2b2b2; height:38px; background: #eee; padding-left: 20px;color: #999; float: left}
 .jingzhun .jing p.one{ width: 721px ; }
@@ -138,16 +138,18 @@ img,input{vertical-align:middle; outline:none}
 .jingzhun .jing p.trr{width: 102px; text-align: center;margin-right: 20px}
 .jingzhun .jing p.for{width: 172px;}
 .jingzhun .jing p.for input{ background: none; border: none; width: 110px}
-.jingzhun .jing span{ padding: 8px  35px;cursor: pointer; border: 1px solid #ccc; margin-right: 20px}
+.jingzhun .jing span{ cursor: pointer; border: 1px solid #ccc; margin-right: 20px; float: left; width: 130px; text-align: center}
 .jingzhun .jing span.hover{ background: #f05b48;color: #fff;}
 .jingzhun .jing span:hover{ background: #f05b48;color: #fff;}
-.jck label{ height:50px}
+.jck label{ height:70px}
 .jingzhun .jing.tell{ margin-top: 50px; overflow: hidden;}
 .jingzhun .jing.tells input{ background: #eee; border: 1px solid #b2b2b2; width: 200px;line-height: 35px; height: 35px;}
 .jingzhun .jing.tells a{ color: #f05b48; border: 1px solid #f05b48; border-radius: 8px; padding: 7px 20px}
 .anniu{ width: 200px; margin: 30px auto;background: #f05b48; color: #fff; text-align: center; height: 65px; font-size: 24px; line-height: 65px;cursor: pointer}
 .jing a{ padding: 0 10px}
 .jing a.cen img{ border:2px solid #f05b48;}
+.jingzhun .jck{ height: 98px;}
+.jingzhun .jck span{ width:320px; height: 42px; margin-bottom: 9px;}
 
 .jiage{ width: 1200px; margin: 0 auto}
 .jiage .jias{ font-size: 60px; font-weight: bold; text-align: center; color: #f05b48; margin-top: 100px}
