@@ -26,6 +26,8 @@ public class Model {
 
     private Date updateTime;
 
+    private String shortName;
+
     public Integer getModelId() {
         return modelId;
     }
@@ -112,5 +114,13 @@ public class Model {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName == null ? null : shortName.trim();
     }
 }
