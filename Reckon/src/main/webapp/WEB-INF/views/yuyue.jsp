@@ -97,7 +97,7 @@
                         <div class="x_dd">北京市朝阳区朝阳北路101号地下一层（靠近地铁通道处）</div>
                     </div>
                 </div>
-                <div style="width:400px;height:350px;border:#ccc solid 1px;font-size:12px" id="map"></div>
+                <div style="width:500px;height:300px;border:#ccc solid 1px;font-size:12px" id="map"></div>
 
 
             </div><!--xiao_right-->
