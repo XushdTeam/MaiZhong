@@ -33,7 +33,12 @@
         </div>
     </div><!--top end-->
 
+
+
+    <div class="guzs">
     <div class="pinggu">
+
+
         <ul class="pt16">
             <li class="mb13" style="z-index:100">
                 <div class="select_box" id="select1">
@@ -165,6 +170,8 @@
         </ul>
         <div class="submit" id="eval">快速估值</div>
     </div>
+
+    </div>
     <%--<!--估值-->--%>
     <%--<div class="guz">--%>
         <%--<ul>--%>
@@ -199,22 +206,22 @@
 
         <dl>
             <dt class="dt1"></dt>
-            <dd>评估</dd>
+            <dd>精准估值</dd>
         </dl>
 
         <dl>
             <dt class="dt2"></dt>
-            <dd>评估</dd>
+            <dd>专业检测</dd>
         </dl>
 
         <dl>
             <dt class="dt3"></dt>
-            <dd>评估</dd>
+            <dd>现场打款</dd>
         </dl>
 
         <dl>
             <dt class="dt4"></dt>
-            <dd>评估</dd>
+            <dd>售后服务</dd>
         </dl>
     </div>
 </div>

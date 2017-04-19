@@ -46,7 +46,7 @@
 
         <!-- 指定数据库表 -->
 
-        <table schema="" tableName="model"/>
+        <table schema="" tableName="gzrecord"/>
 
 
        <!-- <table schema="" tableName="system_role"/>

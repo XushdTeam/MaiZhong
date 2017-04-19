@@ -15,16 +15,11 @@ img,input{vertical-align:middle; outline:none}
 .t_cen .tell{ font-size: 24px; margin-left: 20px;color: #fff; line-height: 36px; }
 .t_cen .t_right{ text-align: right; float: right;margin-top: 10px }
 .t_cen .t_right .one{ color: #fff; border: 1px solid #fff; border-radius: 100px; padding: 10px 30px;margin-left:20px;}
+.t_cen .t_right .one:hover{ background: #f05b48;color: #fff; border: 1px solid #f05b48; transition:background 0.8s;-webkit-transition:background 0.8s;
+}
 .t_cen .t_right .two{ color: #fff; background: #f05b48; border-radius: 100px; padding: 10px 20px; margin-left:20px;}
 
-.guz{ width: 1200px; margin:0 auto; overflow: height }
-.guz ul{ background: rgba(240,91,72,0.5); width: 366px; height: 352px; margin-top:70px; padding-top:20px }
-.guz ul li div{ background: #fff; line-height: 43px; width: 271px; margin:0 auto; border: 1px solid #999;
-    margin-top: 20px; text-align: center; font-size: 14px; color: #000; cursor: pointer; }
-.guz ul li div input{ border: none }
-.guz ul li div.last{ background: #f05b48; color: #fff; font-size: 24px;  border: none }
-.guz ul li div.img{ background: #FFF url(../img/1_03.jpg) no-repeat 235px 17px;
-    background-size: 30px 10px; }
+.guzs{ width: 1200px; margin:0 auto; overflow: height }
 
 .liu{ background: url(../img/bg2.jpg) no-repeat; height: 521px; overflow: height}
 .liu .l_cen{ width: 1000px; margin:0px auto; overflow: height}
@@ -33,11 +28,16 @@ img,input{vertical-align:middle; outline:none}
 .liu .l_cen p{ font-size: 24px; color: #999; line-height: 90px; }
 .liu .l_cen dl{ float: left;  margin:50px 60px}
 .liu .l_cen dt{ border: 1px solid #f05b48 ;width:127px; height: 127px; border-radius: 100px;}
-.liu .l_cen dt.dt1{ background:url(../img/1-1.png)no-repeat center; }
-.liu .l_cen dt.dt1:hover{ background:#f05b48 url(../img/1.png)no-repeat center; }
+.liu .l_cen dt.dt1{ background:url(../img/1-1.png)no-repeat center;  }
+.liu .l_cen dt.dt1:hover{ background:#f05b48 url(../img/1.png)no-repeat center;  transition:background 0.8s;-webkit-transition:background 0.8s;  }
+
 .liu .l_cen dt.dt2{ background:url(../img/3.png)no-repeat center; }
 .liu .l_cen dt.dt3{ background:url(../img/4.png)no-repeat center; }
 .liu .l_cen dt.dt4{ background:url(../img/2.png)no-repeat center; }
+
+.liu .l_cen dt.dt2:hover{ background:#f05b48 url(../img/3-1.png)no-repeat center;transition:background 0.8s;-webkit-transition:background 0.8s; }
+.liu .l_cen dt.dt3:hover{ background:#f05b48 url(../img/4-1.png)no-repeat center;transition:background 0.8s;-webkit-transition:background 0.8s; }
+.liu .l_cen dt.dt4:hover{ background:#f05b48 url(../img/2-1.png)no-repeat center;transition:background 0.8s;-webkit-transition:background 0.8s; }
 .liu .l_cen dd{ width: 127px; text-align: center; font-size: 24px;color: #f05b48; line-height: 45px;}
 
 .jiao{ background: #e5e5e5; overflow: hidden; padding-bottom: 80px }
@@ -51,10 +51,10 @@ img,input{vertical-align:middle; outline:none}
 .jiao .j_cen div span{ padding: 0 0 0 10px; line-height: 46px; float: left; display:block; width: 118px}
 .jiao .j_cen div span.cl_one{ width: 300px; padding: 0 0 0 20px}
 .jiao .j_cen div span.last{ width: 60px;  }
-.jiao .j_cen div:hover,.jiao .j_cen div:active{ background: #fff }
-.jiao .j_cen .one:hover{ background: #f05b48; color: #fff; }
+.jiao .j_cen div:hover,.jiao .j_cen div:active{ background: #fff ;transition:background 1s;-webkit-transition:background 1s;}
+.jiao .j_cen .one:hover{ background: #f05b48; color: #fff;transition:background 0.8s;-webkit-transition:background 0.8s; }
 
-.about{ background: #f05b48; overflow: hidden;}
+.about{ background: #f05b48; overflow: hidden; padding: 50px 0}
 .a_cen{ width: 1190px; border:2px solid #fff; margin:20px auto;color: #fff; overflow: hidden; padding: 0 0 30px 0}
 .about .a_cen img{ margin:20px 0 0 30px;vertical-align: bottom;}
 .about .a_cen .left{word-wrap: break-word; width:280px; height: 308px; border: 1px solid #fff; float: right; font-size: 24px; margin-right:70px}
@@ -72,10 +72,16 @@ img,input{vertical-align:middle; outline:none}
 .bans{ width: 1200px; margin: 0 auto;}
 .x_nav{width: 1200px; margin: 0 auto; line-height: 55px; }
 .x_nav,.x_nav a{ color: #a2a0a0}
-.guj{ width: 1200px; margin: 0 auto; background: #e5e5e5; overflow: hidden; min-height: 520px;}
+
+.can{ width: 1200px; margin: 20px auto;}
+.can dl dt{ width: 100px; float: left; padding: 0 30px; height: 60px;margin-top: 20px}
+.can dl dd{ width: 900px; float: left; line-height: 35px;}
+.can dl dd.dd1{ font-size: 26px ;color: #000}
+.can dl dd span{ padding: 5px 20px;}
+.guj{ width: 1200px; margin: 0 auto; background: #e5e5e5; overflow: hidden; min-height: 520px; clear: both}
 .guj .gu{ width: 24.9%;border-right: 1px solid #d2cfcf; min-height: 520px; text-align: center; float: left}
 .guj .gu h2{ font-size:24 ;color: #5c5b5b; font-weight: 500; line-height: 61px; height: 61px; text-align: center; border-bottom:1px solid #d2cfcf }
-.guj .gu span{ font-size: 36px;color: #f05b48; line-height: 60px}
+.guj .gu span{ font-size:30px;color: #f05b48; line-height: 60px}
 .guj .gu  p{ font-size: 24px; line-height: 40px;}
 .guj .gu div{ padding: 10px 20; font-size: 12px;color: #999}
 .guj .gu dt{ font-size:20px ;color: #f05b48}
@@ -97,10 +103,14 @@ img,input{vertical-align:middle; outline:none}
 .lius .l_cen dl{ float: left;  margin:50px 78px}
 .lius .l_cen dt{ border: 1px solid #f05b48 ;width:127px; height: 127px; border-radius: 100px;}
 .lius .l_cen dt.dt1{ background:url(../img/1-1.png)no-repeat center; }
-.lius .l_cen dt.dt1:hover{ background:#f05b48 url(../img/1.png)no-repeat center; }
+.lius .l_cen dt.dt1:hover{ background:#f05b48 url(../img/1.png)no-repeat center;transition:background 0.8s;-webkit-transition:background 0.8s;  }
 .lius .l_cen dt.dt2{ background:url(../img/3.png)no-repeat center; }
 .lius .l_cen dt.dt3{ background:url(../img/4.png)no-repeat center; }
 .lius .l_cen dt.dt4{ background:url(../img/2.png)no-repeat center; }
+
+.lius .l_cen dt.dt2:hover{ background:#f05b48 url(../img/3-1.png)no-repeat center;transition:background 0.8s;-webkit-transition:background 0.8s; }
+.lius .l_cen dt.dt3:hover{ background:#f05b48 url(../img/4-1.png)no-repeat center;transition:background 0.8s;-webkit-transition:background 0.8s; }
+.lius .l_cen dt.dt4:hover{ background:#f05b48 url(../img/2-1.png)no-repeat center;transition:background 0.8s;-webkit-transition:background 0.8s; }
 .lius .l_cen dd{ width: 127px; text-align: center; font-size: 24px;color: #f05b48; line-height: 45px;}
 
 
@@ -127,12 +137,100 @@ img,input{vertical-align:middle; outline:none}
 .jingzhun .jing p.trr{width: 102px; text-align: center;margin-right: 20px}
 .jingzhun .jing p.for{width: 172px;}
 .jingzhun .jing p.for input{ background: none; border: none; width: 110px}
-.jingzhun .jing span{ padding: 5px  35px;cursor: pointer}
+.jingzhun .jing span{ padding: 8px  35px;cursor: pointer; border: 1px solid #ccc; margin-right: 20px}
 .jingzhun .jing span.hover{ background: #f05b48;color: #fff;}
 .jingzhun .jing span:hover{ background: #f05b48;color: #fff;}
 .jck label{ height:50px}
 .jingzhun .jing.tell{ margin-top: 50px; overflow: hidden;}
 .jingzhun .jing.tells input{ background: #eee; border: 1px solid #b2b2b2; width: 200px;line-height: 35px; height: 35px;}
 .jingzhun .jing.tells a{ color: #f05b48; border: 1px solid #f05b48; border-radius: 8px; padding: 7px 20px}
-.anniu{ width: 200px; margin: 30px auto;background: #f05b48; color: #fff; text-align: center; height: 65px; font-size: 24px; line-height: 65px;}
+.anniu{ width: 200px; margin: 30px auto;background: #f05b48; color: #fff; text-align: center; height: 65px; font-size: 24px; line-height: 65px;cursor: pointer}
 .jing a{ padding: 0 10px}
+.jing a.cen img{ border:2px solid #f05b48;}
+
+.jiage{ width: 1200px; margin: 0 auto}
+.jiage .jias{ font-size: 60px; font-weight: bold; text-align: center; color: #f05b48; margin-top: 100px}
+.jiage .jias span{ font-size: 36px;}
+.jiage .jzj{ width: 194px; border: 1px solid #f05b48; border-radius: 8px; height:57px; line-height: 57px; font-size: 24px;
+    color: #f05b48; text-align: center; margin: 50px auto 0;  position: relative;top: 30px}
+.jiage .pos{ height: 76px; background: #e5e5e5; width: 1200px;}
+.xieyi{ margin: 30px 0; text-align: center;color: #ccc; font-size: 18px; display: block; width: 1200px;}
+.zhuyi{ width:1114px; margin: 50px auto; border: 2px solid #f05b48; padding: 50px 40px;}
+.zhuyi div{ text-align: center; font-size: 30px; color: #f05b48; line-height: 70px}
+.zhuyi p{ font-size: 18px; line-height: 55px; margin-left: 80px}
+.xies{ display: none; position: absolute; background:rgba(0,0,0,0.7); height: 100%; width: 100%; top: 0; left: 0}
+.xies .regcon{ width: 600px; background: #fff; height: 500px; margin: 160px auto 0}
+.xies .regcon .m-sPopTitle{ background: #f05b48;color: #fff; height: 55px; text-align: center; line-height: 55px;}
+.xies .regcon .m-sPopTitle strong{ text-align: center; width: 550px; font-size: 20px;}
+#sPopClose{ float: right; font-size: 45px; padding-right: 20px; cursor: pointer}
+
+
+.yuyue{ width: 1200px; margin: 0 auto; overflow: hidden}
+.yuyue .left{ background: #f1f1f1; width: 768px; float: left;}
+.yuyue .right{ background: #e5e5e5; width:400px ; border-radius: 8px; float: right;min-height:547px; }
+.yuyue .left h1{ font-size: 18px; color: #666; font-weight: 500; line-height: 32px; padding: 10px 20px}
+.yuyue .left h1 span{ color: #fff; width: 32px; height: 32px; border-radius: 100px; background: #f05b48; float: left; line-height: 32px; text-align: center;margin-right: 10px}
+.yuyue .left dl{ width: 227px; height: 141px; background: #ccc; float: left; margin:30px 0 30px 80px; text-align: center;color: #000}
+.yuyue .left dl dd.dd1{ font-size: 20px; line-height: 45px;}
+.yuyue .left dl .dt1{ background: url("../img/yu_2.png")no-repeat center; height:50px;}
+.yuyue .left dl .dt2{ background: url("../img/yu_3.png")no-repeat center; height:50px;}
+.yuyue .left dl.hover{ background: #f05b48;color: #fff}
+.yuyue .left dl.hover .dt1{ background: url("../img/yu_1.png")no-repeat center; height:50px;}
+.yuyue .left dl.hover .dt2{ background: url("../img/yu_4.png")no-repeat center; height:50px;}
+
+.yuyue .left .x_left{ width: 175px; float: left; text-align: center; margin-left: 20px; font-size: 18px;}
+.yuyue .left .x_right{ float: right; width:543px; }
+.yuyue .left .x_left ul li{ line-height: 45px; width: 80%; margin: 3px auto}
+.yuyue .left .x_left ul li.active,.yuyue .left .x_left ul li:hover{ background: #f05b48;color: #fff;}
+.yuyue .left .x_dl{ overflow: hidden; width: 100%;}
+.yuyue .left .x_dl .x_dt{width: 30px; float: left; height: 50px; vertical-align: top !important; margin-top: 5px;}
+.yuyue .left .x_dl .x_dd{ width: 500px; float: left}
+.yuyue .left .x_dl .x_dd.x_dd1{ font-size:18px; }
+
+.yuyue .left .qu{ margin:30px 0 40px 90px}
+.yuyue .left .quh span{ background: #ccc; font-size: 18px; color: #666; padding: 7px 50px; margin-left: 40px}
+.yuyue .left .quh span.hovers{ background: #f05b48;color: #fff}
+.yuyue .left .d_1{ width: 693px;  margin: 0 auto; position: relative;}
+.yuyue .left .d_1 .one{ width: 260px; float: left; margin:15px 0}
+.yuyue .left .d_1 .one div{ background: #fff;color: #000; width:200px; height: 40px; line-height: 40px; text-align: center; font-size: 18px; cursor: pointer}
+.yuyue .left .d_1 .one div img{ float: right;margin: 10px 10px 0 0}
+.yuyue .left .d_1 .one1{ margin-left:85px}
+.yuyue .left .d_1 .one input{ border:0; height: 40px; line-height: 40px; padding-left: 20px }
+.yuyue .left .d_1 .one2{ width: 360px !important; margin-right: 20px}
+.yuyue .left .d_1 .one2 input{ width: 360px;}
+.yuyue .left .d_1 .one3{ width:300px;}
+.yuyue .left .d_1 .one3 input{ width: 300px}
+
+.yuyue .left .d_2 .one{ width: 260px; float: left; margin:15px 0;}
+.yuyue .left .d_2 .one div input{ background: #fff;color: #000; width:200px; height: 40px; line-height: 40px;  font-size: 18px; cursor: pointer; padding-left: 20px; border: 0}
+.yuyue .left .d_2 .one1{ margin-left:85px}
+
+.yuyue .left .hid{ width: 400px; background: #fff; height: 400px; overflow: hidden; margin-left: 125px}
+.yuyue .left .hid span{ display: block; background: none; padding: 5px 5px; float: left; width: 95px; height:  30px; line-height: 30px;
+    border:1px solid #ccc; margin: 10px !important; text-align: center; cursor: pointer}
+.yuyue .left .hid span:hover{ border: 1px solid #f05b48;color: #f05b48}
+.yuyue .left .hid span.cun{ border: 1px solid #f05b48;color: #f05b48}
+
+
+.yuyue .right p{ padding: 0px 30px }
+.yuyue .right dl{ margin-top: 30px}
+.yuyue .right dl dt{ width: 125px; float: left; height: 100px; line-height: 80px}
+.yuyue .right dl dt img{ margin-top: 20px; margin-left: 10px}
+.yuyue .right dl dd{ float: right; font-size: 18px; width: 274px;}
+.yuyue .right dl dd.dd2{ font-size:24px; color: #f05b48; font-weight: bold }
+
+
+.bgss{ background: #f5f5f5;}
+.box{ width: 789px; height: 482px; margin: 100px auto; background: #fff;}
+.width{ width: 226px; margin: 50px auto 30px; padding-top: 50px}
+.d_box{ width: 300px; margin: 0 auto}
+.d_box input{ line-height: 41px; height: 41px; margin-top: 20px; padding-left: 10px; width: 178px; border: 1px solid #eee}
+.d_box span{ margin-top: 20px; background:#e5e5e5; color: #666;float: right; width:111px; line-height: 41px; height: 41px; border-radius: 8px; text-align: center}
+.box .input2{ width: 300px; !important; display: block}
+.box button{ width: 100%; background: #f05b48; text-align: center;
+    height: 48px; line-height: 48px; border: none; border-radius: 8px; outline: none; margin-top: 30px; font-size: 18px; color: #fff}
+.xieyis{ width: 789px !important; }
+.p_fooot{ text-align: center; line-height: 40px;}
+.shouj{ width: 300px; margin: 0px auto; font-size: 18px; color: #000}
+
+

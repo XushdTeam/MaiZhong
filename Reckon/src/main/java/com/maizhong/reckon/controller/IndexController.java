@@ -1,17 +1,16 @@
 package com.maizhong.reckon.controller;
 
 import com.maizhong.common.result.JsonResult;
+import com.maizhong.reckon.DTO.GuzhiDTO;
 import com.maizhong.reckon.DTO.IndexDTO;
 import com.maizhong.reckon.service.IndexService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Xushd on 2017/4/18.
@@ -62,6 +61,10 @@ public class IndexController {
         return result;
     }
 
+    /**
+     * 获取所有城市
+     * @return
+     */
     @RequestMapping(value = "/getAllCity")
     @ResponseBody
     public JsonResult getAllCity(){
@@ -69,4 +72,11 @@ public class IndexController {
         return result;
     }
 
+    @RequestMapping(value = "/guzhi/{param}")
+    public String compute(@PathVariable String param,Model model){
+
+        GuzhiDTO guzhiDTO = indexService.getGuZhi(param);
+        model.addAttribute("result",guzhiDTO);
+        return "guzhi";
+    }
 }

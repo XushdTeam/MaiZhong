@@ -5,15 +5,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
+import com.maizhong.reckon.DTO.GuzhiDTO;
 import com.maizhong.reckon.DTO.IndexDTO;
 import com.maizhong.reckon.service.IndexService;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Xushd on 2017/4/18.
@@ -28,19 +24,19 @@ public class IndexServiceImpl implements IndexService {
 
     @Override
     public IndexDTO getIndexDTO() {
-        try {
+        try{
 
-            String res = HttpClientUtil.doGet(RESTURL + "GetBrandList");
+            String res = HttpClientUtil.doGet(RESTURL+"GetBrandList");
             JSONObject object = JSON.parseObject(res);
             IndexDTO indexDTO = new IndexDTO();
             indexDTO.setBrandList(object.getJSONArray("data"));
-            res = HttpClientUtil.doGet(RESTURL + "getProvice");
+            res = HttpClientUtil.doGet(RESTURL+"getProvice");
             object = JSON.parseObject(res);
             indexDTO.setProviceList(object.getJSONArray("data"));
 
             return indexDTO;
 
-        } catch (Exception e) {
+        }catch (Exception e){
 
             e.printStackTrace();
         }
@@ -49,7 +45,6 @@ public class IndexServiceImpl implements IndexService {
 
     /**
      * 通过品牌获取车系
-     *
      * @param brandId
      * @return
      */
@@ -58,10 +53,10 @@ public class IndexServiceImpl implements IndexService {
 
         try {
 
-            String res = HttpClientUtil.doGet(RESTURL + "GetSeriesByBrandId/" + brandId);
-            return JsonUtils.jsonToPojo(res, JsonResult.class);
+            String res = HttpClientUtil.doGet(RESTURL+"GetSeriesByBrandId/"+brandId);
+            return JsonUtils.jsonToPojo(res,JsonResult.class);
 
-        } catch (Exception e) {
+        } catch (Exception e){
 
             e.printStackTrace();
 
@@ -73,7 +68,6 @@ public class IndexServiceImpl implements IndexService {
 
     /**
      * 获取车型
-     *
      * @param seriesId
      * @return
      */
@@ -82,12 +76,16 @@ public class IndexServiceImpl implements IndexService {
 
         try {
 
-            String res = HttpClientUtil.doGet(RESTURL + "getCarType/" + seriesId);
-            return JsonUtils.jsonToPojo(res, JsonResult.class);
+            String res = HttpClientUtil.doGet(RESTURL+"getCarType/"+seriesId);
+            return JsonUtils.jsonToPojo(res,JsonResult.class);
 
-        } catch (Exception e) {
+
+        }catch (Exception e){
+
             e.printStackTrace();
+
         }
+
         return null;
     }
 
@@ -95,15 +93,39 @@ public class IndexServiceImpl implements IndexService {
     public JsonResult getAllCity() {
         try {
 
-            String res = HttpClientUtil.doGet(RESTURL + "getCity/");
-            return JsonUtils.jsonToPojo(res, JsonResult.class);
+            String res = HttpClientUtil.doGet(RESTURL+"getCity/");
+            return JsonUtils.jsonToPojo(res,JsonResult.class);
 
-        } catch (Exception e) {
+
+        }catch (Exception e){
 
             e.printStackTrace();
+
         }
+
         return null;
 
     }
 
+    @Override
+    public GuzhiDTO getGuZhi(String param) {
+
+
+        String res = HttpClientUtil.doGet(RESTURL+"guzhi/"+param);
+
+        JSONObject object = JSON.parseObject(res);
+        JSONObject data = object.getJSONObject("data");
+
+        GuzhiDTO guzhiDTO = new GuzhiDTO();
+
+        guzhiDTO.setPriceA(data.getString("priceMinA")+"万~"+data.getString("priceMaxA")+"万");
+        guzhiDTO.setPriceB(data.getString("priceMinB")+"万~"+data.getString("priceMaxB")+"万");
+        guzhiDTO.setPriceC(data.getString("priceMinC")+"万~"+data.getString("priceMaxC")+"万");
+        guzhiDTO.setPriceD(data.getString("priceMinD")+"万~"+data.getString("priceMaxD")+"万");
+
+
+
+        return guzhiDTO;
+
+    }
 }

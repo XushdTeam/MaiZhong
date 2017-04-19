@@ -1,5 +1,6 @@
 package com.maizhong.rest.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.rest.service.IndexService;
@@ -128,26 +129,15 @@ public class ReckonController {
     }
 
     /**
-     * 获取用户验证码
-     * @param phone
+     * 获取估值信息
+     * @param param
      * @return
      */
-    @RequestMapping(value = "getSMSCode",method = RequestMethod.POST)
+    @RequestMapping(value = "/guzhi/{param}",method = RequestMethod.GET)
     @ResponseBody
-    public  JsonResult getSMSCode(String phone,String ip){
-        JsonResult result=reckonService.getSMSCode(phone,ip);
-        return result;
-    }
+    public JsonResult getGuzhi(@PathVariable String param){
 
-    /**
-     * 用户使用验证码进行登录
-     * @param phone
-     * @return
-     */
-    @RequestMapping(value = "userLogin",method = RequestMethod.POST)
-    @ResponseBody
-    public  JsonResult userLogin(String phone,String smsCode,String ip){
-        JsonResult result=reckonService.userLogin(smsCode,phone,ip);
+        JsonResult result = reckonService.getGuzhi(param);
         return result;
     }
 }

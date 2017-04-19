@@ -17,7 +17,7 @@
     <meta name="description" content="迈众汽车为您提供最新汽车报价，汽车图片，汽车价格大全，最精彩的汽车新闻、行情、评测、导购内容，是提供信息最快最全的中国汽车网站。"/>
     <link rel="stylesheet" type="text/css" href="/resources/style/base.css" />
     <link rel="stylesheet" type="text/css" href="/resources/css/index.css" />
-    <script src="http://cdn.bootcss.com/jquery/3.2.0/jquery.min.js" type="text/javascript"></script>
+    <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
 </head>
 <body>
 <div class="top e_top">
@@ -32,11 +32,19 @@
 
 <div class="x_nav">当前位置 :  <a href="#">首页</a> > <a href="#">二手车评估</a> >  北京2016款 奥迪A3 Limousine 35 TFSI 进取型二手车评估详情</div>
 
+ <div class="can">
+     <dl>
+         <dt><img src="../resources/img/c_1.png"></dt>
+         <dd class="dd1">2016款 奥迪A3 Limousine 35 TFSI 进取型</dd>
+         <dd><span>北京</span>|<span>2016年2月上牌</span>|<span>25万公里</span>|<span>自动</span>|<span>排量1.4L</span>|<span>国5</span>|<span>新车售价19.0万</span></dd>
+     </dl>
+ </div>
+
 <!--估价选项-->
   <div class="guj">
       <div class="gu hover">
           <h2>车况优秀</h2>
-          <span>8万~12万</span>
+          <span>${result.priceA}</span>
           <p>车况说明</p>
           <div>迈众作为独立第三方价格服务平台，为您
               提供精确的车辆估值服务，让您在交易前充分
@@ -64,8 +72,8 @@
 
 
       <div class="gu">
-          <h2>车况优秀</h2>
-          <span>8万~12万</span>
+          <h2>车况良好</h2>
+          <span>${result.priceB}</span>
           <p>车况说明</p>
           <div>迈众作为独立第三方价格服务平台，为您
               提供精确的车辆估值服务，让您在交易前充分
@@ -93,8 +101,8 @@
 
 
       <div class="gu">
-          <h2>车况优秀</h2>
-          <span>8万~12万</span>
+          <h2>车况一般</h2>
+          <span>${result.priceC}</span>
           <p>车况说明</p>
           <div>迈众作为独立第三方价格服务平台，为您
               提供精确的车辆估值服务，让您在交易前充分
@@ -122,8 +130,8 @@
 
 
       <div class="gu none">
-          <h2>车况优秀</h2>
-          <span>8万~12万</span>
+          <h2>车况较差</h2>
+          <span>${result.priceD}</span>
           <p>车况说明</p>
           <div>迈众作为独立第三方价格服务平台，为您
               提供精确的车辆估值服务，让您在交易前充分
@@ -163,22 +171,22 @@
         <h2>我们的流程 <span>快速成交，立马打款，及时有效</span></h2>
         <dl>
             <dt class="dt1"></dt>
-            <dd>评估</dd>
+            <dd>精准估值</dd>
         </dl>
 
         <dl>
             <dt class="dt2"></dt>
-            <dd>评估</dd>
+            <dd>专业检测</dd>
         </dl>
 
         <dl>
             <dt class="dt3"></dt>
-            <dd>评估</dd>
+            <dd>现场打款</dd>
         </dl>
 
         <dl>
             <dt class="dt4"></dt>
-            <dd>评估</dd>
+            <dd>售后服务</dd>
         </dl>
     </div>
 </div>

@@ -1,9 +1,8 @@
 package com.maizhong.reckon.service;
 
 import com.maizhong.common.result.JsonResult;
+import com.maizhong.reckon.DTO.GuzhiDTO;
 import com.maizhong.reckon.DTO.IndexDTO;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Xushd on 2017/4/18.
@@ -18,5 +17,5 @@ public interface IndexService {
 
     JsonResult getAllCity();
 
-
+    GuzhiDTO getGuZhi(String param);
 }
