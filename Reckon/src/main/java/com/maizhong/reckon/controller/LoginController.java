@@ -25,28 +25,30 @@ public class LoginController {
 
 
     /**
-     * 获取验证码
-     * @param phone
-     * @return
-     */
-    @RequestMapping(value = "/getSMSCode/{phone}",method = RequestMethod.GET)
+            * 获取验证码
+    *
+            * @param phone
+    * @return
+            */
+    @RequestMapping(value = "/getSMSCode/{phone}", method = RequestMethod.GET)
     @ResponseBody
-    public JsonResult getSMSCode(@PathVariable("phone") String phone, HttpServletRequest request){
-        JsonResult result=loginService.getSMSCode(phone,request);
-        return  result;
+    public JsonResult getSMSCode(@PathVariable("phone") String phone, HttpServletRequest request) {
+        JsonResult result = loginService.getSMSCode(phone, request);
+        return result;
     }
 
     /**
      * 用户登录
+     *
      * @param phone
      * @param smsCode
      * @return
      */
-    @RequestMapping(value = "/userLogin/{phone}/{smsCode}",method = RequestMethod.GET)
+    @RequestMapping(value = "/userLogin/{phone}/{smsCode}", method = RequestMethod.GET)
     @ResponseBody
-    public JsonResult userLogin(@PathVariable("phone") String phone,@PathVariable("smsCode") String smsCode,HttpServletRequest request){
-        JsonResult result=loginService.userLogin(phone,smsCode,request);
-        return  result;
+    public JsonResult userLogin(@PathVariable("phone") String phone, @PathVariable("smsCode") String smsCode, HttpServletRequest request) {
+        JsonResult result = loginService.userLogin(phone, smsCode, request);
+        return result;
     }
 
 }
