@@ -130,5 +130,8 @@ img,input{vertical-align:middle; outline:none}
 .jingzhun .jing span.hover{ background: #f05b48;color: #fff;}
 .jingzhun .jing span:hover{ background: #f05b48;color: #fff;}
 .jck label{ height:50px}
-.jingzhun .jing .tell{ margin-top: 20px; overflow: hidden}
-
+.jingzhun .jing.tell{ margin-top: 50px; overflow: hidden;}
+.jingzhun .jing.tells input{ background: #eee; border: 1px solid #b2b2b2; width: 200px;line-height: 35px; height: 35px;}
+.jingzhun .jing.tells a{ color: #f05b48; border: 1px solid #f05b48; border-radius: 8px; padding: 7px 20px}
+.anniu{ width: 200px; margin: 30px auto;background: #f05b48; color: #fff; text-align: center; height: 65px; font-size: 24px; line-height: 65px;}
+.jing a{ padding: 0 10px}

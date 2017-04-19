@@ -48,7 +48,15 @@
 
     <div class="jing">
         <label>颜色：</label>
-        <input type="checkbox" name="2">
+       <a href="JavaScript:void(0)"> <img src="../resources/img/y_1.png"></a>
+        <a href="JavaScript:void(0)"> <img src="../resources/img/y_2.png"></a>
+        <a href="JavaScript:void(0)"> <img src="../resources/img/y_3.png"></a>
+        <a href="JavaScript:void(0)"> <img src="../resources/img/y_4.png"></a>
+        <a href="JavaScript:void(0)"> <img src="../resources/img/y_5.jpg"></a>
+        <a href="JavaScript:void(0)"> <img src="../resources/img/y_6.jpg"></a>
+        <a href="JavaScript:void(0)"> <img src="../resources/img/y_7.png"></a>
+        <a href="JavaScript:void(0)"> <img src="../resources/img/y_8.png"></a>
+        <a href="JavaScript:void(0)"> <img src="../resources/img/y_9.png"></a>
     </div>
 
     <div class="jing">
@@ -111,16 +119,20 @@
 
     </div>
 
-    <div class="jing tell">
+    <div class="jing tell tells">
         <label>手机号：</label>
         <input type="tell" name="1">
         <a class="tes">获取验证码</a>
     </div>
 
-
-
-
-
+    <div class="jing tells">
+        <label>验证码：</label>
+        <input type="tell" name="1">
+    </div>
 </div>
+
+
+<div class="clear"></div>
+<div class="anniu">确认估值</div>
 </body>
 </html>
