@@ -815,6 +815,76 @@ public class ModelExample {
             addCriterion("update_time not between", value1, value2, "updateTime");
             return (Criteria) this;
         }
+
+        public Criteria andShortNameIsNull() {
+            addCriterion("short_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortNameIsNotNull() {
+            addCriterion("short_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortNameEqualTo(String value) {
+            addCriterion("short_name =", value, "shortName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortNameNotEqualTo(String value) {
+            addCriterion("short_name <>", value, "shortName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortNameGreaterThan(String value) {
+            addCriterion("short_name >", value, "shortName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortNameGreaterThanOrEqualTo(String value) {
+            addCriterion("short_name >=", value, "shortName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortNameLessThan(String value) {
+            addCriterion("short_name <", value, "shortName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortNameLessThanOrEqualTo(String value) {
+            addCriterion("short_name <=", value, "shortName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortNameLike(String value) {
+            addCriterion("short_name like", value, "shortName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortNameNotLike(String value) {
+            addCriterion("short_name not like", value, "shortName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortNameIn(List<String> values) {
+            addCriterion("short_name in", values, "shortName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortNameNotIn(List<String> values) {
+            addCriterion("short_name not in", values, "shortName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortNameBetween(String value1, String value2) {
+            addCriterion("short_name between", value1, value2, "shortName");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortNameNotBetween(String value1, String value2) {
+            addCriterion("short_name not between", value1, value2, "shortName");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

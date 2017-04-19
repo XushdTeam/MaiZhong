@@ -103,11 +103,11 @@ public class ReckonController {
      *
      * @return
      */
-    @RequestMapping(value = "/getCity/{proviceId}",method =RequestMethod.GET)
+    @RequestMapping(value = "/getCity",method =RequestMethod.GET)
     @ResponseBody
-    public JsonResult getCity(@PathVariable("proviceId") String proviceId) {
+    public JsonResult getCity() {
 
-           JsonResult result = reckonService.getCity(proviceId);
+           JsonResult result = reckonService.getCity();
 
         return result;
     }

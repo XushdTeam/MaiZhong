@@ -13,6 +13,7 @@
     <result column="discharge_standard" jdbcType="VARCHAR" property="dischargeStandard" />
     <result column="seat_number" jdbcType="VARCHAR" property="seatNumber" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="short_name" jdbcType="VARCHAR" property="shortName" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -74,7 +75,7 @@
   </sql>
   <sql id="Base_Column_List">
     model_id, model_name, model_price, model_year, min_reg_year, max_reg_year, liter, 
-    gear_type, discharge_standard, seat_number, update_time
+    gear_type, discharge_standard, seat_number, update_time, short_name
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.pojo.ModelExample" resultMap="BaseResultMap">
     select
@@ -110,11 +111,13 @@
     insert into model (model_id, model_name, model_price, 
       model_year, min_reg_year, max_reg_year, 
       liter, gear_type, discharge_standard, 
-      seat_number, update_time)
+      seat_number, update_time, short_name
+      )
     values (#{modelId,jdbcType=INTEGER}, #{modelName,jdbcType=VARCHAR}, #{modelPrice,jdbcType=DECIMAL}, 
       #{modelYear,jdbcType=INTEGER}, #{minRegYear,jdbcType=INTEGER}, #{maxRegYear,jdbcType=INTEGER}, 
       #{liter,jdbcType=VARCHAR}, #{gearType,jdbcType=VARCHAR}, #{dischargeStandard,jdbcType=VARCHAR}, 
-      #{seatNumber,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+      #{seatNumber,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{shortName,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.pojo.Model">
     insert into model
@@ -152,6 +155,9 @@
       <if test="updateTime != null">
         update_time,
       </if>
+      <if test="shortName != null">
+        short_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="modelId != null">
@@ -186,6 +192,9 @@
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shortName != null">
+        #{shortName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -231,6 +240,9 @@
       <if test="record.updateTime != null">
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.shortName != null">
+        short_name = #{record.shortName,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -248,7 +260,8 @@
       gear_type = #{record.gearType,jdbcType=VARCHAR},
       discharge_standard = #{record.dischargeStandard,jdbcType=VARCHAR},
       seat_number = #{record.seatNumber,jdbcType=VARCHAR},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      short_name = #{record.shortName,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -286,6 +299,9 @@
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="shortName != null">
+        short_name = #{shortName,jdbcType=VARCHAR},
+      </if>
     </set>
     where model_id = #{modelId,jdbcType=INTEGER}
   </update>
@@ -300,7 +316,8 @@
       gear_type = #{gearType,jdbcType=VARCHAR},
       discharge_standard = #{dischargeStandard,jdbcType=VARCHAR},
       seat_number = #{seatNumber,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      short_name = #{shortName,jdbcType=VARCHAR}
     where model_id = #{modelId,jdbcType=INTEGER}
   </update>
 </mapper>

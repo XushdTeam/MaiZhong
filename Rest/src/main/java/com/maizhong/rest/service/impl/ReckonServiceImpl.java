@@ -261,13 +261,11 @@ public class ReckonServiceImpl implements ReckonService {
     }
 
     @Override
-    public JsonResult getCity(String proviceId) {
-        if (StringUtils.isBlank(proviceId)) {
-            return JsonResult.OK();
-        }
+    public JsonResult getCity() {
+
         String get = null;
         try {
-            get = jedisClient.hget(CITY,proviceId);
+            get = jedisClient.get(CITY);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -276,15 +274,7 @@ public class ReckonServiceImpl implements ReckonService {
             return JsonResult.build(200, "获取城市成功", cityDTOList);
         }
 
-        CityExample example = new CityExample();
-        CityExample.Criteria criteria = example.createCriteria();
-        try {
-            criteria.andProvIdEqualTo(Integer.valueOf(proviceId));
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
-        example.setOrderByClause("prov_id ASC");
-        List<City> cities = cityMapper.selectByExample(example);
+        List<City> cities = cityMapper.selectByExample(null);
         if (cities == null || cities.size() == 0) {
             return JsonResult.OK();
         }
@@ -297,7 +287,7 @@ public class ReckonServiceImpl implements ReckonService {
             cityDTOList.add(dto);
         }
         try {
-            jedisClient.hset(CITY,proviceId,JsonUtils.objectToJson(cityDTOList));
+            jedisClient.set(CITY,JsonUtils.objectToJson(cityDTOList));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -329,13 +319,23 @@ public class ReckonServiceImpl implements ReckonService {
                 jedisClient.hset("CAR_MODEL",seriesId,JSON.toJSONString(model_list));
                 //STEP 5 存入数据库
                 for (Object o : model_list) {
-                    Model model = JsonUtils.jsonToPojo(JSON.toJSONString(o), Model.class);
+                    JSONObject object= (JSONObject) o;
+                    Model model=new Model();
+                    model.setDischargeStandard(object.getString("discharge_standard"));
+                    model.setGearType(object.getString("gear_type"));
+                    model.setLiter(object.getString("liter"));
+                    model.setMaxRegYear(object.getInteger("max_reg_year"));
+                    model.setMinRegYear(object.getInteger("min_reg_year"));
+                    model.setModelName(object.getString("model_name"));
+                    model.setModelId(object.getInteger("model_id"));
+                    model.setModelYear(object.getInteger("model_year"));
+                    model.setSeatNumber(object.getString("seat_number"));
+                    model.setUpdateTime(object.getDate("update_time"));
+                    model.setShortName(object.getString("short_name"));
+                    model.setModelPrice(object.getBigDecimal("model_price"));
                     modelMapper.insert(model);
-
-
                 }
                 return JsonResult.OK(model_list);
-
             }
 
         } catch (Exception e){
