@@ -72,6 +72,17 @@
             <artifactId>lucene-core</artifactId>
             <version>4.10.3</version>
         </dependency>
+        <!--阿里云短信接口-->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-sms</artifactId>
+            <version>3.0.0-rc1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -82,9 +93,10 @@
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <configuration>
-                    <port>8082</port>
+                    <port>8085</port>
                     <path>/</path>
                     <url>http://192.168.3.192:8080/manager/text</url>
+                    <update>true</update>
                     <username>admin</username>
                     <password>admin</password>
                 </configuration>
