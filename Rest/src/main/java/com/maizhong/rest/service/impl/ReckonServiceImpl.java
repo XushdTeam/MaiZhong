@@ -3,9 +3,18 @@ package com.maizhong.rest.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.IAcsClient;
+import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.exceptions.ServerException;
+import com.aliyuncs.profile.DefaultProfile;
+import com.aliyuncs.profile.IClientProfile;
+import com.aliyuncs.sms.model.v20160927.SingleSendSmsRequest;
+import com.aliyuncs.sms.model.v20160927.SingleSendSmsResponse;
 import com.maizhong.common.dto.*;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
+import com.maizhong.common.utils.EncryptUtils;
 import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.dao.JedisClient;
@@ -39,6 +48,8 @@ public class ReckonServiceImpl implements ReckonService {
     private ProvinceMapper provinceMapper;
     @Autowired
     private CityMapper cityMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -70,6 +81,10 @@ public class ReckonServiceImpl implements ReckonService {
     private String PROVINCE;
     @Value("${CITY}")
     private String CITY;
+    @Value("${SMS_CODE}")
+    private String SMS_CODE;
+    @Value("${LOGIN_TOKEN}")
+    private String LOGIN_TOKEN;
 
     @Override
     public void getBrandData() {
@@ -448,14 +463,128 @@ public class ReckonServiceImpl implements ReckonService {
     @Override
     public void setRedisCity() {
 
-        CityExample example = new CityExample();
-        List<City> cities = cityMapper.selectByExample(example);
-
-        for (City city : cities) {
-            jedisClient.hset("CITY_KEY",city.getCityId()+"",city.getCityName());
-        }
-
-
     }
+
+    /**
+     * 获取验证码
+     *
+     * @param phone
+     * @return
+     */
+    @Override
+    public JsonResult getSMSCode(String phone, String ip) {
+        try {
+            try {
+                //同一手机号1分钟只能发送一条
+                String s = jedisClient.get(SMS_CODE + ":" + phone);//获取是否发送
+                if (StringUtils.isNotBlank(s)) {
+                    Map map = JsonUtils.jsonToPojo(s, Map.class);
+                    Date now = new Date();
+                    Long oldDate = (Long) map.get("date");
+                    long interval = (now.getTime() - oldDate) / 1000;
+                    if (interval <= 60) {
+                        return JsonResult.Error("发送频发，请稍后重试");
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+/*
+             *//* 限制IP地址*//*
+            Integer number=1;
+            try {
+                String ipAddress = jedisClient.get(IP_ADDRESS + ":" + ip);
+                if (StringUtils.isNotBlank(ipAddress)){
+                    number = JsonUtils.jsonToPojo(IP_ADDRESS, Integer.class);
+                    if (number>5){
+                        return JsonResult.Error("发送频繁，请稍后重试！");//一个小时内只能发送5次
+                    }
+                    number++;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            jedisClient.set(IP_ADDRESS+":"+ip, String.valueOf(number));
+            if (number==1){
+                jedisClient.expire(IP_ADDRESS + ":" + ip, 60 * 60);//1小时过期
+            }*/
+            try {
+                jedisClient.del(SMS_CODE + ":" + phone);//重新发送短息时要清空上一次信息
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            int smsCode = (int) (Math.random() * (9999 - 1000 + 1)) + 1000;//验证码 4位随机数
+            Map<String, Object> codeMap = new HashMap<>();
+            codeMap.put("ip", ip);
+            codeMap.put("smsCode", String.valueOf(smsCode));
+            codeMap.put("date", new Date());//保存发送时间
+            jedisClient.set(SMS_CODE + ":" + phone, JsonUtils.objectToJson(codeMap));//写入缓存
+            jedisClient.expire(SMS_CODE + ":" + phone, 60 * 5);//5分钟过期
+
+           /* 阿里发送短信*/
+            IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAIZ3jQm7dX5Inv", "1OqUiGxTQeH2afyKhYv6vlPtzh1m2a");
+            DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", "Sms", "sms.aliyuncs.com");
+            IAcsClient client = new DefaultAcsClient(profile);
+            SingleSendSmsRequest request = new SingleSendSmsRequest();
+            request.setSignName("王存浩");//控制台创建的签名名称
+            request.setTemplateCode("SMS_62410574");//控制台创建的模板CODE
+            Map<String, String> map = new HashMap<>();
+            map.put("name", "迈众汽车");//称呼
+            map.put("code", String.valueOf(smsCode));//短信验证码
+            request.setParamString(JsonUtils.objectToJson(map));//短信模板中的变量；数字需要转换为字符串；个人用户每个变量长度必须小于15个字符。"
+            request.setRecNum(phone);//接收号码
+            SingleSendSmsResponse httpResponse = client.getAcsResponse(request);
+        } catch (ServerException e) {
+            e.printStackTrace();
+            return JsonResult.Error("发送失败,请重新发送");
+        } catch (ClientException e) {
+            e.printStackTrace();
+            return  JsonResult.Error(e.getMessage());
+        }
+        return JsonResult.OK("发送成功");
+    }
+
+    /**
+     * 用户登录
+     *
+     * @param smsCode
+     * @return
+     */
+    @Override
+    public JsonResult userLogin(String smsCode, String phone, String ip) {
+        String res = null;
+        try {
+            res = jedisClient.get(SMS_CODE + ":" + phone);//获取缓存内的信息
+        } catch (Exception e) {
+            return JsonResult.Error("请发送验证码");
+        }
+        if (StringUtils.isBlank(res)) {
+            return JsonResult.Error("请发送验证码");
+        }
+        Map map = JsonUtils.jsonToPojo(res, Map.class);
+        String reSmsCode = (String) map.get("smsCode");
+        if (StringUtils.equals(smsCode, reSmsCode)) {
+            String token = EncryptUtils.getSHA256Str(phone + "*#$maizhong%$!*");
+            try {
+                jedisClient.set(LOGIN_TOKEN + ":" + phone, token);
+             /*   jedisClient.expire(LOGIN_TOKEN + ":" + phone, 60 * 60 * 2);  登录用户暂时不设置失效时间*/
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                User user = new User();
+                user.setPhone(phone);
+                user.setStatus(1);
+                user.setDelflag(0);
+                userMapper.insert(user);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return JsonResult.build(200, "登录成功", token);
+        } else {
+            return JsonResult.Error("登录失败，验证码不匹配");
+        }
+    }
+
 }
 
