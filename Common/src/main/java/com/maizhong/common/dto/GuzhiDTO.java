@@ -64,6 +64,20 @@ public class GuzhiDTO {
 
     private String maxMouth;
 
+    private String modelId;
+
+
+    private  String color;//颜色
+    private String jqx;//交强险
+    private String gh;//过户次数
+    private String ghtime;//过户时间
+    private String xz;//性质
+    private String nj;//年检
+    private String method;//使用方式
+    private String ck;//车况
+
+
+
     public String getModelId() {
         return modelId;
     }
@@ -71,9 +85,6 @@ public class GuzhiDTO {
     public void setModelId(String modelId) {
         this.modelId = modelId;
     }
-
-    private String modelId;
-
 
     public String getSalePrice() {
         return salePrice;
@@ -302,5 +313,69 @@ public class GuzhiDTO {
 
     public void setPriceD(String priceD) {
         this.priceD = priceD;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getJqx() {
+        return jqx;
+    }
+
+    public void setJqx(String jqx) {
+        this.jqx = jqx;
+    }
+
+    public String getGh() {
+        return gh;
+    }
+
+    public void setGh(String gh) {
+        this.gh = gh;
+    }
+
+    public String getGhtime() {
+        return ghtime;
+    }
+
+    public void setGhtime(String ghtime) {
+        this.ghtime = ghtime;
+    }
+
+    public String getXz() {
+        return xz;
+    }
+
+    public void setXz(String xz) {
+        this.xz = xz;
+    }
+
+    public String getNj() {
+        return nj;
+    }
+
+    public void setNj(String nj) {
+        this.nj = nj;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public String getCk() {
+        return ck;
+    }
+
+    public void setCk(String ck) {
+        this.ck = ck;
     }
 }
