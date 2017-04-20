@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maizhong.mapper.GzrecordMapper">
+  <resultMap id="BaseResultMap" type="com.maizhong.pojo.Gzrecord">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="param" jdbcType="VARCHAR" property="param" />
+    <result column="model_id" jdbcType="BIGINT" property="modelId" />
+    <result column="city" jdbcType="INTEGER" property="city" />
+    <result column="mail" jdbcType="INTEGER" property="mail" />
+    <result column="reg_date" jdbcType="VARCHAR" property="regDate" />
+    <result column="price_max_a" jdbcType="VARCHAR" property="priceMaxA" />
+    <result column="price_min_a" jdbcType="VARCHAR" property="priceMinA" />
+    <result column="price_max_b" jdbcType="VARCHAR" property="priceMaxB" />
+    <result column="price_min_b" jdbcType="VARCHAR" property="priceMinB" />
+    <result column="price_max_c" jdbcType="VARCHAR" property="priceMaxC" />
+    <result column="price_min_c" jdbcType="VARCHAR" property="priceMinC" />
+    <result column="price_max_d" jdbcType="VARCHAR" property="priceMaxD" />
+    <result column="price_min_d" jdbcType="VARCHAR" property="priceMinD" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, param, model_id, city, mail, reg_date, price_max_a, price_min_a, price_max_b, 
+    price_min_b, price_max_c, price_min_c, price_max_d, price_min_d, time
+  </sql>
+  <select id="selectByExample" parameterType="com.maizhong.pojo.GzrecordExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gzrecord
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gzrecord
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gzrecord
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maizhong.pojo.GzrecordExample">
+    delete from gzrecord
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maizhong.pojo.Gzrecord">
+    insert into gzrecord (id, param, model_id, 
+      city, mail, reg_date, 
+      price_max_a, price_min_a, price_max_b, 
+      price_min_b, price_max_c, price_min_c, 
+      price_max_d, price_min_d, time
+      )
+    values (#{id,jdbcType=BIGINT}, #{param,jdbcType=VARCHAR}, #{modelId,jdbcType=BIGINT}, 
+      #{city,jdbcType=INTEGER}, #{mail,jdbcType=INTEGER}, #{regDate,jdbcType=VARCHAR}, 
+      #{priceMaxA,jdbcType=VARCHAR}, #{priceMinA,jdbcType=VARCHAR}, #{priceMaxB,jdbcType=VARCHAR}, 
+      #{priceMinB,jdbcType=VARCHAR}, #{priceMaxC,jdbcType=VARCHAR}, #{priceMinC,jdbcType=VARCHAR}, 
+      #{priceMaxD,jdbcType=VARCHAR}, #{priceMinD,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.maizhong.pojo.Gzrecord">
+    insert into gzrecord
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="param != null">
+        param,
+      </if>
+      <if test="modelId != null">
+        model_id,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="mail != null">
+        mail,
+      </if>
+      <if test="regDate != null">
+        reg_date,
+      </if>
+      <if test="priceMaxA != null">
+        price_max_a,
+      </if>
+      <if test="priceMinA != null">
+        price_min_a,
+      </if>
+      <if test="priceMaxB != null">
+        price_max_b,
+      </if>
+      <if test="priceMinB != null">
+        price_min_b,
+      </if>
+      <if test="priceMaxC != null">
+        price_max_c,
+      </if>
+      <if test="priceMinC != null">
+        price_min_c,
+      </if>
+      <if test="priceMaxD != null">
+        price_max_d,
+      </if>
+      <if test="priceMinD != null">
+        price_min_d,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="param != null">
+        #{param,jdbcType=VARCHAR},
+      </if>
+      <if test="modelId != null">
+        #{modelId,jdbcType=BIGINT},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=INTEGER},
+      </if>
+      <if test="mail != null">
+        #{mail,jdbcType=INTEGER},
+      </if>
+      <if test="regDate != null">
+        #{regDate,jdbcType=VARCHAR},
+      </if>
+      <if test="priceMaxA != null">
+        #{priceMaxA,jdbcType=VARCHAR},
+      </if>
+      <if test="priceMinA != null">
+        #{priceMinA,jdbcType=VARCHAR},
+      </if>
+      <if test="priceMaxB != null">
+        #{priceMaxB,jdbcType=VARCHAR},
+      </if>
+      <if test="priceMinB != null">
+        #{priceMinB,jdbcType=VARCHAR},
+      </if>
+      <if test="priceMaxC != null">
+        #{priceMaxC,jdbcType=VARCHAR},
+      </if>
+      <if test="priceMinC != null">
+        #{priceMinC,jdbcType=VARCHAR},
+      </if>
+      <if test="priceMaxD != null">
+        #{priceMaxD,jdbcType=VARCHAR},
+      </if>
+      <if test="priceMinD != null">
+        #{priceMinD,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maizhong.pojo.GzrecordExample" resultType="java.lang.Long">
+    select count(*) from gzrecord
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gzrecord
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.param != null">
+        param = #{record.param,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelId != null">
+        model_id = #{record.modelId,jdbcType=BIGINT},
+      </if>
+      <if test="record.city != null">
+        city = #{record.city,jdbcType=INTEGER},
+      </if>
+      <if test="record.mail != null">
+        mail = #{record.mail,jdbcType=INTEGER},
+      </if>
+      <if test="record.regDate != null">
+        reg_date = #{record.regDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceMaxA != null">
+        price_max_a = #{record.priceMaxA,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceMinA != null">
+        price_min_a = #{record.priceMinA,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceMaxB != null">
+        price_max_b = #{record.priceMaxB,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceMinB != null">
+        price_min_b = #{record.priceMinB,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceMaxC != null">
+        price_max_c = #{record.priceMaxC,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceMinC != null">
+        price_min_c = #{record.priceMinC,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceMaxD != null">
+        price_max_d = #{record.priceMaxD,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceMinD != null">
+        price_min_d = #{record.priceMinD,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gzrecord
+    set id = #{record.id,jdbcType=BIGINT},
+      param = #{record.param,jdbcType=VARCHAR},
+      model_id = #{record.modelId,jdbcType=BIGINT},
+      city = #{record.city,jdbcType=INTEGER},
+      mail = #{record.mail,jdbcType=INTEGER},
+      reg_date = #{record.regDate,jdbcType=VARCHAR},
+      price_max_a = #{record.priceMaxA,jdbcType=VARCHAR},
+      price_min_a = #{record.priceMinA,jdbcType=VARCHAR},
+      price_max_b = #{record.priceMaxB,jdbcType=VARCHAR},
+      price_min_b = #{record.priceMinB,jdbcType=VARCHAR},
+      price_max_c = #{record.priceMaxC,jdbcType=VARCHAR},
+      price_min_c = #{record.priceMinC,jdbcType=VARCHAR},
+      price_max_d = #{record.priceMaxD,jdbcType=VARCHAR},
+      price_min_d = #{record.priceMinD,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.pojo.Gzrecord">
+    update gzrecord
+    <set>
+      <if test="param != null">
+        param = #{param,jdbcType=VARCHAR},
+      </if>
+      <if test="modelId != null">
+        model_id = #{modelId,jdbcType=BIGINT},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=INTEGER},
+      </if>
+      <if test="mail != null">
+        mail = #{mail,jdbcType=INTEGER},
+      </if>
+      <if test="regDate != null">
+        reg_date = #{regDate,jdbcType=VARCHAR},
+      </if>
+      <if test="priceMaxA != null">
+        price_max_a = #{priceMaxA,jdbcType=VARCHAR},
+      </if>
+      <if test="priceMinA != null">
+        price_min_a = #{priceMinA,jdbcType=VARCHAR},
+      </if>
+      <if test="priceMaxB != null">
+        price_max_b = #{priceMaxB,jdbcType=VARCHAR},
+      </if>
+      <if test="priceMinB != null">
+        price_min_b = #{priceMinB,jdbcType=VARCHAR},
+      </if>
+      <if test="priceMaxC != null">
+        price_max_c = #{priceMaxC,jdbcType=VARCHAR},
+      </if>
+      <if test="priceMinC != null">
+        price_min_c = #{priceMinC,jdbcType=VARCHAR},
+      </if>
+      <if test="priceMaxD != null">
+        price_max_d = #{priceMaxD,jdbcType=VARCHAR},
+      </if>
+      <if test="priceMinD != null">
+        price_min_d = #{priceMinD,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maizhong.pojo.Gzrecord">
+    update gzrecord
+    set param = #{param,jdbcType=VARCHAR},
+      model_id = #{modelId,jdbcType=BIGINT},
+      city = #{city,jdbcType=INTEGER},
+      mail = #{mail,jdbcType=INTEGER},
+      reg_date = #{regDate,jdbcType=VARCHAR},
+      price_max_a = #{priceMaxA,jdbcType=VARCHAR},
+      price_min_a = #{priceMinA,jdbcType=VARCHAR},
+      price_max_b = #{priceMaxB,jdbcType=VARCHAR},
+      price_min_b = #{priceMinB,jdbcType=VARCHAR},
+      price_max_c = #{priceMaxC,jdbcType=VARCHAR},
+      price_min_c = #{priceMinC,jdbcType=VARCHAR},
+      price_max_d = #{priceMaxD,jdbcType=VARCHAR},
+      price_min_d = #{priceMinD,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

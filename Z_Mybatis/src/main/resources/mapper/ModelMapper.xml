@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maizhong.mapper.ModelMapper">
+  <resultMap id="BaseResultMap" type="com.maizhong.pojo.Model">
+    <id column="model_id" jdbcType="INTEGER" property="modelId" />
+    <result column="model_name" jdbcType="VARCHAR" property="modelName" />
+    <result column="model_price" jdbcType="DECIMAL" property="modelPrice" />
+    <result column="model_year" jdbcType="INTEGER" property="modelYear" />
+    <result column="min_reg_year" jdbcType="INTEGER" property="minRegYear" />
+    <result column="max_reg_year" jdbcType="INTEGER" property="maxRegYear" />
+    <result column="liter" jdbcType="VARCHAR" property="liter" />
+    <result column="gear_type" jdbcType="VARCHAR" property="gearType" />
+    <result column="discharge_standard" jdbcType="VARCHAR" property="dischargeStandard" />
+    <result column="seat_number" jdbcType="VARCHAR" property="seatNumber" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    model_id, model_name, model_price, model_year, min_reg_year, max_reg_year, liter, 
+    gear_type, discharge_standard, seat_number, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.maizhong.pojo.ModelExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from model
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from model
+    where model_id = #{modelId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from model
+    where model_id = #{modelId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maizhong.pojo.ModelExample">
+    delete from model
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maizhong.pojo.Model">
+    insert into model (model_id, model_name, model_price, 
+      model_year, min_reg_year, max_reg_year, 
+      liter, gear_type, discharge_standard, 
+      seat_number, update_time)
+    values (#{modelId,jdbcType=INTEGER}, #{modelName,jdbcType=VARCHAR}, #{modelPrice,jdbcType=DECIMAL}, 
+      #{modelYear,jdbcType=INTEGER}, #{minRegYear,jdbcType=INTEGER}, #{maxRegYear,jdbcType=INTEGER}, 
+      #{liter,jdbcType=VARCHAR}, #{gearType,jdbcType=VARCHAR}, #{dischargeStandard,jdbcType=VARCHAR}, 
+      #{seatNumber,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maizhong.pojo.Model">
+    insert into model
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="modelId != null">
+        model_id,
+      </if>
+      <if test="modelName != null">
+        model_name,
+      </if>
+      <if test="modelPrice != null">
+        model_price,
+      </if>
+      <if test="modelYear != null">
+        model_year,
+      </if>
+      <if test="minRegYear != null">
+        min_reg_year,
+      </if>
+      <if test="maxRegYear != null">
+        max_reg_year,
+      </if>
+      <if test="liter != null">
+        liter,
+      </if>
+      <if test="gearType != null">
+        gear_type,
+      </if>
+      <if test="dischargeStandard != null">
+        discharge_standard,
+      </if>
+      <if test="seatNumber != null">
+        seat_number,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="modelId != null">
+        #{modelId,jdbcType=INTEGER},
+      </if>
+      <if test="modelName != null">
+        #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="modelPrice != null">
+        #{modelPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="modelYear != null">
+        #{modelYear,jdbcType=INTEGER},
+      </if>
+      <if test="minRegYear != null">
+        #{minRegYear,jdbcType=INTEGER},
+      </if>
+      <if test="maxRegYear != null">
+        #{maxRegYear,jdbcType=INTEGER},
+      </if>
+      <if test="liter != null">
+        #{liter,jdbcType=VARCHAR},
+      </if>
+      <if test="gearType != null">
+        #{gearType,jdbcType=VARCHAR},
+      </if>
+      <if test="dischargeStandard != null">
+        #{dischargeStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="seatNumber != null">
+        #{seatNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maizhong.pojo.ModelExample" resultType="java.lang.Long">
+    select count(*) from model
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update model
+    <set>
+      <if test="record.modelId != null">
+        model_id = #{record.modelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.modelName != null">
+        model_name = #{record.modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelPrice != null">
+        model_price = #{record.modelPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.modelYear != null">
+        model_year = #{record.modelYear,jdbcType=INTEGER},
+      </if>
+      <if test="record.minRegYear != null">
+        min_reg_year = #{record.minRegYear,jdbcType=INTEGER},
+      </if>
+      <if test="record.maxRegYear != null">
+        max_reg_year = #{record.maxRegYear,jdbcType=INTEGER},
+      </if>
+      <if test="record.liter != null">
+        liter = #{record.liter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gearType != null">
+        gear_type = #{record.gearType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dischargeStandard != null">
+        discharge_standard = #{record.dischargeStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seatNumber != null">
+        seat_number = #{record.seatNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update model
+    set model_id = #{record.modelId,jdbcType=INTEGER},
+      model_name = #{record.modelName,jdbcType=VARCHAR},
+      model_price = #{record.modelPrice,jdbcType=DECIMAL},
+      model_year = #{record.modelYear,jdbcType=INTEGER},
+      min_reg_year = #{record.minRegYear,jdbcType=INTEGER},
+      max_reg_year = #{record.maxRegYear,jdbcType=INTEGER},
+      liter = #{record.liter,jdbcType=VARCHAR},
+      gear_type = #{record.gearType,jdbcType=VARCHAR},
+      discharge_standard = #{record.dischargeStandard,jdbcType=VARCHAR},
+      seat_number = #{record.seatNumber,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.pojo.Model">
+    update model
+    <set>
+      <if test="modelName != null">
+        model_name = #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="modelPrice != null">
+        model_price = #{modelPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="modelYear != null">
+        model_year = #{modelYear,jdbcType=INTEGER},
+      </if>
+      <if test="minRegYear != null">
+        min_reg_year = #{minRegYear,jdbcType=INTEGER},
+      </if>
+      <if test="maxRegYear != null">
+        max_reg_year = #{maxRegYear,jdbcType=INTEGER},
+      </if>
+      <if test="liter != null">
+        liter = #{liter,jdbcType=VARCHAR},
+      </if>
+      <if test="gearType != null">
+        gear_type = #{gearType,jdbcType=VARCHAR},
+      </if>
+      <if test="dischargeStandard != null">
+        discharge_standard = #{dischargeStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="seatNumber != null">
+        seat_number = #{seatNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where model_id = #{modelId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maizhong.pojo.Model">
+    update model
+    set model_name = #{modelName,jdbcType=VARCHAR},
+      model_price = #{modelPrice,jdbcType=DECIMAL},
+      model_year = #{modelYear,jdbcType=INTEGER},
+      min_reg_year = #{minRegYear,jdbcType=INTEGER},
+      max_reg_year = #{maxRegYear,jdbcType=INTEGER},
+      liter = #{liter,jdbcType=VARCHAR},
+      gear_type = #{gearType,jdbcType=VARCHAR},
+      discharge_standard = #{dischargeStandard,jdbcType=VARCHAR},
+      seat_number = #{seatNumber,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where model_id = #{modelId,jdbcType=INTEGER}
+  </update>
+</mapper>
