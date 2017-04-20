@@ -16,6 +16,7 @@ import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.EncryptUtils;
 import com.maizhong.common.utils.HttpClientUtil;
+import com.maizhong.common.utils.IDUtils;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.dao.JedisClient;
 import com.maizhong.mapper.*;
@@ -25,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -56,6 +58,15 @@ public class ReckonServiceImpl implements ReckonService {
 
     @Autowired
     private GzrecordMapper gzrecordMapper;
+
+    @Autowired
+    private ParamsMapper paramsMapper;
+
+    @Autowired
+    private OrderInfoMapper orderInfoMapper;
+
+    @Autowired
+    private OrdersMapper ordersMapper;
 
 
     @Value("${CHE_MODEL}")
@@ -427,9 +438,20 @@ public class ReckonServiceImpl implements ReckonService {
 
             GuzhiDTO guzhiDTO = new GuzhiDTO();
             guzhiDTO.setPriceA(gzrecord.getPriceMinA()+"万~"+gzrecord.getPriceMaxA()+"万");
+            guzhiDTO.setPriceA_max(gzrecord.getPriceMaxA());
+            guzhiDTO.setPriceA_min(gzrecord.getPriceMinA());
             guzhiDTO.setPriceB(gzrecord.getPriceMinB()+"万~"+gzrecord.getPriceMaxB()+"万");
+            guzhiDTO.setPriceB_max(gzrecord.getPriceMaxB());
+            guzhiDTO.setPriceB_min(gzrecord.getPriceMinB());
             guzhiDTO.setPriceC(gzrecord.getPriceMinC()+"万~"+gzrecord.getPriceMaxC()+"万");
+            guzhiDTO.setPriceC_max(gzrecord.getPriceMaxC());
+            guzhiDTO.setPriceC_min(gzrecord.getPriceMinC());
             guzhiDTO.setPriceD(gzrecord.getPriceMinD()+"万~"+gzrecord.getPriceMaxD()+"万");
+            guzhiDTO.setPriceD_max(gzrecord.getPriceMaxD());
+            guzhiDTO.setPriceD_min(gzrecord.getPriceMinD());
+
+
+
 
             String modelRedis = jedisClient.hget("CAR_MODEL",gzrecord.getModelId()+"");
 
@@ -438,6 +460,7 @@ public class ReckonServiceImpl implements ReckonService {
             guzhiDTO.setMaxYear(model.getMaxRegYear()+"");
             guzhiDTO.setMinYear(model.getMinRegYear()+"");
 
+            guzhiDTO.setModelId(model.getModelId()+"");
 
             guzhiDTO.setModelName(model.getModelName());
             guzhiDTO.setDischargeStandard(model.getDischargeStandard());
@@ -472,6 +495,135 @@ public class ReckonServiceImpl implements ReckonService {
 
     @Override
     public void setRedisCity() {
+
+    }
+
+    /**
+     * 精准估值
+     * @param guzhiKey
+     * @param otherKey
+     * @return
+     */
+    @Transactional
+    @Override
+    public JsonResult getSaleGZ(String guzhiKey, String otherKey,long phone) {
+
+
+
+
+        JsonResult guzhi = getGuzhi(guzhiKey);
+        GuzhiDTO guzhiDTO = JsonUtils.jsonToPojo(JSON.toJSONString(guzhi.getData()), GuzhiDTO.class);
+
+        String[] otherArry = otherKey.split("o|j|h|t|x|n|d|k");
+
+        String  ck = otherArry[7],color = otherArry[0],jqx = otherArry[1],
+                gh = otherArry[2],ghtime = otherArry[3],xz = otherArry[4],
+                nj = otherArry[5],method = otherArry[6];
+        BigDecimal basePrice;
+        if(StringUtils.equals("1",ck)){
+            basePrice = new BigDecimal(guzhiDTO.getPriceA_min());
+        } else if(StringUtils.equals("2",ck)){
+            basePrice = new BigDecimal(guzhiDTO.getPriceB_min());
+        } else if(StringUtils.equals("3",ck)){
+            basePrice = new BigDecimal(guzhiDTO.getPriceC_min());
+        } else {
+            basePrice = new BigDecimal(guzhiDTO.getPriceD_min());
+        }
+
+        String colorParam = jedisClient.hget("GZ_PARAM","color");
+        if(StringUtils.isBlank(colorParam)){
+
+            ParamsExample example = new ParamsExample();
+
+            List<Params> paramses = paramsMapper.selectByExample(example);
+
+            for (Params paramse : paramses) {
+                jedisClient.hset("GZ_PARAM",paramse.getId(),JSON.toJSONString(paramse));
+            }
+            colorParam = jedisClient.hget("GZ_PARAM","color");
+        }
+
+
+        JSONObject colorObject = JSON.parseObject(colorParam);
+        String rate = colorObject.getString("p"+color);
+        //颜色影响
+        basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
+
+        String jqxParam = jedisClient.hget("GZ_PARAM","jqx");
+        JSONObject jqxObject = JSON.parseObject(jqxParam);
+        rate = jqxObject.getString("p"+jqx);
+        //交强险影响
+        basePrice = basePrice.subtract(new BigDecimal(rate));
+
+        String ghParam = jedisClient.hget("GZ_PARAM","gh");
+        JSONObject ghObject = JSON.parseObject(ghParam);
+        rate = ghObject.getString("p"+gh);
+        //过户次数影响
+        basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
+
+        String ghtParam = jedisClient.hget("GZ_PARAM","ghtime");
+        JSONObject ghtObject = JSON.parseObject(ghtParam);
+        rate = ghtObject.getString("p"+ghtime);
+        //过户时间影响
+        basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
+
+        String xzParam = jedisClient.hget("GZ_PARAM","xz");
+        JSONObject xzObject = JSON.parseObject(xzParam);
+        rate = xzObject.getString("p"+xz);
+        //性质
+        basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
+
+        String njParam = jedisClient.hget("GZ_PARAM","nj");
+        JSONObject njObject = JSON.parseObject(njParam);
+        rate = njObject.getString("p"+nj);
+        //年检
+        basePrice = basePrice.subtract(new BigDecimal(rate));
+
+        String methodParam = jedisClient.hget("GZ_PARAM","method");
+        JSONObject mObject = JSON.parseObject(methodParam);
+        rate = mObject.getString("p"+method);
+        //使用方式
+        basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
+
+        guzhiDTO.setSalePrice(basePrice.setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+
+        OrdersExample example = new OrdersExample();
+        OrdersExample.Criteria criteria = example.createCriteria();
+        criteria.andUserIdEqualTo(phone).andModelIdEqualTo(Long.valueOf(guzhiDTO.getModelId()));
+        long l = ordersMapper.countByExample(example);
+        if(l==0L){
+            long orderNum = IDUtils.getOrderId();
+
+            Orders order = new Orders();
+            order.setOrderNumber(orderNum);
+            order.setUserId(phone);
+            order.setModelId(Long.valueOf(guzhiDTO.getModelId()));
+            order.setModelName(guzhiDTO.getModelName());
+            order.setReckonPrice(guzhiDTO.getSalePrice());
+            order.setDealPrice("");
+            order.setReckonTime(new Date());
+            ordersMapper.insert(order);
+
+            OrderInfo orderInfo = new OrderInfo();
+            orderInfo.setOrderNumber(orderNum);
+            orderInfo.setModelId(Long.valueOf(guzhiDTO.getModelId()));
+            orderInfo.setRegDate(guzhiDTO.getRegdate());
+            orderInfo.setCityId(guzhiDTO.getCity());
+            orderInfo.setsKm(guzhiDTO.getMail());
+            orderInfo.setColor(color);
+            orderInfo.setJqx(jqx);
+            orderInfo.setNj(nj);
+            orderInfo.setXz(xz);
+            orderInfo.setGh(gh);
+            orderInfo.setGhtime(ghtime);
+            orderInfo.setMethod(method);
+            orderInfo.setCk(ck);
+            orderInfoMapper.insert(orderInfo);
+
+            jedisClient.hset("ORDER_PHONE",phone+"",JSON.toJSONString(guzhiDTO));
+        }
+
+        return JsonResult.build(200,"",guzhiDTO.getSalePrice());
 
     }
 

@@ -232,6 +232,10 @@ function cleckinput(a, b, c, d) {
         $.getJSON('/userLogin/'+phone+'/'+vcode,function (res) {
             if(res.status==200){
                 //提交跳转
+                
+                //电话写入cookie
+                $.cookie('phone', phone, {expires: 7, path: '/'});
+                
                 var n = ($("#s_brand").val(), $("#s_series").val(), $("#s_simple").val());
                 var o = "/saleguzhi/" + j +
                     "c" + k +

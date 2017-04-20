@@ -358,7 +358,8 @@
 <div class="clear"></div>
 <div class="anniu"><a style="display: block;color: #FFF" onclick="submitForm()">确认估值</a></div>
 
-
+<!-- jQuery cookie 操作插件-->
+<script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <script src="/resources/js/guzhi.js"></script>
 <script>
     $(function(){

@@ -8,7 +8,6 @@ import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.reckon.DTO.IndexDTO;
 import com.maizhong.reckon.service.IndexService;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -169,10 +168,10 @@ public class IndexServiceImpl implements IndexService {
     }
 
     @Override
-    public String saleguzhi(String guzhiKey, String otherKey) {
+    public String saleguzhi(String guzhiKey, String otherKey, Long phone) {
 
         try {
-            String res = HttpClientUtil.doGet(RESTURL+"getSaleGZ/"+guzhiKey+"/"+otherKey);
+            String res = HttpClientUtil.doGet(RESTURL+"getSaleGZ/"+guzhiKey+"/"+otherKey+"/"+phone);
             return JsonUtils.jsonToPojo(res,JsonResult.class).getData().toString();
         }catch (Exception e){
 

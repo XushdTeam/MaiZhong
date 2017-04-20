@@ -184,5 +184,21 @@ public class ReckonController {
         return result;
     }
 
+    /**
+     * 获取精准估值结果
+     * @param guzhiKey
+     * @param otherKey
+     * @return
+     */
+    @RequestMapping(value = "/getSaleGZ/{guzhiKey}/{otherKey}/{phone}")
+    @ResponseBody
+    public JsonResult getSaleGZ(@PathVariable String guzhiKey,
+                                @PathVariable String otherKey,
+                                @PathVariable long phone){
+
+        JsonResult result = reckonService.getSaleGZ(guzhiKey,otherKey,phone);
+        return result;
+
+    }
 
 }

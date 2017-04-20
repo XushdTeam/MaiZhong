@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maizhong.mapper.ParamsMapper">
+  <resultMap id="BaseResultMap" type="com.maizhong.pojo.Params">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="operator" jdbcType="INTEGER" property="operator" />
+    <result column="p1" jdbcType="VARCHAR" property="p1" />
+    <result column="p2" jdbcType="VARCHAR" property="p2" />
+    <result column="p3" jdbcType="VARCHAR" property="p3" />
+    <result column="p4" jdbcType="VARCHAR" property="p4" />
+    <result column="p5" jdbcType="VARCHAR" property="p5" />
+    <result column="p6" jdbcType="VARCHAR" property="p6" />
+    <result column="p7" jdbcType="VARCHAR" property="p7" />
+    <result column="p8" jdbcType="VARCHAR" property="p8" />
+    <result column="p9" jdbcType="VARCHAR" property="p9" />
+    <result column="p10" jdbcType="VARCHAR" property="p10" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, operator, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10
+  </sql>
+  <select id="selectByExample" parameterType="com.maizhong.pojo.ParamsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from params
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from params
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from params
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maizhong.pojo.ParamsExample">
+    delete from params
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maizhong.pojo.Params">
+    insert into params (id, name, operator, 
+      p1, p2, p3, p4, 
+      p5, p6, p7, p8, 
+      p9, p10)
+    values (#{id,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{operator,jdbcType=INTEGER}, 
+      #{p1,jdbcType=VARCHAR}, #{p2,jdbcType=VARCHAR}, #{p3,jdbcType=VARCHAR}, #{p4,jdbcType=VARCHAR}, 
+      #{p5,jdbcType=VARCHAR}, #{p6,jdbcType=VARCHAR}, #{p7,jdbcType=VARCHAR}, #{p8,jdbcType=VARCHAR}, 
+      #{p9,jdbcType=VARCHAR}, #{p10,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maizhong.pojo.Params">
+    insert into params
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="p1 != null">
+        p1,
+      </if>
+      <if test="p2 != null">
+        p2,
+      </if>
+      <if test="p3 != null">
+        p3,
+      </if>
+      <if test="p4 != null">
+        p4,
+      </if>
+      <if test="p5 != null">
+        p5,
+      </if>
+      <if test="p6 != null">
+        p6,
+      </if>
+      <if test="p7 != null">
+        p7,
+      </if>
+      <if test="p8 != null">
+        p8,
+      </if>
+      <if test="p9 != null">
+        p9,
+      </if>
+      <if test="p10 != null">
+        p10,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="p1 != null">
+        #{p1,jdbcType=VARCHAR},
+      </if>
+      <if test="p2 != null">
+        #{p2,jdbcType=VARCHAR},
+      </if>
+      <if test="p3 != null">
+        #{p3,jdbcType=VARCHAR},
+      </if>
+      <if test="p4 != null">
+        #{p4,jdbcType=VARCHAR},
+      </if>
+      <if test="p5 != null">
+        #{p5,jdbcType=VARCHAR},
+      </if>
+      <if test="p6 != null">
+        #{p6,jdbcType=VARCHAR},
+      </if>
+      <if test="p7 != null">
+        #{p7,jdbcType=VARCHAR},
+      </if>
+      <if test="p8 != null">
+        #{p8,jdbcType=VARCHAR},
+      </if>
+      <if test="p9 != null">
+        #{p9,jdbcType=VARCHAR},
+      </if>
+      <if test="p10 != null">
+        #{p10,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maizhong.pojo.ParamsExample" resultType="java.lang.Long">
+    select count(*) from params
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update params
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null">
+        operator = #{record.operator,jdbcType=INTEGER},
+      </if>
+      <if test="record.p1 != null">
+        p1 = #{record.p1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.p2 != null">
+        p2 = #{record.p2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.p3 != null">
+        p3 = #{record.p3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.p4 != null">
+        p4 = #{record.p4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.p5 != null">
+        p5 = #{record.p5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.p6 != null">
+        p6 = #{record.p6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.p7 != null">
+        p7 = #{record.p7,jdbcType=VARCHAR},
+      </if>
+      <if test="record.p8 != null">
+        p8 = #{record.p8,jdbcType=VARCHAR},
+      </if>
+      <if test="record.p9 != null">
+        p9 = #{record.p9,jdbcType=VARCHAR},
+      </if>
+      <if test="record.p10 != null">
+        p10 = #{record.p10,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update params
+    set id = #{record.id,jdbcType=CHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      operator = #{record.operator,jdbcType=INTEGER},
+      p1 = #{record.p1,jdbcType=VARCHAR},
+      p2 = #{record.p2,jdbcType=VARCHAR},
+      p3 = #{record.p3,jdbcType=VARCHAR},
+      p4 = #{record.p4,jdbcType=VARCHAR},
+      p5 = #{record.p5,jdbcType=VARCHAR},
+      p6 = #{record.p6,jdbcType=VARCHAR},
+      p7 = #{record.p7,jdbcType=VARCHAR},
+      p8 = #{record.p8,jdbcType=VARCHAR},
+      p9 = #{record.p9,jdbcType=VARCHAR},
+      p10 = #{record.p10,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.pojo.Params">
+    update params
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="p1 != null">
+        p1 = #{p1,jdbcType=VARCHAR},
+      </if>
+      <if test="p2 != null">
+        p2 = #{p2,jdbcType=VARCHAR},
+      </if>
+      <if test="p3 != null">
+        p3 = #{p3,jdbcType=VARCHAR},
+      </if>
+      <if test="p4 != null">
+        p4 = #{p4,jdbcType=VARCHAR},
+      </if>
+      <if test="p5 != null">
+        p5 = #{p5,jdbcType=VARCHAR},
+      </if>
+      <if test="p6 != null">
+        p6 = #{p6,jdbcType=VARCHAR},
+      </if>
+      <if test="p7 != null">
+        p7 = #{p7,jdbcType=VARCHAR},
+      </if>
+      <if test="p8 != null">
+        p8 = #{p8,jdbcType=VARCHAR},
+      </if>
+      <if test="p9 != null">
+        p9 = #{p9,jdbcType=VARCHAR},
+      </if>
+      <if test="p10 != null">
+        p10 = #{p10,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maizhong.pojo.Params">
+    update params
+    set name = #{name,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=INTEGER},
+      p1 = #{p1,jdbcType=VARCHAR},
+      p2 = #{p2,jdbcType=VARCHAR},
+      p3 = #{p3,jdbcType=VARCHAR},
+      p4 = #{p4,jdbcType=VARCHAR},
+      p5 = #{p5,jdbcType=VARCHAR},
+      p6 = #{p6,jdbcType=VARCHAR},
+      p7 = #{p7,jdbcType=VARCHAR},
+      p8 = #{p8,jdbcType=VARCHAR},
+      p9 = #{p9,jdbcType=VARCHAR},
+      p10 = #{p10,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.parsing.SourceExtractor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -136,13 +137,15 @@ public class IndexController {
      * @return
      */
     @RequestMapping(value="/saleguzhi/{param}")
-    public String saleguzhi(@PathVariable String param,Model model){
-        System.out.println(param);
+    public String saleguzhi(@PathVariable String param, Model model,
+                            @CookieValue(value = "phone",required = true) String phone
+    ){
+
         String[] arry = param.split("o");
         String guzhiKey = arry[0];
         String otherKey = arry[1];
 
-        String price = indexService.saleguzhi(guzhiKey,otherKey);
+        String price = indexService.saleguzhi(guzhiKey,otherKey, Long.valueOf(phone));
 
         model.addAttribute("price",price);
 
