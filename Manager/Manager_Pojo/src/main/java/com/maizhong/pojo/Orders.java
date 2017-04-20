@@ -1,9 +1,8 @@
 package com.maizhong.pojo;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
-public class Order {
+public class Orders {
     private Long orderId;
 
     private Long orderNumber;
@@ -14,9 +13,9 @@ public class Order {
 
     private String modelName;
 
-    private BigDecimal reckonPrice;
+    private String reckonPrice;
 
-    private BigDecimal dealPrice;
+    private String dealPrice;
 
     private Integer dealWay;
 
@@ -70,20 +69,20 @@ public class Order {
         this.modelName = modelName == null ? null : modelName.trim();
     }
 
-    public BigDecimal getReckonPrice() {
+    public String getReckonPrice() {
         return reckonPrice;
     }
 
-    public void setReckonPrice(BigDecimal reckonPrice) {
-        this.reckonPrice = reckonPrice;
+    public void setReckonPrice(String reckonPrice) {
+        this.reckonPrice = reckonPrice == null ? null : reckonPrice.trim();
     }
 
-    public BigDecimal getDealPrice() {
+    public String getDealPrice() {
         return dealPrice;
     }
 
-    public void setDealPrice(BigDecimal dealPrice) {
-        this.dealPrice = dealPrice;
+    public void setDealPrice(String dealPrice) {
+        this.dealPrice = dealPrice == null ? null : dealPrice.trim();
     }
 
     public Integer getDealWay() {

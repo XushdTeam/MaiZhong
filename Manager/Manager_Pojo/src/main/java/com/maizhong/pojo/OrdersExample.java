@@ -1,18 +1,17 @@
 package com.maizhong.pojo;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class OrderExample {
+public class OrdersExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public OrderExample() {
+    public OrdersExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -426,52 +425,62 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andReckonPriceEqualTo(BigDecimal value) {
+        public Criteria andReckonPriceEqualTo(String value) {
             addCriterion("reckon_price =", value, "reckonPrice");
             return (Criteria) this;
         }
 
-        public Criteria andReckonPriceNotEqualTo(BigDecimal value) {
+        public Criteria andReckonPriceNotEqualTo(String value) {
             addCriterion("reckon_price <>", value, "reckonPrice");
             return (Criteria) this;
         }
 
-        public Criteria andReckonPriceGreaterThan(BigDecimal value) {
+        public Criteria andReckonPriceGreaterThan(String value) {
             addCriterion("reckon_price >", value, "reckonPrice");
             return (Criteria) this;
         }
 
-        public Criteria andReckonPriceGreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andReckonPriceGreaterThanOrEqualTo(String value) {
             addCriterion("reckon_price >=", value, "reckonPrice");
             return (Criteria) this;
         }
 
-        public Criteria andReckonPriceLessThan(BigDecimal value) {
+        public Criteria andReckonPriceLessThan(String value) {
             addCriterion("reckon_price <", value, "reckonPrice");
             return (Criteria) this;
         }
 
-        public Criteria andReckonPriceLessThanOrEqualTo(BigDecimal value) {
+        public Criteria andReckonPriceLessThanOrEqualTo(String value) {
             addCriterion("reckon_price <=", value, "reckonPrice");
             return (Criteria) this;
         }
 
-        public Criteria andReckonPriceIn(List<BigDecimal> values) {
+        public Criteria andReckonPriceLike(String value) {
+            addCriterion("reckon_price like", value, "reckonPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andReckonPriceNotLike(String value) {
+            addCriterion("reckon_price not like", value, "reckonPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andReckonPriceIn(List<String> values) {
             addCriterion("reckon_price in", values, "reckonPrice");
             return (Criteria) this;
         }
 
-        public Criteria andReckonPriceNotIn(List<BigDecimal> values) {
+        public Criteria andReckonPriceNotIn(List<String> values) {
             addCriterion("reckon_price not in", values, "reckonPrice");
             return (Criteria) this;
         }
 
-        public Criteria andReckonPriceBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andReckonPriceBetween(String value1, String value2) {
             addCriterion("reckon_price between", value1, value2, "reckonPrice");
             return (Criteria) this;
         }
 
-        public Criteria andReckonPriceNotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andReckonPriceNotBetween(String value1, String value2) {
             addCriterion("reckon_price not between", value1, value2, "reckonPrice");
             return (Criteria) this;
         }
@@ -486,52 +495,62 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andDealPriceEqualTo(BigDecimal value) {
+        public Criteria andDealPriceEqualTo(String value) {
             addCriterion("deal_price =", value, "dealPrice");
             return (Criteria) this;
         }
 
-        public Criteria andDealPriceNotEqualTo(BigDecimal value) {
+        public Criteria andDealPriceNotEqualTo(String value) {
             addCriterion("deal_price <>", value, "dealPrice");
             return (Criteria) this;
         }
 
-        public Criteria andDealPriceGreaterThan(BigDecimal value) {
+        public Criteria andDealPriceGreaterThan(String value) {
             addCriterion("deal_price >", value, "dealPrice");
             return (Criteria) this;
         }
 
-        public Criteria andDealPriceGreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andDealPriceGreaterThanOrEqualTo(String value) {
             addCriterion("deal_price >=", value, "dealPrice");
             return (Criteria) this;
         }
 
-        public Criteria andDealPriceLessThan(BigDecimal value) {
+        public Criteria andDealPriceLessThan(String value) {
             addCriterion("deal_price <", value, "dealPrice");
             return (Criteria) this;
         }
 
-        public Criteria andDealPriceLessThanOrEqualTo(BigDecimal value) {
+        public Criteria andDealPriceLessThanOrEqualTo(String value) {
             addCriterion("deal_price <=", value, "dealPrice");
             return (Criteria) this;
         }
 
-        public Criteria andDealPriceIn(List<BigDecimal> values) {
+        public Criteria andDealPriceLike(String value) {
+            addCriterion("deal_price like", value, "dealPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDealPriceNotLike(String value) {
+            addCriterion("deal_price not like", value, "dealPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDealPriceIn(List<String> values) {
             addCriterion("deal_price in", values, "dealPrice");
             return (Criteria) this;
         }
 
-        public Criteria andDealPriceNotIn(List<BigDecimal> values) {
+        public Criteria andDealPriceNotIn(List<String> values) {
             addCriterion("deal_price not in", values, "dealPrice");
             return (Criteria) this;
         }
 
-        public Criteria andDealPriceBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andDealPriceBetween(String value1, String value2) {
             addCriterion("deal_price between", value1, value2, "dealPrice");
             return (Criteria) this;
         }
 
-        public Criteria andDealPriceNotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andDealPriceNotBetween(String value1, String value2) {
             addCriterion("deal_price not between", value1, value2, "dealPrice");
             return (Criteria) this;
         }
