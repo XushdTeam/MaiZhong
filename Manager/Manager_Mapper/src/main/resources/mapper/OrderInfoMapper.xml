@@ -5,19 +5,19 @@
     <id column="info_id" jdbcType="BIGINT" property="infoId" />
     <result column="order_number" jdbcType="BIGINT" property="orderNumber" />
     <result column="model_id" jdbcType="BIGINT" property="modelId" />
-    <result column="reg_year" jdbcType="INTEGER" property="regYear" />
-    <result column="reg_month" jdbcType="INTEGER" property="regMonth" />
-    <result column="city_id" jdbcType="INTEGER" property="cityId" />
-    <result column="s_km" jdbcType="DECIMAL" property="sKm" />
-    <result column="color" jdbcType="INTEGER" property="color" />
-    <result column="jqx" jdbcType="INTEGER" property="jqx" />
-    <result column="nj" jdbcType="INTEGER" property="nj" />
-    <result column="xz" jdbcType="INTEGER" property="xz" />
-    <result column="gh" jdbcType="INTEGER" property="gh" />
-    <result column="ghtime" jdbcType="INTEGER" property="ghtime" />
-    <result column="method" jdbcType="INTEGER" property="method" />
-    <result column="ck" jdbcType="INTEGER" property="ck" />
-    <result column="delflag" jdbcType="INTEGER" property="delflag" />
+    <result column="reg_year" jdbcType="VARCHAR" property="regYear" />
+    <result column="reg_month" jdbcType="VARCHAR" property="regMonth" />
+    <result column="city_id" jdbcType="VARCHAR" property="cityId" />
+    <result column="s_km" jdbcType="VARCHAR" property="sKm" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="jqx" jdbcType="VARCHAR" property="jqx" />
+    <result column="nj" jdbcType="VARCHAR" property="nj" />
+    <result column="xz" jdbcType="VARCHAR" property="xz" />
+    <result column="gh" jdbcType="VARCHAR" property="gh" />
+    <result column="ghtime" jdbcType="VARCHAR" property="ghtime" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="ck" jdbcType="VARCHAR" property="ck" />
+    <result column="delflag" jdbcType="VARCHAR" property="delflag" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -118,10 +118,10 @@
       xz, gh, ghtime, method, 
       ck, delflag)
     values (#{infoId,jdbcType=BIGINT}, #{orderNumber,jdbcType=BIGINT}, #{modelId,jdbcType=BIGINT}, 
-      #{regYear,jdbcType=INTEGER}, #{regMonth,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER}, 
-      #{sKm,jdbcType=DECIMAL}, #{color,jdbcType=INTEGER}, #{jqx,jdbcType=INTEGER}, #{nj,jdbcType=INTEGER}, 
-      #{xz,jdbcType=INTEGER}, #{gh,jdbcType=INTEGER}, #{ghtime,jdbcType=INTEGER}, #{method,jdbcType=INTEGER}, 
-      #{ck,jdbcType=INTEGER}, #{delflag,jdbcType=INTEGER})
+      #{regYear,jdbcType=VARCHAR}, #{regMonth,jdbcType=VARCHAR}, #{cityId,jdbcType=VARCHAR}, 
+      #{sKm,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, #{jqx,jdbcType=VARCHAR}, #{nj,jdbcType=VARCHAR}, 
+      #{xz,jdbcType=VARCHAR}, #{gh,jdbcType=VARCHAR}, #{ghtime,jdbcType=VARCHAR}, #{method,jdbcType=VARCHAR}, 
+      #{ck,jdbcType=VARCHAR}, #{delflag,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.pojo.OrderInfo">
     insert into order_info
@@ -186,43 +186,43 @@
         #{modelId,jdbcType=BIGINT},
       </if>
       <if test="regYear != null">
-        #{regYear,jdbcType=INTEGER},
+        #{regYear,jdbcType=VARCHAR},
       </if>
       <if test="regMonth != null">
-        #{regMonth,jdbcType=INTEGER},
+        #{regMonth,jdbcType=VARCHAR},
       </if>
       <if test="cityId != null">
-        #{cityId,jdbcType=INTEGER},
+        #{cityId,jdbcType=VARCHAR},
       </if>
       <if test="sKm != null">
-        #{sKm,jdbcType=DECIMAL},
+        #{sKm,jdbcType=VARCHAR},
       </if>
       <if test="color != null">
-        #{color,jdbcType=INTEGER},
+        #{color,jdbcType=VARCHAR},
       </if>
       <if test="jqx != null">
-        #{jqx,jdbcType=INTEGER},
+        #{jqx,jdbcType=VARCHAR},
       </if>
       <if test="nj != null">
-        #{nj,jdbcType=INTEGER},
+        #{nj,jdbcType=VARCHAR},
       </if>
       <if test="xz != null">
-        #{xz,jdbcType=INTEGER},
+        #{xz,jdbcType=VARCHAR},
       </if>
       <if test="gh != null">
-        #{gh,jdbcType=INTEGER},
+        #{gh,jdbcType=VARCHAR},
       </if>
       <if test="ghtime != null">
-        #{ghtime,jdbcType=INTEGER},
+        #{ghtime,jdbcType=VARCHAR},
       </if>
       <if test="method != null">
-        #{method,jdbcType=INTEGER},
+        #{method,jdbcType=VARCHAR},
       </if>
       <if test="ck != null">
-        #{ck,jdbcType=INTEGER},
+        #{ck,jdbcType=VARCHAR},
       </if>
       <if test="delflag != null">
-        #{delflag,jdbcType=INTEGER},
+        #{delflag,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -245,43 +245,43 @@
         model_id = #{record.modelId,jdbcType=BIGINT},
       </if>
       <if test="record.regYear != null">
-        reg_year = #{record.regYear,jdbcType=INTEGER},
+        reg_year = #{record.regYear,jdbcType=VARCHAR},
       </if>
       <if test="record.regMonth != null">
-        reg_month = #{record.regMonth,jdbcType=INTEGER},
+        reg_month = #{record.regMonth,jdbcType=VARCHAR},
       </if>
       <if test="record.cityId != null">
-        city_id = #{record.cityId,jdbcType=INTEGER},
+        city_id = #{record.cityId,jdbcType=VARCHAR},
       </if>
       <if test="record.sKm != null">
-        s_km = #{record.sKm,jdbcType=DECIMAL},
+        s_km = #{record.sKm,jdbcType=VARCHAR},
       </if>
       <if test="record.color != null">
-        color = #{record.color,jdbcType=INTEGER},
+        color = #{record.color,jdbcType=VARCHAR},
       </if>
       <if test="record.jqx != null">
-        jqx = #{record.jqx,jdbcType=INTEGER},
+        jqx = #{record.jqx,jdbcType=VARCHAR},
       </if>
       <if test="record.nj != null">
-        nj = #{record.nj,jdbcType=INTEGER},
+        nj = #{record.nj,jdbcType=VARCHAR},
       </if>
       <if test="record.xz != null">
-        xz = #{record.xz,jdbcType=INTEGER},
+        xz = #{record.xz,jdbcType=VARCHAR},
       </if>
       <if test="record.gh != null">
-        gh = #{record.gh,jdbcType=INTEGER},
+        gh = #{record.gh,jdbcType=VARCHAR},
       </if>
       <if test="record.ghtime != null">
-        ghtime = #{record.ghtime,jdbcType=INTEGER},
+        ghtime = #{record.ghtime,jdbcType=VARCHAR},
       </if>
       <if test="record.method != null">
-        method = #{record.method,jdbcType=INTEGER},
+        method = #{record.method,jdbcType=VARCHAR},
       </if>
       <if test="record.ck != null">
-        ck = #{record.ck,jdbcType=INTEGER},
+        ck = #{record.ck,jdbcType=VARCHAR},
       </if>
       <if test="record.delflag != null">
-        delflag = #{record.delflag,jdbcType=INTEGER},
+        delflag = #{record.delflag,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -293,19 +293,19 @@
     set info_id = #{record.infoId,jdbcType=BIGINT},
       order_number = #{record.orderNumber,jdbcType=BIGINT},
       model_id = #{record.modelId,jdbcType=BIGINT},
-      reg_year = #{record.regYear,jdbcType=INTEGER},
-      reg_month = #{record.regMonth,jdbcType=INTEGER},
-      city_id = #{record.cityId,jdbcType=INTEGER},
-      s_km = #{record.sKm,jdbcType=DECIMAL},
-      color = #{record.color,jdbcType=INTEGER},
-      jqx = #{record.jqx,jdbcType=INTEGER},
-      nj = #{record.nj,jdbcType=INTEGER},
-      xz = #{record.xz,jdbcType=INTEGER},
-      gh = #{record.gh,jdbcType=INTEGER},
-      ghtime = #{record.ghtime,jdbcType=INTEGER},
-      method = #{record.method,jdbcType=INTEGER},
-      ck = #{record.ck,jdbcType=INTEGER},
-      delflag = #{record.delflag,jdbcType=INTEGER}
+      reg_year = #{record.regYear,jdbcType=VARCHAR},
+      reg_month = #{record.regMonth,jdbcType=VARCHAR},
+      city_id = #{record.cityId,jdbcType=VARCHAR},
+      s_km = #{record.sKm,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
+      jqx = #{record.jqx,jdbcType=VARCHAR},
+      nj = #{record.nj,jdbcType=VARCHAR},
+      xz = #{record.xz,jdbcType=VARCHAR},
+      gh = #{record.gh,jdbcType=VARCHAR},
+      ghtime = #{record.ghtime,jdbcType=VARCHAR},
+      method = #{record.method,jdbcType=VARCHAR},
+      ck = #{record.ck,jdbcType=VARCHAR},
+      delflag = #{record.delflag,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -320,43 +320,43 @@
         model_id = #{modelId,jdbcType=BIGINT},
       </if>
       <if test="regYear != null">
-        reg_year = #{regYear,jdbcType=INTEGER},
+        reg_year = #{regYear,jdbcType=VARCHAR},
       </if>
       <if test="regMonth != null">
-        reg_month = #{regMonth,jdbcType=INTEGER},
+        reg_month = #{regMonth,jdbcType=VARCHAR},
       </if>
       <if test="cityId != null">
-        city_id = #{cityId,jdbcType=INTEGER},
+        city_id = #{cityId,jdbcType=VARCHAR},
       </if>
       <if test="sKm != null">
-        s_km = #{sKm,jdbcType=DECIMAL},
+        s_km = #{sKm,jdbcType=VARCHAR},
       </if>
       <if test="color != null">
-        color = #{color,jdbcType=INTEGER},
+        color = #{color,jdbcType=VARCHAR},
       </if>
       <if test="jqx != null">
-        jqx = #{jqx,jdbcType=INTEGER},
+        jqx = #{jqx,jdbcType=VARCHAR},
       </if>
       <if test="nj != null">
-        nj = #{nj,jdbcType=INTEGER},
+        nj = #{nj,jdbcType=VARCHAR},
       </if>
       <if test="xz != null">
-        xz = #{xz,jdbcType=INTEGER},
+        xz = #{xz,jdbcType=VARCHAR},
       </if>
       <if test="gh != null">
-        gh = #{gh,jdbcType=INTEGER},
+        gh = #{gh,jdbcType=VARCHAR},
       </if>
       <if test="ghtime != null">
-        ghtime = #{ghtime,jdbcType=INTEGER},
+        ghtime = #{ghtime,jdbcType=VARCHAR},
       </if>
       <if test="method != null">
-        method = #{method,jdbcType=INTEGER},
+        method = #{method,jdbcType=VARCHAR},
       </if>
       <if test="ck != null">
-        ck = #{ck,jdbcType=INTEGER},
+        ck = #{ck,jdbcType=VARCHAR},
       </if>
       <if test="delflag != null">
-        delflag = #{delflag,jdbcType=INTEGER},
+        delflag = #{delflag,jdbcType=VARCHAR},
       </if>
     </set>
     where info_id = #{infoId,jdbcType=BIGINT}
@@ -365,19 +365,19 @@
     update order_info
     set order_number = #{orderNumber,jdbcType=BIGINT},
       model_id = #{modelId,jdbcType=BIGINT},
-      reg_year = #{regYear,jdbcType=INTEGER},
-      reg_month = #{regMonth,jdbcType=INTEGER},
-      city_id = #{cityId,jdbcType=INTEGER},
-      s_km = #{sKm,jdbcType=DECIMAL},
-      color = #{color,jdbcType=INTEGER},
-      jqx = #{jqx,jdbcType=INTEGER},
-      nj = #{nj,jdbcType=INTEGER},
-      xz = #{xz,jdbcType=INTEGER},
-      gh = #{gh,jdbcType=INTEGER},
-      ghtime = #{ghtime,jdbcType=INTEGER},
-      method = #{method,jdbcType=INTEGER},
-      ck = #{ck,jdbcType=INTEGER},
-      delflag = #{delflag,jdbcType=INTEGER}
+      reg_year = #{regYear,jdbcType=VARCHAR},
+      reg_month = #{regMonth,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=VARCHAR},
+      s_km = #{sKm,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      jqx = #{jqx,jdbcType=VARCHAR},
+      nj = #{nj,jdbcType=VARCHAR},
+      xz = #{xz,jdbcType=VARCHAR},
+      gh = #{gh,jdbcType=VARCHAR},
+      ghtime = #{ghtime,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      ck = #{ck,jdbcType=VARCHAR},
+      delflag = #{delflag,jdbcType=VARCHAR}
     where info_id = #{infoId,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -1,7 +1,5 @@
 package com.maizhong.pojo;
 
-import java.math.BigDecimal;
-
 public class OrderInfo {
     private Long infoId;
 
@@ -9,31 +7,31 @@ public class OrderInfo {
 
     private Long modelId;
 
-    private Integer regYear;
+    private String regYear;
 
-    private Integer regMonth;
+    private String regMonth;
 
-    private Integer cityId;
+    private String cityId;
 
-    private BigDecimal sKm;
+    private String sKm;
 
-    private Integer color;
+    private String color;
 
-    private Integer jqx;
+    private String jqx;
 
-    private Integer nj;
+    private String nj;
 
-    private Integer xz;
+    private String xz;
 
-    private Integer gh;
+    private String gh;
 
-    private Integer ghtime;
+    private String ghtime;
 
-    private Integer method;
+    private String method;
 
-    private Integer ck;
+    private String ck;
 
-    private Integer delflag;
+    private String delflag;
 
     public Long getInfoId() {
         return infoId;
@@ -59,107 +57,107 @@ public class OrderInfo {
         this.modelId = modelId;
     }
 
-    public Integer getRegYear() {
+    public String getRegYear() {
         return regYear;
     }
 
-    public void setRegYear(Integer regYear) {
-        this.regYear = regYear;
+    public void setRegYear(String regYear) {
+        this.regYear = regYear == null ? null : regYear.trim();
     }
 
-    public Integer getRegMonth() {
+    public String getRegMonth() {
         return regMonth;
     }
 
-    public void setRegMonth(Integer regMonth) {
-        this.regMonth = regMonth;
+    public void setRegMonth(String regMonth) {
+        this.regMonth = regMonth == null ? null : regMonth.trim();
     }
 
-    public Integer getCityId() {
+    public String getCityId() {
         return cityId;
     }
 
-    public void setCityId(Integer cityId) {
-        this.cityId = cityId;
+    public void setCityId(String cityId) {
+        this.cityId = cityId == null ? null : cityId.trim();
     }
 
-    public BigDecimal getsKm() {
+    public String getsKm() {
         return sKm;
     }
 
-    public void setsKm(BigDecimal sKm) {
-        this.sKm = sKm;
+    public void setsKm(String sKm) {
+        this.sKm = sKm == null ? null : sKm.trim();
     }
 
-    public Integer getColor() {
+    public String getColor() {
         return color;
     }
 
-    public void setColor(Integer color) {
-        this.color = color;
+    public void setColor(String color) {
+        this.color = color == null ? null : color.trim();
     }
 
-    public Integer getJqx() {
+    public String getJqx() {
         return jqx;
     }
 
-    public void setJqx(Integer jqx) {
-        this.jqx = jqx;
+    public void setJqx(String jqx) {
+        this.jqx = jqx == null ? null : jqx.trim();
     }
 
-    public Integer getNj() {
+    public String getNj() {
         return nj;
     }
 
-    public void setNj(Integer nj) {
-        this.nj = nj;
+    public void setNj(String nj) {
+        this.nj = nj == null ? null : nj.trim();
     }
 
-    public Integer getXz() {
+    public String getXz() {
         return xz;
     }
 
-    public void setXz(Integer xz) {
-        this.xz = xz;
+    public void setXz(String xz) {
+        this.xz = xz == null ? null : xz.trim();
     }
 
-    public Integer getGh() {
+    public String getGh() {
         return gh;
     }
 
-    public void setGh(Integer gh) {
-        this.gh = gh;
+    public void setGh(String gh) {
+        this.gh = gh == null ? null : gh.trim();
     }
 
-    public Integer getGhtime() {
+    public String getGhtime() {
         return ghtime;
     }
 
-    public void setGhtime(Integer ghtime) {
-        this.ghtime = ghtime;
+    public void setGhtime(String ghtime) {
+        this.ghtime = ghtime == null ? null : ghtime.trim();
     }
 
-    public Integer getMethod() {
+    public String getMethod() {
         return method;
     }
 
-    public void setMethod(Integer method) {
-        this.method = method;
+    public void setMethod(String method) {
+        this.method = method == null ? null : method.trim();
     }
 
-    public Integer getCk() {
+    public String getCk() {
         return ck;
     }
 
-    public void setCk(Integer ck) {
-        this.ck = ck;
+    public void setCk(String ck) {
+        this.ck = ck == null ? null : ck.trim();
     }
 
-    public Integer getDelflag() {
+    public String getDelflag() {
         return delflag;
     }
 
-    public void setDelflag(Integer delflag) {
-        this.delflag = delflag;
+    public void setDelflag(String delflag) {
+        this.delflag = delflag == null ? null : delflag.trim();
     }
 }
