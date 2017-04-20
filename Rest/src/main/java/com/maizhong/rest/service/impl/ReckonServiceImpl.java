@@ -556,10 +556,10 @@ public class ReckonServiceImpl implements ReckonService {
         try {
             res = jedisClient.get(SMS_CODE + ":" + phone);//获取缓存内的信息
         } catch (Exception e) {
-            return JsonResult.OK("请发送验证码");
+            return JsonResult.Error("请发送验证码");
         }
         if (StringUtils.isBlank(res)) {
-            return JsonResult.OK("请发送验证码");
+            return JsonResult.Error("请发送验证码");
         }
         Map map = JsonUtils.jsonToPojo(res, Map.class);
         String reSmsCode = (String) map.get("smsCode");
@@ -582,7 +582,7 @@ public class ReckonServiceImpl implements ReckonService {
             }
             return JsonResult.build(200, "登录成功", token);
         } else {
-            return JsonResult.OK("登录失败，验证码不匹配");
+            return JsonResult.Error("登录失败，验证码不匹配");
         }
     }
 
