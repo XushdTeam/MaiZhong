@@ -526,8 +526,8 @@ public class ReckonServiceImpl implements ReckonService {
             DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", "Sms", "sms.aliyuncs.com");
             IAcsClient client = new DefaultAcsClient(profile);
             SingleSendSmsRequest request = new SingleSendSmsRequest();
-            request.setSignName("王存浩");//控制台创建的签名名称
-            request.setTemplateCode("SMS_62410574");//控制台创建的模板CODE
+            request.setSignName("迈众");//控制台创建的签名名称
+            request.setTemplateCode("SMS_62710241");//控制台创建的模板CODE
             Map<String, String> map = new HashMap<>();
             map.put("name", "迈众汽车");//称呼
             map.put("code", String.valueOf(smsCode));//短信验证码
