@@ -167,4 +167,17 @@ public class IndexServiceImpl implements IndexService {
 
         return indexDTO;
     }
+
+    @Override
+    public String saleguzhi(String guzhiKey, String otherKey) {
+
+        try {
+            String res = HttpClientUtil.doGet(RESTURL+"getSaleGZ/"+guzhiKey+"/"+otherKey);
+            return JsonUtils.jsonToPojo(res,JsonResult.class).getData().toString();
+        }catch (Exception e){
+
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
