@@ -1,7 +1,7 @@
 package com.maizhong.pojo;
 
 public class User {
-    private Integer userId;
+    private Long userId;
 
     private String phone;
 
@@ -9,17 +9,19 @@ public class User {
 
     private String linkmanPhone;
 
+    private Integer isContact;
+
     private String linkmanName;
 
     private Integer status;
 
     private Integer delflag;
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -45,6 +47,14 @@ public class User {
 
     public void setLinkmanPhone(String linkmanPhone) {
         this.linkmanPhone = linkmanPhone == null ? null : linkmanPhone.trim();
+    }
+
+    public Integer getIsContact() {
+        return isContact;
+    }
+
+    public void setIsContact(Integer isContact) {
+        this.isContact = isContact;
     }
 
     public String getLinkmanName() {
