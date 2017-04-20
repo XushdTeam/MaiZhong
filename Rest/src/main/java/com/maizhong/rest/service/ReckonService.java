@@ -31,4 +31,6 @@ public interface ReckonService {
     void setRedisCity();
 
     JsonResult getSaleGZ(String guzhiKey, String otherKey,long phone);
+
+    JsonResult getGZDetail(long phone);
 }

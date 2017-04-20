@@ -198,7 +198,22 @@ public class ReckonController {
 
         JsonResult result = reckonService.getSaleGZ(guzhiKey,otherKey,phone);
         return result;
-
     }
+
+    /**
+     * 从缓存获取估值信息
+     * @return
+     */
+    @RequestMapping(value = "/getGZDetail/{phone}")
+    @ResponseBody
+    public JsonResult getSaleGZ(@PathVariable long phone){
+
+        JsonResult result = reckonService.getGZDetail(phone);
+        return result;
+    }
+
+
+
+
 
 }

@@ -628,6 +628,23 @@ public class ReckonServiceImpl implements ReckonService {
     }
 
     /**
+     * 精确估值相关信息
+     * @param phone
+     * @return
+     */
+    @Override
+    public JsonResult getGZDetail(long phone) {
+        GuzhiDTO guzhiDTO = null;
+        try {
+            String order_phone = jedisClient.hget("ORDER_PHONE", phone + "");
+            guzhiDTO = JsonUtils.jsonToPojo(order_phone, GuzhiDTO.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return JsonResult.build(200,phone+"",guzhiDTO);
+    }
+
+    /**
      * 获取验证码
      *
      * @param phone
