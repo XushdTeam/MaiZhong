@@ -19,10 +19,10 @@ img,input{vertical-align:middle; outline:none}
 }
 .t_cen .t_right .two{ color: #fff; background: #f05b48; border-radius: 100px; padding: 10px 20px; margin-left:20px;}
 
-.guzs{ width: 1200px; margin:0 auto; overflow: height }
+.guzs{ width: 1200px; margin:0 auto;  }
 
-.liu{ background: url(../img/bg2.jpg) no-repeat; height: 521px; overflow: height;}
-.liu .l_cen{ width: 1000px; margin:0px auto; overflow: height}
+.liu{ background: url(../img/bg2.jpg) no-repeat; height: 521px; }
+.liu .l_cen{ width: 1000px; margin:0px auto; }
 .liu .l_cen h2,.liu .l_cen p{ text-align: center; }
 .liu .l_cen h2{ font-size: 36px; color: #444; padding-top: 86px; font-weight: 500 }
 .liu .l_cen p{ font-size: 24px; color: #999; line-height: 90px; }
@@ -47,7 +47,7 @@ img,input{vertical-align:middle; outline:none}
 .jiao .j_cen p{ font-size: 24px; color: #666; line-height: 90px; }
 .jiao .j_cen .one{ background: #f05b48; color: #fff; }
 .jiao .j_cen .one span{ padding: 0 0 0 10px }
-.jiao .j_cen div{ width: 1200px; overflow: height ;line-height: 46px;height:46px;}
+.jiao .j_cen div{ width: 1200px; overflow: hidden ;line-height: 46px;height:46px;}
 .jiao .j_cen div span{ padding: 0 0 0 10px; line-height: 46px; float: left; display:block; width: 118px}
 .jiao .j_cen div span.cl_one{ width: 300px; padding: 0 0 0 20px}
 .jiao .j_cen div span.last{ width: 60px;  }
@@ -66,7 +66,7 @@ img,input{vertical-align:middle; outline:none}
 
 
 /*a b  c  d*/
-.e_top{ border: 1px solid #eee !important;}
+.e_top{ border: 1px solid #eee !important; background: #fff;}
 .e_top .tell{ color: #f05b48;}
 .e_top .t_right a.one{ border: 1px solid #f05b48 !important; color: #f05b48 !important;}
 .e_top .t_right a.one:hover{ color: #fff !important;}
@@ -81,10 +81,10 @@ img,input{vertical-align:middle; outline:none}
 .can dl dd span{ padding: 5px 20px;}
 .guj{ width: 1200px; margin: 0 auto; background: #e5e5e5; overflow: hidden; min-height: 520px; clear: both}
 .guj .gu{ width: 24.9%;border-right: 1px solid #d2cfcf; min-height: 520px; text-align: center; float: left}
-.guj .gu h2{ font-size:24 ;color: #5c5b5b; font-weight: 500; line-height: 61px; height: 61px; text-align: center; border-bottom:1px solid #d2cfcf }
+.guj .gu h2{ font-size:24px;color: #5c5b5b; font-weight: 500; line-height: 61px; height: 61px; text-align: center; border-bottom:1px solid #d2cfcf }
 .guj .gu span{ font-size:30px;color: #f05b48; line-height: 60px}
 .guj .gu  p{ font-size: 24px; line-height: 40px;}
-.guj .gu div{ padding: 10px 20; font-size: 12px;color: #999}
+.guj .gu div{ padding: 10px 0; font-size: 12px;color: #999}
 .guj .gu dt{ font-size:20px ;color: #f05b48}
 .guj .gu dd{ padding: 0 10px}
 .guj .gu.none{border: none}
@@ -96,9 +96,10 @@ img,input{vertical-align:middle; outline:none}
 .guj .gu:hover dd,.guj .gu.hover dd,.guj .gu:hover h2,.guj .gu.hover h2{ color: #fff}
 
 .mc{ background: #f05b48;color: #fff; text-align: center;clear: both; margin: 30px auto; line-height: 85px;  width: 1200px; font-size: 36px; cursor: pointer}
+.mc a{ color: #fff}
 
 
-.lius .l_cen{ width: 1200px; margin:0px auto; overflow: height}
+.lius .l_cen{ width: 1200px; margin:0px auto; overflow: hidden}
 .lius .l_cen h2{ font-size: 28px; color: #444; padding-top: 36px; font-weight: 500 }
 .lius .l_cen h2 span{ font-size: 18px; color: #999; }
 .lius .l_cen dl{ float: left;  margin:50px 78px}
@@ -122,7 +123,7 @@ img,input{vertical-align:middle; outline:none}
 .jiaos h2 span{ font-size: 18px; color: #666; line-height: 90px; }
 .jiaos .j_cen .one{ background: #f05b48; color: #fff; }
 .jiaos .j_cen .one span{ padding: 0 0 0 10px }
-.jiaos .j_cen div{ width: 1200px; overflow: height ;line-height: 46px;height:46px;}
+.jiaos .j_cen div{ width: 1200px; overflow: hidden ;line-height: 46px;height:46px;}
 .jiaos .j_cen div span{ padding: 0 0 0 10px; line-height: 46px; float: left; display:block; width: 118px}
 .jiaos .j_cen div span.cl_one{ width: 300px; padding: 0 0 0 20px}
 .jiaos .j_cen div span.last{ width: 60px;  }
@@ -237,5 +238,37 @@ img,input{vertical-align:middle; outline:none}
 .xieyis{ width: 789px !important; }
 .p_fooot{ text-align: center; line-height: 40px;}
 .shouj{ width: 300px; margin: 0px auto; font-size: 18px; color: #000}
+
+
+/*个人中心*/
+.main{ width: 1200px; margin: 20px auto 0}
+.main .m_left{ background: #fff; float: left; width: 255px; padding: 0px 0 0 20px;min-height: 736px; }
+.main .m_left ul { margin:40px 0 20px  50px;}
+.main .m_left ul li{ font-size: 18px; color: #000}
+.main .m_left ul p{ margin-left: 35px}
+.main .m_left ul p .cuns{ color: #f05b48}
+.main .m_right{ background: #fff; float: right; width: 893px;min-height: 736px;}
+.main .m_right .m_top{ background: #262930;color: #fff; line-height:51px ;height: 51px; font-size: 18px; width: 90%; margin: 30px auto 10px }
+.main .m_right .m_top span{ float: left; width: 130px; text-align: center}
+.main .m_right .m_top .span1{ width:310px; text-align: left;  margin-left: 30px;}
+.main .m_right .m_top .mon{ width:190px; }
+.main .m_right .danxix{ background: #f5f5f5; width: 87%; margin: 0 auto;  height: 51px; line-height: 51px; padding-left: 25px;margin-top: 20px}
+.main .m_right .danxix .colors{ margin-left: 20px; color: #999}
+.main .m_right .td{ width: 89.5%; margin: 0 auto; border: 1px solid #eee; border-top:none; overflow: hidden; }
+.main .m_right .td .flot{ float: left; border-right: 1px solid #eee; width: 130px; text-align: center; height:100px; line-height: 100px;font-size: 18px; }
+.main .m_right .td .flot.none{ border: none}
+.main .m_right .td .ont{ width: 340px; }
+.main .m_right .td .flot.mony{ font-size: 30px; font-weight: bold; color: #f05b48; width: 190px}
+.main .m_right .td .flot.monys{ color: #f05b48 }
+.main .m_right .td .ont span{     line-height: 35px;  height: 35px;  display: block;  color: #000; width: 200px; float: right; text-align: left; margin-top: 15px}
+.main .m_right .td .ont img{ width: 100px; float: left;margin-top: 15px}
+
+/*过户进度*/
+.p_top{ height: 36px; line-height: 36px; background: #262930; width: 95%; margin: 30px auto 0;color: #fff}
+.p_top  span{ width: 248px; text-align: center; float: left}
+.p_top .span1{ width: 300px; padding-left: 26px; text-align: left}
+.m_right .p_td{ height: 74px; border: 1px solid #eee; border-top: none;width: 95%; margin: 0px auto }
+.es_top{ height: 51px; line-height: 51px; background: #262930; width: 95%; margin: 30px auto 0;color: #fff;}
+.es_top span{ padding: 0 20px}
 
 
