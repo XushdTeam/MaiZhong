@@ -32,6 +32,67 @@ public class GuzhiDTO {
 
     private String modelName;
 
+    private String seriesId;
+
+    private String maxYear;
+
+    private String minYear;
+
+    private String maxMouth;
+
+    public String getMaxYear() {
+        return maxYear;
+    }
+
+    public void setMaxYear(String maxYear) {
+        this.maxYear = maxYear;
+    }
+
+    public String getMinYear() {
+        return minYear;
+    }
+
+    public void setMinYear(String minYear) {
+        this.minYear = minYear;
+    }
+
+    public String getMaxMouth() {
+        return maxMouth;
+    }
+
+    public void setMaxMouth(String maxMouth) {
+        this.maxMouth = maxMouth;
+    }
+
+    public String getMinMouth() {
+        return minMouth;
+    }
+
+    public void setMinMouth(String minMouth) {
+        this.minMouth = minMouth;
+    }
+
+    private String minMouth;
+
+
+    public String getSeriesId() {
+        return seriesId;
+    }
+
+    public void setSeriesId(String seriesId) {
+        this.seriesId = seriesId;
+    }
+
+    public String getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(String brandId) {
+        this.brandId = brandId;
+    }
+
+    private String brandId;
+
     public String getCity() {
         return city;
     }
