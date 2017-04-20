@@ -103,7 +103,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.maizhong.pojo.User">
-    insert into user (user_id, phone, address, 
+    insert ignore  into user (user_id, phone, address,
       linkman_phone, is_contact, linkman_name, 
       status, delflag)
     values (#{userId,jdbcType=BIGINT}, #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 

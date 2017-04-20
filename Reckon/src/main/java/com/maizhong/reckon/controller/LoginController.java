@@ -23,13 +23,12 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-
     /**
-            * 获取验证码
-    *
-            * @param phone
-    * @return
-            */
+     * 获取验证码
+     * @param phone
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/getSMSCode/{phone}", method = RequestMethod.GET)
     @ResponseBody
     public JsonResult getSMSCode(@PathVariable("phone") String phone, HttpServletRequest request) {

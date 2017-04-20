@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class OrderInfo {
     private Long infoId;
 
-    private Long orderId;
+    private Long orderNumber;
 
     private Long modelId;
 
@@ -43,12 +43,12 @@ public class OrderInfo {
         this.infoId = infoId;
     }
 
-    public Long getOrderId() {
-        return orderId;
+    public Long getOrderNumber() {
+        return orderNumber;
     }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+    public void setOrderNumber(Long orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     public Long getModelId() {

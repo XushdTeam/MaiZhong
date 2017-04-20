@@ -3,7 +3,7 @@
 <mapper namespace="com.maizhong.mapper.OrderInfoMapper">
   <resultMap id="BaseResultMap" type="com.maizhong.pojo.OrderInfo">
     <id column="info_id" jdbcType="BIGINT" property="infoId" />
-    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="order_number" jdbcType="BIGINT" property="orderNumber" />
     <result column="model_id" jdbcType="BIGINT" property="modelId" />
     <result column="reg_year" jdbcType="INTEGER" property="regYear" />
     <result column="reg_month" jdbcType="INTEGER" property="regMonth" />
@@ -78,8 +78,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    info_id, order_id, model_id, reg_year, reg_month, city_id, s_km, color, jqx, nj, 
-    xz, gh, ghtime, method, ck, delflag
+    info_id, order_number, model_id, reg_year, reg_month, city_id, s_km, color, jqx, 
+    nj, xz, gh, ghtime, method, ck, delflag
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.pojo.OrderInfoExample" resultMap="BaseResultMap">
     select
@@ -112,12 +112,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.maizhong.pojo.OrderInfo">
-    insert into order_info (info_id, order_id, model_id, 
+    insert into order_info (info_id, order_number, model_id, 
       reg_year, reg_month, city_id, 
       s_km, color, jqx, nj, 
       xz, gh, ghtime, method, 
       ck, delflag)
-    values (#{infoId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{modelId,jdbcType=BIGINT}, 
+    values (#{infoId,jdbcType=BIGINT}, #{orderNumber,jdbcType=BIGINT}, #{modelId,jdbcType=BIGINT}, 
       #{regYear,jdbcType=INTEGER}, #{regMonth,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER}, 
       #{sKm,jdbcType=DECIMAL}, #{color,jdbcType=INTEGER}, #{jqx,jdbcType=INTEGER}, #{nj,jdbcType=INTEGER}, 
       #{xz,jdbcType=INTEGER}, #{gh,jdbcType=INTEGER}, #{ghtime,jdbcType=INTEGER}, #{method,jdbcType=INTEGER}, 
@@ -129,8 +129,8 @@
       <if test="infoId != null">
         info_id,
       </if>
-      <if test="orderId != null">
-        order_id,
+      <if test="orderNumber != null">
+        order_number,
       </if>
       <if test="modelId != null">
         model_id,
@@ -179,8 +179,8 @@
       <if test="infoId != null">
         #{infoId,jdbcType=BIGINT},
       </if>
-      <if test="orderId != null">
-        #{orderId,jdbcType=BIGINT},
+      <if test="orderNumber != null">
+        #{orderNumber,jdbcType=BIGINT},
       </if>
       <if test="modelId != null">
         #{modelId,jdbcType=BIGINT},
@@ -238,8 +238,8 @@
       <if test="record.infoId != null">
         info_id = #{record.infoId,jdbcType=BIGINT},
       </if>
-      <if test="record.orderId != null">
-        order_id = #{record.orderId,jdbcType=BIGINT},
+      <if test="record.orderNumber != null">
+        order_number = #{record.orderNumber,jdbcType=BIGINT},
       </if>
       <if test="record.modelId != null">
         model_id = #{record.modelId,jdbcType=BIGINT},
@@ -291,7 +291,7 @@
   <update id="updateByExample" parameterType="map">
     update order_info
     set info_id = #{record.infoId,jdbcType=BIGINT},
-      order_id = #{record.orderId,jdbcType=BIGINT},
+      order_number = #{record.orderNumber,jdbcType=BIGINT},
       model_id = #{record.modelId,jdbcType=BIGINT},
       reg_year = #{record.regYear,jdbcType=INTEGER},
       reg_month = #{record.regMonth,jdbcType=INTEGER},
@@ -313,8 +313,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.pojo.OrderInfo">
     update order_info
     <set>
-      <if test="orderId != null">
-        order_id = #{orderId,jdbcType=BIGINT},
+      <if test="orderNumber != null">
+        order_number = #{orderNumber,jdbcType=BIGINT},
       </if>
       <if test="modelId != null">
         model_id = #{modelId,jdbcType=BIGINT},
@@ -363,7 +363,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.maizhong.pojo.OrderInfo">
     update order_info
-    set order_id = #{orderId,jdbcType=BIGINT},
+    set order_number = #{orderNumber,jdbcType=BIGINT},
       model_id = #{modelId,jdbcType=BIGINT},
       reg_year = #{regYear,jdbcType=INTEGER},
       reg_month = #{regMonth,jdbcType=INTEGER},
