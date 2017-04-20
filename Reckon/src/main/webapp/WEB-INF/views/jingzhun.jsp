@@ -424,7 +424,8 @@
         });
 
 
-        $.getJSON('/sendVercode/'+phone,function (res) {
+        $.getJSON('/getSMSCode/'+phone,function (res) {
+            console.log(JSON.stringify(res));
             if(res.status==200){
                 countdown = 120;
                 time(el);

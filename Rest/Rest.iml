@@ -121,5 +121,7 @@
     <orderEntry type="library" name="Maven: org.noggit:noggit:0.5" level="project" />
     <orderEntry type="library" name="Maven: org:analyzer:2012" level="project" />
     <orderEntry type="library" name="Maven: org.apache.lucene:lucene-core:4.10.3" level="project" />
+    <orderEntry type="library" name="Maven: com.aliyun:aliyun-java-sdk-core:2.4.2" level="project" />
+    <orderEntry type="library" name="Maven: com.aliyun:aliyun-java-sdk-sms:3.0.0-rc1" level="project" />
   </component>
 </module>

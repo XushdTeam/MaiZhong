@@ -83,6 +83,7 @@ public class IndexController {
 
         GuzhiDTO guzhiDTO = indexService.getGuZhi(param);
         model.addAttribute("result",guzhiDTO);
+
         return "guzhi";
     }
 
@@ -93,5 +94,11 @@ public class IndexController {
         model.addAttribute("brandList",indexDTO.getBrandList());
         model.addAttribute("proviceList",indexDTO.getProviceList());
         return "jingzhun";
+    }
+
+    @RequestMapping(value = "/login")
+    public String login(){
+
+        return "dl";
     }
 }
