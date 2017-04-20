@@ -234,18 +234,44 @@ function cleckinput(a, b, c, d) {
             color: "#ff5d5d"
         })) : (m--, $(".ck").css({
             color: "#333"
-        }))),1 && ("" == vcode ? ($(".tells").css({
-            color: "#ff5d5d"
-        })) : (m--, $(".tells").css({
+        }))),1 && ("" == vcode ? ($(".vc").css({
+            color: "#ff5d5d"}).find('.vr').show()
+        ) : (m--, $(".vc").css({
             color: "#333"
-        }))),(/^1[34578]\d{9}$/.test(phone)) &&( "" == phone ? ($(".tell").css({
-            color: "#ff5d5d"
-        })) : (m--, $(".tell").css({
+            }).find('.vr').hide()
+        )),(!(/^1[34578]\d{9}$/.test(phone)) ? ($(".pc").css({
+                color: "#ff5d5d"}).find('.pr').show()
+        ) : (m--, $(".pc").css({
             color: "#333"
-        }))),
+            }).find('.pr').hide()
+        )),
 
         0 == m) {
 
+        //验证手机验证码
+        $.getJSON('/userLogin/'+phone+'/'+vcode,function (res) {
+            if(res.status==200){
+                //提交跳转
+                var n = ($("#s_brand").val(), $("#s_series").val(), $("#s_simple").val());
+                var o = "/saleguzhi/" + j +
+                    "c" + k +
+                    "m" + n +
+                    "r" + g +
+                    "-" + h +
+                    "g" + l +
+                    "o" + s_color +
+                    "j" + s_jxq +
+                    "h" + s_gh +
+                    "t" + s_ghtime +
+                    "x" + s_xz +
+                    "n" + s_nj +
+                    "d" + s_method +
+                    "k" + s_ck;
+                location.href = o
+            }else{
+                $('.vr').html(res.message).show();
+            }
+        });
 
         //
         // var n = ($("#s_brand").val(), $("#s_series").val(), $("#s_simple").val());
@@ -419,7 +445,7 @@ function getCurrentYear() {
 }
 $(function() {
     $("#select1").live("click", function() {
-        var a = $("#s_simple").val(),
+        var a = "0",
             b = $(this).next();
         "0" != a ? b.is(":hidden") ? ($(".model").fadeIn(), openbg()) : ($(".model").hide(), closebg()) : b.is(":hidden") ? (b.fadeIn().next().fadeIn(), openbg()) : (b.hide().next().hide(), closebg())
     }), $(".pinpai_num").live("click", function() {
@@ -438,7 +464,7 @@ $(function() {
     }), $(".list_1").live("click", function() {
         $(".list_1").removeClass("layerbg2").addClass("pinpailist"), $(this).removeClass("pinpailist pinpailisthover").addClass("layerbg2");
         var a = $(this).attr("id"),
-            b = ($(this).attr("rel"), $("#s_brand").val()),
+            b = ($(this).attr("rel"), "0"),
             c = $("#s_series").val(),
             d = $("#s_simple").val();
         b == a && "0" != c && "0" != d || ($("#s_brand").val(a), getSeriesList("", a, $(".series"), '<p class="pinpailist list_2 mylist%css" id="%id">%letter%name</p>', 0, "", ""), $("#s_series").val(0), $("#s_simple").val(0), $("#select1").html('<div class="lable">选择车型:</div><div id="valnone" >请 选 择 车 型</div>'), $("#select2_1,#select2_2").fadeIn(), $("#select3_1,#select3_2").fadeOut())
@@ -454,7 +480,8 @@ $(function() {
         if ("请 选 择 车 型" == $("#valnone").html()) return $("#valnone").css({
             color: "#ff5d5d"
         }), !1;
-        var a = $("#s_month").val();
+        console.log($("#ndy").val())
+        var a = $("#ndy").val()?"0":$("#s_month").val();
         if ("0" != a) {
             var b = $(this).next();
             b.is(":hidden") ? ($(".regDate").fadeIn(), openbg()) : ($(".regDate").hide(), closebg())

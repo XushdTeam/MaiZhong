@@ -121,7 +121,7 @@
 
                     <div class="select_box" id="select1">
                         <div class="lable">选择车型:</div>
-                        <div id="valnone">请 选 择 车 型</div>
+                        <div id="valnone">${result.modelName}</div>
                     </div>
                     <div class="bg0 lr_158_30 select model" id="select1_1" style="display: none"></div>
                     <div class="ucarselecttype lr_158_30 select model" id="select1_2" style="width: 227px; height: 450px; display: none;">
@@ -151,7 +151,7 @@
                                 <a href="javascript:void(0)" id="letters_20" class="pinpai_num" rel="185">Z</a>                                            </div>
                             <div class="ucarselecttype_pinpaibottom brandgun" style="width:180px;">
                                 <div class="ucarselecttype_pinpaibottom_ul brand">
-                                    <c:forEach items="${brandList}" var="i">
+                                    <c:forEach items="${result.brandList}" var="i">
                                         <p id="${i.key}" class="pinpailist" style="background:#e3e3e3;text-align:center">${i.key}</p>
                                         <c:forEach items="${i.object}" var="j">
                                             <p class="pinpailist list_1" id="${j.key}" rel="A">${j.value}</p>
@@ -177,14 +177,20 @@
                         <div class="ucarselecttype_pinpai last" style="width:400px;height:450px;">
                             <div class="ucarselecttype_pinpaitop" id="xzcxing" style="width:400px;">请选择车型</div>
                             <div class="ucarselecttype_pinpaibottom" style="width:400px;">
-                                <div class="ucarselecttype_pinpaibottom_ul simple"></div>
+                                <div class="ucarselecttype_pinpaibottom_ul simple">
+                                    <c:if test="${second==1}">
+                                        <input type="hidden" id="ndy" value="1">
+                                        <p class="list_3 mylist  simple_${result.modelId} layerbg2" data-min="${result.minYear}" data-max="${result.maxYear}"></p>
+                                    </c:if>
+
+                                </div>
                             </div>
                         </div>
                     </div>
                 </li>
                 <li class="mb13" style="z-index:99">
 
-                    <div class="select_box" id="select4"><div class="lable">首次上牌时间:</div>首 次 上 牌 时 间</div>
+                    <div class="select_box" id="select4"><div class="lable">首次上牌时间:</div>${result.regdate}</div>
                     <div class="bg1 lr_158_30 sele regDate" id="sele1_1" style="height:365px;display: none;"></div>
                     <div class="ucarselecttype lr_158_30 sele regDate" id="sele1_2" style="width:182px;height:310px;display: none;">
                         <div class="ucarselecttype_pinpai" style="height:310px;">
@@ -207,7 +213,7 @@
                 <li class="mb13" style="z-index:88">
                     <div class="lable">车牌归属地:</div>
                     <div class="select_box" id="select5">
-                        北京
+                        ${result.city}
                     </div>
                     <div class="bg1 lr_158_30 sel zone" id="sel1_1" style="display: none;"></div>
                     <div class="ucarselecttype lr_158_30 sel zone" id="sel1_2" style="width:182px;height:310px;display: none;">
@@ -215,7 +221,7 @@
                             <div class="ucarselecttype_pinpaitop selprov" style="width: 170px;">选择省份</div>
                             <div class="ucarselecttype_pinpaibottom" style="height:265px;width:165px; margin-left:7px">
                                 <div class="ucarselecttype_pinpaibottom_ul select_province">
-                                    <c:forEach items="${proviceList}" var="i" varStatus="status">
+                                    <c:forEach items="${result.proviceList}" var="i" varStatus="status">
                                         <p class="list_6 province <c:if test="${status.count == 1}">layerbg2</c:if>" id="${i.id}">${i.name}</p>
                                     </c:forEach>
                                 </div>
@@ -237,18 +243,18 @@
 
                     <div class="select_box none" id="gongli">
                         <div class="lable">行驶里程:</div>
-                        <input name="s_km" type="text" class="numgongli" id="lichengpd" maxlength="6" autocomplete="off" style="padding-left:0;">
+                        <input name="s_km" type="text" class="numgongli" value="${result.mail}" id="lichengpd" maxlength="6" autocomplete="off" style="padding-left:0;">
                         <label>万公里</label>
                     </div>
                 </li>
                 <li>
-                    <input type="hidden" name="s_brand" id="s_brand" value="0">
-                    <input type="hidden" name="s_series" id="s_series" value="0">
-                    <input type="hidden" name="s_simple" id="s_simple" value="0">
-                    <input type="hidden" name="s_year" id="s_year" value="0">
-                    <input type="hidden" name="s_mouth" id="s_month" value="0">
-                    <input type="hidden" name="s_province" id="s_province" value="1">
-                    <input type="hidden" name="s_city" id="s_city" value="1">
+                    <input type="hidden" name="s_brand" id="s_brand" value="${result.brandId}">
+                    <input type="hidden" name="s_series" id="s_series" value="${result.seriesId}">
+                    <input type="hidden" name="s_simple" id="s_simple" value="${result.modelId}">
+                    <input type="hidden" name="s_year" id="s_year" value="${result.year}">
+                    <input type="hidden" name="s_mouth" id="s_month" value="${result.mouth}">
+                    <input type="hidden" name="s_province" id="s_province" value="${result.provice}">
+                    <input type="hidden" name="s_city" id="s_city" value="${result.cityId}">
                     <input type="hidden" name="s_color" id="s_color" value="0">
                     <input type="hidden" name="s_jxq" id="s_jxq" value="0">
                     <input type="hidden" name="s_nj" id="s_nj" value="0">
@@ -257,6 +263,7 @@
                     <input type="hidden" name="s_ghtime" id="s_ghtime" value="0">
                     <input type="hidden" name="s_method" id="s_method" value="0">
                     <input type="hidden" name="s_ck" id="s_ck" value="0">
+                    <input type="hidden" name="sceond" id="sceond" value="${second}">
                     <input id="cityList" type="hidden" value="">
                 </li>
             </ul>
@@ -267,44 +274,42 @@
 
     <div class="jing color">
         <label>颜色：</label>
-        <a href="JavaScript:void(0)" class="hover" data-color="1"> <img src="../resources/img/y_1.png"></a>
-        <a href="JavaScript:void(0)" class="hover" data-color="2"> <img src="../resources/img/y_2.png"></a>
-        <a href="JavaScript:void(0)" class="hover" data-color="3"> <img src="../resources/img/y_3.png"></a>
-        <a href="JavaScript:void(0)" class="hover" data-color="4"> <img src="../resources/img/y_4.png"></a>
-        <a href="JavaScript:void(0)" class="hover" data-color="5"> <img src="../resources/img/y_5.jpg"></a>
-        <a href="JavaScript:void(0)" class="hover" data-color="6"> <img src="../resources/img/y_6.jpg"></a>
-        <a href="JavaScript:void(0)" class="hover" data-color="7"> <img src="../resources/img/y_7.png"></a>
-        <a href="JavaScript:void(0)" class="hover" data-color="8"> <img src="../resources/img/y_8.png"></a>
-        <a href="JavaScript:void(0)" class="hover" data-color="9"> <img src="../resources/img/y_9.png"></a>
+        <a href="JavaScript:void(0)" class="hover" data-color="1" title="米色" style="background: beige"></a>
+        <a href="JavaScript:void(0)" class="hover" data-color="2" title="白色" style="background: white"></a>
+        <a href="JavaScript:void(0)" class="hover" data-color="3" title="灰色" style="background: grey"></a>
+        <a href="JavaScript:void(0)" class="hover" data-color="4" title="红色" style="background: red"></a>
+        <a href="JavaScript:void(0)" class="hover" data-color="5" title="棕色" style="background: brown"> </a>
+        <a href="JavaScript:void(0)" class="hover" data-color="6" title="蓝色" style="background: blue"> </a>
+        <a href="JavaScript:void(0)" class="hover" data-color="7" title="黄色" style="background: yellow"> </a>
+        <a href="JavaScript:void(0)" class="hover" data-color="8" title="黑色" style="background: black"> </a>
+        <a href="JavaScript:void(0)" class="hover" data-color="9" title="银色" style="background: silver"> </a>
+        <a href="JavaScript:void(0)" class="hover" data-color="10" title="绿色" style="background: green"> </a>
     </div>
 
     <div class="jing btn jqx">
         <label>交强险有效期：</label>
-         <a href="JavaScript:void(0)"  data-jqx="1">1~2个月</a>
-         <a href="JavaScript:void(0)"  data-jqx="2">2~6个月</a>
-         <a href="JavaScript:void(0)"  data-jqx="3">12个月以上</a>
+         <a href="JavaScript:void(0)"  data-jqx="1">2个月以内</a>
+         <a href="JavaScript:void(0)"  data-jqx="2">2个月以上</a>
     </div>
 
 
     <div class="jing btn nj">
         <label>年检有效期：</label>
-        <a href="JavaScript:void(0)"  data-nj="1">1~2个月</a>
-        <a href="JavaScript:void(0)"  data-nj="2">2~6个月</a>
-        <a href="JavaScript:void(0)"  data-nj="3">6~12个月</a>
-        <a href="JavaScript:void(0)"  data-nj="4">12个月以上</a>
+        <a href="JavaScript:void(0)"  data-nj="1">2个月以内</a>
+        <a href="JavaScript:void(0)"  data-nj="2">2个月以上</a>
     </div>
 
 
     <div class="jing btn xz">
         <label>使用性质：</label>
         <a href="JavaScript:void(0)"  data-xz="1">非营运</a>
-        <a href="JavaScript:void(0)"  data-xz="2">营运</a>
-        <a href="JavaScript:void(0)"  data-xz="3">租赁</a>
+        <a href="JavaScript:void(0)"  data-xz="2">租赁</a>
     </div>
 
 
     <div class="jing btn gh">
         <label>过户次数：</label>
+        <a href="JavaScript:void(0)"  data-gh="1">0次</a>
         <a href="JavaScript:void(0)"  data-gh="1">1次</a>
         <a href="JavaScript:void(0)"  data-gh="2">2次</a>
         <a href="JavaScript:void(0)"  data-gh="3">3次以上</a>
@@ -313,10 +318,10 @@
 
     <div class="jing btn ghtime">
         <label>最后一次过户时间：</label>
-        <a href="JavaScript:void(0)"  data-ghtime="1">1~2个月</a>
-        <a href="JavaScript:void(0)"  data-ghtime="2">2~6个月</a>
-        <a href="JavaScript:void(0)"  data-ghtime="3">6~12个月</a>
-        <a href="JavaScript:void(0)"  data-ghtime="4">12个月以上</a>
+        <a href="JavaScript:void(0)"  data-ghtime="1">一手车</a>
+        <a href="JavaScript:void(0)"  data-ghtime="2">6个月以内</a>
+        <a href="JavaScript:void(0)"  data-ghtime="3">6个月以上</a>
+
     </div>
 
     <div class="jing btn method">
@@ -334,14 +339,14 @@
         <a href="JavaScript:void(0)"  data-ck="4">D(较差)有发生过伤及主体框架的碰撞或较大事故 </a>
     </div>
 
-    <div class="jing tell tells">
+    <div class="jing tell tells pc">
         <label>手机号：</label>
         <input type="text" name="phone" id="phone" maxlength="11">
         <input type="button" class="tes" onclick="onSendVcode(this)" value="获取验证码"/>
         <b class="error pr">手机号不能为空</b>
     </div>
 
-    <div class="jing tells">
+    <div class="jing tells vc">
         <label>验证码：</label>
 
         <input type="tell" id="vcode">
@@ -403,10 +408,7 @@
             el.value = "重新发送(" + countdown + "s)";
             countdown--;
         }
-
-
         setTimeout(function(){time(el)},1000)
-
     }
 
     var onSendVcode = function(el){
@@ -422,17 +424,12 @@
         $(".tell").css({
             color: "#333"
         });
-
-
         $.getJSON('/getSMSCode/'+phone,function (res) {
-            console.log(JSON.stringify(res));
             if(res.status==200){
                 countdown = 120;
                 time(el);
             }
         });
-
-
     }
 
 

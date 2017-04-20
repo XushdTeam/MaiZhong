@@ -6,6 +6,8 @@ import com.maizhong.common.result.JsonResult;
 import com.maizhong.reckon.DTO.IndexDTO;
 import com.maizhong.reckon.service.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.parsing.SourceExtractor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,10 +32,10 @@ public class IndexController {
         model.addAttribute("proviceList",indexDTO.getProviceList());
         return "index";
     }
-//    @RequestMapping(value = "/{page}")
-//    public String test(@PathVariable String page){
-//        return page;
-//    }
+    @RequestMapping(value = "/{page}")
+    public String test(@PathVariable String page){
+        return page;
+    }
 
 
     /**
@@ -81,18 +83,44 @@ public class IndexController {
     @RequestMapping(value = "/guzhi/{param}")
     public String compute(@PathVariable String param,Model model){
 
+        String params = param;
         GuzhiDTO guzhiDTO = indexService.getGuZhi(param);
         model.addAttribute("result",guzhiDTO);
+        model.addAttribute("ppap",params);
+
 
         return "guzhi";
     }
 
+    /**
+     * 估值完成后跳转
+     * @param model
+     * @param param
+     * @return
+     */
+    @RequestMapping(value = "/sale/{param}")
+    public String sale(Model model,@PathVariable String param){
+
+        IndexDTO indexDTO = indexService.getIndexDTO(param);
+      //  model.addAttribute("brandList",indexDTO.getBrandList());
+       // model.addAttribute("proviceList",indexDTO.getProviceList());
+        model.addAttribute("result",indexDTO);
+        model.addAttribute("second","1");
+        return "jingzhun";
+    }
+
+    /**
+     * 未估值直接跳转
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/sale")
     public String sale(Model model){
         IndexDTO indexDTO = indexService.getIndexDTO();
-
-        model.addAttribute("brandList",indexDTO.getBrandList());
-        model.addAttribute("proviceList",indexDTO.getProviceList());
+        model.addAttribute("result",indexDTO);
+//        model.addAttribute("brandList",indexDTO.getBrandList());
+//        model.addAttribute("proviceList",indexDTO.getProviceList());
+        model.addAttribute("second","0");
         return "jingzhun";
     }
 
@@ -100,5 +128,21 @@ public class IndexController {
     public String login(){
 
         return "dl";
+    }
+
+    /**
+     * 精准估值结果
+     * @param param
+     * @return
+     */
+    @RequestMapping(value="/saleguzhi/{param}")
+    public String saleguzhi(@PathVariable String param){
+        System.out.println(param);
+        String[] arry = param.split("o");
+        String guzhiKey = arry[0];
+        System.out.println(guzhiKey);
+        String otherKey = "o"+arry[1];
+        System.out.println(otherKey);
+        return "jiage";
     }
 }

@@ -435,6 +435,10 @@ public class ReckonServiceImpl implements ReckonService {
 
             Model model = JsonUtils.jsonToPojo(modelRedis, Model.class);
 
+            guzhiDTO.setMaxYear(model.getMaxRegYear()+"");
+            guzhiDTO.setMinYear(model.getMinRegYear()+"");
+
+
             guzhiDTO.setModelName(model.getModelName());
             guzhiDTO.setDischargeStandard(model.getDischargeStandard());
             guzhiDTO.setLiter(model.getLiter());
@@ -446,7 +450,10 @@ public class ReckonServiceImpl implements ReckonService {
 
             String seriesRedis = jedisClient.hget("CAR_SERIES_KEY",model.getSeriesId()+"");
 
-            guzhiDTO.setSeriesImg(JsonUtils.jsonToPojo(seriesRedis,Series.class).getSeriesPic());
+            Series series = JsonUtils.jsonToPojo(seriesRedis, Series.class);
+            guzhiDTO.setSeriesImg(series.getSeriesPic());
+            guzhiDTO.setSeriesId(series.getSeriesId()+"");
+            guzhiDTO.setBrandId(series.getBrandId()+"");
 
             guzhiDTO.setRegdate(gzrecord.getRegDate().replace("-","年")+"月");
 

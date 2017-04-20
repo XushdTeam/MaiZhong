@@ -19,4 +19,7 @@ public interface IndexService {
     JsonResult getAllCity();
 
     GuzhiDTO getGuZhi(String param);
+
+    IndexDTO getIndexDTO(String param);
+
 }

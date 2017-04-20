@@ -162,7 +162,7 @@
       </div>
 
   </div>
-<div class="mc"><a style="display: block" href="/sale">我要卖车</a></div>
+<div class="mc"><a style="display: block;color: #FFF" href="/sale/${ppap}">我要卖车</a></div>
 
 <!--估价选项 end-->
 <div class="bans"><img src="../resources/img/1-4.jpg"></div>
