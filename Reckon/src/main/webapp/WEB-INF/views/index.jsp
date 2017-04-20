@@ -29,7 +29,7 @@
         <div class="t_cen">
             <a href="#"><img src="../resources/img/logo.png"></a>
             <span class="tell">010-3993-394</span>
-            <span class="t_right"><a href="" class="one">我要卖车</a><a href="" class="one">登录</a><a href="" class="two">APP下载</a></span>
+            <span class="t_right"><a href="" class="one">我要卖车</a><a href="/login" class="one">登录</a><a href="" class="two">APP下载</a></span>
         </div>
     </div><!--top end-->
 

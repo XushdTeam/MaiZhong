@@ -77,6 +77,8 @@
           <element id="library" level="project" name="Maven: org.noggit:noggit:0.5" />
           <element id="library" level="project" name="Maven: org:analyzer:2012" />
           <element id="library" level="project" name="Maven: org.apache.lucene:lucene-core:4.10.3" />
+          <element id="library" level="project" name="Maven: com.aliyun:aliyun-java-sdk-core:2.4.2" />
+          <element id="library" level="project" name="Maven: com.aliyun:aliyun-java-sdk-sms:3.0.0-rc1" />
         </element>
       </element>
       <element id="directory" name="META-INF">

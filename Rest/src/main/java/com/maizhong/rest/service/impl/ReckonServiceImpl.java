@@ -376,7 +376,7 @@ public class ReckonServiceImpl implements ReckonService {
 
             if(StringUtils.isNotBlank(redisJson)){
 
-                return JsonResult.OK(JsonUtils.jsonToPojo(redisJson,Gzrecord.class));
+                return JsonResult.OK(JsonUtils.jsonToPojo(redisJson,GuzhiDTO.class));
             }
 
             String[] paramarry = param.split("c|m|r|g");
