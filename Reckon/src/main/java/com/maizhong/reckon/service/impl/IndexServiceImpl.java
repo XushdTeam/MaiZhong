@@ -8,6 +8,7 @@ import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.reckon.DTO.IndexDTO;
 import com.maizhong.reckon.service.IndexService;
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,18 @@ public class IndexServiceImpl implements IndexService {
             res = HttpClientUtil.doGet(RESTURL+"getProvice");
             object = JSON.parseObject(res);
             indexDTO.setProviceList(object.getJSONArray("data"));
+
+
+            indexDTO.setCityId("1");
+            indexDTO.setModelId("0");
+            indexDTO.setProvice("1");
+            indexDTO.setYear("0");
+            indexDTO.setMouth("0");
+            indexDTO.setBrandId("0");
+            indexDTO.setSeriesId("0");
+            indexDTO.setCity("北京");
+            indexDTO.setModelName("请 选 择 车 型");
+            indexDTO.setRegdate("首 次 上 牌 时 间");
 
             return indexDTO;
 
@@ -117,6 +130,41 @@ public class IndexServiceImpl implements IndexService {
         JSONObject data = object.getJSONObject("data");
         return  JSON.parseObject(data.toJSONString(),GuzhiDTO.class);
 
+    }
 
+    @Override
+    public IndexDTO getIndexDTO(String param) {
+
+        String res = HttpClientUtil.doGet(RESTURL+"GetBrandList");
+        JSONObject object = JSON.parseObject(res);
+        IndexDTO indexDTO = new IndexDTO();
+        indexDTO.setBrandList(object.getJSONArray("data"));
+        res = HttpClientUtil.doGet(RESTURL+"getProvice");
+        object = JSON.parseObject(res);
+        indexDTO.setProviceList(object.getJSONArray("data"));
+
+        res = HttpClientUtil.doGet(RESTURL+"guzhi/"+param);
+        object = JSON.parseObject(res);
+        JSONObject data = object.getJSONObject("data");
+        GuzhiDTO guzhiDTO = JSON.parseObject(data.toJSONString(), GuzhiDTO.class);
+
+        String[] paramArry = param.split("c|m|r|g");
+
+        indexDTO.setCity(guzhiDTO.getCity());
+        indexDTO.setCityId(paramArry[1]);
+        indexDTO.setRegdate(guzhiDTO.getRegdate());
+        indexDTO.setModelName(guzhiDTO.getModelName());
+        indexDTO.setModelId(paramArry[2]);
+        indexDTO.setMail(paramArry[4]);
+        indexDTO.setProvice(paramArry[0]);
+        indexDTO.setYear(paramArry[3].split("-")[0]);
+        indexDTO.setMouth(paramArry[3].split("-")[1]);
+        indexDTO.setBrandId(guzhiDTO.getBrandId());
+        indexDTO.setSeriesId(guzhiDTO.getSeriesId());
+
+        indexDTO.setMaxYear(guzhiDTO.getMaxYear());
+        indexDTO.setMinYear(guzhiDTO.getMinYear());
+
+        return indexDTO;
     }
 }

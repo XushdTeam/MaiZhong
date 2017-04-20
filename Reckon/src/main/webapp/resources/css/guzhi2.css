@@ -304,7 +304,7 @@
     background: none;
 }
 .select_box input.numgongli {
-    background: #f1f1f1;
+    background: #FFF;
     border: none;
     height: 96%;
     width: 269px;
@@ -1574,10 +1574,17 @@ li.on a {
 .hover img{
     border:2px solid #CCC;
 }
+.color a{
+    border:2px solid #b39f9f;
+    margin: 5px;
+}
+.color a:hover{
+    border:2px solid #f05b48;
+}
 .hover img:hover{
     border:2px solid #f05b48;
 }
-.guactive img{
+.color .guactive{
     border:2px solid #f05b48;
 }
 
@@ -1609,7 +1616,8 @@ li.on a {
     color: #f05b48;
     display: none;
 }
-
-
+.jingzhun {
+    background: #FFF!important;
+}
 
 
