@@ -136,13 +136,16 @@ public class IndexController {
      * @return
      */
     @RequestMapping(value="/saleguzhi/{param}")
-    public String saleguzhi(@PathVariable String param){
+    public String saleguzhi(@PathVariable String param,Model model){
         System.out.println(param);
         String[] arry = param.split("o");
         String guzhiKey = arry[0];
-        System.out.println(guzhiKey);
-        String otherKey = "o"+arry[1];
-        System.out.println(otherKey);
+        String otherKey = arry[1];
+
+        String price = indexService.saleguzhi(guzhiKey,otherKey);
+
+        model.addAttribute("price",price);
+
         return "jiage";
     }
 }

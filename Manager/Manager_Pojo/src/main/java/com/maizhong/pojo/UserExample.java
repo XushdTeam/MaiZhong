@@ -114,52 +114,52 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andUserIdEqualTo(Integer value) {
+        public Criteria andUserIdEqualTo(Long value) {
             addCriterion("user_id =", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdNotEqualTo(Integer value) {
+        public Criteria andUserIdNotEqualTo(Long value) {
             addCriterion("user_id <>", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdGreaterThan(Integer value) {
+        public Criteria andUserIdGreaterThan(Long value) {
             addCriterion("user_id >", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andUserIdGreaterThanOrEqualTo(Long value) {
             addCriterion("user_id >=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdLessThan(Integer value) {
+        public Criteria andUserIdLessThan(Long value) {
             addCriterion("user_id <", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdLessThanOrEqualTo(Integer value) {
+        public Criteria andUserIdLessThanOrEqualTo(Long value) {
             addCriterion("user_id <=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdIn(List<Integer> values) {
+        public Criteria andUserIdIn(List<Long> values) {
             addCriterion("user_id in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdNotIn(List<Integer> values) {
+        public Criteria andUserIdNotIn(List<Long> values) {
             addCriterion("user_id not in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdBetween(Integer value1, Integer value2) {
+        public Criteria andUserIdBetween(Long value1, Long value2) {
             addCriterion("user_id between", value1, value2, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andUserIdNotBetween(Long value1, Long value2) {
             addCriterion("user_id not between", value1, value2, "userId");
             return (Criteria) this;
         }
@@ -371,6 +371,66 @@ public class UserExample {
 
         public Criteria andLinkmanPhoneNotBetween(String value1, String value2) {
             addCriterion("linkman_phone not between", value1, value2, "linkmanPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsContactIsNull() {
+            addCriterion("is_contact is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsContactIsNotNull() {
+            addCriterion("is_contact is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsContactEqualTo(Integer value) {
+            addCriterion("is_contact =", value, "isContact");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsContactNotEqualTo(Integer value) {
+            addCriterion("is_contact <>", value, "isContact");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsContactGreaterThan(Integer value) {
+            addCriterion("is_contact >", value, "isContact");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsContactGreaterThanOrEqualTo(Integer value) {
+            addCriterion("is_contact >=", value, "isContact");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsContactLessThan(Integer value) {
+            addCriterion("is_contact <", value, "isContact");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsContactLessThanOrEqualTo(Integer value) {
+            addCriterion("is_contact <=", value, "isContact");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsContactIn(List<Integer> values) {
+            addCriterion("is_contact in", values, "isContact");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsContactNotIn(List<Integer> values) {
+            addCriterion("is_contact not in", values, "isContact");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsContactBetween(Integer value1, Integer value2) {
+            addCriterion("is_contact between", value1, value2, "isContact");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsContactNotBetween(Integer value1, Integer value2) {
+            addCriterion("is_contact not between", value1, value2, "isContact");
             return (Criteria) this;
         }
 

@@ -76,18 +76,8 @@ function getSeriesList(a, b, c, d, e, f, g) {
         j = 0;
     showLoading(c), "Microsoft Internet Explorer" != navigator.appName || "8." != navigator.appVersion.match(/8./i) && "9." != navigator.appVersion.match(/9./i) ? $.getJSON(metaUrl + "series/series_brand/" + b , function(a) {
         h(a.data)
-    }) : $.ajax({
-        type: "get",
-        contentType: "application/json; charset=utf-8",
-        url: baseUrl + "/service/QueryService.php",
-        data: {
-            carBrand: b,
-            oper: "getCarSeriesList"
-        },
-        success: function(a) {
-            var b = jQuery.parseJSON(a);
-            h(b)
-        }
+    }) : $.getJSON(metaUrl + "series/series_brand/" + b,function(a){
+        h(a.data)
     })
 }
 /**
@@ -112,18 +102,8 @@ function getSimpleList(a, b, c) {
         g = "";
     showLoading(b), "Microsoft Internet Explorer" != navigator.appName || "8." != navigator.appVersion.match(/8./i) && "9." != navigator.appVersion.match(/9./i) ? $.getJSON(metaUrl + "model/model_series/" + a + "", function(a) {
         d(a.data)
-    }) : $.ajax({
-        type: "get",
-        contentType: "application/json; charset=utf-8",
-        url: baseUrl + "/service/QueryService.php",
-        data: {
-            classID: a,
-            oper: "getCarModelList"
-        },
-        success: function(a) {
-            var b = jQuery.parseJSON(a);
-            d(b)
-        }
+    }) : $.getJSON(metaUrl + "model/model_series/" + a + "",function(a){
+        d(a.data)
     })
 }
 /**
@@ -583,15 +563,8 @@ $(function() {
     var c = "/getAllCity";
     "Microsoft Internet Explorer" != navigator.appName || "8." != navigator.appVersion.match(/8./i) && "9." != navigator.appVersion.match(/9./i) ? $.getJSON(c, function(b) {
         a(b.data)
-    }) : $.ajax({
-        url: "service/QueryService.php",
-        data: {
-            oper: "getAllCity"
-        },
-        success: function(b) {
-            var c = $.parseJSON(b);
-            a(c)
-        }
+    }) : $.getJSON(c,function(b){
+        a(b.data)
     }),  $(".fdlink-tab>li").click(function() {
         $(this).addClass("tab-focus").siblings().removeClass("tab-focus");
         var a = $(this).attr("id").split("-")[1],

@@ -28,9 +28,9 @@
     </div>
 </div><!--top end-->
 
-<div class="x_nav">当前位置 :  <a href="#">首页</a> > <a href="#">二手车评估</a> > 精准估值</div>
+<div class="x_nav">当前位置 :  <a href="/">首页</a> > <a href="javascript:void(0)">二手车评估</a> > 精准估值</div>
 <div class="jiage">
-    <div class="jias"><span>￥</span>450000</div>
+    <div class="jias"><span>￥</span>${price}万</div>
     <div class="jzj">精准价</div>
     <div class="pos"></div>
     <a class="xieyi" href=" javascript:showoutc();"><input type="checkbox" name="1" checked>我已阅读并同意《迈众汽车协议》</a>
@@ -48,14 +48,14 @@
     </div>
 
 
-    <div class="anniu">立即下单</div>
+    <div class="anniu"><a href="/yuyue" style="display: block;color: #FFF">立即下单</a></div>
 </div>
 <div class="zhuyi">
     <div>注意事项</div>
     <p>1、需要携带 登记证 行驶本 新车发票/过户交强险交强险票 购置税本 交强险</p>
-    <p>1、需要携带 登记证 行驶本 新车发交强险交强险交强险票/过户票 购置税本 交强险</p>
-    <p>1、需要携带 登记证 行交强险驶本 新车发票/过户票 购置税本 交强险</p>
-    <p>1、需要携带 登记证 行驶本 新车发票/过户票 购置税本 交强险</p>
+    <p>2、需要携带 登记证 行驶本 新车发交强险交强险交强险票/过户票 购置税本 交强险</p>
+    <p>3、需要携带 登记证 行交强险驶本 新车发票/过户票 购置税本 交强险</p>
+    <p>4、需要携带 登记证 行驶本 新车发票/过户票 购置税本 交强险</p>
 </div>
 
 </body>

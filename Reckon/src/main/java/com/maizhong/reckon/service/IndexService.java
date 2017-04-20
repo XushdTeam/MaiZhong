@@ -22,4 +22,5 @@ public interface IndexService {
 
     IndexDTO getIndexDTO(String param);
 
+    String saleguzhi(String guzhiKey, String otherKey);
 }

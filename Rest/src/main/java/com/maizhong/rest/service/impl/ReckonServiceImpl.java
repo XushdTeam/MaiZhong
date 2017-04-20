@@ -484,21 +484,7 @@ public class ReckonServiceImpl implements ReckonService {
     @Override
     public JsonResult getSMSCode(String phone, String ip) {
         try {
-            try {
-                //同一手机号1分钟只能发送一条
-                String s = jedisClient.get(SMS_CODE + ":" + phone);//获取是否发送
-                if (StringUtils.isNotBlank(s)) {
-                    Map map = JsonUtils.jsonToPojo(s, Map.class);
-                    Date now = new Date();
-                    Long oldDate = (Long) map.get("date");
-                    long interval = (now.getTime() - oldDate) / 1000;
-                    if (interval <= 60) {
-                        return JsonResult.OK("发送频发，请稍后重试");
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+
 /*
              *//* 限制IP地址*//*
             Integer number=1;
@@ -527,12 +513,13 @@ public class ReckonServiceImpl implements ReckonService {
             Map<String, Object> codeMap = new HashMap<>();
             codeMap.put("ip", ip);
             codeMap.put("smsCode", String.valueOf(smsCode));
-            codeMap.put("date", new Date());//保存发送时间
+         /*   codeMap.put("date", new Date());//保存发送时间*/
             jedisClient.set(SMS_CODE + ":" + phone, JsonUtils.objectToJson(codeMap));//写入缓存
             jedisClient.expire(SMS_CODE + ":" + phone, 60 * 5);//5分钟过期
 
            /* 阿里发送短信*/
             IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAIZ3jQm7dX5Inv", "1OqUiGxTQeH2afyKhYv6vlPtzh1m2a");
+            /*主题编号 默认  和 Access Key ID  和 Access Key Secret */
             DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", "Sms", "sms.aliyuncs.com");
             IAcsClient client = new DefaultAcsClient(profile);
             SingleSendSmsRequest request = new SingleSendSmsRequest();
@@ -545,11 +532,9 @@ public class ReckonServiceImpl implements ReckonService {
             request.setRecNum(phone);//接收号码
             SingleSendSmsResponse httpResponse = client.getAcsResponse(request);
         } catch (ServerException e) {
-            e.printStackTrace();
             return JsonResult.OK("发送失败,请重新发送");
         } catch (ClientException e) {
-            e.printStackTrace();
-            return  JsonResult.OK("发送失败，请重新发送");
+            return JsonResult.OK("发送失败，请重新发送");
         }
         return JsonResult.OK("发送成功");
     }
@@ -583,6 +568,7 @@ public class ReckonServiceImpl implements ReckonService {
             }
             try {
                 User user = new User();
+                user.setUserId(Long.valueOf(phone));
                 user.setPhone(phone);
                 user.setStatus(1);
                 user.setDelflag(0);
