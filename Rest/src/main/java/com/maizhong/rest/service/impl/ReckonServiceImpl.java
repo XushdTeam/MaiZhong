@@ -483,7 +483,7 @@ public class ReckonServiceImpl implements ReckonService {
                     Long oldDate = (Long) map.get("date");
                     long interval = (now.getTime() - oldDate) / 1000;
                     if (interval <= 60) {
-                        return JsonResult.Error("发送频发，请稍后重试");
+                        return JsonResult.OK("发送频发，请稍后重试");
                     }
                 }
             } catch (Exception e) {
@@ -536,10 +536,10 @@ public class ReckonServiceImpl implements ReckonService {
             SingleSendSmsResponse httpResponse = client.getAcsResponse(request);
         } catch (ServerException e) {
             e.printStackTrace();
-            return JsonResult.Error("发送失败,请重新发送");
+            return JsonResult.OK("发送失败,请重新发送");
         } catch (ClientException e) {
             e.printStackTrace();
-            return  JsonResult.Error(e.getMessage());
+            return  JsonResult.OK("发送失败，请重新发送");
         }
         return JsonResult.OK("发送成功");
     }
@@ -556,10 +556,10 @@ public class ReckonServiceImpl implements ReckonService {
         try {
             res = jedisClient.get(SMS_CODE + ":" + phone);//获取缓存内的信息
         } catch (Exception e) {
-            return JsonResult.Error("请发送验证码");
+            return JsonResult.OK("请发送验证码");
         }
         if (StringUtils.isBlank(res)) {
-            return JsonResult.Error("请发送验证码");
+            return JsonResult.OK("请发送验证码");
         }
         Map map = JsonUtils.jsonToPojo(res, Map.class);
         String reSmsCode = (String) map.get("smsCode");
@@ -582,7 +582,7 @@ public class ReckonServiceImpl implements ReckonService {
             }
             return JsonResult.build(200, "登录成功", token);
         } else {
-            return JsonResult.Error("登录失败，验证码不匹配");
+            return JsonResult.OK("登录失败，验证码不匹配");
         }
     }
 
