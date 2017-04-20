@@ -5,8 +5,7 @@
     <id column="info_id" jdbcType="BIGINT" property="infoId" />
     <result column="order_number" jdbcType="BIGINT" property="orderNumber" />
     <result column="model_id" jdbcType="BIGINT" property="modelId" />
-    <result column="reg_year" jdbcType="VARCHAR" property="regYear" />
-    <result column="reg_month" jdbcType="VARCHAR" property="regMonth" />
+    <result column="reg_date" jdbcType="VARCHAR" property="regDate" />
     <result column="city_id" jdbcType="VARCHAR" property="cityId" />
     <result column="s_km" jdbcType="VARCHAR" property="sKm" />
     <result column="color" jdbcType="VARCHAR" property="color" />
@@ -78,8 +77,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    info_id, order_number, model_id, reg_year, reg_month, city_id, s_km, color, jqx, 
-    nj, xz, gh, ghtime, method, ck, delflag
+    info_id, order_number, model_id, reg_date, city_id, s_km, color, jqx, nj, xz, gh, 
+    ghtime, method, ck, delflag
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.pojo.OrderInfoExample" resultMap="BaseResultMap">
     select
@@ -113,14 +112,14 @@
   </delete>
   <insert id="insert" parameterType="com.maizhong.pojo.OrderInfo">
     insert into order_info (info_id, order_number, model_id, 
-      reg_year, reg_month, city_id, 
-      s_km, color, jqx, nj, 
-      xz, gh, ghtime, method, 
+      reg_date, city_id, s_km, 
+      color, jqx, nj, xz, 
+      gh, ghtime, method, 
       ck, delflag)
     values (#{infoId,jdbcType=BIGINT}, #{orderNumber,jdbcType=BIGINT}, #{modelId,jdbcType=BIGINT}, 
-      #{regYear,jdbcType=VARCHAR}, #{regMonth,jdbcType=VARCHAR}, #{cityId,jdbcType=VARCHAR}, 
-      #{sKm,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, #{jqx,jdbcType=VARCHAR}, #{nj,jdbcType=VARCHAR}, 
-      #{xz,jdbcType=VARCHAR}, #{gh,jdbcType=VARCHAR}, #{ghtime,jdbcType=VARCHAR}, #{method,jdbcType=VARCHAR}, 
+      #{regDate,jdbcType=VARCHAR}, #{cityId,jdbcType=VARCHAR}, #{sKm,jdbcType=VARCHAR}, 
+      #{color,jdbcType=VARCHAR}, #{jqx,jdbcType=VARCHAR}, #{nj,jdbcType=VARCHAR}, #{xz,jdbcType=VARCHAR}, 
+      #{gh,jdbcType=VARCHAR}, #{ghtime,jdbcType=VARCHAR}, #{method,jdbcType=VARCHAR}, 
       #{ck,jdbcType=VARCHAR}, #{delflag,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.pojo.OrderInfo">
@@ -135,11 +134,8 @@
       <if test="modelId != null">
         model_id,
       </if>
-      <if test="regYear != null">
-        reg_year,
-      </if>
-      <if test="regMonth != null">
-        reg_month,
+      <if test="regDate != null">
+        reg_date,
       </if>
       <if test="cityId != null">
         city_id,
@@ -185,11 +181,8 @@
       <if test="modelId != null">
         #{modelId,jdbcType=BIGINT},
       </if>
-      <if test="regYear != null">
-        #{regYear,jdbcType=VARCHAR},
-      </if>
-      <if test="regMonth != null">
-        #{regMonth,jdbcType=VARCHAR},
+      <if test="regDate != null">
+        #{regDate,jdbcType=VARCHAR},
       </if>
       <if test="cityId != null">
         #{cityId,jdbcType=VARCHAR},
@@ -244,11 +237,8 @@
       <if test="record.modelId != null">
         model_id = #{record.modelId,jdbcType=BIGINT},
       </if>
-      <if test="record.regYear != null">
-        reg_year = #{record.regYear,jdbcType=VARCHAR},
-      </if>
-      <if test="record.regMonth != null">
-        reg_month = #{record.regMonth,jdbcType=VARCHAR},
+      <if test="record.regDate != null">
+        reg_date = #{record.regDate,jdbcType=VARCHAR},
       </if>
       <if test="record.cityId != null">
         city_id = #{record.cityId,jdbcType=VARCHAR},
@@ -293,8 +283,7 @@
     set info_id = #{record.infoId,jdbcType=BIGINT},
       order_number = #{record.orderNumber,jdbcType=BIGINT},
       model_id = #{record.modelId,jdbcType=BIGINT},
-      reg_year = #{record.regYear,jdbcType=VARCHAR},
-      reg_month = #{record.regMonth,jdbcType=VARCHAR},
+      reg_date = #{record.regDate,jdbcType=VARCHAR},
       city_id = #{record.cityId,jdbcType=VARCHAR},
       s_km = #{record.sKm,jdbcType=VARCHAR},
       color = #{record.color,jdbcType=VARCHAR},
@@ -319,11 +308,8 @@
       <if test="modelId != null">
         model_id = #{modelId,jdbcType=BIGINT},
       </if>
-      <if test="regYear != null">
-        reg_year = #{regYear,jdbcType=VARCHAR},
-      </if>
-      <if test="regMonth != null">
-        reg_month = #{regMonth,jdbcType=VARCHAR},
+      <if test="regDate != null">
+        reg_date = #{regDate,jdbcType=VARCHAR},
       </if>
       <if test="cityId != null">
         city_id = #{cityId,jdbcType=VARCHAR},
@@ -365,8 +351,7 @@
     update order_info
     set order_number = #{orderNumber,jdbcType=BIGINT},
       model_id = #{modelId,jdbcType=BIGINT},
-      reg_year = #{regYear,jdbcType=VARCHAR},
-      reg_month = #{regMonth,jdbcType=VARCHAR},
+      reg_date = #{regDate,jdbcType=VARCHAR},
       city_id = #{cityId,jdbcType=VARCHAR},
       s_km = #{sKm,jdbcType=VARCHAR},
       color = #{color,jdbcType=VARCHAR},

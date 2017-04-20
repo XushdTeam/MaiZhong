@@ -7,9 +7,7 @@ public class OrderInfo {
 
     private Long modelId;
 
-    private String regYear;
-
-    private String regMonth;
+    private String regDate;
 
     private String cityId;
 
@@ -57,20 +55,12 @@ public class OrderInfo {
         this.modelId = modelId;
     }
 
-    public String getRegYear() {
-        return regYear;
+    public String getRegDate() {
+        return regDate;
     }
 
-    public void setRegYear(String regYear) {
-        this.regYear = regYear == null ? null : regYear.trim();
-    }
-
-    public String getRegMonth() {
-        return regMonth;
-    }
-
-    public void setRegMonth(String regMonth) {
-        this.regMonth = regMonth == null ? null : regMonth.trim();
+    public void setRegDate(String regDate) {
+        this.regDate = regDate == null ? null : regDate.trim();
     }
 
     public String getCityId() {

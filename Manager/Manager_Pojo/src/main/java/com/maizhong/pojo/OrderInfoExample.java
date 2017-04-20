@@ -284,143 +284,73 @@ public class OrderInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andRegYearIsNull() {
-            addCriterion("reg_year is null");
+        public Criteria andRegDateIsNull() {
+            addCriterion("reg_date is null");
             return (Criteria) this;
         }
 
-        public Criteria andRegYearIsNotNull() {
-            addCriterion("reg_year is not null");
+        public Criteria andRegDateIsNotNull() {
+            addCriterion("reg_date is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRegYearEqualTo(String value) {
-            addCriterion("reg_year =", value, "regYear");
+        public Criteria andRegDateEqualTo(String value) {
+            addCriterion("reg_date =", value, "regDate");
             return (Criteria) this;
         }
 
-        public Criteria andRegYearNotEqualTo(String value) {
-            addCriterion("reg_year <>", value, "regYear");
+        public Criteria andRegDateNotEqualTo(String value) {
+            addCriterion("reg_date <>", value, "regDate");
             return (Criteria) this;
         }
 
-        public Criteria andRegYearGreaterThan(String value) {
-            addCriterion("reg_year >", value, "regYear");
+        public Criteria andRegDateGreaterThan(String value) {
+            addCriterion("reg_date >", value, "regDate");
             return (Criteria) this;
         }
 
-        public Criteria andRegYearGreaterThanOrEqualTo(String value) {
-            addCriterion("reg_year >=", value, "regYear");
+        public Criteria andRegDateGreaterThanOrEqualTo(String value) {
+            addCriterion("reg_date >=", value, "regDate");
             return (Criteria) this;
         }
 
-        public Criteria andRegYearLessThan(String value) {
-            addCriterion("reg_year <", value, "regYear");
+        public Criteria andRegDateLessThan(String value) {
+            addCriterion("reg_date <", value, "regDate");
             return (Criteria) this;
         }
 
-        public Criteria andRegYearLessThanOrEqualTo(String value) {
-            addCriterion("reg_year <=", value, "regYear");
+        public Criteria andRegDateLessThanOrEqualTo(String value) {
+            addCriterion("reg_date <=", value, "regDate");
             return (Criteria) this;
         }
 
-        public Criteria andRegYearLike(String value) {
-            addCriterion("reg_year like", value, "regYear");
+        public Criteria andRegDateLike(String value) {
+            addCriterion("reg_date like", value, "regDate");
             return (Criteria) this;
         }
 
-        public Criteria andRegYearNotLike(String value) {
-            addCriterion("reg_year not like", value, "regYear");
+        public Criteria andRegDateNotLike(String value) {
+            addCriterion("reg_date not like", value, "regDate");
             return (Criteria) this;
         }
 
-        public Criteria andRegYearIn(List<String> values) {
-            addCriterion("reg_year in", values, "regYear");
+        public Criteria andRegDateIn(List<String> values) {
+            addCriterion("reg_date in", values, "regDate");
             return (Criteria) this;
         }
 
-        public Criteria andRegYearNotIn(List<String> values) {
-            addCriterion("reg_year not in", values, "regYear");
+        public Criteria andRegDateNotIn(List<String> values) {
+            addCriterion("reg_date not in", values, "regDate");
             return (Criteria) this;
         }
 
-        public Criteria andRegYearBetween(String value1, String value2) {
-            addCriterion("reg_year between", value1, value2, "regYear");
+        public Criteria andRegDateBetween(String value1, String value2) {
+            addCriterion("reg_date between", value1, value2, "regDate");
             return (Criteria) this;
         }
 
-        public Criteria andRegYearNotBetween(String value1, String value2) {
-            addCriterion("reg_year not between", value1, value2, "regYear");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegMonthIsNull() {
-            addCriterion("reg_month is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegMonthIsNotNull() {
-            addCriterion("reg_month is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegMonthEqualTo(String value) {
-            addCriterion("reg_month =", value, "regMonth");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegMonthNotEqualTo(String value) {
-            addCriterion("reg_month <>", value, "regMonth");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegMonthGreaterThan(String value) {
-            addCriterion("reg_month >", value, "regMonth");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegMonthGreaterThanOrEqualTo(String value) {
-            addCriterion("reg_month >=", value, "regMonth");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegMonthLessThan(String value) {
-            addCriterion("reg_month <", value, "regMonth");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegMonthLessThanOrEqualTo(String value) {
-            addCriterion("reg_month <=", value, "regMonth");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegMonthLike(String value) {
-            addCriterion("reg_month like", value, "regMonth");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegMonthNotLike(String value) {
-            addCriterion("reg_month not like", value, "regMonth");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegMonthIn(List<String> values) {
-            addCriterion("reg_month in", values, "regMonth");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegMonthNotIn(List<String> values) {
-            addCriterion("reg_month not in", values, "regMonth");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegMonthBetween(String value1, String value2) {
-            addCriterion("reg_month between", value1, value2, "regMonth");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegMonthNotBetween(String value1, String value2) {
-            addCriterion("reg_month not between", value1, value2, "regMonth");
+        public Criteria andRegDateNotBetween(String value1, String value2) {
+            addCriterion("reg_date not between", value1, value2, "regDate");
             return (Criteria) this;
         }
 
