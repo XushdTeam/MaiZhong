@@ -209,11 +209,20 @@ public class ReckonController {
     public JsonResult getSaleGZ(@PathVariable long phone){
 
         JsonResult result = reckonService.getGZDetail(phone);
+
         return result;
     }
 
 
 
+
+    @RequestMapping(value = "/getSite")
+    @ResponseBody
+    public JsonResult site(){
+
+        reckonService.site();
+        return JsonResult.OK();
+    }
 
 
 }

@@ -211,7 +211,7 @@ img,input{vertical-align:middle; outline:none}
 .yuyue .left .d_2 .one div input{ background: #fff;color: #000; width:200px; height: 40px; line-height: 40px;  font-size: 18px; cursor: pointer; padding-left: 20px; border: 0}
 .yuyue .left .d_2 .one1{ margin-left:85px}
 
-.yuyue .left .hid{ width: 400px; background: #fff; height: 400px; overflow: hidden; margin-left: 85px}
+/*.yuyue .left .hid{ width: 400px; background: #fff; height: 400px; overflow: hidden; margin-left: 85px}*/
 .yuyue .left .hid span{ display: block; background: none; padding: 5px 5px; float: left; width: 95px; height:  30px; line-height: 30px;
     border:1px solid #ccc; margin: 10px !important; text-align: center; cursor: pointer}
 .yuyue .left .hid span:hover{ border: 1px solid #f05b48;color: #f05b48}

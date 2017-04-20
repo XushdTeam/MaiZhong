@@ -151,4 +151,13 @@ public class IndexController {
 
         return "jiage";
     }
+
+    @RequestMapping(value = "/yuyue")
+    public String yuyue( @CookieValue(value = "phone",required = true) String phone,Model model){
+
+
+        GuzhiDTO guzhiDTO = indexService.getYuyueInfo(phone);
+        model.addAttribute("result",guzhiDTO);
+        return "yuyue";
+    }
 }

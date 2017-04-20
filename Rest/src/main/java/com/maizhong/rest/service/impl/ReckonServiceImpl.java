@@ -68,6 +68,12 @@ public class ReckonServiceImpl implements ReckonService {
     @Autowired
     private OrdersMapper ordersMapper;
 
+    @Autowired
+    private LineMapper lineMapper;
+
+    @Autowired
+    private LineSiteMapper lineSiteMapper;
+
 
     @Value("${CHE_MODEL}")
     private String CHE_MODEL;
@@ -642,6 +648,39 @@ public class ReckonServiceImpl implements ReckonService {
             e.printStackTrace();
         }
         return JsonResult.build(200,phone+"",guzhiDTO);
+    }
+
+    @Override
+    public void site() {
+
+        try {
+
+
+        LineExample example = new LineExample();
+        List<Line> lines = lineMapper.selectByExample(example);
+
+        for (Line line : lines) {
+
+            String res = HttpClientUtil.doGet("http://www.aihuishou.com/util/GetMetroSiteByLine?lineId="+line.getId());
+            System.out.println(res);
+            JSONArray jsonArray = JSON.parseArray(res);
+
+            for (Object o : jsonArray) {
+                JSONObject obj = (JSONObject) o;
+                LineSite site = new LineSite();
+                site.setLineId(line.getId());
+                site.setName(obj.getString("name"));
+                site.setId(obj.getLong("id"));
+                lineSiteMapper.insert(site);
+
+            }
+            Thread.sleep(10);
+
+
+        }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**

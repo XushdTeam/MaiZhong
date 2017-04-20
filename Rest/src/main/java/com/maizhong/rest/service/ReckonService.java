@@ -33,4 +33,6 @@ public interface ReckonService {
     JsonResult getSaleGZ(String guzhiKey, String otherKey,long phone);
 
     JsonResult getGZDetail(long phone);
+
+    void site();
 }

@@ -17,6 +17,8 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/index.css" />
     <link rel="stylesheet" type="text/css" href="/resources/css/guzhi.css" />
     <link rel="stylesheet" type="text/css" href="/resources/css/rili.css" />
+    <link rel="stylesheet" type="text/css" href="/resources/css/site.css" />
+
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
     <script src="/resources/js/js.js" type="text/javascript"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=N8kgZsufZYtKgEXbtUoTHrKlaqgAxTFY"></script>
@@ -24,7 +26,7 @@
 <body>
 <div class="top e_top">
     <div class="t_cen">
-        <a href="#"><img src="../resources/img/logo.png"></a>
+        <a href="#"><img src="../resources/img/logo.png"  ></a>
         <span class="tell">010-3993-394</span>
         <span class="t_right"><a href="" class="one">我要卖车</a><a href="" class="one">登录</a><a href="" class="two">APP下载</a></span>
     </div>
@@ -124,8 +126,25 @@
                          <span>13号线</span> <span>15号线</span> <span>房山线</span> <span>亦庄线</span> <span>八通线</span>
                          <span>昌平线</span>
                      </div>
+
+
+
                  </div>
 
+                 <div class="metro-station-wrap  clearfix show">
+                     <div class="metro-station-left disabled"></div>
+                     <div class="metro-station-content">
+                         <ul style="margin-left: 0px;">
+                             <li data-metro-station-id="296">
+                                 <div class="station-name">公主坟</div>
+                             </li>
+                             <li data-metro-station-id="297">
+                                 <div class="station-name">军事博物馆</div>
+                             </li><li data-metro-station-id="298">
+                         </ul>
+                     </div>
+                     <div class="metro-station-right"></div>
+                 </div>
                  <div class="d_1">
                     <div class="one one2">
                        <p>您的位置</p>
@@ -160,25 +179,24 @@
     </div><!--left end-->
     <div class="right">
         <dl>
-            <dt><img src="../resources/img/c_1.png"></dt>
-            <dd>2016款 奥迪A3 Limousine 35 TFSI 进取型</dd>
-            <dd class="dd2">￥450000</dd>
+            <dt><img src="${result.seriesImg}" width="100"></dt>
+            <dd>${result.modelName}</dd>
+            <dd class="dd2">￥${result.salePrice}万</dd>
         </dl>
          <div class="clear"></div>
         <div>
-
-           <p> 购买渠道: 大陆国行（有“进网许可”标签）</p>
+            <p> 上牌时间: ${result.regdate}</p>
             <p> 屏幕显示: 屏幕正常显示</p>
             <p> 触摸功能: 触摸功能不正常</p>
             <p> 拍摄功能: 拍照摄像正常</p>
-            <p>  拆机维修史: 无拆机无维修</p>
-            <p>  边框背板: 外壳完好（边框外壳完好无划痕磨损、无磕碰）</p>
-            <p>  通话功能: 通话功能正常</p>
-            <p>  开机情况: 开机正常</p>
-            <p>  无线功能: 无线正常</p>
-            <p>  屏幕外观: 屏幕完好（保护很好，屏幕无可见划痕）</p>
-            <p>  机身是否弯曲: 机身无弯曲</p>
-            <p>  受潮状况: 机身无进水</p>
+            <p> 拆机维修史: 无拆机无维修</p>
+            <p> 边框背板: 外壳完好（边框外壳完好无划痕磨损、无磕碰）</p>
+            <p> 通话功能: 通话功能正常</p>
+            <p> 开机情况: 开机正常</p>
+            <p> 无线功能: 无线正常</p>
+            <p> 屏幕外观: 屏幕完好（保护很好，屏幕无可见划痕）</p>
+            <p> 机身是否弯曲: 机身无弯曲</p>
+            <p> 受潮状况: 机身无进水</p>
         </div>
     </div><!--right end -->
 </div>

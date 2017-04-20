@@ -179,4 +179,18 @@ public class IndexServiceImpl implements IndexService {
         }
         return null;
     }
+
+    @Override
+    public GuzhiDTO getYuyueInfo(String phone) {
+
+        try {
+            String res = HttpClientUtil.doGet(RESTURL+"getGZDetail"+"/"+phone);
+            JsonResult result = JsonUtils.jsonToPojo(res, JsonResult.class);
+            return JsonUtils.jsonToPojo(JSON.toJSONString(result.getData()),GuzhiDTO.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+
+    }
 }
