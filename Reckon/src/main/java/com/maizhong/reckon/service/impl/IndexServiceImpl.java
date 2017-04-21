@@ -266,7 +266,7 @@ public class IndexServiceImpl implements IndexService {
             param.put("wayId",wayId);
             param.put("linkMan",linkMan);
             param.put("linkPhone",linkPhone);
-            param.put("checktime",checktime);
+            param.put("checkTime",checktime);
             param.put("address",address);
 
             String res = HttpClientUtil.doPost(RESTURL+"updateOrders",param);

@@ -393,7 +393,8 @@ body{
     margin: 0px auto;
     position: absolute;
     top: 511px;
-    left: 50px;
+    /* left: 50px; */
+    margin-left: 55px;
 }
 .yuyue .left .d_1 .one3 input {
     width: 545px;

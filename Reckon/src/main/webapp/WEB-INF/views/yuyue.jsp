@@ -186,7 +186,7 @@
         </div>
     </div><!--right end -->
 </div>
-<input type="hidden" id="orderNum" value="${result.orderNum}">
+<input type="hidden" id="orderNum" value="${result.orderNumber}">
 <div class="anniu" onclick="submit()">确认下单</div>
 <jsp:include page="footer.jsp"></jsp:include>
 </body>
@@ -349,9 +349,9 @@
 
             $.post("/OrderConfim",param,function(res){
                 if(res.status==200){
-                    window.location = "/per"
+                    window.location.href = "/per"
                 }
-            });
+            },'JSON');
 
         }else{
            //判断选择是地铁还是上门
@@ -407,9 +407,9 @@
 
                 $.post("/OrderConfim",param,function(res){
                     if(res.status==200){
-                        window.location = "/per"
+                        window.location.href = "/per"
                     }
-                });
+                },'JSON');
 
 
             }else{
@@ -458,9 +458,9 @@
 
                 $.post("/OrderConfim",param,function(res){
                     if(res.status==200){
-                        window.location = "/per"
+                        window.location.href = "/per"
                     }
-                });
+                },'JSON');
 
 
 

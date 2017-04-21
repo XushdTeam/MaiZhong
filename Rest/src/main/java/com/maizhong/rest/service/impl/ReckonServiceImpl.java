@@ -859,7 +859,7 @@ public class ReckonServiceImpl implements ReckonService {
                 orders.setAddress(address);
                 orders.setCheckTime(checkTime);
             }
-            orders.setDealWay(1);
+            orders.setDealWay(Integer.valueOf(dealWay));
             orders.setWayId(Long.valueOf(wayId));
             orders.setLinkMan(linkMan);
             orders.setLinkPhone(linkPhone);

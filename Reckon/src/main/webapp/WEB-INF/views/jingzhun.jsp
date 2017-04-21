@@ -291,8 +291,9 @@
 
     <div class="jing btn method">
         <label>现使用方：</label>
-        <a href="JavaScript:void(0)"  data-method="1">公司</a>
         <a href="JavaScript:void(0)"  data-method="2">个人</a>
+        <a href="JavaScript:void(0)"  data-method="1">公司</a>
+
     </div>
 
     <div class="jing btn jqx">
