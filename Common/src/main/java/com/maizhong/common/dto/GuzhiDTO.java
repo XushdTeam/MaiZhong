@@ -1,5 +1,9 @@
 package com.maizhong.common.dto;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
+import java.util.Date;
+
 /**
  * 估值结果返回
  * Created by Xushd on 2017/4/19.
@@ -75,7 +79,8 @@ public class GuzhiDTO {
     private String nj;//年检
     private String method;//使用方式
     private String ck;//车况
-
+    private String reckonTime;
+    private long orderNumber;
 
 
     public String getModelId() {
@@ -377,5 +382,21 @@ public class GuzhiDTO {
 
     public void setCk(String ck) {
         this.ck = ck;
+    }
+
+    public void setReckonTime(String reckonTime) {
+        this.reckonTime = reckonTime;
+    }
+
+    public String getReckonTime() {
+        return reckonTime;
+    }
+
+    public void setOrderNumber(long orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public long getOrderNumber() {
+        return orderNumber;
     }
 }

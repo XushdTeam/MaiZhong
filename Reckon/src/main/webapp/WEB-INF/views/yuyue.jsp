@@ -172,7 +172,6 @@
         </dl>
         <div class="clear"></div>
         <div>
-            <p> 上牌时间: ${result.regdate}</p>
             <p> 所属地区: ${result.city}</p>
             <p> 行驶里程: ${result.mail}万公里</p>
             <p> 主体颜色: ${result.color}</p>
@@ -183,6 +182,7 @@
             <p> 过户次数: ${result.gh}</p>
             <p> 最后一次过户时间: ${result.ghtime}</p>
             <p> 车况: ${result.ck}</p>
+            <p> 评估时间: ${result.reckonTime}</p>
         </div>
     </div><!--right end -->
 </div>

@@ -15,11 +15,17 @@ public class Orders {
 
     private String reckonPrice;
 
+    private Long wayId;
+
     private String dealPrice;
+
+    private String dealTime;
 
     private Integer dealWay;
 
     private String linkMan;
+
+    private String linkPhone;
 
     private String address;
 
@@ -77,12 +83,28 @@ public class Orders {
         this.reckonPrice = reckonPrice == null ? null : reckonPrice.trim();
     }
 
+    public Long getWayId() {
+        return wayId;
+    }
+
+    public void setWayId(Long wayId) {
+        this.wayId = wayId;
+    }
+
     public String getDealPrice() {
         return dealPrice;
     }
 
     public void setDealPrice(String dealPrice) {
         this.dealPrice = dealPrice == null ? null : dealPrice.trim();
+    }
+
+    public String getDealTime() {
+        return dealTime;
+    }
+
+    public void setDealTime(String dealTime) {
+        this.dealTime = dealTime == null ? null : dealTime.trim();
     }
 
     public Integer getDealWay() {
@@ -99,6 +121,14 @@ public class Orders {
 
     public void setLinkMan(String linkMan) {
         this.linkMan = linkMan == null ? null : linkMan.trim();
+    }
+
+    public String getLinkPhone() {
+        return linkPhone;
+    }
+
+    public void setLinkPhone(String linkPhone) {
+        this.linkPhone = linkPhone == null ? null : linkPhone.trim();
     }
 
     public String getAddress() {
