@@ -985,6 +985,7 @@ public class ReckonServiceImpl implements ReckonService {
                 array1.add(object1);
             }
             object.put("shop",array1);
+            array.add(object);
         }
         jedisClient.set(BUSINESS_ADDRESS, JsonUtils.objectToJson(array));
         return JsonResult.build(200, "获取成功", array);
