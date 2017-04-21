@@ -20,6 +20,7 @@ import com.maizhong.mapper.*;
 import com.maizhong.pojo.*;
 import com.maizhong.rest.service.ReckonService;
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -56,7 +57,6 @@ public class ReckonServiceImpl implements ReckonService {
 
     @Autowired
     private GzrecordMapper gzrecordMapper;
-
     @Autowired
     private ParamsMapper paramsMapper;
 
@@ -516,10 +516,8 @@ public class ReckonServiceImpl implements ReckonService {
     @Override
     public JsonResult getSaleGZ(String guzhiKey, String otherKey, long phone) {
 
-
         JsonResult guzhi = getGuzhi(guzhiKey);
         GuzhiDTO guzhiDTO = JsonUtils.jsonToPojo(JSON.toJSONString(guzhi.getData()), GuzhiDTO.class);
-
         String[] otherArry = otherKey.split("o|j|h|t|x|n|d|k");
 
         String ck = otherArry[7], color = otherArry[0], jqx = otherArry[1],
@@ -528,15 +526,15 @@ public class ReckonServiceImpl implements ReckonService {
         BigDecimal basePrice;
         if (StringUtils.equals("1", ck)) {
             basePrice = new BigDecimal(guzhiDTO.getPriceA_min());
-            guzhiDTO.setCk("车况优秀");
+            guzhiDTO.setCk("车况优秀,好没有任何故障");
         } else if (StringUtils.equals("2", ck)) {
-            guzhiDTO.setCk("车况良好");
+            guzhiDTO.setCk("车况良好,有过少量剐蹭或钣金");
             basePrice = new BigDecimal(guzhiDTO.getPriceB_min());
         } else if (StringUtils.equals("3", ck)) {
-            guzhiDTO.setCk("车况一般");
+            guzhiDTO.setCk("车况一般,有过前后轻碰事故");
             basePrice = new BigDecimal(guzhiDTO.getPriceC_min());
         } else {
-            guzhiDTO.setCk("车况较差");
+            guzhiDTO.setCk("车况较差,有发生过伤及主体框架的碰撞或较大事故");
             basePrice = new BigDecimal(guzhiDTO.getPriceD_min());
         }
         //颜色
@@ -593,7 +591,7 @@ public class ReckonServiceImpl implements ReckonService {
         }
         //过户时间
         if (StringUtils.equals(ghtime, "1")) {
-            guzhiDTO.setGhtime("一手车");
+            guzhiDTO.setGhtime("无过户");
         } else if (StringUtils.equals(ghtime, "2")) {
             guzhiDTO.setGhtime("六个月以内");
         }
@@ -698,6 +696,10 @@ public class ReckonServiceImpl implements ReckonService {
             orderInfo.setOrderNumber(orderNum);
             orderInfo.setModelId(Long.valueOf(guzhiDTO.getModelId()));
             orderInfo.setRegDate(guzhiDTO.getRegdate());
+            //获取下单时间
+            guzhiDTO.setReckonTime(TimeUtils.getFormatDateTime2(new DateTime()));
+            guzhiDTO.setOrderNumber(orderNum);
+
             orderInfo.setCityId(guzhiDTO.getCity());
             orderInfo.setsKm(guzhiDTO.getMail());
             orderInfo.setColor(color);
@@ -770,6 +772,7 @@ public class ReckonServiceImpl implements ReckonService {
 
     /**
      * 获取地铁线路
+     *
      * @return
      */
     @Override
@@ -778,23 +781,21 @@ public class ReckonServiceImpl implements ReckonService {
         try {
 
             String linesRedis = jedisClient.get("LINES");
-            if(StringUtils.isBlank(linesRedis)){
+            if (StringUtils.isBlank(linesRedis)) {
                 LineExample example = new LineExample();
                 List<Line> lineList = lineMapper.selectByExample(example);
-                jedisClient.set("LINES",JsonUtils.objectToJson(lineList));
+                jedisClient.set("LINES", JsonUtils.objectToJson(lineList));
                 return JsonResult.OK(lineList);
 
-            }else{
+            } else {
 
-                return JsonResult.OK(JsonUtils.jsonToList(linesRedis,Line.class));
+                return JsonResult.OK(JsonUtils.jsonToList(linesRedis, Line.class));
             }
 
 
-
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
 
 
         return null;
@@ -802,6 +803,7 @@ public class ReckonServiceImpl implements ReckonService {
 
     /**
      * 通过线路ID获取地铁信息
+     *
      * @param lineId
      * @return
      */
@@ -810,26 +812,60 @@ public class ReckonServiceImpl implements ReckonService {
 
         try {
 
-            String siteRedis = jedisClient.hget("LINE_SITE",lineId);
-            if(StringUtils.isBlank(siteRedis)){
+            String siteRedis = jedisClient.hget("LINE_SITE", lineId);
+            if (StringUtils.isBlank(siteRedis)) {
                 LineSiteExample example = new LineSiteExample();
                 LineSiteExample.Criteria criteria = example.createCriteria();
                 criteria.andLineIdEqualTo(Long.valueOf(lineId));
                 List<LineSite> lineSites = lineSiteMapper.selectByExample(example);
-                jedisClient.hset("LINE_SITE",lineId,JsonUtils.objectToJson(lineSites));
+                jedisClient.hset("LINE_SITE", lineId, JsonUtils.objectToJson(lineSites));
                 return JsonResult.OK(lineSites);
 
-            }else{
+            } else {
 
-                return JsonResult.OK(JsonUtils.jsonToList(siteRedis,LineSite.class));
+                return JsonResult.OK(JsonUtils.jsonToList(siteRedis, LineSite.class));
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
 
         return null;
+    }
+
+    @Override
+    public JsonResult updateOrders(String orderNumber, String dealWay, String wayId, String linkMan, String linkPhone,String address) {
+        try {
+            OrdersExample example=new OrdersExample();
+            OrdersExample.Criteria criteria = example.createCriteria();
+            criteria.andOrderNumberEqualTo(Long.valueOf(orderNumber));
+            List<Orders> orderses = ordersMapper.selectByExample(example);
+            Orders orders=orderses.get(0);
+            //4s店
+            if (Integer.valueOf(dealWay)==1){
+                TbBusiness tbBusiness = tbBusinessMapper.selectByPrimaryKey(Long.valueOf(wayId));
+                orders.setAddress(tbBusiness.getAddress());
+            }
+            //地铁
+            if (Integer.valueOf(dealWay)==2){
+                LineSite lineSite = lineSiteMapper.selectByPrimaryKey(Long.valueOf(wayId));
+                Line line = lineMapper.selectByPrimaryKey(lineSite.getLineId());
+                orders.setAddress("北京市地铁"+line.getName()+"号线"+lineSite.getName()+"站");
+            }
+            //上门
+            if (Integer.valueOf(dealWay)==3){
+                orders.setAddress(address);
+            }
+            orders.setDealWay(1);
+            orders.setWayId(Long.valueOf(wayId));
+            orders.setLinkMan(linkMan);
+            orders.setLinkPhone(linkPhone);
+            ordersMapper.updateByPrimaryKey(orders);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return JsonResult.OK();
     }
 
     /**
@@ -841,26 +877,6 @@ public class ReckonServiceImpl implements ReckonService {
     @Override
     public JsonResult getSMSCode(String phone, String ip) {
         try {
-
-/*
-             *//* 限制IP地址*//*
-            Integer number=1;
-            try {
-                String ipAddress = jedisClient.get(IP_ADDRESS + ":" + ip);
-                if (StringUtils.isNotBlank(ipAddress)){
-                    number = JsonUtils.jsonToPojo(IP_ADDRESS, Integer.class);
-                    if (number>5){
-                        return JsonResult.Error("发送频繁，请稍后重试！");//一个小时内只能发送5次
-                    }
-                    number++;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            jedisClient.set(IP_ADDRESS+":"+ip, String.valueOf(number));
-            if (number==1){
-                jedisClient.expire(IP_ADDRESS + ":" + ip, 60 * 60);//1小时过期
-            }*/
             try {
                 jedisClient.del(SMS_CODE + ":" + phone);//重新发送短息时要清空上一次信息
             } catch (Exception e) {
@@ -962,11 +978,11 @@ public class ReckonServiceImpl implements ReckonService {
 
         List<District> districts = districtMapper.selectByExample(null);//区县 16
         TbBusinessExample example = new TbBusinessExample();
-        JSONArray array=new JSONArray();
+        JSONArray array = new JSONArray();
         for (District district : districts) {
-           JSONObject object=new JSONObject();
-            object.put("district",district.getName());
-            object.put("id",district.getId());
+            JSONObject object = new JSONObject();
+            object.put("district", district.getName());
+            object.put("id", district.getId());
             example.clear();
             TbBusinessExample.Criteria criteria = example.createCriteria();
             criteria.andDistrictIdEqualTo(Long.valueOf(district.getId()));
@@ -974,17 +990,17 @@ public class ReckonServiceImpl implements ReckonService {
             if (tbBusinesses == null || tbBusinesses.size() == 0) {
                 continue;
             }
-            JSONArray array1=new JSONArray();
+            JSONArray array1 = new JSONArray();
             for (TbBusiness tbBusiness : tbBusinesses) {
-                JSONObject object1=new JSONObject();
-             object1.put("address",tbBusiness.getAddress());
-             object1.put("name",tbBusiness.getBusinessName());
-             object1.put("id",tbBusiness.getId());
-             object1.put("location",tbBusiness.getLocation());
-             object1.put("districtId",tbBusiness.getDistrictId());
+                JSONObject object1 = new JSONObject();
+                object1.put("address", tbBusiness.getAddress());
+                object1.put("name", tbBusiness.getBusinessName());
+                object1.put("id", tbBusiness.getId());
+                object1.put("location", tbBusiness.getLocation());
+                object1.put("districtId", tbBusiness.getDistrictId());
                 array1.add(object1);
             }
-            object.put("shop",array1);
+            object.put("shop", array1);
             array.add(object);
         }
         jedisClient.set(BUSINESS_ADDRESS, JsonUtils.objectToJson(array));
@@ -993,21 +1009,21 @@ public class ReckonServiceImpl implements ReckonService {
 
     @Override
     public JsonResult getOneWeek() {
-        List<Map> mapList=new ArrayList<>();
+        List<Map> mapList = new ArrayList<>();
 
         for (int i = 0; i >= -6; i--) {
-            Map<String,String> map=new HashMap<>();
-           String StringDate= TimeUtils.getDateBeforeDay(i);
+            Map<String, String> map = new HashMap<>();
+            String StringDate = TimeUtils.getDateBeforeDay(i);
             Date date = TimeUtils.getDate2(StringDate);
             String[] weekDaysName = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
             int intWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
-            String weekDate= weekDaysName[intWeek];
-          String Mday= StringUtils.substring(StringDate,5);
-            map.put("Ydate",StringDate);
-            map.put("week",weekDate);
-            map.put("Mday",Mday);
+            String weekDate = weekDaysName[intWeek];
+            String Mday = StringUtils.substring(StringDate, 5);
+            map.put("Ydate", StringDate);
+            map.put("week", weekDate);
+            map.put("Mday", Mday);
             mapList.add(map);
         }
         return JsonResult.build(200, "获取成功", mapList);

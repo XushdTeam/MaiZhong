@@ -45,4 +45,6 @@ public interface ReckonService {
     JsonResult getLines();
 
     JsonResult getSiteByLineId(String lineId);
+
+    JsonResult updateOrders(String orderNumber, String dealWay, String wayId, String linkMan, String linkPhone,String address);
 }

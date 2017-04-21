@@ -35,6 +35,9 @@ public class TimeUtils {
     public static String getFormatDateTime(DateTime date){
         return date.toString(format_default_s);
     }
+    public static String getFormatDateTime2(DateTime date){
+        return date.toString(format_default);
+    }
 
     /**
      * 通过字符串获取Date
