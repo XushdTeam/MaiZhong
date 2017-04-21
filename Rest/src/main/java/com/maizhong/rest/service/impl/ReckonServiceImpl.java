@@ -897,34 +897,34 @@ public class ReckonServiceImpl implements ReckonService {
         }
 
 
-        List<District> districts = districtMapper.selectByExample(null);
+        List<District> districts = districtMapper.selectByExample(null);//区县 16
         TbBusinessExample example = new TbBusinessExample();
-        List<Map> listMap=new ArrayList<>();
+        JSONArray array=new JSONArray();
         for (District district : districts) {
-            Map<String, List<BusinessDTO>> map = new HashMap<>();
+           JSONObject object=new JSONObject();
+            object.put("district",district.getName());
+            object.put("id",district.getId());
             example.clear();
             TbBusinessExample.Criteria criteria = example.createCriteria();
             criteria.andDistrictIdEqualTo(Long.valueOf(district.getId()));
             List<TbBusiness> tbBusinesses = tbBusinessMapper.selectByExample(example);
-            List<BusinessDTO> businessDTOList = new ArrayList<>();
             if (tbBusinesses == null || tbBusinesses.size() == 0) {
                 continue;
             }
+            JSONArray array1=new JSONArray();
             for (TbBusiness tbBusiness : tbBusinesses) {
-                BusinessDTO businessDTO = new BusinessDTO();
-                businessDTO.setAddress(tbBusiness.getAddress());
-                businessDTO.setId(tbBusiness.getId());
-                businessDTO.setBusinessName(tbBusiness.getBusinessName());
-                businessDTO.setDistrictId(tbBusiness.getDistrictId());
-                businessDTO.setLocation(tbBusiness.getLocation());
-                businessDTOList.add(businessDTO);
+                JSONObject object1=new JSONObject();
+             object1.put("address",tbBusiness.getAddress());
+             object1.put("name",tbBusiness.getBusinessName());
+             object1.put("id",tbBusiness.getId());
+             object1.put("location",tbBusiness.getLocation());
+             object1.put("districtId",tbBusiness.getDistrictId());
+                array1.add(object1);
             }
-            map.put(district.getName(),businessDTOList);
-            listMap.add(map);
-           /* map.put(district.getName(), businessDTOList);*/
+            object.put("shop",array1);
         }
-        jedisClient.set(BUSINESS_ADDRESS, JsonUtils.objectToJson(listMap));
-        return JsonResult.build(200, "获取成功", listMap);
+        jedisClient.set(BUSINESS_ADDRESS, JsonUtils.objectToJson(array));
+        return JsonResult.build(200, "获取成功", array);
     }
 
     @Override
