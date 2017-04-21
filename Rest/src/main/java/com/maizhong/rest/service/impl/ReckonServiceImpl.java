@@ -14,10 +14,7 @@ import com.aliyuncs.sms.model.v20160927.SingleSendSmsResponse;
 import com.maizhong.common.dto.*;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
-import com.maizhong.common.utils.EncryptUtils;
-import com.maizhong.common.utils.HttpClientUtil;
-import com.maizhong.common.utils.IDUtils;
-import com.maizhong.common.utils.JsonUtils;
+import com.maizhong.common.utils.*;
 import com.maizhong.dao.JedisClient;
 import com.maizhong.mapper.*;
 import com.maizhong.pojo.*;
@@ -29,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.sql.Time;
 import java.util.*;
 
 /**
@@ -74,6 +72,10 @@ public class ReckonServiceImpl implements ReckonService {
     @Autowired
     private LineSiteMapper lineSiteMapper;
 
+    @Autowired
+    private TbBusinessMapper tbBusinessMapper;
+    @Autowired
+    private DistrictMapper districtMapper;
 
     @Value("${CHE_MODEL}")
     private String CHE_MODEL;
@@ -102,6 +104,8 @@ public class ReckonServiceImpl implements ReckonService {
     private String SMS_CODE;
     @Value("${LOGIN_TOKEN}")
     private String LOGIN_TOKEN;
+    @Value("${BUSINESS_ADDRESS}")
+    private String BUSINESS_ADDRESS;
 
     @Override
     public void getBrandData() {
@@ -592,7 +596,8 @@ public class ReckonServiceImpl implements ReckonService {
             guzhiDTO.setGhtime("一手车");
         } else if (StringUtils.equals(ghtime, "2")) {
             guzhiDTO.setGhtime("六个月以内");
-        }{
+        }
+        {
             guzhiDTO.setGhtime("六个月以上");
         }
         //性质
@@ -736,31 +741,95 @@ public class ReckonServiceImpl implements ReckonService {
         try {
 
 
-        LineExample example = new LineExample();
-        List<Line> lines = lineMapper.selectByExample(example);
+            LineExample example = new LineExample();
+            List<Line> lines = lineMapper.selectByExample(example);
 
-        for (Line line : lines) {
+            for (Line line : lines) {
 
-            String res = HttpClientUtil.doGet("http://www.aihuishou.com/util/GetMetroSiteByLine?lineId="+line.getId());
-            System.out.println(res);
-            JSONArray jsonArray = JSON.parseArray(res);
+                String res = HttpClientUtil.doGet("http://www.aihuishou.com/util/GetMetroSiteByLine?lineId=" + line.getId());
+                System.out.println(res);
+                JSONArray jsonArray = JSON.parseArray(res);
 
-            for (Object o : jsonArray) {
-                JSONObject obj = (JSONObject) o;
-                LineSite site = new LineSite();
-                site.setLineId(line.getId());
-                site.setName(obj.getString("name"));
-                site.setId(obj.getLong("id"));
-                lineSiteMapper.insert(site);
+                for (Object o : jsonArray) {
+                    JSONObject obj = (JSONObject) o;
+                    LineSite site = new LineSite();
+                    site.setLineId(line.getId());
+                    site.setName(obj.getString("name"));
+                    site.setId(obj.getLong("id"));
+                    lineSiteMapper.insert(site);
+
+                }
+                Thread.sleep(10);
+
 
             }
-            Thread.sleep(10);
-
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
+
+    /**
+     * 获取地铁线路
+     * @return
+     */
+    @Override
+    public JsonResult getLines() {
+
+        try {
+
+            String linesRedis = jedisClient.get("LINES");
+            if(StringUtils.isBlank(linesRedis)){
+                LineExample example = new LineExample();
+                List<Line> lineList = lineMapper.selectByExample(example);
+                jedisClient.set("LINES",JsonUtils.objectToJson(lineList));
+                return JsonResult.OK(lineList);
+
+            }else{
+
+                return JsonResult.OK(JsonUtils.jsonToList(linesRedis,Line.class));
+            }
+
+
+
         }catch (Exception e){
             e.printStackTrace();
         }
+
+
+
+        return null;
+    }
+
+    /**
+     * 通过线路ID获取地铁信息
+     * @param lineId
+     * @return
+     */
+    @Override
+    public JsonResult getSiteByLineId(String lineId) {
+
+        try {
+
+            String siteRedis = jedisClient.hget("LINE_SITE",lineId);
+            if(StringUtils.isBlank(siteRedis)){
+                LineSiteExample example = new LineSiteExample();
+                LineSiteExample.Criteria criteria = example.createCriteria();
+                criteria.andLineIdEqualTo(Long.valueOf(lineId));
+                List<LineSite> lineSites = lineSiteMapper.selectByExample(example);
+                jedisClient.hset("LINE_SITE",lineId,JsonUtils.objectToJson(lineSites));
+                return JsonResult.OK(lineSites);
+
+            }else{
+
+                return JsonResult.OK(JsonUtils.jsonToList(siteRedis,LineSite.class));
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return null;
     }
 
     /**
@@ -870,5 +939,77 @@ public class ReckonServiceImpl implements ReckonService {
         }
     }
 
+
+    /**
+     * 获取4S店地址
+     *
+     * @return
+     */
+    @Override
+    public JsonResult getBusinessAddress() {
+
+        String s = null;
+        try {
+            s = jedisClient.get(BUSINESS_ADDRESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (StringUtils.isNotBlank(s)) {
+            List list = JsonUtils.jsonToPojo(s, List.class);
+            return JsonResult.build(200, "获取成功", list);
+        }
+
+
+        List<District> districts = districtMapper.selectByExample(null);//区县 16
+        TbBusinessExample example = new TbBusinessExample();
+        JSONArray array=new JSONArray();
+        for (District district : districts) {
+           JSONObject object=new JSONObject();
+            object.put("district",district.getName());
+            object.put("id",district.getId());
+            example.clear();
+            TbBusinessExample.Criteria criteria = example.createCriteria();
+            criteria.andDistrictIdEqualTo(Long.valueOf(district.getId()));
+            List<TbBusiness> tbBusinesses = tbBusinessMapper.selectByExample(example);
+            if (tbBusinesses == null || tbBusinesses.size() == 0) {
+                continue;
+            }
+            JSONArray array1=new JSONArray();
+            for (TbBusiness tbBusiness : tbBusinesses) {
+                JSONObject object1=new JSONObject();
+             object1.put("address",tbBusiness.getAddress());
+             object1.put("name",tbBusiness.getBusinessName());
+             object1.put("id",tbBusiness.getId());
+             object1.put("location",tbBusiness.getLocation());
+             object1.put("districtId",tbBusiness.getDistrictId());
+                array1.add(object1);
+            }
+            object.put("shop",array1);
+        }
+        jedisClient.set(BUSINESS_ADDRESS, JsonUtils.objectToJson(array));
+        return JsonResult.build(200, "获取成功", array);
+    }
+
+    @Override
+    public JsonResult getOneWeek() {
+        List<Map> mapList=new ArrayList<>();
+
+        for (int i = 0; i >= -6; i--) {
+            Map<String,String> map=new HashMap<>();
+           String StringDate= TimeUtils.getDateBeforeDay(i);
+            Date date = TimeUtils.getDate2(StringDate);
+            String[] weekDaysName = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            int intWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+            String weekDate= weekDaysName[intWeek];
+          String Mday= StringUtils.substring(StringDate,5);
+            map.put("Ydate",StringDate);
+            map.put("week",weekDate);
+            map.put("Mday",Mday);
+            mapList.add(map);
+        }
+        return JsonResult.build(200, "获取成功", mapList);
+    }
 }
 

@@ -1,9 +1,6 @@
 package com.maizhong.rest.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.maizhong.common.result.JsonResult;
-import com.maizhong.rest.service.IndexService;
 import com.maizhong.rest.service.ReckonService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -214,15 +211,60 @@ public class ReckonController {
     }
 
 
-
+    /**
+     * 获取地铁站信息
+     * @return
+     */
 
     @RequestMapping(value = "/getSite")
     @ResponseBody
     public JsonResult site(){
-
         reckonService.site();
         return JsonResult.OK();
     }
 
+    /**
+     * 获取4S店地址
+     * @return
+     */
+    @RequestMapping(value = "/getBusinessAddress")
+    @ResponseBody
+    public JsonResult getBusinessAddress(){
+       JsonResult result= reckonService.getBusinessAddress();
+        return result;
+    }
+
+    /**
+     * 获取一周的时间
+     * @return
+     */
+    @RequestMapping(value = "/getOneWeek")
+    @ResponseBody
+    public JsonResult getOneWeek(){
+        JsonResult result =reckonService.getOneWeek();
+        return result;
+    }
+    /**
+     * 获取地铁线路
+     * @return
+     */
+    @RequestMapping(value = "/getLines")
+    @ResponseBody
+    public JsonResult getLines(){
+        JsonResult result = reckonService.getLines();
+        return result;
+    }
+
+    /**
+     * 通过线路ID 获取地铁站信息
+     * @param lineId
+     * @return
+     */
+    @RequestMapping(value = "/getSite/{lineId}")
+    @ResponseBody
+    public JsonResult getSite(@PathVariable String lineId){
+        JsonResult result = reckonService.getSiteByLineId(lineId);
+        return result;
+    }
 
 }

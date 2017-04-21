@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -16,7 +17,6 @@
     <meta name="description" content="迈众汽车为您提供最新汽车报价，汽车图片，汽车价格大全，最精彩的汽车新闻、行情、评测、导购内容，是提供信息最快最全的中国汽车网站。"/>
     <link rel="stylesheet" type="text/css" href="/resources/css/index.css" />
     <link rel="stylesheet" type="text/css" href="/resources/css/guzhi.css" />
-    <link rel="stylesheet" type="text/css" href="/resources/css/rili.css" />
     <link rel="stylesheet" type="text/css" href="/resources/css/site.css" />
 
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
@@ -30,19 +30,19 @@
 
 <div class="yuyue">
     <div class="left">
-        <h1><span>1</span>预约方式</h1>
-         <dl class="dl1">
-             <dt class="dt1"> </dt>
-             <dd class="dd1">门店回收</dd>
-             <dd>24小时内到店交易 必中现金大奖</dd>
-         </dl>
+        <h1><span>1</span>验车方式</h1>
+        <dl class="dl1">
+            <dt class="dt1"> </dt>
+            <dd class="dd1">门店验车</dd>
+            <dd>24小时内到店交易 必中现金大奖</dd>
+        </dl>
 
         <dl class="dl2">
             <dt class="dt2"> </dt>
-            <dd class="dd1">上门回收</dd>
+            <dd class="dd1">上门验车</dd>
             <dd>免费上门服务，提前预约</dd>
         </dl>
-       <div class="clear"></div>
+        <div class="clear"></div>
         <div class="xk xk1">
             <h1><span>2</span>选择门店</h1>
             <div class="x_left">
@@ -50,114 +50,103 @@
                     <li>全部门店</li>
                     <li>丰台区</li>
                     <li>大兴区</li>
-                    <li class="active">朝阳区</li>
+                    <li>朝阳区</li>
                     <li>昌平区</li>
                     <li>房山区</li>
                 </ul>
-
-            </div><!--xiao_left-->
-
+            </div>
             <div class="x_right">
                 <div class="over">
-                    <div class="x_dl">
-                        <div class="x_dt"><input type="checkbox"></div>
-                        <div class="x_dd x_dd1">北京朝阳大悦城店</div>
-                        <div class="x_dd">北京市朝阳区朝阳北路101号地下一层（靠近地铁通道处）</div>
-                    </div>
-
-                    <div class="x_dl">
-                        <div class="x_dt"><input type="checkbox"></div>
-                        <div class="x_dd x_dd1">北京朝阳大悦城店</div>
-                        <div class="x_dd">北京市朝阳区朝阳北路101号地下一层（靠近地铁通道处）</div>
-                    </div>
-                    <div class="x_dl">
-                        <div class="x_dt"><input type="checkbox"></div>
-                        <div class="x_dd x_dd1">北京朝阳大悦城店</div>
-                        <div class="x_dd">北京市朝阳区朝阳北路101号地下一层（靠近地铁通道处）</div>
-                    </div>
-
-                    <div class="x_dl">
-                        <div class="x_dt"><input type="checkbox"></div>
-                        <div class="x_dd x_dd1">北京朝阳大悦城店</div>
-                        <div class="x_dd">北京市朝阳区朝阳北路101号地下一层（靠近地铁通道处）</div>
-                    </div>
-                    <div class="x_dl">
-                        <div class="x_dt"><input type="checkbox"></div>
-                        <div class="x_dd x_dd1">北京朝阳大悦城店</div>
-                        <div class="x_dd">北京市朝阳区朝阳北路101号地下一层（靠近地铁通道处）</div>
-                    </div>
-
-                    <div class="x_dl">
-                        <div class="x_dt"><input type="checkbox"></div>
-                        <div class="x_dd x_dd1">北京朝阳大悦城店</div>
-                        <div class="x_dd">北京市朝阳区朝阳北路101号地下一层（靠近地铁通道处）</div>
-                    </div>
+                    <ul id="outlets-list" class="outlets-list scrollbar">
+                        <li data-shop-id="28"
+                            data-longitude="116.42575000"
+                            data-latitude="39.90450000"
+                            style="display: list-item;">
+                            <p class="outlets-name">北京国瑞店</p>
+                            <p class="outlets-addr">北京市东城区崇外大街18号国瑞购物中心B2层</p>
+                        </li>
+                        <li data-shop-id="28"
+                            data-longitude="116.42575000"
+                            data-latitude="39.90450000"
+                            style="display: list-item;">
+                            <p class="outlets-name">北京国瑞店</p>
+                            <p class="outlets-addr">北京市东城区崇外大街18号国瑞购物中心B2层</p>
+                        </li>
+                    </ul>
                 </div>
-                <div style="width:500px;height:300px;border:#ccc solid 1px;font-size:12px" id="map"></div>
-
-
             </div><!--xiao_right-->
+            <div class="baidumap" id="map"></div>
         </div><!--xk end-->
         <div class="clear"></div>
         <div class="xk xk2">
-            <h1><span>2</span>取货方式</h1>
-             <div class="quh">
-                 <div class="qu"> <span>地铁取货</span> <span>上门取货</span></div>
-                 <div class="d_1">
-                     <div class="one one1">
-                         <p>地铁线路</p>
-                         <div onclick="cun();">地铁线路<img src="../resources/img/d.jpg"></div>
+            <h1><span>2</span>验车方式</h1>
+            <div class="quh">
+                <div class="qu"> <span>地铁附近</span> <span>上门验车</span></div>
+                <div class="d_1">
+                    <div class="one one1">
+                        <p>地铁线路</p>
+                        <div id="lineInput">地铁线路<img src="../resources/img/u.jpg"></div>
+                    </div>
 
-                     </div>
+                    <div class="one">
+                        <p>预约时间</p>
+                        <div id="dateInput">预约时间<img src="../resources/img/u.jpg"></div>
+                    </div>
+                    <div class="hid">
+                        <c:forEach items="${lines}" var="item">
+                            <span  data-id="${item.id}">${item.name}线</span>
+                        </c:forEach>
+                    </div>
+                    <div class="hid1">
+                        <span data-text="04-22 星期六" data-date="2017-04-22">04-22 <br> 星期六</span>
+                        <span data-text="04-23 星期日" data-date="2017-04-23">04-23 <br> 星期日</span>
+                        <span data-text="04-24 星期一" data-date="2017-04-24">04-24 <br> 星期一</span>
+                        <span data-text="04-25 星期二" data-date="2017-04-25">04-25 <br> 星期二</span>
+                        <span data-text="04-26 星期三" data-date="2017-04-26">04-26 <br> 星期三</span>
+                        <span data-text="04-27 星期四" data-date="2017-04-27">04-27 <br> 星期四</span>
+                        <span data-text="04-28 星期五" data-date="2017-04-28">04-28 <br> 星期五</span>
+                    </div>
+                </div>
 
-                     <div class="one">
-                         <p>交易时间</p>
-                          <div><input   type="date"> </div>
-                     </div>
-                     <div class="hid">
-                         <span class="cun">1号线</span> <span>2号线</span> <span>4号线</span> <span>5号线</span> <span>6号线</span>
-                         <span>7号线</span> <span>8号线</span> <span>9号线</span> <span>10号线</span> <span>14号线</span>
-                         <span>13号线</span> <span>15号线</span> <span>房山线</span> <span>亦庄线</span> <span>八通线</span>
-                         <span>昌平线</span>
-                     </div>
+                <div class="metro-station-wrap  clearfix ">
+                    <div class="metro-station-content" id="lineSite">
+                        <script id="list-tmpl" type="text/x-dot-template">
+                            <ul style="margin-left: 0px;" id="ul_site">
+                                {{ for(var i=0,len=it.length;i<len; i++) { }}
+                                <li data-metro-station-id="{{=it[i].id}}">
+                                    <div class="station-name">{{=it[i].name}}</div>
+                                </li>
+                                {{ } }}
+                            </ul>
+                        </script>
+                    </div>
 
+                </div>
 
-
-                 </div>
-
-                 <div class="metro-station-wrap  clearfix show">
-                     <div class="metro-station-left disabled"></div>
-                     <div class="metro-station-content">
-                         <ul style="margin-left: 0px;">
-                             <li data-metro-station-id="296">
-                                 <div class="station-name">公主坟</div>
-                             </li>
-                             <li data-metro-station-id="297">
-                                 <div class="station-name">军事博物馆</div>
-                             </li><li data-metro-station-id="298">
-                         </ul>
-                     </div>
-                     <div class="metro-station-right"></div>
-                 </div>
-                 <div class="d_1">
-                    <div class="one one2">
-                       <p>您的位置</p>
-                        <input type="text" name="1" placeholder="请输入你的小区、大厦或街道名称 ">
-                     </div>
-                     <div class="one one3">
-                         <p>详细地址</p>
-                         <input type="text" name="1" placeholder=" ">
-                     </div>
-                     <div class="one">
+                <div class="d_1">
+                    <div class="one one3">
+                        <p>详细地址</p>
+                        <input type="text" name="1" placeholder=" ">
+                    </div>
+                    <div class="one">
                         <p>交易时间</p>
-                         <div><input   type="date"> </div>
-                     </div>
-                 </div>
-             </div>
+                        <div id="dateInput1">预约时间<img src="../resources/img/u.jpg"></div>
+                    </div>
+                    <div class="hid2">
+                        <span data-text="04-22 星期六" data-date="2017-04-22">04-22 <br> 星期六</span>
+                        <span data-text="04-23 星期日" data-date="2017-04-23">04-23 <br> 星期日</span>
+                        <span data-text="04-24 星期一" data-date="2017-04-24">04-24 <br> 星期一</span>
+                        <span data-text="04-25 星期二" data-date="2017-04-25">04-25 <br> 星期二</span>
+                        <span data-text="04-26 星期三" data-date="2017-04-26">04-26 <br> 星期三</span>
+                        <span data-text="04-27 星期四" data-date="2017-04-27">04-27 <br> 星期四</span>
+                        <span data-text="04-28 星期五" data-date="2017-04-28">04-28 <br> 星期五</span>
+                    </div>
+                </div>
+            </div>
         </div><!--xk end-->
         <div class="clear"></div>
         <h1><span>3</span>联系方式</h1>
-         <div class="d_2">
+        <div class="d_2">
             <div class="one one1">
                 <p>输入姓名</p>
                 <div><input type="text" name="1"> </div>
@@ -167,7 +156,7 @@
                 <div><input type="tel" name="1"></div>
                 <p>用来接受订单信息</p>
             </div>
-         </div><!--d_2 end-->
+        </div><!--d_2 end-->
         <div class="clear"></div>
         <div class="anniu">确认预约</div>
     </div><!--left end-->
@@ -177,12 +166,12 @@
             <dd>${result.modelName}</dd>
             <dd class="dd2">￥${result.salePrice}万</dd>
         </dl>
-         <div class="clear"></div>
+        <div class="clear"></div>
         <div>
             <p> 上牌时间: ${result.regdate}</p>
-            <p> 屏幕显示: 屏幕正常显示</p>
-            <p> 触摸功能: 触摸功能不正常</p>
-            <p> 拍摄功能: 拍照摄像正常</p>
+            <p> 屏幕显示: ${result.city}</p>
+            <p> 触摸功能: ${result.mail}</p>
+            <p> 拍摄功能: ${result.ck}</p>
             <p> 拆机维修史: 无拆机无维修</p>
             <p> 边框背板: 外壳完好（边框外壳完好无划痕磨损、无磕碰）</p>
             <p> 通话功能: 通话功能正常</p>
@@ -197,62 +186,95 @@
 
 <jsp:include page="footer.jsp"></jsp:include>
 </body>
-
+<script src="/resources/js/doT.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-    //创建和初始化地图函数：
-    function initMap(){
-        createMap();//创建地图
-        setMapEvent();//设置地图事件
-        addMapControl();//向地图添加控件
-        addMapOverlay();//向地图添加覆盖物
-    }
-    function createMap(){
-        map = new BMap.Map("map");
-        map.centerAndZoom(new BMap.Point(116.403963,39.915119),15);
-    }
-    function setMapEvent(){
-        map.enableScrollWheelZoom();
-        map.enableKeyboard();
-        map.enableDragging();
-        map.enableDoubleClickZoom()
-    }
-    function addClickHandler(target,window){
-        target.addEventListener("click",function(){
-            target.openInfoWindow(window);
+
+
+
+    $(function () {
+
+        var evalText = doT.template($("#list-tmpl").text());
+        $(".hid1 span").click(function () {
+            $(this).addClass('checked').siblings().removeClass("checked");
+            var text = $(this).data("text");
+            $("#dateInput").html(text+'<img src="../resources/img/u.jpg">');
+            $(".hid1").hide();
+        });
+        $(".hid2 span").click(function () {
+            $(this).addClass('checked').siblings().removeClass("checked");
+            var text = $(this).data("text");
+            $("#dateInput1").html(text+'<img src="../resources/img/u.jpg">');
+            $(".hid2").hide();
+        });
+        $(".hid span").click(function(){
+            $(this).addClass('cun').siblings().removeClass("cun");
+            var lineId = $(this).data("id");
+            var lineName = $(this).html();
+            $("#lineInput").html(lineName+'<img src="../resources/img/u.jpg">');
+            $(".hid").hide();
+
+            $.getJSON("/getSite/"+lineId,function (d) {
+                if(d.status == 200){
+                    $("#lineSite").html('');
+                    $("#lineSite").html(evalText(d.data));
+                    $(".metro-station-wrap").show();
+                    var count = d.data.length;
+                    var w = 35*count;
+                    if(w>550){
+                        $("#ul_site").css({"width":w+"px"}).parent().css({"overflow-x": "scroll"});
+                    }else{
+                        $("#ul_site").css({"width":w+"px"}).parent().css({"overflow-x": "hidden"});
+                    }
+                    $(".metro-station-content ul li").click(function(){
+                        $(this).addClass("active").siblings().removeClass('active');
+                    });
+
+                }
+            })
+
+
+        });
+
+        $("#lineInput").click(function () {
+            $(this).html('地铁线路<img src="../resources/img/d.jpg">');
+            $(".hid").show();
+            $(".hid1").hide();
+        })
+        $("#dateInput").click(function () {
+            $(this).html('预约时间<img src="../resources/img/d.jpg">');
+            $(".hid1").show();
+            $(".hid").hide();
+        })
+        $("#dateInput1").click(function () {
+            $(this).html('交易时间<img src="../resources/img/d.jpg">');
+            $(".hid2").show();
+
+        })
+        $(".x_left li").click(function(){
+            $(this).addClass('active').siblings().removeClass("active");
+        })
+        initMap();
+    });
+    var initMap = function(){
+        // 百度地图API功能
+        var map = new BMap.Map("map");
+        var point = new BMap.Point(116.417854,39.921988);
+        var marker = new BMap.Marker(point);  // 创建标注
+        map.addOverlay(marker);              // 将标注添加到地图中
+        map.centerAndZoom(point, 15);
+        map.enableScrollWheelZoom(true);
+        var opts = {
+            width : 200,     // 信息窗口宽度
+            height: 100,     // 信息窗口高度
+            title : "海底捞王府井店" , // 信息窗口标题
+            enableMessage:true,//设置允许信息窗发送短息
+            message:"亲耐滴，晚上一起吃个饭吧？戳下面的链接看下地址喔~"
+        }
+        var infoWindow = new BMap.InfoWindow("地址：北京市东城区王府井大街88号乐天银泰百货八层", opts);  // 创建信息窗口对象
+        marker.addEventListener("click", function(){
+            map.openInfoWindow(infoWindow,point); //开启信息窗口
         });
     }
-    function addMapOverlay(){
-        var markers = [
-            {content:"我的备注",title:"我的标记",imageOffset: {width:0,height:3},position:{lat:39.924305,lng:116.402526}}
-        ];
-        for(var index = 0; index < markers.length; index++ ){
-            var point = new BMap.Point(markers[index].position.lng,markers[index].position.lat);
-            var marker = new BMap.Marker(point,{icon:new BMap.Icon("http://api.map.baidu.com/lbsapi/createmap/images/icon.png",new BMap.Size(20,25),{
-                imageOffset: new BMap.Size(markers[index].imageOffset.width,markers[index].imageOffset.height)
-            })});
-            var label = new BMap.Label(markers[index].title,{offset: new BMap.Size(25,5)});
-            var opts = {
-                width: 200,
-                title: markers[index].title,
-                enableMessage: false
-            };
-            var infoWindow = new BMap.InfoWindow(markers[index].content,opts);
-            marker.setLabel(label);
-            addClickHandler(marker,infoWindow);
-            map.addOverlay(marker);
-        };
-    }
-    //向地图添加控件
-    function addMapControl(){
-        var scaleControl = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
-        scaleControl.setUnit(BMAP_UNIT_IMPERIAL);
-        map.addControl(scaleControl);
-        var navControl = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
-        map.addControl(navControl);
-        var overviewControl = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:true});
-        map.addControl(overviewControl);
-    }
-    var map;
-    initMap();
+
 </script>
 </html>
