@@ -64,7 +64,7 @@
              </div>
             <div class="flot mony">￥4500</div>
             <div class="flot monys">已完成</div>
-            <div class="flot none monys">已打款</div>
+            <div class="flot none monys">已成交</div>
         </div>
 
         <p class="danxix">
@@ -77,7 +77,7 @@
             </div>
             <div class="flot mony">￥4500</div>
             <div class="flot ">未完成</div>
-            <div class="flot none ">过户中</div>
+            <div class="flot none ">未预约</div>
         </div>
 
 
@@ -90,9 +90,23 @@
                 <span>2016款 北京BJ20 1.5T CVT 豪华型</span>
             </div>
             <div class="flot mony">￥245.0万</div>
-            <div class="flot monys">已完成</div>
-            <div class="flot none monys">已打款</div>
+            <div class="flot ">未完成</div>
+            <div class="flot none ">预约</div>
         </div>
+
+        <p class="danxix">
+            <span>订单号：293930939387387</span><span class="colors">2017年3月30日</span>
+        </p>
+        <div class="td">
+            <div class="flot ont">
+                <img src="../resources/img/p_08.jpg">
+                <span>2016款 北京BJ20 1.5T CVT 豪华型</span>
+            </div>
+            <div class="flot mony">￥245.0万</div>
+            <div class="flot ">未完成</div>
+            <div class="flot none ">验车中</div>
+        </div>
+
 
 
 

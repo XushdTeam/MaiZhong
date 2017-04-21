@@ -50,22 +50,21 @@
     </div><!--m_left-->
     <div class="m_right">
         <p class="p_top">
+            <span class="mon">订单号：949848747848</span>
             <span class="span1">名称：2016款 北京BJ20 1.5T CVT 豪华型</span>
-            <span class="mon">价格:￥45.0万</span>
-            <span >过户进度：过户中</span>
         </p>
         <div class="p_td">
             <section class="container">
                 <input type="radio" class="radio" name="progress" value="five" id="five">
-                <label for="five" class="label">等待验收车辆</label>
+                <label for="five" class="label">等待验收</label>
                 <input type="radio" class="radio" name="progress" value="twentyfive" id="twentyfive" checked>
-                <label for="twentyfive" class="label">手续已入库</label>
+                <label for="twentyfive" class="label">车辆处理</label>
                 <input type="radio" class="radio" name="progress" value="fifty" id="fifty">
-                <label for="fifty" class="label">等待过户票办理</label>
+                <label for="fifty" class="label">等待过户</label>
                 <input type="radio" class="radio" name="progress" value="seventyfive" id="seventyfive">
-                <label for="seventyfive" class="label">等待拓号验车</label>
+                <label for="seventyfive" class="label">过户完成</label>
                 <input type="radio" class="radio" name="progress" value="onehundred" id="onehundred">
-                <label for="onehundred" class="label">过户完成</label>
+                <label for="onehundred" class="label">更新指标</label>
                 <div class="progress">
 
                     <div class="progress-bar"></div>
@@ -76,22 +75,21 @@
 
 
         <p class="p_top">
+            <span class="mon">订单号：949848747848</span>
             <span class="span1">名称：2016款 北京BJ20 1.5T CVT 豪华型</span>
-            <span class="mon">价格:￥45.0万</span>
-            <span >过户进度：过户中</span>
         </p>
         <div class="p_td">
             <section class="container">
                 <input type="radio" class="radio" name="progres" value="five1" id="five1">
-                <label for="five1" class="label">等待验收车辆</label>
+                <label for="five1" class="label">等待验收</label>
                 <input type="radio" class="radio" name="progres" value="twentyfive2" id="twentyfive2">
-                <label for="twentyfive2" class="label">手续已入库</label>
+                <label for="twentyfive2" class="label">车辆处理</label>
                 <input type="radio" class="radio" name="progres" value="fifty3" id="fifty3">
-                <label for="fifty3" class="label">等待过户票办理</label>
+                <label for="fifty3" class="label">等待过户</label>
                 <input type="radio" class="radio" name="progres" value="seventyfive4" id="seventyfive4" checked>
-                <label for="seventyfive4" class="label">等待拓号验车</label>
+                <label for="seventyfive4" class="label">过户完成</label>
                 <input type="radio" class="radio" name="progres" value="onehundred5" id="onehundred5">
-                <label for="onehundred5" class="label">过户完成</label>
+                <label for="onehundred5" class="label">更新指标</label>
 
                 <div class="progress">
 
@@ -104,22 +102,21 @@
 
 
         <p class="p_top">
+            <span class="mon">订单号：949848747848</span>
             <span class="span1">名称：2016款 北京BJ20 1.5T CVT 豪华型</span>
-            <span class="mon">价格:￥45.0万</span>
-            <span >过户进度：过户中</span>
         </p>
         <div class="p_td">
             <section class="container">
                 <input type="radio" class="radio" name="progrest" value="five1" id="five2">
-                <label for="five2" class="label">等待验收车辆</label>
+                <label for="five2" class="label">等待验收</label>
                 <input type="radio" class="radio" name="progrest" value="twentyfive2" id="twentyfive4">
-                <label for="twentyfive4" class="label">手续已入库</label>
+                <label for="twentyfive4" class="label">车辆处理</label>
                 <input type="radio" class="radio" name="progrest" value="fifty2" id="fifty2" checked>
-                <label for="fifty2" class="label">等待过户票办理</label>
+                <label for="fifty2" class="label">等待过户</label>
                 <input type="radio" class="radio" name="progrest" value="seventyfive4" id="seventyfive2" >
-                <label for="seventyfive2" class="label">等待拓号验车</label>
+                <label for="seventyfive2" class="label">过户完成</label>
                 <input type="radio" class="radio" name="progrest" value="onehundred5" id="onehundred2">
-                <label for="onehundred2" class="label">过户完成</label>
+                <label for="onehundred2" class="label">更新指标</label>
 
                 <div class="progress">
 

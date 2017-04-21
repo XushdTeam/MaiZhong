@@ -17,7 +17,7 @@ img,input{vertical-align:middle; outline:none}
 .t_cen .t_right .one{ color: #fff; border: 1px solid #fff; border-radius: 100px; padding: 10px 30px;margin-left:20px;}
 .t_cen .t_right .one:hover{ background: #f05b48;color: #fff; border: 1px solid #f05b48; transition:background 0.8s;-webkit-transition:background 0.8s;
 }
-.t_cen .t_right .two{ color: #fff; background: #f05b48; border-radius: 100px; padding: 10px 20px; margin-left:20px;}
+.t_cen .t_right .two{ color: #fff; background: #f05b48; border-radius: 80px; padding: 10px 15px; margin-left:20px;}
 
 .guzs{ width: 1200px; margin:0 auto;  }
 
@@ -241,13 +241,13 @@ img,input{vertical-align:middle; outline:none}
 
 
 /*个人中心*/
-.main{ width: 1200px; margin: 20px auto 0}
+.main{ width: 1200px; margin:0px auto}
 .main .m_left{ background: #fff; float: left; width: 255px; padding: 0px 0 0 20px;min-height: 736px; }
 .main .m_left ul { margin:40px 0 20px  50px;}
 .main .m_left ul li{ font-size: 18px; color: #000}
 .main .m_left ul p{ margin-left: 35px}
 .main .m_left ul p .cuns{ color: #f05b48}
-.main .m_right{ background: #fff; float: right; width: 893px;min-height: 736px;}
+.main .m_right{ background: #fff; float: right; width: 893px;min-height: 706px; padding-bottom: 30px}
 .main .m_right .m_top{ background: #262930;color: #fff; line-height:51px ;height: 51px; font-size: 18px; width: 90%; margin: 30px auto 10px }
 .main .m_right .m_top span{ float: left; width: 130px; text-align: center}
 .main .m_right .m_top .span1{ width:310px; text-align: left;  margin-left: 30px;}
@@ -268,7 +268,10 @@ img,input{vertical-align:middle; outline:none}
 .p_top  span{ width: 248px; text-align: center; float: left}
 .p_top .span1{ width: 300px; padding-left: 26px; text-align: left}
 .m_right .p_td{ height: 74px; border: 1px solid #eee; border-top: none;width: 95%; margin: 0px auto }
-.es_top{ height: 51px; line-height: 51px; background: #262930; width: 95%; margin: 30px auto 0;color: #fff;}
-.es_top span{ padding: 0 20px}
+.m_right .es_top{ height: 51px; line-height: 51px; background: #262930; width: 95%; margin: 30px auto 0;color: #fff;}
+.m_right .one{ height: 35px; line-height: 35px; width: 95%; margin: 0 auto; cursor: pointer}
+.m_right .es_top span,.m_right .one span{  float: left; width: 100px; text-align: center}
+.m_right  .es_top .cl_one,.m_right  .one .cl_one{ width: 200px; margin-left: 30px; text-align: left !important;}
+.m_right  .one:hover{ background: #eee;}
 
 
