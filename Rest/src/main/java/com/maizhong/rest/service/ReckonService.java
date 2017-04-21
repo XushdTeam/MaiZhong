@@ -35,4 +35,7 @@ public interface ReckonService {
     JsonResult getGZDetail(long phone);
 
     void site();
+
+
+    JsonResult getBusinessAddress();
 }

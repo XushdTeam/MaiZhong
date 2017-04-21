@@ -25,4 +25,6 @@ public interface IndexService {
     String saleguzhi(String guzhiKey, String otherKey, Long phone);
 
     GuzhiDTO getYuyueInfo(String phone);
+
+    JsonResult getBusinessAddress();
 }

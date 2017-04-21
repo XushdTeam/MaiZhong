@@ -74,6 +74,10 @@ public class ReckonServiceImpl implements ReckonService {
     @Autowired
     private LineSiteMapper lineSiteMapper;
 
+    @Autowired
+    private TbBusinessMapper tbBusinessMapper;
+    @Autowired
+    private DistrictMapper districtMapper;
 
     @Value("${CHE_MODEL}")
     private String CHE_MODEL;
@@ -102,6 +106,8 @@ public class ReckonServiceImpl implements ReckonService {
     private String SMS_CODE;
     @Value("${LOGIN_TOKEN}")
     private String LOGIN_TOKEN;
+    @Value("${BUSINESS_ADDRESS}")
+    private String BUSINESS_ADDRESS;
 
     @Override
     public void getBrandData() {
@@ -592,7 +598,8 @@ public class ReckonServiceImpl implements ReckonService {
             guzhiDTO.setGhtime("一手车");
         } else if (StringUtils.equals(ghtime, "2")) {
             guzhiDTO.setGhtime("六个月以内");
-        }{
+        }
+        {
             guzhiDTO.setGhtime("六个月以上");
         }
         //性质
@@ -736,32 +743,33 @@ public class ReckonServiceImpl implements ReckonService {
         try {
 
 
-        LineExample example = new LineExample();
-        List<Line> lines = lineMapper.selectByExample(example);
+            LineExample example = new LineExample();
+            List<Line> lines = lineMapper.selectByExample(example);
 
-        for (Line line : lines) {
+            for (Line line : lines) {
 
-            String res = HttpClientUtil.doGet("http://www.aihuishou.com/util/GetMetroSiteByLine?lineId="+line.getId());
-            System.out.println(res);
-            JSONArray jsonArray = JSON.parseArray(res);
+                String res = HttpClientUtil.doGet("http://www.aihuishou.com/util/GetMetroSiteByLine?lineId=" + line.getId());
+                System.out.println(res);
+                JSONArray jsonArray = JSON.parseArray(res);
 
-            for (Object o : jsonArray) {
-                JSONObject obj = (JSONObject) o;
-                LineSite site = new LineSite();
-                site.setLineId(line.getId());
-                site.setName(obj.getString("name"));
-                site.setId(obj.getLong("id"));
-                lineSiteMapper.insert(site);
+                for (Object o : jsonArray) {
+                    JSONObject obj = (JSONObject) o;
+                    LineSite site = new LineSite();
+                    site.setLineId(line.getId());
+                    site.setName(obj.getString("name"));
+                    site.setId(obj.getLong("id"));
+                    lineSiteMapper.insert(site);
+
+                }
+                Thread.sleep(10);
+
 
             }
-            Thread.sleep(10);
-
-
-        }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     /**
      * 获取验证码
@@ -870,5 +878,53 @@ public class ReckonServiceImpl implements ReckonService {
         }
     }
 
+
+    /**
+     * 获取4S店地址
+     *
+     * @return
+     */
+    @Override
+    public JsonResult getBusinessAddress() {
+
+        String s = null;
+        try {
+            s = jedisClient.get(BUSINESS_ADDRESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (StringUtils.isNotBlank(s)) {
+            Map map = JsonUtils.jsonToPojo(s, Map.class);
+            return JsonResult.build(200, "获取成功", map);
+        }
+
+
+        List<District> districts = districtMapper.selectByExample(null);
+        TbBusinessExample example = new TbBusinessExample();
+        Map<String, List<BusinessDTO>> map = new HashMap<>();
+
+        for (District district : districts) {
+            example.clear();
+            TbBusinessExample.Criteria criteria = example.createCriteria();
+            criteria.andDistrictIdEqualTo(Long.valueOf(district.getId()));
+            List<TbBusiness> tbBusinesses = tbBusinessMapper.selectByExample(example);
+            List<BusinessDTO> businessDTOList = new ArrayList<>();
+            if (tbBusinesses == null || tbBusinesses.size() == 0) {
+                continue;
+            }
+            for (TbBusiness tbBusiness : tbBusinesses) {
+                BusinessDTO businessDTO = new BusinessDTO();
+                businessDTO.setAddress(tbBusiness.getAddress());
+                businessDTO.setId(tbBusiness.getId());
+                businessDTO.setBusinessName(tbBusiness.getBusinessName());
+                businessDTO.setDistrictId(tbBusiness.getDistrictId());
+                businessDTO.setLocation(tbBusiness.getLocation());
+                businessDTOList.add(businessDTO);
+            }
+            map.put(district.getName(), businessDTOList);
+        }
+        jedisClient.set(BUSINESS_ADDRESS, JsonUtils.objectToJson(map));
+        return JsonResult.build(200, "获取成功", map);
+    }
 }
 

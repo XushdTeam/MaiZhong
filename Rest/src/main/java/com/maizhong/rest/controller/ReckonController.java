@@ -214,15 +214,26 @@ public class ReckonController {
     }
 
 
-
+    /**
+     * 获取地铁站信息
+     * @return
+     */
 
     @RequestMapping(value = "/getSite")
     @ResponseBody
     public JsonResult site(){
-
         reckonService.site();
         return JsonResult.OK();
     }
 
-
+    /**
+     * 获取4S店地址
+     * @return
+     */
+    @RequestMapping(value = "/getBusinessAddress")
+    @ResponseBody
+    public JsonResult getBusinessAddress(){
+       JsonResult result= reckonService.getBusinessAddress();
+        return result;
+    }
 }

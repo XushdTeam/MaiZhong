@@ -11,6 +11,8 @@ import com.maizhong.reckon.service.IndexService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 /**
  * Created by Xushd on 2017/4/18.
  */
@@ -108,11 +110,9 @@ public class IndexServiceImpl implements IndexService {
             String res = HttpClientUtil.doGet(RESTURL+"getCity/");
             return JsonUtils.jsonToPojo(res,JsonResult.class);
 
-
         }catch (Exception e){
 
             e.printStackTrace();
-
         }
 
         return null;
@@ -192,5 +192,14 @@ public class IndexServiceImpl implements IndexService {
         }
         return null;
 
+    }
+
+    @Override
+    public JsonResult getBusinessAddress() {
+        String res = HttpClientUtil.doGet(RESTURL+"getBusinessAddress");
+        JSONObject object = JSON.parseObject(res);
+        JSONObject data = object.getJSONObject("data");
+        Map map = JSON.parseObject(data.toJSONString(), Map.class);
+        return  JsonResult.build(200,"获取成功",map);
     }
 }
