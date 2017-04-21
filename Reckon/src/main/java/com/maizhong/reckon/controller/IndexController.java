@@ -3,6 +3,7 @@ package com.maizhong.reckon.controller;
 import com.maizhong.common.dto.GuzhiDTO;
 import com.maizhong.common.result.JsonResult;
 
+import com.maizhong.pojo.Line;
 import com.maizhong.reckon.DTO.IndexDTO;
 import com.maizhong.reckon.service.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * Created by Xushd on 2017/4/18.
@@ -156,33 +159,25 @@ public class IndexController {
     public String yuyue( @CookieValue(value = "phone",required = true) String phone,Model model){
 
 
+
         GuzhiDTO guzhiDTO = indexService.getYuyueInfo(phone);
+        List<Line> lineList = indexService.getLineList();
         model.addAttribute("result",guzhiDTO);
+        model.addAttribute("lines",lineList);
         return "yuyue";
     }
 
-
     /**
-     * 获取4S店地址信息
+     * 获取地铁站信息
+     * @param lineId
      * @return
      */
-    @RequestMapping(value = "/getBusinessAddress")
+    @RequestMapping(value = "getSite/{lineId}")
     @ResponseBody
-    public JsonResult getBusinessAddress(){
+    public JsonResult getSiteByLineId(@PathVariable String lineId){
 
-       JsonResult result =indexService.getBusinessAddress();
-        return result;
-    }
+        JsonResult result = indexService.getSiteByLineId(lineId);
 
-    /**
-     * 获取前七天时间
-     * @return
-     */
-    @RequestMapping(value = "/getOneWeek")
-    @ResponseBody
-    public JsonResult getOneWeek(){
-
-        JsonResult result =indexService.getOneWeek();
         return result;
     }
 }

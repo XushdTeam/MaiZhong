@@ -7,13 +7,13 @@ import com.maizhong.common.dto.GuzhiDTO;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
+import com.maizhong.pojo.Line;
 import com.maizhong.reckon.DTO.IndexDTO;
 import com.maizhong.reckon.service.IndexService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Xushd on 2017/4/18.
@@ -197,16 +197,36 @@ public class IndexServiceImpl implements IndexService {
     }
 
     @Override
-    public JsonResult getBusinessAddress() {
-        String res = HttpClientUtil.doGet(RESTURL+"getBusinessAddress");
-        JsonResult object = JsonUtils.jsonToPojo(res,JsonResult.class);
-        return  object;
+    public List<Line> getLineList() {
+        try {
+
+            String res = HttpClientUtil.doGet(RESTURL+"getLines");
+            JsonResult result = JsonUtils.jsonToPojo(res,JsonResult.class);
+            return JsonUtils.jsonToList(JSON.toJSONString(result.getData()),Line.class);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
+    /**
+     * 通过线路获取地铁站信息
+     * @param lineId
+     * @return
+     */
     @Override
-    public JsonResult getOneWeek() {
-        String res = HttpClientUtil.doGet(RESTURL+"getOneWeek");
-        JsonResult object = JsonUtils.jsonToPojo(res,JsonResult.class);
-        return  object;
+    public JsonResult getSiteByLineId(String lineId) {
+
+        try{
+            String res = HttpClientUtil.doGet(RESTURL+"getSite/"+lineId);
+            return JsonUtils.jsonToPojo(res,JsonResult.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return null;
     }
 }

@@ -3,7 +3,10 @@ package com.maizhong.reckon.service;
 import com.maizhong.common.dto.GuzhiDTO;
 import com.maizhong.common.result.JsonResult;
 
+import com.maizhong.pojo.Line;
 import com.maizhong.reckon.DTO.IndexDTO;
+
+import java.util.List;
 
 /**
  * Created by Xushd on 2017/4/18.
@@ -26,7 +29,7 @@ public interface IndexService {
 
     GuzhiDTO getYuyueInfo(String phone);
 
-    JsonResult getBusinessAddress();
+    List<Line> getLineList();
 
-    JsonResult getOneWeek();
+    JsonResult getSiteByLineId(String lineId);
 }
