@@ -28,7 +28,7 @@
     <div class="top">
         <div class="t_cen">
             <a href="#"><img src="../resources/img/logo.png"></a>
-            <span class="tell">010-3993-394</span>
+            <span class="tell">010-8025-8108</span>
             <span class="t_right">
                 <a href="/sale" class="one">我要卖车</a>
                 <a href="/login" class="one">登录</a>
@@ -208,12 +208,12 @@
 
         <dl>
             <dt class="dt1"></dt>
-            <dd>精准估值</dd>
+            <dd>网上定价</dd>
         </dl>
 
         <dl>
             <dt class="dt2"></dt>
-            <dd>专业检测</dd>
+            <dd>预约检测</dd>
         </dl>
 
         <dl>
@@ -223,7 +223,7 @@
 
         <dl>
             <dt class="dt4"></dt>
-            <dd>售后服务</dd>
+            <dd>售后保障</dd>
         </dl>
     </div>
 </div>
@@ -236,7 +236,7 @@
     <div class="j_cen">
 
         <h2>交易记录</h2>
-        <p>真是记录、公正透明、超高效率</p>
+        <p>真实记录、公正透明、超高效率</p>
         <div class="one">
             <span class="cl_one">成交车型</span>
             <span>新车指导价</span>
@@ -255,6 +255,18 @@
             <span>14.60万</span>
             <span>2016年11月 </span>
             <span>0.85万公里 </span>
+            <span>2017年04月01日</span>
+            <span>北京</span>
+            <span class="last">车商</span>
+        </div>
+
+
+        <div>
+            <span class="cl_one">2010款 雅阁 2.0L 自动庆典版 </span>
+            <span> 19.98万 </span>
+            <span>6.19万</span>
+            <span>2010年7月 </span>
+            <span>14万公里 </span>
             <span>2017年04月03日</span>
             <span>北京</span>
             <span class="last">车商</span>
@@ -262,93 +274,94 @@
 
 
         <div>
-            <span class="cl_one">2106 奥迪A3 Limousine </span>
-            <span> 19.90万 </span>
-            <span>14.60万</span>
-            <span>2016年11月 </span>
-            <span>0.85万公里 </span>
-            <span>2017年04月03日</span>
+            <span class="cl_one">2013款 奥迪Q3 35 TFSI quattro 舒适型</span>
+            <span>35.68万 </span>
+            <span>15.90万</span>
+            <span>2013年7月 </span>
+            <span>12万公里 </span>
+            <span>2017年03月02日</span>
+            <span>北京</span>
+            <span class="last">车商</span>
+        </div>
+
+        <div>
+            <span class="cl_one">2012款 北汽E系列两厢 1.5L 自动 乐尚版 </span>
+            <span>7.51万</span>
+            <span>1.88万</span>
+            <span>2012年6月 </span>
+            <span>18万公里 </span>
+            <span>2017年03月23日</span>
+            <span>北京</span>
+            <span class="last">车商</span>
+        </div>
+
+        <div>
+            <span class="cl_one">2013款 比亚迪S6 2.4L 自动 尊荣型 劲悦版 </span>
+            <span>12.99万 </span>
+            <span>4.42万</span>
+            <span>2013年6月 </span>
+            <span>12万公里 </span>
+            <span>2017年03月01日</span>
+            <span>北京</span>
+            <span class="last">车商</span>
+        </div>
+
+        <div>
+            <span class="cl_one">2011款 高尔夫 1.4TSI 自动舒适型</span>
+            <span>14.98万 </span>
+            <span>5.30万</span>
+            <span>2011年9月 </span>
+            <span>13万公里 </span>
+            <span>2017年03月16日</span>
+            <span>北京</span>
+            <span class="last">车商</span>
+        </div>
+
+        <div>
+            <span class="cl_one">2012款 哈弗H6 2.4L 手动 汽油 两驱 尊贵型 </span>
+            <span>12.48万</span>
+            <span>4.42万</span>
+            <span>2012年8月 </span>
+            <span>10万公里 </span>
+            <span>2017年03月15日</span>
+            <span>北京</span>
+            <span class="last">车商</span>
+        </div>
+
+        <div>
+            <span class="cl_one">2011款 凯越 1.6 LX-MT</span>
+            <span>9.99万</span>
+            <span>2.82万</span>
+            <span>2011年7月 </span>
+            <span>12万公里 </span>
+            <span>2017年04月13日</span>
+            <span>北京</span>
+            <span class="last">车商</span>
+        </div>
+
+        <div>
+            <span class="cl_one">2013款 宝来 1.4T 手动 舒适型 </span>
+            <span>12.63万</span>
+            <span>5.30万</span>
+            <span>2013年11月 </span>
+            <span>12万公里 </span>
+            <span>2017年04月15日</span>
             <span>北京</span>
             <span class="last">车商</span>
         </div>
 
 
         <div>
-            <span class="cl_one">2106 奥迪A3 Limousine </span>
-            <span> 19.90万 </span>
-            <span>14.60万</span>
-            <span>2016年11月 </span>
-            <span>0.85万公里 </span>
-            <span>2017年04月03日</span>
+            <span class="cl_one">2013款 赛欧两厢 1.2L 手动理想版 </span>
+            <span>6.18万</span>
+            <span>1.77万</span>
+            <span>2013年10月 </span>
+            <span>8万公里 </span>
+            <span>2017年04月23日</span>
             <span>北京</span>
             <span class="last">车商</span>
         </div>
 
-        <div>
-            <span class="cl_one">2106 奥迪A3 Limousine </span>
-            <span> 19.90万 </span>
-            <span>14.60万</span>
-            <span>2016年11月 </span>
-            <span>0.85万公里 </span>
-            <span>2017年04月03日</span>
-            <span>北京</span>
-            <span class="last">车商</span>
-        </div>
-
-        <div>
-            <span class="cl_one">2106 奥迪A3 Limousine </span>
-            <span> 19.90万 </span>
-            <span>14.60万</span>
-            <span>2016年11月 </span>
-            <span>0.85万公里 </span>
-            <span>2017年04月03日</span>
-            <span>北京</span>
-            <span class="last">车商</span>
-        </div>
-
-        <div>
-            <span class="cl_one">2106 奥迪A3 Limousine </span>
-            <span> 19.90万 </span>
-            <span>14.60万</span>
-            <span>2016年11月 </span>
-            <span>0.85万公里 </span>
-            <span>2017年04月03日</span>
-            <span>北京</span>
-            <span class="last">车商</span>
-        </div>
-
-        <div>
-            <span class="cl_one">2106 奥迪A3 Limousine </span>
-            <span> 19.90万 </span>
-            <span>14.60万</span>
-            <span>2016年11月 </span>
-            <span>0.85万公里 </span>
-            <span>2017年04月03日</span>
-            <span>北京</span>
-            <span class="last">车商</span>
-        </div>
-
-        <div>
-            <span class="cl_one">2106 奥迪A3 Limousine </span>
-            <span> 19.90万 </span>
-            <span>14.60万</span>
-            <span>2016年11月 </span>
-            <span>0.85万公里 </span>
-            <span>2017年04月03日</span>
-            <span>北京</span>
-            <span class="last">车商</span>
-        </div>
-
-        <div>
-            <span class="cl_one">2106 奥迪A3 Limousine </span>
-            <span> 19.90万 </span>
-            <span>14.60万</span>
-            <span>2016年11月 </span>
-            <span>0.85万公里 </span>
-            <span>2017年04月03日</span>
-            <span>北京</span>
-            <span class="last">车商</span>
-        </div>
     </div>
 </div>
 
@@ -367,19 +380,26 @@
             北京迈众汽车信息服务有限公司，是一家致力服务于各大汽车经销商。推进4S店新车销量与市场流量的专业服务公司。2017年4月15日，产品正式上线，我们将成为中国领先的专业服务于各大汽车集团、4s店与C端客户的互联网平台，通过产品服务、数据技术和资源 共享为汽车消费者提供选车、买车、用车、换车、金融、维修、美容、装饰等全方位一体的快捷专业的一站式服务端口，通过我们的平台将庞大的客户资源与各大汽车集团、4S店服务资源优选整合。公司将秉承“杰出服务，行业领先”的经营理念，开启汽车互联网新纪元。</div>
 
         <div class="left">
-            <span>公司为先</span>
-            <span>忠实诚信</span>
-            <span>爱岗敬业</span>
+            <div class="one">
+                <div class="x_l">
+                    <span>专业专注</span>
+                    <span>客户至上</span>
+                    <span class="spans"> 迈众汽车经营理念</span>
+                </div>
+                <div class="x_r">
+                    <span>贴心服务</span>
+                    <span>迈众宗旨</span>
+                </div>
 
-            <span>个人在后</span>
-            <span>思想统一</span>
-            <span>悉心钻研</span>
+            </div>
+
         </div>
     </div>
 
 
 </div>
 <!--关于我们 end-->
+<jsp:include page="footer.jsp"></jsp:include>
 <script src="/resources/js/index.js"></script>
 </body>
 </html>

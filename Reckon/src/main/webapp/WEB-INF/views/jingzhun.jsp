@@ -26,13 +26,9 @@
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
 </head>
 <body>
-<div class="top e_top">
-    <div class="t_cen">
-        <a href="#"><img src="../resources/img/logo.png"></a>
-        <span class="tell">010-3993-394</span>
-        <span class="t_right"><a href="" class="one">我要卖车</a><a href="" class="one">登录</a><a href="" class="two">APP下载</a></span>
-    </div>
-</div><!--top end-->
+<jsp:include page="header.jsp"></jsp:include>
+
+
 <div class="x_nav">当前位置 :  <a href="#">首页</a> > <a href="#">二手车评估</a> > 精准估值</div>
 
 <div class="jingzhun">
@@ -271,7 +267,7 @@
 
 <%--</div>--%>
 
-
+<div class="clear"></div>
     <div class="jing color">
         <label>颜色：</label>
         <a href="JavaScript:void(0)" class="hover" data-color="1" title="米色" style="background: beige"></a>
@@ -284,6 +280,19 @@
         <a href="JavaScript:void(0)" class="hover" data-color="8" title="黑色" style="background: black"> </a>
         <a href="JavaScript:void(0)" class="hover" data-color="9" title="银色" style="background: silver"> </a>
         <a href="JavaScript:void(0)" class="hover" data-color="10" title="绿色" style="background: green"> </a>
+    </div>
+
+
+    <div class="jing btn xz">
+        <label>使用性质：</label>
+        <a href="JavaScript:void(0)"  data-xz="1">非营运</a>
+        <a href="JavaScript:void(0)"  data-xz="2">租赁</a>
+    </div>
+
+    <div class="jing btn method">
+        <label>现使用方：</label>
+        <a href="JavaScript:void(0)"  data-method="1">公司</a>
+        <a href="JavaScript:void(0)"  data-method="2">个人</a>
     </div>
 
     <div class="jing btn jqx">
@@ -299,12 +308,6 @@
         <a href="JavaScript:void(0)"  data-nj="2">2个月以上</a>
     </div>
 
-
-    <div class="jing btn xz">
-        <label>使用性质：</label>
-        <a href="JavaScript:void(0)"  data-xz="1">非营运</a>
-        <a href="JavaScript:void(0)"  data-xz="2">租赁</a>
-    </div>
 
 
     <div class="jing btn gh">
@@ -324,17 +327,13 @@
 
     </div>
 
-    <div class="jing btn method">
-        <label>现使用方：</label>
-        <a href="JavaScript:void(0)"  data-method="1">公司</a>
-        <a href="JavaScript:void(0)"  data-method="2">个人</a>
-    </div>
 
     <div class="jing jck btn ck">
         <label>车况：</label>
         <a href="JavaScript:void(0)"  data-ck="1">A(优秀)车况好没有任何故障 </a>
         <a href="JavaScript:void(0)"  data-ck="3">C(一般)有过前后轻碰事故 </a>
         <br>
+          <i style="display: block; height: 15px;"></i>
         <a href="JavaScript:void(0)"  data-ck="2" style="padding-right: 36px;">B(良好)有过少量剐蹭或钣金 </a>
         <a href="JavaScript:void(0)"  data-ck="4">D(较差)有发生过伤及主体框架的碰撞或较大事故 </a>
     </div>
@@ -437,4 +436,6 @@
 
 </script>
 </body>
+
+<jsp:include page="footer.jsp"></jsp:include>
 </html>
