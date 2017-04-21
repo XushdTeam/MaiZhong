@@ -173,4 +173,16 @@ public class IndexController {
        JsonResult result =indexService.getBusinessAddress();
         return result;
     }
+
+    /**
+     * 获取前七天时间
+     * @return
+     */
+    @RequestMapping(value = "/getOneWeek")
+    @ResponseBody
+    public JsonResult getOneWeek(){
+
+        JsonResult result =indexService.getOneWeek();
+        return result;
+    }
 }

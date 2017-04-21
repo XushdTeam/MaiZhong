@@ -38,4 +38,6 @@ public interface ReckonService {
 
 
     JsonResult getBusinessAddress();
+
+    JsonResult getOneWeek();
 }

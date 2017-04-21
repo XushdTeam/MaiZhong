@@ -27,4 +27,6 @@ public interface IndexService {
     GuzhiDTO getYuyueInfo(String phone);
 
     JsonResult getBusinessAddress();
+
+    JsonResult getOneWeek();
 }

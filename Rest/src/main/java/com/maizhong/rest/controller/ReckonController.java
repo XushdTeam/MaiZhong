@@ -1,9 +1,6 @@
 package com.maizhong.rest.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.maizhong.common.result.JsonResult;
-import com.maizhong.rest.service.IndexService;
 import com.maizhong.rest.service.ReckonService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -236,4 +233,16 @@ public class ReckonController {
        JsonResult result= reckonService.getBusinessAddress();
         return result;
     }
+
+    /**
+     * 获取一周的时间
+     * @return
+     */
+    @RequestMapping(value = "/getOneWeek")
+    @ResponseBody
+    public JsonResult getOneWeek(){
+        JsonResult result =reckonService.getOneWeek();
+        return result;
+    }
+
 }

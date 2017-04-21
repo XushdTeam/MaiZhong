@@ -14,10 +14,7 @@ import com.aliyuncs.sms.model.v20160927.SingleSendSmsResponse;
 import com.maizhong.common.dto.*;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
-import com.maizhong.common.utils.EncryptUtils;
-import com.maizhong.common.utils.HttpClientUtil;
-import com.maizhong.common.utils.IDUtils;
-import com.maizhong.common.utils.JsonUtils;
+import com.maizhong.common.utils.*;
 import com.maizhong.dao.JedisClient;
 import com.maizhong.mapper.*;
 import com.maizhong.pojo.*;
@@ -29,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.sql.Time;
 import java.util.*;
 
 /**
@@ -894,16 +892,16 @@ public class ReckonServiceImpl implements ReckonService {
             e.printStackTrace();
         }
         if (StringUtils.isNotBlank(s)) {
-            Map map = JsonUtils.jsonToPojo(s, Map.class);
-            return JsonResult.build(200, "获取成功", map);
+            List list = JsonUtils.jsonToPojo(s, List.class);
+            return JsonResult.build(200, "获取成功", list);
         }
 
 
         List<District> districts = districtMapper.selectByExample(null);
         TbBusinessExample example = new TbBusinessExample();
-        Map<String, List<BusinessDTO>> map = new HashMap<>();
-
+        List<Map> listMap=new ArrayList<>();
         for (District district : districts) {
+            Map<String, List<BusinessDTO>> map = new HashMap<>();
             example.clear();
             TbBusinessExample.Criteria criteria = example.createCriteria();
             criteria.andDistrictIdEqualTo(Long.valueOf(district.getId()));
@@ -921,10 +919,34 @@ public class ReckonServiceImpl implements ReckonService {
                 businessDTO.setLocation(tbBusiness.getLocation());
                 businessDTOList.add(businessDTO);
             }
-            map.put(district.getName(), businessDTOList);
+            map.put(district.getName(),businessDTOList);
+            listMap.add(map);
+           /* map.put(district.getName(), businessDTOList);*/
         }
-        jedisClient.set(BUSINESS_ADDRESS, JsonUtils.objectToJson(map));
-        return JsonResult.build(200, "获取成功", map);
+        jedisClient.set(BUSINESS_ADDRESS, JsonUtils.objectToJson(listMap));
+        return JsonResult.build(200, "获取成功", listMap);
+    }
+
+    @Override
+    public JsonResult getOneWeek() {
+        List<Map> mapList=new ArrayList<>();
+
+        for (int i = 0; i >= -6; i--) {
+            Map<String,String> map=new HashMap<>();
+           String StringDate= TimeUtils.getDateBeforeDay(i);
+            Date date = TimeUtils.getDate2(StringDate);
+            String[] weekDaysName = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            int intWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+            String weekDate= weekDaysName[intWeek];
+          String Mday= StringUtils.substring(StringDate,5);
+            map.put("Ydate",StringDate);
+            map.put("week",weekDate);
+            map.put("Mday",Mday);
+            mapList.add(map);
+        }
+        return JsonResult.build(200, "获取成功", mapList);
     }
 }
 
