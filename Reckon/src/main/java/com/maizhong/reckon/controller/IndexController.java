@@ -200,9 +200,10 @@ public class IndexController {
                                   String wayId,
                                   String linkMan,
                                   String linkPhone,
+                                  String checktime,
                                   String address ){
 
-        JsonResult result = indexService.orderConfim(orderNumber,dealWay,wayId,linkMan,linkPhone,address);
+        JsonResult result = indexService.orderConfim(orderNumber,dealWay,wayId,linkMan,linkPhone,checktime,address);
         return result;
     }
 }
