@@ -1,6 +1,7 @@
 package com.maizhong.reckon.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.maizhong.common.dto.GuzhiDTO;
 import com.maizhong.common.result.JsonResult;
@@ -10,6 +11,9 @@ import com.maizhong.reckon.DTO.IndexDTO;
 import com.maizhong.reckon.service.IndexService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Xushd on 2017/4/18.
@@ -108,11 +112,9 @@ public class IndexServiceImpl implements IndexService {
             String res = HttpClientUtil.doGet(RESTURL+"getCity/");
             return JsonUtils.jsonToPojo(res,JsonResult.class);
 
-
         }catch (Exception e){
 
             e.printStackTrace();
-
         }
 
         return null;
@@ -192,5 +194,19 @@ public class IndexServiceImpl implements IndexService {
         }
         return null;
 
+    }
+
+    @Override
+    public JsonResult getBusinessAddress() {
+        String res = HttpClientUtil.doGet(RESTURL+"getBusinessAddress");
+        JsonResult object = JsonUtils.jsonToPojo(res,JsonResult.class);
+        return  object;
+    }
+
+    @Override
+    public JsonResult getOneWeek() {
+        String res = HttpClientUtil.doGet(RESTURL+"getOneWeek");
+        JsonResult object = JsonUtils.jsonToPojo(res,JsonResult.class);
+        return  object;
     }
 }

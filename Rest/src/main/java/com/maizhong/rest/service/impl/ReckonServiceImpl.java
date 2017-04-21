@@ -14,10 +14,7 @@ import com.aliyuncs.sms.model.v20160927.SingleSendSmsResponse;
 import com.maizhong.common.dto.*;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
-import com.maizhong.common.utils.EncryptUtils;
-import com.maizhong.common.utils.HttpClientUtil;
-import com.maizhong.common.utils.IDUtils;
-import com.maizhong.common.utils.JsonUtils;
+import com.maizhong.common.utils.*;
 import com.maizhong.dao.JedisClient;
 import com.maizhong.mapper.*;
 import com.maizhong.pojo.*;
@@ -29,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.sql.Time;
 import java.util.*;
 
 /**
@@ -74,6 +72,10 @@ public class ReckonServiceImpl implements ReckonService {
     @Autowired
     private LineSiteMapper lineSiteMapper;
 
+    @Autowired
+    private TbBusinessMapper tbBusinessMapper;
+    @Autowired
+    private DistrictMapper districtMapper;
 
     @Value("${CHE_MODEL}")
     private String CHE_MODEL;
@@ -102,6 +104,8 @@ public class ReckonServiceImpl implements ReckonService {
     private String SMS_CODE;
     @Value("${LOGIN_TOKEN}")
     private String LOGIN_TOKEN;
+    @Value("${BUSINESS_ADDRESS}")
+    private String BUSINESS_ADDRESS;
 
     @Override
     public void getBrandData() {
@@ -592,7 +596,8 @@ public class ReckonServiceImpl implements ReckonService {
             guzhiDTO.setGhtime("一手车");
         } else if (StringUtils.equals(ghtime, "2")) {
             guzhiDTO.setGhtime("六个月以内");
-        }{
+        }
+        {
             guzhiDTO.setGhtime("六个月以上");
         }
         //性质
@@ -736,32 +741,33 @@ public class ReckonServiceImpl implements ReckonService {
         try {
 
 
-        LineExample example = new LineExample();
-        List<Line> lines = lineMapper.selectByExample(example);
+            LineExample example = new LineExample();
+            List<Line> lines = lineMapper.selectByExample(example);
 
-        for (Line line : lines) {
+            for (Line line : lines) {
 
-            String res = HttpClientUtil.doGet("http://www.aihuishou.com/util/GetMetroSiteByLine?lineId="+line.getId());
-            System.out.println(res);
-            JSONArray jsonArray = JSON.parseArray(res);
+                String res = HttpClientUtil.doGet("http://www.aihuishou.com/util/GetMetroSiteByLine?lineId=" + line.getId());
+                System.out.println(res);
+                JSONArray jsonArray = JSON.parseArray(res);
 
-            for (Object o : jsonArray) {
-                JSONObject obj = (JSONObject) o;
-                LineSite site = new LineSite();
-                site.setLineId(line.getId());
-                site.setName(obj.getString("name"));
-                site.setId(obj.getLong("id"));
-                lineSiteMapper.insert(site);
+                for (Object o : jsonArray) {
+                    JSONObject obj = (JSONObject) o;
+                    LineSite site = new LineSite();
+                    site.setLineId(line.getId());
+                    site.setName(obj.getString("name"));
+                    site.setId(obj.getLong("id"));
+                    lineSiteMapper.insert(site);
+
+                }
+                Thread.sleep(10);
+
 
             }
-            Thread.sleep(10);
-
-
-        }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     /**
      * 获取验证码
@@ -870,5 +876,77 @@ public class ReckonServiceImpl implements ReckonService {
         }
     }
 
+
+    /**
+     * 获取4S店地址
+     *
+     * @return
+     */
+    @Override
+    public JsonResult getBusinessAddress() {
+
+        String s = null;
+        try {
+            s = jedisClient.get(BUSINESS_ADDRESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (StringUtils.isNotBlank(s)) {
+            List list = JsonUtils.jsonToPojo(s, List.class);
+            return JsonResult.build(200, "获取成功", list);
+        }
+
+
+        List<District> districts = districtMapper.selectByExample(null);
+        TbBusinessExample example = new TbBusinessExample();
+        List<Map> listMap=new ArrayList<>();
+        for (District district : districts) {
+            Map<String, List<BusinessDTO>> map = new HashMap<>();
+            example.clear();
+            TbBusinessExample.Criteria criteria = example.createCriteria();
+            criteria.andDistrictIdEqualTo(Long.valueOf(district.getId()));
+            List<TbBusiness> tbBusinesses = tbBusinessMapper.selectByExample(example);
+            List<BusinessDTO> businessDTOList = new ArrayList<>();
+            if (tbBusinesses == null || tbBusinesses.size() == 0) {
+                continue;
+            }
+            for (TbBusiness tbBusiness : tbBusinesses) {
+                BusinessDTO businessDTO = new BusinessDTO();
+                businessDTO.setAddress(tbBusiness.getAddress());
+                businessDTO.setId(tbBusiness.getId());
+                businessDTO.setBusinessName(tbBusiness.getBusinessName());
+                businessDTO.setDistrictId(tbBusiness.getDistrictId());
+                businessDTO.setLocation(tbBusiness.getLocation());
+                businessDTOList.add(businessDTO);
+            }
+            map.put(district.getName(),businessDTOList);
+            listMap.add(map);
+           /* map.put(district.getName(), businessDTOList);*/
+        }
+        jedisClient.set(BUSINESS_ADDRESS, JsonUtils.objectToJson(listMap));
+        return JsonResult.build(200, "获取成功", listMap);
+    }
+
+    @Override
+    public JsonResult getOneWeek() {
+        List<Map> mapList=new ArrayList<>();
+
+        for (int i = 0; i >= -6; i--) {
+            Map<String,String> map=new HashMap<>();
+           String StringDate= TimeUtils.getDateBeforeDay(i);
+            Date date = TimeUtils.getDate2(StringDate);
+            String[] weekDaysName = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            int intWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+            String weekDate= weekDaysName[intWeek];
+          String Mday= StringUtils.substring(StringDate,5);
+            map.put("Ydate",StringDate);
+            map.put("week",weekDate);
+            map.put("Mday",Mday);
+            mapList.add(map);
+        }
+        return JsonResult.build(200, "获取成功", mapList);
+    }
 }
 

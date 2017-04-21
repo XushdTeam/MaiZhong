@@ -160,4 +160,29 @@ public class IndexController {
         model.addAttribute("result",guzhiDTO);
         return "yuyue";
     }
+
+
+    /**
+     * 获取4S店地址信息
+     * @return
+     */
+    @RequestMapping(value = "/getBusinessAddress")
+    @ResponseBody
+    public JsonResult getBusinessAddress(){
+
+       JsonResult result =indexService.getBusinessAddress();
+        return result;
+    }
+
+    /**
+     * 获取前七天时间
+     * @return
+     */
+    @RequestMapping(value = "/getOneWeek")
+    @ResponseBody
+    public JsonResult getOneWeek(){
+
+        JsonResult result =indexService.getOneWeek();
+        return result;
+    }
 }

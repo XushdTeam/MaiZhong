@@ -17,6 +17,7 @@ public class TimeUtils {
     private static final String format_default = "yyyy-MM-dd HH:mm:ss";
     private static final String format_default_s = "yyyy-MM-dd";
     private static final DateTimeFormatter format = DateTimeFormat.forPattern(format_default);
+    private static final DateTimeFormatter format2 = DateTimeFormat.forPattern(format_default_s);
     /**
      * 获取当期时间 "yyyy-MM-dd HH:mm:ss"
      * @return
@@ -42,6 +43,11 @@ public class TimeUtils {
      */
     public static Date getDate(String time){
         DateTime dateTime = DateTime.parse(time,format);
+        return dateTime.toDate();
+    }
+
+    public static Date getDate2(String time){
+        DateTime dateTime = DateTime.parse(time,format2);
         return dateTime.toDate();
     }
 
