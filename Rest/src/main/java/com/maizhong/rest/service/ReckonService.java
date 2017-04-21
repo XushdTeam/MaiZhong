@@ -40,4 +40,9 @@ public interface ReckonService {
     JsonResult getBusinessAddress();
 
     JsonResult getOneWeek();
+
+
+    JsonResult getLines();
+
+    JsonResult getSiteByLineId(String lineId);
 }

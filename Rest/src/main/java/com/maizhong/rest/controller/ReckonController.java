@@ -244,5 +244,27 @@ public class ReckonController {
         JsonResult result =reckonService.getOneWeek();
         return result;
     }
+    /**
+     * 获取地铁线路
+     * @return
+     */
+    @RequestMapping(value = "/getLines")
+    @ResponseBody
+    public JsonResult getLines(){
+        JsonResult result = reckonService.getLines();
+        return result;
+    }
+
+    /**
+     * 通过线路ID 获取地铁站信息
+     * @param lineId
+     * @return
+     */
+    @RequestMapping(value = "/getSite/{lineId}")
+    @ResponseBody
+    public JsonResult getSite(@PathVariable String lineId){
+        JsonResult result = reckonService.getSiteByLineId(lineId);
+        return result;
+    }
 
 }

@@ -768,6 +768,69 @@ public class ReckonServiceImpl implements ReckonService {
         }
     }
 
+    /**
+     * 获取地铁线路
+     * @return
+     */
+    @Override
+    public JsonResult getLines() {
+
+        try {
+
+            String linesRedis = jedisClient.get("LINES");
+            if(StringUtils.isBlank(linesRedis)){
+                LineExample example = new LineExample();
+                List<Line> lineList = lineMapper.selectByExample(example);
+                jedisClient.set("LINES",JsonUtils.objectToJson(lineList));
+                return JsonResult.OK(lineList);
+
+            }else{
+
+                return JsonResult.OK(JsonUtils.jsonToList(linesRedis,Line.class));
+            }
+
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+        return null;
+    }
+
+    /**
+     * 通过线路ID获取地铁信息
+     * @param lineId
+     * @return
+     */
+    @Override
+    public JsonResult getSiteByLineId(String lineId) {
+
+        try {
+
+            String siteRedis = jedisClient.hget("LINE_SITE",lineId);
+            if(StringUtils.isBlank(siteRedis)){
+                LineSiteExample example = new LineSiteExample();
+                LineSiteExample.Criteria criteria = example.createCriteria();
+                criteria.andLineIdEqualTo(Long.valueOf(lineId));
+                List<LineSite> lineSites = lineSiteMapper.selectByExample(example);
+                jedisClient.hset("LINE_SITE",lineId,JsonUtils.objectToJson(lineSites));
+                return JsonResult.OK(lineSites);
+
+            }else{
+
+                return JsonResult.OK(JsonUtils.jsonToList(siteRedis,LineSite.class));
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return null;
+    }
 
     /**
      * 获取验证码

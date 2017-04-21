@@ -1,0 +1,278 @@
+.metro-station-wrap.show {
+    display: block;
+}
+
+.metro-station-wrap {
+    display: none;
+    width: 600px;
+    height: 160px;
+    margin-top: 160px;
+    border-top: 2px solid #666;
+    margin-left: 70px;
+}
+.yuyue .left .hid {
+    /* width: 400px; */
+    background: #fff;
+    /* height: 400px; */
+    overflow: hidden;
+    margin-left: 85px;
+    position: absolute;
+    top: 80px;
+    display: none;
+    z-index: 999;
+}
+.yuyue .left .hid1 {
+    /* width: 400px; */
+    background: #fff;
+    /* height: 400px; */
+    overflow: hidden;
+    margin-left: 85px;
+    position: absolute;
+    top: 80px;
+    display: none;
+    z-index: 999;
+}
+.metro-station-wrap .metro-station-left, .pickup-type-content .pickup-tab-content .pickup-metro .metro-station-wrap .metro-station-right {
+    overflow: hidden;
+    float: left;
+    width: 10px;
+    height: 20px;
+    margin-top: 50px;
+    cursor: pointer;
+}
+ .metro-station-wrap .metro-station-left.disabled:before {
+    border-right-color: silver;
+    cursor: not-allowed;
+}
+
+
+.metro-station-wrap .metro-station-left:before {
+    border-right-color: #3782ff;
+    margin-left: -10px;
+}
+
+.metro-station-wrap .metro-station-left:before, .metro-station-wrap .metro-station-right:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+}
+.pickup-type-content .pickup-tab-content .pickup-metro .metro-station-wrap .metro-station-content {
+    overflow: hidden;
+    float: left;
+    width: 530px;
+    min-height: 100px;
+    margin: -11px 10px 0;
+}
+.metro-station-wrap ul {
+    float: left;
+    width: 1000%;
+}
+.metro-station-wrap li {
+    position: relative;
+    float: left;
+    width: 27px;
+    padding: 30px 4px 0;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+}
+
+ul li {
+    list-style-type: none;
+    list-style-position: outside;
+}
+.metro-station-wrap .metro-station-right {
+    overflow: hidden;
+    float: left;
+    width: 10px;
+    height: 20px;
+    margin-top: 50px;
+    cursor: pointer;
+}
+.metro-station-wrap .metro-station-right:before {
+    border-left-color: #3782ff;
+}
+
+ .metro-station-wrap .metro-station-left:before,  .metro-station-wrap .metro-station-right:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+}
+.clearfix:after {
+    display: block;
+    clear: both;
+    width: 0;
+    height: 0;
+    visibility: hidden;
+    overflow: hidden;
+    content: "";
+}
+ .metro-station-wrap li:before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    background: url(/resources/img/apply_payment_icons.png) no-repeat;
+    background-position: -89px -204px;
+}
+.metro-station-wrap.show {
+    display: block;
+}
+
+
+.metro-station-wrap .metro-station-content {
+    overflow: hidden;
+    float: left;
+    width: 530px;
+    min-height: 100px;
+    margin: -11px 10px 0;
+
+    height: 200px;
+}
+ .metro-station-wrap li.active:before {
+    border: none;
+    background: url(/resources/img/apply_payment_icons.png) -121px -203px no-repeat;
+}
+ .queding{
+     position: relative;
+     top: 160px;
+ }
+.queding{
+    position: relative;
+    top: 160px;
+
+}
+.queding a{
+    color: #FFF;
+    background: #f05b48;
+    width: 163px;
+    height: 23px;
+    padding: 8px;
+    border-radius: 5px;
+}
+/*.hid1 span{*/
+    /*display: block;*/
+/*}*/
+.yuyue .left .hid1 span {
+    display: block;
+    background: none;
+    padding: 5px 5px;
+    float: left;
+    width: 86px;
+    height: 62px;
+    line-height: 30px;
+    border: 1px solid #ccc;
+    margin: 10px !important;
+    text-align: center;
+    cursor: pointer;
+}
+.yuyue .left .d_1 .one {
+
+    padding-left: 25px;
+}
+
+.hid2 {
+    /* width: 400px; */
+    background: #fff;
+    /* height: 400px; */
+    overflow: hidden;
+    margin-left: 25px;
+    position: absolute;
+    top: 81px;
+    display: none;
+    z-index: 999;
+    display: none;
+}
+.hid2 span {
+    display: block;
+    background: none;
+    padding: 5px 5px;
+    float: left;
+    width: 86px;
+    height: 62px;
+    line-height: 30px;
+    border: 1px solid #ccc;
+    margin: 10px !important;
+    text-align: center;
+    cursor: pointer;
+    background: #FFF!important;
+}
+.x_left li{
+    cursor: pointer;
+}
+.baidumap{
+    width: 565px;
+    height: 350px;
+    border: 1px solid rgb(204, 204, 204);
+    font-size: 12px;
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+    background-color: rgb(243, 241, 236);
+    color: rgb(0, 0, 0);
+    text-align: left;
+    top: 25px;
+}
+.yuyue .left .x_right .over {
+    /* max-height: 250px; */
+    overflow: auto;
+    height: 250px;
+    border: 1px solid #CCC;
+}
+.yuyue .left .x_right {
+    float: right;
+    height: 231px;
+    width: 573px;
+}
+.outlets-list {
+    float: left;
+    border: 1px solid #f2f2f2;
+    width: 380px;
+    height: 325px;
+    overflow: auto;
+    box-sizing: border-box;
+    border-top-color: #fff;
+}
+.outlets-list li.checked {
+    border-color: #3782ff;
+    background: #eff5ff;
+}
+.outlets-list li {
+    position: relative;
+    padding: 7px 30px 12px 47px;
+    border: 1px solid transparent;
+    border-bottom-color: #f2f2f2;
+    cursor: pointer;
+}
+.outlets-list li.checked:before {
+    border: none;
+    background: url(/resources/img/apply_payment_icons.png) -13px -97px no-repeat;
+}
+
+.outlets-list li:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 15px;
+    left: 18px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #e6e6e6;
+    border-radius: 2px;
+}
+.outlets-list li .outlets-name {
+    line-height: 20px;
+    font-size: 14px;
+    color: #333;
+}
+.outlets-list li .outlets-addr {
+    line-height: 20px;
+    font-size: 14px;
+    color: #666;
+}
