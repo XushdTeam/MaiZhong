@@ -29,15 +29,17 @@
         <div class="t_cen">
             <a href="#"><img src="../resources/img/logo.png"></a>
             <span class="tell">010-3993-394</span>
-            <span class="t_right"><a href="/sale" class="one">我要卖车</a><a href="/login" class="one">登录</a><a href="" class="two">APP下载</a></span>
+            <span class="t_right">
+                <a href="/sale" class="one">我要卖车</a>
+                <a href="/login" class="one">登录</a>
+                <a href="" class="two" >136****3782</a>
+                <a href="javascript:vold(0)" class="two">APP下载</a></span>
         </div>
     </div><!--top end-->
 
 
-
     <div class="guzs">
-    <div class="pinggu">
-
+       <div class="pinggu">
 
         <ul class="pt16">
             <li class="mb13" style="z-index:100">
