@@ -32,4 +32,8 @@ public interface IndexService {
     List<Line> getLineList();
 
     JsonResult getSiteByLineId(String lineId);
+
+    JsonResult getBusinessAddress();
+
+    JsonResult getOneWeek();
 }

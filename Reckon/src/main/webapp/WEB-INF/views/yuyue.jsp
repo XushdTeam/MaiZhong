@@ -54,11 +54,10 @@
             <div class="x_left">
                 <ul>
                     <li>全部门店</li>
-                    <li>丰台区</li>
-                    <li>大兴区</li>
-                    <li>朝阳区</li>
-                    <li>昌平区</li>
-                    <li>房山区</li>
+                    <c:forEach items="${shop}" var="item">
+                        <li>${item.name}</li>
+                    </c:forEach>
+
                 </ul>
             </div>
             <div class="x_right">

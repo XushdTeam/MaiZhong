@@ -229,4 +229,18 @@ public class IndexServiceImpl implements IndexService {
 
         return null;
     }
+
+    @Override
+    public JsonResult getBusinessAddress() {
+        String res = HttpClientUtil.doGet(RESTURL+"getBusinessAddress");
+        JsonResult object = JsonUtils.jsonToPojo(res,JsonResult.class);
+        return  object;
+    }
+
+    @Override
+    public JsonResult getOneWeek() {
+        String res = HttpClientUtil.doGet(RESTURL+"getOneWeek");
+        JsonResult object = JsonUtils.jsonToPojo(res,JsonResult.class);
+        return  object;
+    }
 }

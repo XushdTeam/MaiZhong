@@ -162,6 +162,11 @@ public class IndexController {
 
         GuzhiDTO guzhiDTO = indexService.getYuyueInfo(phone);
         List<Line> lineList = indexService.getLineList();
+        JsonResult result =indexService.getBusinessAddress();
+        JsonResult result1 =indexService.getOneWeek();
+
+        model.addAttribute("shop",result.getData());
+        model.addAttribute("week",result1.getData());
         model.addAttribute("result",guzhiDTO);
         model.addAttribute("lines",lineList);
         return "yuyue";
