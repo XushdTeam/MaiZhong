@@ -36,4 +36,6 @@ public interface IndexService {
     JsonResult getBusinessAddress();
 
     JsonResult getOneWeek();
+
+    JsonResult orderConfim(String orderNumber, String dealWay, String wayId, String linkMan, String linkPhone, String address);
 }

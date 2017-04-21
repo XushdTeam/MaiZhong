@@ -13,7 +13,9 @@ import com.maizhong.reckon.service.IndexService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Xushd on 2017/4/18.
@@ -242,5 +244,35 @@ public class IndexServiceImpl implements IndexService {
         String res = HttpClientUtil.doGet(RESTURL+"getOneWeek");
         JsonResult object = JsonUtils.jsonToPojo(res,JsonResult.class);
         return  object;
+    }
+
+    /**
+     * 订单确认
+     * @param orderNumber
+     * @param dealWay
+     * @param wayId
+     * @param linkMan
+     * @param linkPhone
+     * @param address
+     * @return
+     */
+    @Override
+    public JsonResult orderConfim(String orderNumber, String dealWay, String wayId, String linkMan, String linkPhone, String address) {
+
+        try {
+            Map<String,String> param = new HashMap<>();
+            param.put("orderNumber",orderNumber);
+            param.put("dealWay",dealWay);
+            param.put("wayId",wayId);
+            param.put("linkMan",linkMan);
+            param.put("linkPhone",linkPhone);
+            param.put("address",address);
+
+            String res = HttpClientUtil.doPost(RESTURL+"updateOrders",param);
+            return JsonResult.OK(JsonUtils.jsonToPojo(res,JsonResult.class));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }

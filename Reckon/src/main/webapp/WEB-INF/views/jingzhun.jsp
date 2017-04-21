@@ -321,7 +321,7 @@
 
     <div class="jing btn ghtime">
         <label>最后一次过户时间：</label>
-        <a href="JavaScript:void(0)"  data-ghtime="1">一手车</a>
+        <a href="JavaScript:void(0)"  data-ghtime="1">无过户</a>
         <a href="JavaScript:void(0)"  data-ghtime="2">6个月以内</a>
         <a href="JavaScript:void(0)"  data-ghtime="3">6个月以上</a>
 

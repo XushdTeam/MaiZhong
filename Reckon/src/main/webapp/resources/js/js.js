@@ -18,6 +18,7 @@ $(function () {
     $(".dl2").click(function () {
         $(".xk2").show();
         $(".xk1").hide()
+
     })
 })
 
@@ -29,7 +30,19 @@ $(function () {
     $(".yuyue .left .qu span").eq(0).addClass("hovers")
     $(".yuyue .left .qu span ").click(function () {
         var a=$(this).index();
-        $(".yuyue .left .d_1").eq(a).show().siblings(".yuyue .left .d_1").hide();
+        if(a==0){
+            $(".yuyue .left .d_1").eq(a).show().siblings(".yuyue .left .d_1").hide();
+            if($("#lineInput").html().indexOf('地铁线路')){
+                $(".metro-station-wrap").css("visibility","visible");
+            }
+
+        }else{
+            $(".yuyue .left .d_1").eq(a).show().siblings(".yuyue .left .d_1").hide();
+            $(".metro-station-wrap").css("visibility","hidden");
+        }
+
+
+
         $(this).addClass("hovers").siblings(".yuyue .left .qu span").removeClass("hovers");
     })
 })
