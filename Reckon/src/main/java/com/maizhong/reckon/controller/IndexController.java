@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.parsing.SourceExtractor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -183,6 +180,29 @@ public class IndexController {
 
         JsonResult result = indexService.getSiteByLineId(lineId);
 
+        return result;
+    }
+
+    /**
+     * 订单确认
+     * @param orderNumber 订单编号
+     * @param dealWay 交易方式 1 4S店 2 地铁站 3 上门
+     * @param wayId  4S店ID 或者 地铁站ID
+     * @param linkMan 联系人
+     * @param linkPhone 联系人手机号
+     * @param address 上门地址
+     * @return
+     */
+    @RequestMapping(value = "/OrderConfim",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult orderConfim(String orderNumber,
+                                  String dealWay,
+                                  String wayId,
+                                  String linkMan,
+                                  String linkPhone,
+                                  String address ){
+
+        JsonResult result = indexService.orderConfim(orderNumber,dealWay,wayId,linkMan,linkPhone,address);
         return result;
     }
 }

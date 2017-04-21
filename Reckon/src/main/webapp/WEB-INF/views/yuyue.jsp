@@ -21,6 +21,8 @@
 
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
     <script src="/resources/js/js.js" type="text/javascript"></script>
+    <script src="https://cdn.bootcss.com/layer/3.0.1/layer.js"></script>
+    <script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=N8kgZsufZYtKgEXbtUoTHrKlaqgAxTFY"></script>
 </head>
 <body>
@@ -79,7 +81,7 @@
             <h1><span>2</span>验车方式</h1>
             <div class="quh">
                 <div class="qu"> <span>地铁附近</span> <span>上门验车</span></div>
-                <div class="d_1">
+                <div class="d_1" >
                     <div class="one one1">
                         <p>地铁线路</p>
                         <div id="lineInput">地铁线路<img src="../resources/img/u.jpg"></div>
@@ -118,10 +120,10 @@
 
                 </div>
 
-                <div class="d_1">
+                <div class="d_1" style="display: none;">
                     <div class="one one3">
                         <p>详细地址</p>
-                        <input type="text" name="1" placeholder=" ">
+                        <input type="text" name="1" placeholder="请输入您的小区、大厦或街道名称" id="address">
                     </div>
                     <div class="one">
                         <p>交易时间</p>
@@ -140,16 +142,27 @@
         <div class="d_2">
             <div class="one one1">
                 <p>输入姓名</p>
-                <div><input type="text" name="1"> </div>
+                <div>
+                    <input type="text" name="name" id="userName" style="width: 100px;">
+                    <label class="demo--label">
+                        <input class="demo--radio" type="radio" value="先生" name="demo-radio" checked>
+                        <span class="demo--radioInput"></span>先生
+                    </label>
+                    <label class="demo--label">
+                        <input class="demo--radio" type="radio" value="女士" name="demo-radio">
+                        <span class="demo--radioInput"></span>女士
+                    </label>
+                    <%--<input type="radio" value="先生" name="r" style="width: 20px" checked>先生--%>
+                    <%--<input type="radio" value="女士" name="r" style="width: 20px">女士--%>
+                </div>
             </div>
             <div class="one">
                 <p>输入手机号</p>
-                <div><input type="tel" name="1"></div>
+                <div><input type="text" maxlength="11" name="phone" id="phone"></div>
                 <p>用来接受订单信息</p>
             </div>
         </div><!--d_2 end-->
         <div class="clear"></div>
-        <div class="anniu">确认预约</div>
     </div><!--left end-->
     <div class="right">
         <dl>
@@ -173,7 +186,8 @@
         </div>
     </div><!--right end -->
 </div>
-
+<input type="hidden" id="orderNum" value="${result.}">
+<div class="anniu" onclick="submit()">确认下单</div>
 <jsp:include page="footer.jsp"></jsp:include>
 </body>
 <script src="/resources/js/doT.min.js" type="text/javascript"></script>
@@ -207,7 +221,7 @@
                 if(d.status == 200){
                     $("#lineSite").html('');
                     $("#lineSite").html(evalText(d.data));
-                    $(".metro-station-wrap").show();
+                    $(".metro-station-wrap").css("visibility","visible");
                     var count = d.data.length;
                     var w = 35*count;
                     if(w>550){
@@ -234,6 +248,7 @@
             $(this).html('预约时间<img src="../resources/img/d.jpg">');
             $(".hid1").show();
             $(".hid").hide();
+
         })
         $("#dateInput1").click(function () {
             $(this).html('交易时间<img src="../resources/img/d.jpg">');
@@ -258,6 +273,8 @@
                 map.centerAndZoom(new BMap.Point(location.split(',')[0],location.split(',')[1]),18);
             }
         });
+
+        $("#phone").val($.cookie('phone'));
     });
     $(document).ready(function(){
 
@@ -289,6 +306,125 @@
         })
     })
 
+    var submit = function () {
+        //判断方式
+        if($('.dl1').hasClass('hover')){
+            //门店
+            var els = document.querySelectorAll(".scrollbar li");
+            var shopId = "";
+            $.each(els,function (d,i) {
+                if($(i).hasClass('checked')){
+                    shopId = $(i).data('shop-id');
+                    return false;
+                }
+            })
+            if(!shopId){
+                layer.msg('请选择4S店');
+                return false;
+            }
+            var userName = $("#userName").val();
+            if(!userName){
+                layer.msg('请输入您的姓氏');
+                return false;
+            }
+
+            var phone = $("#phone").val();
+            if(!(/^1[34578]\d{9}$/.test(phone))){
+                layer.msg('手机号格式不正确');
+                return false;
+            }
+            var name_right = $('.demo--label input:radio:checked').val();
+
+            //TODO
+
+            var param={};
+
+            $.post("/OrderConfim",param,function(res){
+
+            });
+
+        }else{
+           //判断选择是地铁还是上门
+            if($('.qu span').eq(0).hasClass('hovers')){
+                //地铁
+                var els = document.querySelectorAll("#ul_site li");
+                var siteId = "";
+                $.each(els,function (d,i) {
+                    if($(i).hasClass('active')){
+                        siteId = $(i).data('metro-station-id');
+                        return false;
+                    }
+                })
+                if(!siteId){
+                    layer.msg('请选择地铁站');
+                    return false;
+                }
+                els = document.querySelectorAll(".hid1 span");
+                var date = "";
+                $.each(els,function (d,i) {
+                    if($(i).hasClass('checked')){
+                        date = $(i).data('date');
+                        return false;
+                    }
+                })
+                if(!date){
+                    layer.msg('请选择预约时间');
+                    return false;
+                }
+                var userName = $("#userName").val();
+                if(!userName){
+                    layer.msg('请输入您的姓氏');
+                    return false;
+                }
+
+                var phone = $("#phone").val();
+                if(!(/^1[34578]\d{9}$/.test(phone))){
+                    layer.msg('手机号格式不正确');
+                    return false;
+                }
+                var name_right = $('.demo--label input:radio:checked').val();
+
+                //TODO
+
+
+            }else{
+                //上门
+                var address = $("#address").val();
+                if(!address){
+                    layer.msg('请输入详细地址');
+                    return false;
+                }
+                var els = document.querySelectorAll(".hid2 span");
+                var date = "";
+                $.each(els,function (d,i) {
+                    if($(i).hasClass('checked')){
+                        date = $(i).data('date');
+                        return false;
+                    }
+                })
+                if(!date){
+                    layer.msg('请选择预约时间');
+                    return false;
+                }
+                var userName = $("#userName").val();
+                if(!userName){
+                    layer.msg('请输入您的姓氏');
+                    return false;
+                }
+
+                var phone = $("#phone").val();
+                if(!(/^1[34578]\d{9}$/.test(phone))){
+                    layer.msg('手机号格式不正确');
+                    return false;
+                }
+                var name_right = $('.demo--label input:radio:checked').val();
+
+                //TODO
+
+            }
+        }
+
+    }
 
 </script>
 </html>
