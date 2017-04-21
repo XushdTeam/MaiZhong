@@ -47,9 +47,9 @@
             <h1><span>2</span>选择门店</h1>
             <div class="x_left">
                 <ul>
-                    <li>全部门店</li>
+                    <li class="active" data-id="0">全部门店</li>
                     <c:forEach items="${shop}" var="item">
-                        <li>${item.name}</li>
+                        <li data-id="${item.id}">${item.district}</li>
                     </c:forEach>
 
                 </ul>
@@ -57,20 +57,18 @@
             <div class="x_right">
                 <div class="over">
                     <ul id="outlets-list" class="outlets-list scrollbar">
-                        <li data-shop-id="28"
-                            data-longitude="116.42575000"
-                            data-latitude="39.90450000"
-                            style="display: list-item;">
-                            <p class="outlets-name">北京国瑞店</p>
-                            <p class="outlets-addr">北京市东城区崇外大街18号国瑞购物中心B2层</p>
-                        </li>
-                        <li data-shop-id="28"
-                            data-longitude="116.42575000"
-                            data-latitude="39.90450000"
-                            style="display: list-item;">
-                            <p class="outlets-name">北京国瑞店</p>
-                            <p class="outlets-addr">北京市东城区崇外大街18号国瑞购物中心B2层</p>
-                        </li>
+                        <c:forEach items="${shop}" var="item">
+                            <c:forEach items="${item.shop}" var="j">
+                                <li data-shop-id="${j.id}"
+                                    data-location="${j.location}"
+                                    data-address="${j.address}"
+                                    data-title="${j.name}"
+                                    style="display: list-item;" class="parent${j.districtId}">
+                                    <p class="outlets-name">${j.name}</p>
+                                    <p class="outlets-addr">${j.address}</p>
+                                </li>
+                            </c:forEach>
+                        </c:forEach>
                     </ul>
                 </div>
             </div><!--xiao_right-->
@@ -97,13 +95,11 @@
                         </c:forEach>
                     </div>
                     <div class="hid1">
-                        <span data-text="04-22 星期六" data-date="2017-04-22">04-22 <br> 星期六</span>
-                        <span data-text="04-23 星期日" data-date="2017-04-23">04-23 <br> 星期日</span>
-                        <span data-text="04-24 星期一" data-date="2017-04-24">04-24 <br> 星期一</span>
-                        <span data-text="04-25 星期二" data-date="2017-04-25">04-25 <br> 星期二</span>
-                        <span data-text="04-26 星期三" data-date="2017-04-26">04-26 <br> 星期三</span>
-                        <span data-text="04-27 星期四" data-date="2017-04-27">04-27 <br> 星期四</span>
-                        <span data-text="04-28 星期五" data-date="2017-04-28">04-28 <br> 星期五</span>
+                        <c:forEach items="${week}" var="item">
+                            <span data-text="${item.Mday}${item.week}" data-date="${item.Ydate}">${item.Mday} <br> ${item.week}</span>
+                        </c:forEach>
+
+
                     </div>
                 </div>
 
@@ -132,13 +128,9 @@
                         <div id="dateInput1">预约时间<img src="../resources/img/u.jpg"></div>
                     </div>
                     <div class="hid2">
-                        <span data-text="04-22 星期六" data-date="2017-04-22">04-22 <br> 星期六</span>
-                        <span data-text="04-23 星期日" data-date="2017-04-23">04-23 <br> 星期日</span>
-                        <span data-text="04-24 星期一" data-date="2017-04-24">04-24 <br> 星期一</span>
-                        <span data-text="04-25 星期二" data-date="2017-04-25">04-25 <br> 星期二</span>
-                        <span data-text="04-26 星期三" data-date="2017-04-26">04-26 <br> 星期三</span>
-                        <span data-text="04-27 星期四" data-date="2017-04-27">04-27 <br> 星期四</span>
-                        <span data-text="04-28 星期五" data-date="2017-04-28">04-28 <br> 星期五</span>
+                        <c:forEach items="${week}" var="item">
+                            <span data-text="${item.Mday}${item.week}" data-date="${item.Ydate}">${item.Mday} <br> ${item.week}</span>
+                        </c:forEach>
                     </div>
                 </div>
             </div>
@@ -168,17 +160,16 @@
         <div class="clear"></div>
         <div>
             <p> 上牌时间: ${result.regdate}</p>
-            <p> 屏幕显示: ${result.city}</p>
-            <p> 触摸功能: ${result.mail}</p>
-            <p> 拍摄功能: ${result.ck}</p>
-            <p> 拆机维修史: 无拆机无维修</p>
-            <p> 边框背板: 外壳完好（边框外壳完好无划痕磨损、无磕碰）</p>
-            <p> 通话功能: 通话功能正常</p>
-            <p> 开机情况: 开机正常</p>
-            <p> 无线功能: 无线正常</p>
-            <p> 屏幕外观: 屏幕完好（保护很好，屏幕无可见划痕）</p>
-            <p> 机身是否弯曲: 机身无弯曲</p>
-            <p> 受潮状况: 机身无进水</p>
+            <p> 所属地区: ${result.city}</p>
+            <p> 行驶里程: ${result.mail}万公里</p>
+            <p> 主体颜色: ${result.color}</p>
+            <p> 使用性质: ${result.xz}</p>
+            <p> 现使用方: ${result.method}</p>
+            <p> 交强险有效期: ${result.jqx}</p>
+            <p> 年检有效期: ${result.nj}</p>
+            <p> 过户次数: ${result.gh}</p>
+            <p> 最后一次过户时间: ${result.ghtime}</p>
+            <p> 车况: ${result.ck}</p>
         </div>
     </div><!--right end -->
 </div>
@@ -251,29 +242,53 @@
         })
         $(".x_left li").click(function(){
             $(this).addClass('active').siblings().removeClass("active");
-        })
-        initMap();
-    });
-    var initMap = function(){
-        // 百度地图API功能
-        var map = new BMap.Map("map");
-        var point = new BMap.Point(116.417854,39.921988);
-        var marker = new BMap.Marker(point);  // 创建标注
-        map.addOverlay(marker);              // 将标注添加到地图中
-        map.centerAndZoom(point, 15);
-        map.enableScrollWheelZoom(true);
-        var opts = {
-            width : 200,     // 信息窗口宽度
-            height: 100,     // 信息窗口高度
-            title : "海底捞王府井店" , // 信息窗口标题
-            enableMessage:true,//设置允许信息窗发送短息
-            message:"亲耐滴，晚上一起吃个饭吧？戳下面的链接看下地址喔~"
-        }
-        var infoWindow = new BMap.InfoWindow("地址：北京市东城区王府井大街88号乐天银泰百货八层", opts);  // 创建信息窗口对象
-        marker.addEventListener("click", function(){
-            map.openInfoWindow(infoWindow,point); //开启信息窗口
+            var id = $(this).data('id');
+            if(id==0){
+                $(".scrollbar li").show();
+            }else{
+                $(".scrollbar li").hide();
+                $(".parent"+id).show();
+            }
         });
-    }
+        $(".scrollbar li").click(function () {
+            var location = $(this).data('location');
+            $(this).addClass('checked').siblings().removeClass("checked");
+
+            if(map){
+                map.centerAndZoom(new BMap.Point(location.split(',')[0],location.split(',')[1]),18);
+            }
+        });
+    });
+    $(document).ready(function(){
+
+        // 百度地图API功能
+        window.map = new BMap.Map("map");
+        map.centerAndZoom(new BMap.Point(116.404, 39.915), 10);
+        map.enableScrollWheelZoom(true);
+        var els = document.querySelectorAll(".scrollbar li");
+        $.each(els,function(d,i){
+            var location = $(i).data('location');
+            var title = $(i).data('title');
+            var address = $(i).data('address');
+            var opts = {
+                width : 250,     // 信息窗口宽度
+                height: 80,     // 信息窗口高度
+                title : title , // 信息窗口标题
+                enableMessage:true//设置允许信息窗发送短息
+            };
+
+            var point = new BMap.Point(location.split(',')[0],location.split(',')[1]);
+            var marker = new BMap.Marker(point);  // 创建标注
+
+            map.addOverlay(marker);
+            // 将标注添加到地图中
+            var infoWindow = new BMap.InfoWindow("地址："+address, opts);  // 创建信息窗口对象
+            marker.addEventListener("click", function(){
+                map.openInfoWindow(infoWindow,point); //开启信息窗口
+            });
+        })
+    })
+
 
 </script>
 </html>
