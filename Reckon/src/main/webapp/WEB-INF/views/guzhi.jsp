@@ -22,13 +22,8 @@
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
 </head>
 <body>
-<div class="top e_top">
-    <div class="t_cen">
-        <a href="#"><img src="../resources/img/logo.png"></a>
-        <span class="tell">010-3993-394</span>
-        <span class="t_right"><a href="" class="one">我要卖车</a><a href="" class="one">登录</a><a href="" class="two">APP下载</a></span>
-    </div>
-</div><!--top end-->
+
+<jsp:include page="header.jsp"></jsp:include>
 
 <div class="bans"><img src="../resources/img/1-3.jpg"></div>
 
@@ -175,12 +170,12 @@
         <h2>我们的流程 <span>快速成交，立马打款，及时有效</span></h2>
         <dl>
             <dt class="dt1"></dt>
-            <dd>精准估值</dd>
+            <dd>网上定价</dd>
         </dl>
 
         <dl>
             <dt class="dt2"></dt>
-            <dd>专业检测</dd>
+            <dd>预约检测</dd>
         </dl>
 
         <dl>
@@ -190,7 +185,7 @@
 
         <dl>
             <dt class="dt4"></dt>
-            <dd>售后服务</dd>
+            <dd>售后保障</dd>
         </dl>
     </div>
 </div>
@@ -200,7 +195,7 @@
 <!--交易记录-->
 <div class="jiaos">
 
-    <h2>交易记录 <span> 真是记录、公正透明、超高效率</span></h2>
+    <h2>交易记录 <span> 真实记录、公正透明、超高效率</span></h2>
 
     <div class="j_cen">
 
@@ -217,111 +212,59 @@
 
 
         <div>
-            <span class="cl_one">2106 奥迪A3 Limousine 35 TFSI 进取型</span>
-            <span> 19.90万 </span>
-            <span>14.60万</span>
-            <span>2016年11月 </span>
-            <span>0.85万公里 </span>
-            <span>2017年04月03日</span>
+            <span class="cl_one">2012款 迈腾 1.4TSI DSG豪华型</span>
+            <span>16.78万</span>
+            <span>7.07万</span>
+            <span>2012年12月 </span>
+            <span>13万公里 </span>
+            <span>2017年04月20日</span>
             <span>北京</span>
             <span class="last">车商</span>
         </div>
 
 
         <div>
-            <span class="cl_one">2106 奥迪A3 Limousine </span>
-            <span> 19.90万 </span>
-            <span>14.60万</span>
-            <span>2016年11月 </span>
-            <span>0.85万公里 </span>
-            <span>2017年04月03日</span>
+            <span class="cl_one">2012款 迈腾 1.4TSI DSG豪华型</span>
+            <span>16.7
+                8万</span>
+            <span>7.07万</span>
+            <span>2012年6月 </span>
+            <span>10.85万公里 </span>
+            <span>2017年04月18日</span>
             <span>北京</span>
             <span class="last">车商</span>
         </div>
 
 
-        <div>
-            <span class="cl_one">2106 奥迪A3 Limousine </span>
-            <span> 19.90万 </span>
-            <span>14.60万</span>
-            <span>2016年11月 </span>
-            <span>0.85万公里 </span>
-            <span>2017年04月03日</span>
-            <span>北京</span>
-            <span class="last">车商</span>
-        </div>
 
         <div>
-            <span class="cl_one">2106 奥迪A3 Limousine </span>
-            <span> 19.90万 </span>
-            <span>14.60万</span>
-            <span>2016年11月 </span>
-            <span>0.85万公里 </span>
-            <span>2017年04月03日</span>
+            <span class="cl_one">2012款 高尔夫 1.6L 自动 时尚型</span>
+            <span>13.09万 </span>
+            <span>5.64万</span>
+            <span>2012年11月 </span>
+            <span>12.85万公里 </span>
+            <span>2017年04月06日</span>
             <span>北京</span>
             <span class="last">车商</span>
         </div>
 
         <div>
-            <span class="cl_one">2106 奥迪A3 Limousine </span>
-            <span> 19.90万 </span>
-            <span>14.60万</span>
-            <span>2016年11月 </span>
-            <span>0.85万公里 </span>
-            <span>2017年04月03日</span>
+            <span class="cl_one">2012款 高尔夫 1.4TSI 自动舒适型</span>
+            <span>14.48万</span>
+            <span>6.58万</span>
+            <span>2012年5月 </span>
+            <span>12万公里 </span>
+            <span>2017年04月20日</span>
             <span>北京</span>
             <span class="last">车商</span>
         </div>
 
-        <div>
-            <span class="cl_one">2106 奥迪A3 Limousine </span>
-            <span> 19.90万 </span>
-            <span>14.60万</span>
-            <span>2016年11月 </span>
-            <span>0.85万公里 </span>
-            <span>2017年04月03日</span>
-            <span>北京</span>
-            <span class="last">车商</span>
-        </div>
 
-        <div>
-            <span class="cl_one">2106 奥迪A3 Limousine </span>
-            <span> 19.90万 </span>
-            <span>14.60万</span>
-            <span>2016年11月 </span>
-            <span>0.85万公里 </span>
-            <span>2017年04月03日</span>
-            <span>北京</span>
-            <span class="last">车商</span>
-        </div>
-
-        <div>
-            <span class="cl_one">2106 奥迪A3 Limousine </span>
-            <span> 19.90万 </span>
-            <span>14.60万</span>
-            <span>2016年11月 </span>
-            <span>0.85万公里 </span>
-            <span>2017年04月03日</span>
-            <span>北京</span>
-            <span class="last">车商</span>
-        </div>
-
-        <div>
-            <span class="cl_one">2106 奥迪A3 Limousine </span>
-            <span> 19.90万 </span>
-            <span>14.60万</span>
-            <span>2016年11月 </span>
-            <span>0.85万公里 </span>
-            <span>2017年04月03日</span>
-            <span>北京</span>
-            <span class="last">车商</span>
-        </div>
     </div>
 </div>
 
 <!--交易记录 end-->
-
-<body>
-
+<jsp:include page="footer.jsp"></jsp:include>
+</body>
 
 </html>

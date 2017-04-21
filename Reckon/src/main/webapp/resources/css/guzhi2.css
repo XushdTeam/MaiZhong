@@ -128,7 +128,7 @@
 }
 .lable{
     position: absolute;
-    right: 1015px;
+    left: 45px;
 
 }
 /*banner-left*/
@@ -173,6 +173,7 @@
 }
 .pinggu ul li {
     position: relative;
+    float: left;
 }
 .select_box,
 .select_box input.numgongli {
@@ -187,7 +188,7 @@
     cursor: pointer;
     color: #333;
     margin-left: 150px;
-    border: 1px solid #f05b48;
+    border: 1px solid #999;
 }
 .lr_158_30 {
     left: 150px;
@@ -1576,7 +1577,7 @@ li.on a {
 }
 .color a{
     border:2px solid #b39f9f;
-    margin: 5px;
+    margin: 5px 25px;
 }
 .color a:hover{
     border:2px solid #f05b48;
@@ -1594,8 +1595,8 @@ li.on a {
 }
 
 .jingzhun .btn a {
-    padding: 8px 35px;
-    border: 1px solid #f05b48;
+    padding: 5px 45px;
+    border: 1px solid #666;
     margin-right: 20px;
 }
 .jingzhun .btn a:hover {
@@ -1606,7 +1607,6 @@ li.on a {
     background: #f05b48!important;
     color: #FFF;
     border: none!important;
-    border-radius: 25px;
     width: 145px!important;
 }
 

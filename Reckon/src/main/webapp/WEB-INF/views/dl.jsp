@@ -41,7 +41,7 @@
         .tells input[disabled]{color:#7a8475;opacity:0.8;background: #CCCCCC!important;}
     </style>
 </head>
-<body class="bgss">
+<body>
 <div class="box">
     <p class="width"><img src="../resources/img/dl.jpg"></p>
     <div class="shouj">手机验证登录</div>

@@ -20,13 +20,8 @@
     <script src="/resources/js/js.js" type="text/javascript"></script>
 </head>
 <body>
-<div class="top e_top">
-    <div class="t_cen">
-        <a href="#"><img src="../resources/img/logo.png"></a>
-        <span class="tell">010-3993-394</span>
-        <span class="t_right"><a href="" class="one">我要卖车</a><a href="" class="one">登录</a><a href="" class="two">APP下载</a></span>
-    </div>
-</div><!--top end-->
+
+<jsp:include page="header.jsp"></jsp:include>
 
 <div class="x_nav">当前位置 :  <a href="/">首页</a> > <a href="javascript:void(0)">二手车评估</a> > 精准估值</div>
 <div class="jiage">
@@ -58,5 +53,6 @@
     <p>4、需要携带 登记证 行驶本 新车发票/过户票 购置税本 交强险</p>
 </div>
 
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
