@@ -835,27 +835,29 @@ public class ReckonServiceImpl implements ReckonService {
     }
 
     @Override
-    public JsonResult updateOrders(String orderNumber, String dealWay, String wayId, String linkMan, String linkPhone,String address) {
+    public JsonResult updateOrders(String orderNumber, String dealWay, String wayId, String linkMan, String linkPhone, String address, String checkTime) {
         try {
-            OrdersExample example=new OrdersExample();
+            OrdersExample example = new OrdersExample();
             OrdersExample.Criteria criteria = example.createCriteria();
             criteria.andOrderNumberEqualTo(Long.valueOf(orderNumber));
             List<Orders> orderses = ordersMapper.selectByExample(example);
-            Orders orders=orderses.get(0);
+            Orders orders = orderses.get(0);
             //4s店
-            if (Integer.valueOf(dealWay)==1){
+            if (Integer.valueOf(dealWay) == 1) {
                 TbBusiness tbBusiness = tbBusinessMapper.selectByPrimaryKey(Long.valueOf(wayId));
                 orders.setAddress(tbBusiness.getAddress());
             }
             //地铁
-            if (Integer.valueOf(dealWay)==2){
+            if (Integer.valueOf(dealWay) == 2) {
                 LineSite lineSite = lineSiteMapper.selectByPrimaryKey(Long.valueOf(wayId));
                 Line line = lineMapper.selectByPrimaryKey(lineSite.getLineId());
-                orders.setAddress("北京市地铁"+line.getName()+"号线"+lineSite.getName()+"站");
+                orders.setAddress("北京市地铁" + line.getName() + "号线" + lineSite.getName() + "站");
+                orders.setCheckTime(checkTime);
             }
             //上门
-            if (Integer.valueOf(dealWay)==3){
+            if (Integer.valueOf(dealWay) == 3) {
                 orders.setAddress(address);
+                orders.setCheckTime(checkTime);
             }
             orders.setDealWay(1);
             orders.setWayId(Long.valueOf(wayId));

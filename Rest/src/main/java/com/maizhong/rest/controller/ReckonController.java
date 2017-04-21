@@ -293,8 +293,9 @@ public class ReckonController {
                                     String wayId,
                                     String linkMan,
                                     String linkPhone,
-                                    String address){
-        JsonResult resul=reckonService.updateOrders(orderNumber,dealWay,wayId,linkMan,linkPhone,address);
+                                    String address,
+                                    String checkTime){
+        JsonResult resul=reckonService.updateOrders(orderNumber,dealWay,wayId,linkMan,linkPhone,address,checkTime);
         return resul;
     }
 }

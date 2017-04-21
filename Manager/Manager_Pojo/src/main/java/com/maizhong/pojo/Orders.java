@@ -19,6 +19,8 @@ public class Orders {
 
     private String dealPrice;
 
+    private String checkTime;
+
     private String dealTime;
 
     private Integer dealWay;
@@ -97,6 +99,14 @@ public class Orders {
 
     public void setDealPrice(String dealPrice) {
         this.dealPrice = dealPrice == null ? null : dealPrice.trim();
+    }
+
+    public String getCheckTime() {
+        return checkTime;
+    }
+
+    public void setCheckTime(String checkTime) {
+        this.checkTime = checkTime == null ? null : checkTime.trim();
     }
 
     public String getDealTime() {
