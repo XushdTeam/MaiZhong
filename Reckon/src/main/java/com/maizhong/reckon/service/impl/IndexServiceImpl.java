@@ -257,7 +257,7 @@ public class IndexServiceImpl implements IndexService {
      * @return
      */
     @Override
-    public JsonResult orderConfim(String orderNumber, String dealWay, String wayId, String linkMan, String linkPhone, String address) {
+    public JsonResult orderConfim(String orderNumber, String dealWay, String wayId, String linkMan, String linkPhone,String checktime, String address) {
 
         try {
             Map<String,String> param = new HashMap<>();
@@ -266,6 +266,7 @@ public class IndexServiceImpl implements IndexService {
             param.put("wayId",wayId);
             param.put("linkMan",linkMan);
             param.put("linkPhone",linkPhone);
+            param.put("checktime",checktime);
             param.put("address",address);
 
             String res = HttpClientUtil.doPost(RESTURL+"updateOrders",param);

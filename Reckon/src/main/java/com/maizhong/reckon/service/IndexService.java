@@ -37,5 +37,5 @@ public interface IndexService {
 
     JsonResult getOneWeek();
 
-    JsonResult orderConfim(String orderNumber, String dealWay, String wayId, String linkMan, String linkPhone, String address);
+    JsonResult orderConfim(String orderNumber, String dealWay, String wayId, String linkMan, String linkPhone,String checktime, String address);
 }

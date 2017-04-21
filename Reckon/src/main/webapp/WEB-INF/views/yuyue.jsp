@@ -186,7 +186,7 @@
         </div>
     </div><!--right end -->
 </div>
-<input type="hidden" id="orderNum" value="${result.}">
+<input type="hidden" id="orderNum" value="${result.orderNum}">
 <div class="anniu" onclick="submit()">确认下单</div>
 <jsp:include page="footer.jsp"></jsp:include>
 </body>
@@ -335,12 +335,22 @@
             }
             var name_right = $('.demo--label input:radio:checked').val();
 
-            //TODO
+            var orderNum = $("#orderNum").val();
 
             var param={};
+            param.orderNumber = orderNum;
+            param.dealWay = "1";
+            param.wayId = shopId;
+            param.linkMan = userName+name_right;
+            param.linkPhone = phone;
+            param.checktime = "";
+            param.address = "";
+
 
             $.post("/OrderConfim",param,function(res){
-
+                if(res.status==200){
+                    window.location = "/per"
+                }
             });
 
         }else{
@@ -384,7 +394,22 @@
                 }
                 var name_right = $('.demo--label input:radio:checked').val();
 
-                //TODO
+                var orderNum = $("#orderNum").val();
+
+                var param={};
+                param.orderNumber = orderNum;
+                param.dealWay = "2";
+                param.wayId = siteId;
+                param.linkMan = userName+name_right;
+                param.linkPhone = phone;
+                param.checktime = date;
+                param.address = "";
+
+                $.post("/OrderConfim",param,function(res){
+                    if(res.status==200){
+                        window.location = "/per"
+                    }
+                });
 
 
             }else{
@@ -419,7 +444,25 @@
                 }
                 var name_right = $('.demo--label input:radio:checked').val();
 
-                //TODO
+                var orderNum = $("#orderNum").val();
+
+
+                var param={};
+                param.orderNumber = orderNum;
+                param.dealWay = "3";
+                param.wayId = "0";
+                param.linkMan = userName+name_right;
+                param.linkPhone = phone;
+                param.checktime = date;
+                param.address = address;
+
+                $.post("/OrderConfim",param,function(res){
+                    if(res.status==200){
+                        window.location = "/per"
+                    }
+                });
+
+
 
             }
         }
