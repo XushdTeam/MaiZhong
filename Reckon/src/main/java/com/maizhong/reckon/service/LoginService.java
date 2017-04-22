@@ -14,4 +14,6 @@ public interface LoginService {
 
     JsonResult userLogin(String phone,String smsCode,HttpServletRequest request);
     JsonResult getSMSCode(String phone, HttpServletRequest request);
+
+    JsonResult userIsLogin(String phone, String token);
 }

@@ -20,6 +20,7 @@
     <meta name="description" content="迈众汽车为您提供最新汽车报价，汽车图片，汽车价格大全，最精彩的汽车新闻、行情、评测、导购内容，是提供信息最快最全的中国汽车网站。"/>
     <link rel="stylesheet" type="text/css" href="/resources/css/index.css" />
     <link rel="stylesheet" type="text/css" href="/resources/css/guzhi.css" />
+    <script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
 </head>
 <body>
@@ -31,8 +32,8 @@
             <span class="tell">010-8025-8108</span>
             <span class="t_right">
                 <a href="/sale" class="one">我要卖车</a>
-                <a href="/login" class="one">登录</a>
-                <a href="" class="two" >136****3782</a>
+                <a href="/login" class="one" id="login">登录</a>
+                <a href="/per" class="two" id="user" style="display:none">188****8888</a>
                 <a href="javascript:vold(0)" class="two">APP下载</a></span>
         </div>
     </div><!--top end-->
@@ -401,5 +402,7 @@
 <!--关于我们 end-->
 <jsp:include page="footer.jsp"></jsp:include>
 <script src="/resources/js/index.js"></script>
+
+
 </body>
 </html>

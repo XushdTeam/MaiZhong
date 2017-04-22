@@ -1,5 +1,6 @@
 package com.maizhong.reckon.service.impl;
 
+import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
@@ -63,6 +64,27 @@ public class LoginServiceImpl implements LoginService {
     }
 
     /**
+     * 判断用户是否登成功
+     * @param phone
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult userIsLogin(String phone, String token) {
+
+        try {
+
+            String res = HttpClientUtil.doGet(RESTURL+"");
+            return JsonUtils.jsonToPojo(res,JsonResult.class);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
+    }
+
+    /**
      * 用户登录
      * @return
      */
@@ -92,7 +114,7 @@ public class LoginServiceImpl implements LoginService {
             map.put("phone",phone);
             map.put("ip",ip);
             String res = HttpClientUtil.doPost(RESTURL + "userLogin/",map);
-            System.out.println(res);
+//            System.out.println(res);
             if (StringUtils.isBlank(res)){
                 return JsonResult.Error("网络异常，请刷新后重试");
             }

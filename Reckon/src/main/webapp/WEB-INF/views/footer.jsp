@@ -30,5 +30,24 @@
 
     </div>
 </div>
+<script>
+    $(document).ready(function() {
 
+        var phone = $.cookie('phone');
+        var token = $.cookie('token');
+        if(phone&&token){
+            $.getJSON('/userIsLogin/'+phone+'/'+token,function (d) {
+                if(d.status==200){
+                    $("#login").hide();
+
+                    $('#user').html(phone).show();
+
+                }else{
+                    $.cookie('phone', null);
+                    $.cookie('token', null);
+                }
+            })
+        }
+    })
+</script>
 <!--fooot_cen end-->

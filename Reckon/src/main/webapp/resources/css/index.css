@@ -284,8 +284,7 @@ img,input{vertical-align:middle; outline:none}
 .m_right  .one:hover{ background: #eee;}
 
 
-/*foot*/
-/*FOOTER*/
+
 .footer{ background: #000; overflow: hidden;}
 .foot_cen{ width: 1200px; margin: 0 auto; padding: 20px 0}
 .n_f_m_c{ width: 75%; overflow: hidden; border-bottom: 1px solid #ccc; float: left;}
