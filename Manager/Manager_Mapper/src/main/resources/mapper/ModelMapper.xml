@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.maizhong.mapper.ModelMapper">
   <resultMap id="BaseResultMap" type="com.maizhong.pojo.Model">
-    <id column="model_id" jdbcType="INTEGER" property="modelId" />
+    <id column="model_id" jdbcType="BIGINT" property="modelId" />
     <result column="model_name" jdbcType="VARCHAR" property="modelName" />
     <result column="series_id" jdbcType="INTEGER" property="seriesId" />
     <result column="model_price" jdbcType="DECIMAL" property="modelPrice" />
@@ -92,15 +92,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from model
-    where model_id = #{modelId,jdbcType=INTEGER}
+    where model_id = #{modelId,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from model
-    where model_id = #{modelId,jdbcType=INTEGER}
+    where model_id = #{modelId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.maizhong.pojo.ModelExample">
     delete from model
@@ -114,7 +114,7 @@
       max_reg_year, liter, gear_type, 
       discharge_standard, seat_number, update_time, 
       short_name)
-    values (#{modelId,jdbcType=INTEGER}, #{modelName,jdbcType=VARCHAR}, #{seriesId,jdbcType=INTEGER}, 
+    values (#{modelId,jdbcType=BIGINT}, #{modelName,jdbcType=VARCHAR}, #{seriesId,jdbcType=INTEGER}, 
       #{modelPrice,jdbcType=DECIMAL}, #{modelYear,jdbcType=INTEGER}, #{minRegYear,jdbcType=INTEGER}, 
       #{maxRegYear,jdbcType=INTEGER}, #{liter,jdbcType=VARCHAR}, #{gearType,jdbcType=VARCHAR}, 
       #{dischargeStandard,jdbcType=VARCHAR}, #{seatNumber,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
@@ -165,7 +165,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="modelId != null">
-        #{modelId,jdbcType=INTEGER},
+        #{modelId,jdbcType=BIGINT},
       </if>
       <if test="modelName != null">
         #{modelName,jdbcType=VARCHAR},
@@ -215,7 +215,7 @@
     update model
     <set>
       <if test="record.modelId != null">
-        model_id = #{record.modelId,jdbcType=INTEGER},
+        model_id = #{record.modelId,jdbcType=BIGINT},
       </if>
       <if test="record.modelName != null">
         model_name = #{record.modelName,jdbcType=VARCHAR},
@@ -260,7 +260,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update model
-    set model_id = #{record.modelId,jdbcType=INTEGER},
+    set model_id = #{record.modelId,jdbcType=BIGINT},
       model_name = #{record.modelName,jdbcType=VARCHAR},
       series_id = #{record.seriesId,jdbcType=INTEGER},
       model_price = #{record.modelPrice,jdbcType=DECIMAL},
@@ -317,7 +317,7 @@
         short_name = #{shortName,jdbcType=VARCHAR},
       </if>
     </set>
-    where model_id = #{modelId,jdbcType=INTEGER}
+    where model_id = #{modelId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.maizhong.pojo.Model">
     update model
@@ -333,6 +333,6 @@
       seat_number = #{seatNumber,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       short_name = #{shortName,jdbcType=VARCHAR}
-    where model_id = #{modelId,jdbcType=INTEGER}
+    where model_id = #{modelId,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -116,52 +116,52 @@ public class ModelExample {
             return (Criteria) this;
         }
 
-        public Criteria andModelIdEqualTo(Integer value) {
+        public Criteria andModelIdEqualTo(Long value) {
             addCriterion("model_id =", value, "modelId");
             return (Criteria) this;
         }
 
-        public Criteria andModelIdNotEqualTo(Integer value) {
+        public Criteria andModelIdNotEqualTo(Long value) {
             addCriterion("model_id <>", value, "modelId");
             return (Criteria) this;
         }
 
-        public Criteria andModelIdGreaterThan(Integer value) {
+        public Criteria andModelIdGreaterThan(Long value) {
             addCriterion("model_id >", value, "modelId");
             return (Criteria) this;
         }
 
-        public Criteria andModelIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andModelIdGreaterThanOrEqualTo(Long value) {
             addCriterion("model_id >=", value, "modelId");
             return (Criteria) this;
         }
 
-        public Criteria andModelIdLessThan(Integer value) {
+        public Criteria andModelIdLessThan(Long value) {
             addCriterion("model_id <", value, "modelId");
             return (Criteria) this;
         }
 
-        public Criteria andModelIdLessThanOrEqualTo(Integer value) {
+        public Criteria andModelIdLessThanOrEqualTo(Long value) {
             addCriterion("model_id <=", value, "modelId");
             return (Criteria) this;
         }
 
-        public Criteria andModelIdIn(List<Integer> values) {
+        public Criteria andModelIdIn(List<Long> values) {
             addCriterion("model_id in", values, "modelId");
             return (Criteria) this;
         }
 
-        public Criteria andModelIdNotIn(List<Integer> values) {
+        public Criteria andModelIdNotIn(List<Long> values) {
             addCriterion("model_id not in", values, "modelId");
             return (Criteria) this;
         }
 
-        public Criteria andModelIdBetween(Integer value1, Integer value2) {
+        public Criteria andModelIdBetween(Long value1, Long value2) {
             addCriterion("model_id between", value1, value2, "modelId");
             return (Criteria) this;
         }
 
-        public Criteria andModelIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andModelIdNotBetween(Long value1, Long value2) {
             addCriterion("model_id not between", value1, value2, "modelId");
             return (Criteria) this;
         }

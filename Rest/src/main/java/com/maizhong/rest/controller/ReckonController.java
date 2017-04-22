@@ -277,32 +277,45 @@ public class ReckonController {
     }
 
     /**
-     *
      * @param orderNumber 订单编号
-     * @param dealWay 交易方式 1 4S店 2 地铁站 3 上门
-     * @param wayId  4S店ID 或者 地铁站ID
-     * @param linkMan 联系人
-     * @param linkPhone 联系人手机号
-     * @param address 上门地址
+     * @param dealWay     交易方式 1 4S店 2 地铁站 3 上门
+     * @param wayId       4S店ID 或者 地铁站ID
+     * @param linkMan     联系人
+     * @param linkPhone   联系人手机号
+     * @param address     上门地址
      * @return
      */
-    @RequestMapping(value = "/updateOrders",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateOrders", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult updateOrders( String orderNumber,
-                                    String dealWay,
-                                    String wayId,
-                                    String linkMan,
-                                    String linkPhone,
-                                    String address,
-                                    String checkTime){
-        JsonResult resul=reckonService.updateOrders(orderNumber,dealWay,wayId,linkMan,linkPhone,address,checkTime);
+    public JsonResult updateOrders(String orderNumber,
+                                   String dealWay,
+                                   String wayId,
+                                   String linkMan,
+                                   String linkPhone,
+                                   String address,
+                                   String checkTime) {
+        JsonResult resul = reckonService.updateOrders(orderNumber, dealWay, wayId, linkMan, linkPhone, address, checkTime);
         return resul;
     }
 
-    @RequestMapping(value = "loginByToken/{phone}/{token}",method =RequestMethod.GET)
+    @RequestMapping(value = "loginByToken/{phone}/{token}", method = RequestMethod.GET)
     @ResponseBody
-    public JsonResult loginByToken(@PathVariable("phone") String phone,@PathVariable("token") String token){
-        JsonResult result=reckonService.loginByToken(phone,token);
+    public JsonResult loginByToken(@PathVariable("phone") String phone, @PathVariable("token") String token) {
+        JsonResult result = reckonService.loginByToken(phone, token);
         return result;
+    }
+
+    /**
+     * 根据手机号获取订单信息/DTO
+     * @param phone
+     * @return
+     */
+    @RequestMapping(value = "getOrdersByPhone/{phone}")
+    @ResponseBody
+    public JsonResult getOrdersByPhone(@PathVariable("phone") String phone) {
+        JsonResult result = reckonService.getOrdersByPhone(phone);
+        return result;
+
+
     }
 }
