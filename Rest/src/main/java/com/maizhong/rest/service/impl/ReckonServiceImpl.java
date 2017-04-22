@@ -871,6 +871,30 @@ public class ReckonServiceImpl implements ReckonService {
     }
 
     /**
+     * 使用手机号和token判断
+     *
+     * @param phone
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult loginByToken(String phone, String token) {
+        if (StringUtils.isBlank(token) || StringUtils.isBlank(phone)) {
+            return JsonResult.build(500, "登录失败", phone);
+        }
+        String baseToken = null;
+        try {
+            baseToken = jedisClient.get(LOGIN_TOKEN + ":" + phone);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (StringUtils.equals(baseToken, token)) {
+            return JsonResult.build(200, "登录成功", phone);
+        }
+        return JsonResult.build(500, "登录失败", phone);
+    }
+
+    /**
      * 获取验证码
      *
      * @param phone

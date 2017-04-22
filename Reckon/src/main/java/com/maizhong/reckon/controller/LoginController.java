@@ -1,6 +1,5 @@
 package com.maizhong.reckon.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.reckon.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,11 +50,17 @@ public class LoginController {
         return result;
     }
 
-
-    @RequestMapping(value = "/userIsLogin/{phone}/{token}",method = RequestMethod.GET)
+    /**
+     * 使用phone和Token判断是否登录
+     *
+     * @param phone
+     * @param token
+     * @return
+     */
+    @RequestMapping(value = "/loginByToken/{phone}/{token}", method = RequestMethod.GET)
     @ResponseBody
-    public JsonResult userIsLogin(@PathVariable String phone,@PathVariable String token){
-        JsonResult result = loginService.userIsLogin(phone,token);
+    public JsonResult loginByToken(@PathVariable("phone") String phone, @PathVariable("token") String token) {
+        JsonResult result = loginService.loginByToken(phone, token);
         return result;
     }
 }
