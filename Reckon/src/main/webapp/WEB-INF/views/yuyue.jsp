@@ -33,7 +33,7 @@
         <span class="t_right">
             <a href="/sale" class="one">我要卖车</a>
             <a href="/login" class="one" id="login">登录</a>
-            <a href="/per" class="two" id="user" style="display:none">188****8888</a>
+            <a href="/per/or" class="two" id="user" style="display:none">188****8888</a>
             <a href="javascript:vold(0)" class="two">APP下载</a></span>
         </span>
     </div>
@@ -348,18 +348,27 @@
                 }
             })
             if(!shopId){
-                layer.msg('请选择4S店');
+                layer.msg('请选择4S店',{
+                    offset: 't',
+                    anim: 6
+                });
                 return false;
             }
             var userName = $("#userName").val();
             if(!userName){
-                layer.msg('请输入您的姓氏');
+                layer.msg('请输入您的姓氏',{
+                    offset: 't',
+                    anim: 6
+                });
                 return false;
             }
 
             var phone = $("#phone").val();
             if(!(/^1[34578]\d{9}$/.test(phone))){
-                layer.msg('手机号格式不正确');
+                layer.msg('手机号格式不正确',{
+                    offset: 't',
+                    anim: 6
+                });
                 return false;
             }
             var name_right = $('.demo--label input:radio:checked').val();
@@ -395,7 +404,10 @@
                     }
                 })
                 if(!siteId){
-                    layer.msg('请选择地铁站');
+                    layer.msg('请选择地铁站',{
+                        offset: 't',
+                        anim: 6
+                    });
                     return false;
                 }
                 els = document.querySelectorAll(".hid1 span");
@@ -407,18 +419,27 @@
                     }
                 })
                 if(!date){
-                    layer.msg('请选择预约时间');
+                    layer.msg('请选择预约时间',{
+                        offset: 't',
+                        anim: 6
+                    });
                     return false;
                 }
                 var userName = $("#userName").val();
                 if(!userName){
-                    layer.msg('请输入您的姓氏');
+                    layer.msg('请输入您的姓氏',{
+                        offset: 't',
+                        anim: 6
+                    });
                     return false;
                 }
 
                 var phone = $("#phone").val();
                 if(!(/^1[34578]\d{9}$/.test(phone))){
-                    layer.msg('手机号格式不正确');
+                    layer.msg('手机号格式不正确',{
+                        offset: 't',
+                        anim: 6
+                    });
                     return false;
                 }
                 var name_right = $('.demo--label input:radio:checked').val();
@@ -445,7 +466,10 @@
                 //上门
                 var address = $("#address").val();
                 if(!address){
-                    layer.msg('请输入详细地址');
+                    layer.msg('请输入详细地址',{
+                        offset: 't',
+                        anim: 6
+                    });
                     return false;
                 }
                 var els = document.querySelectorAll(".hid2 span");
@@ -457,18 +481,27 @@
                     }
                 })
                 if(!date){
-                    layer.msg('请选择预约时间');
+                    layer.msg('请选择预约时间',{
+                        offset: 't',
+                        anim: 6
+                    });
                     return false;
                 }
                 var userName = $("#userName").val();
                 if(!userName){
-                    layer.msg('请输入您的姓氏');
+                    layer.msg('请输入您的姓氏',{
+                        offset: 't',
+                        anim: 6
+                    });
                     return false;
                 }
 
                 var phone = $("#phone").val();
                 if(!(/^1[34578]\d{9}$/.test(phone))){
-                    layer.msg('手机号格式不正确');
+                    layer.msg('手机号格式不正确',{
+                        offset: 't',
+                        anim: 6
+                    });
                     return false;
                 }
                 var name_right = $('.demo--label input:radio:checked').val();

@@ -9,8 +9,6 @@ import com.maizhong.reckon.service.IndexService;
 import com.maizhong.reckon.service.LoginService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.parsing.SourceExtractor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,10 +36,22 @@ public class IndexController {
         model.addAttribute("proviceList",indexDTO.getProviceList());
         return "index";
     }
-    @RequestMapping(value = "/{page}")
-    public String test(@PathVariable String page){
-        return page;
+    @RequestMapping(value = "/index")
+    public String index1(Model model){
+
+        IndexDTO indexDTO = indexService.getIndexDTO();
+
+        model.addAttribute("brandList",indexDTO.getBrandList());
+        model.addAttribute("proviceList",indexDTO.getProviceList());
+        return "index";
     }
+
+
+
+//    @RequestMapping(value = "/{page}")
+//    public String test(@PathVariable String page){
+//        return page;
+//    }
 
 
     /**
@@ -219,9 +229,10 @@ public class IndexController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/per")
+    @RequestMapping(value = "/per/{cu}")
     public String userCenter(@CookieValue(value = "phone",required = false) String phone,
                              @CookieValue(value = "token",required = false) String token,
+                             @PathVariable String cu,
                              Model model){
 
         if(StringUtils.isBlank(phone)||StringUtils.isBlank(token)){
@@ -230,7 +241,7 @@ public class IndexController {
             JsonResult result = loginService.loginByToken(phone,token);
             if(result.getStatus()==200){
                 model.addAttribute("phone",phone);
-                return "per";
+                return cu;
             }else{
                 return "dl";
             }

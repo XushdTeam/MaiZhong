@@ -18,10 +18,20 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/guzhi.css" />
     <link rel="stylesheet" type="text/css" href="/resources/css/per.css" />
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
-    <script src="/resources/js/js.js" type="text/javascript"></script>
+    <script src="/resources/js/jquery.cookie.min.js" type="text/javascript"></script>
 </head>
 <body class="bgss">
-<jsp:include page="header.jsp"></jsp:include>
+<div class="top e_top">
+    <div class="t_cen">
+        <a href="#"><img src="../resources/img/logo.png"></a>
+        <span class="tell">010-8025-8108</span>
+        <span class="t_right">
+            <a href="/sale" class="one">我要卖车</a>
+            <a href="javascript:void(0)" class="two" >${phone}</a>
+            <a href="javascript:void(0)" class="two">APP下载</a>
+        </span>
+    </div>
+</div>
 
 <div class="x_nav">当前位置 :  <a href="#">首页</a> > <a href="#">个人中心</a></div>
 

@@ -136,7 +136,7 @@
                 //电话写入cookie
                 $.cookie('phone', phone, {expires: 7, path: '/'});
                 $.cookie('token', res.data, {expires: 7, path: '/'});
-                window.location.href="/per";
+                window.location.href="/per/or";
             }else {
                 $(".verc").html(res.message);
                 $(".verc").show();

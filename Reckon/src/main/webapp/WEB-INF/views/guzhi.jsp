@@ -21,6 +21,19 @@
      <link rel="stylesheet" type="text/css" href="/resources/css/index.css" />
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
     <script src="/resources/js/jquery.cookie.min.js" type="text/javascript"></script>
+    <style>
+        .shiyan_fudong {
+            top:15px;
+        }
+        .shiyan_fudong:hover {
+            top:5px;
+            box-shadow: 1px 1px 8px rgba(240,91,72, 0.7);
+            -moz-box-shadow:  1px 1px 8px rgba(240,91,72, 0.7);
+            -webkit-box-shadow: 1px 1px 8px rgba(240,91,72, 0.7);
+            -o-box-shadow:  1px 1px 8px rgba(240,91,72, 0.7);
+            -ms-box-shadow:  1px 1px 8px rgba(240,91,72, 0.7);
+        }
+    </style>
 </head>
 <body>
 
@@ -31,7 +44,7 @@
         <span class="t_right">
             <a href="/sale" class="one">我要卖车</a>
             <a href="/login" class="one" id="login">登录</a>
-            <a href="/per" class="two" id="user" style="display:none">188****8888</a>
+            <a href="/per/or" class="two" id="user" style="display:none">188****8888</a>
             <a href="javascript:vold(0)" class="two">APP下载</a></span>
         </span>
     </div>
@@ -53,94 +66,9 @@
 
 <!--估价选项-->
   <div class="guj">
-      <div class="gu hover">
-          <h2>车况优秀</h2>
-          <span>${result.priceA}</span>
-          <p>车况说明</p>
-          <div>迈众作为独立第三方价格服务平台，为您
-              提供精确的车辆估值服务，让您在交易前充分
-              了解市场行情价</div>
-
-          <dl>
-              <dt>外观</dt>
-              <dd>外观无可见瑕疵和色差</dd>
-          </dl>
-
-          <dl>
-              <dt>内饰</dt>
-              <dd>内饰干净整洁无明显可见磨损；
-                  无异味</dd>
-          </dl>
-
-          <dl>
-              <dt>工况</dt>
-              <dd>2年且4万公里以内；
-                  动力系统、机械部位运行正常且无维修；
-                  按时保养且记录完整；电子系统无任何故障</dd>
-          </dl>
-
-      </div>
 
 
-      <div class="gu">
-          <h2>车况良好</h2>
-          <span>${result.priceB}</span>
-          <p>车况说明</p>
-          <div>迈众作为独立第三方价格服务平台，为您
-              提供精确的车辆估值服务，让您在交易前充分
-              了解市场行情价</div>
-
-          <dl>
-              <dt>外观</dt>
-              <dd>外观无可见瑕疵和色差</dd>
-          </dl>
-
-          <dl>
-              <dt>内饰</dt>
-              <dd>内饰干净整洁无明显可见磨损；
-                  无异味</dd>
-          </dl>
-
-          <dl>
-              <dt>工况</dt>
-              <dd>2年且4万公里以内；
-                  动力系统、机械部位运行正常且无维修；
-                  按时保养且记录完整；电子系统无任何故障</dd>
-          </dl>
-
-      </div>
-
-
-      <div class="gu">
-          <h2>车况一般</h2>
-          <span>${result.priceC}</span>
-          <p>车况说明</p>
-          <div>迈众作为独立第三方价格服务平台，为您
-              提供精确的车辆估值服务，让您在交易前充分
-              了解市场行情价</div>
-
-          <dl>
-              <dt>外观</dt>
-              <dd>外观无可见瑕疵和色差</dd>
-          </dl>
-
-          <dl>
-              <dt>内饰</dt>
-              <dd>内饰干净整洁无明显可见磨损；
-                  无异味</dd>
-          </dl>
-
-          <dl>
-              <dt>工况</dt>
-              <dd>2年且4万公里以内；
-                  动力系统、机械部位运行正常且无维修；
-                  按时保养且记录完整；电子系统无任何故障</dd>
-          </dl>
-
-      </div>
-
-
-      <div class="gu none">
+      <div class="gu shiyan_fudong">
           <h2>车况较差</h2>
           <span>${result.priceD}</span>
           <p>车况说明</p>
@@ -168,8 +96,93 @@
 
       </div>
 
+
+
+      <div class="gu shiyan_fudong">
+          <h2>车况一般</h2>
+          <span>${result.priceC}</span>
+          <p>车况说明</p>
+          <div>迈众作为独立第三方价格服务平台，为您
+              提供精确的车辆估值服务，让您在交易前充分
+              了解市场行情价</div>
+
+          <dl>
+              <dt>外观</dt>
+              <dd>外观无可见瑕疵和色差</dd>
+          </dl>
+
+          <dl>
+              <dt>内饰</dt>
+              <dd>内饰干净整洁无明显可见磨损；
+                  无异味</dd>
+          </dl>
+
+          <dl>
+              <dt>工况</dt>
+              <dd>2年且4万公里以内；
+                  动力系统、机械部位运行正常且无维修；
+                  按时保养且记录完整；电子系统无任何故障</dd>
+          </dl>
+
+      </div>
+
+      <div class="gu shiyan_fudong">
+          <h2>车况良好</h2>
+          <span>${result.priceB}</span>
+          <p>车况说明</p>
+          <div>迈众作为独立第三方价格服务平台，为您
+              提供精确的车辆估值服务，让您在交易前充分
+              了解市场行情价</div>
+
+          <dl>
+              <dt>外观</dt>
+              <dd>外观无可见瑕疵和色差</dd>
+          </dl>
+
+          <dl>
+              <dt>内饰</dt>
+              <dd>内饰干净整洁无明显可见磨损；
+                  无异味</dd>
+          </dl>
+
+          <dl>
+              <dt>工况</dt>
+              <dd>2年且4万公里以内；
+                  动力系统、机械部位运行正常且无维修；
+                  按时保养且记录完整；电子系统无任何故障</dd>
+          </dl>
+
+      </div>
+      <div class="gu none shiyan_fudong">
+          <h2>车况优秀</h2>
+          <span>${result.priceA}</span>
+          <p>车况说明</p>
+          <div>迈众作为独立第三方价格服务平台，为您
+              提供精确的车辆估值服务，让您在交易前充分
+              了解市场行情价</div>
+
+          <dl>
+              <dt>外观</dt>
+              <dd>外观无可见瑕疵和色差</dd>
+          </dl>
+
+          <dl>
+              <dt>内饰</dt>
+              <dd>内饰干净整洁无明显可见磨损；
+                  无异味</dd>
+          </dl>
+
+          <dl>
+              <dt>工况</dt>
+              <dd>2年且4万公里以内；
+                  动力系统、机械部位运行正常且无维修；
+                  按时保养且记录完整；电子系统无任何故障</dd>
+          </dl>
+
+      </div>
+
   </div>
-<div class="mc"><a style="display: block;color: #FFF" href="/sale/${ppap}">我要卖车</a></div>
+<div class="mc"><a style="display: block;color: #FFF" href="/sale/${ppap}">我要出售此车</a></div>
 
 <!--估价选项 end-->
 <div class="bans"><img src="../resources/img/1-4.jpg"></div>
