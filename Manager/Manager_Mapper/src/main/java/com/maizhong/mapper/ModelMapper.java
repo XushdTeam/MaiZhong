@@ -11,7 +11,7 @@ public interface ModelMapper {
 
     int deleteByExample(ModelExample example);
 
-    int deleteByPrimaryKey(Integer modelId);
+    int deleteByPrimaryKey(Long modelId);
 
     int insert(Model record);
 
@@ -19,7 +19,7 @@ public interface ModelMapper {
 
     List<Model> selectByExample(ModelExample example);
 
-    Model selectByPrimaryKey(Integer modelId);
+    Model selectByPrimaryKey(Long modelId);
 
     int updateByExampleSelective(@Param("record") Model record, @Param("example") ModelExample example);
 

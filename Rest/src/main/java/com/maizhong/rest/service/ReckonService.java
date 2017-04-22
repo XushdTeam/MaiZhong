@@ -49,4 +49,6 @@ public interface ReckonService {
     JsonResult updateOrders(String orderNumber, String dealWay, String wayId, String linkMan, String linkPhone,String address,String checkTime);
 
     JsonResult loginByToken(String phone, String token);
+
+    JsonResult getOrdersByPhone(String phone);
 }
