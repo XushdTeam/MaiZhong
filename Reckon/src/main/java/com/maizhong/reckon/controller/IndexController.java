@@ -6,6 +6,8 @@ import com.maizhong.common.result.JsonResult;
 import com.maizhong.pojo.Line;
 import com.maizhong.reckon.DTO.IndexDTO;
 import com.maizhong.reckon.service.IndexService;
+import com.maizhong.reckon.service.LoginService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.parsing.SourceExtractor;
@@ -23,6 +25,9 @@ public class IndexController {
 
     @Autowired
     private IndexService indexService;
+
+    @Autowired
+    private LoginService loginService;
 
     @RequestMapping(value = "/")
     public String index(Model model){
@@ -205,5 +210,30 @@ public class IndexController {
 
         JsonResult result = indexService.orderConfim(orderNumber,dealWay,wayId,linkMan,linkPhone,checktime,address);
         return result;
+    }
+
+    /**
+     * 跳转到个人中心
+     * @param phone
+     * @param token
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/per")
+    public String userCenter(@CookieValue(value = "phone",required = false) String phone,
+                             @CookieValue(value = "token",required = false) String token,
+                             Model model){
+
+        if(StringUtils.isBlank(phone)||StringUtils.isBlank(token)){
+            return "dl";
+        }else{
+            JsonResult result = loginService.loginByToken(phone,token);
+            if(result.getStatus()==200){
+                model.addAttribute("phone",phone);
+                return "per";
+            }else{
+                return "dl";
+            }
+        }
     }
 }

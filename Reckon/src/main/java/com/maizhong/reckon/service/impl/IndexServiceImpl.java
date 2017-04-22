@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.maizhong.common.dto.GuzhiDTO;
+import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
@@ -79,7 +80,7 @@ public class IndexServiceImpl implements IndexService {
             e.printStackTrace();
 
         }
-        return null;
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
 
 
     }
@@ -104,7 +105,7 @@ public class IndexServiceImpl implements IndexService {
 
         }
 
-        return null;
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
     }
 
     @Override
@@ -119,7 +120,7 @@ public class IndexServiceImpl implements IndexService {
             e.printStackTrace();
         }
 
-        return null;
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
 
     }
 
@@ -229,7 +230,7 @@ public class IndexServiceImpl implements IndexService {
         }
 
 
-        return null;
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
     }
 
     @Override
@@ -274,6 +275,6 @@ public class IndexServiceImpl implements IndexService {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return null;
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
     }
 }

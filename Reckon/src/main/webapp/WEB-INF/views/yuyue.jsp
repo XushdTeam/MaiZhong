@@ -22,11 +22,22 @@
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
     <script src="/resources/js/js.js" type="text/javascript"></script>
     <script src="https://cdn.bootcss.com/layer/3.0.1/layer.js"></script>
-    <script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="/resources/js/jquery.cookie.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=N8kgZsufZYtKgEXbtUoTHrKlaqgAxTFY"></script>
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
+<div class="top e_top">
+    <div class="t_cen">
+        <a href="#"><img src="../resources/img/logo.png"></a>
+        <span class="tell">010-8025-8108</span>
+        <span class="t_right">
+            <a href="/sale" class="one">我要卖车</a>
+            <a href="/login" class="one" id="login">登录</a>
+            <a href="/per" class="two" id="user" style="display:none">188****8888</a>
+            <a href="javascript:vold(0)" class="two">APP下载</a></span>
+        </span>
+    </div>
+</div>
 
 <div class="x_nav">当前位置 :  <a href="#">首页</a> > <a href="#">二手车评估</a> > 预约</div>
 
@@ -274,9 +285,27 @@
             }
         });
 
-        $("#phone").val($.cookie('phone'));
+
     });
     $(document).ready(function(){
+
+        var phone = $.cookie('phone');
+        var token = $.cookie('token');
+        if(phone&&token){
+            $.getJSON('/loginByToken/'+phone+'/'+token,function (d) {
+                if(d.status==200){
+                    $("#login").hide();
+
+                    $('#user').html(phone).show();
+
+                    $("#phone").val(phone);
+
+                }else{
+                    $.cookie('phone', null);
+                    $.cookie('token', null);
+                }
+            })
+        }
 
         // 百度地图API功能
         window.map = new BMap.Map("map");

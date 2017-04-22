@@ -20,10 +20,22 @@
     <meta name="description" content="迈众汽车为您提供最新汽车报价，汽车图片，汽车价格大全，最精彩的汽车新闻、行情、评测、导购内容，是提供信息最快最全的中国汽车网站。"/>
      <link rel="stylesheet" type="text/css" href="/resources/css/index.css" />
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="/resources/js/jquery.cookie.min.js" type="text/javascript"></script>
 </head>
 <body>
 
-<jsp:include page="header.jsp"></jsp:include>
+<div class="top e_top">
+    <div class="t_cen">
+        <a href="#"><img src="../resources/img/logo.png"></a>
+        <span class="tell">010-8025-8108</span>
+        <span class="t_right">
+            <a href="/sale" class="one">我要卖车</a>
+            <a href="/login" class="one" id="login">登录</a>
+            <a href="/per" class="two" id="user" style="display:none">188****8888</a>
+            <a href="javascript:vold(0)" class="two">APP下载</a></span>
+        </span>
+    </div>
+</div>
 
 <div class="bans"><img src="../resources/img/1-3.jpg"></div>
 
@@ -265,6 +277,26 @@
 
 <!--交易记录 end-->
 <jsp:include page="footer.jsp"></jsp:include>
+<script>
+    $(document).ready(function() {
+
+        var phone = $.cookie('phone');
+        var token = $.cookie('token');
+        if(phone&&token){
+            $.getJSON('/loginByToken/'+phone+'/'+token,function (d) {
+                if(d.status==200){
+                    $("#login").hide();
+
+                    $('#user').html(phone).show();
+
+                }else{
+                    $.cookie('phone', null);
+                    $.cookie('token', null);
+                }
+            })
+        }
+    })
+</script>
 </body>
 
 </html>
