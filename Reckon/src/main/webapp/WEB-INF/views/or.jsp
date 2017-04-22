@@ -46,7 +46,7 @@
 
         <ul>
             <li><img src="../resources/img/p_06.jpg">售后进度</li>
-            <p><a href="/per/sh">过户进度</a></p>
+            <p><a href="/per/sh">售后进度</a></p>
         </ul>
 
         <ul>
@@ -73,9 +73,36 @@
                     <span>${item.modelName}</span>
                 </div>
                 <div class="flot mony">￥${item.reckonPrice}万</div>
-                <div class="flot monys">已完成</div>
+                <div class="flot monys">
+                    <c:if test="${item.status=='0'}">
+                        待预约
+                    </c:if>
+                    <c:if test="${item.status=='1'}">
+                        待验车
+                    </c:if>
+                    <c:if test="${item.status=='2'}">
+                        车辆处理中
+                    </c:if>
+                    <c:if test="${item.status=='3'}">
+                        等待过户
+                    </c:if>
+                    <c:if test="${item.status=='4'}">
+                        过户完成
+                    </c:if>
+                    <c:if test="${item.status=='5'}">
+                        更新指标
+                    </c:if>
+                    <c:if test="${item.status=='6'}">
+                        --
+                    </c:if>
+                </div>
                 <div class="flot none monys">
-                    <%--<c:if test="${item}"--%>
+                    <c:if test="${item.status!='6'}">
+                        进行中
+                    </c:if>
+                    <c:if test="${item.status=='6'}">
+                        完结
+                    </c:if>
                 </div>
             </div>
             <div class="modal fade" id="modal${item.orderNumber}" tabindex="-1" role="dialog">
