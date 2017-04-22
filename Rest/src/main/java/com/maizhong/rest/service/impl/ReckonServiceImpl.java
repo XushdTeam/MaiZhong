@@ -360,6 +360,7 @@ public class ReckonServiceImpl implements ReckonService {
                 JSONArray model_list = jsonObject.getJSONArray("model_list");
                 //STEP 4 放到缓存
                 jedisClient.hset("CAR_SERIES_MODEL", seriesId, JSON.toJSONString(model_list));
+
                 //STEP 5 存入数据库
                 for (Object o : model_list) {
                     JSONObject object = (JSONObject) o;
@@ -379,7 +380,7 @@ public class ReckonServiceImpl implements ReckonService {
                     model.setModelPrice(object.getBigDecimal("model_price"));
                     modelMapper.insert(model);
 
-                    jedisClient.hset("CAR_MODEL", model.getModelId() + "", JSON.toJSONString(model));
+                    jedisClient.hset("CAR_MODEL", object.getInteger("model_id") + "", JSON.toJSONString(model));
                 }
                 return JsonResult.OK(model_list);
             }
@@ -420,26 +421,26 @@ public class ReckonServiceImpl implements ReckonService {
             for (Object eval_price : eval_prices) {
                 JSONObject object = (JSONObject) eval_price;
 //
-//                if(object.getString("condition").equals("excellent")){
-//                    //车况优秀
-//                    gzrecord.setPriceMaxA(object.getString("dealer_buy_price"));
-//                    gzrecord.setPriceMinA(object.getString("dealer_low_buy_price"));
-//                }
-                if (object.getString("condition").equals("good")) {
+                if(object.getString("condition").equals("excellent")){
                     //车况优秀
                     gzrecord.setPriceMaxA(object.getString("dealer_buy_price"));
                     gzrecord.setPriceMinA(object.getString("dealer_low_buy_price"));
                 }
-                if (object.getString("condition").equals("normal")) {
+                if (object.getString("condition").equals("good")) {
                     //车况良好
                     gzrecord.setPriceMaxB(object.getString("dealer_buy_price"));
                     gzrecord.setPriceMinB(object.getString("dealer_low_buy_price"));
+                }
+                if (object.getString("condition").equals("normal")) {
                     //车况一般
-                    gzrecord.setPriceMaxC(new BigDecimal(object.getInteger("dealer_buy_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
-                    gzrecord.setPriceMinC(new BigDecimal(object.getInteger("dealer_low_buy_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+                    gzrecord.setPriceMaxC(object.getString("dealer_buy_price"));
+                    gzrecord.setPriceMinC(object.getString("dealer_low_buy_price"));
                     //车况较差
-                    gzrecord.setPriceMaxD(new BigDecimal(object.getInteger("dealer_buy_price") * 0.94 * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
-                    gzrecord.setPriceMinD(new BigDecimal(object.getInteger("dealer_low_buy_price") * 0.94 * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+                    gzrecord.setPriceMaxD(new BigDecimal(object.getInteger("dealer_buy_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+                    gzrecord.setPriceMinD(new BigDecimal(object.getInteger("dealer_low_buy_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+//
+//                    gzrecord.setPriceMaxD(new BigDecimal(object.getInteger("dealer_buy_price") * 0.94 * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+//                    gzrecord.setPriceMinD(new BigDecimal(object.getInteger("dealer_low_buy_price") * 0.94 * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
                 }
 
             }
