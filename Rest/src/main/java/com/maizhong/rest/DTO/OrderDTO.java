@@ -26,6 +26,15 @@ public class OrderDTO {
     private String reckon_time;//评估时间
     private String seriesImg;//车系图片
     private OrderInfo orderInfo;//评测信息详情
+    private String status;//订单状态
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public OrderInfo getOrderInfo() {
         return orderInfo;

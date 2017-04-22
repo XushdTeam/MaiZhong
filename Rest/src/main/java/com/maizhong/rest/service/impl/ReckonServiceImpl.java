@@ -422,7 +422,7 @@ public class ReckonServiceImpl implements ReckonService {
             for (Object eval_price : eval_prices) {
                 JSONObject object = (JSONObject) eval_price;
 //
-                if(object.getString("condition").equals("excellent")){
+                if (object.getString("condition").equals("excellent")) {
                     //车况优秀
                     gzrecord.setPriceMaxA(object.getString("dealer_buy_price"));
                     gzrecord.setPriceMinA(object.getString("dealer_low_buy_price"));
@@ -949,106 +949,111 @@ public class ReckonServiceImpl implements ReckonService {
             orderDTO.setLinkMan(orders.getLinkMan());//联系人
             orderDTO.setLinkPhone(orders.getLinkPhone());//联系人电话
             orderDTO.setReckon_time(TimeUtils.getFormatDateTime3(orders.getReckonTime()));//评估时间
-            OrderInfoExample orderInfoExample=new OrderInfoExample();
+            OrderInfoExample orderInfoExample = new OrderInfoExample();
             orderInfoExample.createCriteria();
             criteria.andOrderNumberEqualTo(orders.getOrderNumber());
             List<OrderInfo> orderInfoList = orderInfoMapper.selectByExample(orderInfoExample);
-           if (orderInfoList!=null&&orderInfoList.size()>0){
-               OrderInfo orderInfo=orderInfoList.get(0);
-               if (StringUtils.equals("1", orderInfo.getCk())) {
-                   orderInfo.setCk("车况优秀");
-               } else if (StringUtils.equals("2", orderInfo.getCk())) {
-                   orderInfo.setCk("车况良好");
-               } else if (StringUtils.equals("3", orderInfo.getCk())) {
-                   orderInfo.setCk("车况一般");
-               } else {
-                   orderInfo.setCk("车况较差");
-               }
-               //颜色
-               switch (orderInfo.getColor()) {
-                   case "1":
-                       orderInfo.setColor("米色");
-                       break;
-                   case "2":
-                       orderInfo.setColor("白色");
-                       break;
-                   case "3":
-                       orderInfo.setColor("灰色");
-                       break;
-                   case "4":
-                       orderInfo.setColor("红色");
-                       break;
-                   case "5":
-                       orderInfo.setColor("棕色");
-                       break;
-                   case "6":
-                       orderInfo.setColor("蓝色");
-                       break;
-                   case "7":
-                       orderInfo.setColor("黄色");
-                       break;
-                   case "8":
-                       orderInfo.setColor("黑色");
-                       break;
-                   case "9":
-                       orderInfo.setColor("银色");
-                       break;
-                   case "10":
-                       orderInfo.setColor("绿色");
-                       break;
-                   default:
-                       orderInfo.setColor("其他颜色");
-                       break;
-               }
-               //交强险
-               if (StringUtils.equals(orderInfo.getJqx(), "1")) {
-                   orderInfo.setJqx("两个月以内");
-               } else {
-                   orderInfo.setJqx("两个月以上");
-               }
-               //过户
-               if (StringUtils.equals(orderInfo.getGh(), "1")) {
-                   orderInfo.setGh("0次");
-               } else if (StringUtils.equals(orderInfo.getGh(), "2")) {
-                   orderInfo.setGh("1次");
-               } else if (StringUtils.equals(orderInfo.getGh(), "3")) {
-                   orderInfo.setGh("2次");
-               } else {
-                   orderInfo.setGh("3次及以上");
-               }
-               //过户时间
-               if (StringUtils.equals(orderInfo.getGhtime(), "1")) {
-                   orderInfo.setGhtime("无过户");
-               } else if (StringUtils.equals(orderInfo.getGhtime(), "2")) {
-                   orderInfo.setGhtime("六个月以内");
-               }
-               {
-                   orderInfo.setGhtime("六个月以上");
-               }
-               //性质
-               if (StringUtils.equals(orderInfo.getXz(), "1")) {
-                   orderInfo.setXz("非营运");
-               } else {
-                   orderInfo.setXz("租赁");
-               }
-               //年检
-               if (StringUtils.equals(orderInfo.getNj(), "1")) {
-                   orderInfo.setNj("两个月以内");
-               } else {
-                   orderInfo.setNj("两个月以上");
-               }
-               //使用方式
-               if (StringUtils.equals(orderInfo.getMethod(), "1")) {
-                   orderInfo.setMethod("公司");
-               } else {
-                   orderInfo.setMethod("个人");
-               }
-               orderDTO.setOrderInfo(orderInfo);//评测信息详情
-           }
+            if (orderInfoList != null && orderInfoList.size() > 0) {
+                OrderInfo orderInfo = orderInfoList.get(0);
+                if (StringUtils.equals("1", orderInfo.getCk())) {
+                    orderInfo.setCk("车况优秀");
+                } else if (StringUtils.equals("2", orderInfo.getCk())) {
+                    orderInfo.setCk("车况良好");
+                } else if (StringUtils.equals("3", orderInfo.getCk())) {
+                    orderInfo.setCk("车况一般");
+                } else {
+                    orderInfo.setCk("车况较差");
+                }
+                //颜色
+                switch (orderInfo.getColor()) {
+                    case "1":
+                        orderInfo.setColor("米色");
+                        break;
+                    case "2":
+                        orderInfo.setColor("白色");
+                        break;
+                    case "3":
+                        orderInfo.setColor("灰色");
+                        break;
+                    case "4":
+                        orderInfo.setColor("红色");
+                        break;
+                    case "5":
+                        orderInfo.setColor("棕色");
+                        break;
+                    case "6":
+                        orderInfo.setColor("蓝色");
+                        break;
+                    case "7":
+                        orderInfo.setColor("黄色");
+                        break;
+                    case "8":
+                        orderInfo.setColor("黑色");
+                        break;
+                    case "9":
+                        orderInfo.setColor("银色");
+                        break;
+                    case "10":
+                        orderInfo.setColor("绿色");
+                        break;
+                    default:
+                        orderInfo.setColor("其他颜色");
+                        break;
+                }
+                //交强险
+                if (StringUtils.equals(orderInfo.getJqx(), "1")) {
+                    orderInfo.setJqx("两个月以内");
+                } else {
+                    orderInfo.setJqx("两个月以上");
+                }
+                //过户
+                if (StringUtils.equals(orderInfo.getGh(), "1")) {
+                    orderInfo.setGh("0次");
+                } else if (StringUtils.equals(orderInfo.getGh(), "2")) {
+                    orderInfo.setGh("1次");
+                } else if (StringUtils.equals(orderInfo.getGh(), "3")) {
+                    orderInfo.setGh("2次");
+                } else {
+                    orderInfo.setGh("3次及以上");
+                }
+                //过户时间
+                if (StringUtils.equals(orderInfo.getGhtime(), "1")) {
+                    orderInfo.setGhtime("无过户");
+                } else if (StringUtils.equals(orderInfo.getGhtime(), "2")) {
+                    orderInfo.setGhtime("六个月以内");
+                }
+                {
+                    orderInfo.setGhtime("六个月以上");
+                }
+                //性质
+                if (StringUtils.equals(orderInfo.getXz(), "1")) {
+                    orderInfo.setXz("非营运");
+                } else {
+                    orderInfo.setXz("租赁");
+                }
+                //年检
+                if (StringUtils.equals(orderInfo.getNj(), "1")) {
+                    orderInfo.setNj("两个月以内");
+                } else {
+                    orderInfo.setNj("两个月以上");
+                }
+                //使用方式
+                if (StringUtils.equals(orderInfo.getMethod(), "1")) {
+                    orderInfo.setMethod("公司");
+                } else {
+                    orderInfo.setMethod("个人");
+                }
+                orderDTO.setOrderInfo(orderInfo);//评测信息详情
+            }
+            try {
+                orderDTO.setStatus(String.valueOf(orders.getStatus()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             orderDTOList.add(orderDTO);
         }
 
-        return JsonResult.build(200,"获取成功",orderDTOList);
+        return JsonResult.build(200, "获取成功", orderDTOList);
     }
 
     /**
