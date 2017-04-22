@@ -440,8 +440,8 @@
                     $('#user').html(phone).show();
 
                 }else{
-                    $.cookie('phone', null);
-                    $.cookie('token', null);
+                    $.cookie("phone",null,{path:"/"});
+                    $.cookie("token",null,{path:"/"});
                 }
             })
         }

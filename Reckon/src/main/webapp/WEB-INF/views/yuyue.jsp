@@ -301,8 +301,8 @@
                     $("#phone").val(phone);
 
                 }else{
-                    $.cookie('phone', null);
-                    $.cookie('token', null);
+                    $.cookie("phone",null,{path:"/"});
+                    $.cookie("token",null,{path:"/"});
                 }
             })
         }
@@ -387,7 +387,7 @@
 
             $.post("/OrderConfim",param,function(res){
                 if(res.status==200){
-                    window.location.href = "/per"
+                    window.location.href = "/per/or"
                 }
             },'JSON');
 
@@ -457,7 +457,7 @@
 
                 $.post("/OrderConfim",param,function(res){
                     if(res.status==200){
-                        window.location.href = "/per"
+                        window.location.href = "/per/or"
                     }
                 },'JSON');
 
@@ -520,7 +520,7 @@
 
                 $.post("/OrderConfim",param,function(res){
                     if(res.status==200){
-                        window.location.href = "/per"
+                        window.location.href = "/per/or"
                     }
                 },'JSON');
 

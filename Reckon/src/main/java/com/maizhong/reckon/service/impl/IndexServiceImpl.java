@@ -3,6 +3,7 @@ package com.maizhong.reckon.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.parser.JSONLexerBase;
 import com.maizhong.common.dto.GuzhiDTO;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
@@ -10,7 +11,9 @@ import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.pojo.Line;
 import com.maizhong.reckon.DTO.IndexDTO;
+import com.maizhong.reckon.DTO.OrderDTO;
 import com.maizhong.reckon.service.IndexService;
+import net.sf.json.util.JSONUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -276,5 +279,26 @@ public class IndexServiceImpl implements IndexService {
             e.printStackTrace();
         }
         return JsonResult.Error(OperateEnum.SERVER_ERROR);
+    }
+
+    /**
+     * 获取订单信息
+     * @param phone
+     * @return
+     */
+    @Override
+    public List<OrderDTO> getOrderDTO(String phone) {
+
+        try {
+
+            String res = HttpClientUtil.doGet(RESTURL+"getOrdersByPhone/"+phone);
+            JsonResult result = JsonUtils.jsonToPojo(res,JsonResult.class);
+            return JsonUtils.jsonToList(JSON.toJSONString(result.getData()),OrderDTO.class);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

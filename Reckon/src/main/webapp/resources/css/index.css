@@ -251,7 +251,14 @@ img,input{vertical-align:middle; outline:none}
 
 /*个人中心*/
 .main{ width: 1200px; margin:0px auto 30px; overflow: hidden}
-.main .m_left{ background: #fff; float: left; width: 255px; padding: 0px 0 0 20px;min-height: 736px; border: 1px solid #CCC;}
+.main .m_left{
+    background: #fff;
+    float: left;
+    width: 258px;
+    padding: -1px 0 0 20px;
+    min-height: 365px;
+    border: 1px solid #CCC;
+}
 .main .m_left ul { margin:40px 0 20px  50px;cursor: pointer;}
 .main .m_left ul li{ font-size: 18px; color: #000}
 .main .m_left ul p{ margin-left: 35px}

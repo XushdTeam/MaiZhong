@@ -1,10 +1,12 @@
 package com.maizhong.reckon.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.maizhong.common.dto.GuzhiDTO;
 import com.maizhong.common.result.JsonResult;
 
 import com.maizhong.pojo.Line;
 import com.maizhong.reckon.DTO.IndexDTO;
+import com.maizhong.reckon.DTO.OrderDTO;
 import com.maizhong.reckon.service.IndexService;
 import com.maizhong.reckon.service.LoginService;
 import org.apache.commons.lang3.StringUtils;
@@ -240,6 +242,10 @@ public class IndexController {
         }else{
             JsonResult result = loginService.loginByToken(phone,token);
             if(result.getStatus()==200){
+
+                List<OrderDTO> list = indexService.getOrderDTO(phone);
+                System.out.println(JSON.toJSONString(list));
+                model.addAttribute("orderInfo",list);
                 model.addAttribute("phone",phone);
                 return cu;
             }else{

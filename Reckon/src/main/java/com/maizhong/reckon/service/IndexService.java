@@ -5,6 +5,7 @@ import com.maizhong.common.result.JsonResult;
 
 import com.maizhong.pojo.Line;
 import com.maizhong.reckon.DTO.IndexDTO;
+import com.maizhong.reckon.DTO.OrderDTO;
 
 import java.util.List;
 
@@ -38,4 +39,6 @@ public interface IndexService {
     JsonResult getOneWeek();
 
     JsonResult orderConfim(String orderNumber, String dealWay, String wayId, String linkMan, String linkPhone,String checktime, String address);
+
+    List<OrderDTO> getOrderDTO(String phone);
 }
