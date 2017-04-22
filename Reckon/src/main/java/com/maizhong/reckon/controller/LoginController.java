@@ -50,4 +50,17 @@ public class LoginController {
         return result;
     }
 
+    /**
+     * 使用phone和Token判断是否登录
+     *
+     * @param phone
+     * @param token
+     * @return
+     */
+    @RequestMapping(value = "/loginByToken/{phone}/{token}", method = RequestMethod.GET)
+    @ResponseBody
+    public JsonResult loginByToken(@PathVariable("phone") String phone, @PathVariable("token") String token) {
+        JsonResult result = loginService.loginByToken(phone, token);
+        return result;
+    }
 }
