@@ -20,8 +20,8 @@
     <meta name="description" content="迈众汽车为您提供最新汽车报价，汽车图片，汽车价格大全，最精彩的汽车新闻、行情、评测、导购内容，是提供信息最快最全的中国汽车网站。"/>
     <link rel="stylesheet" type="text/css" href="/resources/css/index.css" />
     <link rel="stylesheet" type="text/css" href="/resources/css/guzhi.css" />
-    <script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="/resources/js/jquery.cookie.min.js"></script>
 </head>
 <body>
 <!--头部开始-->
@@ -402,7 +402,26 @@
 <!--关于我们 end-->
 <jsp:include page="footer.jsp"></jsp:include>
 <script src="/resources/js/index.js"></script>
+<script>
+    $(document).ready(function() {
 
+        var phone = $.cookie('phone');
+        var token = $.cookie('token');
+        if(phone&&token){
+            $.getJSON('/loginByToken/'+phone+'/'+token,function (d) {
+                if(d.status==200){
+                    $("#login").hide();
+
+                    $('#user').html(phone).show();
+
+                }else{
+                    $.cookie('phone', null);
+                    $.cookie('token', null);
+                }
+            })
+        }
+    })
+</script>
 
 </body>
 </html>
