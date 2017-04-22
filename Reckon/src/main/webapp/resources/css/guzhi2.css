@@ -1620,4 +1620,12 @@ li.on a {
     background: #FFF!important;
 }
 
+.layui-layer-hui {
+    min-width: 100px;
+    background-color: #f05b48!important;
+    filter: alpha(opacity=60);
+    background-color: rgba(240,91,72,.6)!important;
+    color: #fff;
+    border: none;
+}
 

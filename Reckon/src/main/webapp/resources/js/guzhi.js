@@ -160,67 +160,68 @@ function cleckinput(a, b, c, d) {
         vcode = $("#vcode").val(),
         m = 14;
 
+    var error = [];
 
-    if (1 == a && ("请 选 择 车 型" == e ? $("#select1").css({
+    if (1 == a && ("请 选 择 车 型" == e ? ($("#select1").css({
             color: "#ff5d5d"
-        }) : (m--, $("#select1").css({
+        }), error.push('请选择车型<br>')) : (m--, $("#select1").css({
             color: "#333"
         }))),
-        1 == b && ("请 选 择 年 份" == f || 0 == g || 0 == h ? $("#select4").css({
+        1 == b && ("请 选 择 年 份" == f || 0 == g || 0 == h ? ($("#select4").css({
             color: "#ff5d5d"
-        }) : (m--, $("#select4").css({
+        }),error.push('请选择年份')): (m--, $("#select4").css({
             color: "#333"
         }))),
-        1 == c && ("请 选 择 地 区" == i || 0 == j || 0 == k ? $("#select5").css({
+        1 == c && ("请 选 择 地 区" == i || 0 == j || 0 == k ? ($("#select5").css({
             color: "#ff5d5d"
-        }) : (m--, $("#select5").css({
+        }),error.push('请选择地区')): (m--, $("#select5").css({
             color: "#333"
         }))),
         1 == d && ("" == l && 0 == l ? ($("#gongli").css({
             color: "#ff5d5d"
-        }), $("#lichengpd").focus()) : (m--, $("#gongli").css({
+        }), $("#lichengpd").focus(),error.push('请选输入里程')) : (m--, $("#gongli").css({
             color: "#333"
         }))),
         1 && (0 == s_color ? ($(".color").css({
             color: "#ff5d5d"
-        })) : (m--, $(".color").css({
+        }),error.push('请选择颜色')) : (m--, $(".color").css({
             color: "#333"
         }))),
         1 && (0 == s_jxq ? ($(".jqx").css({
             color: "#ff5d5d"
-        })) : (m--, $(".jqx").css({
+        }),error.push('请选择交强险')) : (m--, $(".jqx").css({
             color: "#333"
         }))), 1 && (0 == s_nj ? ($(".nj").css({
             color: "#ff5d5d"
-        })) : (m--, $(".nj").css({
+        }),error.push('请选择年检')) : (m--, $(".nj").css({
             color: "#333"
         }))),1 && (0 == s_xz ? ($(".xz").css({
             color: "#ff5d5d"
-        })) : (m--, $(".xz").css({
+        }),error.push('请选择使用性质')) : (m--, $(".xz").css({
             color: "#333"
         }))),1 && (0 == s_gh ? ($(".gh").css({
             color: "#ff5d5d"
-        })) : (m--, $(".gh").css({
+        }),error.push('请选择过户次数')) : (m--, $(".gh").css({
             color: "#333"
         }))),1 && (0 == s_ghtime ? ($(".ghtime").css({
             color: "#ff5d5d"
-        })) : (m--, $(".ghtime").css({
+        }),error.push('请选择过户时间')) : (m--, $(".ghtime").css({
             color: "#333"
         }))),1 && (0 == s_method ? ($(".method").css({
             color: "#ff5d5d"
-        })) : (m--, $(".method").css({
+        }),error.push('请选择现使用方')) : (m--, $(".method").css({
             color: "#333"
         }))),1 && (0 == s_ck ? ($(".ck").css({
             color: "#ff5d5d"
-        })) : (m--, $(".ck").css({
+        }),error.push('请选择车况')) : (m--, $(".ck").css({
             color: "#333"
         }))),1 && ("" == vcode ? ($(".vc").css({
-            color: "#ff5d5d"}).find('.vr').show()
+            color: "#ff5d5d"}).find('.vr').show(),error.push('验证码为空')
         ) : (m--, $(".vc").css({
             color: "#333"
             }).find('.vr').hide()
         )),(!(/^1[34578]\d{9}$/.test(phone)) ? ($(".pc").css({
-                color: "#ff5d5d"}).find('.pr').show()
+                color: "#ff5d5d"}).find('.pr').show(),error.push('手机号格式不正确')
         ) : (m--, $(".pc").css({
             color: "#333"
             }).find('.pr').hide()
@@ -235,7 +236,8 @@ function cleckinput(a, b, c, d) {
                 
                 //电话写入cookie
                 $.cookie('phone', phone, {expires: 7, path: '/'});
-                
+                $.cookie('token', res.data, {expires: 7, path: '/'});
+
                 var n = ($("#s_brand").val(), $("#s_series").val(), $("#s_simple").val());
                 var o = "/saleguzhi/" + j +
                     "c" + k +
@@ -263,6 +265,11 @@ function cleckinput(a, b, c, d) {
         //
         // var o = "/guzhi/" + j + "c" + k + "m" + n + "r" + g + "-" + h + "g" + l;
         // location.href = o
+    }else{
+        layer.msg(error.join(','), {
+            offset: 't',
+            anim: 6
+        });
     }
 }
 /**

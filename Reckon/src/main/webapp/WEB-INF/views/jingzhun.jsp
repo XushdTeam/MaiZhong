@@ -25,6 +25,7 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/guzhi2.css" />
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
     <script src="/resources/js/jquery.cookie.min.js" type="text/javascript"></script>
+    <script src="https://cdn.bootcss.com/layer/3.0.1/layer.js"></script>
 </head>
 <body>
 <div class="top e_top">
@@ -34,7 +35,7 @@
         <span class="t_right">
             <a href="/sale" class="one">我要卖车</a>
             <a href="/login" class="one" id="login">登录</a>
-            <a href="/per" class="two" id="user" style="display:none">188****8888</a>
+            <a href="/per/or" class="two" id="user" style="display:none">188****8888</a>
             <a href="javascript:vold(0)" class="two">APP下载</a></span>
         </span>
     </div>
