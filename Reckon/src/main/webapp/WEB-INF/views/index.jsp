@@ -35,6 +35,7 @@
                 <a href="/sale" class="one">我要卖车</a>
                 <a href="/login" class="one" id="login">登录</a>
                 <a href="/per/or" class="two" id="user" style="display:none">188****8888</a>
+                <a href="javascript:void(0)" class="two" id="exit" style="display:none" onclick="exit();">退出</a>
                 <a href="javascript:vold(0)" class="two">APP下载</a></span>
         </div>
     </div><!--top end-->
@@ -442,6 +443,7 @@
                     $("#login").hide();
 
                     $('#user').html(phone).show();
+                    $('#exit').show();
 
                 }else{
                     $.cookie("phone",null,{path:"/"});
@@ -450,6 +452,11 @@
             })
         }
     })
+    function exit(){
+        $.cookie("phone",null,{path:"/"});
+        $.cookie("token",null,{path:"/"});
+        window.location.reload()
+    }
 </script>
 
 </body>

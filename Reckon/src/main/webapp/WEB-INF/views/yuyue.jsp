@@ -35,7 +35,7 @@
             <a href="/sale" class="one">我要卖车</a>
             <a href="/login" class="one" id="login">登录</a>
             <a href="/per/or" class="two" id="user" style="display:none">188****8888</a>
-            <a href="javascript:vold(0)" class="two">APP下载</a>
+            <a href="javascript:void(0)" class="two">APP下载</a></span>
         </span>
     </div>
 </div>

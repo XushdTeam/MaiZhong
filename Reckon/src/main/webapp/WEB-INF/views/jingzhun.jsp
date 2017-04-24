@@ -33,7 +33,7 @@
         <a href="#"><img src="../resources/img/logo.png"></a>
         <span class="tell">010-8025-8108</span>
         <span class="t_right">
-            <a href="/sale" class="one">我要卖车</a>
+            <%--<a href="/sale" class="one">我要卖车</a>--%>
             <a href="/login" class="one" id="login">登录</a>
             <a href="/per/or" class="two" id="user" style="display:none">188****8888</a>
             <a href="javascript:vold(0)" class="two">APP下载</a></span>

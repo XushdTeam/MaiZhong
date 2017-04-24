@@ -26,17 +26,18 @@
 <body class="bgss">
 <div class="top e_top">
     <div class="t_cen">
-        <a href="#"><img src="../resources/img/logo.png"></a>
+        <a href="/"><img src="../resources/img/logo.png"></a>
         <span class="tell">010-8025-8108</span>
         <span class="t_right">
             <a href="/sale" class="one">我要卖车</a>
             <a href="javascript:void(0)" class="two" >${phone}</a>
+            <a href="javascript:void(0)" class="two" id="exit"  onclick="exit();">退出</a>
             <a href="javascript:void(0)" class="two">APP下载</a>
         </span>
     </div>
 </div>
 
-<div class="x_nav">当前位置 :  <a href="#">首页</a> > <a href="#">个人中心</a></div>
+<div class="x_nav">当前位置 :  <a href="/">首页</a> > <a href="#">个人中心</a></div>
 
 <div class="main">
     <div class="m_left">
@@ -218,6 +219,11 @@
         });
 
     })
+    function exit(){
+        $.cookie("phone",null,{path:"/"});
+        $.cookie("token",null,{path:"/"});
+        window.location.href="/";
+    }
 </script>
 
 
