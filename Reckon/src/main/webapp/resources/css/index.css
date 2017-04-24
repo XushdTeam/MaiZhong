@@ -325,5 +325,7 @@ img,input{vertical-align:middle; outline:none}
 .x_l{ float: left; position: relative;}
 .x_r{ clear: both}
 
+.ovf{ overflow: auto; height: 320px}
+
 
 
