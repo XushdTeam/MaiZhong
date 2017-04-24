@@ -46,11 +46,12 @@ public class ReckonController {
 
     /**
      * 缓存城市keyvalue
+     *
      * @return
      */
     @RequestMapping(value = "/setRedisCity")
     @ResponseBody
-    public JsonResult setRedisCity(){
+    public JsonResult setRedisCity() {
         reckonService.setRedisCity();
         return JsonResult.OK();
 
@@ -142,7 +143,6 @@ public class ReckonController {
     }
 
     /**
-     *
      * 获取用户验证码
      *
      * @param phone
@@ -170,6 +170,7 @@ public class ReckonController {
 
     /**
      * 估值
+     *
      * @param param
      * @return
      */
@@ -183,6 +184,7 @@ public class ReckonController {
 
     /**
      * 获取精准估值结果
+     *
      * @param guzhiKey
      * @param otherKey
      * @return
@@ -191,19 +193,20 @@ public class ReckonController {
     @ResponseBody
     public JsonResult getSaleGZ(@PathVariable String guzhiKey,
                                 @PathVariable String otherKey,
-                                @PathVariable long phone){
+                                @PathVariable long phone) {
 
-        JsonResult result = reckonService.getSaleGZ(guzhiKey,otherKey,phone);
+        JsonResult result = reckonService.getSaleGZ(guzhiKey, otherKey, phone);
         return result;
     }
 
     /**
      * 从缓存获取估值信息
+     *
      * @return
      */
     @RequestMapping(value = "/getGZDetail/{phone}")
     @ResponseBody
-    public JsonResult getSaleGZ(@PathVariable long phone){
+    public JsonResult getSaleGZ(@PathVariable long phone) {
 
         JsonResult result = reckonService.getGZDetail(phone);
 
@@ -213,58 +216,106 @@ public class ReckonController {
 
     /**
      * 获取地铁站信息
+     *
      * @return
      */
 
     @RequestMapping(value = "/getSite")
     @ResponseBody
-    public JsonResult site(){
+    public JsonResult site() {
         reckonService.site();
         return JsonResult.OK();
     }
 
     /**
      * 获取4S店地址
+     *
      * @return
      */
     @RequestMapping(value = "/getBusinessAddress")
     @ResponseBody
-    public JsonResult getBusinessAddress(){
-       JsonResult result= reckonService.getBusinessAddress();
+    public JsonResult getBusinessAddress() {
+        JsonResult result = reckonService.getBusinessAddress();
         return result;
     }
 
     /**
      * 获取一周的时间
+     *
      * @return
      */
     @RequestMapping(value = "/getOneWeek")
     @ResponseBody
-    public JsonResult getOneWeek(){
-        JsonResult result =reckonService.getOneWeek();
+    public JsonResult getOneWeek() {
+        JsonResult result = reckonService.getOneWeek();
         return result;
     }
+
     /**
      * 获取地铁线路
+     *
      * @return
      */
     @RequestMapping(value = "/getLines")
     @ResponseBody
-    public JsonResult getLines(){
+    public JsonResult getLines() {
         JsonResult result = reckonService.getLines();
         return result;
     }
 
     /**
      * 通过线路ID 获取地铁站信息
+     *
      * @param lineId
      * @return
      */
     @RequestMapping(value = "/getSite/{lineId}")
     @ResponseBody
-    public JsonResult getSite(@PathVariable String lineId){
+    public JsonResult getSite(@PathVariable String lineId) {
         JsonResult result = reckonService.getSiteByLineId(lineId);
         return result;
     }
 
+    /**
+     * @param orderNumber 订单编号
+     * @param dealWay     交易方式 1 4S店 2 地铁站 3 上门
+     * @param wayId       4S店ID 或者 地铁站ID
+     * @param linkMan     联系人
+     * @param linkPhone   联系人手机号
+     * @param address     上门地址
+     * @return
+     */
+    @RequestMapping(value = "/updateOrders", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult updateOrders(String orderNumber,
+                                   String dealWay,
+                                   String wayId,
+                                   String linkMan,
+                                   String linkPhone,
+                                   String address,
+                                   String checkTime) {
+        JsonResult resul = reckonService.updateOrders(orderNumber, dealWay, wayId, linkMan, linkPhone, address, checkTime);
+        return resul;
+    }
+
+    @RequestMapping(value = "loginByToken/{phone}/{token}", method = RequestMethod.GET)
+    @ResponseBody
+    public JsonResult loginByToken(@PathVariable("phone") String phone, @PathVariable("token") String token) {
+        JsonResult result = reckonService.loginByToken(phone, token);
+        return result;
+    }
+
+    /**
+     * 根据手机号获取订单信息/DTO
+     * @param phone
+     * @return
+     */
+    @RequestMapping(value = "getOrdersByPhone/{phone}")
+    @ResponseBody
+    public JsonResult getOrdersByPhone(@PathVariable("phone") String phone) {
+        JsonResult result = reckonService.getOrdersByPhone(phone);
+        return result;
+
+
+    }
 }

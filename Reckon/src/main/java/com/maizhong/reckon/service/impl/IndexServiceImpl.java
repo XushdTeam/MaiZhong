@@ -3,17 +3,23 @@ package com.maizhong.reckon.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.parser.JSONLexerBase;
 import com.maizhong.common.dto.GuzhiDTO;
+import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.pojo.Line;
 import com.maizhong.reckon.DTO.IndexDTO;
+import com.maizhong.reckon.DTO.OrderDTO;
 import com.maizhong.reckon.service.IndexService;
+import net.sf.json.util.JSONUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Xushd on 2017/4/18.
@@ -77,7 +83,7 @@ public class IndexServiceImpl implements IndexService {
             e.printStackTrace();
 
         }
-        return null;
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
 
 
     }
@@ -102,7 +108,7 @@ public class IndexServiceImpl implements IndexService {
 
         }
 
-        return null;
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
     }
 
     @Override
@@ -117,7 +123,7 @@ public class IndexServiceImpl implements IndexService {
             e.printStackTrace();
         }
 
-        return null;
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
 
     }
 
@@ -227,7 +233,7 @@ public class IndexServiceImpl implements IndexService {
         }
 
 
-        return null;
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
     }
 
     @Override
@@ -242,5 +248,57 @@ public class IndexServiceImpl implements IndexService {
         String res = HttpClientUtil.doGet(RESTURL+"getOneWeek");
         JsonResult object = JsonUtils.jsonToPojo(res,JsonResult.class);
         return  object;
+    }
+
+    /**
+     * 订单确认
+     * @param orderNumber
+     * @param dealWay
+     * @param wayId
+     * @param linkMan
+     * @param linkPhone
+     * @param address
+     * @return
+     */
+    @Override
+    public JsonResult orderConfim(String orderNumber, String dealWay, String wayId, String linkMan, String linkPhone,String checktime, String address) {
+
+        try {
+            Map<String,String> param = new HashMap<>();
+            param.put("orderNumber",orderNumber);
+            param.put("dealWay",dealWay);
+            param.put("wayId",wayId);
+            param.put("linkMan",linkMan);
+            param.put("linkPhone",linkPhone);
+            param.put("checkTime",checktime);
+            param.put("address",address);
+
+            String res = HttpClientUtil.doPost(RESTURL+"updateOrders",param);
+            return JsonResult.OK(JsonUtils.jsonToPojo(res,JsonResult.class));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
+    }
+
+    /**
+     * 获取订单信息
+     * @param phone
+     * @return
+     */
+    @Override
+    public List<OrderDTO> getOrderDTO(String phone) {
+
+        try {
+
+            String res = HttpClientUtil.doGet(RESTURL+"getOrdersByPhone/"+phone);
+            JsonResult result = JsonUtils.jsonToPojo(res,JsonResult.class);
+            return JsonUtils.jsonToList(JSON.toJSONString(result.getData()),OrderDTO.class);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

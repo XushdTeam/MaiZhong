@@ -16,12 +16,12 @@ import static org.junit.Assert.*;
 
 @Controller
 public class TestControllerTest {
-
-    @Autowired
-    private TestService testService;
-    @Test
-    public void testReckon() throws Exception {
-        testService.testService("sdaf");
-    }
+//
+//    @Autowired
+//    private TestService testService;
+//    @Test
+//    public void testReckon() throws Exception {
+//        testService.testService("sdaf");
+//    }
 
 }

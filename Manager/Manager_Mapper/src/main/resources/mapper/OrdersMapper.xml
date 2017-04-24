@@ -8,9 +8,13 @@
     <result column="model_id" jdbcType="BIGINT" property="modelId" />
     <result column="model_name" jdbcType="VARCHAR" property="modelName" />
     <result column="reckon_price" jdbcType="VARCHAR" property="reckonPrice" />
+    <result column="way_id" jdbcType="BIGINT" property="wayId" />
     <result column="deal_price" jdbcType="VARCHAR" property="dealPrice" />
+    <result column="check_time" jdbcType="VARCHAR" property="checkTime" />
+    <result column="deal_time" jdbcType="VARCHAR" property="dealTime" />
     <result column="deal_way" jdbcType="INTEGER" property="dealWay" />
     <result column="link_man" jdbcType="VARCHAR" property="linkMan" />
+    <result column="link_phone" jdbcType="VARCHAR" property="linkPhone" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="reckon_time" jdbcType="TIMESTAMP" property="reckonTime" />
     <result column="status" jdbcType="INTEGER" property="status" />
@@ -75,8 +79,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    order_id, order_number, user_id, model_id, model_name, reckon_price, deal_price, 
-    deal_way, link_man, address, reckon_time, status, delflag
+    order_id, order_number, user_id, model_id, model_name, reckon_price, way_id, deal_price, 
+    check_time, deal_time, deal_way, link_man, link_phone, address, reckon_time, status, 
+    delflag
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.pojo.OrdersExample" resultMap="BaseResultMap">
     select
@@ -111,14 +116,16 @@
   <insert id="insert" parameterType="com.maizhong.pojo.Orders">
     insert into orders (order_id, order_number, user_id, 
       model_id, model_name, reckon_price, 
-      deal_price, deal_way, link_man, 
-      address, reckon_time, status, 
-      delflag)
+      way_id, deal_price, check_time, 
+      deal_time, deal_way, link_man, 
+      link_phone, address, reckon_time, 
+      status, delflag)
     values (#{orderId,jdbcType=BIGINT}, #{orderNumber,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
       #{modelId,jdbcType=BIGINT}, #{modelName,jdbcType=VARCHAR}, #{reckonPrice,jdbcType=VARCHAR}, 
-      #{dealPrice,jdbcType=VARCHAR}, #{dealWay,jdbcType=INTEGER}, #{linkMan,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{reckonTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
-      #{delflag,jdbcType=INTEGER})
+      #{wayId,jdbcType=BIGINT}, #{dealPrice,jdbcType=VARCHAR}, #{checkTime,jdbcType=VARCHAR}, 
+      #{dealTime,jdbcType=VARCHAR}, #{dealWay,jdbcType=INTEGER}, #{linkMan,jdbcType=VARCHAR}, 
+      #{linkPhone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{reckonTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{delflag,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.pojo.Orders">
     insert into orders
@@ -141,14 +148,26 @@
       <if test="reckonPrice != null">
         reckon_price,
       </if>
+      <if test="wayId != null">
+        way_id,
+      </if>
       <if test="dealPrice != null">
         deal_price,
+      </if>
+      <if test="checkTime != null">
+        check_time,
+      </if>
+      <if test="dealTime != null">
+        deal_time,
       </if>
       <if test="dealWay != null">
         deal_way,
       </if>
       <if test="linkMan != null">
         link_man,
+      </if>
+      <if test="linkPhone != null">
+        link_phone,
       </if>
       <if test="address != null">
         address,
@@ -182,14 +201,26 @@
       <if test="reckonPrice != null">
         #{reckonPrice,jdbcType=VARCHAR},
       </if>
+      <if test="wayId != null">
+        #{wayId,jdbcType=BIGINT},
+      </if>
       <if test="dealPrice != null">
         #{dealPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null">
+        #{checkTime,jdbcType=VARCHAR},
+      </if>
+      <if test="dealTime != null">
+        #{dealTime,jdbcType=VARCHAR},
       </if>
       <if test="dealWay != null">
         #{dealWay,jdbcType=INTEGER},
       </if>
       <if test="linkMan != null">
         #{linkMan,jdbcType=VARCHAR},
+      </if>
+      <if test="linkPhone != null">
+        #{linkPhone,jdbcType=VARCHAR},
       </if>
       <if test="address != null">
         #{address,jdbcType=VARCHAR},
@@ -232,14 +263,26 @@
       <if test="record.reckonPrice != null">
         reckon_price = #{record.reckonPrice,jdbcType=VARCHAR},
       </if>
+      <if test="record.wayId != null">
+        way_id = #{record.wayId,jdbcType=BIGINT},
+      </if>
       <if test="record.dealPrice != null">
         deal_price = #{record.dealPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkTime != null">
+        check_time = #{record.checkTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dealTime != null">
+        deal_time = #{record.dealTime,jdbcType=VARCHAR},
       </if>
       <if test="record.dealWay != null">
         deal_way = #{record.dealWay,jdbcType=INTEGER},
       </if>
       <if test="record.linkMan != null">
         link_man = #{record.linkMan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkPhone != null">
+        link_phone = #{record.linkPhone,jdbcType=VARCHAR},
       </if>
       <if test="record.address != null">
         address = #{record.address,jdbcType=VARCHAR},
@@ -266,9 +309,13 @@
       model_id = #{record.modelId,jdbcType=BIGINT},
       model_name = #{record.modelName,jdbcType=VARCHAR},
       reckon_price = #{record.reckonPrice,jdbcType=VARCHAR},
+      way_id = #{record.wayId,jdbcType=BIGINT},
       deal_price = #{record.dealPrice,jdbcType=VARCHAR},
+      check_time = #{record.checkTime,jdbcType=VARCHAR},
+      deal_time = #{record.dealTime,jdbcType=VARCHAR},
       deal_way = #{record.dealWay,jdbcType=INTEGER},
       link_man = #{record.linkMan,jdbcType=VARCHAR},
+      link_phone = #{record.linkPhone,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=VARCHAR},
       reckon_time = #{record.reckonTime,jdbcType=TIMESTAMP},
       status = #{record.status,jdbcType=INTEGER},
@@ -295,14 +342,26 @@
       <if test="reckonPrice != null">
         reckon_price = #{reckonPrice,jdbcType=VARCHAR},
       </if>
+      <if test="wayId != null">
+        way_id = #{wayId,jdbcType=BIGINT},
+      </if>
       <if test="dealPrice != null">
         deal_price = #{dealPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null">
+        check_time = #{checkTime,jdbcType=VARCHAR},
+      </if>
+      <if test="dealTime != null">
+        deal_time = #{dealTime,jdbcType=VARCHAR},
       </if>
       <if test="dealWay != null">
         deal_way = #{dealWay,jdbcType=INTEGER},
       </if>
       <if test="linkMan != null">
         link_man = #{linkMan,jdbcType=VARCHAR},
+      </if>
+      <if test="linkPhone != null">
+        link_phone = #{linkPhone,jdbcType=VARCHAR},
       </if>
       <if test="address != null">
         address = #{address,jdbcType=VARCHAR},
@@ -326,9 +385,13 @@
       model_id = #{modelId,jdbcType=BIGINT},
       model_name = #{modelName,jdbcType=VARCHAR},
       reckon_price = #{reckonPrice,jdbcType=VARCHAR},
+      way_id = #{wayId,jdbcType=BIGINT},
       deal_price = #{dealPrice,jdbcType=VARCHAR},
+      check_time = #{checkTime,jdbcType=VARCHAR},
+      deal_time = #{dealTime,jdbcType=VARCHAR},
       deal_way = #{dealWay,jdbcType=INTEGER},
       link_man = #{linkMan,jdbcType=VARCHAR},
+      link_phone = #{linkPhone,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       reckon_time = #{reckonTime,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=INTEGER},

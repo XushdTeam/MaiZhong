@@ -13,8 +13,8 @@
 <head>
     <title>迈众汽车精准估值</title>
 
-    <title>迈众汽车</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>迈众汽车</title>
@@ -24,9 +24,22 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/index.css" />
     <link rel="stylesheet" type="text/css" href="/resources/css/guzhi2.css" />
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="/resources/js/jquery.cookie.min.js" type="text/javascript"></script>
+    <script src="https://cdn.bootcss.com/layer/3.0.1/layer.js"></script>
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
+<div class="top e_top">
+    <div class="t_cen">
+        <a href="#"><img src="../resources/img/logo.png"></a>
+        <span class="tell">010-8025-8108</span>
+        <span class="t_right">
+            <a href="/sale" class="one">我要卖车</a>
+            <a href="/login" class="one" id="login">登录</a>
+            <a href="/per/or" class="two" id="user" style="display:none">188****8888</a>
+            <a href="javascript:vold(0)" class="two">APP下载</a></span>
+        </span>
+    </div>
+</div>
 
 
 <div class="x_nav">当前位置 :  <a href="#">首页</a> > <a href="#">二手车评估</a> > 精准估值</div>
@@ -291,8 +304,9 @@
 
     <div class="jing btn method">
         <label>现使用方：</label>
-        <a href="JavaScript:void(0)"  data-method="1">公司</a>
         <a href="JavaScript:void(0)"  data-method="2">个人</a>
+        <a href="JavaScript:void(0)"  data-method="1">公司</a>
+
     </div>
 
     <div class="jing btn jqx">
@@ -321,7 +335,7 @@
 
     <div class="jing btn ghtime">
         <label>最后一次过户时间：</label>
-        <a href="JavaScript:void(0)"  data-ghtime="1">一手车</a>
+        <a href="JavaScript:void(0)"  data-ghtime="1">无过户</a>
         <a href="JavaScript:void(0)"  data-ghtime="2">6个月以内</a>
         <a href="JavaScript:void(0)"  data-ghtime="3">6个月以上</a>
 
@@ -356,6 +370,31 @@
 
 <div class="clear"></div>
 <div class="anniu"><a style="display: block;color: #FFF" onclick="submitForm()">确认估值</a></div>
+
+
+<div class="footer">
+    <div class="foot_cen">
+        <!--div class="n_f_m_c">
+            <div class="">
+                <a href="/about.html">关于我们</a>
+                <a href="/help.html">帮助中心</a>
+                <a href="/joinus.html">加入我们</a>
+                <a href="/feedback.html">用户反馈</a>
+            </div>
+        </div-->
+
+        <div class="pp">
+            <p>Copyright © 2017-2020 迈众 All Rights Reserved 版权所有 迈众汽车信息服务有限公司</p>
+            <p>京ICP备17017795号  &nbsp;&nbsp;&nbsp; 联系电话：010-8025-8108 &nbsp;&nbsp;&nbsp;
+                <script type="text/javascript">
+                    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+                    document.write(unescape("%3Cspan id='cnzz_stat_icon_1261672623'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261672623' type='text/javascript'%3E%3C/script%3E"));
+                </script>
+            </p>
+        </div>
+
+    </div>
+</div>
 
 <!-- jQuery cookie 操作插件-->
 <script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -433,9 +472,29 @@
     }
 
 
+    $(document).ready(function() {
+
+        var phone = $.cookie('phone');
+        var token = $.cookie('token');
+        if(phone&&token){
+            $.getJSON('/loginByToken/'+phone+'/'+token,function (d) {
+                if(d.status==200){
+                    $("#login").hide();
+
+                    $('#user').html(phone).show();
+
+                    $("#phone").val(phone)
+                }else{
+                    $.cookie("phone",null,{path:"/"});
+                    $.cookie("token",null,{path:"/"});
+                }
+            })
+        }
+    })
+
 
 </script>
 </body>
 
-<jsp:include page="footer.jsp"></jsp:include>
+
 </html>

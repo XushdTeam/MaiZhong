@@ -12,7 +12,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>迈众汽车</title>
@@ -21,6 +22,7 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/index.css" />
     <link rel="stylesheet" type="text/css" href="/resources/css/guzhi.css" />
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="/resources/js/jquery.cookie.min.js"></script>
 </head>
 <body>
 <!--头部开始-->
@@ -31,8 +33,8 @@
             <span class="tell">010-8025-8108</span>
             <span class="t_right">
                 <a href="/sale" class="one">我要卖车</a>
-                <a href="/login" class="one">登录</a>
-                <a href="" class="two" >136****3782</a>
+                <a href="/login" class="one" id="login">登录</a>
+                <a href="/per/or" class="two" id="user" style="display:none">188****8888</a>
                 <a href="javascript:vold(0)" class="two">APP下载</a></span>
         </div>
     </div><!--top end-->
@@ -398,7 +400,53 @@
 
 </div>
 <!--关于我们 end-->
-<jsp:include page="footer.jsp"></jsp:include>
+
+<div class="footer">
+    <div class="foot_cen">
+        <!--div class="n_f_m_c">
+            <div class="">
+                <a href="/about.html">关于我们</a>
+                <a href="/help.html">帮助中心</a>
+                <a href="/joinus.html">加入我们</a>
+                <a href="/feedback.html">用户反馈</a>
+            </div>
+        </div-->
+
+        <div class="pp">
+            <p>Copyright © 2017-2020 迈众 All Rights Reserved 版权所有 迈众汽车信息服务有限公司</p>
+            <p>京ICP备17017795号  &nbsp;&nbsp;&nbsp; 联系电话：010-8025-8108 &nbsp;&nbsp;&nbsp;
+                <script type="text/javascript">
+                    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+                    document.write(unescape("%3Cspan id='cnzz_stat_icon_1261672623'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261672623' type='text/javascript'%3E%3C/script%3E"));
+                </script>
+            </p>
+        </div>
+
+    </div>
+</div>
+
 <script src="/resources/js/index.js"></script>
+<script>
+    $(document).ready(function() {
+
+        var phone = $.cookie('phone');
+        var token = $.cookie('token');
+        if(phone&&token){
+            $.getJSON('/loginByToken/'+phone+'/'+token,function (d) {
+                console.log(d)
+                if(d.status==200){
+                    $("#login").hide();
+
+                    $('#user').html(phone).show();
+
+                }else{
+                    $.cookie("phone",null,{path:"/"});
+                    $.cookie("token",null,{path:"/"});
+                }
+            })
+        }
+    })
+</script>
+
 </body>
 </html>

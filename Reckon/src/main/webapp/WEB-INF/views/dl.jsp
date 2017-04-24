@@ -8,7 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=9">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>迈众汽车</title>
@@ -17,6 +19,7 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/index.css" />
     <link rel="stylesheet" type="text/css" href="/resources/css/guzhi.css" />
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="/resources/js/js.js" type="text/javascript"></script>
     <style>
 
@@ -131,10 +134,11 @@
         $(".verc").hide();
 
         $.getJSON('/userLogin/'+phone+"/"+vercode,function(res){
-           console.log(JSON.stringify(res));
             if(res.status == 200){
-                window.sessionStorage.setItem('token',res.data);
-                window.location.href="/";
+                //电话写入cookie
+                $.cookie('phone', phone, {expires: 7, path: '/'});
+                $.cookie('token', res.data, {expires: 7, path: '/'});
+                window.location.href="/per/or";
             }else {
                 $(".verc").html(res.message);
                 $(".verc").show();

@@ -1,20 +1,19 @@
 package com.maizhong.reckon.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.maizhong.common.dto.GuzhiDTO;
 import com.maizhong.common.result.JsonResult;
 
 import com.maizhong.pojo.Line;
 import com.maizhong.reckon.DTO.IndexDTO;
+import com.maizhong.reckon.DTO.OrderDTO;
 import com.maizhong.reckon.service.IndexService;
+import com.maizhong.reckon.service.LoginService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.parsing.SourceExtractor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,6 +26,9 @@ public class IndexController {
     @Autowired
     private IndexService indexService;
 
+    @Autowired
+    private LoginService loginService;
+
     @RequestMapping(value = "/")
     public String index(Model model){
 
@@ -36,10 +38,22 @@ public class IndexController {
         model.addAttribute("proviceList",indexDTO.getProviceList());
         return "index";
     }
-    @RequestMapping(value = "/{page}")
-    public String test(@PathVariable String page){
-        return page;
+    @RequestMapping(value = "/index")
+    public String index1(Model model){
+
+        IndexDTO indexDTO = indexService.getIndexDTO();
+
+        model.addAttribute("brandList",indexDTO.getBrandList());
+        model.addAttribute("proviceList",indexDTO.getProviceList());
+        return "index";
     }
+
+
+
+//    @RequestMapping(value = "/{page}")
+//    public String test(@PathVariable String page){
+//        return page;
+//    }
 
 
     /**
@@ -184,5 +198,59 @@ public class IndexController {
         JsonResult result = indexService.getSiteByLineId(lineId);
 
         return result;
+    }
+
+    /**
+     * 订单确认
+     * @param orderNumber 订单编号
+     * @param dealWay 交易方式 1 4S店 2 地铁站 3 上门
+     * @param wayId  4S店ID 或者 地铁站ID
+     * @param linkMan 联系人
+     * @param linkPhone 联系人手机号
+     * @param address 上门地址
+     * @return
+     */
+    @RequestMapping(value = "/OrderConfim",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult orderConfim(String orderNumber,
+                                  String dealWay,
+                                  String wayId,
+                                  String linkMan,
+                                  String linkPhone,
+                                  String checktime,
+                                  String address ){
+
+        JsonResult result = indexService.orderConfim(orderNumber,dealWay,wayId,linkMan,linkPhone,checktime,address);
+        return result;
+    }
+
+    /**
+     * 跳转到个人中心
+     * @param phone
+     * @param token
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/per/{cu}")
+    public String userCenter(@CookieValue(value = "phone",required = false) String phone,
+                             @CookieValue(value = "token",required = false) String token,
+                             @PathVariable String cu,
+                             Model model){
+
+        if(StringUtils.isBlank(phone)||StringUtils.isBlank(token)){
+            return "dl";
+        }else{
+            JsonResult result = loginService.loginByToken(phone,token);
+            if(result.getStatus()==200){
+
+                List<OrderDTO> list = indexService.getOrderDTO(phone);
+
+                model.addAttribute("orderInfo",list);
+                model.addAttribute("phone",phone);
+                return cu;
+            }else{
+                return "dl";
+            }
+        }
     }
 }

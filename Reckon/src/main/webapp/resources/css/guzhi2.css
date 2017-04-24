@@ -1130,7 +1130,7 @@ li.on a {
     top: -1px;
     width: 37px;
     height: 35px;
-    background: url("../../../theme/images/web2.0/check.png") no-repeat;
+
 }
 .ck_left > img {
     width: 70px;
@@ -1620,4 +1620,12 @@ li.on a {
     background: #FFF!important;
 }
 
+.layui-layer-hui {
+    min-width: 100px;
+    background-color: #f05b48!important;
+    filter: alpha(opacity=60);
+    background-color: rgba(240,91,72,.6)!important;
+    color: #fff;
+    border: none;
+}
 

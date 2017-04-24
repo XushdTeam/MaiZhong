@@ -9,7 +9,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>迈众汽车</title>
@@ -21,10 +22,23 @@
 
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
     <script src="/resources/js/js.js" type="text/javascript"></script>
+    <script src="https://cdn.bootcss.com/layer/3.0.1/layer.js"></script>
+    <script src="/resources/js/jquery.cookie.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=N8kgZsufZYtKgEXbtUoTHrKlaqgAxTFY"></script>
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
+<div class="top e_top">
+    <div class="t_cen">
+        <a href="#"><img src="../resources/img/logo.png"></a>
+        <span class="tell">010-8025-8108</span>
+        <span class="t_right">
+            <a href="/sale" class="one">我要卖车</a>
+            <a href="/login" class="one" id="login">登录</a>
+            <a href="/per/or" class="two" id="user" style="display:none">188****8888</a>
+            <a href="javascript:vold(0)" class="two">APP下载</a></span>
+        </span>
+    </div>
+</div>
 
 <div class="x_nav">当前位置 :  <a href="#">首页</a> > <a href="#">二手车评估</a> > 预约</div>
 
@@ -79,7 +93,7 @@
             <h1><span>2</span>验车方式</h1>
             <div class="quh">
                 <div class="qu"> <span>地铁附近</span> <span>上门验车</span></div>
-                <div class="d_1">
+                <div class="d_1" >
                     <div class="one one1">
                         <p>地铁线路</p>
                         <div id="lineInput">地铁线路<img src="../resources/img/u.jpg"></div>
@@ -118,10 +132,10 @@
 
                 </div>
 
-                <div class="d_1">
+                <div class="d_1" style="display: none;">
                     <div class="one one3">
                         <p>详细地址</p>
-                        <input type="text" name="1" placeholder=" ">
+                        <input type="text" name="1" placeholder="请输入您的小区、大厦或街道名称" id="address">
                     </div>
                     <div class="one">
                         <p>交易时间</p>
@@ -140,16 +154,27 @@
         <div class="d_2">
             <div class="one one1">
                 <p>输入姓名</p>
-                <div><input type="text" name="1"> </div>
+                <div>
+                    <input type="text" name="name" id="userName" style="width: 100px;">
+                    <label class="demo--label">
+                        <input class="demo--radio" type="radio" value="先生" name="demo-radio" checked>
+                        <span class="demo--radioInput"></span>先生
+                    </label>
+                    <label class="demo--label">
+                        <input class="demo--radio" type="radio" value="女士" name="demo-radio">
+                        <span class="demo--radioInput"></span>女士
+                    </label>
+                    <%--<input type="radio" value="先生" name="r" style="width: 20px" checked>先生--%>
+                    <%--<input type="radio" value="女士" name="r" style="width: 20px">女士--%>
+                </div>
             </div>
             <div class="one">
                 <p>输入手机号</p>
-                <div><input type="tel" name="1"></div>
+                <div><input type="text" maxlength="11" name="phone" id="phone"></div>
                 <p>用来接受订单信息</p>
             </div>
         </div><!--d_2 end-->
         <div class="clear"></div>
-        <div class="anniu">确认预约</div>
     </div><!--left end-->
     <div class="right">
         <dl>
@@ -159,7 +184,6 @@
         </dl>
         <div class="clear"></div>
         <div>
-            <p> 上牌时间: ${result.regdate}</p>
             <p> 所属地区: ${result.city}</p>
             <p> 行驶里程: ${result.mail}万公里</p>
             <p> 主体颜色: ${result.color}</p>
@@ -170,11 +194,35 @@
             <p> 过户次数: ${result.gh}</p>
             <p> 最后一次过户时间: ${result.ghtime}</p>
             <p> 车况: ${result.ck}</p>
+            <p> 评估时间: ${result.reckonTime}</p>
         </div>
     </div><!--right end -->
 </div>
+<input type="hidden" id="orderNum" value="${result.orderNumber}">
+<div class="anniu" onclick="submit()">确认下单</div>
+<div class="footer">
+    <div class="foot_cen">
+        <!--div class="n_f_m_c">
+            <div class="">
+                <a href="/about.html">关于我们</a>
+                <a href="/help.html">帮助中心</a>
+                <a href="/joinus.html">加入我们</a>
+                <a href="/feedback.html">用户反馈</a>
+            </div>
+        </div-->
 
-<jsp:include page="footer.jsp"></jsp:include>
+        <div class="pp">
+            <p>Copyright © 2017-2020 迈众 All Rights Reserved 版权所有 迈众汽车信息服务有限公司</p>
+            <p>京ICP备17017795号  &nbsp;&nbsp;&nbsp; 联系电话：010-8025-8108 &nbsp;&nbsp;&nbsp;
+                <script type="text/javascript">
+                    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+                    document.write(unescape("%3Cspan id='cnzz_stat_icon_1261672623'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261672623' type='text/javascript'%3E%3C/script%3E"));
+                </script>
+            </p>
+        </div>
+
+    </div>
+</div>
 </body>
 <script src="/resources/js/doT.min.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -207,7 +255,7 @@
                 if(d.status == 200){
                     $("#lineSite").html('');
                     $("#lineSite").html(evalText(d.data));
-                    $(".metro-station-wrap").show();
+                    $(".metro-station-wrap").css("visibility","visible");
                     var count = d.data.length;
                     var w = 35*count;
                     if(w>550){
@@ -234,6 +282,7 @@
             $(this).html('预约时间<img src="../resources/img/d.jpg">');
             $(".hid1").show();
             $(".hid").hide();
+
         })
         $("#dateInput1").click(function () {
             $(this).html('交易时间<img src="../resources/img/d.jpg">');
@@ -258,8 +307,28 @@
                 map.centerAndZoom(new BMap.Point(location.split(',')[0],location.split(',')[1]),18);
             }
         });
+
+
     });
     $(document).ready(function(){
+
+        var phone = $.cookie('phone');
+        var token = $.cookie('token');
+        if(phone&&token){
+            $.getJSON('/loginByToken/'+phone+'/'+token,function (d) {
+                if(d.status==200){
+                    $("#login").hide();
+
+                    $('#user').html(phone).show();
+
+                    $("#phone").val(phone);
+
+                }else{
+                    $.cookie("phone",null,{path:"/"});
+                    $.cookie("token",null,{path:"/"});
+                }
+            })
+        }
 
         // 百度地图API功能
         window.map = new BMap.Map("map");
@@ -289,6 +358,201 @@
         })
     })
 
+    var submit = function () {
+        //判断方式
+        if($('.dl1').hasClass('hover')){
+            //门店
+            var els = document.querySelectorAll(".scrollbar li");
+            var shopId = "";
+            $.each(els,function (d,i) {
+                if($(i).hasClass('checked')){
+                    shopId = $(i).data('shop-id');
+                    return false;
+                }
+            })
+            if(!shopId){
+                layer.msg('请选择4S店',{
+                    offset: 't',
+                    anim: 6
+                });
+                return false;
+            }
+            var userName = $("#userName").val();
+            if(!userName){
+                layer.msg('请输入您的姓氏',{
+                    offset: 't',
+                    anim: 6
+                });
+                return false;
+            }
+
+            var phone = $("#phone").val();
+            if(!(/^1[34578]\d{9}$/.test(phone))){
+                layer.msg('手机号格式不正确',{
+                    offset: 't',
+                    anim: 6
+                });
+                return false;
+            }
+            var name_right = $('.demo--label input:radio:checked').val();
+
+            var orderNum = $("#orderNum").val();
+
+            var param={};
+            param.orderNumber = orderNum;
+            param.dealWay = "1";
+            param.wayId = shopId;
+            param.linkMan = userName+name_right;
+            param.linkPhone = phone;
+            param.checktime = "";
+            param.address = "";
+
+
+            $.post("/OrderConfim",param,function(res){
+                if(res.status==200){
+                    window.location.href = "/per/or"
+                }
+            },'JSON');
+
+        }else{
+           //判断选择是地铁还是上门
+            if($('.qu span').eq(0).hasClass('hovers')){
+                //地铁
+                var els = document.querySelectorAll("#ul_site li");
+                var siteId = "";
+                $.each(els,function (d,i) {
+                    if($(i).hasClass('active')){
+                        siteId = $(i).data('metro-station-id');
+                        return false;
+                    }
+                })
+                if(!siteId){
+                    layer.msg('请选择地铁站',{
+                        offset: 't',
+                        anim: 6
+                    });
+                    return false;
+                }
+                els = document.querySelectorAll(".hid1 span");
+                var date = "";
+                $.each(els,function (d,i) {
+                    if($(i).hasClass('checked')){
+                        date = $(i).data('date');
+                        return false;
+                    }
+                })
+                if(!date){
+                    layer.msg('请选择预约时间',{
+                        offset: 't',
+                        anim: 6
+                    });
+                    return false;
+                }
+                var userName = $("#userName").val();
+                if(!userName){
+                    layer.msg('请输入您的姓氏',{
+                        offset: 't',
+                        anim: 6
+                    });
+                    return false;
+                }
+
+                var phone = $("#phone").val();
+                if(!(/^1[34578]\d{9}$/.test(phone))){
+                    layer.msg('手机号格式不正确',{
+                        offset: 't',
+                        anim: 6
+                    });
+                    return false;
+                }
+                var name_right = $('.demo--label input:radio:checked').val();
+
+                var orderNum = $("#orderNum").val();
+
+                var param={};
+                param.orderNumber = orderNum;
+                param.dealWay = "2";
+                param.wayId = siteId;
+                param.linkMan = userName+name_right;
+                param.linkPhone = phone;
+                param.checktime = date;
+                param.address = "";
+
+                $.post("/OrderConfim",param,function(res){
+                    if(res.status==200){
+                        window.location.href = "/per/or"
+                    }
+                },'JSON');
+
+
+            }else{
+                //上门
+                var address = $("#address").val();
+                if(!address){
+                    layer.msg('请输入详细地址',{
+                        offset: 't',
+                        anim: 6
+                    });
+                    return false;
+                }
+                var els = document.querySelectorAll(".hid2 span");
+                var date = "";
+                $.each(els,function (d,i) {
+                    if($(i).hasClass('checked')){
+                        date = $(i).data('date');
+                        return false;
+                    }
+                })
+                if(!date){
+                    layer.msg('请选择预约时间',{
+                        offset: 't',
+                        anim: 6
+                    });
+                    return false;
+                }
+                var userName = $("#userName").val();
+                if(!userName){
+                    layer.msg('请输入您的姓氏',{
+                        offset: 't',
+                        anim: 6
+                    });
+                    return false;
+                }
+
+                var phone = $("#phone").val();
+                if(!(/^1[34578]\d{9}$/.test(phone))){
+                    layer.msg('手机号格式不正确',{
+                        offset: 't',
+                        anim: 6
+                    });
+                    return false;
+                }
+                var name_right = $('.demo--label input:radio:checked').val();
+
+                var orderNum = $("#orderNum").val();
+
+
+                var param={};
+                param.orderNumber = orderNum;
+                param.dealWay = "3";
+                param.wayId = "0";
+                param.linkMan = userName+name_right;
+                param.linkPhone = phone;
+                param.checktime = date;
+                param.address = address;
+
+                $.post("/OrderConfim",param,function(res){
+                    if(res.status==200){
+                        window.location.href = "/per/or"
+                    }
+                },'JSON');
+
+
+
+            }
+        }
+
+    }
 
 </script>
 </html>

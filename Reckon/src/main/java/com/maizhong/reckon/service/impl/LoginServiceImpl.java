@@ -62,6 +62,13 @@ public class LoginServiceImpl implements LoginService {
         return JsonResult.Error("网络异常，请刷新后重试");
     }
 
+    @Override
+    public JsonResult loginByToken(String phone, String token) {
+        String res = HttpClientUtil.doGet(RESTURL + "loginByToken/"+phone+"/"+token);
+        JsonResult result = JsonUtils.jsonToPojo(res, JsonResult.class);
+        return result;
+    }
+
     /**
      * 用户登录
      * @return
@@ -92,7 +99,6 @@ public class LoginServiceImpl implements LoginService {
             map.put("phone",phone);
             map.put("ip",ip);
             String res = HttpClientUtil.doPost(RESTURL + "userLogin/",map);
-            System.out.println(res);
             if (StringUtils.isBlank(res)){
                 return JsonResult.Error("网络异常，请刷新后重试");
             }

@@ -21,7 +21,7 @@ img,input{vertical-align:middle; outline:none}
 
 .guzs{ width: 1200px; margin:0 auto;  }
 
-.liu{ background: url(../img/bg2.jpg) no-repeat center; height: 521px; }
+.liu{ background: url(../img/bg2.jpg) no-repeat; height: 521px; }
 .liu .l_cen{ width: 1000px; margin:0px auto; }
 .liu .l_cen h2,.liu .l_cen p{ text-align: center; }
 .liu .l_cen h2{ font-size: 36px; color: #444; padding-top: 86px; font-weight: 500 }
@@ -46,9 +46,9 @@ img,input{vertical-align:middle; outline:none}
 .jiao .j_cen h2{ font-size: 36px; color: #444; padding-top: 86px; font-weight: 500 }
 .jiao .j_cen p{ font-size: 24px; color: #666; line-height: 90px; }
 .jiao .j_cen .one{ background: #f05b48; color: #fff; }
-.jiao .j_cen .one span{ padding: 0 0 0 50px }
+.jiao .j_cen .one span{ padding: 0 0 0 10px }
 .jiao .j_cen div{ width: 1200px; overflow: hidden ;line-height: 46px;height:46px;}
-.jiao .j_cen div span{ padding: 0 0 0 50px; line-height: 46px; float: left; display:block; width: 118px}
+.jiao .j_cen div span{ padding: 0 0 0 10px; line-height: 46px; float: left; display:block; width: 118px}
 .jiao .j_cen div span.cl_one{ width: 300px; padding: 0 0 0 20px}
 .jiao .j_cen div span.last{ width: 60px;  }
 .jiao .j_cen div:hover,.jiao .j_cen div:active{ background: #fff ;transition:background 1s;-webkit-transition:background 1s;}
@@ -71,9 +71,6 @@ img,input{vertical-align:middle; outline:none}
 .about .a_cen .abs{ font-size: 24px; margin-top: 20px }
 .about .a_cen p{ font-size: 24px; line-height: 55px; width: 600px; float: left; margin-top: 30px}
 .about .a_cen .right{ width: 600px; float: left; margin-left: 100px; line-height:30px}
-.spans{ position: absolute;right: -57px; top: -10px; font-size: 28px;line-height: 35px; font-weight: bold}
-.x_l{ float: left; position: relative;}
-.x_r{ clear: both}
 
 
 
@@ -91,7 +88,7 @@ img,input{vertical-align:middle; outline:none}
 .can dl dd{ width: 900px; float: left; line-height: 35px;}
 .can dl dd.dd1{ font-size: 26px ;color: #000}
 .can dl dd span{ padding: 5px 20px;}
-.guj{ width: 1200px; margin: 0 auto; background: #e5e5e5; overflow: hidden; min-height: 520px; clear: both}
+.guj{ width: 1200px; margin: 0 auto; background: #e5e5e5; overflow: hidden; min-height: 520px;padding-bottom: 2px; clear: both;}
 .guj .gu{ width: 24.9%;border-right: 1px solid #d2cfcf; min-height: 520px; text-align: center; float: left}
 .guj .gu h2{ font-size:24px;color: #5c5b5b; font-weight: 500; line-height: 61px; height: 61px; text-align: center; border-bottom:1px solid #d2cfcf }
 .guj .gu span{ font-size:30px;color: #f05b48; line-height: 60px}
@@ -134,9 +131,9 @@ img,input{vertical-align:middle; outline:none}
 .jiaos  h2{ font-size: 28px; color: #444;  font-weight: 500 }
 .jiaos h2 span{ font-size: 18px; color: #666; line-height: 90px; }
 .jiaos .j_cen .one{ background: #f05b48; color: #fff; }
-.jiaos .j_cen .one span{ padding: 0 0 0 50px }
+.jiaos .j_cen .one span{ padding: 0 0 0 10px }
 .jiaos .j_cen div{ width: 1200px; overflow: hidden ;line-height: 46px;height:46px;}
-.jiaos .j_cen div span{ padding: 0 0 0 50px; line-height: 46px; float: left; display:block; width: 118px}
+.jiaos .j_cen div span{ padding: 0 0 0 10px; line-height: 46px; float: left; display:block; width: 118px}
 .jiaos .j_cen div span.cl_one{ width: 300px; padding: 0 0 0 20px}
 .jiaos .j_cen div span.last{ width: 60px;  }
 .jiaos .j_cen div:hover,.jiao .j_cen div:active{ background: #fff }
@@ -238,7 +235,7 @@ img,input{vertical-align:middle; outline:none}
 .yuyue .right dl dd.dd2{ font-size:24px; color: #f05b48; font-weight: bold }
 
 
-.bgss{ background: #f5f5f5;}
+.bgss{ background: #FFF;}
 .box{ width: 789px; height: 482px; margin: 100px auto; background: #fff;}
 .width{ width: 226px; margin: 50px auto 30px; padding-top: 50px}
 .d_box{ width: 300px; margin: 0 auto}
@@ -254,15 +251,30 @@ img,input{vertical-align:middle; outline:none}
 
 /*个人中心*/
 .main{ width: 1200px; margin:0px auto 30px; overflow: hidden}
-.main .m_left{ background: #fff; float: left; width: 255px; padding: 0px 0 0 20px;min-height: 736px; }
-.main .m_left ul { margin:40px 0 20px  50px;}
+.main .m_left{
+    background: #fff;
+    float: left;
+    width: 258px;
+    padding: -1px 0 0 20px;
+    min-height: 365px;
+    border: 1px solid #CCC;
+}
+.main .m_left ul { margin:40px 0 20px  50px;cursor: pointer;}
 .main .m_left ul li{ font-size: 18px; color: #000}
 .main .m_left ul p{ margin-left: 35px}
 .main .m_left ul p .cuns{ color: #f05b48}
-.main .m_right{ background: #fff; float: right; width: 893px;min-height: 706px; padding-bottom: 30px}
-.main .m_right .m_top{ background: #262930;color: #fff; line-height:51px ;height: 51px; font-size: 18px; width: 90%; margin: 30px auto 10px }
+.main .m_right{ background: #fff; float: right; width: 893px;min-height: 706px; padding-bottom: 30px;border: 1px solid #CCC;}
+.main .m_right .m_top{
+    background: rgba(140, 130, 128, 0.7);
+    color: #fff;
+    line-height: 51px;
+    height: 51px;
+    font-size: 18px;
+    width: 100%;
+    margin: 0px auto 10px;
+}
 .main .m_right .m_top span{ float: left; width: 130px; text-align: center}
-.main .m_right .m_top .span1{ width:310px; text-align: left;  margin-left: 30px;}
+.main .m_right .m_top .span1{ width:310px; text-align: left;  margin-left: 80px;}
 .main .m_right .m_top .mon{ width:190px; }
 .main .m_right .danxix{ background: #f5f5f5; width: 87%; margin: 0 auto;  height: 51px; line-height: 51px; padding-left: 25px;margin-top: 20px}
 .main .m_right .danxix .colors{ margin-left: 20px; color: #999}
@@ -276,10 +288,23 @@ img,input{vertical-align:middle; outline:none}
 .main .m_right .td .ont img{ width: 100px; float: left;margin-top: 15px}
 
 /*过户进度*/
-.p_top{ height: 36px; line-height: 36px; background: #262930; width: 95%; margin: 30px auto 0;color: #fff}
+.p_top{
+    height: 36px;
+    line-height: 36px;
+    background: rgba(140, 130, 128, 0.7);
+    width: 100%;
+    margin: 0px auto 10px;
+    color: #fff;
+}
 .p_top  span{ width: 248px; text-align: center; float: left}
 .p_top .span1{ width: 300px; padding-left: 26px; text-align: left}
-.m_right .p_td{ height: 74px; border: 1px solid #eee; border-top: none;width: 95%; margin: 0px auto }
+.m_right .p_td{
+    height: 74px;
+    border: 1px solid #eee;
+    border-top: none;
+    width: 95%;
+    margin: 10px auto;
+}
 .m_right .es_top{ height: 51px; line-height: 51px; background: #262930; width: 95%; margin: 30px auto 0;color: #fff;}
 .m_right .one{ height: 35px; line-height: 35px; width: 95%; margin: 0 auto; cursor: pointer}
 .m_right .es_top span,.m_right .one span{  float: left; width: 100px; text-align: center}
@@ -287,7 +312,7 @@ img,input{vertical-align:middle; outline:none}
 .m_right  .one:hover{ background: #eee;}
 
 
-/*foot*/
+
 .footer{ background: #000; overflow: hidden;}
 .foot_cen{ width: 1200px; margin: 0 auto; padding: 20px 0}
 .n_f_m_c{ width: 75%; overflow: hidden; border-bottom: 1px solid #ccc; float: left;}
@@ -296,6 +321,9 @@ img,input{vertical-align:middle; outline:none}
 .foot_cen .pp{ margin: 20px 0; width: 1200px}
 .rem{ width: 10%; float: right; text-align: center; margin-top: -30px}
 
+.spans{ position: absolute;right: -57px; top: -10px; font-size: 28px;line-height: 35px; font-weight: bold}
+.x_l{ float: left; position: relative;}
+.x_r{ clear: both}
 
 
 

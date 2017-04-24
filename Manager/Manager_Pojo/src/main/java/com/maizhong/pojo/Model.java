@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Model {
-    private Integer modelId;
+    private Long modelId;
 
     private String modelName;
 
@@ -30,11 +30,11 @@ public class Model {
 
     private String shortName;
 
-    public Integer getModelId() {
+    public Long getModelId() {
         return modelId;
     }
 
-    public void setModelId(Integer modelId) {
+    public void setModelId(Long modelId) {
         this.modelId = modelId;
     }
 
