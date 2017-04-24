@@ -389,12 +389,12 @@
             <div class="one">
                 <div class="x_l">
                     <span>专业专注</span>
-                    <span>客户至上</span>
+                    <span>信誉第一</span>
                     <span class="spans"> 迈众汽车经营理念</span>
                 </div>
                 <div class="x_r">
                     <span>贴心服务</span>
-                    <span>迈众宗旨</span>
+                    <span>客户至上</span>
                 </div>
 
             </div>
