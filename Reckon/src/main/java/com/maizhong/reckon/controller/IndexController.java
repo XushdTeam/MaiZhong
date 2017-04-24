@@ -244,7 +244,7 @@ public class IndexController {
             if(result.getStatus()==200){
 
                 List<OrderDTO> list = indexService.getOrderDTO(phone);
-                System.out.println(JSON.toJSONString(list));
+
                 model.addAttribute("orderInfo",list);
                 model.addAttribute("phone",phone);
                 return cu;

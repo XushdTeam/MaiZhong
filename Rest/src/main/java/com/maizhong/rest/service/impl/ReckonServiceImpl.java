@@ -527,17 +527,17 @@ public class ReckonServiceImpl implements ReckonService {
                 nj = otherArry[5], method = otherArry[6];
         BigDecimal basePrice;
         if (StringUtils.equals("1", ck)) {
-            basePrice = new BigDecimal(guzhiDTO.getPriceA_min());
+            basePrice = new BigDecimal(guzhiDTO.getPriceB_min());
             guzhiDTO.setCk("车况优秀,好没有任何故障");
         } else if (StringUtils.equals("2", ck)) {
             guzhiDTO.setCk("车况良好,有过少量剐蹭或钣金");
-            basePrice = new BigDecimal(guzhiDTO.getPriceB_min());
+            basePrice = new BigDecimal(guzhiDTO.getPriceC_min());
         } else if (StringUtils.equals("3", ck)) {
             guzhiDTO.setCk("车况一般,有过前后轻碰事故");
-            basePrice = new BigDecimal(guzhiDTO.getPriceC_min());
+            basePrice = new BigDecimal(guzhiDTO.getPriceD_min());
         } else {
             guzhiDTO.setCk("车况较差,有发生过伤及主体框架的碰撞或较大事故");
-            basePrice = new BigDecimal(guzhiDTO.getPriceD_min());
+            basePrice = new BigDecimal(guzhiDTO.getPriceD_min()).multiply(new BigDecimal("0.95"));
         }
         //颜色
         switch (color) {
@@ -675,6 +675,10 @@ public class ReckonServiceImpl implements ReckonService {
         //使用方式
         basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
 
+        if(basePrice.compareTo(BigDecimal.ZERO)<0){
+            basePrice = BigDecimal.ZERO;
+        }
+
         guzhiDTO.setSalePrice(basePrice.setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
 
         OrdersExample example = new OrdersExample();
@@ -692,6 +696,7 @@ public class ReckonServiceImpl implements ReckonService {
             order.setReckonPrice(guzhiDTO.getSalePrice());
             order.setDealPrice("");
             order.setReckonTime(new Date());
+            order.setStatus(0);
             ordersMapper.insert(order);
 
             OrderInfo orderInfo = new OrderInfo();
@@ -865,6 +870,7 @@ public class ReckonServiceImpl implements ReckonService {
             orders.setWayId(Long.valueOf(wayId));
             orders.setLinkMan(linkMan);
             orders.setLinkPhone(linkPhone);
+            orders.setStatus(1);
             ordersMapper.updateByPrimaryKey(orders);
         } catch (Exception e) {
             e.printStackTrace();
@@ -906,6 +912,7 @@ public class ReckonServiceImpl implements ReckonService {
     public JsonResult getOrdersByPhone(String phone) {
         OrdersExample example = new OrdersExample();
         OrdersExample.Criteria criteria = example.createCriteria();
+        example.setOrderByClause("reckon_time DESC");
         criteria.andUserIdEqualTo(Long.valueOf(phone));
         List<Orders> ordersList = ordersMapper.selectByExample(example);
         if (ordersList == null || ordersList.size() == 0) {
@@ -917,6 +924,7 @@ public class ReckonServiceImpl implements ReckonService {
             orderDTO.setOrderNumber(String.valueOf(orders.getOrderNumber()));//订单编号
             orderDTO.setUserId(String.valueOf(orders.getUserId()));//用户Id
             Model model = modelMapper.selectByPrimaryKey(orders.getModelId());//车型对象
+
             Series series = seriesMapper.selectByPrimaryKey(model.getSeriesId());
             orderDTO.setSeriesImg(series.getSeriesPic());//车系图片
             orderDTO.setModel(model);
@@ -924,126 +932,139 @@ public class ReckonServiceImpl implements ReckonService {
             orderDTO.setReckonPrice(orders.getReckonPrice());//评估价格
             orderDTO.setDealPrice(orders.getDealPrice());//交易价格--实际
             orderDTO.setDealTime(orders.getDealTime());//交易时间
+            try {
 
-            //4s店
-            if (orders.getDealWay() == 1) {
-                TbBusiness tbBusiness = tbBusinessMapper.selectByPrimaryKey(orders.getWayId());
-                orderDTO.setAddress(tbBusiness.getBusinessName() + " " + tbBusiness.getAddress());
-                orderDTO.setCheckTime("4S店营业时间内");//验车时间
-                orderDTO.setDealWay("4S店");//验车地址
-            }
-            //地铁
-            if (orders.getDealWay() == 2) {
-                LineSite lineSite = lineSiteMapper.selectByPrimaryKey(orders.getWayId());
-                Line line = lineMapper.selectByPrimaryKey(lineSite.getLineId());
-                orderDTO.setAddress("北京市地铁" + line.getName() + "线" + lineSite.getName() + "站");
-                orderDTO.setCheckTime(orders.getCheckTime());//验车时间
-                orderDTO.setDealWay("地铁站附近");//验车地址
-            }
-            //上门
-            if (orders.getDealWay() == 3) {
-                orderDTO.setAddress(orders.getAddress());//验车地址
-                orderDTO.setCheckTime(orders.getAddress());//验车时间
-                orderDTO.setDealWay("上门");
-            }
-            orderDTO.setLinkMan(orders.getLinkMan());//联系人
-            orderDTO.setLinkPhone(orders.getLinkPhone());//联系人电话
-            orderDTO.setReckon_time(TimeUtils.getFormatDateTime3(orders.getReckonTime()));//评估时间
-            OrderInfoExample orderInfoExample = new OrderInfoExample();
-            orderInfoExample.createCriteria();
-            criteria.andOrderNumberEqualTo(orders.getOrderNumber());
-            List<OrderInfo> orderInfoList = orderInfoMapper.selectByExample(orderInfoExample);
-            if (orderInfoList != null && orderInfoList.size() > 0) {
-                OrderInfo orderInfo = orderInfoList.get(0);
-                if (StringUtils.equals("1", orderInfo.getCk())) {
-                    orderInfo.setCk("车况优秀");
-                } else if (StringUtils.equals("2", orderInfo.getCk())) {
-                    orderInfo.setCk("车况良好");
-                } else if (StringUtils.equals("3", orderInfo.getCk())) {
-                    orderInfo.setCk("车况一般");
-                } else {
-                    orderInfo.setCk("车况较差");
+
+
+
+                //4s店
+                if (orders.getDealWay() == 1) {
+                    TbBusiness tbBusiness = tbBusinessMapper.selectByPrimaryKey(orders.getWayId());
+                    orderDTO.setAddress(tbBusiness.getBusinessName() + " " + tbBusiness.getAddress());
+                    orderDTO.setCheckTime("4S店营业时间内");//验车时间
+                    orderDTO.setDealWay("4S店");//验车地址
                 }
-                //颜色
-                switch (orderInfo.getColor()) {
-                    case "1":
-                        orderInfo.setColor("米色");
-                        break;
-                    case "2":
-                        orderInfo.setColor("白色");
-                        break;
-                    case "3":
-                        orderInfo.setColor("灰色");
-                        break;
-                    case "4":
-                        orderInfo.setColor("红色");
-                        break;
-                    case "5":
-                        orderInfo.setColor("棕色");
-                        break;
-                    case "6":
-                        orderInfo.setColor("蓝色");
-                        break;
-                    case "7":
-                        orderInfo.setColor("黄色");
-                        break;
-                    case "8":
-                        orderInfo.setColor("黑色");
-                        break;
-                    case "9":
-                        orderInfo.setColor("银色");
-                        break;
-                    case "10":
-                        orderInfo.setColor("绿色");
-                        break;
-                    default:
-                        orderInfo.setColor("其他颜色");
-                        break;
+                //地铁
+                if (orders.getDealWay() == 2) {
+                    LineSite lineSite = lineSiteMapper.selectByPrimaryKey(orders.getWayId());
+                    Line line = lineMapper.selectByPrimaryKey(lineSite.getLineId());
+                    orderDTO.setAddress("北京市地铁" + line.getName() + "线" + lineSite.getName() + "站");
+                    orderDTO.setCheckTime(orders.getCheckTime());//验车时间
+                    orderDTO.setDealWay("地铁站附近");//验车地址
                 }
-                //交强险
-                if (StringUtils.equals(orderInfo.getJqx(), "1")) {
-                    orderInfo.setJqx("两个月以内");
-                } else {
-                    orderInfo.setJqx("两个月以上");
+                //上门
+                if (orders.getDealWay() == 3) {
+                    orderDTO.setAddress(orders.getAddress());//验车地址
+                    orderDTO.setCheckTime(orders.getAddress());//验车时间
+                    orderDTO.setDealWay("上门");
                 }
-                //过户
-                if (StringUtils.equals(orderInfo.getGh(), "1")) {
-                    orderInfo.setGh("0次");
-                } else if (StringUtils.equals(orderInfo.getGh(), "2")) {
-                    orderInfo.setGh("1次");
-                } else if (StringUtils.equals(orderInfo.getGh(), "3")) {
-                    orderInfo.setGh("2次");
-                } else {
-                    orderInfo.setGh("3次及以上");
+                orderDTO.setLinkMan(orders.getLinkMan());//联系人
+                orderDTO.setLinkPhone(orders.getLinkPhone());//联系人电话
+                orderDTO.setReckon_time(TimeUtils.getFormatDateTime3(orders.getReckonTime()));//评估时间
+                OrderInfoExample orderInfoExample = new OrderInfoExample();
+                OrderInfoExample.Criteria criteria1 = orderInfoExample.createCriteria();
+                criteria1.andOrderNumberEqualTo(orders.getOrderNumber());
+
+                List<OrderInfo> orderInfoList = orderInfoMapper.selectByExample(orderInfoExample);
+                if (orderInfoList != null && orderInfoList.size() > 0) {
+                    OrderInfo orderInfo = orderInfoList.get(0);
+                    if (StringUtils.equals("1", orderInfo.getCk())) {
+                        orderInfo.setCk("车况优秀");
+                    } else if (StringUtils.equals("2", orderInfo.getCk())) {
+                        orderInfo.setCk("车况良好");
+                    } else if (StringUtils.equals("3", orderInfo.getCk())) {
+                        orderInfo.setCk("车况一般");
+                    } else {
+                        orderInfo.setCk("车况较差");
+                    }
+                    //颜色
+                    System.out.println(orderInfo.getColor());
+                    switch (orderInfo.getColor()) {
+                        case "1":
+                            orderInfo.setColor("米色");
+                            break;
+                        case "2":
+                            orderInfo.setColor("白色");
+                            break;
+                        case "3":
+                            orderInfo.setColor("灰色");
+                            break;
+                        case "4":
+                            orderInfo.setColor("红色");
+                            break;
+                        case "5":
+                            orderInfo.setColor("棕色");
+                            break;
+                        case "6":
+                            orderInfo.setColor("蓝色");
+                            break;
+                        case "7":
+                            orderInfo.setColor("黄色");
+                            break;
+                        case "8":
+                            orderInfo.setColor("黑色");
+                            break;
+                        case "9":
+                            orderInfo.setColor("银色");
+                            break;
+                        case "10":
+                            orderInfo.setColor("绿色");
+                            break;
+                        default:
+                            orderInfo.setColor("其他颜色");
+                            break;
+                    }
+                    //交强险
+                    if (StringUtils.equals(orderInfo.getJqx(), "1")) {
+                        orderInfo.setJqx("两个月以内");
+                    } else {
+                        orderInfo.setJqx("两个月以上");
+                    }
+                    //过户
+                    if (StringUtils.equals(orderInfo.getGh(), "1")) {
+                        orderInfo.setGh("0次");
+                    } else if (StringUtils.equals(orderInfo.getGh(), "2")) {
+                        orderInfo.setGh("1次");
+                    } else if (StringUtils.equals(orderInfo.getGh(), "3")) {
+                        orderInfo.setGh("2次");
+                    } else {
+                        orderInfo.setGh("3次及以上");
+                    }
+                    //过户时间
+                    if (StringUtils.equals(orderInfo.getGhtime(), "1")) {
+                        orderInfo.setGhtime("无过户");
+                    } else if (StringUtils.equals(orderInfo.getGhtime(), "2")) {
+                        orderInfo.setGhtime("六个月以内");
+                    }
+                    {
+                        orderInfo.setGhtime("六个月以上");
+                    }
+                    //性质
+                    if (StringUtils.equals(orderInfo.getXz(), "1")) {
+                        orderInfo.setXz("非营运");
+                    } else {
+                        orderInfo.setXz("租赁");
+                    }
+                    //年检
+                    if (StringUtils.equals(orderInfo.getNj(), "1")) {
+                        orderInfo.setNj("两个月以内");
+                    } else {
+                        orderInfo.setNj("两个月以上");
+                    }
+                    //使用方式
+                    if (StringUtils.equals(orderInfo.getMethod(), "1")) {
+                        orderInfo.setMethod("公司");
+                    } else {
+                        orderInfo.setMethod("个人");
+                    }
+
+                    orderDTO.setOrderInfo(orderInfo);//评测信息详情
+
+
                 }
-                //过户时间
-                if (StringUtils.equals(orderInfo.getGhtime(), "1")) {
-                    orderInfo.setGhtime("无过户");
-                } else if (StringUtils.equals(orderInfo.getGhtime(), "2")) {
-                    orderInfo.setGhtime("六个月以内");
-                }
-                {
-                    orderInfo.setGhtime("六个月以上");
-                }
-                //性质
-                if (StringUtils.equals(orderInfo.getXz(), "1")) {
-                    orderInfo.setXz("非营运");
-                } else {
-                    orderInfo.setXz("租赁");
-                }
-                //年检
-                if (StringUtils.equals(orderInfo.getNj(), "1")) {
-                    orderInfo.setNj("两个月以内");
-                } else {
-                    orderInfo.setNj("两个月以上");
-                }
-                //使用方式
-                if (StringUtils.equals(orderInfo.getMethod(), "1")) {
-                    orderInfo.setMethod("公司");
-                } else {
-                    orderInfo.setMethod("个人");
-                }
-                orderDTO.setOrderInfo(orderInfo);//评测信息详情
+
+            }catch (Exception e){
+                e.printStackTrace();
             }
             try {
                 orderDTO.setStatus(String.valueOf(orders.getStatus()));
