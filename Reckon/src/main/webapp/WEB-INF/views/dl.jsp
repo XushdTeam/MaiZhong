@@ -54,7 +54,7 @@
             <button onclick="onMysubmit()">立即登录</button>
         </form>
     </div>
-    <a class="xieyi xieyis" href=" javascript:showoutc();"><input type="checkbox" name="1" checked>我已阅读并同意《迈众汽车协议》</a>
+    <!--a class="xieyi xieyis" href=" javascript:showoutc();"><input type="checkbox" name="1" checked>我已阅读并同意《迈众汽车协议》</a>
     <div class="xies">
         <div class=" regcon">
             <div class="m-sPopTitle"><strong>服务协议条款</strong><b id="sPopClose" class="m-sPopClose" onClick="closeClause()">×</b></div>
@@ -65,7 +65,7 @@
             </div>
             <center><a class="btn btn-blue btn-lg f-size12 b-b0 b-l0 b-t0 b-r0 f-pl50 f-pr50 f-r3" href="javascript:closeClause();">已阅读并同意此条款</a></center>
         </div>
-    </div>
+    </div-->
 </div>
 
 <p class="p_fooot">Copyright © 2017-2020 迈众 All Rights Reserved 版权所有 迈众汽车信息服务有限公司</p>

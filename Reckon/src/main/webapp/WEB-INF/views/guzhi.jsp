@@ -207,7 +207,6 @@
             <span>公里数</span>
             <span>成交日期</span>
             <span>城市</span>
-            <span class="last">类别</span>
         </div>
 
 
@@ -219,7 +218,6 @@
             <span>13万公里 </span>
             <span>2017年04月20日</span>
             <span>北京</span>
-            <span class="last">车商</span>
         </div>
 
 
@@ -232,7 +230,6 @@
             <span>10.85万公里 </span>
             <span>2017年04月18日</span>
             <span>北京</span>
-            <span class="last">车商</span>
         </div>
 
 
@@ -245,7 +242,6 @@
             <span>12.85万公里 </span>
             <span>2017年04月06日</span>
             <span>北京</span>
-            <span class="last">车商</span>
         </div>
 
         <div>
@@ -256,7 +252,6 @@
             <span>12万公里 </span>
             <span>2017年04月20日</span>
             <span>北京</span>
-            <span class="last">车商</span>
         </div>
 
 

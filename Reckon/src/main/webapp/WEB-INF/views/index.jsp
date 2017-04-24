@@ -245,7 +245,6 @@
             <span>公里数</span>
             <span>成交日期</span>
             <span>城市</span>
-            <span class="last">类别</span>
         </div>
 
 
@@ -257,7 +256,7 @@
             <span>0.85万公里 </span>
             <span>2017年04月01日</span>
             <span>北京</span>
-            <span class="last">车商</span>
+
         </div>
 
 
@@ -269,7 +268,7 @@
             <span>14万公里 </span>
             <span>2017年04月03日</span>
             <span>北京</span>
-            <span class="last">车商</span>
+
         </div>
 
 
@@ -281,7 +280,7 @@
             <span>12万公里 </span>
             <span>2017年03月02日</span>
             <span>北京</span>
-            <span class="last">车商</span>
+
         </div>
 
         <div>
@@ -292,7 +291,7 @@
             <span>18万公里 </span>
             <span>2017年03月23日</span>
             <span>北京</span>
-            <span class="last">车商</span>
+
         </div>
 
         <div>
@@ -303,7 +302,7 @@
             <span>12万公里 </span>
             <span>2017年03月01日</span>
             <span>北京</span>
-            <span class="last">车商</span>
+
         </div>
 
         <div>
@@ -314,7 +313,7 @@
             <span>13万公里 </span>
             <span>2017年03月16日</span>
             <span>北京</span>
-            <span class="last">车商</span>
+
         </div>
 
         <div>
@@ -325,7 +324,7 @@
             <span>10万公里 </span>
             <span>2017年03月15日</span>
             <span>北京</span>
-            <span class="last">车商</span>
+
         </div>
 
         <div>
@@ -336,7 +335,7 @@
             <span>12万公里 </span>
             <span>2017年04月13日</span>
             <span>北京</span>
-            <span class="last">车商</span>
+
         </div>
 
         <div>
@@ -347,7 +346,7 @@
             <span>12万公里 </span>
             <span>2017年04月15日</span>
             <span>北京</span>
-            <span class="last">车商</span>
+
         </div>
 
 
@@ -359,7 +358,7 @@
             <span>8万公里 </span>
             <span>2017年04月23日</span>
             <span>北京</span>
-            <span class="last">车商</span>
+
         </div>
 
     </div>

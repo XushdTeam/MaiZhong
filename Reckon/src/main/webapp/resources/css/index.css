@@ -21,7 +21,7 @@ img,input{vertical-align:middle; outline:none}
 
 .guzs{ width: 1200px; margin:0 auto;  }
 
-.liu{ background: url(../img/bg2.jpg) no-repeat; height: 521px; }
+.liu{ background: url(../img/bg2.jpg) no-repeat center; height: 521px; }
 .liu .l_cen{ width: 1000px; margin:0px auto; }
 .liu .l_cen h2,.liu .l_cen p{ text-align: center; }
 .liu .l_cen h2{ font-size: 36px; color: #444; padding-top: 86px; font-weight: 500 }
@@ -46,9 +46,9 @@ img,input{vertical-align:middle; outline:none}
 .jiao .j_cen h2{ font-size: 36px; color: #444; padding-top: 86px; font-weight: 500 }
 .jiao .j_cen p{ font-size: 24px; color: #666; line-height: 90px; }
 .jiao .j_cen .one{ background: #f05b48; color: #fff; }
-.jiao .j_cen .one span{ padding: 0 0 0 10px }
+.jiao .j_cen .one span{ padding: 0 0 0 50px }
 .jiao .j_cen div{ width: 1200px; overflow: hidden ;line-height: 46px;height:46px;}
-.jiao .j_cen div span{ padding: 0 0 0 10px; line-height: 46px; float: left; display:block; width: 118px}
+.jiao .j_cen div span{ padding: 0 0 0 50px; line-height: 46px; float: left; display:block; width: 118px}
 .jiao .j_cen div span.cl_one{ width: 300px; padding: 0 0 0 20px}
 .jiao .j_cen div span.last{ width: 60px;  }
 .jiao .j_cen div:hover,.jiao .j_cen div:active{ background: #fff ;transition:background 1s;-webkit-transition:background 1s;}
@@ -71,6 +71,9 @@ img,input{vertical-align:middle; outline:none}
 .about .a_cen .abs{ font-size: 24px; margin-top: 20px }
 .about .a_cen p{ font-size: 24px; line-height: 55px; width: 600px; float: left; margin-top: 30px}
 .about .a_cen .right{ width: 600px; float: left; margin-left: 100px; line-height:30px}
+.spans{ position: absolute;right: -57px; top: -10px; font-size: 28px;line-height: 35px; font-weight: bold}
+.x_l{ float: left; position: relative;}
+.x_r{ clear: both}
 
 
 
@@ -131,9 +134,9 @@ img,input{vertical-align:middle; outline:none}
 .jiaos  h2{ font-size: 28px; color: #444;  font-weight: 500 }
 .jiaos h2 span{ font-size: 18px; color: #666; line-height: 90px; }
 .jiaos .j_cen .one{ background: #f05b48; color: #fff; }
-.jiaos .j_cen .one span{ padding: 0 0 0 10px }
+.jiaos .j_cen .one span{ padding: 0 0 0 50px }
 .jiaos .j_cen div{ width: 1200px; overflow: hidden ;line-height: 46px;height:46px;}
-.jiaos .j_cen div span{ padding: 0 0 0 10px; line-height: 46px; float: left; display:block; width: 118px}
+.jiaos .j_cen div span{ padding: 0 0 0 50px; line-height: 46px; float: left; display:block; width: 118px}
 .jiaos .j_cen div span.cl_one{ width: 300px; padding: 0 0 0 20px}
 .jiaos .j_cen div span.last{ width: 60px;  }
 .jiaos .j_cen div:hover,.jiao .j_cen div:active{ background: #fff }
@@ -285,7 +288,6 @@ img,input{vertical-align:middle; outline:none}
 
 
 /*foot*/
-/*FOOTER*/
 .footer{ background: #000; overflow: hidden;}
 .foot_cen{ width: 1200px; margin: 0 auto; padding: 20px 0}
 .n_f_m_c{ width: 75%; overflow: hidden; border-bottom: 1px solid #ccc; float: left;}
@@ -294,9 +296,6 @@ img,input{vertical-align:middle; outline:none}
 .foot_cen .pp{ margin: 20px 0; width: 1200px}
 .rem{ width: 10%; float: right; text-align: center; margin-top: -30px}
 
-.spans{ position: absolute;right: -57px; top: -10px; font-size: 28px;line-height: 35px; font-weight: bold}
-.x_l{ float: left; position: relative;}
-.x_r{ clear: both}
 
 
 
