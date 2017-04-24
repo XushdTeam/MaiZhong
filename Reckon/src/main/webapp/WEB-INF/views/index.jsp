@@ -172,7 +172,7 @@
                 <input id="cityList" type="hidden" value="">
             </li>
         </ul>
-        <div class="submit" id="eval">快速估值</div>
+        <div class="submit" id="eval">免费估值</div>
     </div>
 
     </div>
@@ -247,7 +247,6 @@
             <span>公里数</span>
             <span>成交日期</span>
             <span>城市</span>
-            <span class="last">类别</span>
         </div>
 
 
@@ -259,7 +258,7 @@
             <span>0.85万公里 </span>
             <span>2017年04月01日</span>
             <span>北京</span>
-            <span class="last">车商</span>
+
         </div>
 
 
@@ -271,7 +270,7 @@
             <span>14万公里 </span>
             <span>2017年04月03日</span>
             <span>北京</span>
-            <span class="last">车商</span>
+
         </div>
 
 
@@ -283,7 +282,7 @@
             <span>12万公里 </span>
             <span>2017年03月02日</span>
             <span>北京</span>
-            <span class="last">车商</span>
+
         </div>
 
         <div>
@@ -294,7 +293,7 @@
             <span>18万公里 </span>
             <span>2017年03月23日</span>
             <span>北京</span>
-            <span class="last">车商</span>
+
         </div>
 
         <div>
@@ -305,7 +304,7 @@
             <span>12万公里 </span>
             <span>2017年03月01日</span>
             <span>北京</span>
-            <span class="last">车商</span>
+
         </div>
 
         <div>
@@ -316,7 +315,7 @@
             <span>13万公里 </span>
             <span>2017年03月16日</span>
             <span>北京</span>
-            <span class="last">车商</span>
+
         </div>
 
         <div>
@@ -327,7 +326,7 @@
             <span>10万公里 </span>
             <span>2017年03月15日</span>
             <span>北京</span>
-            <span class="last">车商</span>
+
         </div>
 
         <div>
@@ -338,7 +337,7 @@
             <span>12万公里 </span>
             <span>2017年04月13日</span>
             <span>北京</span>
-            <span class="last">车商</span>
+
         </div>
 
         <div>
@@ -349,7 +348,7 @@
             <span>12万公里 </span>
             <span>2017年04月15日</span>
             <span>北京</span>
-            <span class="last">车商</span>
+
         </div>
 
 
@@ -361,7 +360,7 @@
             <span>8万公里 </span>
             <span>2017年04月23日</span>
             <span>北京</span>
-            <span class="last">车商</span>
+
         </div>
 
     </div>
@@ -379,7 +378,11 @@
         <div class="right">
             <p>北京迈众汽车信息服务有限公司</p>
 
-            北京迈众汽车信息服务有限公司，是一家致力服务于各大汽车经销商。推进4S店新车销量与市场流量的专业服务公司。2017年4月15日，产品正式上线，我们将成为中国领先的专业服务于各大汽车集团、4s店与C端客户的互联网平台，通过产品服务、数据技术和资源 共享为汽车消费者提供选车、买车、用车、换车、金融、维修、美容、装饰等全方位一体的快捷专业的一站式服务端口，通过我们的平台将庞大的客户资源与各大汽车集团、4S店服务资源优选整合。公司将秉承“杰出服务，行业领先”的经营理念，开启汽车互联网新纪元。</div>
+           <div> 北京迈众汽车信息服务有限公司，是一家致力服务于各大汽车经销商，推进二手车置换交易的专业服务公司。</div>
+            <div>公司自成立以来，一直努力着手为对各大汽车集团，4S店，企业，事业单位，以及私家车车主，提供最专业，最贴心的二手车评估，收购，置换等服务。
+            公司秉承“专业专注，贴心服务，信誉第一，客户至上”的经营理念，用专业贴心的服务，最合理的价格，让客户享受最优质的服务体验。</div>
+
+            </div>
 
         <div class="left">
             <div class="one">
