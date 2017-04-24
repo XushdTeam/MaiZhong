@@ -283,16 +283,16 @@
 <div class="clear"></div>
     <div class="jing color">
         <label>颜色：</label>
-        <a href="JavaScript:void(0)" class="hover" data-color="1" title="米色" style="background: beige"></a>
+        <a href="JavaScript:void(0)" class="hover" data-color="8" title="黑色" style="background: black"> </a>
         <a href="JavaScript:void(0)" class="hover" data-color="2" title="白色" style="background: white"></a>
-        <a href="JavaScript:void(0)" class="hover" data-color="3" title="灰色" style="background: grey"></a>
+        <a href="JavaScript:void(0)" class="hover" data-color="1" title="橙色" style="background: orange"></a>
         <a href="JavaScript:void(0)" class="hover" data-color="4" title="红色" style="background: red"></a>
         <a href="JavaScript:void(0)" class="hover" data-color="5" title="棕色" style="background: brown"> </a>
         <a href="JavaScript:void(0)" class="hover" data-color="6" title="蓝色" style="background: blue"> </a>
         <a href="JavaScript:void(0)" class="hover" data-color="7" title="黄色" style="background: yellow"> </a>
-        <a href="JavaScript:void(0)" class="hover" data-color="8" title="黑色" style="background: black"> </a>
         <a href="JavaScript:void(0)" class="hover" data-color="9" title="银色" style="background: silver"> </a>
         <a href="JavaScript:void(0)" class="hover" data-color="10" title="绿色" style="background: green"> </a>
+        <a href="JavaScript:void(0)" class="hover" data-color="3" title="其他" >其他</a>
     </div>
 
 
