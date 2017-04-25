@@ -418,7 +418,7 @@
         </div-->
 
         <div class="pp">
-            <p>Copyright © 2017-2020 迈众 All Rights Reserved 版权所有 迈众汽车信息服务有限公司</p>
+            <p>Copyright © 2017-2020 迈众 All Rights Reserved 版权所有 北京迈众汽车信息服务有限公司</p>
             <p>京ICP备17017795号  &nbsp;&nbsp;&nbsp; 联系电话：010-8025-8108 &nbsp;&nbsp;&nbsp;
                 <script type="text/javascript">
                     var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
