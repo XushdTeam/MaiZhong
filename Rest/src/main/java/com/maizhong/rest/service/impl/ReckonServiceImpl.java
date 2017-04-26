@@ -101,6 +101,10 @@ public class ReckonServiceImpl implements ReckonService {
     private String PROVINCE;
     @Value("${CITY}")
     private String CITY;
+    @Value("${LINES}")
+    private String LINES;
+    @Value("${LINE_SITE}")
+    private String LINE_SITE;
     @Value("${SMS_CODE}")
     private String SMS_CODE;
     @Value("${LOGIN_TOKEN}")
@@ -787,11 +791,11 @@ public class ReckonServiceImpl implements ReckonService {
 
         try {
 
-            String linesRedis = jedisClient.get("LINES");
+            String linesRedis = jedisClient.get(LINES);
             if (StringUtils.isBlank(linesRedis)) {
                 LineExample example = new LineExample();
                 List<Line> lineList = lineMapper.selectByExample(example);
-                jedisClient.set("LINES", JsonUtils.objectToJson(lineList));
+                jedisClient.set(LINES, JsonUtils.objectToJson(lineList));
                 return JsonResult.OK(lineList);
 
             } else {
@@ -819,13 +823,13 @@ public class ReckonServiceImpl implements ReckonService {
 
         try {
 
-            String siteRedis = jedisClient.hget("LINE_SITE", lineId);
+            String siteRedis = jedisClient.hget(LINE_SITE, lineId);
             if (StringUtils.isBlank(siteRedis)) {
                 LineSiteExample example = new LineSiteExample();
                 LineSiteExample.Criteria criteria = example.createCriteria();
                 criteria.andLineIdEqualTo(Long.valueOf(lineId));
                 List<LineSite> lineSites = lineSiteMapper.selectByExample(example);
-                jedisClient.hset("LINE_SITE", lineId, JsonUtils.objectToJson(lineSites));
+                jedisClient.hset(LINE_SITE, lineId, JsonUtils.objectToJson(lineSites));
                 return JsonResult.OK(lineSites);
 
             } else {

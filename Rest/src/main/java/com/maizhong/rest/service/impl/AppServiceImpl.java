@@ -1,5 +1,6 @@
 package com.maizhong.rest.service.impl;
 
+import com.maizhong.common.dto.CityDTO;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.EncryptUtils;
 import com.maizhong.common.utils.JsonUtils;
@@ -51,10 +52,10 @@ public class AppServiceImpl implements AppService {
     private String APP_ADVERT;
     @Value("${APP_PROVINCE}")
     private String APP_PROVINCE;
-    @Value("${APP_CITY}")
-    private String APP_CITY;
-    @Value("${APP_LINE}")
-    private String APP_LINE;
+    @Value("${CITY}")
+    private String CITY;
+    @Value("${LINES}")
+    private String LINES;
     @Value("${APP_LINE_SITE}")
     private String APP_LINE_SITE;
 
@@ -142,83 +143,125 @@ public class AppServiceImpl implements AppService {
      */
     @Override
     public JsonResult getProvince() {
+
         try {
             String s = jedisClient.get(APP_PROVINCE);
-            if (StringUtils.isNotBlank(s)){
+            if (StringUtils.isNotBlank(s)) {
                 List<Province> provinces1 = JsonUtils.jsonToList(s, Province.class);
                 return JsonResult.build(200, "获取省份成功", provinces1);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        List<Province> provinces = provinceMapper.selectByExample(null);
+
+        char[] str = new char[26];
+        for (int i = 0; i < 26; i++) {
+            str[i] = (char) (65 + i);
+        }
+        List<Province> provinceList = new ArrayList<>();
+
+        ProvinceExample example = new ProvinceExample();
+        for (int i = 0; i < 26; i++) {
+            example.clear();
+            ProvinceExample.Criteria criteria = example.createCriteria();
+            criteria.andInitialEqualTo(String.valueOf(str[i]));
+            example.setOrderByClause("prov_id ASC");
+            List<Province> provinces = provinceMapper.selectByExample(example);
+            if (provinces == null || provinces.size() == 0) {
+                continue;
+            }
+            Province province1 = new Province();
+            province1.setInitial(String.valueOf(str[i]));
+            province1.setProvId(0);
+            province1.setProvName(null);
+            provinceList.add(province1);
+            for (Province province : provinces) {
+                provinceList.add(province);
+            }
+        }
         try {
-            jedisClient.set(APP_PROVINCE,JsonUtils.objectToJson(provinces));
+            jedisClient.set(APP_PROVINCE, JsonUtils.objectToJson(provinceList));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return JsonResult.build(200, "获取省份成功", provinces);
+
+        return JsonResult.build(200, "获取省份成功", provinceList);
     }
 
     /**
      * 获取城市
+     *
      * @return
      */
     @Override
     public JsonResult getCity() {
+        String get = null;
         try {
-            String s = jedisClient.get(APP_CITY);
-            if (StringUtils.isNotBlank(s)){
-                List<City> cities2 = JsonUtils.jsonToList(s, City.class);
-                return JsonResult.build(200,"获取成功",cities2);
-            }
+            get = jedisClient.get(CITY);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        if (StringUtils.isNotBlank(get)) {
+            List<CityDTO> cityDTOList = JsonUtils.jsonToList(get, CityDTO.class);
+            return JsonResult.build(200, "获取城市成功", cityDTOList);
+        }
 
         List<City> cities = cityMapper.selectByExample(null);
-        jedisClient.set(APP_CITY,JsonUtils.objectToJson(cities));
-        return JsonResult.build(200,"获取成功",cities);
+        if (cities == null || cities.size() == 0) {
+            return JsonResult.OK();
+        }
+        List<CityDTO> cityDTOList = new ArrayList<>();
+        for (City city : cities) {
+            CityDTO dto = new CityDTO();
+            dto.setId(city.getCityId());
+            dto.setName(city.getCityName());
+            dto.setProv(city.getProvId());
+            cityDTOList.add(dto);
+        }
+        try {
+            jedisClient.set(CITY, JsonUtils.objectToJson(cityDTOList));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return JsonResult.build(200, "获取城市成功", cityDTOList);
     }
 
     /**
      * 获取地铁线路
+     *
      * @return
      */
     @Override
     public JsonResult getLine() {
-        try {
-            String s = jedisClient.get(APP_LINE);
-            if (StringUtils.isNotBlank(s)){
-                List<Line> lines2 = JsonUtils.jsonToList(s, Line.class);
-                return JsonResult.build(200,"获取成功",lines2);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        String linesRedis = jedisClient.get("LINES");
+        if (StringUtils.isBlank(linesRedis)) {
+            LineExample example = new LineExample();
+            List<Line> lineList = lineMapper.selectByExample(example);
+            jedisClient.set("LINES", JsonUtils.objectToJson(lineList));
+            return JsonResult.OK(lineList);
+        } else {
+            return JsonResult.OK(JsonUtils.jsonToList(linesRedis, Line.class));
         }
 
-        List<Line> lines = lineMapper.selectByExample(null);
-        jedisClient.set(APP_LINE,JsonUtils.objectToJson(lines));
-        return JsonResult.build(200,"获取成功",lines);
     }
 
     /**
-     * 获取地铁站点
+     * 地铁站站点
      * @return
      */
     @Override
     public JsonResult getLineSite() {
         try {
             String s = jedisClient.get(APP_LINE_SITE);
-            if (StringUtils.isNotBlank(s)){
+            if (StringUtils.isNotBlank(s)) {
                 List<LineSite> lineSites2 = JsonUtils.jsonToList(s, LineSite.class);
-                return JsonResult.build(200,"获取成功",lineSites2);
+                return JsonResult.build(200, "获取成功", lineSites2);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         List<LineSite> lineSites = lineSiteMapper.selectByExample(null);
-        jedisClient.set(APP_LINE_SITE,JsonUtils.objectToJson(lineSites));
-        return JsonResult.build(200,"获取成功",lineSites);
+        jedisClient.set(APP_LINE_SITE, JsonUtils.objectToJson(lineSites));
+        return JsonResult.build(200, "获取成功", lineSites);
     }
 }
