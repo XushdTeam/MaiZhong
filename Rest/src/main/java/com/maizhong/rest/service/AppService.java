@@ -24,4 +24,6 @@ public interface AppService {
     JsonResult getLine();
 
     JsonResult getLineSite();
+
+    JsonResult getBrand();
 }

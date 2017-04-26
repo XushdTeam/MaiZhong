@@ -1,5 +1,7 @@
 package com.maizhong.rest.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.maizhong.common.dto.CityDTO;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.EncryptUtils;
@@ -58,6 +60,8 @@ public class AppServiceImpl implements AppService {
     private String LINES;
     @Value("${APP_LINE_SITE}")
     private String APP_LINE_SITE;
+    @Value("${APP_BRAND}")
+    private String APP_BRAND;
 
 
     /**
@@ -264,4 +268,68 @@ public class AppServiceImpl implements AppService {
         jedisClient.set(APP_LINE_SITE, JsonUtils.objectToJson(lineSites));
         return JsonResult.build(200, "获取成功", lineSites);
     }
+
+    /**
+     * 获取品牌
+     * @return
+     */
+    @Override
+    public JsonResult getBrand() {
+        String s=null;
+        try {
+             s = jedisClient.get(APP_BRAND);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            if (StringUtils.isNotBlank(s)){
+                List list= JsonUtils.jsonToPojo(s, List.class);
+                return JsonResult.build(200,"获取成功",list);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        char[] str = new char[26];
+        for (int i = 0; i < 26; i++) {
+            str[i] = (char) (65 + i);
+        }
+       JSONArray array=new JSONArray();
+
+        BrandExample example = new BrandExample();
+        for (int i = 0; i < 26; i++) {
+            example.clear();
+            BrandExample.Criteria criteria = example.createCriteria();
+            criteria.andInitialEqualTo(String.valueOf(str[i]));
+            example.setOrderByClause("brand_id ASC");
+            List<Brand> brands = brandMapper.selectByExample(example);
+            if (brands == null || brands.size() == 0){
+                continue;
+            }
+            JSONObject object1=new JSONObject();
+            object1.put("id",0);
+            object1.put("name",null);
+            object1.put("img",null);
+            object1.put("initial",String.valueOf(str[i]));
+            array.add(object1);
+            for (Brand brand:brands){
+                JSONObject object=new JSONObject();
+                object.put("id",brand.getBrandId());
+                object.put("name",brand.getBrandName());
+                object.put("img",brand.getSmallLogo());
+                object.put("initial",brand.getInitial());
+                array.add(object);
+            }
+        }
+        try {
+            jedisClient.set(APP_BRAND,JsonUtils.objectToJson(array));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return JsonResult.build(200,"获取成功",array);
+    }
+
 }
