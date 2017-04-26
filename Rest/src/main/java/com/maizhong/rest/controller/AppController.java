@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Description: APP端接口
@@ -16,7 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Time: 9:55
  */
 
-@Controller
+@RestController
+@RequestMapping("/app")
 public class AppController {
 
     @Autowired
@@ -24,11 +28,11 @@ public class AppController {
 
     /**
      * 根据设备Id获取token
+     *
      * @param deviceId
      * @return
      */
-    @RequestMapping(value = "/app/getTokenByDeviceId", method = RequestMethod.POST)
-    @ResponseBody
+    @RequestMapping(value = "/getTokenByDeviceId", method = RequestMethod.POST)
     public JsonResult getTokenByDeviceId(String deviceId) {
 
         if (StringUtils.isBlank(deviceId)) return JsonResult.Error("设备编号不能为空");
@@ -39,6 +43,70 @@ public class AppController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return result;
+    }
+
+    /**
+     * 测试Token
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/testGetToken")
+    public JsonResult testGetToken(HttpServletRequest request) {
+        JsonResult result = appService.testGetToken(request);
+        return result;
+
+    }
+
+    /**
+     * 广告获取
+     *
+     * @return
+     */
+    @RequestMapping(value = "/getTopPic")
+    public JsonResult getAdvert() {
+        JsonResult result = appService.getAdvert();
+        return result;
+    }
+
+    /**
+     * 获取省份
+     * @return
+     */
+    @RequestMapping(value = "/getProvince")
+    public JsonResult getProvince() {
+        JsonResult result = appService.getProvince();
+        return result;
+    }
+
+    /**
+     * 获取城市
+     * @return
+     */
+    @RequestMapping(value = "/getCity")
+    public  JsonResult getCity(){
+        JsonResult result=appService.getCity();
+        return result;
+    }
+
+    /**
+     * 获取地铁线路
+     * @return
+     */
+    @RequestMapping(value = "/getLine")
+    public  JsonResult getLine(){
+        JsonResult result=appService.getLine();
+        return result;
+    }
+
+    /**
+     * 获取地铁站点
+     * @return
+     */
+    @RequestMapping(value = "/getLineSite")
+    public  JsonResult getLineSite(){
+        JsonResult result=appService.getLineSite();
         return result;
     }
 

@@ -1218,9 +1218,9 @@ public class ReckonServiceImpl implements ReckonService {
 
     @Override
     public JsonResult getOneWeek() {
-        List<Map> mapList = new ArrayList<>();
+            List<Map> mapList = new ArrayList<>();
 
-        for (int i = 0; i >= -6; i--) {
+            for (int i = 0; i >= -6; i--) {
             Map<String, String> map = new HashMap<>();
             String StringDate = TimeUtils.getDateBeforeDay(i);
             Date date = TimeUtils.getDate2(StringDate);

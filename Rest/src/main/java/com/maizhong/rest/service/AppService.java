@@ -2,6 +2,8 @@ package com.maizhong.rest.service;
 
 import com.maizhong.common.result.JsonResult;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Description:
  * User: 王存浩
@@ -10,4 +12,16 @@ import com.maizhong.common.result.JsonResult;
  */
 public interface AppService {
     JsonResult getTokenByDeciceId(String deviceId);
+
+    JsonResult testGetToken(HttpServletRequest request);
+
+    JsonResult getAdvert();
+
+    JsonResult getProvince();
+
+    JsonResult getCity();
+
+    JsonResult getLine();
+
+    JsonResult getLineSite();
 }

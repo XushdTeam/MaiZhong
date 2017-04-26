@@ -33,7 +33,13 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
-
+    <!--     配置拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/app/**"/>
+            <bean class="com.maizhong.rest.filter.TokenFilter" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 
 
