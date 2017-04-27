@@ -845,6 +845,17 @@ public class ReckonServiceImpl implements ReckonService {
         return null;
     }
 
+    /**
+     * 填写预约信息
+     * @param orderNumber
+     * @param dealWay
+     * @param wayId
+     * @param linkMan
+     * @param linkPhone
+     * @param address
+     * @param checkTime
+     * @return
+     */
     @Override
     public JsonResult updateOrders(String orderNumber, String dealWay, String wayId, String linkMan, String linkPhone, String address, String checkTime) {
         try {

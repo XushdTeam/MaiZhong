@@ -11,6 +11,7 @@ import com.maizhong.mapper.*;
 import com.maizhong.pojo.*;
 import com.maizhong.rest.DTO.AdvertDTO;
 import com.maizhong.rest.service.AppService;
+import com.maizhong.rest.service.ReckonService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Description:
@@ -44,10 +46,16 @@ public class AppServiceImpl implements AppService {
     private LineMapper lineMapper;
     @Autowired
     private LineSiteMapper lineSiteMapper;
+    @Autowired
+    private SeriesMapper seriesMapper;
+    @Autowired
+    private UserMapper userMapper;
 
+
+    @Autowired
+    private ReckonService reckonService;
     @Value("${UNLOGIN_TOKEN}")
     private String UNLOGIN_TOKEN;
-
     @Value("${BRAND_GROUP_INITIAL}")
     private String BRAND_GROUP_INITIAL;
     @Value("${APP_ADVERT}")
@@ -62,7 +70,12 @@ public class AppServiceImpl implements AppService {
     private String APP_LINE_SITE;
     @Value("${APP_BRAND}")
     private String APP_BRAND;
-
+    @Value("${APP_BRAND_SERIES}")
+    private String APP_BRAND_SERIES;
+    @Value("${SMS_CODE}")
+    private String SMS_CODE;
+    @Value("${APP_LOGIN_TOKEN}")
+    private String APP_LOGIN_TOKEN;
 
     /**
      * 根据设备Id获取token
@@ -251,6 +264,7 @@ public class AppServiceImpl implements AppService {
 
     /**
      * 地铁站站点
+     *
      * @return
      */
     @Override
@@ -271,21 +285,22 @@ public class AppServiceImpl implements AppService {
 
     /**
      * 获取品牌
+     *
      * @return
      */
     @Override
     public JsonResult getBrand() {
-        String s=null;
+        String s = null;
         try {
-             s = jedisClient.get(APP_BRAND);
+            s = jedisClient.get(APP_BRAND);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         try {
-            if (StringUtils.isNotBlank(s)){
-                List list= JsonUtils.jsonToPojo(s, List.class);
-                return JsonResult.build(200,"获取成功",list);
+            if (StringUtils.isNotBlank(s)) {
+                List list = JsonUtils.jsonToPojo(s, List.class);
+                return JsonResult.build(200, "获取成功", list);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -296,7 +311,7 @@ public class AppServiceImpl implements AppService {
         for (int i = 0; i < 26; i++) {
             str[i] = (char) (65 + i);
         }
-       JSONArray array=new JSONArray();
+        JSONArray array = new JSONArray();
 
         BrandExample example = new BrandExample();
         for (int i = 0; i < 26; i++) {
@@ -305,31 +320,172 @@ public class AppServiceImpl implements AppService {
             criteria.andInitialEqualTo(String.valueOf(str[i]));
             example.setOrderByClause("brand_id ASC");
             List<Brand> brands = brandMapper.selectByExample(example);
-            if (brands == null || brands.size() == 0){
+            if (brands == null || brands.size() == 0) {
                 continue;
             }
-            JSONObject object1=new JSONObject();
-            object1.put("id",0);
-            object1.put("name",null);
-            object1.put("img",null);
-            object1.put("initial",String.valueOf(str[i]));
+            JSONObject object1 = new JSONObject();
+            object1.put("id", 0);
+            object1.put("name", null);
+            object1.put("img", null);
+            object1.put("initial", String.valueOf(str[i]));
             array.add(object1);
-            for (Brand brand:brands){
-                JSONObject object=new JSONObject();
-                object.put("id",brand.getBrandId());
-                object.put("name",brand.getBrandName());
-                object.put("img",brand.getSmallLogo());
-                object.put("initial",brand.getInitial());
+            for (Brand brand : brands) {
+                JSONObject object = new JSONObject();
+                object.put("id", brand.getBrandId());
+                object.put("name", brand.getBrandName());
+                object.put("img", brand.getSmallLogo());
+                object.put("initial", brand.getInitial());
                 array.add(object);
             }
         }
         try {
-            jedisClient.set(APP_BRAND,JsonUtils.objectToJson(array));
+            jedisClient.set(APP_BRAND, JsonUtils.objectToJson(array));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return JsonResult.build(200,"获取成功",array);
+        return JsonResult.build(200, "获取成功", array);
     }
 
+    /**
+     * 根据品牌获取车系
+     *
+     * @param brandId
+     * @return
+     */
+    @Override
+    public JsonResult getSeries(String brandId) {
+        String hget = null;
+        try {
+            hget = jedisClient.hget(APP_BRAND_SERIES, brandId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (StringUtils.isNotBlank(hget)) {
+            List list = JsonUtils.jsonToPojo(hget, List.class);
+            return JsonResult.build(200, "获取成功", list);
+        }
+
+        List<String> strings = null;
+        try {
+            strings = seriesMapper.selectByBrandId(Integer.valueOf(brandId));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        if (strings == null || strings.size() == 0) {
+            return JsonResult.build(200, "品牌Id有误", null);
+        }
+        JSONArray array = new JSONArray();
+        SeriesExample example = new SeriesExample();
+        for (String factory : strings) {
+            example.clear();
+            JSONObject object = new JSONObject();
+            object.put("seriesId", 0);
+            object.put("seriesName", "");
+            object.put("seriesGroupName", factory);
+           /* object.put("seriesPic",null);*/
+            object.put("brandId", brandId);
+            array.add(object);
+            SeriesExample.Criteria criteria = example.createCriteria();
+            try {
+                criteria.andBrandIdEqualTo(Integer.valueOf(brandId));
+                criteria.andSeriesGroupNameEqualTo(factory);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                return JsonResult.build(200, "品牌Id有误", null);
+            }
+            List<Series> seriesList = seriesMapper.selectByExample(example);
+            for (Series series1 : seriesList) {
+                JSONObject object2 = new JSONObject();
+                object2.put("seriesId", series1.getSeriesId());
+                object2.put("seriesName", series1.getSeriesName());
+                object.put("seriesGroupName", series1.getSeriesGroupName());
+               /* object2.put("seriesPic",null);*/
+                object2.put("brandId", series1.getBrandId());
+                array.add(object2);
+            }
+        }
+        try {
+            jedisClient.hset(APP_BRAND_SERIES, brandId, JsonUtils.objectToJson(array));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return JsonResult.build(200, "获取成功", array);
+    }
+
+    /**
+     * 根据车系获取车型
+     *
+     * @param seriesId
+     * @return
+     */
+    @Override
+    public JsonResult getModelBySeries(String seriesId) {
+        JsonResult carType = null;
+        try {
+            carType = reckonService.getCarType(seriesId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return JsonResult.build(200, "获取成功", carType);
+    }
+
+    /**
+     * 获取短信验证码
+     *
+     * @param phone
+     * @return
+     */
+    @Override
+    public JsonResult getSmsCode(String phone) {
+        JsonResult smsCode = reckonService.getSMSCode(phone, "127.0.0.1");
+        return smsCode;
+    }
+
+    @Override
+    public JsonResult userLogin(String smsCode, String phone) {
+        String res = null;
+        try {
+            res = jedisClient.get(SMS_CODE + ":" + phone);//获取缓存内的信息
+        } catch (Exception e) {
+            return JsonResult.Error("请发送验证码");
+        }
+        if (StringUtils.isBlank(res)) {
+            return JsonResult.Error("请发送验证码");
+        }
+        Map map = JsonUtils.jsonToPojo(res, Map.class);
+        String reSmsCode = (String) map.get("smsCode");
+        if (StringUtils.equals(smsCode, reSmsCode)) {
+            String token = EncryptUtils.getSHA256Str(phone + "*#$maizhongCAR%$!*");
+            try {
+                jedisClient.set(APP_LOGIN_TOKEN + ":" + phone, token);
+             /*   jedisClient.expire(LOGIN_TOKEN + ":" + phone, 60 * 60 * 2);  登录用户暂时不设置失效时间*/
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                User user = new User();
+                user.setUserId(Long.valueOf(phone));
+                user.setPhone(phone);
+                user.setStatus(1);
+                user.setDelflag(0);
+                userMapper.insert(user);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return JsonResult.build(200, "登录成功", token);
+        } else {
+            return JsonResult.Error("登录失败，验证码不匹配");
+        }
+    }
+
+    /**
+     * 估值
+     * @param param
+     * @return
+     */
+    @Override
+    public JsonResult getGuzhi(String param) {
+        return reckonService.getGuzhi(param);
+    }
 }

@@ -26,4 +26,15 @@ public interface AppService {
     JsonResult getLineSite();
 
     JsonResult getBrand();
+
+    JsonResult getSeries(String brandId);
+
+    JsonResult getModelBySeries(String seriesId);
+
+
+    JsonResult getSmsCode(String phone);
+
+    JsonResult userLogin(String smsCode, String phone);
+
+    JsonResult getGuzhi(String param);
 }

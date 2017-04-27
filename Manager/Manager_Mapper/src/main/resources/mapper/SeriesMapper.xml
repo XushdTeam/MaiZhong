@@ -9,6 +9,10 @@
     <result column="series_pic" jdbcType="VARCHAR" property="seriesPic" />
     <result column="brand_id" jdbcType="INTEGER" property="brandId" />
   </resultMap>
+
+  <resultMap id="GroupMap" type="java.lang.String">
+    <result column="series_group_name" jdbcType="VARCHAR" property="seriesGroupName" />
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -225,4 +229,10 @@
       brand_id = #{brandId,jdbcType=INTEGER}
     where series_id = #{seriesId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByBrandId" resultMap="GroupMap">
+    SELECT s.series_group_name FROM series s
+    WHERE s.brand_id=#{brandId,jdbcType=INTEGER} GROUP BY s.series_group_name;
+  </select>
+
 </mapper>

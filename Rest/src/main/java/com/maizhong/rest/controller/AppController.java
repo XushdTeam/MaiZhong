@@ -6,10 +6,7 @@ import com.maizhong.rest.service.AppService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -125,4 +122,63 @@ public class AppController {
         JsonResult result = appService.getBrand();
         return result;
     }
+
+    /**
+     * 根据品品牌获取车系
+     * @return
+     */
+    @RequestMapping(value = "/getSeriesByBrand/{brandId}",method = RequestMethod.GET)
+    public JsonResult getSeries(@PathVariable("brandId") String brandId){
+     JsonResult result=   appService.getSeries(brandId);
+        return  result;
+    }
+
+    /**
+     * 根据车系获取车型
+     * @param seriesId
+     * @return
+     */
+    @RequestMapping(value = "/getModelBySeries/{seriesId}")
+    public JsonResult getModelBySeries(@PathVariable("seriesId") String seriesId){
+        JsonResult result=appService.getModelBySeries(seriesId);
+        return  result;
+    }
+
+    /**
+     * 估值
+     *
+     * @param param
+     * @return
+     */
+    @RequestMapping(value = "/guzhi/{param}", method = RequestMethod.GET)
+    @ResponseBody
+    public JsonResult getGuzhi(@PathVariable String param) {
+
+        JsonResult result = appService.getGuzhi(param);
+        return result;
+    }
+
+    /**
+     * 根据手机号发送验证码
+     * @param phone
+     * @return
+     */
+    @RequestMapping(value = "/getSmsCode/{phone}")
+    public JsonResult getSmsCode(@PathVariable("phone") String phone){
+       JsonResult result= appService.getSmsCode(phone);
+        return result;
+    }
+
+    /**
+     * 用户登录
+     * @param smsCode
+     * @param phone
+     * @return
+     */
+    @RequestMapping(value = "/userLogin",method = RequestMethod.POST)
+    public  JsonResult userLogin(String smsCode,String phone){
+      JsonResult result=  appService.userLogin(smsCode,phone);
+        return  result;
+    }
+
 }
