@@ -13,7 +13,7 @@ public class Series {
 
     private String seriesPic;
 
-    private Integer brandId;
+    private Long brandId;
 
     public Integer getSeriesId() {
         return seriesId;
@@ -55,11 +55,11 @@ public class Series {
         this.seriesPic = seriesPic == null ? null : seriesPic.trim();
     }
 
-    public Integer getBrandId() {
+    public Long getBrandId() {
         return brandId;
     }
 
-    public void setBrandId(Integer brandId) {
+    public void setBrandId(Long brandId) {
         this.brandId = brandId;
     }
 }

@@ -11,7 +11,7 @@ public interface BrandMapper {
 
     int deleteByExample(BrandExample example);
 
-    int deleteByPrimaryKey(Integer brandId);
+    int deleteByPrimaryKey(Long brandId);
 
     int insert(Brand record);
 
@@ -19,7 +19,7 @@ public interface BrandMapper {
 
     List<Brand> selectByExample(BrandExample example);
 
-    Brand selectByPrimaryKey(Integer brandId);
+    Brand selectByPrimaryKey(Long brandId);
 
     int updateByExampleSelective(@Param("record") Brand record, @Param("example") BrandExample example);
 

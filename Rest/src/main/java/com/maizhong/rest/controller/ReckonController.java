@@ -315,7 +315,5 @@ public class ReckonController {
     public JsonResult getOrdersByPhone(@PathVariable("phone") String phone) {
         JsonResult result = reckonService.getOrdersByPhone(phone);
         return result;
-
-
     }
 }

@@ -3,7 +3,7 @@ package com.maizhong.pojo;
 import java.util.Date;
 
 public class Brand {
-    private Integer brandId;
+    private Long brandId;
 
     private String brandName;
 
@@ -15,11 +15,13 @@ public class Brand {
 
     private String largeLogo;
 
-    public Integer getBrandId() {
+    private Integer isHot;
+
+    public Long getBrandId() {
         return brandId;
     }
 
-    public void setBrandId(Integer brandId) {
+    public void setBrandId(Long brandId) {
         this.brandId = brandId;
     }
 
@@ -61,5 +63,13 @@ public class Brand {
 
     public void setLargeLogo(String largeLogo) {
         this.largeLogo = largeLogo == null ? null : largeLogo.trim();
+    }
+
+    public Integer getIsHot() {
+        return isHot;
+    }
+
+    public void setIsHot(Integer isHot) {
+        this.isHot = isHot;
     }
 }

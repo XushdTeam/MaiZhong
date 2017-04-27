@@ -60,12 +60,12 @@ public class AdvertPublishServiceImpl implements AdvertPublishService {
      */
     @Override
     public TbAdvertPublish getAdvertPublishByid(Long id) {
-        TbAdvertPublishExample tbAdvertPublishExample = new TbAdvertPublishExample();
+    /*    TbAdvertPublishExample tbAdvertPublishExample = new TbAdvertPublishExample();
         TbAdvertPublishExample.Criteria criteria = tbAdvertPublishExample.createCriteria();
         criteria.andIdEqualTo(id);
-        List<TbAdvertPublish> advertPublishes = tbAdvertPublishMapper.selectByExample(tbAdvertPublishExample);
-        if (advertPublishes == null || advertPublishes.size() == 0) return null;
-        return advertPublishes.get(0);
+        List<TbAdvertPublish> advertPublishes = tbAdvertPublishMapper.selectByExample(tbAdvertPublishExample);*/
+        TbAdvertPublish tbAdvertPublish = tbAdvertPublishMapper.selectByPrimaryKey(id);
+        return tbAdvertPublish;
     }
 
 

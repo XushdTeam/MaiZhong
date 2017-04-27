@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
  * Time: 9:57
  */
 public interface AppService {
-    JsonResult getTokenByDeciceId(String deviceId);
+    JsonResult getTokenByDeciceId(String deviceId,String phone);
 
     JsonResult testGetToken(HttpServletRequest request);
 

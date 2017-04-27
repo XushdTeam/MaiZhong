@@ -31,13 +31,13 @@ public class AppController {
      * @return
      */
     @RequestMapping(value = "/getTokenByDeviceId", method = RequestMethod.POST)
-    public JsonResult getTokenByDeviceId(String deviceId) {
+    public JsonResult getTokenByDeviceId(String deviceId,String phone) {
 
-        if (StringUtils.isBlank(deviceId)) return JsonResult.Error("设备编号不能为空");
+        if (StringUtils.isBlank(deviceId)&&StringUtils.isBlank(phone)) return JsonResult.Error("网络繁忙，请稍后重试");
 
         JsonResult result = null;
         try {
-            result = appService.getTokenByDeciceId(deviceId);
+            result = appService.getTokenByDeciceId(deviceId,phone);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -54,7 +54,6 @@ public class AppController {
     public JsonResult testGetToken(HttpServletRequest request) {
         JsonResult result = appService.testGetToken(request);
         return result;
-
     }
 
     /**
@@ -175,8 +174,8 @@ public class AppController {
      * @param phone
      * @return
      */
-    @RequestMapping(value = "/userLogin",method = RequestMethod.POST)
-    public  JsonResult userLogin(String smsCode,String phone){
+    @RequestMapping(value = "/userLogin/{smsCode}/{phone}",method = RequestMethod.GET)
+    public  JsonResult userLogin(@PathVariable("smsCode") String smsCode, @PathVariable("phone") String phone){
       JsonResult result=  appService.userLogin(smsCode,phone);
         return  result;
     }

@@ -123,7 +123,7 @@ public class ReckonServiceImpl implements ReckonService {
         for (Object o : brand_list) {
             JSONObject object = (JSONObject) o;
             Brand brand = new Brand();
-            brand.setBrandId(object.getInteger("brand_id"));
+            brand.setBrandId(object.getLong("brand_id"));
             brand.setBrandName(object.getString("brand_name"));
             brand.setInitial(object.getString("initial"));
             brand.setUpdateTime(object.getDate("update_time"));

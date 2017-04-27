@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -50,6 +51,8 @@ public class AppServiceImpl implements AppService {
     private SeriesMapper seriesMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private VersionMapper versionMapper;
 
 
     @Autowired
@@ -84,24 +87,68 @@ public class AppServiceImpl implements AppService {
      * @return
      */
     @Override
-    public JsonResult getTokenByDeciceId(String deviceId) {
+    public JsonResult getTokenByDeciceId(String deviceId, String phone) {
+        JSONObject object = new JSONObject();
+        List<Version> versions = versionMapper.selectByExample(null);
+        Version version = null;
         try {
-            String hget = jedisClient.get(UNLOGIN_TOKEN + ":" + deviceId);
-            if (StringUtils.isNotBlank(hget)) {
-                return JsonResult.build(200, "获取成功", hget);
+            if (versions != null && versions.size() > 0) {
+                version = versions.get(versions.size() - 1);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String token = EncryptUtils.getSHA256Str(deviceId + "*#$maizhong!*");
-
-        try {
-            jedisClient.set(UNLOGIN_TOKEN + ":" + deviceId, token);
-           /* jedisClient.expire(UNLOGIN_TOKEN + ":" + deviceId, 60 * 60 * 2);*/
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (version != null) {
+            object.put("versionNumber", version.getVersionNumber());
+        } else {
+            object.put("versionNumber", "V0.0.0");
         }
-        return JsonResult.build(200, "获取成功", token);
+        if (StringUtils.isNotBlank(deviceId)) {
+            try {
+                String hget = jedisClient.get(UNLOGIN_TOKEN + ":" + deviceId);
+                if (StringUtils.isNotBlank(hget)) {
+                    object.put("token",hget);
+                    return JsonResult.build(200, "获取成功", object);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            String token = EncryptUtils.getSHA256Str(deviceId + "*#$maizhong!*");
+
+            try {
+                jedisClient.set(UNLOGIN_TOKEN + ":" + deviceId, token);
+           /* jedisClient.expire(UNLOGIN_TOKEN + ":" + deviceId, 60 * 60 * 2);*/
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            object.put("token", token);
+            return JsonResult.build(200, "获取成功", object);
+        } else {
+            String s = jedisClient.get(APP_LOGIN_TOKEN + ":" + phone);
+            if (StringUtils.isNotBlank(s)) {
+                object.put("token", s);
+            } else {
+                String token = EncryptUtils.getSHA256Str(phone + "*#$maizhongCAR%$!*");
+                try {
+                    jedisClient.set(APP_LOGIN_TOKEN + ":" + phone, token);
+             /*   jedisClient.expire(LOGIN_TOKEN + ":" + phone, 60 * 60 * 2);  登录用户暂时不设置失效时间*/
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                try {
+                    User user = new User();
+                    user.setUserId(Long.valueOf(phone));
+                    user.setPhone(phone);
+                    user.setStatus(1);
+                    user.setDelflag(0);
+                    userMapper.insert(user);
+                }  catch (Exception e) {
+                    e.printStackTrace();
+                }
+                object.put("token", token);
+            }
+            return JsonResult.build(200, "获取成功", object);
+        }
     }
 
     @Override
@@ -325,16 +372,18 @@ public class AppServiceImpl implements AppService {
             }
             JSONObject object1 = new JSONObject();
             object1.put("id", 0);
-            object1.put("name", null);
-            object1.put("img", null);
+            object1.put("name", "");
+            object1.put("img", "");
             object1.put("initial", String.valueOf(str[i]));
+            object1.put("isHot", 0);
             array.add(object1);
             for (Brand brand : brands) {
                 JSONObject object = new JSONObject();
                 object.put("id", brand.getBrandId());
                 object.put("name", brand.getBrandName());
-                object.put("img", brand.getSmallLogo());
+                object.put("img", brand.getLargeLogo());
                 object.put("initial", brand.getInitial());
+                object.put("isHot", brand.getIsHot());
                 array.add(object);
             }
         }
@@ -343,7 +392,6 @@ public class AppServiceImpl implements AppService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return JsonResult.build(200, "获取成功", array);
     }
 
@@ -481,6 +529,7 @@ public class AppServiceImpl implements AppService {
 
     /**
      * 估值
+     *
      * @param param
      * @return
      */
