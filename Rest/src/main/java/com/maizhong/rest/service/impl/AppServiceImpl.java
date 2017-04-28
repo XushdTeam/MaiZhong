@@ -475,7 +475,7 @@ public class AppServiceImpl implements AppService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return JsonResult.build(200, "获取成功", carType);
+        return carType;
     }
 
     /**
