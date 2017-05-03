@@ -37,4 +37,6 @@ public interface AppService {
     JsonResult userLogin(String smsCode, String phone);
 
     JsonResult getGuzhi(String param);
+
+    JsonResult uploadBase64(String base64Date,HttpServletRequest request);
 }

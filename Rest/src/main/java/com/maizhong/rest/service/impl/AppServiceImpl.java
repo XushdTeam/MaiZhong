@@ -11,15 +11,22 @@ import com.maizhong.mapper.*;
 import com.maizhong.pojo.*;
 import com.maizhong.rest.DTO.AdvertDTO;
 import com.maizhong.rest.service.AppService;
+import com.maizhong.rest.service.FileUploadService;
 import com.maizhong.rest.service.ReckonService;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import sun.misc.BASE64Decoder;
 
+import javax.imageio.ImageIO;
+import javax.imageio.stream.FileImageOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -57,6 +64,9 @@ public class AppServiceImpl implements AppService {
 
     @Autowired
     private ReckonService reckonService;
+    @Autowired
+    private FileUploadService fileUploadService;
+
     @Value("${UNLOGIN_TOKEN}")
     private String UNLOGIN_TOKEN;
     @Value("${BRAND_GROUP_INITIAL}")
@@ -107,7 +117,7 @@ public class AppServiceImpl implements AppService {
             try {
                 String hget = jedisClient.get(UNLOGIN_TOKEN + ":" + deviceId);
                 if (StringUtils.isNotBlank(hget)) {
-                    object.put("token",hget);
+                    object.put("token", hget);
                     return JsonResult.build(200, "获取成功", object);
                 }
             } catch (Exception e) {
@@ -131,6 +141,7 @@ public class AppServiceImpl implements AppService {
                 String token = EncryptUtils.getSHA256Str(phone + "*#$maizhongCAR%$!*");
                 try {
                     jedisClient.set(APP_LOGIN_TOKEN + ":" + phone, token);
+                    jedisClient.set("APP_LOGIN_PHONE" + ":" + token, phone);
              /*   jedisClient.expire(LOGIN_TOKEN + ":" + phone, 60 * 60 * 2);  登录用户暂时不设置失效时间*/
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -142,7 +153,7 @@ public class AppServiceImpl implements AppService {
                     user.setStatus(1);
                     user.setDelflag(0);
                     userMapper.insert(user);
-                }  catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 object.put("token", token);
@@ -507,6 +518,7 @@ public class AppServiceImpl implements AppService {
             String token = EncryptUtils.getSHA256Str(phone + "*#$maizhongCAR%$!*");
             try {
                 jedisClient.set(APP_LOGIN_TOKEN + ":" + phone, token);
+                jedisClient.set("APP_LOGIN_PHONE" + ":" + token, phone);
              /*   jedisClient.expire(LOGIN_TOKEN + ":" + phone, 60 * 60 * 2);  登录用户暂时不设置失效时间*/
             } catch (Exception e) {
                 e.printStackTrace();
@@ -536,5 +548,43 @@ public class AppServiceImpl implements AppService {
     @Override
     public JsonResult getGuzhi(String param) {
         return reckonService.getGuzhi(param);
+    }
+
+    /**
+     * 图片上传
+     *
+     * @param base64Date
+     * @return
+     */
+    @Override
+    public JsonResult uploadBase64(String base64Date, HttpServletRequest request) {
+        String imgName= null;
+        try {
+            String[] split = base64Date.split(";");
+            String[] split1 = split[0].split("/");
+            imgName = "xxx."+split1[1];
+            String[] split2 = split[1].split("se64,");
+            base64Date=split2[1];
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        byte[] json = null;
+        try {
+            json = base64Date.getBytes("UTF-8");
+            json = Base64.decodeBase64(json);
+            JsonResult result = fileUploadService.uploadImg(json, "appPerson/", imgName);
+            String data = String.valueOf(result.getData());
+            String token = request.getHeader("X-Maizhong-AppKey");
+            String app_login_phone = jedisClient.hget("APP_LOGIN_PHONE", token);
+         /*   String app_login_phone = "18515455566";*/
+            User user = userMapper.selectByPrimaryKey(Long.valueOf(app_login_phone));
+            user.setUserImg(data);
+            userMapper.updateByPrimaryKeySelective(user);
+            return JsonResult.build(200, "修改成功", data);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return JsonResult.build(500, "上传失败", null);
     }
 }

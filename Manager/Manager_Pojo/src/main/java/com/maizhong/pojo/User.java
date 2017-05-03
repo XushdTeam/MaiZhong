@@ -13,6 +13,8 @@ public class User {
 
     private String linkmanName;
 
+    private String userImg;
+
     private Integer status;
 
     private Integer delflag;
@@ -63,6 +65,14 @@ public class User {
 
     public void setLinkmanName(String linkmanName) {
         this.linkmanName = linkmanName == null ? null : linkmanName.trim();
+    }
+
+    public String getUserImg() {
+        return userImg;
+    }
+
+    public void setUserImg(String userImg) {
+        this.userImg = userImg == null ? null : userImg.trim();
     }
 
     public Integer getStatus() {

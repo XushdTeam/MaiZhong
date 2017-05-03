@@ -8,6 +8,7 @@
     <result column="linkman_phone" jdbcType="VARCHAR" property="linkmanPhone" />
     <result column="is_contact" jdbcType="INTEGER" property="isContact" />
     <result column="linkman_name" jdbcType="VARCHAR" property="linkmanName" />
+    <result column="user_img" jdbcType="VARCHAR" property="userImg" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="delflag" jdbcType="INTEGER" property="delflag" />
   </resultMap>
@@ -70,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, phone, address, linkman_phone, is_contact, linkman_name, status, delflag
+    user_id, phone, address, linkman_phone, is_contact, linkman_name, user_img, status, 
+    delflag
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.pojo.UserExample" resultMap="BaseResultMap">
     select
@@ -105,10 +107,12 @@
   <insert id="insert" parameterType="com.maizhong.pojo.User">
     insert ignore  into user (user_id, phone, address,
       linkman_phone, is_contact, linkman_name, 
-      status, delflag)
+      user_img, status, delflag
+      )
     values (#{userId,jdbcType=BIGINT}, #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{linkmanPhone,jdbcType=VARCHAR}, #{isContact,jdbcType=INTEGER}, #{linkmanName,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{delflag,jdbcType=INTEGER})
+      #{userImg,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{delflag,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.pojo.User">
     insert into user
@@ -130,6 +134,9 @@
       </if>
       <if test="linkmanName != null">
         linkman_name,
+      </if>
+      <if test="userImg != null">
+        user_img,
       </if>
       <if test="status != null">
         status,
@@ -156,6 +163,9 @@
       </if>
       <if test="linkmanName != null">
         #{linkmanName,jdbcType=VARCHAR},
+      </if>
+      <if test="userImg != null">
+        #{userImg,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
@@ -192,6 +202,9 @@
       <if test="record.linkmanName != null">
         linkman_name = #{record.linkmanName,jdbcType=VARCHAR},
       </if>
+      <if test="record.userImg != null">
+        user_img = #{record.userImg,jdbcType=VARCHAR},
+      </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
       </if>
@@ -211,6 +224,7 @@
       linkman_phone = #{record.linkmanPhone,jdbcType=VARCHAR},
       is_contact = #{record.isContact,jdbcType=INTEGER},
       linkman_name = #{record.linkmanName,jdbcType=VARCHAR},
+      user_img = #{record.userImg,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=INTEGER},
       delflag = #{record.delflag,jdbcType=INTEGER}
     <if test="_parameter != null">
@@ -235,6 +249,9 @@
       <if test="linkmanName != null">
         linkman_name = #{linkmanName,jdbcType=VARCHAR},
       </if>
+      <if test="userImg != null">
+        user_img = #{userImg,jdbcType=VARCHAR},
+      </if>
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
       </if>
@@ -251,6 +268,7 @@
       linkman_phone = #{linkmanPhone,jdbcType=VARCHAR},
       is_contact = #{isContact,jdbcType=INTEGER},
       linkman_name = #{linkmanName,jdbcType=VARCHAR},
+      user_img = #{userImg,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
       delflag = #{delflag,jdbcType=INTEGER}
     where user_id = #{userId,jdbcType=BIGINT}

@@ -31,13 +31,13 @@ public class AppController {
      * @return
      */
     @RequestMapping(value = "/getTokenByDeviceId", method = RequestMethod.POST)
-    public JsonResult getTokenByDeviceId(String deviceId,String phone) {
+    public JsonResult getTokenByDeviceId(String deviceId, String phone) {
 
-        if (StringUtils.isBlank(deviceId)&&StringUtils.isBlank(phone)) return JsonResult.Error("网络繁忙，请稍后重试");
+        if (StringUtils.isBlank(deviceId) && StringUtils.isBlank(phone)) return JsonResult.Error("网络繁忙，请稍后重试");
 
         JsonResult result = null;
         try {
-            result = appService.getTokenByDeciceId(deviceId,phone);
+            result = appService.getTokenByDeciceId(deviceId, phone);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -124,23 +124,25 @@ public class AppController {
 
     /**
      * 根据品品牌获取车系
+     *
      * @return
      */
-    @RequestMapping(value = "/getSeriesByBrand/{brandId}",method = RequestMethod.GET)
-    public JsonResult getSeries(@PathVariable("brandId") String brandId){
-     JsonResult result=   appService.getSeries(brandId);
-        return  result;
+    @RequestMapping(value = "/getSeriesByBrand/{brandId}", method = RequestMethod.GET)
+    public JsonResult getSeries(@PathVariable("brandId") String brandId) {
+        JsonResult result = appService.getSeries(brandId);
+        return result;
     }
 
     /**
      * 根据车系获取车型
+     *
      * @param seriesId
      * @return
      */
     @RequestMapping(value = "/getModelBySeries/{seriesId}")
-    public JsonResult getModelBySeries(@PathVariable("seriesId") String seriesId){
-        JsonResult result=appService.getModelBySeries(seriesId);
-        return  result;
+    public JsonResult getModelBySeries(@PathVariable("seriesId") String seriesId) {
+        JsonResult result = appService.getModelBySeries(seriesId);
+        return result;
     }
 
     /**
@@ -159,25 +161,38 @@ public class AppController {
 
     /**
      * 根据手机号发送验证码
+     *
      * @param phone
      * @return
      */
     @RequestMapping(value = "/getSmsCode/{phone}")
-    public JsonResult getSmsCode(@PathVariable("phone") String phone){
-       JsonResult result= appService.getSmsCode(phone);
+    public JsonResult getSmsCode(@PathVariable("phone") String phone) {
+        JsonResult result = appService.getSmsCode(phone);
         return result;
     }
 
     /**
      * 用户登录
+     *
      * @param smsCode
      * @param phone
      * @return
      */
-    @RequestMapping(value = "/userLogin/{smsCode}/{phone}",method = RequestMethod.GET)
-    public  JsonResult userLogin(@PathVariable("smsCode") String smsCode, @PathVariable("phone") String phone){
-      JsonResult result=  appService.userLogin(smsCode,phone);
-        return  result;
+    @RequestMapping(value = "/userLogin/{smsCode}/{phone}", method = RequestMethod.GET)
+    public JsonResult userLogin(@PathVariable("smsCode") String smsCode, @PathVariable("phone") String phone) {
+        JsonResult result = appService.userLogin(smsCode, phone);
+        return result;
     }
 
+    /**
+     * APP头像上传
+     * @param base64Date
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/uploadBase64",method = RequestMethod.POST)
+    public JsonResult uploadBase64(String base64Date,HttpServletRequest request) {
+    JsonResult result=appService.uploadBase64(base64Date,request);
+        return result;
+    }
 }
