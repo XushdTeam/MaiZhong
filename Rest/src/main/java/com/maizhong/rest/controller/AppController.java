@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -146,16 +147,15 @@ public class AppController {
     }
 
     /**
-     * 估值
+     * 预估值
      *
      * @param param
      * @return
      */
     @RequestMapping(value = "/guzhi/{param}", method = RequestMethod.GET)
     @ResponseBody
-    public JsonResult getGuzhi(@PathVariable String param) {
-
-        JsonResult result = appService.getGuzhi(param);
+    public JsonResult getGuzhi(@PathVariable String param,HttpServletRequest request) {
+        JsonResult result = appService.getGuzhi(param,request);
         return result;
     }
 
@@ -195,4 +195,100 @@ public class AppController {
     JsonResult result=appService.uploadBase64(base64Date,request);
         return result;
     }
+
+    /**
+     * 获取估值记录
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/getGzrecord")
+    public JsonResult getGzrecord(HttpServletRequest request){
+        JsonResult result=appService.getGzrecord(request);
+        return result;
+    }
+
+    /**
+     * 帮助中心获取标题
+     * @return
+     */
+    @RequestMapping(value = "getHelpTitle")
+    public JsonResult getHelp(){
+        JsonResult result=appService.getHelpTitle();
+        return result;
+    }
+
+    /**
+     * 帮助中心 根据id获取内容
+     * @return
+     */
+    @RequestMapping(value = "getHelpContent/{id}",method = RequestMethod.GET)
+    public JsonResult getHelp(@PathVariable("id") String id){
+        JsonResult result=appService.getHelpContent(id);
+        return result;
+    }
+
+    /**
+     * 获取精准估值结果
+     *
+     * @param guzhiKey
+     * @param otherKey
+     * @return
+     */
+    @RequestMapping(value = "/getSaleGZ/{guzhiKey}/{otherKey}",method = RequestMethod.GET)
+    @ResponseBody
+    public JsonResult getSaleGZ(@PathVariable String guzhiKey,
+                                @PathVariable String otherKey,
+                               HttpServletRequest request) {
+        JsonResult result = appService.getSaleGZ(guzhiKey, otherKey, request);
+        return result;
+    }
+
+
+
+
+    /**
+     * 订单--完善
+     * @param orderNumber 订单编号
+     * @param dealWay     交易方式 1 4S店 2 地铁站 3 上门
+     * @param wayId       4S店ID 或者 地铁站ID
+     * @param linkMan     联系人
+     * @param linkPhone   联系人手机号
+     * @param address     上门地址
+     * @return
+     */
+    @RequestMapping(value = "/updateOrders", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult updateOrders(String orderNumber,
+                                   String dealWay,
+                                   String wayId,
+                                   String linkMan,
+                                   String linkPhone,
+                                   String address,
+                                   String checkTime) {
+        JsonResult resul = appService.updateOrders(orderNumber, dealWay, wayId, linkMan, linkPhone, address, checkTime);
+        return resul;
+    }
+    /**
+     * 根据手机号获取订单信息/DTO
+     * @return
+     */
+    @RequestMapping(value = "getOrdersByPhone")
+    @ResponseBody
+    public JsonResult getOrdersByPhone(HttpServletRequest request) {
+        JsonResult result = appService.getOrdersByPhone(request);
+        return result;
+    }
+
+
+    /**
+     * 获取汽车协议
+     * @return
+     */
+    @RequestMapping(value = "getOrderAgreement",method = RequestMethod.GET)
+    public  JsonResult getOrderAgreement(){
+        JsonResult result=appService.getOrderAgreement();
+        return result;
+
+    }
+
 }

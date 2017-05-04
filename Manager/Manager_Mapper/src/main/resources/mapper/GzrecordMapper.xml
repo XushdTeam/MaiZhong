@@ -17,6 +17,7 @@
     <result column="price_max_d" jdbcType="VARCHAR" property="priceMaxD" />
     <result column="price_min_d" jdbcType="VARCHAR" property="priceMinD" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="phone" jdbcType="BIGINT" property="phone" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -78,7 +79,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, param, model_id, city, mail, reg_date, price_max_a, price_min_a, price_max_b, 
-    price_min_b, price_max_c, price_min_c, price_max_d, price_min_d, time
+    price_min_b, price_max_c, price_min_c, price_max_d, price_min_d, time, phone
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.pojo.GzrecordExample" resultMap="BaseResultMap">
     select
@@ -115,14 +116,14 @@
       city, mail, reg_date, 
       price_max_a, price_min_a, price_max_b, 
       price_min_b, price_max_c, price_min_c, 
-      price_max_d, price_min_d, time
-      )
+      price_max_d, price_min_d, time, 
+      phone)
     values (#{id,jdbcType=BIGINT}, #{param,jdbcType=VARCHAR}, #{modelId,jdbcType=BIGINT}, 
       #{city,jdbcType=INTEGER}, #{mail,jdbcType=INTEGER}, #{regDate,jdbcType=VARCHAR}, 
       #{priceMaxA,jdbcType=VARCHAR}, #{priceMinA,jdbcType=VARCHAR}, #{priceMaxB,jdbcType=VARCHAR}, 
       #{priceMinB,jdbcType=VARCHAR}, #{priceMaxC,jdbcType=VARCHAR}, #{priceMinC,jdbcType=VARCHAR}, 
-      #{priceMaxD,jdbcType=VARCHAR}, #{priceMinD,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}
-      )
+      #{priceMaxD,jdbcType=VARCHAR}, #{priceMinD,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
+      #{phone,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.pojo.Gzrecord">
     insert into gzrecord
@@ -172,6 +173,9 @@
       <if test="time != null">
         time,
       </if>
+      <if test="phone != null">
+        phone,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -218,6 +222,9 @@
       </if>
       <if test="time != null">
         #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -275,6 +282,9 @@
       <if test="record.time != null">
         time = #{record.time,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=BIGINT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -296,7 +306,8 @@
       price_min_c = #{record.priceMinC,jdbcType=VARCHAR},
       price_max_d = #{record.priceMaxD,jdbcType=VARCHAR},
       price_min_d = #{record.priceMinD,jdbcType=VARCHAR},
-      time = #{record.time,jdbcType=TIMESTAMP}
+      time = #{record.time,jdbcType=TIMESTAMP},
+      phone = #{record.phone,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -346,6 +357,9 @@
       <if test="time != null">
         time = #{time,jdbcType=TIMESTAMP},
       </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=BIGINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -364,7 +378,8 @@
       price_min_c = #{priceMinC,jdbcType=VARCHAR},
       price_max_d = #{priceMaxD,jdbcType=VARCHAR},
       price_min_d = #{priceMinD,jdbcType=VARCHAR},
-      time = #{time,jdbcType=TIMESTAMP}
+      time = #{time,jdbcType=TIMESTAMP},
+      phone = #{phone,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -1,11 +1,16 @@
 package com.maizhong.rest.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.maizhong.common.dto.CityDTO;
+import com.maizhong.common.dto.GuzhiDTO;
+import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.EncryptUtils;
+import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
+import com.maizhong.common.utils.TimeUtils;
 import com.maizhong.dao.JedisClient;
 import com.maizhong.mapper.*;
 import com.maizhong.pojo.*;
@@ -18,15 +23,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import sun.misc.BASE64Decoder;
 
-import javax.imageio.ImageIO;
-import javax.imageio.stream.FileImageOutputStream;
 import javax.servlet.http.HttpServletRequest;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +44,8 @@ public class AppServiceImpl implements AppService {
     private JedisClient jedisClient;
     @Autowired
     private BrandMapper brandMapper;
+    @Autowired
+    private GzrecordMapper gzrecordMapper;
 
     @Autowired
     private TbAdvertMapper tbAdvertMapper;
@@ -60,12 +63,20 @@ public class AppServiceImpl implements AppService {
     private UserMapper userMapper;
     @Autowired
     private VersionMapper versionMapper;
-
+    @Autowired
+    private ModelMapper modelMapper;
+    @Autowired
+    private HelpMapper helpMapper;
+    @Autowired
+    private RichtextMapper richtextMapper;
 
     @Autowired
     private ReckonService reckonService;
     @Autowired
     private FileUploadService fileUploadService;
+
+
+
 
     @Value("${UNLOGIN_TOKEN}")
     private String UNLOGIN_TOKEN;
@@ -89,6 +100,10 @@ public class AppServiceImpl implements AppService {
     private String SMS_CODE;
     @Value("${APP_LOGIN_TOKEN}")
     private String APP_LOGIN_TOKEN;
+    @Value("${GUZHI}")
+    private String GUZHI;
+    @Value("${TOKEN}")
+    private String TOKEN;
 
     /**
      * 根据设备Id获取token
@@ -148,8 +163,7 @@ public class AppServiceImpl implements AppService {
                 }
                 try {
                     User user = new User();
-                    user.setUserId(Long.valueOf(phone));
-                    user.setPhone(phone);
+                    user.setPhone(Long.valueOf(phone));
                     user.setStatus(1);
                     user.setDelflag(0);
                     userMapper.insert(user);
@@ -507,10 +521,10 @@ public class AppServiceImpl implements AppService {
         try {
             res = jedisClient.get(SMS_CODE + ":" + phone);//获取缓存内的信息
         } catch (Exception e) {
-            return JsonResult.Error("请发送验证码");
+            return JsonResult.build(200, "请发送验证码", phone);
         }
         if (StringUtils.isBlank(res)) {
-            return JsonResult.Error("请发送验证码");
+            return JsonResult.build(200, "请发送验证码", phone);
         }
         Map map = JsonUtils.jsonToPojo(res, Map.class);
         String reSmsCode = (String) map.get("smsCode");
@@ -523,19 +537,29 @@ public class AppServiceImpl implements AppService {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            try {
+
+            JSONObject object = new JSONObject();
+            object.put("token", token);
+            object.put("phone", phone);
+
+            UserExample example = new UserExample();
+            UserExample.Criteria criteria = example.createCriteria();
+            criteria.andPhoneEqualTo(Long.valueOf(phone));
+            List<User> users = userMapper.selectByExample(example);
+            if (users == null || users.size() == 0) {
                 User user = new User();
-                user.setUserId(Long.valueOf(phone));
-                user.setPhone(phone);
+                user.setPhone(Long.valueOf(phone));
                 user.setStatus(1);
                 user.setDelflag(0);
                 userMapper.insert(user);
-            } catch (Exception e) {
-                e.printStackTrace();
+                object.put("userImg", null);
+            } else {
+                User user = users.get(users.size() - 1);
+                object.put("userImg", user.getUserImg());
             }
-            return JsonResult.build(200, "登录成功", token);
+            return JsonResult.build(200, "登录成功", object);
         } else {
-            return JsonResult.Error("登录失败，验证码不匹配");
+            return JsonResult.build(200, "验证码不匹配", phone);
         }
     }
 
@@ -546,8 +570,123 @@ public class AppServiceImpl implements AppService {
      * @return
      */
     @Override
-    public JsonResult getGuzhi(String param) {
-        return reckonService.getGuzhi(param);
+    public JsonResult getGuzhi(String param, HttpServletRequest request) {
+        String token = request.getHeader("X-Maizhong-AppKey");
+        String app_login_phone = jedisClient.hget("APP_LOGIN_PHONE", token);
+        try {
+
+            String redisJson = jedisClient.hget("GUZHI", param);
+
+            if (StringUtils.isNotBlank(redisJson)) {
+
+                return JsonResult.OK(JsonUtils.jsonToPojo(redisJson, GuzhiDTO.class));
+            }
+
+            String[] paramarry = param.split("c|m|r|g");
+            String url = String.format("%s?token=%s&modelId=%s&regDate=%s&mile=%s&zone=%s", GUZHI, TOKEN, paramarry[2], paramarry[3], paramarry[4], paramarry[1]);
+
+            String res = HttpClientUtil.doGet(url);
+
+            JSONObject jsonObject = JSON.parseObject(res);
+            JSONArray eval_prices = jsonObject.getJSONArray("eval_prices");
+
+
+            Gzrecord gzrecord = new Gzrecord();
+            gzrecord.setParam(param);
+            gzrecord.setCity(Integer.valueOf(paramarry[1]));
+            gzrecord.setMail(Integer.valueOf(paramarry[4]));
+            gzrecord.setModelId(Long.valueOf(paramarry[2]));
+            gzrecord.setRegDate(paramarry[3]);
+            gzrecord.setTime(new Date());
+            if (StringUtils.isNotBlank(app_login_phone)) {
+                try {
+                    gzrecord.setPhone(Long.valueOf(app_login_phone));
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            for (Object eval_price : eval_prices) {
+                JSONObject object = (JSONObject) eval_price;
+//
+                if (object.getString("condition").equals("excellent")) {
+                    //车况优秀
+                    gzrecord.setPriceMaxA(object.getString("dealer_buy_price"));
+                    gzrecord.setPriceMinA(object.getString("dealer_low_buy_price"));
+                }
+                if (object.getString("condition").equals("good")) {
+                    //车况良好
+                    gzrecord.setPriceMaxB(object.getString("dealer_buy_price"));
+                    gzrecord.setPriceMinB(object.getString("dealer_low_buy_price"));
+                }
+                if (object.getString("condition").equals("normal")) {
+                    //车况一般
+                    gzrecord.setPriceMaxC(object.getString("dealer_buy_price"));
+                    gzrecord.setPriceMinC(object.getString("dealer_low_buy_price"));
+                    //车况较差
+                    gzrecord.setPriceMaxD(new BigDecimal(object.getInteger("dealer_buy_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+                    gzrecord.setPriceMinD(new BigDecimal(object.getInteger("dealer_low_buy_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+//
+//                    gzrecord.setPriceMaxD(new BigDecimal(object.getInteger("dealer_buy_price") * 0.94 * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+//                    gzrecord.setPriceMinD(new BigDecimal(object.getInteger("dealer_low_buy_price") * 0.94 * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+                }
+
+            }
+
+
+            GuzhiDTO guzhiDTO = new GuzhiDTO();
+            guzhiDTO.setPriceA(gzrecord.getPriceMinA() + "万~" + gzrecord.getPriceMaxA() + "万");
+            guzhiDTO.setPriceA_max(gzrecord.getPriceMaxA());
+            guzhiDTO.setPriceA_min(gzrecord.getPriceMinA());
+            guzhiDTO.setPriceB(gzrecord.getPriceMinB() + "万~" + gzrecord.getPriceMaxB() + "万");
+            guzhiDTO.setPriceB_max(gzrecord.getPriceMaxB());
+            guzhiDTO.setPriceB_min(gzrecord.getPriceMinB());
+            guzhiDTO.setPriceC(gzrecord.getPriceMinC() + "万~" + gzrecord.getPriceMaxC() + "万");
+            guzhiDTO.setPriceC_max(gzrecord.getPriceMaxC());
+            guzhiDTO.setPriceC_min(gzrecord.getPriceMinC());
+            guzhiDTO.setPriceD(gzrecord.getPriceMinD() + "万~" + gzrecord.getPriceMaxD() + "万");
+            guzhiDTO.setPriceD_max(gzrecord.getPriceMaxD());
+            guzhiDTO.setPriceD_min(gzrecord.getPriceMinD());
+
+
+            String modelRedis = jedisClient.hget("CAR_MODEL", gzrecord.getModelId() + "");
+
+            Model model = JsonUtils.jsonToPojo(modelRedis, Model.class);
+
+            guzhiDTO.setMaxYear(model.getMaxRegYear() + "");
+            guzhiDTO.setMinYear(model.getMinRegYear() + "");
+
+            guzhiDTO.setModelId(model.getModelId() + "");
+
+            guzhiDTO.setModelName(model.getModelName());
+            guzhiDTO.setDischargeStandard(model.getDischargeStandard());
+            guzhiDTO.setLiter(model.getLiter());
+            guzhiDTO.setModelPrice(model.getModelPrice() + "");
+            guzhiDTO.setGearType(model.getGearType());
+
+            guzhiDTO.setMail(gzrecord.getMail() + "");
+            guzhiDTO.setCity(jedisClient.hget("CITY_KEY", gzrecord.getCity() + ""));
+
+            String seriesRedis = jedisClient.hget("CAR_SERIES_KEY", model.getSeriesId() + "");
+
+            Series series = JsonUtils.jsonToPojo(seriesRedis, Series.class);
+            guzhiDTO.setSeriesImg(series.getSeriesPic());
+            guzhiDTO.setSeriesId(series.getSeriesId() + "");
+            guzhiDTO.setBrandId(series.getBrandId() + "");
+
+            guzhiDTO.setRegdate(gzrecord.getRegDate().replace("-", "年") + "月");
+
+
+            jedisClient.hset("GUZHI", param, JsonUtils.objectToJson(guzhiDTO));
+            gzrecordMapper.insert(gzrecord);
+
+            return JsonResult.OK(guzhiDTO);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     /**
@@ -558,13 +697,13 @@ public class AppServiceImpl implements AppService {
      */
     @Override
     public JsonResult uploadBase64(String base64Date, HttpServletRequest request) {
-        String imgName= null;
+        String imgName = null;
         try {
             String[] split = base64Date.split(";");
             String[] split1 = split[0].split("/");
-            imgName = "xxx."+split1[1];
+            imgName = "xxx." + split1[1];
             String[] split2 = split[1].split("se64,");
-            base64Date=split2[1];
+            base64Date = split2[1];
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -576,15 +715,219 @@ public class AppServiceImpl implements AppService {
             JsonResult result = fileUploadService.uploadImg(json, "appPerson/", imgName);
             String data = String.valueOf(result.getData());
             String token = request.getHeader("X-Maizhong-AppKey");
-            String app_login_phone = jedisClient.hget("APP_LOGIN_PHONE", token);
-         /*   String app_login_phone = "18515455566";*/
-            User user = userMapper.selectByPrimaryKey(Long.valueOf(app_login_phone));
+            String app_login_phone = jedisClient.get("APP_LOGIN_PHONE" + ":" + token);
+           /* String app_login_phone = "18515455566";*/
+            UserExample example = new UserExample();
+            UserExample.Criteria criteria = example.createCriteria();
+            criteria.andPhoneEqualTo(Long.valueOf(app_login_phone));
+            List<User> users = userMapper.selectByExample(example);
+            if (users == null || users.size() == 0) {
+                return JsonResult.build(200, "修改成功", data);
+            }
+            User user = users.get(users.size() - 1);
             user.setUserImg(data);
             userMapper.updateByPrimaryKeySelective(user);
             return JsonResult.build(200, "修改成功", data);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return JsonResult.build(500, "上传失败", null);
+        return JsonResult.build(500, "修改失败", null);
+    }
+
+    /**
+     * 获取估值记录
+     *
+     * @param request
+     * @return
+     */
+    @Override
+    public JsonResult getGzrecord(HttpServletRequest request) {
+        String token = request.getHeader("X-Maizhong-AppKey");//获取token
+        String app_login_phone = jedisClient.get("APP_LOGIN_PHONE" + ":" + token);//获取手机号
+       /* String app_login_phone = "18515455566";*/
+        if (StringUtils.isBlank(app_login_phone)) {
+            return JsonResult.build(200, "获取成功", null);
+        }
+        GzrecordExample example = new GzrecordExample();
+        GzrecordExample.Criteria criteria = example.createCriteria();
+        try {
+            criteria.andPhoneEqualTo(Long.valueOf(app_login_phone));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return JsonResult.build(200, "获取成功", null);
+        }
+
+        List<Gzrecord> gzrecords = gzrecordMapper.selectByExample(example);
+        if (gzrecords == null || gzrecords.size() < 1) {
+            return JsonResult.build(200, "获取成功", null);
+        }
+        JSONArray array = new JSONArray();
+
+        for (Gzrecord gzrecord : gzrecords) {
+            Model model = modelMapper.selectByPrimaryKey(gzrecord.getModelId());
+            if (model == null) {
+                continue;
+            }
+            City city = cityMapper.selectByPrimaryKey(gzrecord.getCity());
+            if (city == null) {
+                continue;
+            }
+            JSONObject object = new JSONObject();
+            object.put("city", city.getCityName());//城市
+            object.put("modelName", model.getModelName());//名称
+            object.put("regDate", gzrecord.getRegDate());//上牌时间
+            String formatDateTime3 = TimeUtils.getFormatDateTime3(gzrecord.getTime());
+            object.put("time",formatDateTime3);//评估时间
+            object.put("mail", gzrecord.getMail());//行驶里程/万公里
+            array.add(object);
+        }
+        return JsonResult.build(200, "获取成功", array);
+    }
+
+
+    /**
+     * 获取帮助标题
+     *
+     * @return
+     */
+    @Override
+    public JsonResult getHelpTitle() {
+        String app_help_title = null;
+        try {
+            app_help_title = jedisClient.get("APP_HELP_TITLE");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (StringUtils.isNotBlank(app_help_title)) {
+            List list = JsonUtils.jsonToPojo(app_help_title, List.class);
+            return JsonResult.OK(list);
+        }
+
+        HelpExample example = new HelpExample();
+        HelpExample.Criteria criteria = example.createCriteria();
+        criteria.andDelflagEqualTo(0);
+        criteria.andStatusEqualTo(1);
+        List<Help> helps = helpMapper.selectByExample(example);
+        JSONArray array = new JSONArray();
+
+        //存入标题
+        for (Help help : helps) {
+            JSONObject object = new JSONObject();
+            object.put("id", help.getId());
+            object.put("title", help.getTitle());
+            array.add(object);
+        }
+        jedisClient.set("APP_HELP_TITLE", JsonUtils.objectToJson(array));
+        return JsonResult.OK(array);
+    }
+
+    /**
+     * 获取帮助内容
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public JsonResult getHelpContent(String id) {
+
+        if (StringUtils.isBlank(id)) {
+            return JsonResult.OK();
+        }
+        String app_help_content = null;
+        try {
+            app_help_content = jedisClient.hget("APP_HELP_CONTENT", id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (StringUtils.isNotBlank(app_help_content)) {
+            JSONObject object = JsonUtils.jsonToPojo(app_help_content, JSONObject.class);
+            return JsonResult.OK(object);
+        }
+
+        HelpExample example = new HelpExample();
+        HelpExample.Criteria criteria = example.createCriteria();
+        criteria.andDelflagEqualTo(0);
+        criteria.andStatusEqualTo(1);
+        criteria.andIdEqualTo(Long.valueOf(id));
+        List<Help> helps = helpMapper.selectByExample(example);
+        if (helps == null || helps.size() == 0) {
+            return JsonResult.OK();
+        }
+        Help help = helps.get(helps.size() - 1);
+        JSONObject object = new JSONObject();
+        object.put("id", help.getId());
+        object.put("title", help.getTitle());
+        object.put("content", help.getContent());
+        jedisClient.hset("APP_HELP_CONTENT", id, JsonUtils.objectToJson(object));
+        return JsonResult.OK(object);
+    }
+
+    /**
+     * 精准估值
+     *
+     * @param guzhiKey
+     * @param otherKey
+     * @param request
+     * @return
+     */
+    @Override
+    public JsonResult getSaleGZ(String guzhiKey, String otherKey, HttpServletRequest request) {
+        String token = request.getHeader("X-Maizhong-AppKey");//获取token
+        String phone = jedisClient.get("APP_LOGIN_PHONE" + ":" + token);//获取手机号
+        if (StringUtils.isBlank(phone)) {
+            return JsonResult.build(500, "信息错误，请重新登录", null);
+        }
+        JsonResult saleGZ = reckonService.getSaleGZ(guzhiKey, otherKey, Long.parseLong(phone));
+        return saleGZ;
+    }
+
+    /**
+     * 订单完善
+     *
+     * @param orderNumber
+     * @param dealWay
+     * @param wayId
+     * @param linkMan
+     * @param linkPhone
+     * @param address
+     * @param checkTime
+     * @return
+     */
+    @Override
+    public JsonResult updateOrders(String orderNumber, String dealWay, String wayId, String linkMan, String linkPhone, String address, String checkTime) {
+        JsonResult result = reckonService.updateOrders(orderNumber, dealWay, wayId, linkMan, linkPhone, address, checkTime);
+        return result;
+    }
+
+
+    /**
+     * 根据手机号获取订单信息
+     *
+     * @param request
+     * @return
+     */
+    @Override
+    public JsonResult getOrdersByPhone(HttpServletRequest request) {
+        String token = request.getHeader("X-Maizhong-AppKey");//获取token
+        String phone = jedisClient.get("APP_LOGIN_PHONE" + ":" + token);//获取手机号
+        JsonResult ordersByPhone = reckonService.getOrdersByPhone(phone);
+        return ordersByPhone;
+    }
+
+    /**
+     * 获取交易协议
+     * @return
+     */
+    @Override
+    public JsonResult getOrderAgreement() {
+        RichtextExample example=new RichtextExample();
+        RichtextExample.Criteria criteria = example.createCriteria();
+        criteria.andIdEqualTo(1L);
+        List<Richtext> richtexts = richtextMapper.selectByExampleWithBLOBs(example);
+        if (richtexts==null||richtexts.size()==0){
+            return JsonResult.OK();
+        }
+        String content=richtexts.get(richtexts.size()-1).getContent();
+        return JsonResult.build(200,"获取协议成功",content);
     }
 }

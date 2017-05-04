@@ -174,62 +174,52 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andPhoneEqualTo(String value) {
+        public Criteria andPhoneEqualTo(Long value) {
             addCriterion("phone =", value, "phone");
             return (Criteria) this;
         }
 
-        public Criteria andPhoneNotEqualTo(String value) {
+        public Criteria andPhoneNotEqualTo(Long value) {
             addCriterion("phone <>", value, "phone");
             return (Criteria) this;
         }
 
-        public Criteria andPhoneGreaterThan(String value) {
+        public Criteria andPhoneGreaterThan(Long value) {
             addCriterion("phone >", value, "phone");
             return (Criteria) this;
         }
 
-        public Criteria andPhoneGreaterThanOrEqualTo(String value) {
+        public Criteria andPhoneGreaterThanOrEqualTo(Long value) {
             addCriterion("phone >=", value, "phone");
             return (Criteria) this;
         }
 
-        public Criteria andPhoneLessThan(String value) {
+        public Criteria andPhoneLessThan(Long value) {
             addCriterion("phone <", value, "phone");
             return (Criteria) this;
         }
 
-        public Criteria andPhoneLessThanOrEqualTo(String value) {
+        public Criteria andPhoneLessThanOrEqualTo(Long value) {
             addCriterion("phone <=", value, "phone");
             return (Criteria) this;
         }
 
-        public Criteria andPhoneLike(String value) {
-            addCriterion("phone like", value, "phone");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhoneNotLike(String value) {
-            addCriterion("phone not like", value, "phone");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhoneIn(List<String> values) {
+        public Criteria andPhoneIn(List<Long> values) {
             addCriterion("phone in", values, "phone");
             return (Criteria) this;
         }
 
-        public Criteria andPhoneNotIn(List<String> values) {
+        public Criteria andPhoneNotIn(List<Long> values) {
             addCriterion("phone not in", values, "phone");
             return (Criteria) this;
         }
 
-        public Criteria andPhoneBetween(String value1, String value2) {
+        public Criteria andPhoneBetween(Long value1, Long value2) {
             addCriterion("phone between", value1, value2, "phone");
             return (Criteria) this;
         }
 
-        public Criteria andPhoneNotBetween(String value1, String value2) {
+        public Criteria andPhoneNotBetween(Long value1, Long value2) {
             addCriterion("phone not between", value1, value2, "phone");
             return (Criteria) this;
         }

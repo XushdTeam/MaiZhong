@@ -423,6 +423,7 @@ public class ReckonServiceImpl implements ReckonService {
             gzrecord.setModelId(Long.valueOf(paramarry[2]));
             gzrecord.setRegDate(paramarry[3]);
             gzrecord.setTime(new Date());
+
             for (Object eval_price : eval_prices) {
                 JSONObject object = (JSONObject) eval_price;
 //
@@ -948,10 +949,6 @@ public class ReckonServiceImpl implements ReckonService {
             orderDTO.setDealPrice(orders.getDealPrice());//交易价格--实际
             orderDTO.setDealTime(orders.getDealTime());//交易时间
             try {
-
-
-
-
                 //4s店
                 if (orders.getDealWay() == 1) {
                     TbBusiness tbBusiness = tbBusinessMapper.selectByPrimaryKey(orders.getWayId());
@@ -1101,11 +1098,11 @@ public class ReckonServiceImpl implements ReckonService {
     @Override
     public JsonResult getSMSCode(String phone, String ip) {
         try {
-            try {
+           /* try {
                 jedisClient.del(SMS_CODE + ":" + phone);//重新发送短息时要清空上一次信息
             } catch (Exception e) {
                 e.printStackTrace();
-            }
+            }*/
             int smsCode = (int) (Math.random() * (9999 - 1000 + 1)) + 1000;//验证码 4位随机数
             Map<String, Object> codeMap = new HashMap<>();
             codeMap.put("ip", ip);
@@ -1165,8 +1162,8 @@ public class ReckonServiceImpl implements ReckonService {
             }
             try {
                 User user = new User();
-                user.setUserId(Long.valueOf(phone));
-                user.setPhone(phone);
+              /*  user.setUserId(Long.valueOf(phone));*/
+                user.setPhone(Long.valueOf(phone));
                 user.setStatus(1);
                 user.setDelflag(0);
                 userMapper.insert(user);
