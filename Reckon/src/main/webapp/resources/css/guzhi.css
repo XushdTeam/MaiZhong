@@ -141,14 +141,14 @@
     background-color: #f05b48;
 }
 .pinggu {
-
-    z-index: 100;
+   position: relative;
+    z-index: 888888;
     width: 273px;
-    margin-top:80px;
-    background:rgba(240,91,72,0.5);
+    margin-top:40px;
+    background:#fff;
     padding: 25px;
 
-    left: 80px;
+    left:0px;
     top: 20px;
 }
 .pingu-count {
@@ -174,6 +174,7 @@
     width: 224px;
 }
 .select_box {
+    border: 1px solid #ccc;
     width: 269px;
     height: 44px;
     text-align: center;

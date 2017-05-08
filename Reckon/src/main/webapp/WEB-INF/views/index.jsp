@@ -21,13 +21,20 @@
     <meta name="description" content="迈众汽车为您提供最新汽车报价，汽车图片，汽车价格大全，最精彩的汽车新闻、行情、评测、导购内容，是提供信息最快最全的中国汽车网站。"/>
     <link rel="stylesheet" type="text/css" href="/resources/css/index.css" />
     <link rel="stylesheet" type="text/css" href="/resources/css/guzhi.css" />
+    <link rel="stylesheet" type="text/css" href="/resources/font/iconfont.css" />
+
+    <link rel="stylesheet" type="text/css" href="/resources/css/owl.carousel.css" />
+    <link rel="stylesheet" type="text/css" href="/resources/css/owl.theme.css" />
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="/resources/js/owl.carousel.js" type="text/javascript"></script>
+    <script src="/resources/js/jquery.cxscroll.js" type="text/javascript"></script>
     <script src="/resources/js/jquery.cookie.min.js"></script>
+    <script src="/resources/js/js.js"></script>
 </head>
 <body>
 <!--头部开始-->
-<div class="bg_img">
-    <div class="top">
+
+    <div class="top e_top">
         <div class="t_cen">
             <a href="#"><img src="../resources/img/logo.png"></a>
             <span class="tell">010-8025-8108</span>
@@ -74,7 +81,8 @@
                             <a href="javascript:void(0)" id="letters_17" class="pinpai_num" rel="160">W</a>
                             <a href="javascript:void(0)" id="letters_18" class="pinpai_num" rel="169">X</a>
                             <a href="javascript:void(0)" id="letters_19" class="pinpai_num" rel="177">Y</a>
-                            <a href="javascript:void(0)" id="letters_20" class="pinpai_num" rel="185">Z</a>                                            </div>
+                            <a href="javascript:void(0)" id="letters_20" class="pinpai_num" rel="185">Z</a>
+                        </div>
                         <div class="ucarselecttype_pinpaibottom brandgun" style="width:180px;">
                             <div class="ucarselecttype_pinpaibottom_ul brand">
                                 <c:forEach items="${brandList}" var="i">
@@ -151,7 +159,8 @@
                         <div class="ucarselecttype_pinpaitop selcity">选择城市</div>
                         <div class="ucarselecttype_pinpaibottom" style="height:265px;width:160px; margin-left:7px">
                             <div class="ucarselecttype_pinpaibottom_ul select_city">
-                                <p class="pinpailist list_7 layerbg2 pinpailisthover" id="1">北京</p>                                                                      </div>
+                                <p class="pinpailist list_7 layerbg2 pinpailisthover" id="1">北京</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -175,58 +184,64 @@
         </ul>
         <div class="submit" id="eval">免费估值</div>
     </div>
-
     </div>
-    <%--<!--估值-->--%>
-    <%--<div class="guz">--%>
-        <%--<ul>--%>
-            <%--<li>--%>
-                <%--<div class="img">选择车型</div>--%>
 
-            <%--</li>--%>
-            <%--<li>--%>
-                <%--<div class="img">选择年份</div>--%>
-            <%--</li>--%>
-            <%--<li>--%>
-                <%--<div class="img">北京</div>--%>
-            <%--</li>--%>
-            <%--<li>--%>
-                <%--<div><input type="text" name="" />万公里</div>--%>
-            <%--</li>--%>
-            <%--<li>--%>
-                <%--<div class="last">快速估值</div>--%>
-            <%--</li>--%>
-        <%--</ul>--%>
-    <%--</div>--%>
-    <!--估值end-->
-</div><!--bg_img end-->
+
+
+<!--banner-->
+
+<div class="htmleaf-container">
+
+    <div class="banner">
+        <ul>
+        </ul>
+        <ol>
+        </ol>
+    </div><!--banner end-->
+</div><!--htmleaf-container end-->
+<!--banner end-->
+
+
+
 <!--头end-->
 
 
 <!--流程-->
 <div class="liu">
     <div class="l_cen">
-        <h2>我们的流程</h2>
-        <p>快速成交，立马打款，及时有效</p>
-
         <dl>
-            <dt class="dt1"></dt>
-            <dd>网上定价</dd>
+            <dt><i class="icon iconfont icon-search"></i></dt>
+            <dd>1、搜索车型</dd>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
         </dl>
 
         <dl>
-            <dt class="dt2"></dt>
-            <dd>预约检测</dd>
+            <dt><i class="icon iconfont icon-stop"></i></dt>
+            <dd>2、获得报价</dd>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
         </dl>
 
         <dl>
-            <dt class="dt3"></dt>
-            <dd>现场打款</dd>
+            <dt><i class="icon iconfont icon-cart"></i></dt>
+            <dd>3、提交订单</dd>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
         </dl>
 
-        <dl>
-            <dt class="dt4"></dt>
-            <dd>售后保障</dd>
+        <dl class="lase">
+            <dt><i class="icon iconfont icon-huanhuobz"></i></dt>
+            <dd>4、极速到账</dd>
         </dl>
     </div>
 </div>
@@ -237,133 +252,292 @@
 <div class="jiao">
 
     <div class="j_cen">
+          <div class="j_left">
+              <div class="j_one">
+                  <a href="#">
+                      <p class="xian">
+                          <span>汽车估价</span>
+                      </p>
+                      <p class="p1">悟空估价系统、真实可靠精准评估帮助你卖车</p>
+                  </a>
+              </div>
+              <div class="j_two">
+                  <a href="#">
+                      <p class="h2">
+                          <span>悟空收车</span>
+                      </p>
+                      <p class="p1">快速打款、售后保障、检测专业</p>
+                   </a>
+              </div>
+          </div><!--j_left-->
 
-        <h2>交易记录</h2>
-        <p>真实记录、公正透明、超高效率</p>
-        <div class="one">
-            <span class="cl_one">成交车型</span>
-            <span>新车指导价</span>
-            <span>成交价</span>
-            <span>上牌时间</span>
-            <span>公里数</span>
-            <span>成交日期</span>
-            <span>城市</span>
+        <div class="j_right">
+            <div class="result-top">
+                <div class="brands">
+                    <span class="sub-title">品牌：</span>
+
+                    <ul class="brands-list">
+                        <li class="show" data-val="52">
+                            <a href=" " title="宝马汽车" class="no_hover">
+                                <img src="../resources/img/b_47.png" alt="宝马汽车">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="show" data-val="7">
+                            <a href="" title="" class="no_hover">
+                                <img src="../resources/img/b_38.png" alt="宝马汽车">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="show" data-val="184">
+                            <a href="" title="" class="no_hover">
+                                <img src="../resources/img/b_55.png" alt="宝马汽车">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="show" data-val="9">
+                            <a href="" title="" class="no_hover">
+                                <img src="../resources/img/b_73.png" alt="宝马汽车">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="show" data-val="24">
+                            <a href="" title="" class="no_hover">
+                                <img src="../resources/img/b_98.png" alt="宝马汽车">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="show" data-val="356">
+                            <a href="" title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/6361439633048183361102333564.png" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="show" data-val="4">
+                            <a href=" " title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/636143935099013348928577242.png" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="show" data-val="16">
+                            <a href=" " title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/6361439351013572672120090359.png" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="show" data-val="278">
+                            <a href=" " title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/636143940158420666395938663.png" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="show" data-val="365">
+                            <a href=" " title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/6361439633059120711413239127.png" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="show" data-val="17">
+                            <a href=" " title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/6361439351015133801068873362.png" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="show" data-val="19">
+                            <a href=" " title=" " class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/6361439351019821551462257230.png" alt=" ">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="show" data-val="1">
+                            <a href=" " title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/6361439318803992762058406761.png" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="show" data-val="3">
+                            <a href=" " title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/6361439350987009491215174584.png" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="hide" data-val="18">
+                            <a href=" " title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/636143935101825919716660345.png" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="hide" data-val="342">
+                            <a href=" " title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/636143943246721587975055736.png" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="hide" data-val="25">
+                            <a href=" " title=" " class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/6361439360782384101897504348.png" alt=" ">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="hide" data-val="357">
+                            <a href=" " title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/636143963304974544347668102.png" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="hide" data-val="8">
+                            <a href=" " title=" " class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/636143935099638530593559841.png" alt=" ">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="hide" data-val="21">
+                            <a href=" " title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/6361439360776134271319378279.png" alt=" ">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="hide" data-val="14">
+                            <a href=" " title=" " class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/6361439351008884231715451689.png" alt=" ">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="hide" data-val="103">
+                            <a href=" " title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/636143937277621026897627965.png" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="hide" data-val="20">
+                            <a href=" " title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/636143935102138428823174381.png" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="hide" data-val="15">
+                            <a href=" " title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/636143935101044645782737074.png" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="hide" data-val="12">
+                            <a href=" " title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/6361439351005758501233307607.png" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="hide" data-val="10">
+                            <a href=" " title=" " class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/6361439351001072232096640321.png" alt=" ">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="hide" data-val="11">
+                            <a href=" " title=" " class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/636143935100419662630904409.png" alt=" ">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="hide" data-val="358">
+                            <a href=" " title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/636143963305130796644997531.png" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="hide" data-val="51">
+                            <a href=" " title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/636143936078707120145452801.png" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="hide" data-val="391">
+                            <a href=" " title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/6361439647488900921337887683.png" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="hide" data-val="458">
+                            <a href=" " title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/63614397347753943911431533.png" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="hide" data-val="460">
+                            <a href=" " title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/6361723942445574431123020530.jpg" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="hide" data-val="463">
+                            <a href=" " title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/6362044783883086241324530320.png" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="hide" data-val="478">
+                            <a href=" " title="" class="no_hover">
+                                <img src="https://sr.aihuishou.com/cms/image/6362639815162794002102382406.png" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                        <li class="hide" data-val="266">
+                            <a href=" " title="" class="no_hover">
+                                <img src="http://oss-cn-hangzhou.aliyuncs.com/aihuishou-internal/cms/image/6361439401576394972070275816.png" alt="">
+                            </a>
+                            <div id="hot-prods"></div>
+                        </li>
+                    </ul>
+
+
+                    <div class="opt">
+                        <span class="more">更多</span>
+                        <span class="collapse">收起</span>
+                        <span class="after"></span>
+                    </div>
+                </div>
+                <div class="hot-prods">
+                    <span class="sub-title">热门：</span>
+                    <ul class="hot-prods-list">
+                        <li><a title=" " href=" " class="no_hover">OPPO R9s</a></li>
+                        <li><a title="  " href=" " class="no_hover">苹果 iPhone 7</a></li>
+                        <li><a title="   " href=" " class="no_hover">苹果 iPhone 7 Plus</a></li>
+                        <li><a title="" href=" " class="no_hover">红米Pro</a></li>
+                        <li><a title=" " href=" " class="no_hover">魅族 MX6</a></li>
+                        <li><a title="" href=" " class="no_hover">红米3X</a></li>
+                        <li><a title="" href=" " class="no_hover">红米手机3S</a></li>
+                        <li><a title="" href=" " class="no_hover">小米Max</a></li>
+                        <li><a title="  " href=" " class="no_hover">三星 GALAXY C5</a></li>
+                        <li><a title="  " href=" " class="no_hover">魅族 魅蓝 3S</a></li>
+                        <li><a title="  " href=" " class="no_hover">酷派 ivvi i3</a></li>
+                        <li><a title=" " href=" " class="no_hover">魅族 MX5e</a></li>
+                        <li><a title="   " href=" " class="no_hover">魅族 魅蓝 Note 3</a></li>
+                        <li><a title="  " href=" " class="no_hover">魅族 魅蓝 3</a></li>
+                        <li><a title="  " href=" " class="no_hover">华为 P9 Plus</a></li>
+                        <li><a title=" " href=" " class="no_hover">华为 P9</a></li>
+                        <li><a title=" " href=" " class="no_hover">魅族 PRO6</a></li>
+                        <li><a title="  " href=" " class="no_hover">苹果 iPhone SE</a></li>
+                        <li><a title=" " href=" " class="no_hover">OPPO R9 Plus</a></li>
+                        <li><a title="" href=" " class="no_hover">小米手机4S</a></li>
+                        <li><a title=" " href=" " class="no_hover">小米手机5 </a></li>
+                        <li><a title="  " href=" " class="no_hover">三星 GALAXY S7 edge 蝙蝠侠版</a></li>
+                        <li><a title="  " href=" " class="no_hover">三星 GALAXY S7</a></li>
+                        <li><a title="   " href=" " class="no_hover">三星 GALAXY S7 edge</a></li>
+                        <li><a title="" href=" " class="no_hover">红米手机3</a></li>
+                        <li><a title="  " href=" " class="no_hover">华硕 ZenFone 6</a></li>
+                        <li><a title=" " href=" " class="no_hover">三星 W2016</a></li>
+                        <li><a title=" " href=" " class="no_hover">联想 乐檬3</a></li>
+                        <li><a title="  " href=" " class="no_hover">华硕鹰眼 ZenFone Zoom</a></li>
+                        <li><a title="" href=" " class="no_hover">vivo X5Max+</a></li>
+                    </ul>
+                    <div class="opt">
+                        <span class="more">更多</span>
+                        <span class="collapse">收起</span>
+                        <span class="after"></span>
+                    </div>
+                </div>
+            </div>
         </div>
-
-
-        <div>
-            <span class="cl_one">2106 奥迪A3 Limousine 35 TFSI 进取型</span>
-            <span> 19.90万 </span>
-            <span>14.60万</span>
-            <span>2016年11月 </span>
-            <span>0.85万公里 </span>
-            <span>2017年04月01日</span>
-            <span>北京</span>
-
-        </div>
-
-
-        <div>
-            <span class="cl_one">2010款 雅阁 2.0L 自动庆典版 </span>
-            <span> 19.98万 </span>
-            <span>6.19万</span>
-            <span>2010年7月 </span>
-            <span>14万公里 </span>
-            <span>2017年04月03日</span>
-            <span>北京</span>
-
-        </div>
-
-
-        <div>
-            <span class="cl_one">2013款 奥迪Q3 35 TFSI quattro 舒适型</span>
-            <span>35.68万 </span>
-            <span>15.90万</span>
-            <span>2013年7月 </span>
-            <span>12万公里 </span>
-            <span>2017年03月02日</span>
-            <span>北京</span>
-
-        </div>
-
-        <div>
-            <span class="cl_one">2012款 北汽E系列两厢 1.5L 自动 乐尚版 </span>
-            <span>7.51万</span>
-            <span>1.88万</span>
-            <span>2012年6月 </span>
-            <span>18万公里 </span>
-            <span>2017年03月23日</span>
-            <span>北京</span>
-
-        </div>
-
-        <div>
-            <span class="cl_one">2013款 比亚迪S6 2.4L 自动 尊荣型 劲悦版 </span>
-            <span>12.99万 </span>
-            <span>4.42万</span>
-            <span>2013年6月 </span>
-            <span>12万公里 </span>
-            <span>2017年03月01日</span>
-            <span>北京</span>
-
-        </div>
-
-        <div>
-            <span class="cl_one">2011款 高尔夫 1.4TSI 自动舒适型</span>
-            <span>14.98万 </span>
-            <span>5.30万</span>
-            <span>2011年9月 </span>
-            <span>13万公里 </span>
-            <span>2017年03月16日</span>
-            <span>北京</span>
-
-        </div>
-
-        <div>
-            <span class="cl_one">2012款 哈弗H6 2.4L 手动 汽油 两驱 尊贵型 </span>
-            <span>12.48万</span>
-            <span>4.42万</span>
-            <span>2012年8月 </span>
-            <span>10万公里 </span>
-            <span>2017年03月15日</span>
-            <span>北京</span>
-
-        </div>
-
-        <div>
-            <span class="cl_one">2011款 凯越 1.6 LX-MT</span>
-            <span>9.99万</span>
-            <span>2.82万</span>
-            <span>2011年7月 </span>
-            <span>12万公里 </span>
-            <span>2017年04月13日</span>
-            <span>北京</span>
-
-        </div>
-
-        <div>
-            <span class="cl_one">2013款 宝来 1.4T 手动 舒适型 </span>
-            <span>12.63万</span>
-            <span>5.30万</span>
-            <span>2013年11月 </span>
-            <span>12万公里 </span>
-            <span>2017年04月15日</span>
-            <span>北京</span>
-
-        </div>
-
-
-        <div>
-            <span class="cl_one">2013款 赛欧两厢 1.2L 手动理想版 </span>
-            <span>6.18万</span>
-            <span>1.77万</span>
-            <span>2013年10月 </span>
-            <span>8万公里 </span>
-            <span>2017年04月23日</span>
-            <span>北京</span>
-
-        </div>
-
     </div>
 </div>
 
@@ -371,52 +545,474 @@
 
 
 <!--关于我们-->
-<div class="about">
-    <div class="a_cen">
-        <img src="../resources/img/logo2.png">
-        <div class="abs"><img src="../resources/img/x.png">关于我们/<span>about us</span></div>
+<div class="jiyi">
+    <div class="jiao_cen">
+         <h2>最近成交记录</h2>
 
-        <div class="right">
-            <p>北京迈众汽车信息服务有限公司</p>
+        <div id="owl-example" class="owl-carousel">
 
-           <div> 北京迈众汽车信息服务有限公司，是一家致力服务于各大汽车经销商，推进二手车置换交易的专业服务公司。</div>
-            <div>公司自成立以来，一直努力着手为对各大汽车集团，4S店，企业，事业单位，以及私家车车主，提供最专业，最贴心的二手车评估，收购，置换等服务。
-            公司秉承“专业专注，贴心服务，信誉第一，客户至上”的经营理念，用专业贴心的服务，最合理的价格，让客户享受最优质的服务体验。</div>
-
+            <div class="item darkCyan">
+                <img src="../resources/img/2-y.jpg "  alt="Touch">
+                <h3>别克 君威 2010年出厂 2.0L自动2010年出厂2010年出厂</h3>
+                <p>7年车龄/8.0万公里/北京</p>
+                <h4>5.6万</h4>
             </div>
 
-        <div class="left">
-            <div class="one">
-                <div class="x_l">
-                    <span>专业专注</span>
-                    <span>信誉第一</span>
-                    <span class="spans"> 迈众汽车经营理念</span>
+            <div class="item darkCyan">
+                <img src="../resources/img/2-y.jpg "  alt="Touch">
+                <h3>别克 君威 2010年出厂 2.0L自动</h3>
+                <p>7年车龄/8.0万公里/北京</p>
+                <h4>5.6万</h4>
+            </div>
+            <div class="item darkCyan">
+                <img src="../resources/img/2-y.jpg "  alt="Touch">
+                <h3>别克 君威 2010年出厂 2.0L自动</h3>
+                <p>7年车龄/8.0万公里/北京</p>
+                <h4>5.6万</h4>
+            </div>
+
+            <div class="item darkCyan">
+                <img src="../resources/img/2-y.jpg "  alt="Touch">
+                <h3>别克 君威 2010年出厂 2.0L自动</h3>
+                <p>7年车龄/8.0万公里/北京</p>
+                <h4>5.6万</h4>
+            </div>
+
+            <div class="item darkCyan">
+                <img src="../resources/img/2-y.jpg "  alt="Touch">
+                <h3>别克 君威 2010年出厂 2.0L自动</h3>
+                <p>7年车龄/8.0万公里/北京</p>
+                <h4>5.6万</h4>
+            </div>
+
+            <div class="item darkCyan">
+                <img src="../resources/img/2-y.jpg "  alt="Touch">
+                <h3>别克 君威 2010年出厂 2.0L自动</h3>
+                <p>7年车龄/8.0万公里/北京</p>
+                <h4>5.6万</h4>
+            </div>
+            <div class="item darkCyan">
+                <img src="../resources/img/2-y.jpg "  alt="Touch">
+                <h3>别克 君威 2010年出厂 2.0L自动</h3>
+                <p>7年车龄/8.0万公里/北京</p>
+                <h4>5.6万</h4>
+            </div>
+
+            <div class="item darkCyan">
+                <img src="../resources/img/2-y.jpg "  alt="Touch">
+                <h3>别克 君威 2010年出厂 2.0L自动</h3>
+                <p>7年车龄/8.0万公里/北京</p>
+                <h4>5.6万</h4>
+            </div>
+
+            <div class="item darkCyan">
+                <img src="../resources/img/2-y.jpg "  alt="Touch">
+                <h3>别克 君威 2010年出厂 2.0L自动</h3>
+                <p>7年车龄/8.0万公里/北京</p>
+                <h4>5.6万</h4>
+            </div>
+
+            <div class="item darkCyan">
+                <img src="../resources/img/2-y.jpg "  alt="Touch">
+                <h3>别克 君威 2010年出厂 2.0L自动</h3>
+                <p>7年车龄/8.0万公里/北京</p>
+                <h4>5.6万</h4>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!--关于我们 end-->
+
+
+<!--预约服务-->
+<div class="yuye">
+    <div class="yue_cen">
+        <h2>预约服务</h2>
+
+        <div class="stores-info">
+            <div class="col-left">
+                <a href=" ">
+
+                    <img class="lazy-load img_loaded" src="../resources/img/1_03.jpg " alt="4s店图片" style="display: block;">
+                </a>
+            </div>
+            <div class="col-right">
+                <div class="store-dist-list">
+                    <span class="allstores active">全部门店(17)</span>
+                    <div id="alldistrict" class="swiper-container">
+                        <div class="swiper-wrapper" style="width: 120px; height: 516px; transform: translate3d(0px, 0px, 0px); transition-duration: 0.2s;">
+                            <div class="swiper-slide swiper-slide-visible swiper-slide-active" style="width: 120px; height: 258px;">
+
+                                <div class="region " data-index="0">东城区(3)</div>
+                                <div class="region " data-index="1">西城区(1)</div>
+                                <div class="region " data-index="2">朝阳区(9)</div>
+                                <div class="region " data-index="3">丰台区(3)</div>
+                                <div class="region " data-index="4">石景山区(1)</div>
+                                <div class="region " data-index="5">海淀区(9)</div>
+                                <div class="region " data-index="6">顺义区(1)</div>
+                                <div class="region " data-index="7">昌平区(3)</div>
+                            </div>
+                            <div class="swiper-slide" style="width: 120px; height: 258px;">
+                                <div class="region" data-index="8">大兴区(4)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <span class="more-store-dist next"><i></i></span>
                 </div>
-                <div class="x_r">
-                    <span>贴心服务</span>
-                    <span>客户至上</span>
+
+                <div id="r-storelist-all" class="storelist current" data-page="1" data-pagecount="7">
+                    <ul>
+                        <li class="page-1 show">
+                            <div>
+                                <a href=" " data-fancybox-type="iframe" class="shop-addr-pop" title="北京东方广场店门店回收">
+                                    <p class="store-name">北京东方广场店 </p>
+
+                                </a>
+                            </div>
+                        </li>
+                        <li class="page-1 show">
+                            <div>
+                                <a href=" " data-fancybox-type="iframe" class="shop-addr-pop" title="北京国瑞店门店回收">
+                                    <p class="store-name">北京国瑞店 </p>
+
+                                </a>
+                            </div>
+                        </li>
+                        <li class="page-1 show">
+                            <div>
+                                <a href=" " data-fancybox-type="iframe" class="shop-addr-pop" title="北京东方银座店门店回收">
+                                    <p class="store-name">北京东方银座店 </p>
+
+                                </a>
+                            </div>
+                        </li>
+                        <li class="page-1 show">
+                            <div>
+                                <a href=" " data-fancybox-type="iframe" class="shop-addr-pop" title="北京新华百货店门店回收">
+                                    <p class="store-name">北京新华百货店 </p>
+
+                                </a>
+                            </div>
+                        </li>
+                        <li class="page-1 show">
+                            <div>
+                                <a href=" " data-fancybox-type="iframe" class="shop-addr-pop" title="北京朝阳大悦城店门店回收">
+                                    <p class="store-name">北京朝阳大悦城店 </p>
+
+                                </a>
+                            </div>
+                        </li>
+                        <li class="page-2">
+                            <div>
+                                <a href=" " data-fancybox-type="iframe" class="shop-addr-pop" title="北京太阳宫凯德店门店回收">
+                                    <p class="store-name">北京太阳宫凯德店 </p>
+
+                                </a>
+                            </div>
+                        </li>
+                        <li class="page-2">
+                            <div>
+                                <a href=" " data-fancybox-type="iframe" class="shop-addr-pop" title="北京金地店门店回收">
+                                    <p class="store-name">北京金地店 </p>
+
+                                </a>
+                            </div>
+                        </li>
+                        <li class="page-2">
+                            <div>
+                                <a href=" " data-fancybox-type="iframe" class="shop-addr-pop" title="北京龙湖广场店门店回收">
+                                    <p class="store-name">北京龙湖广场店 </p>
+
+                                </a>
+                            </div>
+                        </li>
+
+                        <li class="page-2">
+                            <div>
+                                <a href=" " data-fancybox-type="iframe" class="shop-addr-pop" title="北京金地店门店回收">
+                                    <p class="store-name">北京金地店 </p>
+
+                                </a>
+                            </div>
+                        </li>
+                        <li class="page-2">
+                            <div>
+                                <a href=" " data-fancybox-type="iframe" class="shop-addr-pop" title="北京龙湖广场店门店回收">
+                                    <p class="store-name">北京龙湖广场店 </p>
+
+                                </a>
+                            </div>
+                        </li>
+
+                        <li class="page-2">
+                            <div>
+                                <a href=" " class="shop-addr-pop" title="北京金地店门店回收">
+                                    <p class="store-name">北京金地店 </p>
+
+                                </a>
+                            </div>
+                        </li>
+                        <li class="page-2">
+                            <div>
+                                <a href=" " class="shop-addr-pop" title="北京龙湖广场店门店回收">
+                                    <p class="store-name">北京龙湖广场店 </p>
+
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
                 </div>
+        </div>
+    </div>
+
+        <div class="free-service">
+            <span class="tips-title">上门服务</span>
+
+            <span class="tips">所有在本网站卖车的用户</span>
+            <span class="tips">可享受质检小哥优质上门服务</span>
+
+
+            <ul class="pros">
+                <li>
+
+                    <span>专业</span>
+                </li>
+                <li>
+
+                    <span>放心</span>
+                </li>
+                <li>
+
+                    <span>高效</span>
+                </li>
+            </ul>
+            <p class="p3"><img src="../resources/img/c_4.png "></p>
+        </div>
+</div>
+    </div>
+<!--预约服务-->
+    <!--用户评价-->
+    <div class="users">
+        <div class="yue_cen">
+            <h2>用户评论</h2>
+            <div id="pic_list_2" class="scroll_horizontal">
+
+                <div class="box">
+
+                    <ul class="list">
+                        <li>
+                            <div class="l_box">
+                                <p class="p_t"><img src="../resources/img/t_07.jpg">136****4839</p>
+                                <p class="pl">估值的价格准确，服务较好，评估师态度良好</p>
+                                <p class="bottom">05月03号在北京龙湖广场店收一辆奥迪A4</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="l_box">
+                                <p class="p_t"><img src="../resources/img/t_07.jpg">136****4839</p>
+                                <p class="pl">估值的价格准确，服务较好，评估师态度良好</p>
+                                <p class="bottom">05月03号在北京龙湖广场店收一辆奥迪A4</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="l_box">
+                                <p class="p_t"><img src="../resources/img/t_07.jpg">136****4839</p>
+                                <p class="pl">估值的价格准确，服务较好，评估师态度良好</p>
+                                <p class="bottom">05月03号在北京龙湖广场店收一辆奥迪A4</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="l_box">
+                                <p class="p_t"><img src="../resources/img/t_07.jpg">136****4839</p>
+                                <p class="pl">估值的价格准确，服务较好，评估师态度良好</p>
+                                <p class="bottom">05月03号在北京龙湖广场店收一辆奥迪A4</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="l_box">
+                                <p class="p_t"><img src="../resources/img/t_07.jpg">136****4839</p>
+                                <p class="pl">估值的价格准确，服务较好，评估师态度良好</p>
+                                <p class="bottom">05月03号在北京龙湖广场店收一辆奥迪A4</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="l_box">
+                                <p class="p_t"><img src="../resources/img/t_07.jpg">136****4839</p>
+                                <p class="pl">估值的价格准确，服务较好，评估师态度良好</p>
+                                <p class="bottom">05月03号在北京龙湖广场店收一辆奥迪A4</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="l_box">
+                                <p class="p_t"><img src="../resources/img/t_07.jpg">136****4839</p>
+                                <p class="pl">估值的价格准确，服务较好，评估师态度良好</p>
+                                <p class="bottom">05月03号在北京龙湖广场店收一辆奥迪A4</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="l_box">
+                                <p class="p_t"><img src="../resources/img/t_07.jpg">136****4839</p>
+                                <p class="pl">估值的价格准确，服务较好，评估师态度良好</p>
+                                <p class="bottom">05月03号在北京龙湖广场店收一辆奥迪A4</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="l_box">
+                                <p class="p_t"><img src="../resources/img/t_07.jpg">136****4839</p>
+                                <p class="pl">估值的价格准确，服务较好，评估师态度良好</p>
+                                <p class="bottom">05月03号在北京龙湖广场店收一辆奥迪A4</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="l_box">
+                                <p class="p_t"><img src="../resources/img/t_07.jpg">136****4839</p>
+                                <p class="pl">估值的价格准确，服务较好，评估师态度良好</p>
+                                <p class="bottom">05月03号在北京龙湖广场店收一辆奥迪A4</p>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                    <ul class="piclist swaplist"></ul>
+
+                </div>
+
+                <div class="og_prev"></div>
+
+                <div class="og_next"></div>
 
             </div>
 
         </div>
     </div>
+    <!--用户评价 end-->
 
+     <!--合作伙伴-->
+        <%--<div class="hezuo">--%>
+             <%--<div class="hz_cen">--%>
+                 <%--<h2>合作伙伴</h2>--%>
+                 <%--<table>--%>
+                     <%--<tbody>--%>
+                     <%--<tr>--%>
 
-</div>
-<!--关于我们 end-->
+                         <%--<td> <img src="../resources/img/b_38.png"></td>--%>
+                         <%--<td><img src="../resources/img/b_47.png"></td>--%>
+                         <%--<td><img src="../resources/img/b_55.png"></td>--%>
+                         <%--<td><img src="../resources/img/b_73.png"></td>--%>
+                         <%--<td><img src="../resources/img/b_98.png"></td>--%>
+                     <%--</tr>--%>
+                     <%--<tr class="bottom-border">--%>
+                         <%--<td><img src="../resources/img/b_47.png"></td>--%>
+                         <%--<td><img src="../resources/img/b_55.png"></td>--%>
+                         <%--<td> <img src="../resources/img/b_38.png"></td>--%>
+                         <%--<td><img src="../resources/img/b_73.png"></td>--%>
+                         <%--<td><img src="../resources/img/b_98.png"></td>--%>
+                     <%--</tr>--%>
+                     <%--<tr>--%>
+                         <%--<td><img src="../resources/img/b_98.png"></td>--%>
+                         <%--<td><img src="../resources/img/b_73.png"></td>--%>
+                         <%--<td><img src="../resources/img/b_47.png"></td>--%>
+                         <%--<td><img src="../resources/img/b_55.png"></td>--%>
 
+                         <%--<td> <img src="../resources/img/b_38.png"></td>--%>
+
+                     <%--</tr>--%>
+
+                     <%--</tbody></table>--%>
+             <%--</div>--%>
+        <%--</div>--%>
+        <!--合作伙伴 end-->
+
+<!--优势-->
+  <div class="you">
+      <div class="you_cen">
+          <dl>
+              <dt><i class="icon iconfont icon-success"></i></dt>
+              <dd class="dd1">成交快</dd>
+              <dd>线上回收， 成交快</dd>
+          </dl>
+          <dl>
+              <dt><i class="icon iconfont icon-renminbi1688"></i></dt>
+              <dd class="dd1">价格高</dd>
+              <dd>精准估值 卖的高</dd>
+          </dl>
+          <dl>
+              <dt><i class="icon iconfont icon-iconfontfuwushichang"></i></dt>
+              <dd class="dd1">超省心</dd>
+              <dd>一对一全程服务</dd>
+          </dl>
+          <dl>
+              <dt><i class="icon iconfont icon-maijiabz"></i></dt>
+              <dd class="dd1">有保障</dd>
+              <dd>安全无忧/全程保障</dd>
+          </dl>
+      </div>
+  </div>
+<!--优势 end-->
+<div class="clear"></div>
 <div class="footer">
     <div class="foot_cen">
-        <!--div class="n_f_m_c">
-            <div class="">
-                <a href="/about.html">关于我们</a>
-                <a href="/help.html">帮助中心</a>
-                <a href="/joinus.html">加入我们</a>
-                <a href="/feedback.html">用户反馈</a>
-            </div>
-        </div-->
+        <div class="n_f_m_c">
+            <div class="ul1">
+                <a href="/about.html">交易方式</a>
+                <a href="/help.html">质检说明</a>
+                <a href="/joinus.html">帮助中心</a>
 
+                <a href="/joinus.html">加盟合作</a>
+                <a href="/feedback.html">关于我们</a>
+                <a href="/feedback.html">联系我们</a>
+            </div>
+            <div class="ul">
+                <ul>
+                    <li><a href="#">门店交易</a></li>
+                    <li><a href="#">上门交易</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#">检测名词解释</a></li>
+                    <li><a href="#">专业检测项目</a></li>
+
+                </ul>
+                <ul>
+                    <li><a href="#">常见问题</a></li>
+                    <li><a href="#">服务条款</a></li>
+
+                </ul>
+
+                <ul>
+                    <li><a href="#">公司简介</a></li>
+                    <li><a href="#">招贤纳士</a></li>
+
+                </ul>
+                <ul>
+                    <li><a href="#"> 销售商加盟</a></li>
+
+                </ul>
+                <ul class="last">
+                    <li><a href="#">系电话：010-82967855/18515157855</a></li>
+                    <li><a href="#">  公司地址：北京市大兴区西红门嘉悦广场
+                        5号楼1002室或西红门公交车站对面</a></li>
+                </ul>
+
+        </div><!--ul end-->
+    </div><!--f_n-->
+        <div class="f_n_r">
+            <div class="f_one">
+               <img src="../resources/img/m_11.jpg">
+               <p>APP下载</p>
+            </div>
+            <div class="f_one">
+                <img src="../resources/img/m_13.jpg">
+                <p>微信公众号</p>
+            </div>
+        </div>
+
+
+        <div class="clear"></div>
         <div class="pp">
             <p>Copyright © 2017-2020 迈众 All Rights Reserved 版权所有 北京迈众汽车信息服务有限公司</p>
             <p>京ICP备17017795号  &nbsp;&nbsp;&nbsp; 联系电话：010-8025-8108 &nbsp;&nbsp;&nbsp;
@@ -429,6 +1025,26 @@
 
     </div>
 </div>
+
+
+<script>
+
+    $(document).ready(function($) {
+        $("#owl-example").owlCarousel();
+    });
+
+
+    $("body").data("page", "frontpage");
+
+</script>
+
+<script>
+
+
+    $("#pic_list_2").cxScroll({direction:"left",step:3});
+
+</script>
+
 
 <script src="/resources/js/index.js"></script>
 <script>
@@ -458,6 +1074,9 @@
         window.location.reload()
     }
 </script>
+
+
+
 
 </body>
 </html>

@@ -1,6 +1,231 @@
-/**
- * Created by Administrator on 2017/4/19.
- */
+
+$(function(){
+    var images_height = '460px';
+    var images_url = [
+        '../resources/img/3.jpg',
+        '../resources/img/1.jpg',
+        '../resources/img/2.jpg'
+    ];
+    var images_count = images_url.length;
+    for(var j=0;j<images_count+1;j++){
+        $('.banner ul').append('<li></li>')
+    }
+    //轮播圆点按钮节点
+    for(var j=0;j<images_count;j++){
+        if(j==0){
+            $('.banner ol').append('<li class="current"></li>')
+        }else{
+            $('.banner ol').append('<li></li>')
+        }
+    }
+
+    //载入图片
+    $(".banner ul li").css('background-image','url('+images_url[0]+')');
+    $.each(images_url,function(key,value){
+        $('.banner ul li').eq(key).css('background-image','url('+value+')');
+    });
+
+    $('.banner').css('height',images_height);
+
+    $('.banner ul').css('width',(images_count+1)*100+'%');
+
+    $('.banner ol').css('width',images_count*20+'px');
+    $('.banner ol').css('margin-left',-images_count*20*0.5-10+'px');
+
+    //=========================
+
+    var num = 0;
+    //获取窗口宽度
+    var window_width = $(window).width();
+    $(window).resize(function(){
+        window_width = $(window).width();
+        $('.banner ul li').css({width:window_width});
+        clearInterval(timer);
+        nextPlay();
+        timer = setInterval(nextPlay,2000);
+    });
+    //console.log(window_width);
+    $('.banner ul li').width(window_width);
+    //轮播圆点
+    $('.banner ol li').mouseover(function(){//用hover的话会有两个事件(鼠标进入和离开)
+        $(this).addClass('current').siblings().removeClass('current');
+        //第一张图： 0 * window_width
+        //第二张图： 1 * window_width
+        //第三张图： 2 * window_width
+        //获取当前编号
+        var i = $(this).index();
+        //console.log(i);
+        $('.banner ul').stop().animate({left:-i*window_width},500);
+        num = i;
+    });
+    //自动播放
+    var timer = null;
+    function prevPlay(){
+        num--;
+        if(num<0){
+            //悄悄把图片跳到最后一张图(复制页,与第一张图相同),然后做出图片播放动画，left参数是定位而不是移动的长度
+            $('.banner ul').css({left:-window_width*images_count}).stop().animate({left:-window_width*(images_count-1)},500);
+            num=images_count-1;
+        }else{
+            //console.log(num);
+            $('.banner ul').stop().animate({left:-num*window_width},500);
+        }
+        if(num==images_count-1){
+            $('.banner ol li').eq(images_count-1).addClass('current').siblings().removeClass('current');
+        }else{
+            $('.banner ol li').eq(num).addClass('current').siblings().removeClass('current');
+
+        }
+    }
+    function nextPlay(){
+        num++;
+        if(num>images_count){
+            //播放到最后一张(复制页)后,悄悄地把图片跳到第一张,因为和第一张相同,所以难以发觉,
+            $('.banner ul').css({left:0}).stop().animate({left:-window_width},500);
+            //css({left:0})是直接悄悄改变位置，animate({left:-window_width},500)是做出移动动画
+            //随后要把指针指向第二张图片,表示已经播放至第二张了。
+            num=1;
+        }else{
+            //在最后面加入一张和第一张相同的图片，如果播放到最后一张，继续往下播，悄悄回到第一张(肉眼看不见)，从第一张播放到第二张
+            //console.log(num);
+            $('.banner ul').stop().animate({left:-num*window_width},500);
+        }
+        if(num==images_count){
+            $('.banner ol li').eq(0).addClass('current').siblings().removeClass('current');
+        }else{
+            $('.banner ol li').eq(num).addClass('current').siblings().removeClass('current');
+
+        }
+    }
+    timer = setInterval(nextPlay,50000);
+    //鼠标经过banner，停止定时器,离开则继续播放
+    $('.banner').mouseenter(function(){
+        clearInterval(timer);
+        //左右箭头显示(淡入)
+        $('.banner i').fadeIn();
+    }).mouseleave(function(){
+        timer = setInterval(nextPlay,50000);
+        //左右箭头隐藏(淡出)
+        $('.banner i').fadeOut();
+    });
+    //播放下一张
+    $('.banner .right').click(function(){
+        nextPlay();
+    });
+    //返回上一张
+    $('.banner .left').click(function(){
+        prevPlay();
+    });
+});
+
+
+// $(document).ready(function(e) {
+//     /***不需要自动滚动，去掉即可***/
+//     time = window.setInterval(function(){
+//         $('.og_next').click();
+//     },5000);
+//     /***不需要自动滚动，去掉即可***/
+//     linum = $('.mainlist li').length;//图片数量
+//     w = linum * 250;//ul宽度
+//     $('.piclist').css('width', w + 'px');//ul宽度
+//     $('.swaplist').html($('.mainlist').html());//复制内容
+//
+//     $('.og_next').click(function(){
+//
+//         if($('.swaplist,.mainlist').is(':animated')){
+//             $('.swaplist,.mainlist').stop(true,true);
+//         }
+//
+//         if($('.mainlist li').length>5){//多于4张图片
+//             ml = parseInt($('.mainlist').css('left'));//默认图片ul位置
+//             sl = parseInt($('.swaplist').css('left'));//交换图片ul位置
+//             if(ml<=0 && ml>w*-1){//默认图片显示时
+//                 $('.swaplist').css({left: '1250px'});//交换图片放在显示区域右侧
+//                 $('.mainlist').animate({left: ml - 1250 + 'px'},'slow');//默认图片滚动
+//                 if(ml==(w-1250)*-1){//默认图片最后一屏时
+//                     $('.swaplist').animate({left: '0px'},'slow');//交换图片滚动
+//                 }
+//             }else{//交换图片显示时
+//                 $('.mainlist').css({left: '1250px'})//默认图片放在显示区域右
+//                 $('.swaplist').animate({left: sl - 1250 + 'px'},'slow');//交换图片滚动
+//                 if(sl==(w-1250)*-1){//交换图片最后一屏时
+//                     $('.mainlist').animate({left: '0px'},'slow');//默认图片滚动
+//                 }
+//             }
+//         }
+//     })
+//     $('.og_prev').click(function(){
+//
+//         if($('.swaplist,.mainlist').is(':animated')){
+//             $('.swaplist,.mainlist').stop(true,true);
+//         }
+//
+//         if($('.mainlist li').length>5){
+//             ml = parseInt($('.mainlist').css('left'));
+//             sl = parseInt($('.swaplist').css('left'));
+//             if(ml<=0 && ml>w*-1){
+//                 $('.swaplist').css({left: w * -1 + 'px'});
+//                 $('.mainlist').animate({left: ml + 1250 + 'px'},'slow');
+//                 if(ml==0){
+//                     $('.swaplist').animate({left: (w - 1250) * -1 + 'px'},'slow');
+//                 }
+//             }else{
+//                 $('.mainlist').css({left: (w - 1250) * -1 + 'px'});
+//                 $('.swaplist').animate({left: sl + 1250 + 'px'},'slow');
+//                 if(sl==0){
+//                     $('.mainlist').animate({left: '0px'},'slow');
+//                 }
+//             }
+//         }
+//     })
+// });
+//
+// $(document).ready(function(){
+//     $('.og_prev,.og_next').hover(function(){
+//         $(this).fadeTo('fast',1);
+//     },function(){
+//         $(this).fadeTo('fast',0.7);
+//     })
+//
+// })
+
+
+
+
+$(function () {
+    $(".hot-prods .opt .more").click(function () {
+        $(".hot-prods .collapse").show();
+        $(".hot-prods .hot-prods-list").css("height","auto")
+        $(this).hide();
+    })
+})
+
+$(function () {
+    $(".hot-prods .collapse").click(function () {
+        $(".opt .more").show();
+        $(".hot-prods .hot-prods-list").css("height","55px")
+        $(this).hide();
+    })
+})
+
+
+$(function () {
+    $(".brands .opt .more").click(function () {
+        $(".brands .collapse").show();
+        $(".brands-list li").show();
+        $(this).hide();
+    })
+})
+
+$(function () {
+    $(".brands .collapse").click(function () {
+        $(".brands .opt .more").show();
+        $(".brands-list li:gt(13)").hide();;
+        $(this).hide();
+    })
+})
+
+
 
 
 $(function () {
