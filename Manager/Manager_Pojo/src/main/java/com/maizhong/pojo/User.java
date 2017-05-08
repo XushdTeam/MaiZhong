@@ -3,7 +3,7 @@ package com.maizhong.pojo;
 public class User {
     private Long userId;
 
-    private String phone;
+    private Long phone;
 
     private String address;
 
@@ -27,12 +27,12 @@ public class User {
         this.userId = userId;
     }
 
-    public String getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
+    public void setPhone(Long phone) {
+        this.phone = phone;
     }
 
     public String getAddress() {

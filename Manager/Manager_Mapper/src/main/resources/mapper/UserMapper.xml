@@ -3,7 +3,7 @@
 <mapper namespace="com.maizhong.mapper.UserMapper">
   <resultMap id="BaseResultMap" type="com.maizhong.pojo.User">
     <id column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="phone" jdbcType="BIGINT" property="phone" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="linkman_phone" jdbcType="VARCHAR" property="linkmanPhone" />
     <result column="is_contact" jdbcType="INTEGER" property="isContact" />
@@ -105,11 +105,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.maizhong.pojo.User">
-    insert ignore  into user (user_id, phone, address,
+    insert into user (user_id, phone, address, 
       linkman_phone, is_contact, linkman_name, 
       user_img, status, delflag
       )
-    values (#{userId,jdbcType=BIGINT}, #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+    values (#{userId,jdbcType=BIGINT}, #{phone,jdbcType=BIGINT}, #{address,jdbcType=VARCHAR}, 
       #{linkmanPhone,jdbcType=VARCHAR}, #{isContact,jdbcType=INTEGER}, #{linkmanName,jdbcType=VARCHAR}, 
       #{userImg,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{delflag,jdbcType=INTEGER}
       )
@@ -150,7 +150,7 @@
         #{userId,jdbcType=BIGINT},
       </if>
       <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
+        #{phone,jdbcType=BIGINT},
       </if>
       <if test="address != null">
         #{address,jdbcType=VARCHAR},
@@ -188,7 +188,7 @@
         user_id = #{record.userId,jdbcType=BIGINT},
       </if>
       <if test="record.phone != null">
-        phone = #{record.phone,jdbcType=VARCHAR},
+        phone = #{record.phone,jdbcType=BIGINT},
       </if>
       <if test="record.address != null">
         address = #{record.address,jdbcType=VARCHAR},
@@ -219,7 +219,7 @@
   <update id="updateByExample" parameterType="map">
     update user
     set user_id = #{record.userId,jdbcType=BIGINT},
-      phone = #{record.phone,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=BIGINT},
       address = #{record.address,jdbcType=VARCHAR},
       linkman_phone = #{record.linkmanPhone,jdbcType=VARCHAR},
       is_contact = #{record.isContact,jdbcType=INTEGER},
@@ -235,7 +235,7 @@
     update user
     <set>
       <if test="phone != null">
-        phone = #{phone,jdbcType=VARCHAR},
+        phone = #{phone,jdbcType=BIGINT},
       </if>
       <if test="address != null">
         address = #{address,jdbcType=VARCHAR},
@@ -263,7 +263,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.maizhong.pojo.User">
     update user
-    set phone = #{phone,jdbcType=VARCHAR},
+    set phone = #{phone,jdbcType=BIGINT},
       address = #{address,jdbcType=VARCHAR},
       linkman_phone = #{linkmanPhone,jdbcType=VARCHAR},
       is_contact = #{isContact,jdbcType=INTEGER},

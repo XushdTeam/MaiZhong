@@ -29,7 +29,7 @@ public class OrderInfo {
 
     private String ck;
 
-    private String delflag;
+    private Integer delflag;
 
     public Long getInfoId() {
         return infoId;
@@ -143,11 +143,11 @@ public class OrderInfo {
         this.ck = ck == null ? null : ck.trim();
     }
 
-    public String getDelflag() {
+    public Integer getDelflag() {
         return delflag;
     }
 
-    public void setDelflag(String delflag) {
-        this.delflag = delflag == null ? null : delflag.trim();
+    public void setDelflag(Integer delflag) {
+        this.delflag = delflag;
     }
 }

@@ -423,6 +423,7 @@ public class ReckonServiceImpl implements ReckonService {
             gzrecord.setModelId(Long.valueOf(paramarry[2]));
             gzrecord.setRegDate(paramarry[3]);
             gzrecord.setTime(new Date());
+
             for (Object eval_price : eval_prices) {
                 JSONObject object = (JSONObject) eval_price;
 //
@@ -701,6 +702,7 @@ public class ReckonServiceImpl implements ReckonService {
             order.setDealPrice("");
             order.setReckonTime(new Date());
             order.setStatus(0);
+            order.setDelflag(0);
             ordersMapper.insert(order);
 
             OrderInfo orderInfo = new OrderInfo();
@@ -721,6 +723,7 @@ public class ReckonServiceImpl implements ReckonService {
             orderInfo.setGhtime(ghtime);
             orderInfo.setMethod(method);
             orderInfo.setCk(ck);
+            orderInfo.setDelflag(0);
             orderInfoMapper.insert(orderInfo);
 
             jedisClient.hset("ORDER_PHONE", phone + "", JSON.toJSONString(guzhiDTO));
@@ -929,9 +932,10 @@ public class ReckonServiceImpl implements ReckonService {
         OrdersExample.Criteria criteria = example.createCriteria();
         example.setOrderByClause("reckon_time DESC");
         criteria.andUserIdEqualTo(Long.valueOf(phone));
+        criteria.andDelflagEqualTo(0);
         List<Orders> ordersList = ordersMapper.selectByExample(example);
         if (ordersList == null || ordersList.size() == 0) {
-            return JsonResult.build(200, "无订单", phone);
+            return JsonResult.build(200, "无订单", ordersList);
         }
         List<OrderDTO> orderDTOList = new ArrayList<>();
         for (Orders orders : ordersList) {
@@ -948,31 +952,31 @@ public class ReckonServiceImpl implements ReckonService {
             orderDTO.setDealPrice(orders.getDealPrice());//交易价格--实际
             orderDTO.setDealTime(orders.getDealTime());//交易时间
             try {
-
-
-
-
-                //4s店
-                if (orders.getDealWay() == 1) {
-                    TbBusiness tbBusiness = tbBusinessMapper.selectByPrimaryKey(orders.getWayId());
-                    orderDTO.setAddress(tbBusiness.getBusinessName() + " " + tbBusiness.getAddress());
-                    orderDTO.setCheckTime("4S店营业时间内");//验车时间
-                    orderDTO.setDealWay("4S店");//验车地址
+                if (orders.getDealWay()!=null){
+                    //4s店
+                    if (orders.getDealWay() == 1) {
+                        TbBusiness tbBusiness = tbBusinessMapper.selectByPrimaryKey(orders.getWayId());
+                        orderDTO.setAddress(tbBusiness.getBusinessName() + " " + tbBusiness.getAddress());
+                        orderDTO.setCheckTime("4S店营业时间内");//验车时间
+                        orderDTO.setDealWay("4S店");//验车地址
+                    }
+                    //地铁
+                    if (orders.getDealWay() == 2) {
+                        LineSite lineSite = lineSiteMapper.selectByPrimaryKey(orders.getWayId());
+                        Line line = lineMapper.selectByPrimaryKey(lineSite.getLineId());
+                        orderDTO.setAddress("北京市地铁" + line.getName() + "线" + lineSite.getName() + "站");
+                        orderDTO.setCheckTime(orders.getCheckTime());//验车时间
+                        orderDTO.setDealWay("地铁站附近");//验车地址
+                    }
+                    //上门
+                    if (orders.getDealWay() == 3) {
+                        orderDTO.setAddress(orders.getAddress());//验车地址
+                        orderDTO.setCheckTime(orders.getAddress());//验车时间
+                        orderDTO.setDealWay("上门");
+                    }
                 }
-                //地铁
-                if (orders.getDealWay() == 2) {
-                    LineSite lineSite = lineSiteMapper.selectByPrimaryKey(orders.getWayId());
-                    Line line = lineMapper.selectByPrimaryKey(lineSite.getLineId());
-                    orderDTO.setAddress("北京市地铁" + line.getName() + "线" + lineSite.getName() + "站");
-                    orderDTO.setCheckTime(orders.getCheckTime());//验车时间
-                    orderDTO.setDealWay("地铁站附近");//验车地址
-                }
-                //上门
-                if (orders.getDealWay() == 3) {
-                    orderDTO.setAddress(orders.getAddress());//验车地址
-                    orderDTO.setCheckTime(orders.getAddress());//验车时间
-                    orderDTO.setDealWay("上门");
-                }
+
+
                 orderDTO.setLinkMan(orders.getLinkMan());//联系人
                 orderDTO.setLinkPhone(orders.getLinkPhone());//联系人电话
                 orderDTO.setReckon_time(TimeUtils.getFormatDateTime3(orders.getReckonTime()));//评估时间
@@ -1101,11 +1105,11 @@ public class ReckonServiceImpl implements ReckonService {
     @Override
     public JsonResult getSMSCode(String phone, String ip) {
         try {
-            try {
+           /* try {
                 jedisClient.del(SMS_CODE + ":" + phone);//重新发送短息时要清空上一次信息
             } catch (Exception e) {
                 e.printStackTrace();
-            }
+            }*/
             int smsCode = (int) (Math.random() * (9999 - 1000 + 1)) + 1000;//验证码 4位随机数
             Map<String, Object> codeMap = new HashMap<>();
             codeMap.put("ip", ip);
@@ -1165,8 +1169,8 @@ public class ReckonServiceImpl implements ReckonService {
             }
             try {
                 User user = new User();
-                user.setUserId(Long.valueOf(phone));
-                user.setPhone(phone);
+              /*  user.setUserId(Long.valueOf(phone));*/
+                user.setPhone(Long.valueOf(phone));
                 user.setStatus(1);
                 user.setDelflag(0);
                 userMapper.insert(user);

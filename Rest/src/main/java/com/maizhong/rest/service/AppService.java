@@ -2,6 +2,7 @@ package com.maizhong.rest.service;
 
 import com.maizhong.common.result.JsonResult;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -36,7 +37,29 @@ public interface AppService {
 
     JsonResult userLogin(String smsCode, String phone);
 
-    JsonResult getGuzhi(String param);
+    JsonResult getGuzhi(String param, HttpServletRequest request);
 
     JsonResult uploadBase64(String base64Date,HttpServletRequest request);
+
+    JsonResult getGzrecord(HttpServletRequest request);
+
+    JsonResult getHelpTitle();
+
+    JsonResult getHelpContent(String id);
+
+    JsonResult getSaleGZ(String guzhiKey, String otherKey,HttpServletRequest request);
+
+    JsonResult updateOrders(String orderNumber, String dealWay, String wayId, String linkMan, String linkPhone, String address, String checkTime);
+
+    JsonResult getOrdersByPhone(HttpServletRequest request);
+
+    JsonResult getOrderAgreement();
+
+    JsonResult getGZDetail(long phone);
+
+    JsonResult getBusinessAddress();
+
+    JsonResult getGZDetailByOrderNumber(long orderNumber);
+
+    JsonResult deleteOrder(String orderNumber, HttpServletRequest request);
 }
