@@ -82,6 +82,18 @@
                        </div>
                    </div>
                    <div class="layui-form-item">
+                       <label class="layui-form-label">所属地区</label>
+                       <div class="layui-input-block">
+                           <select name="districtId" lay-filter="district">
+                               <option value=""></option>
+                               <c:forEach items="${districtList}" var="dist">
+                                   <option value="${dist.id}" <c:if test="${business.districtId==dist.id}">selected="selected"</c:if>>${dist.name}</option>
+                               </c:forEach>
+                           </select>
+                       </div>
+                   </div>
+
+                   <div class="layui-form-item">
                        <label class="layui-form-label">地址坐标</label>
                        <div class="layui-input-block">
                            <input name="location" autocomplete="off" lay-verify="required" maxlength="100"  value="${business.location}"

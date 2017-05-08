@@ -1,13 +1,19 @@
 package com.maizhong.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.enums.OperateEnum;
+import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.common.utils.SqlUtils;
+import com.maizhong.dao.JedisClient;
+import com.maizhong.mapper.DistrictMapper;
 import com.maizhong.mapper.TbBusinessMapper;
+import com.maizhong.pojo.District;
 import com.maizhong.pojo.TbBusiness;
 import com.maizhong.pojo.TbBusinessExample;
 import com.maizhong.service.BusinessService;
@@ -29,6 +35,10 @@ public class BusinessServiceImpl implements BusinessService {
 
     @Autowired
     private TbBusinessMapper tbBusinessMapper;
+    @Autowired
+    private DistrictMapper districtMapper;
+    @Autowired
+    JedisClient jedisClient;
 
     /**
      * 根据id获取店铺对象
@@ -165,5 +175,55 @@ public class BusinessServiceImpl implements BusinessService {
         tbBusiness.setLogo(logo);
         int res = tbBusinessMapper.updateByPrimaryKeySelective(tbBusiness);
         return res;
+    }
+
+    /**
+     * 北京所有区县
+     * @return
+     */
+
+    @Override
+    public List<District> getDistrict() {
+        List<District> list = districtMapper.selectByExample(null);
+        return list;
+    }
+
+    /**
+     * 店铺更新缓存
+     * @return
+     */
+    @Override
+    public OperateEnum updateHelpRedis() {
+        jedisClient.del("BUSINESS_ADDRESS");
+        List<District> districts = districtMapper.selectByExample(null);//区县 16
+        TbBusinessExample example = new TbBusinessExample();
+        JSONArray array = new JSONArray();
+        for (District district : districts) {
+            JSONObject object = new JSONObject();
+            object.put("district", district.getName());
+            object.put("id", district.getId());
+            example.clear();
+            TbBusinessExample.Criteria criteria = example.createCriteria();
+            criteria.andDistrictIdEqualTo(Long.valueOf(district.getId()));
+            List<TbBusiness> tbBusinesses = tbBusinessMapper.selectByExample(example);
+            if (tbBusinesses == null || tbBusinesses.size() == 0) {
+                continue;
+            }
+            JSONArray array1 = new JSONArray();
+            for (TbBusiness tbBusiness : tbBusinesses) {
+                JSONObject object1 = new JSONObject();
+                object1.put("address", tbBusiness.getAddress());
+                object1.put("name", tbBusiness.getBusinessName());
+                object1.put("id", tbBusiness.getId());
+                object1.put("location", tbBusiness.getLocation());
+                object1.put("districtId", tbBusiness.getDistrictId());
+                array1.add(object1);
+            }
+            object.put("shop", array1);
+            array.add(object);
+        }
+        jedisClient.set("BUSINESS_ADDRESS", JsonUtils.objectToJson(array));
+
+        return OperateEnum.SUCCESS;
     }
 }

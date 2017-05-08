@@ -6,6 +6,7 @@ import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.common.target.ControllerLog;
 import com.maizhong.common.utils.JsonUtils;
+import com.maizhong.pojo.District;
 import com.maizhong.pojo.TbBusiness;
 import com.maizhong.service.BusinessService;
 import com.maizhong.service.FileUploadService;
@@ -95,9 +96,12 @@ public class BusinessController {
     public String handle(@PathVariable String id, Model model) {
 
         model.addAttribute("baseUrl", "/business");
+        List<District> list=businessService.getDistrict();
         if (StringUtils.equals("new", id)) {
+
             //新增
             model.addAttribute("handle", "店铺管理/店铺新增");
+            model.addAttribute("districtList", list);
             model.addAttribute("saveUrl", "/business/save");
             return "business/business_add";
         } else {
@@ -105,6 +109,7 @@ public class BusinessController {
             model.addAttribute("business", business);
             model.addAttribute("handle", "店铺管理/店铺修改");
             model.addAttribute("saveUrl", "/business/update");
+            model.addAttribute("districtList", list);
             model.addAttribute("uploadUrl", "/business/" + business.getId() + "/logo/upload");
             return "business/business_setting";
         }
@@ -217,6 +222,21 @@ public class BusinessController {
         List<TbBusiness> list = businessService.getBusinessListAll();
         return JsonResult.OK(list);
     }
+
+
+    /**
+     * 更新缓存
+     * @return
+     */
+    /*@RequiresPermissions("/business/update")*/
+    @ControllerLog(module = "帮助管理", methods = "缓存更新")
+    @RequestMapping(value = "/business/updateBusinessRedis", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult updateHelpRedis() {
+        OperateEnum result = businessService.updateHelpRedis();
+        return JsonResult.build(result);
+    }
+
 }
 
 
