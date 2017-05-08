@@ -54,4 +54,12 @@ public interface AppService {
     JsonResult getOrdersByPhone(HttpServletRequest request);
 
     JsonResult getOrderAgreement();
+
+    JsonResult getGZDetail(long phone);
+
+    JsonResult getBusinessAddress();
+
+    JsonResult getGZDetailByOrderNumber(long orderNumber);
+
+    JsonResult deleteOrder(String orderNumber, HttpServletRequest request);
 }

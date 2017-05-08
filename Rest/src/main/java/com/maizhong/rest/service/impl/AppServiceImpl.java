@@ -7,19 +7,18 @@ import com.maizhong.common.dto.CityDTO;
 import com.maizhong.common.dto.GuzhiDTO;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
-import com.maizhong.common.utils.EncryptUtils;
-import com.maizhong.common.utils.HttpClientUtil;
-import com.maizhong.common.utils.JsonUtils;
-import com.maizhong.common.utils.TimeUtils;
+import com.maizhong.common.utils.*;
 import com.maizhong.dao.JedisClient;
 import com.maizhong.mapper.*;
 import com.maizhong.pojo.*;
 import com.maizhong.rest.DTO.AdvertDTO;
+import com.maizhong.rest.DTO.OrderDTO;
 import com.maizhong.rest.service.AppService;
 import com.maizhong.rest.service.FileUploadService;
 import com.maizhong.rest.service.ReckonService;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -46,6 +45,12 @@ public class AppServiceImpl implements AppService {
     private BrandMapper brandMapper;
     @Autowired
     private GzrecordMapper gzrecordMapper;
+    @Autowired
+    private OrderInfoMapper orderInfoMapper;
+    @Autowired
+    private OrdersMapper ordersMapper;
+    @Autowired
+    private TbBusinessMapper tbBusinessMapper;
 
     @Autowired
     private TbAdvertMapper tbAdvertMapper;
@@ -74,8 +79,6 @@ public class AppServiceImpl implements AppService {
     private ReckonService reckonService;
     @Autowired
     private FileUploadService fileUploadService;
-
-
 
 
     @Value("${UNLOGIN_TOKEN}")
@@ -777,7 +780,7 @@ public class AppServiceImpl implements AppService {
             object.put("modelName", model.getModelName());//名称
             object.put("regDate", gzrecord.getRegDate());//上牌时间
             String formatDateTime3 = TimeUtils.getFormatDateTime3(gzrecord.getTime());
-            object.put("time",formatDateTime3);//评估时间
+            object.put("time", formatDateTime3);//评估时间
             object.put("mail", gzrecord.getMail());//行驶里程/万公里
             array.add(object);
         }
@@ -910,24 +913,280 @@ public class AppServiceImpl implements AppService {
     public JsonResult getOrdersByPhone(HttpServletRequest request) {
         String token = request.getHeader("X-Maizhong-AppKey");//获取token
         String phone = jedisClient.get("APP_LOGIN_PHONE" + ":" + token);//获取手机号
+        if (StringUtils.isBlank(phone)) {
+            List list = new ArrayList();
+            return JsonResult.build(200, "无", list);
+        }
         JsonResult ordersByPhone = reckonService.getOrdersByPhone(phone);
         return ordersByPhone;
     }
 
     /**
      * 获取交易协议
+     *
      * @return
      */
     @Override
     public JsonResult getOrderAgreement() {
-        RichtextExample example=new RichtextExample();
+        RichtextExample example = new RichtextExample();
         RichtextExample.Criteria criteria = example.createCriteria();
         criteria.andIdEqualTo(1L);
         List<Richtext> richtexts = richtextMapper.selectByExampleWithBLOBs(example);
-        if (richtexts==null||richtexts.size()==0){
+        if (richtexts == null || richtexts.size() == 0) {
             return JsonResult.OK();
         }
-        String content=richtexts.get(richtexts.size()-1).getContent();
-        return JsonResult.build(200,"获取协议成功",content);
+        String content = richtexts.get(richtexts.size() - 1).getContent();
+        return JsonResult.build(200, "获取协议成功", content);
+    }
+
+
+    /**
+     * 获取4S店地址
+     *
+     * @return
+     */
+    @Override
+    public JsonResult getBusinessAddress() {
+        return reckonService.getBusinessAddress();
+    }
+
+
+    /**
+     * 获取估值详情
+     *
+     * @param phone
+     * @return
+     */
+    @Override
+    public JsonResult getGZDetail(long phone) {
+        String order_phone = jedisClient.hget("ORDER_PHONE", phone + "");//获取缓存
+        if (StringUtils.isBlank(order_phone)) {
+            return JsonResult.OK();
+        }
+
+        OrderDTO orderDTO = JsonUtils.jsonToPojo(order_phone, OrderDTO.class);
+        Long orderNumber = null;
+        try {
+            orderNumber = Long.valueOf(orderDTO.getOrderNumber());
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return JsonResult.OK();
+        }
+        JsonResult gzDetailByOrderNumber = getGZDetailByOrderNumber(orderNumber);
+        return gzDetailByOrderNumber;
+    }
+
+    /**
+     * 获取估值详情
+     *
+     * @param orderNumber
+     * @return
+     */
+    @Override
+    public JsonResult getGZDetailByOrderNumber(long orderNumber) {
+        OrdersExample example = new OrdersExample();
+        OrdersExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderNumberEqualTo(orderNumber);
+        List<Orders> ordersList = ordersMapper.selectByExample(example);
+        if (ordersList == null || ordersList.size() == 0) {
+            return JsonResult.OK();
+        }
+        Orders orders = ordersList.get(0);
+        OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setOrderNumber(String.valueOf(orders.getOrderNumber()));//订单编号
+        orderDTO.setUserId(String.valueOf(orders.getUserId()));//用户Id
+        Model model = modelMapper.selectByPrimaryKey(orders.getModelId());//车型对象
+
+        Series series = seriesMapper.selectByPrimaryKey(model.getSeriesId());
+        orderDTO.setSeriesImg(series.getSeriesPic());//车系图片
+        orderDTO.setModel(model);
+        orderDTO.setModelName(orders.getModelName());//车型名称
+        orderDTO.setReckonPrice(orders.getReckonPrice());//评估价格
+        orderDTO.setDealPrice(orders.getDealPrice());//交易价格--实际
+        orderDTO.setDealTime(orders.getDealTime());//交易时间
+        try {
+            if (orders.getDealWay() != null) {
+                //4s店
+                if (orders.getDealWay() == 1) {
+                    TbBusiness tbBusiness = tbBusinessMapper.selectByPrimaryKey(orders.getWayId());
+                    orderDTO.setAddress(tbBusiness.getBusinessName() + " " + tbBusiness.getAddress());
+                    orderDTO.setCheckTime("4S店营业时间内");//验车时间
+                    orderDTO.setDealWay("4S店");//验车地址
+                }
+                //地铁
+                if (orders.getDealWay() == 2) {
+                    LineSite lineSite = lineSiteMapper.selectByPrimaryKey(orders.getWayId());
+                    Line line = lineMapper.selectByPrimaryKey(lineSite.getLineId());
+                    orderDTO.setAddress("北京市地铁" + line.getName() + "线" + lineSite.getName() + "站");
+                    orderDTO.setCheckTime(orders.getCheckTime());//验车时间
+                    orderDTO.setDealWay("地铁站附近");//验车地址
+                }
+                //上门
+                if (orders.getDealWay() == 3) {
+                    orderDTO.setAddress(orders.getAddress());//验车地址
+                    orderDTO.setCheckTime(orders.getAddress());//验车时间
+                    orderDTO.setDealWay("上门");
+                }
+            }
+
+
+            orderDTO.setLinkMan(orders.getLinkMan());//联系人
+            orderDTO.setLinkPhone(orders.getLinkPhone());//联系人电话
+            orderDTO.setReckon_time(TimeUtils.getFormatDateTime3(orders.getReckonTime()));//评估时间
+            OrderInfoExample orderInfoExample = new OrderInfoExample();
+            OrderInfoExample.Criteria criteria1 = orderInfoExample.createCriteria();
+            criteria1.andOrderNumberEqualTo(orders.getOrderNumber());
+
+            List<OrderInfo> orderInfoList = orderInfoMapper.selectByExample(orderInfoExample);
+            if (orderInfoList != null && orderInfoList.size() > 0) {
+                OrderInfo orderInfo = orderInfoList.get(0);
+                if (StringUtils.equals("1", orderInfo.getCk())) {
+                    orderInfo.setCk("车况优秀");
+                } else if (StringUtils.equals("2", orderInfo.getCk())) {
+                    orderInfo.setCk("车况良好");
+                } else if (StringUtils.equals("3", orderInfo.getCk())) {
+                    orderInfo.setCk("车况一般");
+                } else {
+                    orderInfo.setCk("车况较差");
+                }
+                //颜色
+                System.out.println(orderInfo.getColor());
+                switch (orderInfo.getColor()) {
+                    case "1":
+                        orderInfo.setColor("米色");
+                        break;
+                    case "2":
+                        orderInfo.setColor("白色");
+                        break;
+                    case "3":
+                        orderInfo.setColor("灰色");
+                        break;
+                    case "4":
+                        orderInfo.setColor("红色");
+                        break;
+                    case "5":
+                        orderInfo.setColor("棕色");
+                        break;
+                    case "6":
+                        orderInfo.setColor("蓝色");
+                        break;
+                    case "7":
+                        orderInfo.setColor("黄色");
+                        break;
+                    case "8":
+                        orderInfo.setColor("黑色");
+                        break;
+                    case "9":
+                        orderInfo.setColor("银色");
+                        break;
+                    case "10":
+                        orderInfo.setColor("绿色");
+                        break;
+                    default:
+                        orderInfo.setColor("其他颜色");
+                        break;
+                }
+                //交强险
+                if (StringUtils.equals(orderInfo.getJqx(), "1")) {
+                    orderInfo.setJqx("两个月以内");
+                } else {
+                    orderInfo.setJqx("两个月以上");
+                }
+                //过户
+                if (StringUtils.equals(orderInfo.getGh(), "1")) {
+                    orderInfo.setGh("0次");
+                } else if (StringUtils.equals(orderInfo.getGh(), "2")) {
+                    orderInfo.setGh("1次");
+                } else if (StringUtils.equals(orderInfo.getGh(), "3")) {
+                    orderInfo.setGh("2次");
+                } else {
+                    orderInfo.setGh("3次及以上");
+                }
+                //过户时间
+                if (StringUtils.equals(orderInfo.getGhtime(), "1")) {
+                    orderInfo.setGhtime("无过户");
+                } else if (StringUtils.equals(orderInfo.getGhtime(), "2")) {
+                    orderInfo.setGhtime("六个月以内");
+                }
+                {
+                    orderInfo.setGhtime("六个月以上");
+                }
+                //性质
+                if (StringUtils.equals(orderInfo.getXz(), "1")) {
+                    orderInfo.setXz("非营运");
+                } else {
+                    orderInfo.setXz("租赁");
+                }
+                //年检
+                if (StringUtils.equals(orderInfo.getNj(), "1")) {
+                    orderInfo.setNj("两个月以内");
+                } else {
+                    orderInfo.setNj("两个月以上");
+                }
+                //使用方式
+                if (StringUtils.equals(orderInfo.getMethod(), "1")) {
+                    orderInfo.setMethod("公司");
+                } else {
+                    orderInfo.setMethod("个人");
+                }
+                orderDTO.setOrderInfo(orderInfo);//评测信息详情
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            orderDTO.setStatus(String.valueOf(orders.getStatus()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        JsonResult oneWeek = reckonService.getOneWeek();
+        Object data1 = oneWeek.getData();
+        JSONObject object = new JSONObject();
+        object.put("gzDetail", orderDTO);
+        object.put("oneWeek", data1);
+        return JsonResult.build(200, "返回成功", object);
+    }
+
+    /**
+     * \
+     * 删除订单
+     *
+     * @param orderNumber
+     * @param request
+     * @return
+     */
+    @Override
+    public JsonResult deleteOrder(String orderNumber, HttpServletRequest request) {
+        try {
+            String token = request.getHeader("X-Maizhong-AppKey");//获取token
+            String app_login_phone = jedisClient.get("APP_LOGIN_PHONE" + ":" + token);//获取手机号
+            OrdersExample example = new OrdersExample();
+            OrdersExample.Criteria criteria = example.createCriteria();
+            criteria.andUserIdEqualTo(Long.valueOf(app_login_phone));
+            criteria.andOrderNumberEqualTo(Long.valueOf(orderNumber));
+
+            List<Orders> ordersList = ordersMapper.selectByExample(example);
+            if (ordersList == null || ordersList.size() == 0) {
+                return JsonResult.build(200, "删除成功", "删除成功");
+            }
+            Orders order=ordersList.get(0);
+            order.setDelflag(1);
+            OrderInfoExample orderInfoExample=new OrderInfoExample();
+            OrderInfoExample.Criteria criteria1 = orderInfoExample.createCriteria();
+            criteria1.andOrderNumberEqualTo(Long.valueOf(orderNumber));
+            List<OrderInfo> orderInfoList = orderInfoMapper.selectByExample(orderInfoExample);
+            if (orderInfoList!=null&&orderInfoList.size()>0){
+                OrderInfo orderInfo = orderInfoList.get(0);
+                orderInfo.setDelflag(1);
+                orderInfoMapper.updateByPrimaryKeySelective(orderInfo);
+            }
+
+            ordersMapper.updateByPrimaryKeySelective(order);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return JsonResult.build(200, "删除成功", "删除成功");
     }
 }

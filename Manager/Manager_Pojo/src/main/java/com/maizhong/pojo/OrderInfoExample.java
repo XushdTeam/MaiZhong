@@ -1064,62 +1064,52 @@ public class OrderInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andDelflagEqualTo(String value) {
+        public Criteria andDelflagEqualTo(Integer value) {
             addCriterion("delflag =", value, "delflag");
             return (Criteria) this;
         }
 
-        public Criteria andDelflagNotEqualTo(String value) {
+        public Criteria andDelflagNotEqualTo(Integer value) {
             addCriterion("delflag <>", value, "delflag");
             return (Criteria) this;
         }
 
-        public Criteria andDelflagGreaterThan(String value) {
+        public Criteria andDelflagGreaterThan(Integer value) {
             addCriterion("delflag >", value, "delflag");
             return (Criteria) this;
         }
 
-        public Criteria andDelflagGreaterThanOrEqualTo(String value) {
+        public Criteria andDelflagGreaterThanOrEqualTo(Integer value) {
             addCriterion("delflag >=", value, "delflag");
             return (Criteria) this;
         }
 
-        public Criteria andDelflagLessThan(String value) {
+        public Criteria andDelflagLessThan(Integer value) {
             addCriterion("delflag <", value, "delflag");
             return (Criteria) this;
         }
 
-        public Criteria andDelflagLessThanOrEqualTo(String value) {
+        public Criteria andDelflagLessThanOrEqualTo(Integer value) {
             addCriterion("delflag <=", value, "delflag");
             return (Criteria) this;
         }
 
-        public Criteria andDelflagLike(String value) {
-            addCriterion("delflag like", value, "delflag");
-            return (Criteria) this;
-        }
-
-        public Criteria andDelflagNotLike(String value) {
-            addCriterion("delflag not like", value, "delflag");
-            return (Criteria) this;
-        }
-
-        public Criteria andDelflagIn(List<String> values) {
+        public Criteria andDelflagIn(List<Integer> values) {
             addCriterion("delflag in", values, "delflag");
             return (Criteria) this;
         }
 
-        public Criteria andDelflagNotIn(List<String> values) {
+        public Criteria andDelflagNotIn(List<Integer> values) {
             addCriterion("delflag not in", values, "delflag");
             return (Criteria) this;
         }
 
-        public Criteria andDelflagBetween(String value1, String value2) {
+        public Criteria andDelflagBetween(Integer value1, Integer value2) {
             addCriterion("delflag between", value1, value2, "delflag");
             return (Criteria) this;
         }
 
-        public Criteria andDelflagNotBetween(String value1, String value2) {
+        public Criteria andDelflagNotBetween(Integer value1, Integer value2) {
             addCriterion("delflag not between", value1, value2, "delflag");
             return (Criteria) this;
         }
