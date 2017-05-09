@@ -7,16 +7,19 @@ a{color:#666;text-decoration:none;cursor:pointer;blr:expression(this.onFocus=thi
 .center{ text-align:center}ul li,ol{ list-style:none}a:hover{ color:#f60}img{border:0}.clear{ clear: both;}
 img,input{vertical-align:middle; outline:none}
 
-
+.bg_top1{background: url("../img/xiao.jpg") no-repeat center; height: 59px}
 /*index*/
 .bg_img{ background: url("../img/bag.jpg") no-repeat center;  height: 589px;}
-.top{ height: 68px; border: 1px solid #999999}
+.top{ height: 68px; border-bottom: 1px solid #ccc; overflow: hidden}
+.bg_x{ display: block; width: 1000px; text-align: right; margin: 0 auto; line-height: 59px; color: #fff; font-size:18px;  cursor: pointer}
+.bg_x a{ color: #fff; background:rgba(0,0,0,0.3); padding:2px 5px}
 .t_cen{ width: 1200px; margin: 0px auto }
 .guzs{ width: 1200px; margin:0 auto; z-index: 1000}
 .logo{ display: block; width: 200px; margin-top: 10px; float:left}
 
 /*banner*/
-.htmleaf-container{ position: absolute;top: 69px; width: 100%; z-index: 1}
+.pos{ position: relative}
+.htmleaf-container{ position: absolute;top: -40px; width: 100%; z-index: 1}
 .banner{ width: 100%; position: relative; overflow: hidden;}
 .banner ul{  position: absolute;}
 .banner ul li{ width: 100%; height: 460px; float: left; background:  no-repeat center center;}
@@ -323,8 +326,14 @@ table td{ width: 20%; border-bottom: 1px solid #eee; text-align: center; border-
 table td img{ width: 70px; }
 /*首页软文*/
 .wz_box{ background: #f5f5f5; margin: 20px 0 0 0; overflow: hidden}
-.wz{ width: 1000px; margin: 20px auto; }
-.wz p{ font-size: 18px;color:#000; line-height: 40px; height: 40px}
+.wz{ width: 1000px; margin: 20px auto; overflow: hidden}
+.wz p{ font-size: 24px;color:#000; line-height: 50px; height: 50px; margin-bottom: 20px}
+.wz dl{ width: 330px; float: left;}
+.wz dl.dl2{ width:640px; float: right; background: #fff;height: 220px}
+.wz dl.dl2 dt{ width: 330px; float: left}
+.wz dl.dl2 dd{ width:270px; float: left; margin-left: 20px}
+.wz dl.dl2 dd.dd1{ font-size: 18px; color: #000; margin: 10px 0 10px 20px}
+.wz dl.dl2 dd.dd3{ text-align: right; padding: 30px 0}
 
 
 /*优势*/
@@ -338,7 +347,7 @@ table td img{ width: 70px; }
 .you_cen dl dd.dd1{  font-size: 18px;}
 .you_cen .iconfont{ color: #fff; font-size: 35px;}
 /*a b  c  d*/
-.e_top{ border: 1px solid #eee !important; background: #fff;}
+.e_top{ background: #fff;}
 .e_top .tell{ color: #f60;}
 .t_right{ width: 710px; overflow: hidden;  float: left; margin-left: 100px}
 .t_right li a{ float: left; padding: 22px 23px; font-size: 16px;}
@@ -694,6 +703,10 @@ ul.t_right a.hover{ background: #f60;color: #fff; }
 .zh{ border-bottom: 1px solid #ccc}
 .zh_cen{ width: 1200px; margin: 20px auto; text-align: center}
 .zh_cen h3{ font-size: 48px; line-height: 60px;color: #000; margin: 40px 0; font-weight: 500}
+
+.zh_cen h2{ margin-top: 40px; clear: both; font-size: 40px; font-weight: 500; line-height: 90px}
+
+.zh_cen p a{ background: #f60; color: #fff;  display: block; line-height: 35px; width: 300px; margin: 30px auto; padding: 0 20px}
 .zh_cen p{ font-size: 18px; line-height: 30px}
 .inpu{ margin: 30px auto; width: 617px; }
 .inpu input{ height: 46px; width: 378px; padding-left: 20px}
@@ -705,3 +718,71 @@ ul.t_right a.hover{ background: #f60;color: #fff; }
 .guiz_cen p{ padding: 0 50px; font-size: 18px; line-height: 35px;}
 .bot,.on{ background: #f60; color: #fff; width: 225px; height: 54px; line-height: 54px; text-align: center; font-size: 18px; margin: 40px auto; cursor: pointer}
 .guiz_cen .hide{ display: none}
+
+
+/*新闻*/
+.A_colocr{ background: #F5F5F5; overflow: hidden; clear: both}
+.A_colocr .A_con{ width: 1200px; margin:30px auto 100px;  min-height: 500px; overflow: hidden; background: #fff}
+.A_con .left{ width: 210px; float: left;background:#e5e5e5; overflow: hidden; min-height: 750px; border-right:1px solid #ccc}
+.A_con .left>ul>li>a{ color: #f60}
+.A_con .left ul li a{ display: block;line-height:45px; text-indent: 1.5em; font-size: 16px; height: 45px; border-bottom: 1px solid #eee; cursor: pointer;}
+.A_con .left ul li span{ font-family: '宋体'; float: right; margin-right: 15px;}
+.A_con .left ul li a.cun{ background: #e72116; color: #fff;}
+.A_con .right{float: right;background:#fff; overflow: hidden; width: 980px; padding-bottom: 50px; height: 700px; overflow: hidden}
+.A_con .right div{ font-size: 14px; line-height: 25px; width: 830px; margin:15px auto 0}
+.A_con .right>div{ height: 750px; overflow: auto}
+.A_con .right h3{ font-size:24px; line-height: 45px; height: 45px; font-weight: 500; padding: 10px 0; border-bottom: 1px solid #eee; width: 830px; margin: 20px auto 0;color: #000}
+.A_con .right .zp{ font-size: 16px; background: #666; padding: 0px 15px; line-height:35px; width: 100px;color: #fff; margin-top: 50px}
+.A_con .right ul{ border: 1px solid #666; }
+.A_con .right ul li a{ line-height: 30px; display: block;padding-left: 20px}
+.A_con .right ul li a span{ float:right; font-family: '宋体'; padding-right: 20px}
+.A_con { background: #fff;}
+.A_con  .cur{ color: #f60}
+.xiao_ul li a{ padding-left: 30px}
+
+
+
+.X_con{ width: 1000px; margin:30px auto; border: 1px solid #eee;background: #fff;padding: 50px; overflow: hidden;}
+.X_con h2{ font-size: 16px; color: #000; line-height: 45px; border-bottom: 1px solid #eee;}
+.X_con h2 a{ font-size: 14px; padding: 0 20px;color: #999; font-weight: 500}
+.X_con .x_left{ width:900px;  margin: 0 auto}
+.X_con .x_left h3{ text-align: center; line-height: 55px; font-size: 20px; margin-top: 20px;color: #000}
+.X_con .x_left .clock{ display: block; text-align: center; color: #999; margin-bottom: 20px}
+.X_con .x_left  div{ font-size: 16px; line-height:35px; text-indent: 2em}
+.X_con .x_left .x_tj{ color: #000; margin-top: 30px;}
+.X_con .x_left .x_tj div{ line-height: 10px}
+.X_con .x_left img{ margin: 20px 0}
+.x_foot{ border-top: 1px solid #eee; margin: 60px 0 20px 0 ; padding:20px 0;}
+.x_foot li{ font-size: 14px; padding: 10px 0 }
+.x_right{ background: #eee;width: 300px; float: right; margin-right: 20px; margin-top: 50px; border-radius: 8px; padding-bottom: 20px;}
+.x_right dl{ width: 250px; margin:20px auto; background: #fff;padding-bottom: 10px; border-radius: 7px}
+.x_right dl dd{ text-align: center; font-size: 16px; line-height: 25px;}
+.x_right dl dt{text-align: center; width: 250px}
+.x_right dl dd.dd1{ color: #e72116;}
+.x_right h2{ color: #333; font-weight: 500 ; border-bottom: 1px solid #fff; padding-left: 22px}
+
+
+.help_howjoin h1{ font-size: 24px; text-align: center;color: #000; line-height: 55px;}
+.placeholder{    width: 600px;display: block;
+    margin: 0 auto;
+    height: 43px;
+    padding: 0 0 0 20px;
+
+    border: 1px solid #ddd;
+    line-height: 60px;
+    font-size: 18px;
+    cursor: text;}
+.help_howjoin label{ display: none}
+
+
+.help_howjoin .help_form .form_group textarea {
+    height: 200px;
+    resize: none;
+    font-family: '微软雅黑';
+}
+
+#btnSubmit{  width:600px; margin:0 auto;
+    height: 43px;
+    line-height: 43px;
+    font-size: 18px;
+    cursor: text; background: #f60; display: block;color: #fff; text-align: center}

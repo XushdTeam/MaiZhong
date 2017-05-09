@@ -33,6 +33,10 @@
 </head>
 <body>
 <!--头部开始-->
+  <div class="bg_top1">
+      <span class="bg_x"><a href="javascript:void(0)" onclick="$('.bg_top1').hide();">X</a></span>
+  </div>
+
 
     <div class="top e_top">
         <div class="t_cen">
@@ -54,6 +58,8 @@
     </div><!--top end-->
 
 
+
+<div class="pos">
     <div class="guzs">
        <div class="pinggu">
 
@@ -190,22 +196,26 @@
         </ul>
         <div class="submit" id="eval">免费估值</div>
     </div>
+
     </div>
 
+        <!--banner-->
+
+        <div class="htmleaf-container">
+
+            <div class="banner">
+                <ul>
+                </ul>
+                <ol>
+                </ol>
+            </div><!--banner end-->
+        </div><!--htmleaf-container end-->
+        <!--banner end-->
+
+</div><!--pos end-->
 
 
-<!--banner-->
 
-<div class="htmleaf-container">
-
-    <div class="banner">
-        <ul>
-        </ul>
-        <ol>
-        </ol>
-    </div><!--banner end-->
-</div><!--htmleaf-container end-->
-<!--banner end-->
 
 
 
@@ -946,9 +956,20 @@
             </dt>
         </dl>
 
-        <dl>
-            <dt><img src=""></dt>
-            <dd></dd>
+        <dl class="dl2">
+            <a href="#">
+                <dt>
+                   <img src="../resources/img/wz2.jpg">
+                </dt>
+                <dd class="dd1">为提高安全意识教你如何鉴定汽车的技术状况及使用寿命</dd>
+                <dd>如何做到心中有数不被潜规则
+                    选什么样的车更保值，悟空收车教你
+                    如何鉴定事故车
+                </dd>
+                <dd>二手车行业存在一个潜规则-----------塞价 </dd>
+                <dd class="dd3">查看更多>></dd>
+
+            </a>
         </dl>
     </div>
 </div>
@@ -988,9 +1009,9 @@
                 <a href="/about.html">交易方式</a>
                 <a href="/help.html">质检说明</a>
                 <a href="/joinus.html">帮助中心</a>
-
-                <a href="/joinus.html">加盟合作</a>
                 <a href="/feedback.html">关于我们</a>
+                <a href="/joinus.html">加盟合作</a>
+
                 <a href="/feedback.html">联系我们</a>
             </div>
             <div class="ul">
