@@ -5,9 +5,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.maizhong.common.dto.CityDTO;
 import com.maizhong.common.dto.GuzhiDTO;
-import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
-import com.maizhong.common.utils.*;
+import com.maizhong.common.utils.EncryptUtils;
+import com.maizhong.common.utils.HttpClientUtil;
+import com.maizhong.common.utils.JsonUtils;
+import com.maizhong.common.utils.TimeUtils;
 import com.maizhong.dao.JedisClient;
 import com.maizhong.mapper.*;
 import com.maizhong.pojo.*;
@@ -18,7 +20,6 @@ import com.maizhong.rest.service.FileUploadService;
 import com.maizhong.rest.service.ReckonService;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -74,6 +75,9 @@ public class AppServiceImpl implements AppService {
     private HelpMapper helpMapper;
     @Autowired
     private RichtextMapper richtextMapper;
+    @Autowired
+    private UserrecordMapper userrecordMapper;
+
 
     @Autowired
     private ReckonService reckonService;
@@ -117,21 +121,20 @@ public class AppServiceImpl implements AppService {
     @Override
     public JsonResult getTokenByDeciceId(String deviceId, String phone) {
         JSONObject object = new JSONObject();
-        List<Version> versions = versionMapper.selectByExample(null);
-        Version version = null;
-        try {
-            if (versions != null && versions.size() > 0) {
-                version = versions.get(versions.size() - 1);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (version != null) {
+        String app_version = jedisClient.get("APP_VERSION");
+        if (StringUtils.isNotBlank(app_version)){
+            Version version = JsonUtils.jsonToPojo(app_version, Version.class);
             object.put("versionNumber", version.getVersionNumber());
-        } else {
-            object.put("versionNumber", "V0.0.0");
+        }else {
+            List<Version> versionList = versionMapper.selectByExample(null);
+            if (versionList!=null&&versionList.size()>0){
+                Version version = versionList.get(versionList.size() - 1);
+                object.put("versionNumber", version.getVersionNumber());
+                jedisClient.set("APP_VERSION",JsonUtils.objectToJson(version));
+            }
         }
         if (StringUtils.isNotBlank(deviceId)) {
+            deviceId.replace(":","-");
             try {
                 String hget = jedisClient.get(UNLOGIN_TOKEN + ":" + deviceId);
                 if (StringUtils.isNotBlank(hget)) {
@@ -575,14 +578,32 @@ public class AppServiceImpl implements AppService {
     @Override
     public JsonResult getGuzhi(String param, HttpServletRequest request) {
         String token = request.getHeader("X-Maizhong-AppKey");
-        String app_login_phone = jedisClient.hget("APP_LOGIN_PHONE", token);
+        String app_login_phone = jedisClient.get("APP_LOGIN_PHONE"+":"+token);
         try {
 
             String redisJson = jedisClient.hget("GUZHI", param);
 
             if (StringUtils.isNotBlank(redisJson)) {
+                GuzhiDTO guzhiDTO = JsonUtils.jsonToPojo(redisJson, GuzhiDTO.class);
+                if (StringUtils.isNotBlank(app_login_phone) && app_login_phone.length() == 11) {//粗略判断是否为登录用户估值
+                    GzrecordExample gzrecordExample = new GzrecordExample();
+                    GzrecordExample.Criteria criteria = gzrecordExample.createCriteria();
+                    criteria.andParamEqualTo(param);//到数据库查询记录
+                    List<Gzrecord> gzrecords = gzrecordMapper.selectByExample(gzrecordExample);
+                    if (gzrecords != null && gzrecords.size() > 0) {//查询出结果 取最新记录
+                        try {
+                            Userrecord userrecord = new Userrecord();
+                            userrecord.setUserId(Long.valueOf(app_login_phone));
+                            userrecord.setGzDate(new Date());
+                            userrecord.setGzId(gzrecords.get(gzrecords.size() - 1).getId());
+                            userrecordMapper.insert(userrecord);//插入估值记录
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
 
-                return JsonResult.OK(JsonUtils.jsonToPojo(redisJson, GuzhiDTO.class));
+                return JsonResult.OK(guzhiDTO);
             }
 
             String[] paramarry = param.split("c|m|r|g");
@@ -679,9 +700,26 @@ public class AppServiceImpl implements AppService {
 
             guzhiDTO.setRegdate(gzrecord.getRegDate().replace("-", "年") + "月");
 
-
             jedisClient.hset("GUZHI", param, JsonUtils.objectToJson(guzhiDTO));
             gzrecordMapper.insert(gzrecord);
+
+            if (StringUtils.isNotBlank(app_login_phone) && app_login_phone.length() == 11) {//粗略判断是否为登录用户估值
+                GzrecordExample gzrecordExample = new GzrecordExample();
+                GzrecordExample.Criteria criteria = gzrecordExample.createCriteria();
+                criteria.andParamEqualTo(param);//到数据库查询记录
+                List<Gzrecord> gzrecords = gzrecordMapper.selectByExample(gzrecordExample);
+                if (gzrecords != null && gzrecords.size() > 0) {//查询出结果 取最新记录
+                    try {
+                        Userrecord userrecord = new Userrecord();
+                        userrecord.setUserId(Long.valueOf(app_login_phone));
+                        userrecord.setGzDate(new Date());
+                        userrecord.setGzId(gzrecords.get(gzrecords.size() - 1).getId());
+                        userrecordMapper.insert(userrecord);//插入估值记录
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
 
             return JsonResult.OK(guzhiDTO);
 
@@ -747,26 +785,25 @@ public class AppServiceImpl implements AppService {
     public JsonResult getGzrecord(HttpServletRequest request) {
         String token = request.getHeader("X-Maizhong-AppKey");//获取token
         String app_login_phone = jedisClient.get("APP_LOGIN_PHONE" + ":" + token);//获取手机号
-       /* String app_login_phone = "18515455566";*/
+        /*String app_login_phone = "18515455566";*/
         if (StringUtils.isBlank(app_login_phone)) {
-            return JsonResult.build(200, "获取成功", null);
-        }
-        GzrecordExample example = new GzrecordExample();
-        GzrecordExample.Criteria criteria = example.createCriteria();
-        try {
-            criteria.andPhoneEqualTo(Long.valueOf(app_login_phone));
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-            return JsonResult.build(200, "获取成功", null);
+            return JsonResult.build(200, "手机号有误", null);
         }
 
-        List<Gzrecord> gzrecords = gzrecordMapper.selectByExample(example);
-        if (gzrecords == null || gzrecords.size() < 1) {
+        UserrecordExample userrecordExample = new UserrecordExample();
+        UserrecordExample.Criteria criteria1 = userrecordExample.createCriteria();
+        criteria1.andUserIdEqualTo(Long.valueOf(app_login_phone));
+        Date dateBefore = TimeUtils.getDateBefore(15);
+        criteria1.andGzDateGreaterThan(dateBefore);
+        userrecordExample.setOrderByClause("gz_date DESC");
+        List<Userrecord> userrecords = userrecordMapper.selectByExample(userrecordExample);//获取所有的估值记录
+
+        if (userrecords == null || userrecords.size() < 1) {
             return JsonResult.build(200, "获取成功", null);
         }
         JSONArray array = new JSONArray();
-
-        for (Gzrecord gzrecord : gzrecords) {
+        for (Userrecord userrecord : userrecords) {
+            Gzrecord gzrecord = gzrecordMapper.selectByPrimaryKey(userrecord.getGzId());
             Model model = modelMapper.selectByPrimaryKey(gzrecord.getModelId());
             if (model == null) {
                 continue;
@@ -779,11 +816,12 @@ public class AppServiceImpl implements AppService {
             object.put("city", city.getCityName());//城市
             object.put("modelName", model.getModelName());//名称
             object.put("regDate", gzrecord.getRegDate());//上牌时间
-            String formatDateTime3 = TimeUtils.getFormatDateTime3(gzrecord.getTime());
+            String formatDateTime3 = TimeUtils.getFormatDateTime3(userrecord.getGzDate());//获取估值时间
             object.put("time", formatDateTime3);//评估时间
             object.put("mail", gzrecord.getMail());//行驶里程/万公里
             array.add(object);
         }
+
         return JsonResult.build(200, "获取成功", array);
     }
 
@@ -1171,13 +1209,13 @@ public class AppServiceImpl implements AppService {
             if (ordersList == null || ordersList.size() == 0) {
                 return JsonResult.build(200, "删除成功", "删除成功");
             }
-            Orders order=ordersList.get(0);
+            Orders order = ordersList.get(0);
             order.setDelflag(1);
-            OrderInfoExample orderInfoExample=new OrderInfoExample();
+            OrderInfoExample orderInfoExample = new OrderInfoExample();
             OrderInfoExample.Criteria criteria1 = orderInfoExample.createCriteria();
             criteria1.andOrderNumberEqualTo(Long.valueOf(orderNumber));
             List<OrderInfo> orderInfoList = orderInfoMapper.selectByExample(orderInfoExample);
-            if (orderInfoList!=null&&orderInfoList.size()>0){
+            if (orderInfoList != null && orderInfoList.size() > 0) {
                 OrderInfo orderInfo = orderInfoList.get(0);
                 orderInfo.setDelflag(1);
                 orderInfoMapper.updateByPrimaryKeySelective(orderInfo);

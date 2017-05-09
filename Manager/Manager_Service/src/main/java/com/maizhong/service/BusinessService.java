@@ -4,6 +4,7 @@ package com.maizhong.service;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.PageResult;
+import com.maizhong.pojo.District;
 import com.maizhong.pojo.TbBusiness;
 
 import java.util.List;
@@ -71,5 +72,7 @@ public interface BusinessService {
      */
     int updateBusinessLogo(String logo, long id);
 
+    List<District> getDistrict();
 
+    OperateEnum updateHelpRedis();
 }

@@ -1,5 +1,8 @@
 package com.maizhong.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Version {
@@ -17,6 +20,7 @@ public class Version {
         this.id = id;
     }
 
+
     public String getVersionNumber() {
         return versionNumber;
     }
@@ -25,6 +29,8 @@ public class Version {
         this.versionNumber = versionNumber == null ? null : versionNumber.trim();
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     public Date getUpdateTime() {
         return updateTime;
     }
