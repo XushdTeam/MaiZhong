@@ -72,7 +72,7 @@
     width: 10px;
     height: 10px;
     display: block;
-    background-color: #f05b48;
+    background-color: #f60;
     position: absolute;
     top: 2px;
     left: 2px;
@@ -138,7 +138,7 @@
     position: relative;
     z-index: 1;
     font-size: 16px;
-    background-color: #f05b48;
+    background-color: #f60;
 }
 .pinggu {
    position: relative;
@@ -194,7 +194,7 @@
     height: 458px;
     position: absolute;
     background: #fff;
-    border: 1px solid #f05b48;
+    border: 1px solid #f60;
     z-index: 1000;
 }
 .ucarselecttype {
@@ -208,6 +208,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    width: 269px;
 }
 .ucarselecttype_pinpai {
     width: 180px;
@@ -222,7 +223,7 @@
     margin-bottom: 5px;
     text-align: center;
     font-size: 16px;
-    color: #f05b48;
+    color: #f60;
     line-height: 27px;
 }
 .left_list {
@@ -255,7 +256,7 @@
     font-size: 14px;
 }
 .left_list > a:hover {
-    background: #f05b48;
+    background: #f60;
     color: #fff;
 }
 .list_1:hover,
@@ -265,7 +266,7 @@
 .list_5:hover,
 .list_6:hover,
 .list_7:hover {
-    background: #f05b48;
+    background: #f60;
     color: #fff;
 }
 .ucarselecttype_pinpaibottom_ul p.pinpailist {
@@ -293,7 +294,7 @@
     height: 316px;
     position: absolute;
     background: #fff;
-    border: 1px solid #f05b48;
+    border: 1px solid #f60;
     z-index: 1000;
 }
 .select_box.none {
@@ -318,7 +319,7 @@
     width: 50px;
 }
 .layerbg2 {
-    background: #f05b48;
+    background: #f60;
     color: #fff;
 }
 /**/
@@ -433,7 +434,7 @@
     margin: 0 auto;
 }
 .slick-dots .slick-active button {
-    background-color: #f05b48;
+    background-color: #f60;
 }
 .slick-list:focus {
     outline: none;
@@ -463,7 +464,7 @@
 .mtpinfo-more {
     height: 399px;
     font-size: 33px;
-    color: #f05b48;
+    color: #f60;
     line-height: 399px;
     text-align: center;
     border: 1px solid #ddd;
@@ -543,7 +544,7 @@
     display: block !important;
 }
 .fdlink-tab > .tab-focus {
-    border-top: 2px solid #f05b48;
+    border-top: 2px solid #f60;
     border-bottom: 1px solid #fff;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
@@ -567,7 +568,7 @@
 li.on {
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
-    background: #f05b48;
+    background: #f60;
     color: #fff;
 }
 .tab_letter {
@@ -587,7 +588,7 @@ li.on a {
     z-index: 2;
     overflow: hidden;
     background: #fff;
-    border-top: 3px solid #f05b48;
+    border-top: 3px solid #f60;
     height: 374px;
 }
 .brand-wrap {
@@ -678,7 +679,7 @@ li.on a {
     height: 26px;
     border-style: solid;
     border-width: 0 0 4px 4px;
-    border-color: #f05b48;
+    border-color: #f60;
     position: absolute;
     top: 15px;
 }
@@ -724,7 +725,7 @@ li.on a {
     position: absolute;
     float: left;
     background: #fff;
-    border: 1px solid #f05b48;
+    border: 1px solid #f60;
     z-index: 1000;
 }
 ._bg1 {
@@ -733,7 +734,7 @@ li.on a {
     position: absolute;
     float: left;
     background: #fff;
-    border: 1px solid #f05b48;
+    border: 1px solid #f60;
     z-index: 1000;
 }
 ._ucarselecttype.w723 {
@@ -772,7 +773,7 @@ li.on a {
     width: 160px;
     margin-bottom: 5px;
     text-align: center;
-    color: #f05b48;
+    color: #f60;
     line-height: 27px;
 }
 ._ucarselecttype_pinpaibottom {
@@ -831,7 +832,7 @@ li.on a {
     font-size: 14px;
 }
 ._ucarselecttype_pinpaibottom_ul p._pinpailist:hover {
-    background: #f05b48;
+    background: #f60;
     color: #fff;
 }
 ._ucarselecttype_pinpaibottom_ul p._pinpailisthover a,
@@ -916,12 +917,12 @@ li.on a {
     margin-top: .5px;
 }
 ._left_list a:hover {
-    background-color: #f05b48;
+    background-color: #f60;
     border: 1px solid #fff;
     color: #fff;
 }
 ._layerbg2 {
-    background: #f05b48;
+    background: #f60;
     color: #fff;
 }
 ._select_box {
@@ -977,7 +978,7 @@ li.on a {
     text-align: center;
     z-index: 1;
     cursor: pointer;
-    background: #f05b48;
+    background: #f60;
     box-sizing: border-box;
     margin: 45px 9px 0;
     padding: 5px 0;
@@ -1026,7 +1027,7 @@ li.on a {
 }
 .pg_itd > div > .clearMine > .fanxian {
     margin: 0 20px;
-    color: #f05b48;
+    color: #f60;
 }
 .pg_itd > div > .clearMine > .fanxian > img {
     margin: 0 10px 0 0;
@@ -1047,7 +1048,7 @@ li.on a {
     position: relative;
 }
 .submit-to > div {
-    background-color: #f05b48;
+    background-color: #f60;
     color: #fff;
     line-height: 1.5;
     padding: 10px 40px;
@@ -1056,7 +1057,7 @@ li.on a {
     margin-left: 10px;
 }
 .submit-to > span {
-    color: #f05b48;
+    color: #f60;
     float: right;
     height: 40px;
     line-height: 40px;
@@ -1077,7 +1078,7 @@ li.on a {
     color: #999;
 }
 .remind > span {
-    color: #f05b48;
+    color: #f60;
     font-size: 16px;
 }
 .pgr-wrap {
@@ -1115,7 +1116,7 @@ li.on a {
     float: none;
 }
 .checked {
-    border-color: #f05b48 !important;
+    border-color: #f60!important;
 }
 .checked:after {
     content: "";
@@ -1146,7 +1147,7 @@ li.on a {
     font-size: 16px;
 }
 .pg_prj > ul > li > .ck_top > .ck_right > div {
-    color: #f05b48;
+    color: #f60;
     margin-top: 5px;
     height: 19px;
 }
@@ -1201,7 +1202,7 @@ li.on a {
     left: 1px;
     background-color: #fff;
     width: 207px;
-    border: 1px solid #f05b48;
+    border: 1px solid #f60;
     height: 250px;
     overflow-y: scroll;
     padding: 5px;
@@ -1218,12 +1219,12 @@ li.on a {
 }
 #_sp_time > dd:hover {
     color: #fff;
-    background-color: #f05b48;
+    background-color: #f60;
 }
 #_sp_time > dt {
     text-align: center;
     padding: 0 0 10px;
-    color: #f05b48;
+    color: #f60;
     border-bottom: 1px solid #eee;
 }
 .ck_bot > .platform {
@@ -1248,7 +1249,7 @@ li.on a {
 }
 .ht-right > strong > span {
     font-size: 24px;
-    color: #f05b48;
+    color: #f60;
     margin-right: 12px;
 }
 .pg_left {
@@ -1394,7 +1395,7 @@ li.on a {
     right: -19px;
 }
 .our-column .img-position .our-img:hover {
-    border: 50px solid #f05b48;
+    border: 50px solid #f60;
     border-radius: 50px;
 }
 .our-column .our-title {
@@ -1426,7 +1427,7 @@ li.on a {
     margin-right: 0;
 }
 .app-introduce .introduce-choose .orange {
-    background: #f05b48;
+    background: #f60;
     color: #fff;
 }
 .app-introduce .introduce-choose .blue {
@@ -1461,7 +1462,7 @@ li.on a {
     text-indent: 40px;
 }
 .app-introduce .introduce .orange {
-    background: #f05b48;
+    background: #f60;
     color: #fff;
 }
 .app-introduce .introduce .blue {

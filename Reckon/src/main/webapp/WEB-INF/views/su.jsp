@@ -52,7 +52,7 @@
         </ul>
 
         <ul>
-            <li style="color:#f05b48"><img src="../resources/img/p_12.jpg">历史成交车辆</li>
+            <li style="color:#f60"><img src="../resources/img/p_12.jpg">历史成交车辆</li>
             <p><a href="javascript:void(0)"  class="cuns">成交车辆信息</a></p>
         </ul>
     </div><!--m_left-->

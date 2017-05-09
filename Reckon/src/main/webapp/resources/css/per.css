@@ -99,4 +99,4 @@
     pointer-events: none;
 }
 
-.radio:checked + .label { color: #f05b48}
+.radio:checked + .label { color: #f60}

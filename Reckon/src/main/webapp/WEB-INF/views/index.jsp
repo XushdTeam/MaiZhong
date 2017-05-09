@@ -36,14 +36,20 @@
 
     <div class="top e_top">
         <div class="t_cen">
-            <a href="#"><img src="../resources/img/logo.png"></a>
-            <span class="tell">010-8025-8108</span>
-            <span class="t_right">
-                <a href="/sale" class="one">我要卖车</a>
-                <a href="/login" class="one" id="login">登录</a>
-                <a href="/per/or" class="two" id="user" style="display:none">188****8888</a>
-                <a href="javascript:void(0)" class="two" id="exit" style="display:none" onclick="exit();">退出</a>
-                <a href="javascript:vold(0)" class="two">APP下载</a></span>
+            <a href="#" class="logo"><img src="../resources/img/logo.png"></a>
+            <ul class="t_right">
+                <li><a href="#" class="hover">首页</a></li>
+                <li><a href="/sale">我要卖车</a></li>
+                <li><a href="#">销售商加盟</a></li>
+                <li><a href="#">app下载</a></li>
+                <li><a href="#">帮助中心</a></li>
+                <li><a href="#">个人中心</a></li>
+                <li><a href="/per/or"  id="user" style="display:none">188****8888</a></li>
+            </ul>
+            <ul class="lon">
+                <li ><i class="iconfont icon ">&#xe6a3;</i><a href="/login"  id="login">登录</a>/<a href="/login"  id="">注册</a></li>
+                <li><a href="javascript:void(0)" class="two" id="exit" style="display:none" onclick="exit();">退出</a></li>
+            </ul>
         </div>
     </div><!--top end-->
 
@@ -634,9 +640,10 @@
 
         <div class="stores-info">
             <div class="col-left">
+                <p>你身边的免费服务站</p>
                 <a href=" ">
 
-                    <img class="lazy-load img_loaded" src="../resources/img/1_03.jpg " alt="4s店图片" style="display: block;">
+                    <img class="lazy-load img_loaded" src="../resources/img/1_03.jpg " alt="4s店图片" style="display: block;" width="100%">
                 </a>
             </div>
             <div class="col-right">
@@ -654,10 +661,9 @@
                                 <div class="region " data-index="5">海淀区(9)</div>
                                 <div class="region " data-index="6">顺义区(1)</div>
                                 <div class="region " data-index="7">昌平区(3)</div>
-                            </div>
-                            <div class="swiper-slide" style="width: 120px; height: 258px;">
                                 <div class="region" data-index="8">大兴区(4)</div>
                             </div>
+
                         </div>
                     </div>
 
@@ -773,22 +779,25 @@
         <div class="free-service">
             <span class="tips-title">上门服务</span>
 
-            <span class="tips">所有在本网站卖车的用户</span>
+            <span class="tips">足不出户</span>
+            <span class="tips">即可高价卖车</span>
+            <span class="tips">北京6环内地区的用户</span>
+            <span class="tips">可享受质检小哥优质上门服务</span>
             <span class="tips">可享受质检小哥优质上门服务</span>
 
 
             <ul class="pros">
                 <li>
 
+                    <span>高效</span>
+                </li>
+                <li>
+
                     <span>专业</span>
                 </li>
                 <li>
 
-                    <span>放心</span>
-                </li>
-                <li>
-
-                    <span>高效</span>
+                    <span>安心</span>
                 </li>
             </ul>
             <p class="p3"><img src="../resources/img/c_4.png "></p>
@@ -927,6 +936,23 @@
              <%--</div>--%>
         <%--</div>--%>
         <!--合作伙伴 end-->
+<!--文章-->
+<div class="wz_box">
+    <div class="wz">
+        <p>精选文章</p>
+        <dl>
+            <dt>
+                <a href="#"><img src="../resources/img/wz.jpg"></a>
+            </dt>
+        </dl>
+
+        <dl>
+            <dt><img src=""></dt>
+            <dd></dd>
+        </dl>
+    </div>
+</div>
+<!--文章 end-->
 
 <!--优势-->
   <div class="you">
