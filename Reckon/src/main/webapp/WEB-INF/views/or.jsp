@@ -42,7 +42,7 @@
 <div class="main">
     <div class="m_left">
         <ul>
-            <li style="color:#f05b48"><img src="../resources/img/p_03.jpg">订单中心</li>
+            <li style="color:#f60"><img src="../resources/img/p_03.jpg">订单中心</li>
             <p><a href="#" class="cuns">订单信息</a></p>
         </ul>
 
@@ -185,17 +185,65 @@
 
 
 
+<div class="clear"></div>
 <div class="footer">
     <div class="foot_cen">
-        <!--div class="n_f_m_c">
-            <div class="">
-                <a href="/about.html">关于我们</a>
-                <a href="/help.html">帮助中心</a>
-                <a href="/joinus.html">加入我们</a>
-                <a href="/feedback.html">用户反馈</a>
-            </div>
-        </div-->
+        <div class="n_f_m_c">
+            <div class="ul1">
+                <a href="/about.html">交易方式</a>
+                <a href="/help.html">质检说明</a>
+                <a href="/joinus.html">帮助中心</a>
 
+                <a href="/joinus.html">加盟合作</a>
+                <a href="/feedback.html">关于我们</a>
+                <a href="/feedback.html">联系我们</a>
+            </div>
+            <div class="ul">
+                <ul>
+                    <li><a href="#">门店交易</a></li>
+                    <li><a href="#">上门交易</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#">检测名词解释</a></li>
+                    <li><a href="#">专业检测项目</a></li>
+
+                </ul>
+                <ul>
+                    <li><a href="#">常见问题</a></li>
+                    <li><a href="#">服务条款</a></li>
+
+                </ul>
+
+                <ul>
+                    <li><a href="#">公司简介</a></li>
+                    <li><a href="#">招贤纳士</a></li>
+
+                </ul>
+                <ul>
+                    <li><a href="#"> 销售商加盟</a></li>
+
+                </ul>
+                <ul class="last">
+                    <li><a href="#">系电话：010-82967855/18515157855</a></li>
+                    <li><a href="#">  公司地址：北京市大兴区西红门嘉悦广场
+                        5号楼1002室或西红门公交车站对面</a></li>
+                </ul>
+
+            </div><!--ul end-->
+        </div><!--f_n-->
+        <div class="f_n_r">
+            <div class="f_one">
+                <img src="../resources/img/m_11.jpg">
+                <p>APP下载</p>
+            </div>
+            <div class="f_one">
+                <img src="../resources/img/m_13.jpg">
+                <p>微信公众号</p>
+            </div>
+        </div>
+
+
+        <div class="clear"></div>
         <div class="pp">
             <p>Copyright © 2017-2020 迈众 All Rights Reserved 版权所有 北京迈众汽车信息服务有限公司</p>
             <p>京ICP备17017795号  &nbsp;&nbsp;&nbsp; 联系电话：010-8025-8108 &nbsp;&nbsp;&nbsp;
@@ -208,6 +256,7 @@
 
     </div>
 </div>
+
 
 
 <script>

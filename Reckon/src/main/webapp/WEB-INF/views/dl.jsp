@@ -25,7 +25,7 @@
 
         .error{
             display: none;
-            color: #f05b48;
+            color: #f60;
         }
         .d_box input {
             line-height: 41px;
@@ -33,11 +33,11 @@
             margin-top: 20px;
             padding-left: 10px;
             width: 178px;
-            border: 1px solid #f05b48;
+            border: 1px solid #f60;
         }
         .verbut {
             width: 120px!important;
-            background: #f05b48;
+            background: #f60;
             color: #FFF;
             cursor: pointer;
         }
@@ -165,7 +165,7 @@
         if(!(/^1[34578]\d{9}$/.test(phone))){
             $(".pr").show();
             $(".tell").css({
-                color: "#f05b48"
+                color: "#f60"
             })
             return;
         }

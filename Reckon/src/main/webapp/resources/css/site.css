@@ -152,7 +152,7 @@ ul li {
 }
 .queding a{
     color: #FFF;
-    background: #f05b48;
+    background: #f60;
     width: 163px;
     height: 23px;
     padding: 8px;
@@ -411,7 +411,7 @@ body{
 
 .demo--radio{display:none}
 .demo--radioInput{background-color:#fff;border:1px solid rgba(0,0,0,0.15);border-radius:100%;display:inline-block;height:16px;margin-right:10px;margin-top:-1px;vertical-align:middle;width:16px;line-height:1}
-.demo--radio:checked + .demo--radioInput:after{background-color:#f05b48;border-radius:100%;content:"";display:inline-block;height:12px;margin:2px;width:12px}
+.demo--radio:checked + .demo--radioInput:after{background-color:#f60;border-radius:100%;content:"";display:inline-block;height:12px;margin:2px;width:12px}
 .demo--checkbox.demo--radioInput,.demo--radio:checked + .demo--checkbox.demo--radioInput:after{border-radius:0}
 .demo--label {
     margin: 10px 6px 0 0;
@@ -419,7 +419,7 @@ body{
 }
 .layui-layer-hui {
     min-width: 100px;
-    background-color: #f05b48!important;
+    background-color: #f60!important;
     filter: alpha(opacity=60);
     background-color: rgba(240,91,72,.6)!important;
     color: #fff;
