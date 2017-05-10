@@ -1088,7 +1088,6 @@ public class AppServiceImpl implements AppService {
                     orderInfo.setCk("车况较差");
                 }
                 //颜色
-                System.out.println(orderInfo.getColor());
                 switch (orderInfo.getColor()) {
                     case "1":
                         orderInfo.setColor("米色");
@@ -1226,5 +1225,26 @@ public class AppServiceImpl implements AppService {
             e.printStackTrace();
         }
         return JsonResult.build(200, "删除成功", "删除成功");
+    }
+
+    /**
+     * 获取缓存估值
+     * @param request
+     * @return
+     */
+    @Override
+    public JsonResult getAppGZDetail(HttpServletRequest request) {
+        JsonResult gzDetail = null;
+        try {
+            String token = request.getHeader("X-Maizhong-AppKey");//获取token
+            String app_login_phone = jedisClient.get("APP_LOGIN_PHONE" + ":" + token);//获取手机号
+            gzDetail = getGZDetail(Long.parseLong(app_login_phone));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        if (gzDetail==null){
+            JsonResult.build(200,"无",null);
+        }
+        return gzDetail;
     }
 }
