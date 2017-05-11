@@ -10,9 +10,11 @@ import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.pojo.Line;
+import com.maizhong.pojo.Model;
 import com.maizhong.reckon.DTO.IndexDTO;
 import com.maizhong.reckon.DTO.OrderDTO;
 import com.maizhong.reckon.service.IndexService;
+import com.sun.org.apache.regexp.internal.RE;
 import net.sf.json.util.JSONUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -65,6 +67,61 @@ public class IndexServiceImpl implements IndexService {
         return null;
     }
 
+    @Override
+    public IndexDTO getIndexDTOSe(String param) {
+
+        try{
+            String res = HttpClientUtil.doGet(RESTURL+"GetBrandList");
+            JSONObject object = JSON.parseObject(res);
+            IndexDTO indexDTO = new IndexDTO();
+            indexDTO.setBrandList(object.getJSONArray("data"));
+            res = HttpClientUtil.doGet(RESTURL+"getProvice");
+            object = JSON.parseObject(res);
+            indexDTO.setProviceList(object.getJSONArray("data"));
+
+            res = HttpClientUtil.doGet(RESTURL+"getModelById/"+param);
+            JsonResult result = JsonUtils.jsonToPojo(res,JsonResult.class);
+
+            Model model = JSON.parseObject(JsonUtils.objectToJson(result.getData()),Model.class);
+
+            indexDTO.setCityId("1");
+            indexDTO.setModelId(param);
+            indexDTO.setProvice("1");
+            indexDTO.setYear("0");
+            indexDTO.setMouth("0");
+            indexDTO.setBrandId("0");
+            indexDTO.setSeriesId("0");
+            indexDTO.setCity("北京");
+
+            indexDTO.setRegdate("首 次 上 牌 时 间");
+
+
+
+            indexDTO.setMaxYear(model.getMaxRegYear()+"");
+            indexDTO.setMinYear(model.getMinRegYear()+"");
+            indexDTO.setModelName(model.getModelName());
+
+
+            indexDTO.setBrandId(result.getMessage());
+            indexDTO.setSeriesId(model.getSeriesId()+"");
+
+
+
+
+
+
+
+
+
+            return indexDTO;
+
+            }catch (Exception e){
+
+                e.printStackTrace();
+            }
+            return null;
+
+    }
     /**
      * 通过品牌获取车系
      * @param brandId
@@ -301,4 +358,34 @@ public class IndexServiceImpl implements IndexService {
 
         return null;
     }
+
+    @Override
+    public JsonResult getHotBrand() {
+
+        try {
+            String res = HttpClientUtil.doGet(RESTURL+"getHotBrand");
+            JsonResult result = JsonUtils.jsonToPojo(res,JsonResult.class);
+            return result;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Override
+    public JsonResult getHotSeries() {
+
+        try {
+            String res = HttpClientUtil.doGet(RESTURL+"reckon/getHotSeries");
+            JsonResult  result = JsonUtils.jsonToPojo(res,JsonResult.class);
+            return result;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+
 }

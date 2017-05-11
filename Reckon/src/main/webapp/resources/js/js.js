@@ -6,6 +6,11 @@ $(function(){
         '../resources/img/1.jpg',
         '../resources/img/2.jpg'
     ];
+    var url_arry = [
+        '/prepo',
+        '/zhihuan',
+        'act'
+    ]
     var images_count = images_url.length;
     for(var j=0;j<images_count+1;j++){
         $('.banner ul').append('<li></li>')
@@ -23,6 +28,7 @@ $(function(){
     $(".banner ul li").css('background-image','url('+images_url[0]+')');
     $.each(images_url,function(key,value){
         $('.banner ul li').eq(key).css('background-image','url('+value+')');
+        $('.banner ul li').eq(key).attr('data-url',url_arry[key]);
     });
 
     $('.banner').css('height',images_height);
@@ -116,6 +122,11 @@ $(function(){
     $('.banner .left').click(function(){
         prevPlay();
     });
+
+    $('.banner ul li').click(function(){
+        var url = this.getAttribute('data-url')
+        window.location.href = url;
+    })
 });
 
 
@@ -223,5 +234,25 @@ function cun  () {
 /*地图*/
 
 
+var datemy = function(d){
+    //抓取现在日期
+    var now = new Date();
+    var years = now.getYear()+1;
+    var months = now.getMonth()+1;
+    var days = now.getDate();
 
+    //抓取前一天日期
 
+    NextNow = addDate(months+"/"+days+"/"+years,0-d);
+    months = NextNow.getMonth()+1;
+    days = NextNow.getDate();
+    return months+'月'+days+'日';
+}
+
+function addDate(dd,dadd){
+    var a = new Date(dd)
+    a = a.valueOf()
+    a = a + dadd * 24 * 60 * 60 * 1000
+    a = new Date(a)
+    return a;
+}

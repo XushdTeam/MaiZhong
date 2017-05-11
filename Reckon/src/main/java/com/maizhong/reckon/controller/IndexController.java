@@ -9,6 +9,7 @@ import com.maizhong.reckon.DTO.IndexDTO;
 import com.maizhong.reckon.DTO.OrderDTO;
 import com.maizhong.reckon.service.IndexService;
 import com.maizhong.reckon.service.LoginService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,9 +34,14 @@ public class IndexController {
     public String index(Model model){
 
         IndexDTO indexDTO = indexService.getIndexDTO();
-
+        JsonResult result =indexService.getBusinessAddress();
+        JsonResult result1 = indexService.getHotBrand();
+        JsonResult result2 = indexService.getHotSeries();
         model.addAttribute("brandList",indexDTO.getBrandList());
         model.addAttribute("proviceList",indexDTO.getProviceList());
+        model.addAttribute("shopList",result.getData());
+        model.addAttribute("hotBrand",result1.getData());
+        model.addAttribute("hotSeries",result2.getData());
         return "index";
     }
     @RequestMapping(value = "/index")
@@ -122,6 +128,15 @@ public class IndexController {
         IndexDTO indexDTO = indexService.getIndexDTO(param);
       //  model.addAttribute("brandList",indexDTO.getBrandList());
        // model.addAttribute("proviceList",indexDTO.getProviceList());
+        model.addAttribute("result",indexDTO);
+        model.addAttribute("second","1");
+        return "jingzhun";
+    }
+
+    @RequestMapping(value = "/sale/model/{param}")
+    public String saleSe(Model model,@PathVariable String param){
+
+        IndexDTO indexDTO = indexService.getIndexDTOSe(param);
         model.addAttribute("result",indexDTO);
         model.addAttribute("second","1");
         return "jingzhun";

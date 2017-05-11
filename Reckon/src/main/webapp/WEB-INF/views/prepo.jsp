@@ -29,9 +29,9 @@
 <!--头部开始-->
 <div class="top e_top">
     <div class="t_cen">
-        <a href="#" class="logo"><img src="../resources/img/logo.png"></a>
+        <a href="/" class="logo"><img src="../resources/img/logo.png"></a>
         <ul class="t_right">
-            <li><a href="#" class="hover">首页</a></li>
+            <li><a href="/" >首页</a></li>
             <li><a href="/sale">我要卖车</a></li>
             <li><a href="#">销售商加盟</a></li>
             <li><a href="#">app下载</a></li>
@@ -216,7 +216,7 @@
                 <ul class="last">
                     <li><a href="#">系电话：010-82967855/18515157855</a></li>
                     <li><a href="#">  公司地址：北京市大兴区西红门嘉悦广场
-                        5号楼1002室或西红门公交车站对面</a></li>
+                        5号楼1002-1004室或西红门公交车站对面</a></li>
                 </ul>
 
             </div><!--ul end-->

@@ -12,10 +12,11 @@ img,input{vertical-align:middle; outline:none}
 .bg_img{ background: url("../img/bag.jpg") no-repeat center;  height: 589px;}
 .top{ height: 68px; border-bottom: 1px solid #ccc; overflow: hidden}
 .bg_x{ display: block; width: 1000px; text-align: right; margin: 0 auto; line-height: 59px; color: #fff; font-size:18px;  cursor: pointer}
-.bg_x a{ color: #fff; background:rgba(0,0,0,0.3); padding:2px 5px}
+.bg_x2{display: block; }
+.bg_x2 a{ color: #fff; background:rgba(0,0,0,0.3); padding:2px 5px}
 .t_cen{ width: 1200px; margin: 0px auto }
 .guzs{ width: 1200px; margin:0 auto; z-index: 1000}
-.logo{ display: block; width: 200px; margin-top: 10px; float:left}
+.logo{ display: block; width: 200px;  float:left}
 
 /*banner*/
 .pos{ position: relative}
@@ -73,7 +74,7 @@ img,input{vertical-align:middle; outline:none}
 .liu .l_cen dt i.iconfont{ display: block;color: #f60; line-height: 84px; text-align: center; font-size: 45px}
 .liu .l_cen dt.dt1:hover{ background:#f60 url(../img/1.png)no-repeat center;  transition:background 0.8s;-webkit-transition:background 0.8s;  }
 .liu .l_cen dd{ width: 114px; text-align: center; font-size: 19px;color: #000; line-height: 55px; float: left;}
-.jiao{ background: #f5f5f5; overflow: hidden; }
+.jiao{background: rgba(255, 102, 0, 0.13); overflow: hidden; }
 .jiao .j_cen{ width: 1180px; margin:30px auto; overflow: hidden; background: #fff; padding: 10px }
 .jiao .j_cen .j_left{ width: 200px; float: left; color: #fff}
 .jiao .j_cen .j_left .j_one{ width: 198px; height: 195px; background: #666; overflow: hidden}
@@ -146,7 +147,7 @@ img,input{vertical-align:middle; outline:none}
  .opt {
     position: absolute;
     top: 29px;
-    right: 35px;
+    right: 20px;
     color: #b0b0b0;
     cursor: pointer;
     font-size: 14px;
@@ -171,7 +172,7 @@ img,input{vertical-align:middle; outline:none}
 }
 .hot-prods .hot-prods-list li {
     display: inline-block;
-    width: 14.5em;
+    width: 8.5em;
     margin-right: 1.5em;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -197,7 +198,7 @@ img,input{vertical-align:middle; outline:none}
 .owl-item .item img{ width: 100%;}
 
 /*预约服务*/
-.yuye{ background: #f5f5f5; overflow: hidden;padding-bottom: 70px }
+.yuye{ background: rgba(255, 102, 0, 0.13); overflow: hidden;padding-bottom: 70px }
 .yuye .yue_cen{margin: 30px auto 0; width: 1200px; background: #fff; padding: 30px 0; overflow: hidden;}
 .yuye .yue_cen h2{ font-size: 36px; text-align: center; line-height: 45px; color: #333; font-weight: 500}
 .allstores.active{ color:#f60}
@@ -213,7 +214,7 @@ img,input{vertical-align:middle; outline:none}
 
 }
  .col-left {
-     width: 440px;
+     width: 420px;
     height: 340px;
     box-sizing: border-box;
     float: left;
@@ -238,7 +239,10 @@ img,input{vertical-align:middle; outline:none}
  .stores-info .col-right .store-dist-list span.allstores {
     cursor: pointer;
     width: 100px;
-    margin-left: 20px;
+    margin-left: 10px;
+     height: 40px;
+     line-height: 40px;
+     font-size: 18px;
 }
 
 .swiper-container {
@@ -254,7 +258,7 @@ img,input{vertical-align:middle; outline:none}
 }
 
 .stores-info .col-right .store-dist-list #alldistrict .region {
-    font-size: 12px;
+    font-size: 14px;
     height: 37px;
     line-height: 37px;
     width: 100px;
@@ -263,17 +267,23 @@ img,input{vertical-align:middle; outline:none}
     position: relative;
     color: #333;
 }
-
+.stores-info .col-right .store-dist-list #alldistrict .active{
+    color:#f60;
+}
 
 div#r-storelist-all {
     float: left;
-    width: 240px;
+    width: 265px;
     height: 360px;
     overflow: auto;
 }
-.storelist li{ line-height: 35px;  text-align:left;}
+.storelist li{ line-height: 50px;  text-align:left;}
 .storelist li a{ color: #000; font-size: 14px;  text-indent: 1em; font-weight: bold}
-
+.store-name{
+    overflow:hidden;;/* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow:ellipsis;;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+    white-space:nowrap;/* 不换行 */
+}
 
 
  .free-service {
@@ -294,7 +304,7 @@ div#r-storelist-all {
     text-align: center; font-size: 14px; margin-right: 10px; margin-top: 20px; font-weight: bold}
 .free-service .p3{ width:130px; padding-top: 20px; float: right; margin-top: -120px; position: relative}
 
-.users{ margin: 70px 0 30px; overflow: hidden}
+.users{ padding-top: 30px; overflow: hidden}
 .users  .yue_cen h2{ font-size: 36px; text-align: center; line-height: 45px; color: #333; font-weight: 500}
 /*用户评论*/
 
@@ -303,8 +313,8 @@ div#r-storelist-all {
 .scroll_horizontal{position:relative;width:1200px;height:320px;padding:10px; margin: 50px auto}
 .scroll_horizontal .box{overflow:hidden;position:relative;width:1000px;height:320px;margin:0 auto;}
 .scroll_horizontal .list{overflow:hidden;width:9999px;}
-.scroll_horizontal .list li{float:left;width:220px;  padding: 7px 17px}
-.scroll_horizontal .list li .l_box{ border: 1px solid #eee; box-shadow: 0 0 3px #ccc; padding: 7px}
+.scroll_horizontal .list li{float:left;width:220px;  padding: 7px 17px;height: 300px}
+.scroll_horizontal .list li .l_box{ border: 1px solid #eee; box-shadow: 0 0 3px #ccc; padding: 7px;height: 290px}
 .scroll_horizontal .prev,
 .scroll_horizontal .next{position:absolute;top:50%;margin-top:-25px;width:40px;height:50px;background-image:url(../img/control.png);background-repeat:no-repeat;font:0/0 Arial;cursor:pointer;}
 .scroll_horizontal .prev{left:5px;background-position:0 0;}
@@ -313,8 +323,17 @@ div#r-storelist-all {
 .scroll_horizontal .next:hover{background-position:-40px -50px;}
 
 
-.p_t{ margin: 10px 0 0 10px}
-.pl{ color: #f60; width: 80%; margin: 60px auto; font-size: 16px;}
+.p_t{ height: 30px;border-bottom: 1px solid #ccc;padding: 10px;}
+.pl{
+    color: #f60;
+    /* margin-top: 52px; */
+    font-size: 16px;
+    height: 65px;
+    padding: 10px;
+    vertical-align: middle;
+    line-height: 35px;
+    padding-top: 20px;
+}
 .bottom{  border-top:1px solid #eee; margin-top: 80px; color: #999; padding-top: 10px}
 
 /*合作伙伴*/
@@ -325,8 +344,8 @@ table{ width: 95%; margin: 0 auto;border-top:1px solid #eee ; border-left: 1px s
 table td{ width: 20%; border-bottom: 1px solid #eee; text-align: center; border-right:1px solid #eee; height: 132px;}
 table td img{ width: 70px; }
 /*首页软文*/
-.wz_box{ background: #f5f5f5; margin: 20px 0 0 0; overflow: hidden}
-.wz{ width: 1000px; margin: 20px auto; overflow: hidden}
+.wz_box{background: rgba(255, 102, 0, 0.13); margin: 20px 0 0 0; overflow: hidden}
+.wz{ width: 1000px; margin: 20px auto; overflow: hidden;margin-bottom: 50px;}
 .wz p{ font-size: 24px;color:#000; line-height: 50px; height: 50px; margin-bottom: 20px}
 .wz dl{ width: 330px; float: left;}
 .wz dl.dl2{ width:640px; float: right; background: #fff;height: 220px}
@@ -353,7 +372,7 @@ table td img{ width: 70px; }
 .t_right li a{ float: left; padding: 22px 23px; font-size: 16px;}
 .t_right li{ float: left;}
 .e_top  .lon{ float: right; padding: 22px 5px !important; margin-right: 60px}
-.e_top  .lon li{ float: left}
+.e_top  .lon li{ float: left;margin-right: 10px;}
 .e_top  .lon{ line-height: 30px}
 ul.t_right a:hover{ background: #f60;color: #fff;  transition:background 0.8s;-webkit-transition:background 0.8s;  }
 ul.t_right a:active{background: #f60;color: #fff; }
@@ -786,3 +805,26 @@ ul.t_right a.hover{ background: #f60;color: #fff; }
     line-height: 43px;
     font-size: 18px;
     cursor: text; background: #f60; display: block;color: #fff; text-align: center}
+
+.active .store-name{
+    color: #F60;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 16px;
+    background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+    width: 8px;
+    height: 20px;
+    border-radius: 8px;
+    background-color: #c6c6c6;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 2px #f2f2f2;
+    box-shadow: inset 0 0 2px #f2f2f2;
+    background-color: #fafafa;
+}

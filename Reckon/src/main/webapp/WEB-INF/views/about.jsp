@@ -24,13 +24,13 @@
 <body>
 <div class="top e_top">
     <div class="t_cen">
-        <a href="#" class="logo"><img src="../resources/img/logo.png"></a>
+        <a href="/" class="logo"><img src="../resources/img/logo.png"></a>
         <ul class="t_right">
-            <li><a href="#" class="hover">首页</a></li>
+            <li><a href="/" >首页</a></li>
             <li><a href="/sale">我要卖车</a></li>
             <li><a href="#">销售商加盟</a></li>
             <li><a href="#">app下载</a></li>
-            <li><a href="#">帮助中心</a></li>
+            <li><a href="/about" class="hover">帮助中心</a></li>
             <li><a href="#">个人中心</a></li>
             <li><a href="/per/or"  id="user" style="display:none">188****8888</a></li>
         </ul>
@@ -262,7 +262,7 @@
 
                     <p> 四、公司声明</p>
                     <p> 悟空收车隶属于北京迈众汽车信息服务有限公司</p>
-                    <p> 公司地址：北京市大兴区宏业路9号嘉悦广场5号楼1002室</p>
+                    <p> 公司地址：北京市大兴区宏业路9号嘉悦广场5号楼1002-1004室</p>
                     <p> 公司电话：010-80258108</p>
 
                 </div>
@@ -350,7 +350,7 @@
     </div><!--A_con end-->
 </div>
 <!--中间部分end-->
-
+<jsp:include page="footer.jsp"></jsp:include>
 
 <script>
 
