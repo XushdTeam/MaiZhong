@@ -262,6 +262,21 @@ public class AppController {
         return result;
     }
 
+    /**
+     * 从缓存获取估值信息 通过手机
+     *
+     * @return
+     */
+    @RequestMapping(value = "/getAppGZDetail")
+    @ResponseBody
+    public JsonResult getSaleGZ(HttpServletRequest request) {
+
+        JsonResult result = appService.getAppGZDetail(request);
+
+        return result;
+    }
+
+
 
 
     /**

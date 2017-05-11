@@ -1,5 +1,8 @@
 package com.maizhong.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Orders {
@@ -100,7 +103,8 @@ public class Orders {
     public void setDealPrice(String dealPrice) {
         this.dealPrice = dealPrice == null ? null : dealPrice.trim();
     }
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     public String getCheckTime() {
         return checkTime;
     }
@@ -148,7 +152,8 @@ public class Orders {
     public void setAddress(String address) {
         this.address = address == null ? null : address.trim();
     }
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     public Date getReckonTime() {
         return reckonTime;
     }

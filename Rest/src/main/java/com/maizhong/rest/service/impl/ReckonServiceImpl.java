@@ -680,7 +680,7 @@ public class ReckonServiceImpl implements ReckonService {
         //使用方式
         basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
 
-        if(basePrice.compareTo(BigDecimal.ZERO)<0){
+        if (basePrice.compareTo(BigDecimal.ZERO) < 0) {
             basePrice = BigDecimal.ZERO;
         }
 
@@ -850,6 +850,7 @@ public class ReckonServiceImpl implements ReckonService {
 
     /**
      * 填写预约信息
+     *
      * @param orderNumber
      * @param dealWay
      * @param wayId
@@ -952,7 +953,7 @@ public class ReckonServiceImpl implements ReckonService {
             orderDTO.setDealPrice(orders.getDealPrice());//交易价格--实际
             orderDTO.setDealTime(orders.getDealTime());//交易时间
             try {
-                if (orders.getDealWay()!=null){
+                if (orders.getDealWay() != null) {
                     //4s店
                     if (orders.getDealWay() == 1) {
                         TbBusiness tbBusiness = tbBusinessMapper.selectByPrimaryKey(orders.getWayId());
@@ -997,7 +998,6 @@ public class ReckonServiceImpl implements ReckonService {
                         orderInfo.setCk("车况较差");
                     }
                     //颜色
-                    System.out.println(orderInfo.getColor());
                     switch (orderInfo.getColor()) {
                         case "1":
                             orderInfo.setColor("米色");
@@ -1082,7 +1082,7 @@ public class ReckonServiceImpl implements ReckonService {
 
                 }
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             try {
@@ -1205,23 +1205,29 @@ public class ReckonServiceImpl implements ReckonService {
 
 
         List<District> districts = districtMapper.selectByExample(null);//区县 16
+        long totalNumber = tbBusinessMapper.countByExample(null);
+
         TbBusinessExample example = new TbBusinessExample();
         JSONArray array = new JSONArray();
         for (District district : districts) {
             JSONObject object = new JSONObject();
             object.put("district", district.getName());
             object.put("id", district.getId());
+            object.put("totalNumber",totalNumber);
             example.clear();
             TbBusinessExample.Criteria criteria = example.createCriteria();
             criteria.andDistrictIdEqualTo(Long.valueOf(district.getId()));
             List<TbBusiness> tbBusinesses = tbBusinessMapper.selectByExample(example);
             if (tbBusinesses == null || tbBusinesses.size() == 0) {
                 continue;
+            } else {
+                object.put("count", tbBusinesses.size());
             }
             JSONArray array1 = new JSONArray();
             for (TbBusiness tbBusiness : tbBusinesses) {
                 JSONObject object1 = new JSONObject();
                 object1.put("address", tbBusiness.getAddress());
+                object1.put("img",tbBusiness.getLogo());
                 object1.put("name", tbBusiness.getBusinessName());
                 object1.put("id", tbBusiness.getId());
                 object1.put("location", tbBusiness.getLocation());
@@ -1237,9 +1243,9 @@ public class ReckonServiceImpl implements ReckonService {
 
     @Override
     public JsonResult getOneWeek() {
-            List<Map> mapList = new ArrayList<>();
+        List<Map> mapList = new ArrayList<>();
 
-            for (int i = 0; i >= -6; i--) {
+        for (int i = 0; i >= -6; i--) {
             Map<String, String> map = new HashMap<>();
             String StringDate = TimeUtils.getDateBeforeDay(i);
             Date date = TimeUtils.getDate2(StringDate);

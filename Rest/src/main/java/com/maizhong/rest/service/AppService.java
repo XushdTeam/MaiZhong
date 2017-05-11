@@ -62,4 +62,6 @@ public interface AppService {
     JsonResult getGZDetailByOrderNumber(long orderNumber);
 
     JsonResult deleteOrder(String orderNumber, HttpServletRequest request);
+
+    JsonResult getAppGZDetail(HttpServletRequest request);
 }

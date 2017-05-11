@@ -194,29 +194,38 @@ public class BusinessServiceImpl implements BusinessService {
      */
     @Override
     public OperateEnum updateHelpRedis() {
-        jedisClient.del("BUSINESS_ADDRESS");
+        try {
+            jedisClient.del("BUSINESS_ADDRESS");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        long totalNumber = tbBusinessMapper.countByExample(null);
         List<District> districts = districtMapper.selectByExample(null);//区县 16
         TbBusinessExample example = new TbBusinessExample();
         JSONArray array = new JSONArray();
-        for (District district : districts) {
+        for (District district : districts) {//遍历北京16个区县
             JSONObject object = new JSONObject();
             object.put("district", district.getName());
             object.put("id", district.getId());
+            object.put("totalNumber", totalNumber);
             example.clear();
             TbBusinessExample.Criteria criteria = example.createCriteria();
             criteria.andDistrictIdEqualTo(Long.valueOf(district.getId()));
             List<TbBusiness> tbBusinesses = tbBusinessMapper.selectByExample(example);
             if (tbBusinesses == null || tbBusinesses.size() == 0) {
-                continue;
+                continue;//如果区县下没有合作4S店，则跳过
+            }else {
+                object.put("count", tbBusinesses.size());
             }
             JSONArray array1 = new JSONArray();
             for (TbBusiness tbBusiness : tbBusinesses) {
-                JSONObject object1 = new JSONObject();
+                JSONObject object1 = new JSONObject();//添加4S店信息
                 object1.put("address", tbBusiness.getAddress());
                 object1.put("name", tbBusiness.getBusinessName());
                 object1.put("id", tbBusiness.getId());
                 object1.put("location", tbBusiness.getLocation());
                 object1.put("districtId", tbBusiness.getDistrictId());
+                object1.put("img",tbBusiness.getLogo());
                 array1.add(object1);
             }
             object.put("shop", array1);
