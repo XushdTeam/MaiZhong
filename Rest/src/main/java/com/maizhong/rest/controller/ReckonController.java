@@ -5,10 +5,7 @@ import com.maizhong.rest.service.ReckonService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 估值Controller
@@ -316,4 +313,46 @@ public class ReckonController {
         JsonResult result = reckonService.getOrdersByPhone(phone);
         return result;
     }
+
+ /*   @RequestMapping(value = "/joinUs",method = RequestMethod.POST)
+    public JsonResult joinUs(String coName){
+        return null;
+    }*/
+
+    /**
+     * 获取热门品牌
+     * @return
+     */
+    @RequestMapping(value = "/getHotBrand")
+    @ResponseBody
+    public JsonResult getHotBrand(){
+        JsonResult result=reckonService.getHotBrand();
+        return result;
+    }
+
+    /**
+     * 获取热门车系
+     * @return
+     */
+    @RequestMapping(value = "/reckon/getHotSeries")
+    @ResponseBody
+    public JsonResult getHotSeries(){
+        JsonResult result=reckonService.getHotSeries();
+        return result;
+    }
+
+    /**
+     * 根据ID获取车型
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/getModelById/{id}")
+    @ResponseBody
+    public JsonResult getModelById(@PathVariable("id") String id){
+
+JsonResult result=reckonService.getModelById(id);
+return result;
+    }
+
+
 }

@@ -445,53 +445,113 @@ public class SeriesExample {
             return (Criteria) this;
         }
 
-        public Criteria andBrandIdEqualTo(Integer value) {
+        public Criteria andBrandIdEqualTo(Long value) {
             addCriterion("brand_id =", value, "brandId");
             return (Criteria) this;
         }
 
-        public Criteria andBrandIdNotEqualTo(Integer value) {
+        public Criteria andBrandIdNotEqualTo(Long value) {
             addCriterion("brand_id <>", value, "brandId");
             return (Criteria) this;
         }
 
-        public Criteria andBrandIdGreaterThan(Integer value) {
+        public Criteria andBrandIdGreaterThan(Long value) {
             addCriterion("brand_id >", value, "brandId");
             return (Criteria) this;
         }
 
-        public Criteria andBrandIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andBrandIdGreaterThanOrEqualTo(Long value) {
             addCriterion("brand_id >=", value, "brandId");
             return (Criteria) this;
         }
 
-        public Criteria andBrandIdLessThan(Integer value) {
+        public Criteria andBrandIdLessThan(Long value) {
             addCriterion("brand_id <", value, "brandId");
             return (Criteria) this;
         }
 
-        public Criteria andBrandIdLessThanOrEqualTo(Integer value) {
+        public Criteria andBrandIdLessThanOrEqualTo(Long value) {
             addCriterion("brand_id <=", value, "brandId");
             return (Criteria) this;
         }
 
-        public Criteria andBrandIdIn(List<Integer> values) {
+        public Criteria andBrandIdIn(List<Long> values) {
             addCriterion("brand_id in", values, "brandId");
             return (Criteria) this;
         }
 
-        public Criteria andBrandIdNotIn(List<Integer> values) {
+        public Criteria andBrandIdNotIn(List<Long> values) {
             addCriterion("brand_id not in", values, "brandId");
             return (Criteria) this;
         }
 
-        public Criteria andBrandIdBetween(Integer value1, Integer value2) {
+        public Criteria andBrandIdBetween(Long value1, Long value2) {
             addCriterion("brand_id between", value1, value2, "brandId");
             return (Criteria) this;
         }
 
-        public Criteria andBrandIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andBrandIdNotBetween(Long value1, Long value2) {
             addCriterion("brand_id not between", value1, value2, "brandId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsHotIsNull() {
+            addCriterion("is_hot is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsHotIsNotNull() {
+            addCriterion("is_hot is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsHotEqualTo(Integer value) {
+            addCriterion("is_hot =", value, "isHot");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsHotNotEqualTo(Integer value) {
+            addCriterion("is_hot <>", value, "isHot");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsHotGreaterThan(Integer value) {
+            addCriterion("is_hot >", value, "isHot");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsHotGreaterThanOrEqualTo(Integer value) {
+            addCriterion("is_hot >=", value, "isHot");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsHotLessThan(Integer value) {
+            addCriterion("is_hot <", value, "isHot");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsHotLessThanOrEqualTo(Integer value) {
+            addCriterion("is_hot <=", value, "isHot");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsHotIn(List<Integer> values) {
+            addCriterion("is_hot in", values, "isHot");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsHotNotIn(List<Integer> values) {
+            addCriterion("is_hot not in", values, "isHot");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsHotBetween(Integer value1, Integer value2) {
+            addCriterion("is_hot between", value1, value2, "isHot");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsHotNotBetween(Integer value1, Integer value2) {
+            addCriterion("is_hot not between", value1, value2, "isHot");
             return (Criteria) this;
         }
     }

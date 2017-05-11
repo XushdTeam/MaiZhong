@@ -100,7 +100,7 @@ public class FileUploadServiceImpl implements FileUploadService {
         try {
 
             if (filedata.isEmpty()) return JsonResult.build(OperateEnum.FILE_EMPTY);
-            if (filedata.getSize() > 500 * 1024) return JsonResult.build(OperateEnum.FILE_SIZE);
+            if (filedata.getSize() > 3000 * 1024) return JsonResult.build(OperateEnum.FILE_SIZE);
 
             Map param = getParam();
             String originalFilename = filedata.getOriginalFilename();

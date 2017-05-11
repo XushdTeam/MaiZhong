@@ -29,5 +29,5 @@ public interface SeriesMapper {
 
     int updateByPrimaryKey(Series record);
 
-    List<String> selectByBrandId(@Param("brandId") Integer brandId);
+    List<String> selectByBrandId(@Param("brandId") Long brandId);
 }

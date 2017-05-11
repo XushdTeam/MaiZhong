@@ -28,7 +28,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.sql.Time;
 import java.util.*;
 
 /**
@@ -43,9 +42,6 @@ public class ReckonServiceImpl implements ReckonService {
 
     @Autowired
     private BrandMapper brandMapper;
-
-    @Autowired
-    private SeriesMapper seriesMapper;
     @Autowired
     private ProvinceMapper provinceMapper;
     @Autowired
@@ -74,9 +70,12 @@ public class ReckonServiceImpl implements ReckonService {
     private LineSiteMapper lineSiteMapper;
 
     @Autowired
-    private TbBusinessMapper tbBusinessMapper;
-    @Autowired
     private DistrictMapper districtMapper;
+
+    @Autowired
+    private SeriesMapper seriesMapper;
+    @Autowired
+    private TbBusinessMapper tbBusinessMapper;
 
     @Value("${CHE_MODEL}")
     private String CHE_MODEL;
@@ -256,7 +255,7 @@ public class ReckonServiceImpl implements ReckonService {
         SeriesExample.Criteria criteria = example.createCriteria();
         example.setOrderByClause("series_group_name ASC");
         try {
-            criteria.andBrandIdEqualTo(Integer.valueOf(brandId));
+            criteria.andBrandIdEqualTo(Long.valueOf(brandId));
 
         } catch (NumberFormatException e) {
             e.printStackTrace();
@@ -1097,6 +1096,92 @@ public class ReckonServiceImpl implements ReckonService {
     }
 
     /**
+     * 获取热门品牌
+     * @return
+     */
+    @Override
+    public JsonResult getHotBrand() {
+
+        String hot_brand = null;
+        try {
+            hot_brand = jedisClient.get("HOT_BRAND");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (StringUtils.isNotBlank(hot_brand)){
+            List<List> lists = JsonUtils.jsonToPojo(hot_brand, List.class);
+            return  JsonResult.build(200,"获取成功",lists);
+        }
+        BrandExample example=new BrandExample();
+        BrandExample.Criteria criteria = example.createCriteria();
+        criteria.andIsHotNotEqualTo(0);
+        List<Brand> brands = brandMapper.selectByExample(example);
+        JSONArray array=new JSONArray();
+        for (Brand brand:brands){
+            JSONObject object=new JSONObject();
+            object.put("brandId",brand.getBrandId());
+            object.put("largeLogo",brand.getLargeLogo());
+            object.put("brand",brand.getBrandName());
+            array.add(object);
+        }
+        jedisClient.set("HOT_BRAND",JsonUtils.objectToJson(array));
+        return JsonResult.build(200,"获取成功",array);
+    }
+
+    /**
+     * 获取热门车系
+     * @return
+     */
+    @Override
+    public JsonResult getHotSeries() {
+
+        String hot_series = null;
+        try {
+            hot_series = jedisClient.get("HOT_SERIES");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (StringUtils.isNotBlank(hot_series)){
+            List<List> lists = JsonUtils.jsonToPojo(hot_series, List.class);
+            return  JsonResult.build(200,"获取成功",lists);
+        }
+       SeriesExample example=new SeriesExample();
+        SeriesExample.Criteria criteria = example.createCriteria();
+        criteria.andIsHotEqualTo(1);
+        List<Series> seriesList = seriesMapper.selectByExample(example);
+        JSONArray array=new JSONArray();
+        for (Series series:seriesList){
+            JSONObject object=new JSONObject();
+            object.put("seriesId",series.getSeriesId());
+            object.put("seriesName",series.getSeriesName());
+            object.put("brandId",series.getBrandId());
+            array.add(object);
+        }
+        jedisClient.set("HOT_SERIES",JsonUtils.objectToJson(array));
+        return JsonResult.build(200,"获取成功",array);
+    }
+
+    /**
+     * 根据车型ID获取信息
+     * @param id
+     * @return
+     */
+    @Override
+    public JsonResult getModelById(String id) {
+
+        Model model = null;
+        Series series = null;
+        try {
+            String car_model = jedisClient.hget("CAR_MODEL", id);
+            model = JsonUtils.jsonToPojo(car_model, Model.class);
+            series = seriesMapper.selectByPrimaryKey(model.getSeriesId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return JsonResult.build(200,series.getBrandId()+"",model);
+    }
+
+    /**
      * 获取验证码
      *
      * @param phone
@@ -1216,6 +1301,7 @@ public class ReckonServiceImpl implements ReckonService {
             object.put("totalNumber",totalNumber);
             example.clear();
             TbBusinessExample.Criteria criteria = example.createCriteria();
+            criteria.andDelflagEqualTo(0);
             criteria.andDistrictIdEqualTo(Long.valueOf(district.getId()));
             List<TbBusiness> tbBusinesses = tbBusinessMapper.selectByExample(example);
             if (tbBusinesses == null || tbBusinesses.size() == 0) {

@@ -51,4 +51,10 @@ public interface ReckonService {
     JsonResult loginByToken(String phone, String token);
 
     JsonResult getOrdersByPhone(String phone);
+
+    JsonResult getHotBrand();
+
+    JsonResult getHotSeries();
+
+    JsonResult getModelById(String id);
 }

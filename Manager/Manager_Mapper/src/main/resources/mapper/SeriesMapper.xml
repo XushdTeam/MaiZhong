@@ -7,11 +7,8 @@
     <result column="series_group_name" jdbcType="VARCHAR" property="seriesGroupName" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="series_pic" jdbcType="VARCHAR" property="seriesPic" />
-    <result column="brand_id" jdbcType="INTEGER" property="brandId" />
-  </resultMap>
-
-  <resultMap id="GroupMap" type="java.lang.String">
-    <result column="series_group_name" jdbcType="VARCHAR" property="seriesGroupName" />
+    <result column="brand_id" jdbcType="BIGINT" property="brandId" />
+    <result column="is_hot" jdbcType="INTEGER" property="isHot" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    series_id, series_name, series_group_name, update_time, series_pic, brand_id
+    series_id, series_name, series_group_name, update_time, series_pic, brand_id, is_hot
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.pojo.SeriesExample" resultMap="BaseResultMap">
     select
@@ -106,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.maizhong.pojo.Series">
     insert into series (series_id, series_name, series_group_name, 
-      update_time, series_pic, brand_id
-      )
+      update_time, series_pic, brand_id, 
+      is_hot)
     values (#{seriesId,jdbcType=INTEGER}, #{seriesName,jdbcType=VARCHAR}, #{seriesGroupName,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{seriesPic,jdbcType=VARCHAR}, #{brandId,jdbcType=INTEGER}
-      )
+      #{updateTime,jdbcType=TIMESTAMP}, #{seriesPic,jdbcType=VARCHAR}, #{brandId,jdbcType=BIGINT}, 
+      #{isHot,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.pojo.Series">
     insert into series
@@ -133,6 +130,9 @@
       <if test="brandId != null">
         brand_id,
       </if>
+      <if test="isHot != null">
+        is_hot,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="seriesId != null">
@@ -151,7 +151,10 @@
         #{seriesPic,jdbcType=VARCHAR},
       </if>
       <if test="brandId != null">
-        #{brandId,jdbcType=INTEGER},
+        #{brandId,jdbcType=BIGINT},
+      </if>
+      <if test="isHot != null">
+        #{isHot,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -180,7 +183,10 @@
         series_pic = #{record.seriesPic,jdbcType=VARCHAR},
       </if>
       <if test="record.brandId != null">
-        brand_id = #{record.brandId,jdbcType=INTEGER},
+        brand_id = #{record.brandId,jdbcType=BIGINT},
+      </if>
+      <if test="record.isHot != null">
+        is_hot = #{record.isHot,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -194,7 +200,8 @@
       series_group_name = #{record.seriesGroupName,jdbcType=VARCHAR},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       series_pic = #{record.seriesPic,jdbcType=VARCHAR},
-      brand_id = #{record.brandId,jdbcType=INTEGER}
+      brand_id = #{record.brandId,jdbcType=BIGINT},
+      is_hot = #{record.isHot,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -215,7 +222,10 @@
         series_pic = #{seriesPic,jdbcType=VARCHAR},
       </if>
       <if test="brandId != null">
-        brand_id = #{brandId,jdbcType=INTEGER},
+        brand_id = #{brandId,jdbcType=BIGINT},
+      </if>
+      <if test="isHot != null">
+        is_hot = #{isHot,jdbcType=INTEGER},
       </if>
     </set>
     where series_id = #{seriesId,jdbcType=INTEGER}
@@ -226,13 +236,13 @@
       series_group_name = #{seriesGroupName,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       series_pic = #{seriesPic,jdbcType=VARCHAR},
-      brand_id = #{brandId,jdbcType=INTEGER}
+      brand_id = #{brandId,jdbcType=BIGINT},
+      is_hot = #{isHot,jdbcType=INTEGER}
     where series_id = #{seriesId,jdbcType=INTEGER}
   </update>
 
-  <select id="selectByBrandId" resultMap="GroupMap">
+  <select id="selectByBrandId" resultType="String">
     SELECT s.series_group_name FROM series s
-    WHERE s.brand_id=#{brandId,jdbcType=INTEGER} GROUP BY s.series_group_name;
+    WHERE s.brand_id=#{brandId,jdbcType=BIGINT} GROUP BY s.series_group_name;
   </select>
-
 </mapper>

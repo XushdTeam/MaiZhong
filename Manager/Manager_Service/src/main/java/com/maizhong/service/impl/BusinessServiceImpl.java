@@ -211,6 +211,7 @@ public class BusinessServiceImpl implements BusinessService {
             example.clear();
             TbBusinessExample.Criteria criteria = example.createCriteria();
             criteria.andDistrictIdEqualTo(Long.valueOf(district.getId()));
+            criteria.andDelflagEqualTo(0);
             List<TbBusiness> tbBusinesses = tbBusinessMapper.selectByExample(example);
             if (tbBusinesses == null || tbBusinesses.size() == 0) {
                 continue;//如果区县下没有合作4S店，则跳过

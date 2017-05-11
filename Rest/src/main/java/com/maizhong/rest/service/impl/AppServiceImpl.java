@@ -447,7 +447,7 @@ public class AppServiceImpl implements AppService {
 
         List<String> strings = null;
         try {
-            strings = seriesMapper.selectByBrandId(Integer.valueOf(brandId));
+            strings = seriesMapper.selectByBrandId(Long.valueOf(brandId));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
@@ -467,7 +467,7 @@ public class AppServiceImpl implements AppService {
             array.add(object);
             SeriesExample.Criteria criteria = example.createCriteria();
             try {
-                criteria.andBrandIdEqualTo(Integer.valueOf(brandId));
+                criteria.andBrandIdEqualTo(Long.valueOf(brandId));
                 criteria.andSeriesGroupNameEqualTo(factory);
             } catch (NumberFormatException e) {
                 e.printStackTrace();

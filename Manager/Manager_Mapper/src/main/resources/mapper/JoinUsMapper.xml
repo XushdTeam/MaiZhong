@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maizhong.mapper.JoinUsMapper">
+  <resultMap id="BaseResultMap" type="com.maizhong.pojo.JoinUs">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="co_name" jdbcType="VARCHAR" property="coName" />
+    <result column="link_name" jdbcType="VARCHAR" property="linkName" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="apply_time" jdbcType="TIMESTAMP" property="applyTime" />
+    <result column="solve_time" jdbcType="TIMESTAMP" property="solveTime" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.maizhong.pojo.JoinUs">
+    <result column="detail" jdbcType="LONGVARCHAR" property="detail" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, co_name, link_name, phone, city, apply_time, solve_time, mark
+  </sql>
+  <sql id="Blob_Column_List">
+    detail
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.maizhong.pojo.JoinUsExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from join_us
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.maizhong.pojo.JoinUsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from join_us
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from join_us
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from join_us
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maizhong.pojo.JoinUsExample">
+    delete from join_us
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maizhong.pojo.JoinUs">
+    insert into join_us (id, co_name, link_name, 
+      phone, city, apply_time, 
+      solve_time, mark, detail
+      )
+    values (#{id,jdbcType=BIGINT}, #{coName,jdbcType=VARCHAR}, #{linkName,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{applyTime,jdbcType=TIMESTAMP}, 
+      #{solveTime,jdbcType=TIMESTAMP}, #{mark,jdbcType=VARCHAR}, #{detail,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.maizhong.pojo.JoinUs">
+    insert into join_us
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="coName != null">
+        co_name,
+      </if>
+      <if test="linkName != null">
+        link_name,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="applyTime != null">
+        apply_time,
+      </if>
+      <if test="solveTime != null">
+        solve_time,
+      </if>
+      <if test="mark != null">
+        mark,
+      </if>
+      <if test="detail != null">
+        detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="coName != null">
+        #{coName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkName != null">
+        #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null">
+        #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="solveTime != null">
+        #{solveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mark != null">
+        #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null">
+        #{detail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maizhong.pojo.JoinUsExample" resultType="java.lang.Long">
+    select count(*) from join_us
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update join_us
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.coName != null">
+        co_name = #{record.coName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkName != null">
+        link_name = #{record.linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null">
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyTime != null">
+        apply_time = #{record.applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.solveTime != null">
+        solve_time = #{record.solveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.mark != null">
+        mark = #{record.mark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detail != null">
+        detail = #{record.detail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update join_us
+    set id = #{record.id,jdbcType=BIGINT},
+      co_name = #{record.coName,jdbcType=VARCHAR},
+      link_name = #{record.linkName,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      apply_time = #{record.applyTime,jdbcType=TIMESTAMP},
+      solve_time = #{record.solveTime,jdbcType=TIMESTAMP},
+      mark = #{record.mark,jdbcType=VARCHAR},
+      detail = #{record.detail,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update join_us
+    set id = #{record.id,jdbcType=BIGINT},
+      co_name = #{record.coName,jdbcType=VARCHAR},
+      link_name = #{record.linkName,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      apply_time = #{record.applyTime,jdbcType=TIMESTAMP},
+      solve_time = #{record.solveTime,jdbcType=TIMESTAMP},
+      mark = #{record.mark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.pojo.JoinUs">
+    update join_us
+    <set>
+      <if test="coName != null">
+        co_name = #{coName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkName != null">
+        link_name = #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null">
+        apply_time = #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="solveTime != null">
+        solve_time = #{solveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mark != null">
+        mark = #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null">
+        detail = #{detail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.maizhong.pojo.JoinUs">
+    update join_us
+    set co_name = #{coName,jdbcType=VARCHAR},
+      link_name = #{linkName,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      apply_time = #{applyTime,jdbcType=TIMESTAMP},
+      solve_time = #{solveTime,jdbcType=TIMESTAMP},
+      mark = #{mark,jdbcType=VARCHAR},
+      detail = #{detail,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maizhong.pojo.JoinUs">
+    update join_us
+    set co_name = #{coName,jdbcType=VARCHAR},
+      link_name = #{linkName,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      apply_time = #{applyTime,jdbcType=TIMESTAMP},
+      solve_time = #{solveTime,jdbcType=TIMESTAMP},
+      mark = #{mark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

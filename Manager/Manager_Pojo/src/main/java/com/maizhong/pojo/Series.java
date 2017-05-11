@@ -15,6 +15,8 @@ public class Series {
 
     private Long brandId;
 
+    private Integer isHot;
+
     public Integer getSeriesId() {
         return seriesId;
     }
@@ -61,5 +63,13 @@ public class Series {
 
     public void setBrandId(Long brandId) {
         this.brandId = brandId;
+    }
+
+    public Integer getIsHot() {
+        return isHot;
+    }
+
+    public void setIsHot(Integer isHot) {
+        this.isHot = isHot;
     }
 }
