@@ -167,16 +167,16 @@ function cleckinput(a, b, c, d) {
         }), $("#lichengpd").focus()) : (m--, $("#gongli").find("label").css({
             color: "#333"
         }))), 0 == m) {
-        var n = ($("#s_brand").val(), $("#s_series").val(), $("#s_simple").val());
-        resetAllHiddenInput();
-        // console.log('j'+j);
-        // console.log('k'+k);
-        // console.log('n'+n);
-        // console.log('g'+g);
-        // console.log('h'+h);
-        // console.log('l'+l);
-        var o = "/guzhi/" + j + "c" + k + "m" + n + "r" + g + "-" + h + "g" + l;
-        location.href = o
+			var n = ($("#s_brand").val(), $("#s_series").val(), $("#s_simple").val());
+			resetAllHiddenInput();
+			// console.log('j'+j);
+			// console.log('k'+k);
+			// console.log('n'+n);
+			// console.log('g'+g);
+			// console.log('h'+h);
+			// console.log('l'+l);
+			var o = "/guzhi/" + j + "c" + k + "m" + n + "r" + g + "-" + h + "g" + l;
+			location.href = o
     }
 }
 /**

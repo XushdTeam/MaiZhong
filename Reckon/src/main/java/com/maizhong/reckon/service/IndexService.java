@@ -41,4 +41,10 @@ public interface IndexService {
     JsonResult orderConfim(String orderNumber, String dealWay, String wayId, String linkMan, String linkPhone,String checktime, String address);
 
     List<OrderDTO> getOrderDTO(String phone);
+
+    JsonResult getHotBrand();
+
+    JsonResult getHotSeries();
+
+    IndexDTO getIndexDTOSe(String param);
 }
