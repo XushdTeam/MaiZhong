@@ -122,6 +122,31 @@ public class IndexServiceImpl implements IndexService {
             return null;
 
     }
+
+    @Override
+    public void zhihuan(String phone) {
+
+        Map<String,String> param = new HashMap<>();
+        param.put("phone",phone);
+        param.put("type","1");
+        HttpClientUtil.doPost(RESTURL+"consult",param);
+
+    }
+
+    @Override
+    public void wanghz(String txt_companyname, String txt_contactperson, String txt_tel, String txt_city, String txt_remark) {
+
+        Map<String,String> param = new HashMap<>();
+        param.put("txt_companyname",txt_companyname);
+        param.put("txt_contactperson",txt_contactperson);
+        param.put("txt_tel",txt_tel);
+        param.put("txt_city",txt_city);
+        param.put("txt_remark",txt_remark);
+
+        HttpClientUtil.doPost(RESTURL+"wanthz",param);
+
+    }
+
     /**
      * 通过品牌获取车系
      * @param brandId

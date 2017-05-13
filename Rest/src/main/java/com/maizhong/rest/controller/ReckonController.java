@@ -5,6 +5,7 @@ import com.maizhong.rest.service.ReckonService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -350,8 +351,23 @@ public class ReckonController {
     @ResponseBody
     public JsonResult getModelById(@PathVariable("id") String id){
 
-JsonResult result=reckonService.getModelById(id);
-return result;
+        JsonResult result=reckonService.getModelById(id);
+        return result;
+    }
+
+
+
+    @RequestMapping(value = "/wanghz",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult wanthz(String txt_companyname,
+                             String txt_contactperson,
+                             String txt_tel,
+                             String txt_city,
+                             String txt_remark)
+    {
+        reckonService.wanghz(txt_companyname,txt_contactperson,txt_tel,txt_city,txt_remark);
+
+        return JsonResult.OK();
     }
 
 

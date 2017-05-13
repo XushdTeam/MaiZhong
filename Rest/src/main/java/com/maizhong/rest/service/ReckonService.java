@@ -57,4 +57,6 @@ public interface ReckonService {
     JsonResult getHotSeries();
 
     JsonResult getModelById(String id);
+
+    void wanghz(String txt_companyname, String txt_contactperson, String txt_tel, String txt_city, String txt_remark);
 }

@@ -10,7 +10,7 @@ img,input{vertical-align:middle; outline:none}
 .bg_top1{background: url("../img/xiao.jpg") no-repeat center; height: 59px}
 /*index*/
 .bg_img{ background: url("../img/bag.jpg") no-repeat center;  height: 589px;}
-.top{ height: 68px; border-bottom: 1px solid #ccc; overflow: hidden}
+.top{ height: 80px; border-bottom: 1px solid #ccc; overflow: hidden}
 .bg_x{ display: block; width: 1000px; text-align: right; margin: 0 auto; line-height: 59px; color: #fff; font-size:18px;  cursor: pointer}
 .bg_x2{display: block; }
 .bg_x2 a{ color: #fff; background:rgba(0,0,0,0.3); padding:2px 5px}
@@ -23,7 +23,7 @@ img,input{vertical-align:middle; outline:none}
 .htmleaf-container{ position: absolute;top: -40px; width: 100%; z-index: 1}
 .banner{ width: 100%; position: relative; overflow: hidden;}
 .banner ul{  position: absolute;}
-.banner ul li{ width: 100%; height: 460px; float: left; background:  no-repeat center center;}
+.banner ul li{ width: 100%; height: 460px; float: left; background:  no-repeat center center;cursor: pointer}
 .banner ol{
     width: 80px !important;
     height: 20px;
@@ -66,7 +66,7 @@ img,input{vertical-align:middle; outline:none}
 .liu .l_cen h2,.liu .l_cen p{ text-align: center; }
 .liu .l_cen h2{ font-size: 36px; color: #444; padding-top: 86px; font-weight: 500 }
 .liu .l_cen p{ font-size: 24px; color: #999; line-height: 90px; }
-.liu .l_cen dl{ float: left; width: 350px; }
+.liu .l_cen dl{ float: left; width: 360px; }
 .liu .l_cen dl.lase{ width: 114px;}
 .liu .l_cen dl ul{ float: left; width: 200px; margin-left: 30px}
 .liu .l_cen dl ul li{ float: left; height: 8px; width: 8px;  border-radius: 100px; background:#c5c5c5; margin-left: 38px}
@@ -259,8 +259,8 @@ img,input{vertical-align:middle; outline:none}
 
 .stores-info .col-right .store-dist-list #alldistrict .region {
     font-size: 14px;
-    height: 37px;
-    line-height: 37px;
+    height: 45px;
+    line-height: 45px;
     width: 100px;
     margin-left: 20px;
     cursor: pointer;
@@ -277,8 +277,8 @@ div#r-storelist-all {
     height: 360px;
     overflow: auto;
 }
-.storelist li{ line-height: 50px;  text-align:left;}
-.storelist li a{ color: #000; font-size: 14px;  text-indent: 1em; font-weight: bold}
+.storelist li{ line-height: 40px;  text-align:left;}
+.storelist li a{ color: #000; font-size: 14px;  text-indent: 1em; }
 .store-name{
     overflow:hidden;;/* 内容超出宽度时隐藏超出部分的内容 */
     text-overflow:ellipsis;;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
@@ -368,12 +368,12 @@ table td img{ width: 70px; }
 /*a b  c  d*/
 .e_top{ background: #fff;}
 .e_top .tell{ color: #f60;}
-.t_right{ width: 710px; overflow: hidden;  float: left; margin-left: 100px}
-.t_right li a{ float: left; padding: 22px 23px; font-size: 16px;}
+.t_right{ width: 650px; overflow: hidden;  float: left; margin-left: 70px}
+.t_right li a{ float: left; padding: 27px 23px; font-size: 16px;}
 .t_right li{ float: left;}
 .e_top  .lon{ float: right; padding: 22px 5px !important; margin-right: 60px}
 .e_top  .lon li{ float: left;margin-right: 10px;}
-.e_top  .lon{ line-height: 30px}
+.e_top  .lon{ line-height: 43px}
 ul.t_right a:hover{ background: #f60;color: #fff;  transition:background 0.8s;-webkit-transition:background 0.8s;  }
 ul.t_right a:active{background: #f60;color: #fff; }
 ul.t_right a.hover{ background: #f60;color: #fff; }
@@ -465,7 +465,7 @@ ul.t_right a.hover{ background: #f60;color: #fff; }
 .jiage .jias span{ font-size: 36px;}
 .jiage .jzj{ width: 194px; border: 1px solid #f60; border-radius: 8px; height:57px; line-height: 57px; font-size: 24px;
     color: #f60; text-align: center; margin: 50px auto 0;  position: relative;top: 30px}
-.jiage .pos{ height: 76px; background: #e5e5e5; width: 1200px;}
+.jiage .pos{ height: 76px;  width: 1200px;}
 .xieyi{ margin: 30px 0; text-align: center;color: #ccc; font-size: 18px; display: block; width: 1200px;}
 .zhuyi{ width:1114px; margin: 50px auto; border: 2px solid #f60; padding: 50px 40px;}
 .zhuyi div{ text-align: center; font-size: 30px; color: #f60; line-height: 70px}
@@ -537,11 +537,11 @@ ul.t_right a.hover{ background: #f60;color: #fff; }
 .bgss{ background: #FFF;}
 .box{ width: 789px; height: 482px; margin: 100px auto; background: #fff;}
 .width{ width: 226px; margin: 50px auto 30px; padding-top: 50px}
-.d_box{ width: 300px; margin: 0 auto}
+.d_box{ width: 330px; margin: 0 auto}
 .d_box input{ line-height: 41px; height: 41px; margin-top: 20px; padding-left: 10px; width: 178px; border: 1px solid #eee}
 .d_box span{ margin-top: 20px; background:#e5e5e5; color: #666;float: right; width:111px; line-height: 41px; height: 41px; border-radius: 8px; text-align: center}
 .box .input2{ width: 300px; !important; display: block}
-.box button{ width: 100%; background: #f60; text-align: center;
+.box button{ width: 90%; background: #f60; text-align: center;
     height: 48px; line-height: 48px; border: none; border-radius: 8px; outline: none; margin-top: 30px; font-size: 18px; color: #fff}
 .xieyis{ width: 789px !important; }
 .p_fooot{ text-align: center; line-height: 40px;}
@@ -711,7 +711,7 @@ ul.t_right a.hover{ background: #f60;color: #fff; }
 .huod{ text-align: center;  margin: 60px 0}
 .huo_cen{ margin: 30px  0  120px 0}
 .huo_cen p{ text-align:left;color: #42060c; padding-left: 120px}
-.cj_cen{ width: 1200px; margin: 40px auto; overflow: hidden; padding-bottom: 30px}
+.cj_cen{ width: 1200px; margin: 0px auto; overflow: hidden; padding-bottom: 30px}
 .cj_cen h2{ line-height: 120px; font-size: 36px; color: #42060c; text-align: center; font-weight: 500}
 .cj_cen .owl-item{ float: left; margin-left: 20px; margin-top: 20px}
 
@@ -725,7 +725,7 @@ ul.t_right a.hover{ background: #f60;color: #fff; }
 
 .zh_cen h2{ margin-top: 40px; clear: both; font-size: 40px; font-weight: 500; line-height: 90px}
 
-.zh_cen p a{ background: #f60; color: #fff;  display: block; line-height: 35px; width: 300px; margin: 30px auto; padding: 0 20px}
+.zh_cen p a{ background: #f60; color: #fff;  display: block; line-height: 46px; width: 300px; margin: 30px auto; padding: 0 20px}
 .zh_cen p{ font-size: 18px; line-height: 30px}
 .inpu{ margin: 30px auto; width: 617px; }
 .inpu input{ height: 46px; width: 378px; padding-left: 20px}
@@ -741,15 +741,15 @@ ul.t_right a.hover{ background: #f60;color: #fff; }
 
 /*新闻*/
 .A_colocr{ background: #F5F5F5; overflow: hidden; clear: both}
-.A_colocr .A_con{ width: 1200px; margin:30px auto 100px;  min-height: 500px; overflow: hidden; background: #fff}
-.A_con .left{ width: 210px; float: left;background:#e5e5e5; overflow: hidden; min-height: 750px; border-right:1px solid #ccc}
+.A_colocr .A_con{ width: 1200px; margin:30px auto 100px;  min-height: 500px; overflow: hidden; background: #e5e5e5}
+.A_con .left{ width: 210px; float: left;background:#e5e5e5; overflow: hidden; min-height: 750px; }
 .A_con .left>ul>li>a{ color: #f60}
 .A_con .left ul li a{ display: block;line-height:45px; text-indent: 1.5em; font-size: 16px; height: 45px; border-bottom: 1px solid #eee; cursor: pointer;}
 .A_con .left ul li span{ font-family: '宋体'; float: right; margin-right: 15px;}
 .A_con .left ul li a.cun{ background: #e72116; color: #fff;}
-.A_con .right{float: right;background:#fff; overflow: hidden; width: 980px; padding-bottom: 50px; height: 700px; overflow: hidden}
+.A_con .right{float: right;background:#fff; overflow: hidden; width: 980px; padding-bottom: 50px; min-height: 700px; overflow: hidden}
 .A_con .right div{ font-size: 14px; line-height: 25px; width: 830px; margin:15px auto 0}
-.A_con .right>div{ height: 750px; overflow: auto}
+.A_con .right>div{ min-height: 750px; overflow: auto}
 .A_con .right h3{ font-size:24px; line-height: 45px; height: 45px; font-weight: 500; padding: 10px 0; border-bottom: 1px solid #eee; width: 830px; margin: 20px auto 0;color: #000}
 .A_con .right .zp{ font-size: 16px; background: #666; padding: 0px 15px; line-height:35px; width: 100px;color: #fff; margin-top: 50px}
 .A_con .right ul{ border: 1px solid #666; }

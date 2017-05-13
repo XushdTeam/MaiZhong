@@ -16,10 +16,11 @@
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <title>迈众汽车</title>
-    <meta name="keywords" content="汽车,汽车买卖,汽车网,汽车报价,汽车图片,买车"/>
-    <meta name="description" content="迈众汽车为您提供最新汽车报价，汽车图片，汽车价格大全，最精彩的汽车新闻、行情、评测、导购内容，是提供信息最快最全的中国汽车网站。"/>
-     <link rel="stylesheet" type="text/css" href="/resources/css/index.css" />
+    <title>悟空收车</title>
+    <meta name="keywords" content="悟空收车，悟空，二手车，估值，收购"/>
+    <meta name="description" content="悟空收车专业的二手车估值收购平台，验车快，当天到账，售后跟踪"/>
+    <link rel="stylesheet" type="text/css" href="/resources/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="/resources/font/iconfont.css" />
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
     <script src="/resources/js/jquery.cookie.min.js" type="text/javascript"></script>
     <style>
@@ -40,20 +41,29 @@
 
 <div class="top e_top">
     <div class="t_cen">
-        <a href="#"><img src="../resources/img/logo.png"></a>
-        <span class="tell">010-8025-8108</span>
-        <span class="t_right">
-            <a href="/sale" class="one">我要卖车</a>
-            <a href="/login" class="one" id="login">登录</a>
-            <a href="/per/or" class="two" id="user" style="display:none">188****8888</a>
-            <a href="javascript:vold(0)" class="two">APP下载</a></span>
-
+        <a href="/" class="logo"><img src="/resources/img/logo.png"></a>
+        <ul class="t_right">
+            <li><a href="/" class="hover">首页</a></li>
+            <li><a href="/sale">我要卖车</a></li>
+            <li><a href="/join">销售商加盟</a></li>
+            <li><a href="/app">APP下载</a></li>
+           <li><a href="/help">帮助中心</a></li>
+            <li style="display: none;" id="user_li"><a href="/per/or"  >个人中心</a></li>
+        </ul>
+        <ul class="lon" style="margin-top: 0px;">
+            <li >
+                <i class="iconfont icon ">&#xe6a3;</i>
+                <a href="/login"  id="user">登录</a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="two" id="exit" style="display:none" onclick="exit();">退出</a>
+            </li>
+        </ul>
     </div>
-</div>
+</div><!--top end-->
 
-<div class="bans"><img src="../resources/img/1-3.jpg"></div>
 
-<div class="x_nav">当前位置 :  <a href="/">首页</a> > <a href="javascript:;">估值</a> > ${result.city} &nbsp;${result.modelName} 二手车评估详情</div>
+<div class="x_nav"></div>
 
  <div class="can">
      <dl>
@@ -181,109 +191,151 @@
   </div>
 <div class="mc"><a style="display: block;color: #FFF" href="/sale/${ppap}">我要出售此车</a></div>
 
-<!--估价选项 end-->
-<div class="bans"><img src="../resources/img/1-4.jpg"></div>
+
 
 
 
 <!--流程-->
-<div class="lius">
+<div class="liu">
     <div class="l_cen">
-        <h2>我们的流程 <span>快速成交，立马打款，及时有效</span></h2>
         <dl>
-            <dt class="dt1"></dt>
-            <dd>网上定价</dd>
+            <dt><i class="icon iconfont icon-search"></i></dt>
+            <dd>1、搜索车型</dd>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
         </dl>
 
         <dl>
-            <dt class="dt2"></dt>
-            <dd>预约检测</dd>
+            <dt><i class="icon iconfont icon-stop"></i></dt>
+            <dd>2、获得报价</dd>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
         </dl>
 
         <dl>
-            <dt class="dt3"></dt>
-            <dd>现场打款</dd>
+            <dt><i class="icon iconfont icon-cart"></i></dt>
+            <dd>3、提交订单</dd>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
         </dl>
 
-        <dl>
-            <dt class="dt4"></dt>
-            <dd>售后保障</dd>
+        <dl class="lase">
+            <dt><i class="icon iconfont icon-huanhuobz"></i></dt>
+            <dd>4、极速到账</dd>
         </dl>
     </div>
 </div>
 <!--流程 end-->
 
 
-<!--交易记录-->
-<div class="jiaos">
+<%--<!--交易记录-->--%>
+<%--<div class="jiaos">--%>
 
-    <h2>交易记录 <span> 真实记录、公正透明、超高效率</span></h2>
+    <%--<h2>交易记录 <span> 真实记录、公正透明、超高效率</span></h2>--%>
 
-    <div class="j_cen">
+    <%--<div class="j_cen">--%>
 
-        <div class="one">
-            <span class="cl_one">成交车型</span>
-            <span>新车指导价</span>
-            <span>成交价</span>
-            <span>上牌时间</span>
-            <span>公里数</span>
-            <span>成交日期</span>
-            <span>城市</span>
-        </div>
-
-
-        <div>
-            <span class="cl_one">2012款 迈腾 1.4TSI DSG豪华型</span>
-            <span>16.78万</span>
-            <span>7.07万</span>
-            <span>2012年12月 </span>
-            <span>13万公里 </span>
-            <span>2017年04月20日</span>
-            <span>北京</span>
-        </div>
+        <%--<div class="one">--%>
+            <%--<span class="cl_one">成交车型</span>--%>
+            <%--<span>新车指导价</span>--%>
+            <%--<span>成交价</span>--%>
+            <%--<span>上牌时间</span>--%>
+            <%--<span>公里数</span>--%>
+            <%--<span>成交日期</span>--%>
+            <%--<span>城市</span>--%>
+        <%--</div>--%>
 
 
-        <div>
-            <span class="cl_one">2012款 迈腾 1.4TSI DSG豪华型</span>
-            <span>16.7
-                8万</span>
-            <span>7.07万</span>
-            <span>2012年6月 </span>
-            <span>10.85万公里 </span>
-            <span>2017年04月18日</span>
-            <span>北京</span>
-        </div>
+        <%--<div>--%>
+            <%--<span class="cl_one">2012款 迈腾 1.4TSI DSG豪华型</span>--%>
+            <%--<span>16.78万</span>--%>
+            <%--<span>7.07万</span>--%>
+            <%--<span>2012年12月 </span>--%>
+            <%--<span>13万公里 </span>--%>
+            <%--<span>2017年04月20日</span>--%>
+            <%--<span>北京</span>--%>
+        <%--</div>--%>
+
+
+        <%--<div>--%>
+            <%--<span class="cl_one">2012款 迈腾 1.4TSI DSG豪华型</span>--%>
+            <%--<span>16.7--%>
+                <%--8万</span>--%>
+            <%--<span>7.07万</span>--%>
+            <%--<span>2012年6月 </span>--%>
+            <%--<span>10.85万公里 </span>--%>
+            <%--<span>2017年04月18日</span>--%>
+            <%--<span>北京</span>--%>
+        <%--</div>--%>
 
 
 
-        <div>
-            <span class="cl_one">2012款 高尔夫 1.6L 自动 时尚型</span>
-            <span>13.09万 </span>
-            <span>5.64万</span>
-            <span>2012年11月 </span>
-            <span>12.85万公里 </span>
-            <span>2017年04月06日</span>
-            <span>北京</span>
-        </div>
+        <%--<div>--%>
+            <%--<span class="cl_one">2012款 高尔夫 1.6L 自动 时尚型</span>--%>
+            <%--<span>13.09万 </span>--%>
+            <%--<span>5.64万</span>--%>
+            <%--<span>2012年11月 </span>--%>
+            <%--<span>12.85万公里 </span>--%>
+            <%--<span>2017年04月06日</span>--%>
+            <%--<span>北京</span>--%>
+        <%--</div>--%>
 
-        <div>
-            <span class="cl_one">2012款 高尔夫 1.4TSI 自动舒适型</span>
-            <span>14.48万</span>
-            <span>6.58万</span>
-            <span>2012年5月 </span>
-            <span>12万公里 </span>
-            <span>2017年04月20日</span>
-            <span>北京</span>
-        </div>
+        <%--<div>--%>
+            <%--<span class="cl_one">2012款 高尔夫 1.4TSI 自动舒适型</span>--%>
+            <%--<span>14.48万</span>--%>
+            <%--<span>6.58万</span>--%>
+            <%--<span>2012年5月 </span>--%>
+            <%--<span>12万公里 </span>--%>
+            <%--<span>2017年04月20日</span>--%>
+            <%--<span>北京</span>--%>
+        <%--</div>--%>
+
+
+    <%--</div>--%>
+<%--</div>--%>
+
+<!--交易记录 end-->
+
+<div class="cj" style="margin-top: 0px;background: #F8F8F8">
+    <div class="cj_cen" id="owl-example" >
+
+
+        <script id="list-car-tmpl" type="text/x-dot-template">
+            <h2>热收车型</h2>
+            {{ for(var i=0,len=it.length;i<len; i++) { }}
+            <div class="owl-item">
+                <a href="/sale/{{=it[i].paramId}}"  title="{{=it[i].title}}">
+                    <div class="item darkCyan">
+                        <img src="{{=it[i].img}}">
+                        <h3>{{=it[i].title}}</h3>
+                        <p>{{=it[i].param}}</p>
+                        <h4>{{=it[i].price}}</h4>
+                    </div>
+                </a>
+            </div>
+            {{ } }}
+        </script>
+
+
+
 
 
     </div>
 </div>
 
-<!--交易记录 end-->
-<div class="clear"></div>
-<jsp:include page="footer.jsp"></jsp:include>
 
+<div class="clear"></div>
+<%@include file="footer.jsp"%>
+<script src="/resources/js/doT.min.js"></script>
 <script>
     $(document).ready(function() {
 
@@ -294,15 +346,37 @@
                 if(d.status==200){
                     $("#login").hide();
 
-                    $('#user').html(phone).show();
+                    var pre = phone.substring(0,3),pbc = phone.substring(8,11);
+                    $('#user').html(pre+'****'+pbc).show();
+                    $('#exit').show();
 
+                    $('#user').attr('href','/per/or')
+                    $("#user_li").show();
                 }else{
                     $.cookie("phone",null,{path:"/"});
                     $.cookie("token",null,{path:"/"});
-
                 }
             })
         }
+
+    })
+    //数组排序
+    var shuffle = function(v){
+        for(var j, x, i = v.length; i; j = parseInt(Math.random() * i), x = v[--i], v[i] = v[j], v[j] = x);
+        return v;
+    };
+    function exit(){
+        $.cookie("phone",null,{path:"/"});
+        $.cookie("token",null,{path:"/"});
+        window.location.reload()
+    }
+    $(function () {
+        $.getJSON('/resources/data/hotcar.json',function(d){
+            var carevalText = doT.template($("#list-car-tmpl").text());
+            d = shuffle(d)
+            $("#owl-example").html(carevalText(d));
+
+        })
     })
 </script>
 </body>

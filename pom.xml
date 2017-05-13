@@ -293,12 +293,12 @@
         <repository>
             <id>releases</id>
             <name>Internal Releases</name>
-            <url>http://192.168.3.188:8081/nexus/content/repositories/releases</url>
+            <url>http://192.168.2.111:8082/nexus/content/repositories/releases</url>
         </repository>
         <snapshotRepository>
             <id>snapshots</id>
             <name>Internal Snapshots</name>
-            <url>http://192.168.3.188:8081/nexus/content/repositories/snapshots</url>
+            <url>http://192.168.2.111:8082/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -307,7 +307,7 @@
         <repository>
             <id>nexus</id>
             <name>nexus</name>
-            <url>http://192.168.3.188:8081/nexus/content/groups/public/</url>
+            <url>http://192.168.2.111:8082/nexus/content/groups/public/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -315,18 +315,7 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-        <!--阿里云短信-->
-        <repository>
-            <id>sonatype-nexus-staging</id>
-            <name>Sonatype Nexus Staging</name>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
+
 
     </repositories>
 

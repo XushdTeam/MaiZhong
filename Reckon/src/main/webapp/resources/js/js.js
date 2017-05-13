@@ -7,9 +7,9 @@ $(function(){
         '../resources/img/2.jpg'
     ];
     var url_arry = [
-        '/prepo',
-        '/zhihuan',
-        'act'
+        '/activity/1',
+        '/activity/2',
+        '/activity/3'
     ]
     var images_count = images_url.length;
     for(var j=0;j<images_count+1;j++){
@@ -48,7 +48,7 @@ $(function(){
         $('.banner ul li').css({width:window_width});
         clearInterval(timer);
         nextPlay();
-        timer = setInterval(nextPlay,2000);
+        timer = setInterval(nextPlay,10000);
     });
     //console.log(window_width);
     $('.banner ul li').width(window_width);
@@ -103,14 +103,14 @@ $(function(){
 
         }
     }
-    timer = setInterval(nextPlay,50000);
+    timer = setInterval(nextPlay,10000);
     //鼠标经过banner，停止定时器,离开则继续播放
     $('.banner').mouseenter(function(){
         clearInterval(timer);
         //左右箭头显示(淡入)
         $('.banner i').fadeIn();
     }).mouseleave(function(){
-        timer = setInterval(nextPlay,50000);
+        timer = setInterval(nextPlay,10000);
         //左右箭头隐藏(淡出)
         $('.banner i').fadeOut();
     });
@@ -125,7 +125,8 @@ $(function(){
 
     $('.banner ul li').click(function(){
         var url = this.getAttribute('data-url')
-        window.location.href = url;
+       // window.location.href = url;
+        window.open(url);
     })
 });
 
@@ -255,4 +256,21 @@ function addDate(dd,dadd){
     a = a + dadd * 24 * 60 * 60 * 1000
     a = new Date(a)
     return a;
+}
+
+var datemy2 = function(d){
+    //抓取现在日期
+    var now = new Date();
+    var years = now.getFullYear();
+
+    var months = now.getMonth()+1;
+    var days = now.getDate();
+
+    //抓取前一天日期
+
+    NextNow = addDate(months+"/"+days+"/"+years,0-d);
+    months = NextNow.getMonth()+1;
+    days = NextNow.getDate();
+    years = NextNow.getFullYear();
+    return years+'/'+months+'/'+days;
 }

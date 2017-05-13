@@ -11,17 +11,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>迈众汽车精准估值</title>
+
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <title>迈众汽车</title>
-    <meta name="keywords" content="汽车,汽车买卖,汽车网,汽车报价,汽车图片,买车"/>
-    <meta name="description" content="迈众汽车为您提供最新汽车报价，汽车图片，汽车价格大全，最精彩的汽车新闻、行情、评测、导购内容，是提供信息最快最全的中国汽车网站。"/>
-
+    <title>悟空收车</title>
+    <meta name="keywords" content="悟空收车，悟空，二手车，估值，收购"/>
+    <meta name="description" content="悟空收车专业的二手车估值收购平台，验车快，当天到账，售后跟踪"/>
     <link rel="stylesheet" type="text/css" href="/resources/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="/resources/font/iconfont.css" />
     <link rel="stylesheet" type="text/css" href="/resources/css/guzhi2.css" />
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
     <script src="/resources/js/jquery.cookie.min.js" type="text/javascript"></script>
@@ -34,21 +34,25 @@
         <ul class="t_right">
             <li><a href="/" >首页</a></li>
             <li><a href="/sale" class="hover">我要卖车</a></li>
-            <li><a href="#">销售商加盟</a></li>
-            <li><a href="#">app下载</a></li>
-            <li><a href="#">帮助中心</a></li>
-            <li><a href="#" id="usert">个人中心</a></li>
-            <li><a href="/per/or"  id="user" style="display:none">188****8888</a></li>
+            <li><a href="/join">销售商加盟</a></li>
+            <li><a href="/app">APP下载</a></li>
+           <li><a href="/help">帮助中心</a></li>
+            <li style="display: none;" id="user_li"><a href="/per/or"  >个人中心</a></li>
         </ul>
-        <ul class="lon">
-            <li ><i class="iconfont icon ">&#xe6a3;</i><a href="/login"  id="login">登录</a>/<a href="/login"  id="">注册</a></li>
-            <li><a href="javascript:void(0)" class="two" id="exit" style="display:none" onclick="exit();">退出</a></li>
+        <ul class="lon" style="margin-top: 0px;">
+            <li >
+                <i class="iconfont icon ">&#xe6a3;</i>
+                <a href="/login"  id="user">登录</a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="two" id="exit" style="display:none" onclick="exit();">退出</a>
+            </li>
         </ul>
     </div>
 </div><!--top end-->
 
 
-<div class="x_nav">当前位置 :  <a href="/">首页</a> > <a href="#">二手车评估</a> > 精准估值</div>
+
 
 <div class="jingzhun">
     <%--<div class="jing">--%>
@@ -467,9 +471,12 @@
                 if(d.status==200){
                     $("#login").hide();
 
-                    $('#user').html(phone).show();
+                    var pre = phone.substring(0,3),pbc = phone.substring(8,11);
+                    $('#user').html(pre+'****'+pbc).show();
+                    $('#exit').show();
 
-                    $("#phone").val(phone)
+                    $('#user').attr('href','/per/or')
+                    $("#user_li").show();
                 }else{
                     $.cookie("phone",null,{path:"/"});
                     $.cookie("token",null,{path:"/"});

@@ -56,11 +56,47 @@ public class IndexController {
 
 
 
-    @RequestMapping(value = "/{page}")
-    public String test(@PathVariable String page){
-        return page;
+//    @RequestMapping(value = "/{page}")
+//    public String test(@PathVariable String page){
+//        return page;
+//    }
+
+    /**
+     * 跳转到活动页
+     * @param activityId
+     * @return
+     */
+    @RequestMapping(value = "/activity/{activityId}")
+    public String activity(@PathVariable String activityId,Model model){
+        String modelview = null;
+        if(StringUtils.equals("1",activityId)){
+            modelview = "prepo";
+        }
+        if(StringUtils.equals("2",activityId)){
+            modelview = "zhihuan";
+        }
+        if(StringUtils.equals("3",activityId)){
+            modelview = "act";
+        }
+        model.addAttribute("key","activity");
+
+        return modelview;
+
     }
 
+    @RequestMapping(value = "/app")
+    public String appdown(Model model){
+
+        model.addAttribute("key","app");
+        return "prepo";
+    }
+
+    @RequestMapping(value = "/zhihuancar")
+    @ResponseBody
+    public JsonResult zhihuan(String phone){
+        indexService.zhihuan(phone);
+        return JsonResult.OK();
+    }
 
     /**
      * 获取车系
@@ -268,4 +304,115 @@ public class IndexController {
             }
         }
     }
+
+    @RequestMapping("/about")
+    public String about(Model model){
+
+        model.addAttribute("mark","about");
+        model.addAttribute("key","1");
+        return "about";
+    }
+    @RequestMapping("/about/{key}")
+    public String aboutkey(Model model,@PathVariable String key){
+
+        model.addAttribute("mark","about");
+        model.addAttribute("key",key);
+        return "about";
+    }
+    @RequestMapping("/help")
+    public String help(Model model){
+
+        model.addAttribute("mark","help");
+        model.addAttribute("key","1");
+        return "about";
+    }
+    @RequestMapping("/help/{key}")
+    public String help(Model model,@PathVariable String key){
+
+        model.addAttribute("mark","help");
+        model.addAttribute("key",key);
+        return "about";
+    }
+    @RequestMapping("/join")
+    public String join(Model model){
+
+        model.addAttribute("mark","join");
+        model.addAttribute("key","1");
+        return "about";
+    }
+    @RequestMapping("/join/{key}")
+    public String join(Model model,@PathVariable String key){
+
+        model.addAttribute("mark","join");
+        model.addAttribute("key",key);
+        return "about";
+    }
+    @RequestMapping("/work")
+    public String work(Model model){
+
+        model.addAttribute("mark","work");
+        model.addAttribute("key","1");
+        return "about";
+    }
+    @RequestMapping("/work/{key}")
+    public String work(Model model,@PathVariable String key){
+
+        model.addAttribute("mark","work");
+        model.addAttribute("key",key);
+        return "about";
+    }
+
+    @RequestMapping("/deal")
+    public String deal(Model model){
+
+        model.addAttribute("mark","deal");
+        model.addAttribute("key","1");
+        return "about";
+    }
+    @RequestMapping("/deal/{key}")
+    public String dealKey(Model model,@PathVariable String key){
+
+        model.addAttribute("mark","deal");
+        model.addAttribute("key",key);
+        return "about";
+    }
+
+    @RequestMapping("/check")
+    public String check(Model model){
+
+        model.addAttribute("mark","check");
+        model.addAttribute("key","1");
+        return "about";
+    }
+    @RequestMapping("/check/{key}")
+    public String check(Model model,@PathVariable String key){
+
+        model.addAttribute("mark","check");
+        model.addAttribute("key",key);
+        return "about";
+    }
+
+    @RequestMapping("/news/{id}")
+    public String news(@PathVariable String id){
+        String result = null;
+        if(StringUtils.equals("1",id)){
+            result = "news1";
+        }else{
+            result = "news2";
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/wanthz",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult wanthz(String txt_companyname,
+                            String txt_contactperson,
+                            String txt_tel,
+                            String txt_city,
+                            String txt_remark)
+    {
+        indexService.wanghz(txt_companyname,txt_contactperson,txt_tel,txt_city,txt_remark);
+        return JsonResult.OK();
+    }
+
 }

@@ -203,12 +203,12 @@
 
 	// 默认值
 	$.cxScroll={defaults:{
-		direction:"left",	// 滚动方向
+		direction:"right",	// 滚动方向
 		easing:"swing",		// 缓动方式
 		step:1,				// 滚动步长
 		accel:160,			// 手动滚动速度
-		speed:160,			// 自动滚动速度
-		time:40000,			// 自动滚动间隔时间
+		speed:500,			// 自动滚动速度
+		time:10000,			// 自动滚动间隔时间
 		auto:true,			// 是否自动滚动
 		prevBtn:true,		// 是否使用 prev 按钮
 		nextBtn:true,		// 是否使用 next 按钮

@@ -107,6 +107,7 @@ if ( typeof Object.create !== "function" ) {
 			if(base.options.autoPlay === true){
 				base.options.autoPlay = 5000;
 			}
+			base.options.autoPlay = 5000;
 			base.play();
 
 			base.$elem.find(".owl-wrapper").css("display","block")

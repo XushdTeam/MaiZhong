@@ -83,6 +83,12 @@
             <artifactId>aliyun-java-sdk-sms</artifactId>
             <version>3.0.0-rc1</version>
         </dependency>
+        <dependency>
+            <groupId>com.aliyun.mns</groupId>
+            <artifactId>aliyun-sdk-mns</artifactId>
+            <version>1.1.8</version>
+            <classifier>jar-with-dependencies</classifier>
+        </dependency>
     </dependencies>
 
     <build>
@@ -95,7 +101,7 @@
                 <configuration>
                     <port>8085</port>
                     <path>/</path>
-                    <url>http://192.168.3.192:8080/manager/text</url>
+                    <url>http://192.168.2.111:8085/manager/text</url>
                     <update>true</update>
                     <username>admin</username>
                     <password>admin</password>

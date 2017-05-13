@@ -13,34 +13,59 @@
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <title>迈众汽车</title>
-    <meta name="keywords" content="汽车,汽车买卖,汽车网,汽车报价,汽车图片,买车"/>
-    <meta name="description" content="迈众汽车为您提供最新汽车报价，汽车图片，汽车价格大全，最精彩的汽车新闻、行情、评测、导购内容，是提供信息最快最全的中国汽车网站。"/>
+    <title>悟空收车</title>
+    <meta name="keywords" content="悟空收车，悟空，二手车，估值，收购"/>
+    <meta name="description" content="悟空收车专业的二手车估值收购平台，验车快，当天到账，售后跟踪"/>
     <link rel="stylesheet" type="text/css" href="/resources/css/index.css" />
     <link rel="stylesheet" type="text/css" href="/resources/font/iconfont.css" />
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="/resources/js/jquery.cookie.min.js"></script>
+    <script src="http://cdn.bootcss.com/layer/3.0.1/layer.min.js" type="text/javascript"></script>
     <script src="/resources/js/js.js"></script>
 </head>
 <body>
 <div class="top e_top">
     <div class="t_cen">
-        <a href="/" class="logo"><img src="../resources/img/logo.png"></a>
+        <a href="/" class="logo"><img src="/resources/img/logo.png"></a>
         <ul class="t_right">
             <li><a href="/" >首页</a></li>
+
             <li><a href="/sale">我要卖车</a></li>
-            <li><a href="#">销售商加盟</a></li>
-            <li><a href="#">app下载</a></li>
-            <li><a href="/about" class="hover">帮助中心</a></li>
-            <li><a href="#">个人中心</a></li>
-            <li><a href="/per/or"  id="user" style="display:none">188****8888</a></li>
+            <li><a href="/join" class="<c:if test="${mark=='join'}">hover</c:if>" >销售商加盟</a></li>
+            <li><a href="/app">APP下载</a></li>
+            <li><a href="/help" class="<c:if test="${mark=='help'}">hover</c:if>" >帮助中心</a></li>
+            <c:if test="${mark=='work'}">
+                <li><a href="/work" class="hover">关于我们</a></li>
+            </c:if>
+            <li style="display: none;" id="user_li"><a href="/per/or"  >个人中心</a></li>
+
         </ul>
-        <ul class="lon">
-            <li ><i class="iconfont icon ">&#xe6a3;</i><a href="/login"  id="login">登录</a>/<a href="/login"  id="">注册</a></li>
-            <li><a href="javascript:void(0)" class="two" id="exit" style="display:none" onclick="exit();">退出</a></li>
+        <ul class="lon" style="margin-top: 0px;">
+            <li >
+                <i class="iconfont icon ">&#xe6a3;</i>
+                <a href="/login"  id="user">登录</a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="two" id="exit" style="display:none" onclick="exit();">退出</a>
+            </li>
         </ul>
     </div>
 </div><!--top end-->
+<style>
+    .l_a{
+        display: none;
+    }
+    .r_d{
+        display: none;
+    }
+    .show{
+        display: block;
+    }
+    .cur{
+        color: #F60;
+    }
 
+</style>
 
 <!--background-->
 <!--中间部分-->
@@ -48,53 +73,53 @@
     <div class="A_con">
         <div class="left">
             <ul>
-                <li class="l_a"><a href="javascript:void(0)">交易方式<span>&gt;</span></a>
+                <li class="l_a <c:if test="${mark=='deal'}">show</c:if> "><a href="javascript:void(0)">交易方式<span>&gt;</span></a>
                     <ul class="xiao_ul">
-                        <li><a href="#one">门店交易</a></li>
-                        <li><a href="#two">上门交易</a></li>
+                        <li><a href="javascript:;" data-id="one" class="<c:if test="${key=='1'}">cur</c:if>">门店交易</a></li>
+                        <li><a href="javascript:;" data-id="two" class="<c:if test="${key=='2'}">cur</c:if>">上门交易</a></li>
                     </ul>
                 </li>
-                <li class="l_a"><a href="javascript:void(0)">质检说明 <span>&gt;</span></a>
+                <li class="l_a <c:if test="${mark=='check'}">show</c:if> "><a href="javascript:void(0)">质检说明 <span>&gt;</span></a>
                     <ul class="xiao_ul">
-                        <li><a href="#tre">检测名词解释</a></li>
-                        <li><a href="#for">专业检测项目</a></li>
+                        <li><a href="javascript:;" data-id="tre" class="<c:if test="${key=='1'}">cur</c:if>">检测名词解释</a></li>
+                        <li><a href="javascript:;" data-id="for" class="<c:if test="${key=='2'}">cur</c:if>">专业检测项目</a></li>
                     </ul>
                 </li>
-                <li class="l_a" ><a href="javascript:void(0)">帮助中心  <span>&gt;</span></a>
+                <li class="l_a <c:if test="${mark=='help'}">show</c:if> " ><a href="javascript:void(0)">帮助中心  <span>&gt;</span></a>
                     <ul class="xiao_ul">
-                        <li><a href="#six">常见问题</a></li>
-                        <li><a href="#seve">服务条款</a></li>
+                        <li><a href="javascript:;" data-id="six" class="<c:if test="${key=='1'||key=='3'}">cur</c:if>">常见问题</a></li>
+                        <li><a href="javascript:;" data-id="seve" class="<c:if test="${key=='2'}">cur</c:if>">服务条款</a></li>
                     </ul>
                 </li>
-                <li  class="l_a"><a href="javascript:void(0)">关于我们  <span>&gt;</span></a>
+                <li  class="l_a <c:if test="${mark=='work'}">show</c:if> "><a href="javascript:void(0)">关于我们  <span>&gt;</span></a>
                     <ul class="xiao_ul">
-                        <li><a href="#eih">公司简介</a></li>
-                        <li><a href="#nig">招贤纳士</a></li>
+                        <li><a href="javascript:;" data-id="eih" class="<c:if test="${key=='1'}">cur</c:if>">公司简介</a></li>
+                        <li><a href="javascript:;" data-id="nig" class="<c:if test="${key=='2'}">cur</c:if>">招贤纳士</a></li>
                     </ul>
                 </li>
-                <li class="l_a"><a href="javascript:void(0)" >合作加盟<span>&gt;</span></a>
+                <li class="l_a <c:if test="${mark=='join'}">show</c:if> "><a href="javascript:void(0)" >合作加盟<span>&gt;</span></a>
                     <ul class="xiao_ul">
-                        <li><a href="#tens">销售商加盟</a></li>
+                        <li><a href="javascript:;"class="cur" data-id="tens" style="color: #F60;">销售商加盟</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
         <div class="right">
-               <div id="one">
-                    <h3>门店交易</h3>
-                    <div class="xq">
-                        <p><b>什么是门店回收</b></p>
-                        <p>门店回收是一种线下交易方式，用户在线下单之后，凭短信直接去悟空收车指定门店进行交易。</p>
-                        <p>目前悟空收车在北京共有20余家线下指定门店，分布在多个区，用户可通过浏览地图，查看最近最方便的线下门店。</p>
-                        <p>友情提示：用户没有在线下单，也可以在方便的时间自行前往任意一家门店进行交易</p>
-                        <p>门店回收流程</p>
-                       <p> 提交订单 门店交易 现场检测 价格确认 交易完成</p>
+           <div id="one" class="r_d <c:if test="${mark=='deal'&&key=='1'}">show</c:if>">
+                <h3>门店交易</h3>
+                <div class="xq">
+                    <p><b>什么是门店回收</b></p>
+                    <p>门店回收是一种线下交易方式，用户在线下单之后，凭短信直接去悟空收车指定门店进行交易。</p>
+                    <p>目前悟空收车在北京共有20余家线下指定门店，分布在多个区，用户可通过浏览地图，查看最近最方便的线下门店。</p>
+                    <p>友情提示：用户没有在线下单，也可以在方便的时间自行前往任意一家门店进行交易</p>
+                    <p>门店回收流程</p>
+                   <p> 提交订单 门店交易 现场检测 价格确认 交易完成</p>
 
 
-                    </div>
-               </div><!--one end-->
+                </div>
+           </div><!--one end-->
 
-            <div id="two">
+            <div id="two" class="r_d <c:if test="${mark=='deal'&&key=='2'}">show</c:if>">
                 <h3>上门交易</h3>
                 <div class="xq">
                     <p><b> 1.上门交易（地铁站和上门两种方式组成）</b></p>
@@ -105,7 +130,7 @@
             </div>
 
 
-            <div id="tre">
+            <div id="tre" class="r_d <c:if test="${mark=='check'&&key=='1'}">show</c:if>">
                 <h3>检测名词解释</h3>
                 <div class="xq">
 
@@ -134,21 +159,21 @@
                 </div>
             </div>
 
-            <div id="for">
+            <div id="for" class="r_d <c:if test="${mark=='check'&&key=='2'}">show</c:if>">
                 <h3>专业检测项目</h3>
                 <div class="xq">
                     <p><b> 专业检测项目</b></p>
-                    <p><img src="../resources/img/j_1.jpg"></p>
-                    <p><img src="../resources/img/j_2.jpg"></p>
-                    <p><img src="../resources/img/j_3.jpg"></p>
-                    <p><img src="../resources/img/j_4.jpg"></p>
-                    <p><img src="../resources/img/j_5.jpg"></p>
-                    <p><img src="../resources/img/j_6.jpg"></p>
-                    <p><img src="../resources/img/j_7.jpg"></p>
+                    <p><img src="/resources/img/j_1.jpg"></p>
+                    <p><img src="/resources/img/j_2.jpg"></p>
+                    <p><img src="/resources/img/j_3.jpg"></p>
+                    <p><img src="/resources/img/j_4.jpg"></p>
+                    <p><img src="/resources/img/j_5.jpg"></p>
+                    <p><img src="/resources/img/j_6.jpg"></p>
+                    <p><img src="/resources/img/j_7.jpg"></p>
                 </div>
             </div>
 
-            <div id="six">
+            <div id="six" class="r_d <c:if test="${mark=='help'&&(key=='1'||key=='3')}">show</c:if>" >
                  <h3>常见问题</h3>
                 <div class="xq">
 
@@ -166,7 +191,7 @@
                     <p>  需要您先在网站提交订单，由您选择现场质检时间，质检结果与订单无误，现场即可成交。</p>
                     <p><b>（4）打款需要多长时间？</b></p>
                     <p> 悟空收车承诺，卖家签定收购协议即可打款。</p>
-                    <p><b>（5）在悟空收车卖车需要准备什么？</b></p>
+                    <p><b style="<c:if test="${key=='3'}"> color: #ff6600 </c:if> " >（5）在悟空收车卖车需要准备什么？</b></p>
                     <p> 需要先在网站提供您的联系电话，车辆品牌、型号等基本信息。待服务人员联系您后，在约定时间内准备好</p>
                     <p> 1、身份证</p>
                     <p> 2、行驶证</p>
@@ -187,7 +212,7 @@
                     <p>5.证件不齐全、不合格、已无效车辆</p>
 
                     <p><b>（8）什么情况发生退车？</b></p>
-                    <p> 如果您的车辆出现因为手续或者车况无法进行过户，或者我们发现车辆有被盗抢记录，有经济抵押、法院封存记录等不合</p>
+                    <p> 如果您的车辆出现因为手续或者车况无法进行过户，或者我们发现车辆有被盗抢记录，有经济抵押、法院封存记录等不合法车辆</p>
                     <p><b>（9）退车物流费用由谁承担？</b></p>
                     <p> 退车的物流费用全部由悟空收车来承担（不和法车辆除外）。</p>
                     <p><b>（10）退车时间大概多久？</b></p>
@@ -199,7 +224,7 @@
             </div>
 
 
-            <div id="seve">
+            <div id="seve" class="r_d <c:if test="${mark=='help'&&key=='2'}">show</c:if>" >
                 <h3>服务条款</h3>
                 <div class="xq">
 
@@ -237,7 +262,7 @@
                 </div>
             </div>
 
-            <div id="eih">
+            <div id="eih" class="r_d <c:if test="${mark=='work'&&key=='1'}">show</c:if>" >
                 <h3>公司简介</h3>
                 <div class="xq">
                    <p><b>一、悟空收车简介</b></p>
@@ -269,7 +294,7 @@
             </div>
 
 
-            <div id="nig">
+            <div id="nig" class="r_d <c:if test="${mark=='work'&&key=='2'}">show</c:if>" >
                 <h3>招贤纳士</h3>
                 <div class="xq">
                     <p><b> 质检师</b></p>
@@ -306,11 +331,17 @@
                 </div>
             </div>
 
-            <div id="tens">
+            <div id="tens" class="r_d <c:if test="${mark=='join'&&key=='1'}">show</c:if>">
                 <h3>销售商加盟</h3>
                 <div class="xq">
 
+                    <style>
+                        .errortip{
+                            margin-left: 115px;
+                            color: #FF0000;
+                        }
 
+                    </style>
 
 
 
@@ -319,27 +350,27 @@
                         <div class="help_bid_line"></div>
                         <div class="help_form">
                             <div class="form_group">
-                                <input id="txt_companyname" name="txt_required" type="text" placeholder="公司名称" class="placeholder">
+                                <input id="txt_companyname" name="txt_required" type="text" maxlength="200" placeholder="公司名称" class="placeholder">
                                 <label class="errortip">公司名称为空！</label>
                             </div>
                             <div class="form_group">
-                                <input id="txt_contactperson" name="txt_contactperson" type="text" placeholder="联系人" class="placeholder">
+                                <input id="txt_contactperson" name="txt_contactperson" maxlength="20" type="text" placeholder="联系人" class="placeholder">
                                 <label class="errortip">联系人为空！</label>
                             </div>
                             <div class="form_group">
-                                <input id="txt_tel" name="txt_tel" type="text" placeholder="联系电话" class="placeholder">
+                                <input id="txt_tel" name="txt_tel" type="text" placeholder="联系电话" class="placeholder" maxlength="11">
                                 <label class="errortip">输入正确的联系电话！</label>
                             </div>
                             <div class="form_group">
-                                <input id="txt_city" name="txt_city" type="text" placeholder="所在城市" class="placeholder">
+                                <input id="txt_city" name="txt_city" type="text" placeholder="所在城市" class="placeholder" maxlength="20">
                                 <label class="errortip">所在城市为空！</label>
                             </div>
                             <div class="form_group comment">
-                                <textarea id="txt_remark" name="txt_remark" placeholder="说明（请务必说明经营区域和经营的类别）" class="placeholder"></textarea>
+                                <textarea id="txt_remark" name="txt_remark" maxlength="200" placeholder="说明（请务必说明经营区域和经营的类别）" class="placeholder"></textarea>
                                 <label class="errortip">说明为空！</label>
                             </div>
                             <div class="btns">
-                                <a id="btnSubmit" href="javascript:void(0)">提交信息</a>
+                                <a id="btnSubmit" href="javascript:void(0)" style="padding: 5px 0; cursor: pointer" onclick="submitJonin()">提交信息</a>
                                 <span class="tips"><i>*</i> 提交信息后，请保持电话畅通，我们将竭诚为您服务</span>
                             </div>
                         </div>
@@ -349,70 +380,226 @@
         </div>
     </div><!--A_con end-->
 </div>
+
+<style>
+    .layerpop{
+        height: 220px;
+    }
+    .layerpop .cd_m_pop_jjtx_result {
+        width: 260px;
+        padding: 0 45px;
+        text-align: center;
+    }
+    .layerpop .cd_m_pop_jjtx_success>i {
+        background-position: 0 -1640px;
+    }
+    .layerpop .cd_m_pop_jjtx_result>span {
+        display: block;
+    }
+    .layerpop .cd_m_pop_jjtx_result>i {
+        height: 55px;
+        width: 52px;
+        margin-top: 50px;
+        display: inline-block;
+        background: url(/resources/img/correct.png) no-repeat;
+    }
+    .layerpop .cd_m_pop_jjtx_res_tit {
+        font-size: 18px;
+        color: #e72116;
+        margin-top: 20px;
+    }
+    .layerpop .cd_m_pop_jjtx_res_desc {
+        font-size: 14px;
+        color: #585858;
+        margin-top: 15px;
+        line-height: 25px;
+    }
+
+
+</style>
+<div class="layerpop" style="display: none;">
+    <p class="cd_m_pop_jjtx_result" style="display: block;">
+        <i></i>
+        <span class="cd_m_pop_jjtx_res_tit" id="cd_m_pop_jjtx_res_tit_car">提交成功</span>
+        <span class="cd_m_pop_jjtx_res_desc" id="cd_m_pop_jjtx_res_desc_car">稍后会有客服与您联系，请您注意接听。</span>
+    </p>
+</div>
+
 <!--中间部分end-->
-<jsp:include page="footer.jsp"></jsp:include>
+<%@include file="footer.jsp"%>
 
 <script>
 
+    $(function(){
 
-            $(document).ready(function() {
-                $("#oneLink").click(function() {
-                    $("html, body").animate({
-                        scrollTop: $("#one").offset().top }, {duration: 500,easing: "swing"});
-                    return false;
-                });
-                $("#twoLink").click(function() {
-                    $("#two").show();
-                    $("#one").hide();
-                    $("html, body").animate({
-                        scrollTop: $("#two").offset().top }, {duration: 500,easing: "swing"});
-                    return false;
-                });
-                $("#treLink").click(function() {
-                    $("#tre").show();
-                    $("#two").hide();
+        $(".xiao_ul a").click(function(){
+            var id = "#"+$(this).data('id');
 
-                    $("html, body").animate({
-                        scrollTop: $("#tre").offset().top }, {duration: 500,easing: "swing"});
-                    return false;
-                });
-            });
+            $(this).addClass('cur').parent().siblings().find('a').removeClass("cur");
+            $('.r_d').hide();
+
+            $(id).show();
+        })
+
+    })
+
+
+//    $(document).ready(function() {
+//        $("#oneLink").click(function() {
+//            $("html, body").animate({
+//                scrollTop: $("#one").offset().top }, {duration: 500,easing: "swing"});
+//            return false;
+//        });
+//        $("#twoLink").click(function() {
+//            $("#two").show();
+//            $("#one").hide();
+//            $("html, body").animate({
+//                scrollTop: $("#two").offset().top }, {duration: 500,easing: "swing"});
+//            return false;
+//        });
+//        $("#treLink").click(function() {
+//            $("#tre").show();
+//            $("#two").hide();
+//
+//            $("html, body").animate({
+//                scrollTop: $("#tre").offset().top }, {duration: 500,easing: "swing"});
+//            return false;
+//        });
+//    });
 </script>
 
 
 <script type="text/javascript">
-    $(function(){
-        //设置标杆
-        var _line=parseInt($(window).height()/3);
-        $(window).scroll(function(){
-            //滚动730px，左侧导航固定定位
-            if ($(window).scrollTop()>730) {
-                $('.A_con .left').css({'position':'fixed','top':0})
-            }else{
-                $('.A_con .left').css({'position':'','top':''})
-            };
-            $('.A_con .left .xiao_ul a').eq(0).addClass('active');
-            //滚动到标杆位置,左侧导航加active
-            $('.A_con .right>div').each(function(){
-                var _target=parseInt($(this).offset().top-$(window).scrollTop()-_line);
-                var _i=$(this).index();
-                if (_target<=0) {
-                    $('.A_con .left .xiao_ul a').removeClass('active');
-                    $('.A_con .left .xiao_ul a').eq(_i).addClass('active');
+//    $(function(){
+//        //设置标杆
+//        var _line=parseInt($(window).height()/3);
+//        $(window).scroll(function(){
+//            //滚动730px，左侧导航固定定位
+//            if ($(window).scrollTop()>730) {
+//                $('.A_con .left').css({'position':'fixed','top':0})
+//            }else{
+//                $('.A_con .left').css({'position':'','top':''})
+//            };
+//            $('.A_con .left .xiao_ul a').eq(0).addClass('active');
+//            //滚动到标杆位置,左侧导航加active
+//            $('.A_con .right>div').each(function(){
+//                var _target=parseInt($(this).offset().top-$(window).scrollTop()-_line);
+//                var _i=$(this).index();
+//                if (_target<=0) {
+//                    $('.A_con .left .xiao_ul a').removeClass('active');
+//                    $('.A_con .left .xiao_ul a').eq(_i).addClass('active');
+//                }
+//                //如果到达页面底部，给左侧导航最后一个加active
+//                else if($(document).height()==$(window).scrollTop()+$(window).height()){
+//                    $('.A_con .left .xiao_ul a').removeClass('active');
+//                    $('.A_con .left .xiao_ul a').eq($('.fl_r li').length-1).addClass('active');
+//                }
+//            });
+//        });
+//        $('.A_con .left .xiao_ul a').click(function(){
+//            $(this).addClass('active').siblings().removeClass('active');
+//            var _i=$(this).index();
+//            $('body, html').animate({scrollTop:$('.fl_r li').eq(_i).offset().top-_line},500);
+//        });
+//    });
+    $(document).ready(function() {
+
+        var phone = $.cookie('phone');
+        var token = $.cookie('token');
+        if(phone&&token){
+            $.getJSON('/loginByToken/'+phone+'/'+token,function (d) {
+                if(d.status==200){
+                    $("#login").hide();
+
+                    var pre = phone.substring(0,3),pbc = phone.substring(8,11);
+                    $('#user').html(pre+'****'+pbc).show();
+                    $('#exit').show();
+
+                    $('#user').attr('href','/per/or')
+                    $("#user_li").show();
+                }else{
+                    $.cookie("phone",null,{path:"/"});
+                    $.cookie("token",null,{path:"/"});
                 }
-                //如果到达页面底部，给左侧导航最后一个加active
-                else if($(document).height()==$(window).scrollTop()+$(window).height()){
-                    $('.A_con .left .xiao_ul a').removeClass('active');
-                    $('.A_con .left .xiao_ul a').eq($('.fl_r li').length-1).addClass('active');
-                }
+            })
+        }
+
+
+    })
+    function exit(){
+        $.cookie("phone",null,{path:"/"});
+        $.cookie("token",null,{path:"/"});
+        window.location.reload()
+    }
+
+    function submitJonin(){
+
+
+        var txt_companyname = $("#txt_companyname").val();
+        if(!txt_companyname){
+            $("#txt_companyname").parent().find(".errortip").show();
+            return ;
+        }else{
+            $("#txt_companyname").parent().find(".errortip").hide();
+        }
+
+        var txt_contactperson = $("#txt_contactperson").val();
+
+        if(!txt_contactperson){
+            $("#txt_contactperson").parent().find(".errortip").show();
+            return ;
+        }else{
+            $("#txt_contactperson").parent().find(".errortip").hide();
+        }
+
+        var txt_tel = $("#txt_tel").val();
+
+        if(!txt_tel){
+            $("#txt_tel").parent().find(".errortip").show();
+            return ;
+        }else{
+            $("#txt_tel").parent().find(".errortip").hide();
+        }
+
+        var txt_city = $("#txt_city").val();
+
+        if(!txt_city){
+            $("#txt_city").parent().find(".errortip").show();
+            return ;
+        }else{
+            $("#txt_city").parent().find(".errortip").hide();
+        }
+
+        var txt_remark = $("#txt_remark").val();
+
+        if(!txt_remark){
+            $("#txt_remark").parent().find(".errortip").show();
+            return ;
+        }else{
+            $("#txt_remark").parent().find(".errortip").hide();
+        }
+
+        var param = {};
+        param.txt_companyname = txt_companyname;
+        param.txt_contactperson = txt_contactperson;
+        param.txt_tel = txt_tel;
+        param.txt_city = txt_city;
+        param.txt_remark = txt_remark;
+
+        $.post('/wanthz',param,function(d){
+
+            layer.open({
+                type: 1,
+                shade: false,
+                offset: '300px',
+                title: false, //不显示标题
+                content: $('.layerpop'), //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+
             });
-        });
-        $('.A_con .left .xiao_ul a').click(function(){
-            $(this).addClass('active').siblings().removeClass('active');
-            var _i=$(this).index();
-            $('body, html').animate({scrollTop:$('.fl_r li').eq(_i).offset().top-_line},500);
-        });
-    });
+
+        },'json');
+
+    }
 </script>
 </body>
 </html>

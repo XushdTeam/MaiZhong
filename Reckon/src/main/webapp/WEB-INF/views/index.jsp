@@ -19,6 +19,7 @@
     <title>悟空收车</title>
     <meta name="keywords" content="悟空收车，悟空，二手车，估值，收购"/>
     <meta name="description" content="悟空收车专业的二手车估值收购平台，验车快，当天到账，售后跟踪"/>
+
     <link rel="stylesheet" type="text/css" href="/resources/css/index.css" />
     <link rel="stylesheet" type="text/css" href="/resources/css/guzhi.css" />
     <link rel="stylesheet" type="text/css" href="/resources/font/iconfont.css" />
@@ -36,7 +37,7 @@
   <div class="bg_top1">
 
       <span class="bg_x">
-          <a href="/act" style="display: block;float: left;height: 59px; width: 90%;"></a>
+          <a href="/activity/3" style="display: block;float: left;height: 59px; width: 90%;"></a>
           <a href="javascript:void(0)" onclick="$('.bg_top1').hide();" style="color: #fff; background:rgba(0,0,0,0.3); padding:2px 5px">X</a>
       </span>
 
@@ -45,23 +46,28 @@
 
     <div class="top e_top">
         <div class="t_cen">
-            <a href="/" class="logo"><img src="../resources/img/logo.png"></a>
+            <a href="/" class="logo"><img src="/resources/img/logo.png"></a>
             <ul class="t_right">
                 <li><a href="/" class="hover">首页</a></li>
-                <li><a href="/sale">我要卖车</a></li>
-                <li><a href="#">销售商加盟</a></li>
-                <li><a href="#">app下载</a></li>
-                <li><a href="#">帮助中心</a></li>
-                <li><a href="#">个人中心</a></li>
-                <%--<li><a href="/per/or"  id="user" style="display:none">188****8888</a></li>--%>
+                <li><a href="/sale" target="_blank">我要卖车</a></li>
+                <li><a href="/join" target="_blank">销售商加盟</a></li>
+                <li><a href="/app" target="_blank">APP下载</a></li>
+               <li><a href="/help" target="_blank">帮助中心</a></li>
+                <li style="display: none;" id="user_li"><a href="/per/or" target="_blank" >个人中心</a></li>
             </ul>
             <ul class="lon" style="margin-top: 0px;">
                 <li >
                     <i class="iconfont icon ">&#xe6a3;</i>
-                    <a href="/login"  id="user">登录</a>
+                    <a href="/login" target="_blank" id="user">登录</a>
                 </li>
                 <li>
                     <a href="javascript:void(0)" class="two" id="exit" style="display:none" onclick="exit();">退出</a>
+                </li>
+                <li >
+                    <img src="/resources/img/erwei.jpg" onmouseover="javascript:$('#erw').show()" onmouseleave="javascript:$('#erw').hide()" >
+                    <div style="display: none;position: absolute;z-index: 1989" id="erw">
+                        <img src="/resources/img/m_11.jpg" width="150" >
+                    </div>
                 </li>
             </ul>
         </div>
@@ -280,7 +286,7 @@
     <div class="j_cen">
           <div class="j_left">
               <div class="j_one">
-                  <a href="/sale" style="display: block">
+                  <a href="/sale"  target="_blank" style="display: block">
                       <p class="xian">
                           <span>汽车估价</span>
                       </p>
@@ -288,11 +294,11 @@
                   </a>
               </div>
               <div class="j_two">
-                  <a href="#">
+                  <a href="/help/3" target="_blank">
                       <p class="h2">
                           <span>悟空收车</span>
                       </p>
-                      <p class="p1">快速打款、售后保障、检测专业</p>
+                      <p class="p1">在悟空收车卖车需要准备什么？</p>
                    </a>
               </div>
           </div><!--j_left-->
@@ -347,7 +353,7 @@
                             <span class="sub-title">{{=it[i].gn}}：</span>
                             <ul class="hot-prods-list">
                                 {{ for(var j=0,len1=it[i].child.length;j<len1; j++) { }}
-                                <li><a title="{{=it[i].child[j].series_name}}" id="series_{{=it[i].child[j].series_id}}" href="javascript:selectSeries('{{=it[i].child[j].series_id}}')" class="no_hover">{{=it[i].child[j].series_name}}</a></li>
+                                <li><a title="{{=it[i].child[j].series_name}}" id="series_{{=it[i].child[j].series_id}}"   href="javascript:selectSeries('{{=it[i].child[j].series_id}}')" class="no_hover">{{=it[i].child[j].series_name}}</a></li>
                                 {{ } }}
                             </ul>
                         </div>
@@ -402,7 +408,7 @@
         <div id="owl-example" class="owl-carousel">
             <script id="list-car-tmpl" type="text/x-dot-template">
                 {{ for(var i=0,len=it.length;i<len; i++) { }}
-                <a href="/sale/{{=it[i].paramId}}" style="color:#262930" title="{{=it[i].title}}">
+                <a href="/sale/{{=it[i].paramId}}" target="_blank" style="color:#262930" title="{{=it[i].title}}">
                     <div class="item darkCyan">
                         <img src="{{=it[i].img}}">
                         <h3>{{=it[i].title}}</h3>
@@ -429,8 +435,23 @@
             <div class="col-left">
                 <p>你身边的免费服务站</p>
                 <a href=" ">
-
-                    <img class="lazy-load img_loaded" id = "4simg" src="../resources/img/1_03.jpg " alt="4s店图片" style="display: block;" width="100%">
+                    <style>
+                        .cc{
+                            z-index: 1989;
+                            background: rgba(0, 0, 0, 0.49);
+                            color: #FFF;
+                            position: absolute;
+                            bottom: 5px;
+                            height: 45px;
+                            width: 379px;
+                           padding: 5px 20px;
+                            display: none;
+                        }
+                    </style>
+                    <img class="lazy-load img_loaded" id = "4simg" src="/resources/img/1_03.jpg " alt="4s店图片" style="display: block;" width="410" height="318">
+                    <div class="cc" >
+                        <span id="shopAddress" ></span>
+                    </div>
                 </a>
             </div>
             <div class="col-right">
@@ -462,7 +483,9 @@
                                     data-title="${j.name}" class="page-1 show parent${j.districtId}">
                                     <div>
                                         <a href="javascript:void(0)" data-fancybox-type="iframe"  class="shop-addr-pop" title="${j.name}">
-                                            <p class="store-name">${j.name} </p>
+                                            <p class="store-name">
+                                            ${j.name}
+                                            </p>
                                         </a>
                                     </div>
                                 </li>
@@ -480,7 +503,7 @@
             <span class="tips">即可高价卖车</span>
             <span class="tips">北京6环内地区的用户</span>
             <span class="tips">可享受质检小哥优质上门服务</span>
-            <span class="tips">可享受质检小哥优质上门服务</span>
+            <span class="tips">您附近的地铁口现场验车</span>
 
 
             <ul class="pros">
@@ -515,9 +538,9 @@
                             {{ for(var i=0,len=it.length;i<len; i++) { }}
                             <li data-id="{{=it[i].id}}">
                                 <div class="l_box">
-                                    <p class="p_t"><img src="/resources/img/user.svg" style="margin-right: 10px;">{{=it[i].phone}}</p>
+                                    <p class="p_t"><img src="/resources/img/t_07.jpg" style="margin-right: 10px;">{{=it[i].phone}}</p>
                                     <p class="pl">{{=it[i].content}}</p>
-                                    <p class="bottom">{{=it[i].time}} {{=it[i].method}} <a style="color: #0d0df9" href="/sale/model/{{=it[i].modelId}}">{{=it[i].car}}</a></p>
+                                    <p class="bottom">{{=it[i].time}} {{=it[i].method}} <a style="color: #0d0df9" href="/sale/model/{{=it[i].modelId}}"  target="_blank">{{=it[i].car}}</a></p>
                                 </div>
                             </li>
                             {{ } }}
@@ -548,21 +571,19 @@
         <p>精选文章</p>
         <dl>
             <dt>
-                <a href="/news"><img src="../resources/img/wz.jpg"></a>
+                <a href="/news/1"  target="_blank"><img src="../resources/img/wz.jpg"></a>
             </dt>
         </dl>
 
         <dl class="dl2">
-            <a href="/new">
+            <a href="/news/2"  target="_blank">
                 <dt>
                    <img src="../resources/img/wz2.jpg">
                 </dt>
-                <dd class="dd1">为提高安全意识教你如何鉴定汽车的技术状况及使用寿命</dd>
-                <dd>如何做到心中有数不被潜规则
-                    选什么样的车更保值，悟空收车教你
-                    如何鉴定事故车
-                </dd>
-                <dd>二手车行业存在一个潜规则-----------塞价 </dd>
+                <dd class="dd1">二手车行业存在一个潜规则</dd>
+                <dd>出于询价阶段还是着急卖，了解客户的心理低价，
+                    “黄牛”一般非常有经验，应对自如，有些客户会说，价格合适就马上卖</dd>
+                <dd> -----------塞价</dd>
                 <dd class="dd3">查看更多>></dd>
 
             </a>
@@ -574,16 +595,6 @@
 
 <%@include file="footer.jsp"%>
 <script src="/resources/js/doT.min.js"></script>
-<script>
-
-//    $(document).ready(function($) {
-//
-//    });
-
-
-    $("body").data("page", "frontpage");
-
-</script>
 
 
 
@@ -602,9 +613,9 @@
                     var pre = phone.substring(0,3),pbc = phone.substring(8,11);
                     $('#user').html(pre+'****'+pbc).show();
                     $('#exit').show();
-                    $('.lon').css({'margin-top':'-69px'})
-                    $('#user').attr('href','javascript:void(0)')
-
+                    //
+                    $('#user').attr('href','/per/or')
+                    $("#user_li").show();
                 }else{
                     $.cookie("phone",null,{path:"/"});
                     $.cookie("token",null,{path:"/"});
@@ -628,7 +639,8 @@
             })
             d = shuffle(d)
             $("#ul_list").html(evalText(d));
-            $("#pic_list_2").cxScroll({direction:"left",step:3});
+            $("#pic_list_2").cxScroll({direction:"right",step:3});
+            //$("#pic_list_2").owlCarousel();
         });
         $.getJSON('/resources/data/hotcar.json',function(d){
             var carevalText = doT.template($("#list-car-tmpl").text());
@@ -658,6 +670,8 @@
     $(".shop li").click(function(){
         $(this).addClass('active').siblings().removeClass("active");
         var img = $(this).data("img");
+        var address = $(this).data("address");
+        $('#shopAddress').html(address).parent().show();
         document.getElementById('4simg').src = img;
     });
     var evalTextSerise = doT.template($("#tmpl-series").text());
@@ -750,8 +764,7 @@
     }
 
     var carModeSelect = function(modelId){
-
-        window.location.href = '/sale/model/'+modelId
+        window.open('/sale/model/'+modelId);
     }
 </script>
 

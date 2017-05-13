@@ -41,6 +41,7 @@
     </bean>
 
     <mvc:resources location="/resources/" mapping="/resources/**"/>
+    <mvc:resources mapping="/favicon.ico" location="/favicon.ico"/>
 
     <!-- 全局异常配置 -->
     <!--<bean id="exceptionResolver" class="com.maizhong.resolver.GlobalExceptionResolver"/>-->
