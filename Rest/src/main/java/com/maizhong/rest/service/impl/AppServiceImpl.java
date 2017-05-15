@@ -815,6 +815,8 @@ public class AppServiceImpl implements AppService {
             JSONObject object = new JSONObject();
             object.put("city", city.getCityName());//城市
             object.put("modelName", model.getModelName());//名称
+            object.put("modelId", model.getModelId());//ID
+            object.put("dischargeStandard", model.getDischargeStandard());//排放标准
             object.put("regDate", gzrecord.getRegDate());//上牌时间
             String formatDateTime3 = TimeUtils.getFormatDateTime3(userrecord.getGzDate());//获取估值时间
             object.put("time", formatDateTime3);//评估时间

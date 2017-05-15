@@ -410,7 +410,12 @@ public class ReckonServiceImpl implements ReckonService {
     public JsonResult getGuzhi(String param) {
         try {
 
-            String redisJson = jedisClient.hget("GUZHI", param);
+            String redisJson = null;
+            try {
+                redisJson = jedisClient.hget("GUZHI", param);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             if (StringUtils.isNotBlank(redisJson)) {
 
