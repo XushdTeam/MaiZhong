@@ -48,6 +48,13 @@
             <li>
                 <a href="javascript:void(0)" class="two" id="exit" style="display:none" onclick="exit();">退出</a>
             </li>
+
+            <li >
+                <img src="/resources/img/erwei.jpg" onmouseover="javascript:$('#erw').show()" onmouseleave="javascript:$('#erw').hide()" >
+                <div style="display: none;position: absolute;z-index: 1989" id="erw">
+                    <img src="/resources/img/m_11.jpg" width="150" >
+                </div>
+            </li>
         </ul>
     </div>
 </div><!--top end-->

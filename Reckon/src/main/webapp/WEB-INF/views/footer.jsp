@@ -74,7 +74,7 @@
                 <ul class="last">
                     <li><a href="javascript:;">  联系电话：010-8025-8108</a></li>
                     <li><a href="javascript:;">  公司地址：北京市大兴区西红门嘉悦广场
-                        5号楼1002-1004室或西红门公交车站对面</a></li>
+                        5号楼1002-1004室</a></li>
                 </ul>
 
             </div><!--ul end-->

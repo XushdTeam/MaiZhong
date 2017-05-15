@@ -43,6 +43,12 @@
             <li>
                 <a href="javascript:void(0)" class="two" id="exit" style="display:none" onclick="exit();">退出</a>
             </li>
+            <li >
+                <img src="/resources/img/erwei.jpg" onmouseover="javascript:$('#erw').show()" onmouseleave="javascript:$('#erw').hide()" >
+                <div style="display: none;position: absolute;z-index: 1989" id="erw">
+                    <img src="/resources/img/m_11.jpg" width="150" >
+                </div>
+            </li>
         </ul>
     </div>
 </div><!--top end-->
@@ -95,7 +101,7 @@
 <div class="zhuyi">
     <div>注意事项</div>
     <p>1、车辆成交需要携带：车主身份证原件  登记证 行驶本 新车发票/过户票  交强险原件 购置税本 </p>
-    <p>2、精准估计即为成交价格，用户所填能容应真实有效。（如检测结果与用户所填内容不符，以实际检测结果重新估算价格为准。）</p>
+    <p>2、精准估计即为成交价格，用户所填内容应真实有效。（如检测结果与用户所填内容不符，以实际检测结果重新估算价格为准。）</p>
     <p>3、检测师质检通过后即第一时间给您打款。</p>
 </div>
 
