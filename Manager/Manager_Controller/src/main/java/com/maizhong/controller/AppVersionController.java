@@ -138,5 +138,4 @@ public class AppVersionController {
         return JsonResult.build(result);
     }
 
-
 }

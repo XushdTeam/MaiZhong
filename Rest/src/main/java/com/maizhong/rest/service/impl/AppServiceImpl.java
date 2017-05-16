@@ -121,20 +121,9 @@ public class AppServiceImpl implements AppService {
     @Override
     public JsonResult getTokenByDeciceId(String deviceId, String phone) {
         JSONObject object = new JSONObject();
-        String app_version = jedisClient.get("APP_VERSION");
-        if (StringUtils.isNotBlank(app_version)){
-            Version version = JsonUtils.jsonToPojo(app_version, Version.class);
-            object.put("versionNumber", version.getVersionNumber());
-        }else {
-            List<Version> versionList = versionMapper.selectByExample(null);
-            if (versionList!=null&&versionList.size()>0){
-                Version version = versionList.get(versionList.size() - 1);
-                object.put("versionNumber", version.getVersionNumber());
-                jedisClient.set("APP_VERSION",JsonUtils.objectToJson(version));
-            }
-        }
+
         if (StringUtils.isNotBlank(deviceId)) {
-            deviceId.replace(":","-");
+            deviceId.replace(":", "-");
             try {
                 String hget = jedisClient.get(UNLOGIN_TOKEN + ":" + deviceId);
                 if (StringUtils.isNotBlank(hget)) {
@@ -578,7 +567,7 @@ public class AppServiceImpl implements AppService {
     @Override
     public JsonResult getGuzhi(String param, HttpServletRequest request) {
         String token = request.getHeader("X-Maizhong-AppKey");
-        String app_login_phone = jedisClient.get("APP_LOGIN_PHONE"+":"+token);
+        String app_login_phone = jedisClient.get("APP_LOGIN_PHONE" + ":" + token);
         try {
 
             String redisJson = jedisClient.hget("GUZHI", param);
@@ -1231,6 +1220,7 @@ public class AppServiceImpl implements AppService {
 
     /**
      * 获取缓存估值
+     *
      * @param request
      * @return
      */
@@ -1244,9 +1234,36 @@ public class AppServiceImpl implements AppService {
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
-        if (gzDetail==null){
-            JsonResult.build(200,"无",null);
+        if (gzDetail == null) {
+            JsonResult.build(200, "无", null);
         }
         return gzDetail;
+    }
+
+    /**
+     * 获取版本号
+     *
+     * @return
+     */
+    @Override
+    public JsonResult getVersion() {
+        String app_version1 = jedisClient.get("APP_VERSION");
+        if (StringUtils.isNotBlank(app_version1)) {
+            JSONObject object = JsonUtils.jsonToPojo(app_version1, JSONObject.class);
+            return JsonResult.OK(object);
+        }
+        List<Version> versionList = versionMapper.selectByExample(null);
+        if (versionList != null && versionList.size() > 0) {
+            Version version = versionList.get(versionList.size() - 1);
+            JSONObject object = new JSONObject();
+            String app_version = version.getVersionNumber();
+            int i = app_version.lastIndexOf(".");
+            String versionNumber = app_version.substring(0, i);
+            object.put("versionNumber", versionNumber);
+            object.put("versionDetail", app_version);
+            jedisClient.set("APP_VERSION", JsonUtils.objectToJson(object));
+            return JsonResult.OK(object);
+        }
+        return null;
     }
 }

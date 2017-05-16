@@ -305,6 +305,7 @@ public class ReckonController {
 
     /**
      * 根据手机号获取订单信息/DTO
+     *
      * @param phone
      * @return
      */
@@ -322,53 +323,60 @@ public class ReckonController {
 
     /**
      * 获取热门品牌
+     *
      * @return
      */
     @RequestMapping(value = "/getHotBrand")
     @ResponseBody
-    public JsonResult getHotBrand(){
-        JsonResult result=reckonService.getHotBrand();
+    public JsonResult getHotBrand() {
+        JsonResult result = reckonService.getHotBrand();
         return result;
     }
 
     /**
      * 获取热门车系
+     *
      * @return
      */
     @RequestMapping(value = "/reckon/getHotSeries")
     @ResponseBody
-    public JsonResult getHotSeries(){
-        JsonResult result=reckonService.getHotSeries();
+    public JsonResult getHotSeries() {
+        JsonResult result = reckonService.getHotSeries();
         return result;
     }
 
     /**
      * 根据ID获取车型
+     *
      * @param id
      * @return
      */
     @RequestMapping(value = "/getModelById/{id}")
     @ResponseBody
-    public JsonResult getModelById(@PathVariable("id") String id){
+    public JsonResult getModelById(@PathVariable("id") String id) {
 
-        JsonResult result=reckonService.getModelById(id);
+        JsonResult result = reckonService.getModelById(id);
         return result;
     }
 
 
-
-    @RequestMapping(value = "/wanghz",method = RequestMethod.POST)
+    @RequestMapping(value = "/wanghz", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult wanthz(String txt_companyname,
                              String txt_contactperson,
                              String txt_tel,
                              String txt_city,
-                             String txt_remark)
-    {
-        reckonService.wanghz(txt_companyname,txt_contactperson,txt_tel,txt_city,txt_remark);
+                             String txt_remark) {
+        reckonService.wanghz(txt_companyname, txt_contactperson, txt_tel, txt_city, txt_remark);
 
         return JsonResult.OK();
     }
 
 
+    @RequestMapping(value = "/testUploadOss",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult testUploadOss(String json) {
+     JsonResult result=reckonService.testUploadOss(json);
+        return result;
+    }
 }
