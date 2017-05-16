@@ -8,29 +8,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>APP帮助</title>
+    <title>APP版本</title>
     <jsp:include page="../common/head.jsp"/>
 </head>
 <body>
 <div class="main-wrap">
     <blockquote class="layui-elem-quote fhui-admin-main_hd">
-        <h2>APP帮助</h2>
+        <h2>APP版本</h2>
     </blockquote>
     <div class="y-role">
-        <%--<div class="search-bar">
-            <!--查询区-->
-            <form class="layui-form layui-form-pane">
-                <div class="layui-inline">
-                    <label class="layui-form-label">标题名称</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="title" value="" placeholder="标题名称" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <button class="layui-btn layui-btn-warm" lay-submit lay-filter="btnsearch">搜索</button>
-                </div>
-            </form>
-        </div>--%>
         <!--工具栏-->
         <div id="floatHead" class="toolbar-wrap">
             <div class="toolbar">

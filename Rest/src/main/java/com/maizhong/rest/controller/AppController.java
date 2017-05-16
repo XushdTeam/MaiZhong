@@ -1,14 +1,12 @@
 package com.maizhong.rest.controller;
 
 import com.maizhong.common.result.JsonResult;
-import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.rest.service.AppService;
+import com.maizhong.rest.service.ReckonService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -24,6 +22,9 @@ public class AppController {
 
     @Autowired
     private AppService appService;
+
+    @Autowired
+    private ReckonService reckonService;
 
     /**
      * 根据设备Id获取token
@@ -145,6 +146,21 @@ public class AppController {
         JsonResult result = appService.getModelBySeries(seriesId);
         return result;
     }
+
+    /**
+     * 根据ID获取车型
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/getModelById/{id}")
+    @ResponseBody
+    public JsonResult getModelById(@PathVariable("id") String id) {
+
+        JsonResult result = reckonService.getModelById(id);
+        return result;
+    }
+
 
     /**
      * 预估值
@@ -277,8 +293,6 @@ public class AppController {
     }
 
 
-
-
     /**
      * 从缓存获取估值信息 通过订单编号
      *
@@ -356,14 +370,27 @@ public class AppController {
 
     /**
      * 删除
+     *
      * @param orderNumber
      * @return
      */
-    @RequestMapping(value = "/deleteOrder/{orderNumber}",method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteOrder/{orderNumber}", method = RequestMethod.GET)
     @ResponseBody
-    public  JsonResult deleteOrder(@PathVariable("orderNumber") String orderNumber,HttpServletRequest request){
-       JsonResult result= appService.deleteOrder(orderNumber,request);
+    public JsonResult deleteOrder(@PathVariable("orderNumber") String orderNumber, HttpServletRequest request) {
+        JsonResult result = appService.deleteOrder(orderNumber, request);
         return result;
     }
 
+
+    /**
+     * 获取版本号
+     *
+     * @return
+     */
+    @RequestMapping(value = "/getVersion")
+    @ResponseBody
+    public JsonResult getVersion() {
+        JsonResult result = appService.getVersion();
+        return result;
+    }
 }

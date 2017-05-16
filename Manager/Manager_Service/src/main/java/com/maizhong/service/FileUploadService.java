@@ -3,6 +3,8 @@ package com.maizhong.service;
 import com.maizhong.common.result.JsonResult;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+
 /**
  * 文件上传服务接口
  * Created by Xushd on 2017/3/2.
@@ -16,4 +18,6 @@ public interface FileUploadService {
      * @return
      */
     JsonResult uploadImg(MultipartFile filedata,String key);
+
+    JsonResult uploadFile(String json, String diskName,String fileName);
 }

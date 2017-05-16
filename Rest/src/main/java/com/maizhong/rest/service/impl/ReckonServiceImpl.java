@@ -35,6 +35,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -87,6 +91,9 @@ public class ReckonServiceImpl implements ReckonService {
 
     @Autowired
     private JoinUsMapper joinUsMapper;
+
+    @Autowired
+    private FileUploadServiceImpl fileUploadService;
 
     @Value("${CHE_MODEL}")
     private String CHE_MODEL;
@@ -1113,6 +1120,7 @@ public class ReckonServiceImpl implements ReckonService {
 
     /**
      * 获取热门品牌
+     *
      * @return
      */
     @Override
@@ -1124,28 +1132,29 @@ public class ReckonServiceImpl implements ReckonService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (StringUtils.isNotBlank(hot_brand)){
+        if (StringUtils.isNotBlank(hot_brand)) {
             List<List> lists = JsonUtils.jsonToPojo(hot_brand, List.class);
-            return  JsonResult.build(200,"获取成功",lists);
+            return JsonResult.build(200, "获取成功", lists);
         }
-        BrandExample example=new BrandExample();
+        BrandExample example = new BrandExample();
         BrandExample.Criteria criteria = example.createCriteria();
         criteria.andIsHotNotEqualTo(0);
         List<Brand> brands = brandMapper.selectByExample(example);
-        JSONArray array=new JSONArray();
-        for (Brand brand:brands){
-            JSONObject object=new JSONObject();
-            object.put("brandId",brand.getBrandId());
-            object.put("largeLogo",brand.getLargeLogo());
-            object.put("brand",brand.getBrandName());
+        JSONArray array = new JSONArray();
+        for (Brand brand : brands) {
+            JSONObject object = new JSONObject();
+            object.put("brandId", brand.getBrandId());
+            object.put("largeLogo", brand.getLargeLogo());
+            object.put("brand", brand.getBrandName());
             array.add(object);
         }
-        jedisClient.set("HOT_BRAND",JsonUtils.objectToJson(array));
-        return JsonResult.build(200,"获取成功",array);
+        jedisClient.set("HOT_BRAND", JsonUtils.objectToJson(array));
+        return JsonResult.build(200, "获取成功", array);
     }
 
     /**
      * 获取热门车系
+     *
      * @return
      */
     @Override
@@ -1157,28 +1166,29 @@ public class ReckonServiceImpl implements ReckonService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (StringUtils.isNotBlank(hot_series)){
+        if (StringUtils.isNotBlank(hot_series)) {
             List<List> lists = JsonUtils.jsonToPojo(hot_series, List.class);
-            return  JsonResult.build(200,"获取成功",lists);
+            return JsonResult.build(200, "获取成功", lists);
         }
-       SeriesExample example=new SeriesExample();
+        SeriesExample example = new SeriesExample();
         SeriesExample.Criteria criteria = example.createCriteria();
         criteria.andIsHotEqualTo(1);
         List<Series> seriesList = seriesMapper.selectByExample(example);
-        JSONArray array=new JSONArray();
-        for (Series series:seriesList){
-            JSONObject object=new JSONObject();
-            object.put("seriesId",series.getSeriesId());
-            object.put("seriesName",series.getSeriesName());
-            object.put("brandId",series.getBrandId());
+        JSONArray array = new JSONArray();
+        for (Series series : seriesList) {
+            JSONObject object = new JSONObject();
+            object.put("seriesId", series.getSeriesId());
+            object.put("seriesName", series.getSeriesName());
+            object.put("brandId", series.getBrandId());
             array.add(object);
         }
-        jedisClient.set("HOT_SERIES",JsonUtils.objectToJson(array));
-        return JsonResult.build(200,"获取成功",array);
+        jedisClient.set("HOT_SERIES", JsonUtils.objectToJson(array));
+        return JsonResult.build(200, "获取成功", array);
     }
 
     /**
      * 根据车型ID获取信息
+     *
      * @param id
      * @return
      */
@@ -1194,7 +1204,7 @@ public class ReckonServiceImpl implements ReckonService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return JsonResult.build(200,series.getBrandId()+"",model);
+        return JsonResult.build(200, series.getBrandId() + "", model);
     }
 
     @Override
@@ -1212,8 +1222,8 @@ public class ReckonServiceImpl implements ReckonService {
         joinUsMapper.insertSelective(joinUs);
 
 
-
     }
+
 
     /**
      * 获取验证码
@@ -1230,7 +1240,6 @@ public class ReckonServiceImpl implements ReckonService {
         //*   codeMap.put("date", new Date());//保存发送时间*//*
         jedisClient.set(SMS_CODE + ":" + phone, JsonUtils.objectToJson(codeMap));//写入缓存
         jedisClient.expire(SMS_CODE + ":" + phone, 60 * 5);//5分钟过期
-
 
 
         /**
@@ -1352,7 +1361,7 @@ public class ReckonServiceImpl implements ReckonService {
             JSONObject object = new JSONObject();
             object.put("district", district.getName());
             object.put("id", district.getId());
-            object.put("totalNumber",totalNumber);
+            object.put("totalNumber", totalNumber);
             example.clear();
             TbBusinessExample.Criteria criteria = example.createCriteria();
             criteria.andDelflagEqualTo(0);
@@ -1367,7 +1376,7 @@ public class ReckonServiceImpl implements ReckonService {
             for (TbBusiness tbBusiness : tbBusinesses) {
                 JSONObject object1 = new JSONObject();
                 object1.put("address", tbBusiness.getAddress());
-                object1.put("img",tbBusiness.getLogo());
+                object1.put("img", tbBusiness.getLogo());
                 object1.put("name", tbBusiness.getBusinessName());
                 object1.put("id", tbBusiness.getId());
                 object1.put("location", tbBusiness.getLocation());
@@ -1401,6 +1410,21 @@ public class ReckonServiceImpl implements ReckonService {
             mapList.add(map);
         }
         return JsonResult.build(200, "获取成功", mapList);
+    }
+
+
+    /**
+     * 测试上传文件到OSS
+     *
+     * @return
+     */
+
+    @Override
+    public JsonResult testUploadOss(String json) {
+        json= jedisClient.get(BUSINESS_ADDRESS);
+        JsonResult result= fileUploadService.uploadFile(json, "test/v0.0.1/","businessAddress.json");
+
+        return result;
     }
 }
 

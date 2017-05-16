@@ -18,7 +18,7 @@ public class TokenFilter extends HandlerInterceptorAdapter {
         String token = request.getHeader("X-Maizhong-AppKey");
 
         //获取Token
-        if ("/rest/app/getTokenByDeviceId".equals(requestURI)){
+        if ("/rest/app/getTokenByDeviceId".equals(requestURI)||"/rest/app/getVersion".equals(requestURI)){
             return true;
         }
 

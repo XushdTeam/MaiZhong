@@ -1,5 +1,8 @@
 package com.maizhong.rest.service.impl;
 
+import com.aliyun.oss.OSSClient;
+import com.aliyun.oss.model.ObjectMetadata;
+import com.aliyun.oss.model.PutObjectResult;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.target.ServiceLog;
@@ -7,8 +10,9 @@ import com.maizhong.common.utils.FileUploadUtil;
 import com.maizhong.rest.service.FileUploadService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,45 +41,19 @@ public class FileUploadServiceImpl implements FileUploadService {
     // aliOSS
 
     @Value("${ENDPOINT}")
-    private String ENDPOINT;
+    private  String ENDPOINT;
 
     @Value("${ACCESSKEYID}")
-    private String ACCESSKEYID;
+    private  String ACCESSKEYID;
 
     @Value("${ACCESSKEYSECRET}")
-    private String ACCESSKEYSECRET;
+    private  String ACCESSKEYSECRET;
 
     @Value("${BUCKETNAME}")
-    private String BUCKETNAME;
+    private  String BUCKETNAME;
 
     @Value("${IMGURL}")
-    private String IMGURL;
-
-
-
-//    public JsonResult uploadImg(MultipartFile filedata,String pathKey) {
-//
-//        try{
-//            if (filedata.isEmpty()) return JsonResult.build(OperateEnum.FILE_EMPTY);
-//            if (filedata.getSize() > 500 * 1024) return JsonResult.build(OperateEnum.FILE_SIZE);
-//
-//            String filePath = "/"+ TimeUtils.getYear()+"/"+TimeUtils.getMonth()+"/"+TimeUtils.getDay();
-//
-//            String originalFilename = filedata.getOriginalFilename();
-//            //新文件名
-//            String newFileName = IDUtils.genImageName()+originalFilename.substring(originalFilename.lastIndexOf("."));
-//            //转存文件,上传到FTP
-//            FtpUtil.uploadFile(FTP_SERVER_IP,FTP_SERVER_PORT,FTP_SERVER_USERNAME,FTP_SERVER_PASSWORD
-//            ,pathKey,filePath,newFileName,filedata.getInputStream());
-//
-//            return JsonResult.build(200,OperateEnum.FILE_UPLOAD_SUCCESS.getStateInfo(),IMAGE_BASE_URL+pathKey+filePath+"/"+newFileName);
-//
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            return JsonResult.build(OperateEnum.FAILE);
-//        }
-//    }
-
+    private  String IMGURL;
     /**
      * 获取OSS对象参数
      * @return
@@ -107,4 +85,40 @@ public class FileUploadServiceImpl implements FileUploadService {
             return JsonResult.build(OperateEnum.FAILE);
         }
     }
+
+    /**
+     * 上传file到OSS
+     * @param json
+     * @param diskName
+     * @param fileName
+     * @return
+     */
+    @Override
+    public JsonResult uploadFile(String json, String diskName, String fileName) {
+        InputStream is= null;
+        try {
+            is = new ByteArrayInputStream(json.getBytes("utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        OSSClient client = new OSSClient(ENDPOINT, ACCESSKEYID, ACCESSKEYSECRET);
+        String resultStr = null;
+        try {
+            //创建上传Object的Metadata
+            ObjectMetadata metadata = new ObjectMetadata();
+            metadata.setContentLength(is.available());
+            metadata.setCacheControl("no-cache");
+            metadata.setHeader("Pragma", "no-cache");
+            metadata.setContentEncoding("utf-8");
+            metadata.setContentType("application/json");
+            //上传文件
+            PutObjectResult putResult = client.putObject(BUCKETNAME, diskName + fileName, is, metadata);
+        } catch (Exception e) {
+            JsonResult.Error("上传阿里云OSS服务器异常." + e.getMessage());
+        }
+        return JsonResult.OK(IMGURL+diskName+fileName);
+    }
+
+
 }
