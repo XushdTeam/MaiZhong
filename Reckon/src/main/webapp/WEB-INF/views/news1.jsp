@@ -32,13 +32,13 @@
     <div class="t_cen">
         <a href="/" class="logo"><img src="/resources/img/logo.png"></a>
         <ul class="t_right">
-            <li><a href="/" >首页</a></li>
+            <li><a href="/" target="_blank">首页</a></li>
 
-            <li><a href="/sale">我要卖车</a></li>
-            <li><a href="/join">销售商加盟</a></li>
-            <li><a href="/app">APP下载</a></li>
-            <li><a href="/help">帮助中心</a></li>
-            <li style="display: none;" id="user_li"><a href="/per/or"  >个人中心</a></li>
+            <li><a href="/sale"target="_blank">我要卖车</a></li>
+            <li><a href="/join"target="_blank">销售商加盟</a></li>
+            <li><a href="/app"target="_blank">APP下载</a></li>
+            <li><a href="/help"target="_blank">帮助中心</a></li>
+            <li style="display: none;" id="user_li"><a href="/per/or"  target="_blank">个人中心</a></li>
         </ul>
         <ul class="lon" style="margin-top: 0px;">
             <li >
@@ -47,6 +47,12 @@
             </li>
             <li>
                 <a href="javascript:void(0)" class="two" id="exit" style="display:none" onclick="exit();">退出</a>
+            </li>
+            <li >
+                <img src="/resources/img/erwei.jpg" onmouseover="javascript:$('#erw').show()" onmouseleave="javascript:$('#erw').hide()" >
+                <div style="display: none;position: absolute;z-index: 1989" id="erw">
+                    <img src="/resources/img/m_11.jpg" width="150" >
+                </div>
             </li>
         </ul>
     </div>
