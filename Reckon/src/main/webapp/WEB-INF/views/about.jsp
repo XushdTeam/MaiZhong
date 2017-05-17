@@ -350,9 +350,40 @@
 
                     </style>
 
+                   <div class="pt">
+                        <p class="p1">销售商加盟</p>
+                        <p class="p2">公平公正公开地未商家提供安全可靠二手车源渠道，各种车型应有尽有</p>
+                        <p class="p3">快来成为迈众汽车的销售渠道商吧</p>
+                       <button class="contact"><a href="#abc">联系我们</a></button>
+                   </div><!--pt end-->
 
+                    <div class="zongz">
+                        <h2>平台宗旨</h2>
+                        <p class="p5"><span>公平</span> <span>公正</span> <span>公开</span></p>
+                        <p class="p6">为客户构建一个安全稳定的资源渠道</p>
+                    </div><!--zongz end-->
 
-                    <div class="help_howjoin">
+                    <div class="yous">
+                        <h2>四大平台优势</h2>
+                        <dl>
+                            <dt>车型齐全 </dt>
+                            <dd>各种车型应有尽有</dd>
+                        </dl>
+                        <dl>
+                            <dt>数量众多 </dt>
+                            <dd>每天都有几百辆车出售</dd>
+                        </dl>
+                        <dl>
+                            <dt>过户快速</dt>
+                            <dd>专业过户团队</dd>
+                        </dl>
+                        <dl>
+                            <dt>系统优势 </dt>
+                            <dd>操作便捷 反应快速 使用简单</dd>
+                        </dl>
+                    </div><!--yous end-->
+
+                    <div class="help_howjoin"  id="abc">
                         <h1>如何加入平台</h1>
                         <div class="help_bid_line"></div>
                         <div class="help_form">
@@ -451,28 +482,6 @@
     })
 
 
-//    $(document).ready(function() {
-//        $("#oneLink").click(function() {
-//            $("html, body").animate({
-//                scrollTop: $("#one").offset().top }, {duration: 500,easing: "swing"});
-//            return false;
-//        });
-//        $("#twoLink").click(function() {
-//            $("#two").show();
-//            $("#one").hide();
-//            $("html, body").animate({
-//                scrollTop: $("#two").offset().top }, {duration: 500,easing: "swing"});
-//            return false;
-//        });
-//        $("#treLink").click(function() {
-//            $("#tre").show();
-//            $("#two").hide();
-//
-//            $("html, body").animate({
-//                scrollTop: $("#tre").offset().top }, {duration: 500,easing: "swing"});
-//            return false;
-//        });
-//    });
 </script>
 
 
