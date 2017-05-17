@@ -66,4 +66,6 @@ public interface AppService {
     JsonResult getAppGZDetail(HttpServletRequest request);
 
     JsonResult getVersion();
+
+    JsonResult getModelById(String id);
 }

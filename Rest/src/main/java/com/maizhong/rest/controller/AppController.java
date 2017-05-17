@@ -157,7 +157,7 @@ public class AppController {
     @ResponseBody
     public JsonResult getModelById(@PathVariable("id") String id) {
 
-        JsonResult result = reckonService.getModelById(id);
+        JsonResult result = appService.getModelById(id);
         return result;
     }
 
