@@ -111,7 +111,7 @@ public class FileUploadServiceImpl implements FileUploadService {
             metadata.setCacheControl("no-cache");
             metadata.setHeader("Pragma", "no-cache");
             metadata.setContentEncoding("utf-8");
-            metadata.setContentType("application/json");
+            metadata.setContentType("application/json;charset=UTF-8");
             //上传文件
             PutObjectResult putResult = client.putObject(BUCKETNAME, diskName + fileName, is, metadata);
         } catch (Exception e) {

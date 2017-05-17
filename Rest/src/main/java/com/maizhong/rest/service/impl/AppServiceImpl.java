@@ -1266,4 +1266,39 @@ public class AppServiceImpl implements AppService {
         }
         return null;
     }
+
+
+    /**
+     * APP根据id获取model
+     * @param id
+     * @return
+     */
+    @Override
+    public JsonResult getModelById(String id) {
+
+        Model model = null;
+        Series series = null;
+        JSONObject object=new JSONObject();
+        try {
+            String car_model = jedisClient.hget("CAR_MODEL", id);
+            model = JsonUtils.jsonToPojo(car_model, Model.class);
+            series = seriesMapper.selectByPrimaryKey(model.getSeriesId());
+            object.put("max_reg_year",model.getMaxRegYear());
+            object.put("liter",model.getLiter());
+            object.put("gear_type",model.getGearType());
+            object.put("model_id",model.getModelId());
+            object.put("model_year",model.getModelYear());
+            object.put("min_reg_year",model.getMinRegYear());
+            object.put("discharge_standard",model.getDischargeStandard());
+            object.put("short_name",model.getShortName());
+            object.put("model_name",model.getModelName());
+            object.put("model_price",model.getModelPrice());
+            object.put("seat_number",model.getSeatNumber());
+            object.put("group",0);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return JsonResult.build(200, series.getBrandId() + "", object);
+    }
 }
