@@ -644,7 +644,7 @@ ul.t_right a.hover{ background: #f60;color: #fff; }
 .ys_cen .ys_right{ width: 500px; float: left}
 .ys_cen h2{ font-size: 36px; color: #000; font-weight: 500; line-height: 70px}
 .ys_cen p{ font-size: 18px; color: #666; line-height: 30px; margin-top: 10px}
-.ys_cen img{ border-radius: 100px; float: right; margin-left: 60px}
+.ys_cen img{ border-radius: 100%; float: right; margin-left: 60px}
 .bg_none .ys_left{ padding-left: 60px}
 .bg_none .ys_right img{ margin-right: 50px; margin-left: 0}
 
