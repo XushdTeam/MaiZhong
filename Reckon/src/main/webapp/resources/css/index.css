@@ -82,7 +82,7 @@ img,input{vertical-align:middle; outline:none}
 .jiao .j_cen .p1{ width: 80%; margin: 10px auto}
 .jiao .j_cen .j_left a{ color: #fff}
 .jiao .j_cen .j_left .h2{font-size: 24px;width: 80%; margin:10px auto 0; text-align: center; line-height: 43px;}
-.jiao .j_cen .j_left .j_two{ width: 198px; height: 148px; background: #f60; margin-top: 10px;overflow: hidden}
+.jiao .j_cen .j_left .j_two{ width: 198px; height: 160px; background: #f60; margin-top: 10px;overflow: hidden}
 .jiao .j_cen .j_right{ width: 950px; float: right;}
 .result-top {
     border: 1px solid #f2f2f2;
@@ -293,7 +293,7 @@ div#r-storelist-all {
     width: 328px;
     box-shadow: 0 0 10px rgba(0,0,0,.12);
     float: left;
-    height: 298px;
+    height: 318px;
     margin-left: 14px;
     padding: 10px 0 30px 30px;
 }
@@ -827,4 +827,10 @@ ul.t_right a.hover{ background: #f60;color: #fff; }
     -webkit-box-shadow: inset 0 0 2px #f2f2f2;
     box-shadow: inset 0 0 2px #f2f2f2;
     background-color: #fafafa;
+}
+
+
+.btns span.tips {
+    width: 600px;
+    margin: 0 auto; display: block;
 }
