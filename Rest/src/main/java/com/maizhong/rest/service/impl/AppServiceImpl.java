@@ -1301,4 +1301,29 @@ public class AppServiceImpl implements AppService {
         }
         return JsonResult.build(200, series.getBrandId() + "", object);
     }
+
+    /**
+     * 收车数量
+     * @return
+     */
+    @Override
+    public JsonResult getSaleNum() {
+        String sale_num=null;
+        try {
+            sale_num= jedisClient.get("SALE_NUM");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (StringUtils.isNotBlank(sale_num)){
+            return  JsonResult.build(200,"获取成功",sale_num);
+        }
+
+        Long num=95895L;
+        try {
+            jedisClient.set("SALE_NUM",num+"");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return  JsonResult.build(200,"获取成功",num);
+    }
 }

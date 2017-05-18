@@ -68,4 +68,6 @@ public interface AppService {
     JsonResult getVersion();
 
     JsonResult getModelById(String id);
+
+    JsonResult getSaleNum();
 }
