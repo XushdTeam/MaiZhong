@@ -393,4 +393,15 @@ public class AppController {
         JsonResult result = appService.getVersion();
         return result;
     }
+
+    /**
+     * 获取销售数量
+     * @return
+     */
+    @RequestMapping(value = "/getSaleNum")
+    @ResponseBody
+    public JsonResult getSaleNum(){
+        JsonResult result=appService.getSaleNum();
+        return result;
+    }
 }
