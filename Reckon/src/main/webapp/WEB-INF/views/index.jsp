@@ -336,7 +336,7 @@
                     <span class="sub-title">热门车系：</span>
                     <ul class="hot-prods-list">
                         <c:forEach items="${hotSeries}" var="item">
-                            <li><a title="${item.seriesName}" id="series_${item.seriesId}" href="javascript:selectSeries('${item.seriesId}')" class="no_hover">${item.seriesName}</a></li>
+                            <li><a title="${item.seriesName}" id="series_${item.seriesId}" href="javascript:selectSeriest('${item.seriesId}')" class="no_hover">${item.seriesName}</a></li>
                         </c:forEach>
 
                     </ul>
@@ -353,7 +353,7 @@
                             <span class="sub-title">{{=it[i].gn}}：</span>
                             <ul class="hot-prods-list">
                                 {{ for(var j=0,len1=it[i].child.length;j<len1; j++) { }}
-                                <li><a title="{{=it[i].child[j].series_name}}" id="series_{{=it[i].child[j].series_id}}"   href="javascript:selectSeries('{{=it[i].child[j].series_id}}')" class="no_hover">{{=it[i].child[j].series_name}}</a></li>
+                                <li><a title="{{=it[i].child[j].series_name}}" id="seriesh_{{=it[i].child[j].series_id}}"   href="javascript:selectSeries('{{=it[i].child[j].series_id}}')" class="no_hover">{{=it[i].child[j].series_name}}</a></li>
                                 {{ } }}
                             </ul>
                         </div>
@@ -446,6 +446,9 @@
                             width: 379px;
                            padding: 5px 20px;
                             display: none;
+                        }
+                        div#serises_list {
+                            position: relative !important;
                         }
                     </style>
                     <img class="lazy-load img_loaded" id = "4simg" src="/resources/img/1_03.jpg " alt="4s店图片" style="display: block;" width="410" height="318">
@@ -723,6 +726,28 @@
     var selectSeries =function(seriesId){
 
 
+        var id = '#seriesh_'+seriesId;
+
+        var X = $(id).offset().top-20;
+        var Y = $(id).offset().left-400;
+        $(id).css({'color':'#F60'})
+
+        $("#car_model_list").empty();
+        $("#car_model_list").html('<div style="margin:0 auto;margin-top:50%;text-align: center;"><p style="padding-left: 0px;height:32px;line-height: 32px;">'+
+                '<img src="/resources/img/meta_loading.gif"></p></div>');
+
+
+        $("#car_model").css({"top":X,'left':Y}).show();
+
+
+
+        $.getJSON("/model/model_series/" + seriesId, function(d) {
+            carmodelHtml(d.data)
+        })
+    }
+    var selectSeriest =function(seriesId){
+
+
         var id = '#series_'+seriesId;
 
         var X = $(id).offset().top-20;
@@ -742,7 +767,6 @@
             carmodelHtml(d.data)
         })
     }
-
     function carmodelHtml(a) {
 
         var b = $("#car_model_list"),g='',e='',c='<p onclick="carModeSelect(\'%id\')" class="pinpailist list_3 mylist%css simple_%id" id="%id" rel="%date" data-price="%price" data-name="%modelName" data-min="%min" data-max="%max">%name</p>',

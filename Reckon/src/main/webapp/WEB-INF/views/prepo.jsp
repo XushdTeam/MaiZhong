@@ -73,19 +73,19 @@
    </dl>
 
     <dl>
-        <dt><img src="../resources/img/ys_12.jpg"></dt>
+        <dt><img src="../resources/img/ys_07.jpg"></dt>
         <dd class="dd1">全新卖车方式</dd>
         <dd>直接线上成交 省时、省力、省心</dd>
     </dl>
 
     <dl>
-        <dt><img src="../resources/img/ys_07.jpg"></dt>
+        <dt><img src="../resources/img/ys_09.jpg"></dt>
         <dd class="dd1">不挑车</dd>
         <dd>悟空收车不挑车合法合规均收购</dd>
     </dl>
 
     <dl>
-        <dt><img src="../resources/img/ys_09.jpg"></dt>
+        <dt><img src="../resources/img/ys_12.jpg"></dt>
         <dd class="dd1">速度</dd>
         <dd>最快当天成交，当天付款</dd>
     </dl>
