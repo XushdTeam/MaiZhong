@@ -22,6 +22,9 @@
     <script src="/resources/js/jquery.cookie.min.js"></script>
     <script src="http://cdn.bootcss.com/layer/3.0.1/layer.min.js" type="text/javascript"></script>
     <script src="/resources/js/js.js"></script>
+    <script language="javascript">
+        function imgdragstart(){return false;}
+    </script>
 </head>
 <body>
 <div class="top e_top">
@@ -352,7 +355,7 @@
 
                    <div class="pt">
                         <p class="p1">销售商加盟</p>
-                        <p class="p2">公平公正公开地未商家提供安全可靠二手车源渠道，各种车型应有尽有</p>
+                        <p class="p2">公平公正公开地为商家提供安全可靠二手车源渠道，各种车型应有尽有</p>
                         <p class="p3">快来成为迈众汽车的销售渠道商吧</p>
                        <button class="contact"><a href="#abc">联系我们</a></button>
                    </div><!--pt end-->
@@ -616,6 +619,11 @@
         },'json');
 
     }
+</script>
+
+
+<script language="javascript">
+    for(i in document.images)document.images[i].ondragstart=imgdragstart;
 </script>
 </body>
 </html>

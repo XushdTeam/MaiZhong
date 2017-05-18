@@ -26,6 +26,9 @@
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
     <script src="/resources/js/jquery.cookie.min.js"></script>
     <script src="/resources/js/js.js"></script>
+    <script language="javascript">
+        function imgdragstart(){return false;}
+    </script>
 </head>
 <body>
 <!--头部开始-->
@@ -190,6 +193,11 @@
         $.cookie("token",null,{path:"/"});
         window.location.reload()
     }
+</script>
+
+
+<script language="javascript">
+    for(i in document.images)document.images[i].ondragstart=imgdragstart;
 </script>
 
 </body>

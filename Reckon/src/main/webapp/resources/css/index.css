@@ -352,6 +352,7 @@ table td img{ width: 70px; }
 .wz dl.dl2 dt{ width: 330px; float: left}
 .wz dl.dl2 dd{ width:270px; float: left; margin-left: 20px}
 .wz dl.dl2 dd.dd1{ font-size: 18px; color: #000; margin: 10px 0 10px 20px}
+.wz dl.dl2 dd.dd2{ font-size: 16px; margin: 10px 0 10px 20px;color: #333}
 .wz dl.dl2 dd.dd3{ text-align: right; padding: 30px 0}
 
 
