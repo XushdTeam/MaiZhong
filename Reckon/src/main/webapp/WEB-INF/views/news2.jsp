@@ -25,6 +25,9 @@
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
     <script src="/resources/js/jquery.cookie.min.js" type="text/javascript"></script>
     <script src="/resources/js/js.js"></script>
+    <script language="javascript">
+        function imgdragstart(){return false;}
+    </script>
 </head>
 <body>
 
@@ -62,176 +65,88 @@
     <div class="X_con">
         <h2>文章详情</h2>
         <div class="x_left">
-            <h3>二手车行业存在一个潜规则-----------塞价</h3>
+            <h3>这是一篇硬文︱因为悟空收车的优惠活动太多啦</h3>
+            <p  style=" text-align: right; font-size: 17px; color: #999; width: 700px; margin: 20px 0">2017年5月18日 作者：小悟空</p>
+            <p style=" text-align: center"><img src="/resources/img/r1.jpg"></p>
             <p class="MsoNormal" style="text-indent:24.1pt;vertical-align:baseline;">
-                <b><span style="font-size:16px;line-height:1.5;color:#E53333;">塞价</span></b><span style="font-size:16px;line-height:1.5;">是 “黄牛”最常用的收车手段，很多朋友在卖车前都会通过网络电话广播或者二手车市场来咨询自己车辆的价格，但一般很难得到准确的市场行情，“黄牛”一般都会在您询价的时候给报一个虚高于市场的价格，因为他明白您是在询价，不是当时成交，报高价才能吸引您再次回来。 </span><span></span>
+                <b><span style="font-size:16px;line-height:50px; text-align: center; display: block">写在最前面，想快速成为悟空会员；</span></b>
+                <span style="display: block; text-align: center;font-size: 24px"><a href="/login" style="color:#E53333; "> 请戳我</a></span>
             </p>
-            <p class="MsoNormal" style="text-indent:24.0pt;vertical-align:baseline;">
-                <span style="font-size:16px;line-height:1.5;">碰到询价的客户，“黄牛”一般会问两个问题。</span><span> </span>
-            </p>
-            <p class="MsoNormal" style="text-indent:24.0pt;vertical-align:baseline;">
-                <span style="font-size:16px;line-height:1.5;">今天能卖吗？</span><span> </span>
-            </p>
-            <p class="MsoNormal" style="text-indent:24.0pt;vertical-align:baseline;">
-                <span style="font-size:16px;line-height:1.5;">想卖多少钱？</span><span> </span>
-            </p>
-            <p class="MsoNormal" style="text-indent:24.0pt;vertical-align:baseline;">
-                <span style="font-size:16px;line-height:1.5;">看着随便问的两个问题实际上就要确定怎么塞价，塞多少钱合适，第一个问题是想确定客户是出于询价阶段还是着急卖，自己此时要不要塞价，第二个问题就是了解客户的心理低价，确定塞多少钱合适，也会遇到一些警惕性非常高的客户，不作直接的回答，也不要紧，“黄牛”一般非常有经验，应对自如，有些客户会说，价格合适就马上卖，那“黄牛”紧跟着会问：</span><span style="font-size:16px;line-height:1.5;">“</span><span style="font-size:16px;line-height:1.5;">手续带齐了吗？我帮你看看吧，一般人不到真实卖车的时候不会带着齐全的手续，或是显得很随便的问一问，是不是换新车呀？还会借机跟您侃一通新车的品牌好坏等，都是要确定客户是在询价还是马上就能卖？第二个问题是要摸出客户的心理底价，有没有被人塞过价，塞了多少钱，自己要塞多少钱合适，这个是有一定的技术含量的。
-用悟空收车平台，不被潜规则，评估项属实，绝不议价，快速到账省去东奔西跑。</span>
-            </p>
-            <p class="MsoNormal" style="text-indent:24.0pt;vertical-align:baseline;">
-	<span style="font-size:16px;line-height:1.5;"><br />
-</span>
-            </p>
-            <p class="MsoNormal" style="vertical-align:baseline;">
-                <b><span style="color:#E53333;font-size:18px;line-height:1.5;">选什么样的车更保值，悟空收车教你</span></b>
-            </p>
-            <p class="MsoNormal" style="vertical-align:baseline;">
-                <span style="font-size:16px;line-height:1.5;">二手车中不同车型也有其相应的保值率，那就是市场上的热销车。</span><span></span>
-            </p>
-            <p class="MsoNormal" style="vertical-align:baseline;">
-                <span style="font-size:16px;line-height:1.5;">对于二手车市场各车系热销车型，其所有车型保值率大致都有以下共同特征：</span><span></span>
-            </p>
-            <p class="MsoNormal" style="vertical-align:baseline;">
-                <b><span style="font-size:16px;line-height:1.5;">保有量与保值率成正比。</span><span></span></b>
-            </p>
-            <p class="MsoNormal" style="text-indent:24.0pt;vertical-align:baseline;">
-                <span style="font-size:16px;line-height:1.5;">车型热销，保有量大，市场占有率相对较高，价格相对稳定，因此未来保值率较高。比如广汽本田在国内已有</span><span style="font-size:16px;line-height:1.5;">200</span><span style="font-size:16px;line-height:1.5;">万辆车下线，其中</span><span style="font-size:16px;line-height:1.5;">100</span><span style="font-size:16px;line-height:1.5;">万辆是雅阁，飞度是继雅阁之后广本的第二大畅销车型，这两款车型保有量之大可以想像，其保值率自然位居各车系前列。</span><span style="font-size:16px;line-height:1.5;">“</span><span style="font-size:16px;line-height:1.5;">以前要是有辆普桑不用担心卖不掉，现在要是有辆飞度，肯定能赚钱，其正常行情价格一直在</span><span style="font-size:16px;line-height:1.5;">6</span><span style="font-size:16px;line-height:1.5;">万元浮动。</span><span style="font-size:16px;line-height:1.5;">”</span><span style="font-size:16px;line-height:1.5;">这是二手车市场评估人员对飞度的评价。此外，凯越、帕萨特、</span><span style="font-size:16px;line-height:1.5;">CR-V</span><span style="font-size:16px;line-height:1.5;">等热销车也是高保值率的佼佼者。</span><span style="font-size:16px;line-height:1.5;">&nbsp;&nbsp;</span>
-            </p>
-            <p class="MsoNormal" style="text-indent:24.0pt;vertical-align:baseline;">
-	<span style="font-size:16px;line-height:1.5;"><br />
-</span>
-            </p>
-            <p class="MsoNormal" style="vertical-align:baseline;">
-                <b><span style="font-size:16px;line-height:1.5;">品牌认知度影响很大</span><span></span></b>
-            </p>
-            <p class="MsoNormal" style="margin-left:0cm;text-indent:24.0pt;vertical-align:baseline;">
-                <span style="font-size:16px;line-height:1.5;">汽车品牌对保值率的影响非常明显。一般来说，德系车使用两年后的保值率大约为七成左右。在沪上二手车市场，以</span><span style="font-size:16px;line-height:1.5;">POO</span><span style="font-size:16px;line-height:1.5;">、普桑、宝来、帕萨特等大众品牌为代表的德系车是非常抢手的香饽饽，其保值率也最高；其次，骐达、轩逸等日系车燃油经济性方面表现出色，因此也较受欢迎；自主品牌车型中，仅销量巨大的比亚迪</span><span style="font-size:16px;line-height:1.5;">F3</span><span style="font-size:16px;line-height:1.5;">和江淮瑞风较常见，其余品牌车型量少，保值率也低。</span><span style="font-size:16px;line-height:1.5;">&nbsp;</span>
-            </p>
-            <p class="MsoNormal" style="margin-left:0cm;text-indent:24.0pt;vertical-align:baseline;">
-	<span style="font-size:16px;line-height:1.5;"><br />
-</span>
-            </p>
-            <p class="MsoNormal" style="vertical-align:baseline;">
-                <b><span style="font-size:16px;line-height:1.5;">新车价越稳保值率越高</span><span></span></b>
-            </p>
-            <p class="MsoNormal" style="text-indent:24.0pt;vertical-align:baseline;">
-                <span style="font-size:16px;line-height:1.5;">二手车价格评估中很重要的一个参照标准，就是该款新车当时的实际售价，以此为基准按照折旧率的比例进行评估。如一款高配版手动挡凯越，厂家指导价为</span><span style="font-size:16px;line-height:1.5;">10.78</span><span style="font-size:16px;line-height:1.5;">万元，优惠后的实际售价一般为</span><span style="font-size:16px;line-height:1.5;">9.5</span><span style="font-size:16px;line-height:1.5;">万元左右，该车在二手评估时需参照</span><span style="font-size:16px;line-height:1.5;">9.5</span><span style="font-size:16px;line-height:1.5;">万元的价格进行折旧。这说明新车价格越稳定，二手车价越坚挺。</span><span></span>
-            </p>
-            <p class="MsoNormal" style="vertical-align:baseline;">
-                <span style="font-size:16px;line-height:1.5;">而对于一些上市之初定价虚高的车型，二手车经纪公司收购时会压价格，所以尽可能要选择一些成熟企业的产品，价格相对较稳定，短期内还不会停产。</span>
-            </p>
-            <p class="MsoNormal" style="vertical-align:baseline;">
-	<span style="font-size:16px;line-height:1.5;"><br />
-</span>
-            </p>
-            <p class="MsoNormal" style="vertical-align:baseline;">
-                <b><span style="font-size:16px;line-height:1.5;">日常养护也影响保值率</span><span></span></b>
-            </p>
-            <p class="MsoNormal" style="text-indent:24.0pt;vertical-align:baseline;">
-                <span style="font-size:16px;line-height:1.5;">日常养护要考虑两方面，一是使用成本越高，保值率越低。最为明显的表现在美系车型上。虽然美系车性能好，品质高，在品牌价值上也被认可，但其</span><span style="font-size:16px;line-height:1.5;">“</span><span style="font-size:16px;line-height:1.5;">油老虎</span><span style="font-size:16px;line-height:1.5;">”</span><span style="font-size:16px;line-height:1.5;">的特征使车辆的后期使用成本增加了不少。</span><span></span>
-            </p>
-            <p class="MsoNormal" style="text-indent:24.0pt;vertical-align:baseline;">
-                <span style="font-size:16px;line-height:1.5;">另一方面是售后保养越方便，保值率越高。其中大众的车型绝对是沪上二手车市场的销售主力，</span><span style="font-size:16px;line-height:1.5;">500</span><span style="font-size:16px;line-height:1.5;">多家特约维修站遍布全国，形成国内最大的售后服务网络，无论何处都能买到优质价廉的零配件，都能得到便捷的维修服务。相比来说，奇瑞的维修网点在上海就不多，其二手车型市场上几乎看不到。</span>
-            </p>
-            <p class="MsoNormal" style="text-indent:24.0pt;vertical-align:baseline;">
-	<span style="font-size:16px;line-height:1.5;"><br />
-</span>
-            </p>
-            <p class="MsoNormal" style="vertical-align:baseline;">
-                <b><span style="font-size:16px;line-height:1.5;">车按价分，不同市场不同对待</span><span></span></b>
-            </p>
-            <p class="MsoNormal" style="margin-left:27.35pt;vertical-align:baseline;">
-                <span style="font-size:16px;line-height:1.5;">根据价格不同，车辆也分多种档次，而在不同档次的细分领域，各车型所呈现的特征也不尽相同，考察不同款型类别的车型保值率需要区别对待。</span>
-            </p>
-            <p class="MsoNormal" style="margin-left:27.35pt;vertical-align:baseline;">
-	<span style="font-size:16px;line-height:1.5;"><br />
-</span>
-            </p>
-            <p class="MsoNormal" style="margin-left:27.35pt;vertical-align:baseline;">
-                <br />
-            </p>
-            <p class="MsoNormal" style="vertical-align:baseline;">
-                <b><span style="font-size:16px;line-height:1.5;">15</span></b><b><span style="font-size:16px;line-height:1.5;">万元以下车型（经济型车和中级车）</span></b><b><span style="font-size:16px;line-height:1.5;">换车把握后三年</span></b>
-            </p>
-            <p class="MsoNormal" style="text-indent:24.0pt;vertical-align:baseline;">
-                <span style="font-size:16px;line-height:1.5;">这部分车型在市场中占有比例最大，加之这类车型的市场保有量大和保养维修的成熟，使得多数车型的保值率较高。如</span><span style="font-size:16px;line-height:1.5;">POO</span><span style="font-size:16px;line-height:1.5;">、骐达、明锐、凯越等，保有量大，配件便宜，消费者比较青睐，造成其二手车价格居高不下。这一级别二手车型的消费者对品牌的重视程度较弱，而主要关注车型本身的性能和品质表现。简而言之，小车质量越稳定、可靠，保值率也自然提高。</span><span></span>
-            </p>
-            <p class="MsoNormal" style="text-indent:24.0pt;">
-                <span style="font-size:16px;line-height:1.5;">不过，越便宜的车型，在前三年的保值率排名中占据较明显优势，但三年一过，宝来、明锐等原价相对较高的中级车型优势显现，其</span><span style="font-size:16px;line-height:1.5;">4-5</span><span style="font-size:16px;line-height:1.5;">年的保值率较高。因为一般车辆到了第三、第四年，行驶里程已经接近十万公里，需要进行一些比较大的维修保养项目，这个时期最能反映车辆品质的差异。这部分车主要换车，最好把握住第四年和第五年这个黄金节点。如果你的车够保值，这时最能体现车辆的保值率优势。</span>
-            </p>
-            <p class="MsoNormal" style="text-indent:24.0pt;">
-	<span style="font-size:16px;line-height:1.5;"><br />
-</span>
-            </p>
-            <p class="MsoNormal" style="vertical-align:baseline;">
-                <b><span style="font-size:16px;line-height:1.5;">15</span></b><b><span style="font-size:16px;line-height:1.5;">万元以上车型（中高级车）
-高龄车辆难出手</span><span></span></b>
-            </p>
-            <p class="MsoNormal" style="text-indent:24.0pt;vertical-align:baseline;">
-                <span style="font-size:16px;line-height:1.5;">中高级车的保值率在使用期的前五年规律与中级车的保值率基本一致，但从第六年后中高级车的贬值率比中级车的贬值率要高一些。一般来说价格越高的车型保值率也就越低。正常情况下，一年的旧车折旧</span><span style="font-size:16px;line-height:1.5;">20%</span><span style="font-size:16px;line-height:1.5;">，之后每过一年折旧</span><span style="font-size:16px;line-height:1.5;">10%</span><span style="font-size:16px;line-height:1.5;">，车价越高的车型掉价也越快，因此保值率也就相对要低。</span>
-            </p>
-            <p class="MsoNormal" style="text-indent:24.0pt;vertical-align:baseline;">
-	<span style="font-size:16px;line-height:1.5;"><br />
-</span>
-            </p>
-            <p class="MsoNormal" style="vertical-align:baseline;">
-                <b><span style="font-size:16px;line-height:1.5;">高档车及进口车
-三大品牌仍是保证</span><span></span></b>
-            </p>
-            <p class="MsoNormal" style="text-indent:24.0pt;vertical-align:baseline;">
-                <span style="font-size:16px;line-height:1.5;">奥迪、宝马、奔驰三大品牌是这部分车型中保值率最高的。它们的生产历史比较长、质量比较稳定，品牌形象高，保有量大。不过这些二手车型的购买者并非完全是家用，像奥迪</span><span style="font-size:16px;line-height:1.5;">A6</span><span style="font-size:16px;line-height:1.5;">给人的官车形象已经深入人心，就是众多商务人士或单位追求的热点车型，还有的则是被购买作婚庆用车。</span><span></span>
-            </p>
-            <p class="MsoNormal" style="text-indent:24.0pt;vertical-align:baseline;">
-                <span style="font-size:16px;line-height:1.5;">越高档车型越容易受到换代车型影响，尤其以</span><span style="font-size:16px;line-height:1.5;">40</span><span style="font-size:16px;line-height:1.5;">万元以上的车型最为明显。如</span><span style="font-size:16px;line-height:1.5;">2004-2005</span><span style="font-size:16px;line-height:1.5;">年间的奥迪</span><span style="font-size:16px;line-height:1.5;">A6</span><span style="font-size:16px;line-height:1.5;">，其老款车型二手价格约为</span><span style="font-size:16px;line-height:1.5;">16</span><span style="font-size:16px;line-height:1.5;">万元，一旦换代，即使是同一年份，价格立马高出</span><span style="font-size:16px;line-height:1.5;">8</span><span style="font-size:16px;line-height:1.5;">万元，有的甚至提高</span><span style="font-size:16px;line-height:1.5;">20%</span><span style="font-size:16px;line-height:1.5;">。</span><span></span>
-            </p>
-            <p class="MsoNormal" style="text-indent:24.0pt;vertical-align:baseline;">
-                <span style="font-size:16px;line-height:1.5;">这部分车型中，最好卖的莫过于帕萨特。梁文杰告诉记者，</span><span style="font-size:16px;line-height:1.5;">“</span><span style="font-size:16px;line-height:1.5;">帕萨特基本上收一辆就能卖一辆，</span><span style="font-size:16px;line-height:1.5;">”</span><span style="font-size:16px;line-height:1.5;">在二手车市场，帕萨特车型每月的销量都领先。统计来看，帕萨特、雅阁、君威等卖的较好的车型近</span><span style="font-size:16px;line-height:1.5;">80%</span><span style="font-size:16px;line-height:1.5;">的车身颜色均为黑色，这和它们主打公务车市场有很大关系。</span><span></span>
-            </p>
-            <p class="MsoNormal" style="text-indent:24.0pt;vertical-align:baseline;">
-                <span style="font-size:16px;line-height:1.5;">日系车在二手车市场里销得不错，但同为日系，内部排名今年以来悄然发生了变化。</span><span style="font-size:16px;line-height:1.5;">“</span><span style="font-size:16px;line-height:1.5;">前几年，丰田和本田系列车型是同等受欢迎的，但受召回影响，丰田车型在二手车市场的保值率开始下跌。市场售价差不多的凯美瑞和雅阁，在二手车市场上现在相差</span><span style="font-size:16px;line-height:1.5;">4000-5000</span><span style="font-size:16px;line-height:1.5;">元。</span><span style="font-size:16px;line-height:1.5;">”</span><span style="font-size:16px;line-height:1.5;">相比来说，日产车的保值率在中高级车二手市场倍受青睐，如天籁，其保值率就一直很稳定。由于买这部分车型的车主不差钱，观念新，重视排场和外观，其对于车的理解大都认为新款比旧款好，所以多半会多掏钱购买相对款型较新的车型。老车型的退市往往意味着其在二手市场上将加快贬值步伐，所以对于购买该级别二手车的消费者来说，应尽量避免购买即将换代的车型。</span><span></span>
-            </p>
-            <p class="MsoNormal" style="text-indent:24.0pt;vertical-align:baseline;">
-                <span style="font-size:16px;line-height:1.5;">高档和进口车型的保值率受品牌的影响因素非常大。相比上面三大高知名度的高档车品牌，一些小众的进口车品牌在二手车市场的价格要差许多。如斯巴鲁，</span><span style="font-size:16px;line-height:1.5;">40</span><span style="font-size:16px;line-height:1.5;">多万元的新车，使用一年后在二手车市场的价格就跌了近一半；二手市场上</span><span style="font-size:16px;line-height:1.5;">2007</span><span style="font-size:16px;line-height:1.5;">年的萨博，三年时间折了</span><span style="font-size:16px;line-height:1.5;">20</span><span style="font-size:16px;line-height:1.5;">万元。诸如类似的还有沃尔沃、雷诺等品牌。一般大众化的车价格透明，小众车型价格起伏则很大。</span><span></span>
-            </p>
-            <p class="MsoNormal" style="text-indent:24.0pt;">
-                <span style="font-size:16px;line-height:1.5;">&nbsp;</span>
-            </p>
-            <span style="font-size:16px;line-height:1.5;"></span>
-            <p>
-                <br />
-            </p>
+            <p style="display: block; text-align: center;font-size: 24px; line-height: 65px">在聊优惠之前我想问大家一个问题</p>
+            <p style=" text-align: center"><img src="/resources/img/r4.jpg"></p>
+            <p style=" text-align: center">就这个问题，身边的朋友们是这么说的：</p>
+            <p style="width: 80%; text-align: center; margin: 20px auto">@康康康：第一次因为现实原因，放弃自己喜欢了很久的人。现在已经记不清她具体长什么样了，只有第一次约会的地方成为我心中最美好的风景。</p>
+            <p style=" text-align: center; font-size: 24px; line-height: 65px">我的第一次  <span style="color:#f60">first time</span></p>
+            <p style=" text-align: center"><img src="/resources/img/tu1.jpg"></p>
+            <p style="text-align: center; font-size: 29px; line-height: 46px;color: #000; padding: 0 80px 0 0"><span style="font-size: 50px; font-family: '宋体'">“</span>从此这道风景成为我心中<p>
+            <p style="text-align: center; font-size: 29px;line-height: 46px;color: #000; padding: 0 0 0 80px"> 永远也无法抹去的记忆<span style="font-size: 50px;font-family: '宋体">”</span></p>
+
+
+            <p style="width: 80%; text-align: center; margin: 60px auto 20px">@小zzz：第一次跟这两个兄弟说再见。</p>
+            <p style=" text-align: center; font-size: 24px; line-height: 65px">我的第一次  <span style="color:#f60">first time</span></p>
+            <p style=" text-align: center"><img src="/resources/img/tu2.jpg"></p>
+            <p style="text-align: center; font-size: 29px; line-height: 46px;color: #000; padding: 0 80px 0 0">原来最好的兄弟也不能永远在一起<p>
+            <p style="text-align: center; font-size: 29px;line-height: 46px;color: #000; padding: 0 0 0 220px"> 为了理想各自飞翔</p>
+
+
+            <p style="width: 80%; text-align: center; margin: 60px auto 20px"> @悄钱：第一次买车，当时好激动，又好忐忑。</p>
+            <p style=" text-align: center; font-size: 24px; line-height: 65px">我的第一次  <span style="color:#f60">first time</span></p>
+            <p style=" text-align: center"><img src="/resources/img/tu3.jpg"></p>
+            <p style="text-align: center; font-size: 29px; line-height: 46px;color: #000; padding: 0 80px 0 0">当时买车的时候有优惠活动人很多<p>
+            <p style="text-align: center; font-size: 29px;line-height: 46px;color: #000; padding: 0 0 0 220px"> 我抽奖还赢了一台洗衣机呢</p>
+
+            <p style="width: 80%; text-align: center; margin: 60px auto 20px"> @梦中的阿里：第一次卖车，那时候没有这么多平台，自己去市场感觉被骗了，后悔了好久，永生难忘。</p>
+            <p style=" text-align: center; font-size: 24px; line-height: 65px">我的第一次  <span style="color:#f60">first time</span></p>
+            <p style=" text-align: center"><img src="/resources/img/tu4.jpg"></p>
+            <p style="text-align: center; font-size: 29px; line-height: 46px;color: #000; padding: 0 80px 0 0">心理价越来越低，最后不知道怎么就信了<p>
+            <p style="text-align: center; font-size: 29px;line-height: 46px;color: #000; padding: 0 0 0 220px"> 当时卖车的情景大概是这样的</p>
+
+            <p style=" text-align: center; margin: 40px auto"><img src="/resources/img/r2.jpg"></p>
+            <p style="text-align: center">生活百般滋味</p>
+            <p style="text-align: center">我们要面对太多的第一次</p>
+            <p style="text-align: center">很多事情第一次都是不容易的</p>
+            <p style="text-align: center">但是因为悟空收车</p>
+            <p style="text-align: center">第一次卖车</p>
+            <p style="text-align: center">就可以很省心放心</p>
+            <p style="text-align: center">那么，硬货来了</p>
+            <p style="text-align: center">2017悟空收车第二季优惠活动</p>
+            <p style="text-align: center">前所未有的重磅优惠↓</p>
+            <p style=" text-align: center; margin: 40px auto"><img src="/resources/img/r3.jpg"></p>
+
+            <p style="text-align: center">参与步骤：</p>
+            <p style="text-align: center"> ①</p>
+            <p style="text-align: center"> 点击文章底部 立即抽奖或立即置换</p>
+            <p style="text-align: center">进入活动链接</p>
+            <p style="text-align: center">②</p>
+            <p style="text-align: center"> 在活动页面中按活动步骤参与并填写手机号</p>
+            <p style="text-align: center">（悟空收车优惠将与此手机号绑定，请保证正确填写）</p>
+            <p style="text-align: center"> ③</p>
+            <p style="text-align: center"> 按照活动步骤完成卖车</p>
+            <p style="text-align: center"> 系统将自动开始审核</p>
+            <p style="text-align: center">④</p>
+            <p style="text-align: center"> 审核通过就能赢取礼品啦</p>
+            <p style="text-align: center; font-size: 24px; margin: 40px 0"> 最后，也有吃瓜群众表示— —</p>
+            <p style="text-align: center;"><img src="/resources/img/r5.jpg"></p>
+
+            <p style="text-align: center; margin: 40px 0 0 0 ">我们诚挚地建议你：</p>
+            <p style="text-align: center;">  要卖车，就选悟空收车</p>
+            <p style="text-align: center;"> 快来吧！</p>
+
+           <p style="text-align: center; margin: 40px auto">
+               <button style="background: #f60; border-radius: 8px; border:0; outline: none;color:#fff; font-size: 24px; padding: 7px 20px">立即抽奖</button>
+               <button style="background: #f60; border-radius: 8px; border:0;outline: none;font-size: 24px; padding: 7px 20px;color:#fff; margin-left: 20px">立即置换</button>
+           </p>
+
+          <p style="text-align: center"><img src="/resources/img/logo.png">&nbsp;&nbsp;&nbsp;<img src="/resources/img/m_11.jpg" style="width:10%"></p>
+
+
+
+
 
         </div>
     </div><!--X_con-->
 </div>
 
-<div class="cj" style="margin-top: -40px;">
-    <div class="cj_cen" id="owl-example" style="background: #F8F8F8">
-
-
-        <script id="list-car-tmpl" type="text/x-dot-template">
-            <h2>热收车型</h2>
-            {{ for(var i=0,len=it.length;i<len; i++) { }}
-            <div class="owl-item">
-                <a href="/sale/{{=it[i].paramId}}"  title="{{=it[i].title}}">
-                    <div class="item darkCyan">
-                        <img src="{{=it[i].img}}">
-                        <h3>{{=it[i].title}}</h3>
-                        <p>{{=it[i].param}}</p>
-                        <h4>{{=it[i].price}}</h4>
-                    </div>
-                </a>
-            </div>
-            {{ } }}
-        </script>
-
-
-
-
-
-    </div>
-</div>
 
 
 <!--中间部分end-->
@@ -277,6 +192,10 @@
 
         })
     })
+</script>
+
+<script language="javascript">
+    for(i in document.images)document.images[i].ondragstart=imgdragstart;
 </script>
 </body>
 </html>
