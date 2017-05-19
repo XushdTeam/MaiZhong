@@ -38,7 +38,7 @@
            <li><a href="/help"target="_blank">帮助中心</a></li>
             <li><a href="/per/or"  class="hover"target="_blank">个人中心</a></li>
         </ul>
-        <ul class="lon" >
+        <ul class="lon" style="margin-right: 0px">
             <li >
                 <i class="iconfont icon ">&#xe6a3;</i>
                 <a href="/per/or"  id="user">${phone}</a>

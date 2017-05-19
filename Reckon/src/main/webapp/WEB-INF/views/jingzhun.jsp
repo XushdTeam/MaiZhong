@@ -476,7 +476,7 @@
             $.getJSON('/loginByToken/'+phone+'/'+token,function (d) {
                 if(d.status==200){
                     $("#login").hide();
-
+                    $("#phone").val(phone)
                     var pre = phone.substring(0,3),pbc = phone.substring(8,11);
                     $('#user').html(pre+'****'+pbc).show();
                     $('#exit').show();
@@ -486,11 +486,16 @@
                 }else{
                     $.cookie("phone",null,{path:"/"});
                     $.cookie("token",null,{path:"/"});
+                    $.cookie("token",null,{path:"/"});
                 }
             })
         }
     })
-
+    function exit(){
+        $.cookie("phone",null,{path:"/"});
+        $.cookie("token",null,{path:"/"});
+        window.location.reload()
+    }
 </script>
 </body>
 

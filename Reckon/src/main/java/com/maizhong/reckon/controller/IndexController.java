@@ -10,12 +10,16 @@ import com.maizhong.reckon.DTO.OrderDTO;
 import com.maizhong.reckon.service.IndexService;
 import com.maizhong.reckon.service.LoginService;
 import com.sun.org.apache.xpath.internal.operations.Mod;
+import nl.bitwalker.useragentutils.Browser;
+import nl.bitwalker.useragentutils.OperatingSystem;
+import nl.bitwalker.useragentutils.UserAgent;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -413,6 +417,27 @@ public class IndexController {
     {
         indexService.wanghz(txt_companyname,txt_contactperson,txt_tel,txt_city,txt_remark);
         return JsonResult.OK();
+    }
+
+    @RequestMapping(value = "/app/ac/{acPage}")
+    public String startac(@PathVariable String acPage){
+
+        return acPage;
+    }
+
+    @RequestMapping(value = "/app/download")
+    public String scanDown(HttpServletRequest request,Model model){
+        UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
+        OperatingSystem os = userAgent.getOperatingSystem();
+        String key = os.toString().toLowerCase();
+        if(key.contains("android")){
+            //安卓
+            model.addAttribute("key","android");
+        }else if(key.contains("mac")){
+            //IOS
+            model.addAttribute("key","ios");
+        }
+        return "appdownload";
     }
 
 }
