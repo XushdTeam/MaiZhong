@@ -56,10 +56,10 @@ public class IndexController {
 
 
 
-//    @RequestMapping(value = "/{page}")
-//    public String test(@PathVariable String page){
-//        return page;
-//    }
+   @RequestMapping(value = "/{page}")
+   public String test(@PathVariable String page){
+      return page;
+   }
 
     /**
      * 跳转到活动页
