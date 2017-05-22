@@ -1,13 +1,17 @@
 package com.maizhong.controller;
 
 import com.maizhong.common.dto.PageSearchParam;
+import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.common.target.ControllerLog;
+import com.maizhong.pojo.OrderInfo;
+import com.maizhong.pojo.Orders;
 import com.maizhong.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,7 +28,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    /*@RequiresPermissions("/orders")*/
+
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
     public String orders(Model model) {
         model.addAttribute("baseUrl", "/orders");
@@ -47,44 +51,39 @@ public class OrderController {
         PageResult result = orderService.getOrderList(param);
         return JsonResult.OK(result);
     }
-/*
-    *//**
+/**
      * 订单修改
      *
      * @param id
      * @param model
      * @return
-     *//*
+     */
     @RequestMapping(value = "/orders/handle/{id}")
     public String handle(@PathVariable String id, Model model) {
 
-        model.addAttribute("baseUrl", "/order/orders");
+        model.addAttribute("baseUrl", "/orders/handle/"+id);
         Orders orders = orderService.getOrdersById(Long.valueOf(id));
-
         OrderInfo orderInfo = orderService.getOrdersInfo(orders.getOrderNumber());
         model.addAttribute("orders", orders);
         model.addAttribute("orderInfo", orderInfo);
-        model.addAttribute("handle", "帮助管理/帮助修改");
+        model.addAttribute("handle", "订单管理/订单审核");
         model.addAttribute("saveUrl", "/orders/update");
         return "order/orders_setting";
-
-    }*/
-/*
-    *//**
+    }
+    /**
      * 订单删除
      *
      * @param id
      * @return
-     *//*
-  *//*  @RequiresPermissions("/orders/delete")*//*
+     */
     @ControllerLog(module = "订单管理", methods = "订单删除")
-    @RequestMapping(value = "/orders/delete/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/orders/delete/{id}")
     @ResponseBody
-    public JsonResult helpDelete(@PathVariable long id) {
+    public JsonResult orderDelete(@PathVariable long id) {
         //订单删除
         OperateEnum result = orderService.deleteOrdersById(id);
         return JsonResult.build(result);
-    }*/
+    }
 
 
     /**
@@ -92,38 +91,19 @@ public class OrderController {
      *
      * @param orders
      * @return
-     *//*
-    *//*@RequiresPermissions("/orders/update")*//*
+     */
     @ControllerLog(module = "订单管理", methods = "订单信息修改")
     @RequestMapping(value = "/orders/update", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult ordersUpdate(Orders orders, OrderInfo orderInfo) {
-        OperateEnum result = orderService.updateOrders(orders, orderInfo);
-        return JsonResult.build(result);
-    }*/
-
-/*
-    */
-/**
- * 订单信息修改
- * @param orderInfo
- * @return
- *//*
-
-    */
-/*@RequiresPermissions("/orders/update")*//*
-
-    @ControllerLog(module = "订单管理", methods = "订单信息修改")
-    @RequestMapping(value = "/olrders/updateInfo",method = RequestMethod.POST)
-    @ResponseBody
-    public JsonResult orderInfoUpdate(OrderInfo orderInfo){
-        OperateEnum result=orderService.updateOrderInfo(orderInfo);
+    public JsonResult ordersUpdate(Orders orders) {
+        OperateEnum result = orderService.updateOrders(orders);
         return JsonResult.build(result);
     }
 
 
-
-*/
-
+    @RequestMapping(value = "/testMessage")
+    public String test() {
+        return "/order/test";
+    }
 
 }

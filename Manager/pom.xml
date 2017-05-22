@@ -20,13 +20,13 @@
 
     <packaging>pom</packaging>
 
-
     <dependencies>
         <dependency>
             <groupId>MaiZhong</groupId>
             <artifactId>Common</artifactId>
             <version>1.0.0</version>
         </dependency>
+
     </dependencies>
     <build>
         <!-- 配置插件 -->

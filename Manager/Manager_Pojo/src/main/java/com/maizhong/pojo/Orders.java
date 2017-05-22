@@ -103,8 +103,7 @@ public class Orders {
     public void setDealPrice(String dealPrice) {
         this.dealPrice = dealPrice == null ? null : dealPrice.trim();
     }
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+
     public String getCheckTime() {
         return checkTime;
     }
@@ -152,6 +151,8 @@ public class Orders {
     public void setAddress(String address) {
         this.address = address == null ? null : address.trim();
     }
+
+
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     public Date getReckonTime() {

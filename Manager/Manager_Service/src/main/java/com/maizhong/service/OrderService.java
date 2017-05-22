@@ -1,7 +1,11 @@
 package com.maizhong.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.maizhong.common.dto.PageSearchParam;
+import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.PageResult;
+import com.maizhong.pojo.OrderInfo;
+import com.maizhong.pojo.Orders;
 
 /**
  * Description:
@@ -11,4 +15,12 @@ import com.maizhong.common.result.PageResult;
  */
 public interface OrderService  {
     PageResult getOrderList(PageSearchParam param);
+
+    Orders getOrdersById(Long aLong);
+
+    OrderInfo getOrdersInfo(Long orderNumber);
+
+    OperateEnum updateOrders(Orders orders);
+
+    OperateEnum deleteOrdersById(long id);
 }

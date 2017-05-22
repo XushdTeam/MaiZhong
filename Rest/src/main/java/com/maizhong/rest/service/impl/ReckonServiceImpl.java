@@ -35,10 +35,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -415,6 +412,15 @@ public class ReckonServiceImpl implements ReckonService {
 
     @Override
     public JsonResult getGuzhi(String param) {
+
+        /*测试*/
+        WebSocketTest webSocketTest=new WebSocketTest();
+        JSONObject object2=new JSONObject();
+        object2.put("param",param);
+        webSocketTest.SendMessages(JsonUtils.objectToJson(object2));
+       /*测试*/
+
+
         try {
 
             String redisJson = null;
@@ -884,6 +890,16 @@ public class ReckonServiceImpl implements ReckonService {
      */
     @Override
     public JsonResult updateOrders(String orderNumber, String dealWay, String wayId, String linkMan, String linkPhone, String address, String checkTime) {
+
+         /*测试*/
+        WebSocketTest webSocketTest=new WebSocketTest();
+        JSONObject object=new JSONObject();
+        object.put("orderNumber",orderNumber);
+        object.put("linkMan",linkMan);
+        object.put("linkPhone",linkPhone);
+        webSocketTest.SendMessages(JsonUtils.objectToJson(object));
+/*测试*/
+
         try {
             OrdersExample example = new OrdersExample();
             OrdersExample.Criteria criteria = example.createCriteria();
@@ -916,6 +932,7 @@ public class ReckonServiceImpl implements ReckonService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return JsonResult.OK();
     }
 
@@ -1098,10 +1115,7 @@ public class ReckonServiceImpl implements ReckonService {
                     } else {
                         orderInfo.setMethod("个人");
                     }
-
                     orderDTO.setOrderInfo(orderInfo);//评测信息详情
-
-
                 }
 
             } catch (Exception e) {
@@ -1296,6 +1310,7 @@ public class ReckonServiceImpl implements ReckonService {
      */
     @Override
     public JsonResult userLogin(String smsCode, String phone, String ip) {
+
         String res = null;
         try {
             res = jedisClient.get(SMS_CODE + ":" + phone);//获取缓存内的信息
@@ -1423,7 +1438,6 @@ public class ReckonServiceImpl implements ReckonService {
     public JsonResult testUploadOss(String json) {
         json= jedisClient.get(BUSINESS_ADDRESS);
         JsonResult result= fileUploadService.uploadFile(json, "test/v0.0.1/","businessAddress.json");
-
         return result;
     }
 }
