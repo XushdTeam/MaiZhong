@@ -60,10 +60,10 @@ public class LoginController {
                                  BindingResult bindingResult,
                                  HttpServletRequest request){
         //已经登陆 直接跳转到首页
-         Subject subject = SecurityUtils.getSubject();
-//        if(subject.isAuthenticated()){
-//            return JsonResult.OK("/index");
-//        }
+        Subject subject = SecurityUtils.getSubject();
+        if(subject.isAuthenticated()){
+            return JsonResult.OK("/index");
+        }
         String verifyCode = (String) request.getSession().getAttribute(String.valueOf(SessionEnum.VERIFYCODE_KEY));
         if(!StringUtils.equals(tbUser.getVerifyCode().toLowerCase(),verifyCode)){
             return JsonResult.Error(AuthEnum.VERIFYCODE_ERROR.getStateInfo());

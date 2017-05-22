@@ -362,10 +362,10 @@ table td img{ width: 70px; }
 .you_cen dl{ width: 200px;  margin-top: 50px; float: left; margin-left: 60px; margin-right: 40px}
 .you_cen dl:nth-child(4){ float: right; margin-left: 0}
 
-.you_cen dl dt{ width: 40px; float: left;}
+.you_cen dl dt{ width: 40px; float: left; line-height: 30px}
 .you_cen dl dd{ width: 120px; float: left; margin-left: 10px;color: #fff; font-size: 12px; margin-top: -10px; line-height: 30px}
 .you_cen dl dd.dd1{  font-size: 18px;}
-.you_cen .iconfont{ color: #fff; font-size: 35px;}
+.you_cen .iconfont{ color: #fff; font-size: 35px; font-weight: 400}
 /*a b  c  d*/
 .e_top{ background: #fff;}
 .e_top .tell{ color: #f60;}
@@ -858,3 +858,7 @@ ul.t_right a.hover{ background: #f60;color: #fff; }
     line-height: 84px;
     text-align: center;
     font-size: 45px;}
+.layui-layer{display: inline-block;
+    top:40% !important; height: 120px !important;background:#fff url(/resources/img/correct.png) top center no-repeat !important; box-shadow: 5px  5px 5px #ccc;color: #666 !important;}
+.layui-layer-content{ line-height: 60px; margin-top: 50px;}
+*{ box-sizing: content-box !important;}

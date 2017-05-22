@@ -92,7 +92,7 @@ public class IndexController {
     public String appdown(Model model){
 
         model.addAttribute("key","app");
-        return "prepo";
+        return "app2";
     }
 
     @RequestMapping(value = "/zhihuancar")

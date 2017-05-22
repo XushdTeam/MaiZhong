@@ -1,29 +1,35 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Wang
-  Date: 2017/3/7 0030
-  Time: 下午 7:30
+  User: Xushd
+  Date: 2017/5/22
+  Time: 14:28
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>APP帮助</title>
+    <title>文章管理</title>
     <jsp:include page="../common/head.jsp"/>
 </head>
 <body>
 <div class="main-wrap">
     <blockquote class="layui-elem-quote fhui-admin-main_hd">
-        <h2>APP帮助</h2>
+        <h2>文章管理</h2>
     </blockquote>
     <div class="y-role">
         <div class="search-bar">
             <!--查询区-->
             <form class="layui-form layui-form-pane">
                 <div class="layui-inline">
-                    <label class="layui-form-label">标题名称</label>
+                    <label class="layui-form-label">文章标题</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="title" value="" placeholder="标题名称" class="layui-input">
+                        <input type="text" name="title" value="" placeholder="文章标题" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">文章作者</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="author" value="" placeholder="文章作者" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-inline">
@@ -38,7 +44,7 @@
                     <a class="menu-btn"></a>
                     <div class="l-list">
                         <a class="layui-btn layui-btn-small do-action" data-type="doAddEdit"
-                           data-href="${handleUrl}/new"><i class="fa fa-plus"></i>新增帮助</a>
+                           data-href="${handleUrl}/new"><i class="fa fa-plus"></i>新增文章</a>
                         <a class="layui-btn layui-btn-small do-action" data-type="doRefresh" data-href="${baseUrl}"><i
                                 class="fa fa-refresh"></i>刷新</a>
                         <a class="layui-btn layui-btn-small layui-btn-warm do-action" data-type="doAjax"
@@ -53,16 +59,18 @@
             <table class="layui-table" lay-skin="line">
                 <colgroup>
                     <col width="5%">
-                    <col width="50%">
-                    <col width="15%">
+                    <col width="40%">
                     <col width="10%">
+                    <col width="15%">
+                    <col width="8%">
                     <col width="20%">
                 </colgroup>
                 <thead>
                 <tr>
                     <th>ID</th>
                     <th>标题名称</th>
-                    <th>更新日期</th>
+                    <th>作者</th>
+                    <th>最后修改时间</th>
                     <th>是否启用</th>
                     <th>操作</th>
                 </tr>
@@ -73,8 +81,9 @@
                     <tr>
                         <td>{{ item.id }}</td>
                         <td>{{ item.title }}</td>
-                        <td>{{ item.time }}</td>
-                        <td align="center">{{# if (item.status) { }}
+                        <td>{{ item.author }}</td>
+                        <td>{{ item.editTime }}</td>
+                        <td >{{# if (item.status) { }}
                             <i class="fa fa-toggle-on unlock"></i>
                             {{# } else { }}
                             <i class="fa fa-toggle-off islock"></i>
@@ -110,3 +119,4 @@
 </div>
 </body>
 </html>
+
