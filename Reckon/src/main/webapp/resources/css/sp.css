@@ -21,7 +21,7 @@
     .turntable-bg{ width: 100%; height: 44rem}
     .turntable-bg .rotate{ width:35rem;  left:8rem; top: 3.5rem}
     .huod>img{ width: 100%}
-    .huo_cen p {  text-align: left;  color: #42060c;  padding-left: 2rem;}
+    .huo_cen p {  text-align: left; color: #42060c;  padding-left: 2rem;}
     .cj_cen{ width: 100%}
     .cj_cen .owl-item{ margin:1rem auto; float: none; width: 80%}
     .owl-item .item{ margin: 0 auto; width: 95%}
@@ -71,6 +71,7 @@
     .bg_imgq,.bg_imgt{ height:140px; background-size: cover}
     .ys dl{ width: 49%; margin-right: 0; height: 10rem}
     .zh .ys dl dt img{ width: 100%}
+    .guiz_cen p{ padding: 0 20px}
 }
 
 

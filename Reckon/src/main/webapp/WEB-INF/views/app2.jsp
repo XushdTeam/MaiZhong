@@ -40,7 +40,7 @@
             <li><a href="/sale" target="_blank">我要卖车</a></li>
             <li><a href="/join" target="_blank">销售商加盟</a></li>
             <li><a href="/app" class=" <c:if test="${key=='app'}">hover</c:if>"  >APP下载</a></li>
-           <li><a href="/help" target="_blank">帮助中心</a></li>
+            <li><a href="/help" target="_blank">帮助中心</a></li>
             <li style="display: none;" id="user_li"><a href="/per/or" target="_blank" >个人中心</a></li>
         </ul>
         <ul class="lon" style="margin-top: 0px;">
@@ -62,103 +62,82 @@
 </div><!--top end-->
 
 <!--banner-->
-<div class="bg_imgq"> </div>
+<div class="bg_imgfs">
+    <div class="app_cen">
+        <h2>悟空收车APP</h2>
+        <p class="app_p">手机卖车，一键搞定，卖车就是这么简单！</p>
+        <div class="app_x">
+            <div>
+                <button><img src="/resources/img/a_03.jpg">iphone</button>
+                <button><img src="/resources/img/a_06.jpg">Android</button>
+            </div>
+            <p><img src="../resources/img/m_11.jpg"></p>
+        </div>
+    </div>
+</div>
 <!--banner end-->
 <!--头end-->
 
 
+<div class=" apps bg_none">
+    <div class="ys_cen">
+        <div class="ys_left">
+            <h2>随时关注爱车</br>
+                价格动态</h2>
+
+        </div>
+        <div class="ys_right">
+            <img src="../resources/img/s_11.jpg">
+
+        </div>
+    </div>
+</div>
+<div class="bg_ys apps apps2">
+    <div class="ys_cen">
+
+        <div class="ys_right">
+
+            <img src="../resources/img/s_15.jpg">
+        </div>
+
+        <div class="ys_left">
+            <h2>最新优惠活动</br>
+                一手掌握</h2>
+
+        </div>
+
+    </div>
+</div>
+
+
 <!--四个优势-->
-<div class="ys">
-   <dl>
-       <dt><img src="../resources/img/ys_05.jpg"></dt>
-       <dd class="dd1">二手车收购专家</dd>
-       <dd>悟空收车给你更专业的服务</dd>
-   </dl>
-
+<div class="ys app_you">
+    <h2>随时随地卖车</h2>
     <dl>
-        <dt><img src="../resources/img/ys_07.jpg"></dt>
-        <dd class="dd1">全新卖车方式</dd>
-        <dd>直接线上成交 省时、省力、省心</dd>
+        <dt><i class="icon iconfont icon-search"></i></dt>
+        <dd class="dd1">1、搜索车型</dd>
+
     </dl>
 
     <dl>
-        <dt><img src="../resources/img/ys_09.jpg"></dt>
-        <dd class="dd1">不挑车</dd>
-        <dd>悟空收车不挑车合法合规均收购</dd>
+        <dt><i class="icon iconfont icon-stop"></i></dt>
+        <dd class="dd1">2、获得报价</dd>
+
     </dl>
 
     <dl>
-        <dt><img src="../resources/img/ys_12.jpg"></dt>
-        <dd class="dd1">速度</dd>
-        <dd>最快当天成交，当天付款</dd>
+        <dt><i class="icon iconfont icon-cart"></i></dt>
+        <dd class="dd1">3、提交订单</dd>
+
+    </dl>
+
+    <dl>
+        <dt><i class="icon iconfont icon-huanhuobz"></i></dt>
+        <dd class="dd1">4、急速到账</dd>
+
     </dl>
 </div>
 <!--四个优势 end-->
-
-
-<div class="bg_ys">
-    <div class="ys_cen">
-         <div class="ys_left">
-             <h2>成交快</h2>
-             <p>选择太多 没时间等，网上提交订单，
-                 悟空收车直接收购，分分钟成交。</p>
-         </div>
-        <div class="ys_right">
-            <img src="../resources/img/ys_1.jpg">
-            <img src="../resources/img/ys_2.jpg">
-        </div>
-    </div>
-</div>
-<div class="bg_none">
-    <div class="ys_cen">
-
-        <div class="ys_right">
-            <img src="../resources/img/ys_3.jpg">
-            <img src="../resources/img/ys_4.jpg">
-        </div>
-
-        <div class="ys_left">
-            <h2>价格高</h2>
-            <p>海量的收购数据、精准的市场估价，平均比市场多卖10%~20%
-                2000万 +用户卖车的第一选择
-            </p>
-        </div>
-
-    </div>
-</div>
-
-
-<div class="bg_ys">
-    <div class="ys_cen">
-        <div class="ys_left">
-            <h2>超省心</h2>
-            <p>一站式服务，足不出户，省时省心</p>
-        </div>
-        <div class="ys_right">
-            <img src="../resources/img/ys_5.jpg">
-            <img src="../resources/img/ys_6.jpg">
-        </div>
-    </div>
-</div>
-
-
-
-<div class="bg_none">
-    <div class="ys_cen">
-
-        <div class="ys_right">
-            <img src="../resources/img/ys_7.jpg">
-            <img src="../resources/img/ys_8.jpg">
-        </div>
-
-        <div class="ys_left">
-            <h2>有保障</h2>
-            <p>放心卖车，安全有我 </br> 一对一服务，全程可视
-            </p>
-        </div>
-
-    </div>
-</div>
 
 <!--优势 end-->
 <div class="clear"></div>

@@ -31,6 +31,9 @@
     <script src="/resources/js/jquery.cxscroll.js" type="text/javascript"></script>
     <script src="/resources/js/jquery.cookie.min.js"></script>
     <script src="/resources/js/js.js"></script>
+    <script language="javascript">
+        function imgdragstart(){return false;}
+    </script>
 </head>
 <body>
 <!--头部开始-->
@@ -583,10 +586,9 @@
                 <dt>
                    <img src="../resources/img/wz2.jpg">
                 </dt>
-                <dd class="dd1">二手车行业存在一个潜规则</dd>
-                <dd>出于询价阶段还是着急卖，了解客户的心理低价，
-                    “黄牛”一般非常有经验，应对自如，有些客户会说，价格合适就马上卖</dd>
-                <dd> -----------塞价</dd>
+                <dd class="dd1">这是一篇硬文</dd>
+                <dd class="dd2">因为悟空收车的优惠太多啦</dd>
+                <dd>2017  悟空收车优惠活动第二季 ；</br>第一次就选悟空收车。</dd>
                 <dd class="dd3">查看更多>></dd>
 
             </a>
@@ -793,7 +795,9 @@
 </script>
 
 
-
+<script language="javascript">
+    for(i in document.images)document.images[i].ondragstart=imgdragstart;
+</script>
 
 </body>
 </html>

@@ -352,6 +352,7 @@ table td img{ width: 70px; }
 .wz dl.dl2 dt{ width: 330px; float: left}
 .wz dl.dl2 dd{ width:270px; float: left; margin-left: 20px}
 .wz dl.dl2 dd.dd1{ font-size: 18px; color: #000; margin: 10px 0 10px 20px}
+.wz dl.dl2 dd.dd2{ font-size: 16px; margin: 10px 0 10px 20px;color: #333}
 .wz dl.dl2 dd.dd3{ text-align: right; padding: 30px 0}
 
 
@@ -371,7 +372,7 @@ table td img{ width: 70px; }
 .t_right{ width: 650px; overflow: hidden;  float: left; margin-left: 70px}
 .t_right li a{ float: left; padding: 27px 23px; font-size: 16px;}
 .t_right li{ float: left;}
-.e_top  .lon{ float: right; padding: 22px 5px !important; margin-right: 60px}
+.e_top  .lon{ float: right; padding: 22px 5px !important;}
 .e_top  .lon li{ float: left;margin-right: 10px;}
 .e_top  .lon{ line-height: 43px}
 ul.t_right a:hover{ background: #f60;color: #fff;  transition:background 0.8s;-webkit-transition:background 0.8s;  }
@@ -833,3 +834,27 @@ ul.t_right a.hover{ background: #f60;color: #fff; }
 .yous dl{ width: 200px; text-align: center; float: left; margin-top: 30px}
 .yous dl dt{ width: 120px; height: 120px; background: #f60; border-radius: 100%; margin: 30px auto 0; line-height: 120px; color: #fff; font-size: 20px;}
 .yous dl dd{ line-height: 65px;}
+/*app 下载*/
+.bg_imgfs{ background: url("../img/app.jpg") no-repeat center; height: 796px }
+.app_cen{ width: 1200px; margin: 0 auto; overflow: hidden}
+.app_cen h2{ font-size: 80px; font-weight: bold;color: #fff; text-align: right; line-height: 100px; margin-top: 190px; margin-right: 80px}
+.app_cen .app_p{ text-align: right; font-size: 24px; font-style: italic;color: #fff; margin-right: 110px; font-weight: bold; line-height: 45px}
+.app_cen .app_x{ width: 560px; float: right; margin-top: 88px}
+.app_cen .app_x>p{ width: 240px; float: right}
+.app_cen .app_x>p img{ width: 160px}
+.app_cen .app_x>div{ width: 260px; float:left}
+.app_cen .app_x>div button{ display:block; width: 250px;outline: none; border-radius: 100px; height: 65px; line-height: 65px; background: #f98e00; border: 0; margin-bottom: 21px; color: #100500; font-size: 24px;}
+.apps h2{ font-size: 45px;  text-align: center }
+.apps2{ background: #e5e5e5 !important;}
+.apps .ys_cen{ padding: 30px 0}
+.apps .ys_cen .ys_left{ margin-top: 60px}
+.app_you { margin: 120px auto}
+.app_you dl .dd1{ line-height: 60px; color: #000}
+.app_you h2{ text-align: center; font-size: 48px;color: #000; font-weight: 400}
+
+.app_you dl i.iconfont {
+    display: block;
+    color: #f60;
+    line-height: 84px;
+    text-align: center;
+    font-size: 45px;}

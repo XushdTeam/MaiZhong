@@ -27,6 +27,9 @@
     <script src="/resources/js/jquery.cookie.min.js"></script>
     <script src="http://cdn.bootcss.com/layer/3.0.1/layer.min.js" type="text/javascript"></script>
     <script src="/resources/js/js.js"></script>
+    <script language="javascript">
+        function imgdragstart(){return false;}
+    </script>
 </head>
 <body>
 <!--头部开始-->
@@ -277,7 +280,9 @@
 </script>
 
 
-
+<script language="javascript">
+    for(i in document.images)document.images[i].ondragstart=imgdragstart;
+</script>
 
 
 

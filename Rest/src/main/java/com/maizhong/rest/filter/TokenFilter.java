@@ -24,8 +24,8 @@ public class TokenFilter extends HandlerInterceptorAdapter {
 
        //没有Token返回404 进行拦截
         if (StringUtils.isBlank(token)) {
-            response.setStatus(404);
-            return false;
+            //response.setStatus(404);
+            return true;
             /*return true;*/
         } else {
             return true;
