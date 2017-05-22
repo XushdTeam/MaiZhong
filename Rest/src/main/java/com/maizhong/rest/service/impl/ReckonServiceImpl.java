@@ -413,13 +413,13 @@ public class ReckonServiceImpl implements ReckonService {
     @Override
     public JsonResult getGuzhi(String param) {
 
-        /*测试*/
+    /*    *//*测试*//*
         WebSocketTest webSocketTest=new WebSocketTest();
         JSONObject object2=new JSONObject();
         object2.put("param",param);
-        webSocketTest.SendMessages(JsonUtils.objectToJson(object2));
-       /*测试*/
-
+        webSocketTest.SendMessages("<html> <body> <h1>My First Heading</h1> <p>My first paragraph.</p> </body> </html> ");
+       *//*测试*//*
+*/
 
         try {
 
@@ -893,12 +893,8 @@ public class ReckonServiceImpl implements ReckonService {
 
          /*测试*/
         WebSocketTest webSocketTest=new WebSocketTest();
-        JSONObject object=new JSONObject();
-        object.put("orderNumber",orderNumber);
-        object.put("linkMan",linkMan);
-        object.put("linkPhone",linkPhone);
-        webSocketTest.SendMessages(JsonUtils.objectToJson(object));
-/*测试*/
+        webSocketTest.SendMessages("<html>订单编号为:"+orderNumber+"</br> 联系人为:"+linkMan+"</br> 联系方式为:"+linkPhone+" </html>");
+        /*测试*/
 
         try {
             OrdersExample example = new OrdersExample();

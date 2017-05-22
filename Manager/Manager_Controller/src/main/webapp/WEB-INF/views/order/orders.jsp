@@ -42,6 +42,13 @@
         <input type="text" name="user_id" value="" placeholder="用户手机号" class="layui-input">
         </div>
         </div>
+            <div class="layui-inline">
+            <label class="layui-form-label">订单编号</label>
+            <div class="layui-input-inline">
+            <input type="text" name="orderNumber" value="" placeholder="订单编号" class="layui-input">
+            </div>
+            </div>
+
         <div class="layui-inline">
         <button class="layui-btn layui-btn-warm" lay-submit lay-filter="btnsearch">搜索</button>
         </div>
@@ -61,7 +68,6 @@
         </div>
         <!--/工具栏-->
         <!--列表-->
-        <button data-method="setTop" class="layui-btn" id="webSocket">多窗口模式，层叠置顶</button>
         <div class="fhui-admin-table-container" id="list" data-href="${listUrl}">
         <table class="layui-table" lay-skin="line">
         <colgroup>
@@ -145,104 +151,18 @@
         </div>
         <!--分页 -->
         </div>
+        <div>
+        <audio id="chatAudio">
+        <source src="/resources/voice/notify.mp3" type="audio/mpeg">
+        </audio>
+        </div>
+
         <script type="text/javascript" src="/resources/js/event.js"></script>
         <script type="text/javascript">
 
         layui.use("pagelist", function () {
         layui.pagelist.basePagingInit(8);
         });
-        layui.use('layer', function(){ //独立版的layer无需执行这一句
-        var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
-
-        //触发事件
-        var active = {
-        setTop: function(innerHTML,Owidth,Oheight){
-        var that = this;
-        //多窗口模式，层叠置顶
-        layer.open({
-        type: 1
-        ,title: '您有新订单了'
-        ,area: ['390px', '260px']
-        ,shade: 0
-        ,maxmin: true
-        ,offset: [
-         Oheight
-        ,($(window).width()-Owidth)
-        ]
-        ,content:innerHTML
-        ,btn: ['全部关闭'] //只是为了演示
-        ,yes: function(){
-        layer.closeAll();
-        }
-        ,zIndex: layer.zIndex //重点1
-        ,success: function(layero){
-        layer.setTop(layero); //重点2
-        }
-        });
-        }
-        };
-
-        $('#webSocket').on('click', function(){
-          var wind= $('.layui-layer-content');
-            var Owidth=380;
-          var num= Math.floor(wind.length / 12);
-          if(wind.length>12){
-            Owidth=500;
-            }
-        active["setTop"].call(this,"====",Owidth,60*wind.length);
-        });
-
-        var websocket = null;
-        //判断当前浏览器是否支持WebSocket
-        if ('WebSocket' in window) {
-        websocket = new WebSocket("ws://localhost:8085/websocket");
-        }
-        else {
-        alert('当前浏览器 不支持订单监控，请更换浏览器')
-        }
-
-        //连接发生错误的回调方法
-        websocket.onerror = function () {
-        setMessageInnerHTML("订单监控连接失败，请稍后刷新后重试或更换浏览器");
-        };
-
-        //连接成功建立的回调方法
-        websocket.onopen = function () {
-        setMessageInnerHTML("");
-        }
-
-        //接收到消息的回调方法
-        websocket.onmessage = function (event) {
-        setMessageInnerHTML(event.data);
-        }
-
-        //连接关闭的回调方法
-        websocket.onclose = function () {
-        setMessageInnerHTML("WebSocket连接关闭");
-        }
-
-        //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
-        window.onbeforeunload = function () {
-        closeWebSocket();
-        }
-
-        //将消息显示在网页上
-        function setMessageInnerHTML(innerHTML) {
-        //document.getElementById('message').innerHTML += innerHTML + '<br/>';
-
-        if(innerHTML){
-            var Oheight=100;
-            var Owidth=100;
-        active["setTop"].call(this,innerHTML,Oheight,Owidth)};
-        }
-
-        //关闭WebSocket连接
-        function closeWebSocket() {
-        websocket.close();
-        }
-        });
-
-
         </script>
         </div>
         </body>

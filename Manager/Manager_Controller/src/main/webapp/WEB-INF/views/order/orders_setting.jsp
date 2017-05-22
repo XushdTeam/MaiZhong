@@ -8,7 +8,8 @@
         <%@ page contentType="text/html;charset=UTF-8" language="java" %>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
-        <html>
+            <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+            <html>
         <head>
         <title>订单管理</title>
         <jsp:include page="../common/head.jsp"/>
@@ -58,7 +59,8 @@
         <td>${orders.linkMan}</td>
         <td>${orders.modelName}</td>
         <td>${orders.reckonPrice}万元</td>
-        <td>${orders.reckonTime}</td>
+        <td><fmt:formatDate value="${orders.reckonTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+      <%-- <td>${orders.reckonTime}</td>--%>
         <td id="dealTime1">${orders.dealTime}</td>
         <td>${orders.dealPrice}万元</td>
         </tr>
