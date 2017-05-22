@@ -20,6 +20,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 /**
@@ -31,6 +35,9 @@ import java.util.List;
 
 @Controller
 public class AppHelpController {
+
+    @Autowired
+    private FileUploadService fileUploadService;
 
     @Autowired
     private AppHelpService appHelpService;
@@ -141,6 +148,21 @@ public class AppHelpController {
     public JsonResult updateHelpRedis() {
         OperateEnum result = appHelpService.updateHelpRedis();
         return JsonResult.build(result);
+    }
+
+
+    @RequestMapping(value = "/help/upload")
+    public void uploadImg(@RequestParam(value = "uploadFile") MultipartFile file,HttpServletResponse response) throws IOException {
+
+        JsonResult result = fileUploadService.uploadImg(file, "help/");
+        PrintWriter writer = response.getWriter();
+        if(result.getStatus()==200){
+            writer.write(result.getData().toString());
+        }else{
+            writer.write("error|"+result.getMessage());
+        }
+
+        writer.flush();
     }
 }
 

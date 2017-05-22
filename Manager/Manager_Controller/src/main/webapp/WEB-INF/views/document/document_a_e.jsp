@@ -10,7 +10,7 @@
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <html>
 <head>
-    <title>帮助管理</title>
+    <title>文章编辑</title>
     <jsp:include page="../common/head.jsp"/>
     <link rel="stylesheet" href="/resources/edit/css/wangEditor.min.css">
     <script type="text/javascript" src="/resources/js/jquery.min.js" type="text/javascript"></script>
@@ -26,19 +26,29 @@
         <div class="layui-tab-content" style="height: auto;">
             <div class="layui-form layui-form-pane layui-tab-item layui-show">
                 <form>
+                    <input type="hidden" name="id" value="${doc.id}">
                     <div class="layui-form-item">
-                        <label class="layui-form-label">标题</label>
+                        <label class="layui-form-label">文章标题</label>
                         <div class="layui-input-block">
                             <input name="title" autocomplete="off"
-                                   class="layui-input" type="text">
+                                   class="layui-input" type="text" maxlength="100" value="${doc.title}">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">文章作者</label>
+                        <div class="layui-input-block">
+                            <input name="author" autocomplete="off"
+                                   class="layui-input" type="text" maxlength="20" value="${doc.author}">
                         </div>
                     </div>
 
                     <div class="layui-form-item">
                         <label class="layui-form-label">是否启用</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="status" value="1" title="启用"checked="checked">
-                            <input type="radio" name="status" value="0" title="停用">
+                            <input type="radio" name="status" value="1" title="启用"
+                                   <c:if test="${doc==null||doc.status==1}">checked="checked"</c:if> >
+                            <input type="radio" name="status" value="0" title="停用"
+                                   <c:if test="${doc.status==0}">checked="checked"</c:if>>
                         </div>
                     </div>
 
@@ -51,7 +61,7 @@
                              </textarea>
                         </div>
                     </div>
-
+                    <div style="display: none" id="innerContent">${doc.content}</div>
 
                     <div class="layui-form-item">
                         <button class="layui-btn" lay-submit lay-filter="div1" data-href="${saveUrl}">确认</button>
@@ -95,13 +105,22 @@
     var editor=null
     $(function(){
         editor = new wangEditor('textarea1');
-
-        // 上传图片（举例）
-        editor.config.uploadImgUrl = '/help/upload';
+        // 表情
+        editor.config.emotions = {
+        'default': {
+            title: '默认',
+            data: '/resources/edit/emotions.data'
+        }}
+        // 上传图片
+        editor.config.uploadImgUrl = '/document/upload';
         editor.config.uploadImgFileName = 'uploadFile'
         editor.config.mapAk = 'N8kgZsufZYtKgEXbtUoTHrKlaqgAxTFY';
 
         editor.create();
+
+        if($("#innerContent").html()){
+            editor.$txt.html($("#innerContent").html())
+        }
     })
 
 </script>

@@ -12,9 +12,9 @@
 <head>
     <title>帮助管理</title>
     <jsp:include page="../common/head.jsp"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/kindeditor-4.1.10/themes/default/default.css">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/kindeditor-4.1.10/kindeditor-all-min.js" charset="utf-8"></script>
-    <script src="/resources/js/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="/resources/edit/css/wangEditor.min.css">
+    <script type="text/javascript" src="/resources/js/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/resources/edit/js/wangEditor.min.js"></script>
 </head>
 <body>
 <div class="main-wrap" data-href="${baseUrl}">
@@ -45,16 +45,17 @@
                         </div>
                     </div>
 
-                    <%--富文本开始--%>
-                        <div class="layui-form-item layui-form-text">
-                            <label class="layui-form-label">具体内容</label>
-                            <div class="layui-input-block">
-                                <textarea placeholder="请编辑具体内容" name="content1" id="helpContent" class="layui-textarea" style="height: 400px;width: 700px;">
-                                    ${help.content}
-                                </textarea>
-                            </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">内容</label>
+                        <div class="layui-input-block">
+                             <textarea id="textarea1" style="height:500px;max-height:800px;">
+                                <p>请输入内容...</p>
+                             </textarea>
                         </div>
-                    <%--富文本结束--%>
+                    </div>
+                    <div id="innercontent" style="display: none" >
+                        ${help.content}
+                    </div>
                     <div class="layui-form-item">
                         <button class="layui-btn" lay-submit lay-filter="div1" data-href="${saveUrl}">确认</button>
                     </div>
@@ -74,9 +75,10 @@
         app.fixBar();
         //第一个div
         form.on("submit(div1)", function (filedata) {
-            <!--富文本数据同步 同步方法-->
-            itemAddEditor.sync();
-            filedata.field.content=$("#helpContent").val();
+
+            // 获取编辑器区域完整html代码
+            var html = editor.$txt.html();
+            filedata.field.content=html;
             var url = $(filedata.elem).data("href");
             app.ajaxPost(url, filedata.field, function (e, r) {
                 if (e) {
@@ -92,60 +94,20 @@
             return false;
         });
     });
+    var editor = null;
 
-    /*富文本测试*/
-    <!--图片上传以及富文本编译器-->
     $(function(){
-        var kindEditorParams = {
-            //指定上传文件参数名称
-            filePostName  : "uploadFile",
-            //指定上传文件请求的url。
-            uploadJson : '/file/upload',
-            //上传类型，分别为image、flash、media、file
-            dir : "image",
-            allowFileManager : true
-        }
+        editor = new wangEditor('textarea1');
 
-        //创建富文本编辑器
-        itemAddEditor = KindEditor.create("#helpContent",kindEditorParams);
-        $("#helpContent").click(function(){
-            var _self = $(this);
-            KindEditor.editor(kindEditorParams).loadPlugin('image', function() {
-                this.plugin.imageDialog({
-                    showRemote : false,
-                    clickFn : function(url, title, width, height, border, align) {
+        // 上传图片（举例）
+        editor.config.uploadImgUrl = '/help/upload';
+        editor.config.uploadImgFileName = 'uploadFile'
+        editor.config.mapAk = 'N8kgZsufZYtKgEXbtUoTHrKlaqgAxTFY';
+        editor.create();
 
-                        //添加图片成功之后的回显
-                        $("#imagesShow").append('<div class="layui-input-block" ><a href="'+url+'"  target="_blank"><img  style="width: 690px;height: 366px"  src="'+url+'"></a><button type="button" class="layui-btn layui-btn-warm" onclick="delImage(this)">删除<button/></div>');
-                    }
-                });
-            });
-        });
-
-        <!--图片上传-->
-
-        //给“上传图片按钮”绑定click事件
-        $("#fileUpload").click(function(){
-            var formTable = $(this).parentsUntil("form").parent("form");
-            //打开图片上传窗口
-            KindEditor.editor(kindEditorParams).loadPlugin('multiimage',function(){
-                var editor = this;
-                editor.plugin.multiImageDialog({
-                    clickFn : function(urlList) {
-                        var imgArray = [];
-                        KindEditor.each(urlList, function(i, data) {
-                            imgArray.push(data.url);
-                            $("#imagesShow").append('<div class="layui-input-block" ><a href="'+data.url+'"  target="_blank"><img  style="width: 690px;height: 366px"  src="'+data.url+'"></a><button type="button" class="layui-btn layui-btn-warm" onclick="delImage(this)">删除<button/></div>');
-                        });
-                        formTable.find("[name=image]").val(imgArray.join(","));
-                        editor.hideDialog();
-                    }
-                });
-            });
-        });
+        // 初始化编辑器的内容
+        editor.$txt.html($("#innercontent").html());
     })
-
-    /*富文本测试*/
 </script>
 </body>
 </html>
