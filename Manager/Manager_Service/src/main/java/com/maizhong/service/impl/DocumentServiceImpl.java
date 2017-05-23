@@ -6,7 +6,9 @@ import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
+import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.common.utils.SqlUtils;
+import com.maizhong.dao.JedisClient;
 import com.maizhong.mapper.DocumentMapper;
 import com.maizhong.pojo.Document;
 import com.maizhong.pojo.DocumentExample;
@@ -22,6 +24,9 @@ import java.util.List;
 @Service
 public class DocumentServiceImpl implements DocumentService {
 
+
+    @Autowired
+    private JedisClient jedisClient;
 
     @Autowired
     private DocumentMapper documentMapper;
@@ -83,5 +88,21 @@ public class DocumentServiceImpl implements DocumentService {
         }else{
             return JsonResult.build(OperateEnum.FAILE);
         }
+    }
+
+    @Override
+    public JsonResult documentRedisSync() {
+
+        DocumentExample  example = new DocumentExample();
+        DocumentExample.Criteria criteria = example.createCriteria();
+        criteria.andDelflagEqualTo(0).andStatusEqualTo(1);
+        example.setOrderByClause(" id ASC ");
+        List<Document> list = documentMapper.selectByExample(example);
+        jedisClient.del("DOCUMENT");
+        for (Document document : list) {
+            jedisClient.set("DOCUMENT:"+document.getId(), JsonUtils.objectToJson(document));
+        }
+
+        return JsonResult.OK();
     }
 }

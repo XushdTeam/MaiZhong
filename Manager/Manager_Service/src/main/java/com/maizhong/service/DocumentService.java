@@ -23,4 +23,7 @@ public interface DocumentService {
     JsonResult update(Document doc);
 
     JsonResult deleteById(String id);
+
+    JsonResult documentRedisSync();
+
 }

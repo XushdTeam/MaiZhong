@@ -1,5 +1,6 @@
 package com.maizhong.rest.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.rest.service.ReckonService;
 import org.apache.commons.lang3.StringUtils;
@@ -377,6 +378,13 @@ public class ReckonController {
     @ResponseBody
     public JsonResult testUploadOss(String json) {
      JsonResult result=reckonService.testUploadOss(json);
+        return result;
+    }
+
+    @RequestMapping(value = "/getDocById/{documentId}")
+    @ResponseBody
+    public JsonResult document(@PathVariable String documentId){
+        JsonResult result =  reckonService.getDocById(Long.parseLong(documentId));
         return result;
     }
 }
