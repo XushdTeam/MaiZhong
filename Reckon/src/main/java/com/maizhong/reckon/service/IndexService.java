@@ -51,4 +51,7 @@ public interface IndexService {
     void zhihuan(String phone);
 
     void wanghz(String txt_companyname, String txt_contactperson, String txt_tel, String txt_city, String txt_remark);
+
+
+    JsonResult getDocById(String id);
 }

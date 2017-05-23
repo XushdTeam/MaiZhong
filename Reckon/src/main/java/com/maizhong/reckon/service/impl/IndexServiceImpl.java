@@ -147,6 +147,22 @@ public class IndexServiceImpl implements IndexService {
 
     }
 
+    @Override
+    public JsonResult getDocById(String id) {
+
+        try{
+
+            String res = HttpClientUtil.doGet(RESTURL + "getDocById/" + id);
+            return JsonUtils.jsonToPojo(res,JsonResult.class);
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
+    }
+
     /**
      * 通过品牌获取车系
      * @param brandId

@@ -94,11 +94,8 @@
         <div class="clear"></div>
         <div class="pp">
             <p>Copyright © 2017-2020 迈众 All Rights Reserved 版权所有 北京迈众汽车信息服务有限公司</p>
-            <p>京ICP备17017795号  &nbsp;&nbsp;&nbsp; 联系电话：010-8025-8108 &nbsp;&nbsp;&nbsp;
-                <script type="text/javascript">
-                    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-                    document.write(unescape("%3Cspan id='cnzz_stat_icon_1261672623'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261672623' type='text/javascript'%3E%3C/script%3E"));
-                </script>
+            <p>京ICP备17017795号-2  &nbsp;&nbsp;&nbsp; 联系电话：010-8025-8108 &nbsp;&nbsp;&nbsp;
+                <script src="https://s22.cnzz.com/z_stat.php?id=1261963381&web_id=1261963381" language="JavaScript"></script>
             </p>
         </div>
 

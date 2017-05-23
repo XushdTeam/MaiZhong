@@ -19,6 +19,9 @@
 
         .bg_1{ background: url(/resources/img/app-download.jpg) no-repeat center; background-size: 100%; height: 370px; width: 80%;
             margin: 0 auto;}
+        a{
+            text-decoration: none;
+        }
         .button{ font-size: 1.8rem;text-align: center;
             line-height: 4rem;background: #f60; display: block;color: #F8F8F8; width: 80%; margin: 0 auto;
             height: 4rem; border: none; margin-top: 1.2rem; border-radius: 8px; font-weight: 400;outline: none;}
@@ -27,8 +30,8 @@
 <body>
     <div class="b_bos">
         <div class="bg_1"></div>
-        <a class="button" style="<c:if test="${key=='android'}">display:none;</c:if> ">iphone下载</a>
-        <a class="button" style="<c:if test="${key=='ios'}">display:none;</c:if> ">Android下载</a>
+        <a href="http://downloadpkg.apicloud.com/app/download?path=http://7yjb4g.com1.z0.glb.clouddn.com/0a77962d8e4a8334c9ea7f4fe9d93295_d" class="button" style="<c:if test="${key=='ios'}">display:none;</c:if> ">Android下载</a>
+        <a href="https://itunes.apple.com/us/app/%E6%82%9F%E7%A9%BA%E6%94%B6%E8%BD%A6/id1237538091?l=zh&ls=1&mt=8" class="button" style="<c:if test="${key=='android'}">display:none;</c:if> ">iphone下载</a>
     </div>
 </body>
 </html>

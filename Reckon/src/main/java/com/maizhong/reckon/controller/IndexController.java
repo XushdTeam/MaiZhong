@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.maizhong.common.dto.GuzhiDTO;
 import com.maizhong.common.result.JsonResult;
 
+import com.maizhong.common.utils.JsonUtils;
+import com.maizhong.pojo.Document;
 import com.maizhong.pojo.Line;
 import com.maizhong.reckon.DTO.IndexDTO;
 import com.maizhong.reckon.DTO.OrderDTO;
@@ -59,11 +61,11 @@ public class IndexController {
     }
 
 
-
-   @RequestMapping(value = "/{page}")
-   public String test(@PathVariable String page){
-      return page;
-   }
+//
+//   @RequestMapping(value = "/{page}")
+//   public String test(@PathVariable String page){
+//      return page;
+//   }
 
     /**
      * 跳转到活动页
@@ -397,14 +399,10 @@ public class IndexController {
     }
 
     @RequestMapping("/news/{id}")
-    public String news(@PathVariable String id){
-        String result = null;
-        if(StringUtils.equals("1",id)){
-            result = "news1";
-        }else{
-            result = "news2";
-        }
-        return result;
+    public String news(@PathVariable String id,Model model){
+        JsonResult result = indexService.getDocById(id);
+        model.addAttribute("content", JsonUtils.jsonToPojo(JsonUtils.objectToJson(result.getData()), Document.class));
+        return "news";
     }
 
     @RequestMapping(value = "/wanthz",method = RequestMethod.POST)
