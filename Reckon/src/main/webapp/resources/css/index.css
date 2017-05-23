@@ -117,7 +117,7 @@ img,input{vertical-align:middle; outline:none}
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     border: 1px solid #eaeaea;
-    width: 112px;
+    width: 110px;
     height: auto;
     margin: -1px -1px 0 0;
     position: relative;
@@ -439,8 +439,8 @@ ul.t_right a.hover{ background: #f60;color: #fff; }
 .jiaos .j_cen div:hover,.jiao .j_cen div:active{ background: #fff }
 .jiaos .j_cen .one:hover{ background: #f60; color: #fff; }
 
-.jingzhun{ width: 1140px; margin: 0 auto; background: #f1f1f1; padding: 40px 30px}
-.jingzhun .jing{ height: 45px; line-height: 40px; margin-top:10px; overflow: hidden}
+.jingzhun{ width:900px; margin: 30px auto; background: #f1f1f1; padding: 40px 20px}
+.jingzhun .jing{ height:60px; line-height: 45px; margin-top:10px; overflow: hidden}
 .jingzhun .jing label{ width: 130px; float: left; text-align: right; margin-right: 20px}
 .jingzhun .jing p{ border: 1px solid #b2b2b2; height:38px; background: #eee; padding-left: 20px;color: #999; float: left}
 .jingzhun .jing p.one{ width: 721px ; }
@@ -458,7 +458,7 @@ ul.t_right a.hover{ background: #f60;color: #fff; }
 .anniu{ width: 200px; margin: 30px auto;background: #f60; color: #fff; text-align: center; height: 65px; font-size: 24px; line-height: 65px;cursor: pointer}
 .jing a{ padding: 0 10px}
 .jing a.cen img{ border:2px solid #f60;}
-.jingzhun .jck{ height: 98px;}
+.jingzhun .jck{ height: 110px;}
 .jingzhun .jck span{ width:320px; height: 42px; margin-bottom: 9px;}
 
 .jiage{ width: 1200px; margin: 0 auto}
@@ -858,7 +858,7 @@ ul.t_right a.hover{ background: #f60;color: #fff; }
     line-height: 84px;
     text-align: center;
     font-size: 45px;}
-.layui-layer{display: inline-block;
-    top:40% !important; height: 120px !important;background:#fff url(/resources/img/correct.png) top center no-repeat !important; box-shadow: 5px  5px 5px #ccc;color: #666 !important;}
-.layui-layer-content{ line-height: 60px; margin-top: 50px;}
+/*.layui-layer{display: inline-block;*/
+    /*top:40% !important; height: 120px !important;background:#fff url(/resources/img/correct.png) top center no-repeat !important; box-shadow: 5px  5px 5px #ccc;color: #666 !important;}*/
+/*.layui-layer-content{ line-height: 60px; margin-top: 50px;}*/
 *{ box-sizing: content-box !important;}

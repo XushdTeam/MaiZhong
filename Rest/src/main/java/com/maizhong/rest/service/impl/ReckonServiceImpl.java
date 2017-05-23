@@ -62,6 +62,9 @@ public class ReckonServiceImpl implements ReckonService {
     private ModelMapper modelMapper;
 
     @Autowired
+    private DocumentMapper documentMapper;
+
+    @Autowired
     private GzrecordMapper gzrecordMapper;
     @Autowired
     private ParamsMapper paramsMapper;
@@ -1435,6 +1438,26 @@ public class ReckonServiceImpl implements ReckonService {
         json= jedisClient.get(BUSINESS_ADDRESS);
         JsonResult result= fileUploadService.uploadFile(json, "test/v0.0.1/","businessAddress.json");
         return result;
+    }
+
+    @Override
+    public JsonResult getDocById(long docId) {
+
+        try {
+            String redisDoc = jedisClient.get("DOCUMENT:"+docId);
+            if(StringUtils.isNotBlank(redisDoc)){
+                return JsonResult.build(200,"OK",JsonUtils.jsonToPojo(redisDoc,Document.class));
+            }else{
+                Document document = documentMapper.selectByPrimaryKey(docId);
+                jedisClient.set("DOCUMENT:"+docId,JsonUtils.objectToJson(document));
+                return JsonResult.build(200,"OK",document);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
+
+
     }
 }
 

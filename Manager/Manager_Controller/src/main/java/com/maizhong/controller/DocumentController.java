@@ -161,4 +161,10 @@ public class DocumentController {
         writer.flush();
     }
 
+    @RequestMapping(value = "/document/redis")
+    @ResponseBody
+    public JsonResult dictionaryRedis(){
+        JsonResult result = documentService.documentRedisSync();
+        return result;
+    }
 }

@@ -10,16 +10,15 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ page session="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
+<html >
 <head>
+    <title>悟空收车</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <title>悟空收车</title>
     <meta name="keywords" content="悟空收车，悟空，二手车，估值，收购"/>
     <meta name="description" content="悟空收车专业的二手车估值收购平台，验车快，当天到账，售后跟踪"/>
-
+	<link rel="icon" href="/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/resources/css/index.css" />
     <link rel="stylesheet" type="text/css" href="/resources/css/guzhi.css" />
     <link rel="stylesheet" type="text/css" href="/resources/font/iconfont.css" />
@@ -577,14 +576,14 @@
         <p>精选文章</p>
         <dl>
             <dt>
-                <a href="/news/1"  target="_blank"><img src="../resources/img/wz.jpg"></a>
+                <a href="/news/1000"  target="_blank"><img src="../resources/img/wz.jpg"></a>
             </dt>
         </dl>
 
         <dl class="dl2">
-            <a href="/news/2"  target="_blank">
+            <a href="/news/1001"  target="_blank">
                 <dt>
-                   <img src="../resources/img/wz2.jpg">
+                   <img src="http://img.maizhongcar.com/wz/wz2.jpg">
                 </dt>
                 <dd class="dd1">这是一篇硬文</dd>
                 <dd class="dd2">因为悟空收车的优惠太多啦</dd>
@@ -596,7 +595,6 @@
     </div>
 </div>
 <!--文章 end-->
-
 
 <%@include file="footer.jsp"%>
 <script src="/resources/js/doT.min.js"></script>
