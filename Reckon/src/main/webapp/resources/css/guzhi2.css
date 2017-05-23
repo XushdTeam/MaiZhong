@@ -180,15 +180,16 @@
     width: 224px;
 }
 .select_box {
-    width: 300px;
-    height: 35px;
+    width: 270px;
+    height:45px;
     text-align: center;
-    line-height: 35px;
-    background: url(/resources/img/arrow.png) no-repeat 270px 15px;
+    line-height: 45px;
+    background: url(/resources/img/arrow.png) no-repeat 240px 19px;
     cursor: pointer;
-    color: #333;
+    color: #666;
     margin-left: 150px;
-    border: 1px solid #999;
+    border: 1px solid #ccc;
+
 }
 .lr_158_30 {
     left: 150px;
@@ -316,8 +317,8 @@
     padding-left: 50px;
 }
 .select_box label {
-    color: #333;
-    line-height: 35px;
+    color: #666;
+    line-height: 45px;
     position: absolute;
     margin-left: -60px;
     width: 50px;
@@ -1577,7 +1578,7 @@ li.on a {
 }
 .color a{
     border:2px solid #b39f9f;
-    margin: 5px 25px;
+    margin: 5px 23px;
 }
 .color a:hover{
     border:2px solid #f60;
@@ -1594,11 +1595,17 @@ li.on a {
     color: #fff;
 }
 
+
+
 .jingzhun .btn a {
-    padding: 5px 45px;
-    border: 1px solid #666;
+    /* padding: 172px 45px; */
+    border: 1px solid #ccc;
     margin-right: 20px;
-}
+    height: 45px;
+    display: inline-block;
+    border-radius: 8px;
+    padding: 0 45px;
+    line-height: 45px;}
 .jingzhun .btn a:hover {
     background: #f60;
     color: #fff;

@@ -27,7 +27,7 @@
     <script src="/resources/js/jquery.cookie.min.js" type="text/javascript"></script>
     <script src="https://cdn.bootcss.com/layer/3.0.1/layer.js"></script>
 </head>
-<body>
+<body style="background: #f1f1f1">
 <div class="top e_top">
     <div class="t_cen">
         <a href="/" class="logo"><img src="/resources/img/logo.png"></a>
