@@ -41,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public PageResult getOrderList(PageSearchParam param) {
-        PageHelper.startPage(param.getPageIndex(), param.getPageSize());
+
 
         OrdersExample example = new OrdersExample();
         OrdersExample.Criteria criteria = example.createCriteria();
@@ -53,6 +53,16 @@ public class OrderServiceImpl implements OrderService {
                 e.printStackTrace();
             }
         }
+        String orderNumber = param.getFiled("orderNumber");
+
+        if (StringUtils.isNotBlank(orderNumber)) {
+            try {
+                criteria.andOrderNumberEqualTo(Long.valueOf(orderNumber));
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+
         String userId = param.getFiled("user_id");
         if (StringUtils.isNotBlank(userId)) {
             try {
@@ -62,6 +72,8 @@ public class OrderServiceImpl implements OrderService {
             }
         }
         criteria.andDelflagEqualTo(0);
+        example.setOrderByClause("order_id DESC");
+        PageHelper.startPage(param.getPageIndex(), param.getPageSize());
         List<Orders> ordersList = ordersMapper.selectByExample(example);
         PageInfo pageInfo = new PageInfo(ordersList);
         return new PageResult(pageInfo);
