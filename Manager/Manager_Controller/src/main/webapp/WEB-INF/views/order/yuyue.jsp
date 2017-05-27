@@ -19,13 +19,11 @@
         tr th{
             border: 1px solid gray !important;
             text-align: center !important;
-
         }
         tr td{
             border: 1px solid gray !important;
             text-align: center !important;
         }
-
         .layui-form-label{
             border: 1px solid gray !important;
             text-align: center !important;
@@ -36,6 +34,7 @@
         }
 
     </style>
+
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/resources/js/kindeditor-4.1.10/kindeditor-all-min.js"
             charset="utf-8"></script>
@@ -47,64 +46,33 @@
         <h2>${handle}</h2>
     </blockquote>
     <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-
-        <table class="layui-table" lay-skin="line" >
+        <%----%>
+        <table class="layui-table" lay-skin="line">
             <colgroup>
-                <col width="7%">
-                <col width="6%">
-                <col width="6%">
+                <col width="9%">
+                <col width="9%">
                 <col width="10%">
-                <col width="7%">
-                <col width="8%">
-                <col width="8%">
-                <col width="6%">
-                <col width="7%">
-                <col width="6%">
-                <col width="16%">
-                <col width="8%">
-                <col width="5%">
+                <col width="9%">
+                <col width="9%">
             </colgroup>
             <thead>
             <tr>
                 <th>订单编号</th>
                 <th>用户手机号</th>
-                <th>用户称呼</th>
                 <th>车型名称</th>
                 <th>预估价格</th>
                 <th>预估时间</th>
-                <th>交易时间</th>
-                <th>交易价格</th>
-                <th>联系人称呼</th>
-                <th>验车方式</th>
-                <th>验车地址</th>
-                <th>验车时间</th>
-                <th>联系方式</th>
             </tr>
             </thead>
             <tbody id="tbody">
+            <input type="hidden" value="${orders.orderId}" name="orderId"/>
             <tr>
                 <td>${orders.orderNumber}</td>
                 <td>${orders.userId}</td>
-                <td>${orders.linkMan}</td>
                 <td>${orders.modelName}</td>
                 <td>${orders.reckonPrice}万元</td>
                 <td><fmt:formatDate value="${orders.reckonTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                <td id="dealTime1">${orders.dealTime}</td>
-                <td>${orders.dealPrice}万元</td>
-                <td>${orders.linkMan}</td>
-                <c:if test="${orders.dealWay==1}">
-                    <td>4S店验车</td>
-                </c:if>
-                <c:if test="${orders.dealWay==2}">
-                    <td>地铁站验车</td>
-                </c:if>
-                <c:if test="${orders.dealWay==3}">
-                    <td>上门验车</td>
-                </c:if>
 
-                <td>${orders.address}</td>
-                <td>${orders.checkTime}</td>
-                <td>${orders.linkPhone}</td>
             </tr>
             </tbody>
         </table>
@@ -161,42 +129,58 @@
 
             <div class="layui-form layui-form-pane layui-tab-item layui-show">
                 <form>
-                    <input type="hidden" value="${orders.orderId}" name="orderId"/>
+                    <input type="hidden" value="${orders.orderId}" name="orderId" id="orderId"/>
                     <div class="layui-form-item layui-input-inline">
-                        <label class="layui-form-label">订单状态</label>
+                        <label class="layui-form-label">联系人称呼</label>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input name="linkMan" autocomplete="off" value="${orders.linkMan}" id="linkMan"
+                                   class="layui-input" type="text"  style="width: 100px;">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item layui-input-inline" style="width: 260px;">
+                        <label class="layui-form-label">验车方式</label>
                         <div class="layui-input-block">
-                            <select name="status" style="float: left;" id="status">
-                                <option value="0" <c:if test="${orders.status==0}">selected="selected"</c:if>>未预约
+                            <select name="dealWay" style="float: left;" id="dealWay">
+                                <option value="" >请选择验车方式
                                 </option>
-                                <option value="1" <c:if test="${orders.status==1}">selected="selected"</c:if>>等待验收
+                                <option value="1" <c:if test="${orders.dealWay==1}">selected="selected"</c:if>>4S店验车
                                 </option>
-                                <option value="2" <c:if test="${orders.status==2}">selected="selected"</c:if>>车辆处理
+                                <option value="2" <c:if test="${orders.dealWay==2}">selected="selected"</c:if>>地铁站验车
                                 </option>
-                                <option value="3" <c:if test="${orders.status==3}">selected="selected"</c:if>>等待过户
-                                </option>
-                                <option value="4" <c:if test="${orders.status==4}">selected="selected"</c:if>>过户完成
-                                </option>
-                                <option value="5" <c:if test="${orders.status==5}">selected="selected"</c:if>>更新指标
-                                </option>
-                                <option value="6" <c:if test="${orders.status==6}">selected="selected"</c:if>>已完结
+                                <option value="3" <c:if test="${orders.dealWay==3}">selected="selected"</c:if>>上门验车
                                 </option>
                             </select>
                         </div>
                     </div>
 
                     <div class="layui-form-item layui-input-inline">
-                        <label class="layui-form-label">交易价格</label>
+                        <label class="layui-form-label">预约地址</label>
                         <div class="layui-input-inline">
-                            <input name="dealPrice" autocomplete="off" value="${orders.dealPrice}" id="dealPrice"  lay-verify="number"
+                            <input name="address" autocomplete="off" value="${orders.address}" id="address"
                                    class="layui-input" type="text">
                         </div>
                     </div>
-
                     <div class="layui-form-item layui-input-inline">
+                        <label class="layui-form-label">验车时间</label>
                         <div class="layui-input-inline">
-                            <button class="layui-btn" lay-submit lay-filter="div1" data-href="${saveUrl}">确定</button>
+                            <input name="checkTime" autocomplete="off" value="${orders.checkTime}" id="checkTime"
+                                   class="layui-input" type="text">
                         </div>
                     </div>
+                    <div class="layui-form-item layui-input-inline">
+                        <label class="layui-form-label">联系手机</label>
+                        <div class="layui-input-inline">
+                            <input name="linkPhone" autocomplete="off" value="${orders.linkPhone}" id="linkPhone" lay-verify="number"
+                                   class="layui-input" type="text">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-input-inline">
+                        <div class="layui-input-inline">
+                            <button class="layui-btn" lay-submit lay-filter="div1" data-href="${saveUrl}">确认预约</button>
+                        </div>
+                    </div>
+
                 </form>
             </div>
         </div>
@@ -213,16 +197,11 @@
 
         //初始化bar
         app.fixBar();
-        //第一个div
+
         form.on("submit(div1)", function (filedata) {
-            var status = $("#status").val();
-            var dealPrice = $("#dealPrice").val();
-            var dealTime1 = document.getElementById("dealTime1").innerText;
-            if (status == 2 && dealPrice != null && dealPrice != "" && dealTime1.length == 0) {
-                var nowTime = laydate.now(laydate.now, "YYYY-MM-DD hh:mm:ss");
-                filedata.field.dealTime = nowTime;
-            }
+            var orderId = $("#orderId").val();
             var url = $(filedata.elem).data("href");
+            filedata.field.status=1;
             app.ajaxPost(url, filedata.field, function (e, r) {
                 if (e) {
                     app.layerAlertE(e)
@@ -230,7 +209,7 @@
                 else {
                     app.layerAlertS(r.message);
                     app.time(function () {
-                        app.route("${baseUrl}");
+                        app.route("/orders/handle/"+orderId);
                     });
                 }
             });

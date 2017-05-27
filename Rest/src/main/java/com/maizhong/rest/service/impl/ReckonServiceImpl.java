@@ -35,6 +35,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.Authenticator;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
 import java.io.*;
 import java.math.BigDecimal;
 import java.util.*;
@@ -416,13 +419,12 @@ public class ReckonServiceImpl implements ReckonService {
     @Override
     public JsonResult getGuzhi(String param) {
 
-    /*    *//*测试*//*
-        WebSocketTest webSocketTest=new WebSocketTest();
-        JSONObject object2=new JSONObject();
-        object2.put("param",param);
-        webSocketTest.SendMessages("<html> <body> <h1>My First Heading</h1> <p>My first paragraph.</p> </body> </html> ");
-       *//*测试*//*
-*/
+
+        // 测试
+       /* WebSocketTest webSocketTest = new WebSocketTest();
+
+        webSocketTest.SendMessages("<html><a onclick=\"openOrders('/orders/handle/138')\">测试</a></html>");*/
+        //测试
 
         try {
 
@@ -894,10 +896,6 @@ public class ReckonServiceImpl implements ReckonService {
     @Override
     public JsonResult updateOrders(String orderNumber, String dealWay, String wayId, String linkMan, String linkPhone, String address, String checkTime) {
 
-         /*测试*/
-        WebSocketTest webSocketTest=new WebSocketTest();
-        webSocketTest.SendMessages("<html>订单编号为:"+orderNumber+"</br> 联系人为:"+linkMan+"</br> 联系方式为:"+linkPhone+" </html>");
-        /*测试*/
 
         try {
             OrdersExample example = new OrdersExample();
@@ -905,6 +903,16 @@ public class ReckonServiceImpl implements ReckonService {
             criteria.andOrderNumberEqualTo(Long.valueOf(orderNumber));
             List<Orders> orderses = ordersMapper.selectByExample(example);
             Orders orders = orderses.get(0);
+
+         /*测试*/
+            WebSocketTest webSocketTest = new WebSocketTest();
+
+            webSocketTest.SendMessages("<html><div style=\"font-size:16px\"><a onclick=\"openOrders('/orders/handle/" + orders.getOrderId() + "')\" style=\"color:red;cursor: pointer;\">订单编号:" + orderNumber + "</a></br>联系人:" + linkMan + "</br> 联系方式:" + linkPhone + "</div></html>");
+
+/*发送邮件*/
+
+        /*测试*/
+
             //4s店
             if (Integer.valueOf(dealWay) == 1) {
                 TbBusiness tbBusiness = tbBusinessMapper.selectByPrimaryKey(Long.valueOf(wayId));
@@ -1435,8 +1443,8 @@ public class ReckonServiceImpl implements ReckonService {
 
     @Override
     public JsonResult testUploadOss(String json) {
-        json= jedisClient.get(BUSINESS_ADDRESS);
-        JsonResult result= fileUploadService.uploadFile(json, "test/v0.0.1/","businessAddress.json");
+        json = jedisClient.get(BUSINESS_ADDRESS);
+        JsonResult result = fileUploadService.uploadFile(json, "test/v0.0.1/", "businessAddress.json");
         return result;
     }
 
@@ -1444,15 +1452,15 @@ public class ReckonServiceImpl implements ReckonService {
     public JsonResult getDocById(long docId) {
 
         try {
-            String redisDoc = jedisClient.get("DOCUMENT:"+docId);
-            if(StringUtils.isNotBlank(redisDoc)){
-                return JsonResult.build(200,"OK",JsonUtils.jsonToPojo(redisDoc,Document.class));
-            }else{
+            String redisDoc = jedisClient.get("DOCUMENT:" + docId);
+            if (StringUtils.isNotBlank(redisDoc)) {
+                return JsonResult.build(200, "OK", JsonUtils.jsonToPojo(redisDoc, Document.class));
+            } else {
                 Document document = documentMapper.selectByPrimaryKey(docId);
-                jedisClient.set("DOCUMENT:"+docId,JsonUtils.objectToJson(document));
-                return JsonResult.build(200,"OK",document);
+                jedisClient.set("DOCUMENT:" + docId, JsonUtils.objectToJson(document));
+                return JsonResult.build(200, "OK", document);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return JsonResult.Error(OperateEnum.SERVER_ERROR);

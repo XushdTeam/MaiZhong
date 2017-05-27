@@ -37,13 +37,13 @@
                         <i class="fa1 fa-send-o"></i>
                         <cite>站点</cite>
                     </a>
-                </li>
-                <li class="layui-nav-item ">
-                    <a href="javascript:;" data-fid="99">
-                        <i class="fa1 fa-cube"></i>
-                        <cite>应用</cite>
-                    </a>
                 </li>--%>
+                <li class="layui-nav-item ">
+                    <a href="javascript:;" data-fid="3">
+                        <i class="fa1 fa-cube"></i>
+                        <cite>订单管理</cite>
+                    </a>
+                </li>
                 <li class="layui-nav-item ">
                     <a href="javascript:;" data-fid="7">
                         <i class="fa1 fa-institution"></i>
@@ -94,7 +94,7 @@
             </ul>
             <div class="layui-tab-content" id="admin-tab-container" style="min-height: 150px; padding: 0px;">
                 <div class="layui-tab-item layui-show">
-                    <iframe name="mainframe" frameborder="0" src="Center.html"></iframe>
+                    <iframe name="mainframe" frameborder="0" src="https://www.so.com/"></iframe>
                 </div>
             </div>
         </div>
@@ -116,106 +116,14 @@
 <!-- js脚本 -->
 <script type="text/javascript" src="/resources/js/event.js"></script>
 <script type="text/javascript">
+    var admin = null;
     layui.use('admin',function () {
-        layui.admin.init();
+        admin = layui.admin;
+        admin.init();
     });
+    var openWin = function(data){
+        admin.openWin(data);
+    }
 </script>
-<!-- js脚本开始 -->
-    <div>
-    <audio id="chatAudio">
-    <source src="/resources/voice/notify.mp3" type="audio/mpeg">
-    </audio>
-    </div>
-
-    <script type="text/javascript" src="/resources/js/event.js"></script>
-    <script type="text/javascript">
-    layui.use('layer', function(){ //独立版的layer无需执行这一句
-    var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
-
-    //触发事件
-    var active = {
-    setTop: function(innerHTML,Owidth,Oheight){
-    var that = this;
-    //多窗口模式，层叠置顶
-    layer.open({
-    type: 1
-    ,title: '您有新订单了'
-    ,area: ['200px', '130px']
-    ,shade: 0
-    ,maxmin: false
-    ,offset: [
-    Oheight
-    ,($(window).width()-Owidth)
-    ]
-    ,content:innerHTML
-    //,btn: ['全部关闭'] //只是为了演示
-   // ,yes: function(){
-    //layer.closeAll();
-   // }
-    ,zIndex: layer.zIndex //重点1
-    ,success: function(layero){
-    layer.setTop(layero); //重点2
-    }
-    });
-    }
-    };
-
-    var websocket = null;
-    //判断当前浏览器是否支持WebSocket
-    if ('WebSocket' in window) {
-    websocket = new WebSocket("ws://core.maizhongcar.com/websocket");
-    }
-    else {
-    alert('当前浏览器 不支持订单监控，请更换浏览器')
-    }
-
-    //连接发生错误的回调方法
-    websocket.onerror = function () {
-    setMessageInnerHTML("订单监控连接失败，请稍后刷新重试或更换浏览器");
-    };
-
-    //连接成功建立的回调方法
-  //  websocket.onopen = function () {
-  //  setMessageInnerHTML("");
- //   }
-
-    //接收到消息的回调方法
-    websocket.onmessage = function (event) {
-    setMessageInnerHTML(event.data);
-    }
-
-    //连接关闭的回调方法
-    websocket.onclose = function () {
-    setMessageInnerHTML("WebSocket连接关闭");
-    }
-
-    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
-    window.onbeforeunload = function () {
-    closeWebSocket();
-    }
-
-    //将消息显示在网页上
-    function setMessageInnerHTML(innerHTML) {
-    if(innerHTML){
-    $('#chatAudio')[0].play(); //播放声音
-    var wind= $('.layui-layer-content').length;
-    var Owidth=200;
-    var num= Math.floor(wind / 4);
-    if(wind>=4){
-    Owidth=200+num*200;
-    wind=wind-num*4;
-    }
-    active["setTop"].call(this,innerHTML,Owidth,155*wind)};
-    }
-
-    //关闭WebSocket连接
-    function closeWebSocket() {
-    websocket.close();
-    }
-    });
-    </script>
-
-
-
 </body>
 </html>

@@ -72,6 +72,7 @@ public class OrderServiceImpl implements OrderService {
             }
         }
         criteria.andDelflagEqualTo(0);
+        criteria.andStatusGreaterThan(0);
         example.setOrderByClause("order_id DESC");
         PageHelper.startPage(param.getPageIndex(), param.getPageSize());
         List<Orders> ordersList = ordersMapper.selectByExample(example);
@@ -246,4 +247,68 @@ public class OrderServiceImpl implements OrderService {
         }
         return OperateEnum.FAILE;
     }
+
+    /**
+     * 获取订单对象
+     *
+     * @param orderNumber
+     * @return
+     */
+    @Override
+    public Orders getOrdersByOrderNumber(Long orderNumber) {
+        OrdersExample example = new OrdersExample();
+        OrdersExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderNumberEqualTo(orderNumber);
+        List<Orders> ordersList = ordersMapper.selectByExample(example);
+        if (ordersList == null || ordersList.size() == 0) {
+            return null;
+        }
+        return ordersList.get(0);
+    }
+
+    /**
+     * 未预约订单
+     * @param param
+     * @return
+     */
+    @Override
+    public PageResult yuyueList(PageSearchParam param) {
+        OrdersExample example = new OrdersExample();
+        OrdersExample.Criteria criteria = example.createCriteria();
+        String status = param.getFiled("status");
+        if (StringUtils.isNotBlank(status)) {
+            try {
+                criteria.andStatusEqualTo(Integer.valueOf(status));
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        String orderNumber = param.getFiled("orderNumber");
+
+        if (StringUtils.isNotBlank(orderNumber)) {
+            try {
+                criteria.andOrderNumberEqualTo(Long.valueOf(orderNumber));
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+
+        String userId = param.getFiled("user_id");
+        if (StringUtils.isNotBlank(userId)) {
+            try {
+                criteria.andUserIdEqualTo(Long.valueOf(userId));
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        criteria.andDelflagEqualTo(0);
+        criteria.andStatusEqualTo(0);
+        example.setOrderByClause("order_id DESC");
+        PageHelper.startPage(param.getPageIndex(), param.getPageSize());
+        List<Orders> ordersList = ordersMapper.selectByExample(example);
+        PageInfo pageInfo = new PageInfo(ordersList);
+        return new PageResult(pageInfo);
+    }
+
+
 }
