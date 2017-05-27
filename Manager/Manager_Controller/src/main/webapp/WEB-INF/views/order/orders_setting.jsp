@@ -100,7 +100,7 @@
         <%--  <script id="tpl" type="text/html">--%>
         <tr>
         <td>${orderInfo.cityId}</td>
-        <td>${orderInfo.sKm}</td>
+        <td>${orderInfo.sKm}万公里</td>
         <td>${orderInfo.regDate}</td>
         <td>${orderInfo.color}</td>
         <td>${orderInfo.gh}</td>
