@@ -992,10 +992,23 @@ public class AppServiceImpl implements AppService {
             return JsonResult.OK();
         }
 
-        OrderDTO orderDTO = JsonUtils.jsonToPojo(order_phone, OrderDTO.class);
+        GuzhiDTO guzhiDTO = JsonUtils.jsonToPojo(order_phone, GuzhiDTO.class);
+        String modelId = guzhiDTO.getModelId();
+
+
+        ModelExample example = new ModelExample();
+        ModelExample.Criteria criteria = example.createCriteria();
+        criteria.andModelIdEqualTo(Long.parseLong(modelId));
+        long l = modelMapper.countByExample(example);
+        if(l==0){
+            String redisModel = jedisClient.hget("CAR_MODEL",modelId);
+            Model model = JsonUtils.jsonToPojo(redisModel,Model.class);
+            modelMapper.insert(model);
+        }
+
         Long orderNumber = null;
         try {
-            orderNumber = Long.valueOf(orderDTO.getOrderNumber());
+            orderNumber = Long.valueOf(guzhiDTO.getOrderNumber());
         } catch (NumberFormatException e) {
             e.printStackTrace();
             return JsonResult.OK();
