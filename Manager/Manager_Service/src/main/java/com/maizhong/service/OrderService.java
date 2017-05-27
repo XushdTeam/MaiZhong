@@ -23,4 +23,8 @@ public interface OrderService  {
     OperateEnum updateOrders(Orders orders);
 
     OperateEnum deleteOrdersById(long id);
+
+    Orders getOrdersByOrderNumber(Long aLong);
+
+    PageResult yuyueList(PageSearchParam param);
 }

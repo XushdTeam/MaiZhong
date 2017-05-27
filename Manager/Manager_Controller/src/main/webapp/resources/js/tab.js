@@ -109,9 +109,12 @@ layui.define(['element', 'app'], function (exports) {
             element.tabChange(ELEM.tabFilter, tabIndex);
         }
     };
+    
     Tab.prototype.on = function (events, callback) {
 
     }
+
+
 
     var tab = new Tab();
     exports(mod_name, function (options) {

@@ -45,6 +45,19 @@ layui.use(['layer', 'app'], function () {
             app.layerMessageE("没有设定跳转地址")
         }
     };
+
+    //新增修改跳转
+    active.doAddEdit2 = function () {
+        var url = $(this).data('href');
+        if (url) {
+            app.route(url);
+        }
+        else {
+            app.layerMessageE("没有设定跳转地址")
+        }
+    };
+
+
     //单向出发ajax
     active.doAjax = function () {
         var url = $(this).data("href");

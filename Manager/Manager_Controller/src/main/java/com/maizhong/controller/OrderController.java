@@ -38,19 +38,45 @@ public class OrderController {
         return "/order/orders";
     }
 
+
+    @RequestMapping(value = "/yuyue", method = RequestMethod.GET)
+    public String yuyue(Model model) {
+        model.addAttribute("baseUrl", "/yuyue");
+        model.addAttribute("listUrl", "/orders/yuyue");
+        model.addAttribute("handleUrl", "/yuyue/handle");
+        model.addAttribute("deleteUrl", "/orders/delete");
+        return "/order/orders_yuyue";
+    }
+
+
     /**
      * 订单管理
      *
      * @param param
      * @return
      */
-    @ControllerLog(module = "订单管理", methods = "订单审核")
-    @RequestMapping(value = "/orders/list", method = RequestMethod.POST)
+    @ControllerLog(module = "订单管理", methods = "完整订单")
+    @RequestMapping(value = "/orders/list")
     @ResponseBody
     public JsonResult orderList(PageSearchParam param) {
         PageResult result = orderService.getOrderList(param);
         return JsonResult.OK(result);
     }
+
+    /**
+     * 订单管理
+     *
+     * @param param
+     * @return
+     */
+    @ControllerLog(module = "订单管理", methods = "未预约订单")
+    @RequestMapping(value = "/orders/yuyue")
+    @ResponseBody
+    public JsonResult yuyueList(PageSearchParam param) {
+        PageResult result = orderService.yuyueList(param);
+        return JsonResult.OK(result);
+    }
+
 /**
      * 订单修改
      *
@@ -70,6 +96,52 @@ public class OrderController {
         model.addAttribute("saveUrl", "/orders/update");
         return "order/orders_setting";
     }
+
+    /**
+     * 订单修改
+     *
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/yuyue/handle/{id}")
+    public String yuyueHandle(@PathVariable String id, Model model) {
+
+        model.addAttribute("baseUrl", "/yuyue");
+        Orders orders = orderService.getOrdersById(Long.valueOf(id));
+        OrderInfo orderInfo = orderService.getOrdersInfo(orders.getOrderNumber());
+        model.addAttribute("orders", orders);
+        model.addAttribute("orderInfo", orderInfo);
+        model.addAttribute("handle", "订单管理/订单审核");
+        model.addAttribute("saveUrl", "/orders/update");
+        return "order/yuyue";
+    }
+
+
+
+
+    /**
+     * 订单更新
+     *
+     * @param orderNumber
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/orders/check/{orderNumber}")
+    public String check(@PathVariable String orderNumber, Model model) {
+        model.addAttribute("baseUrl", "/orders/check/"+orderNumber);
+        Orders orders = orderService.getOrdersByOrderNumber(Long.valueOf(orderNumber));
+        OrderInfo orderInfo = orderService.getOrdersInfo(orders.getOrderNumber());
+        model.addAttribute("orders", orders);
+        model.addAttribute("orderInfo", orderInfo);
+        model.addAttribute("handle", "订单确认/订单审核");
+        model.addAttribute("saveUrl", "/orders/update");
+        return "order/orders_setting";
+    }
+
+
+
+
     /**
      * 订单删除
      *
@@ -98,12 +170,6 @@ public class OrderController {
     public JsonResult ordersUpdate(Orders orders) {
         OperateEnum result = orderService.updateOrders(orders);
         return JsonResult.build(result);
-    }
-
-
-    @RequestMapping(value = "/testMessage")
-    public String test() {
-        return "/order/test";
     }
 
 }
