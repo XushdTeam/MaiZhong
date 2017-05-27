@@ -168,7 +168,7 @@ public class AppController {
      * @param param
      * @return
      */
-    @RequestMapping(value = "/guzhi/{param}", method = RequestMethod.GET)
+    @RequestMapping(value = "/guzhi/{param:.+}", method = RequestMethod.GET)
     @ResponseBody
     public JsonResult getGuzhi(@PathVariable String param, HttpServletRequest request) {
         JsonResult result = appService.getGuzhi(param, request);
@@ -254,7 +254,7 @@ public class AppController {
      * @param otherKey
      * @return
      */
-    @RequestMapping(value = "/getSaleGZ/{guzhiKey}/{otherKey}", method = RequestMethod.GET)
+    @RequestMapping(value = "/getSaleGZ/{guzhiKey:.+}/{otherKey}", method = RequestMethod.GET)
     @ResponseBody
     public JsonResult getSaleGZ(@PathVariable String guzhiKey,
                                 @PathVariable String otherKey,

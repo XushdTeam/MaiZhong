@@ -6,7 +6,7 @@
     <result column="param" jdbcType="VARCHAR" property="param" />
     <result column="model_id" jdbcType="BIGINT" property="modelId" />
     <result column="city" jdbcType="INTEGER" property="city" />
-    <result column="mail" jdbcType="INTEGER" property="mail" />
+    <result column="mail" jdbcType="VARCHAR" property="mail" />
     <result column="reg_date" jdbcType="VARCHAR" property="regDate" />
     <result column="price_max_a" jdbcType="VARCHAR" property="priceMaxA" />
     <result column="price_min_a" jdbcType="VARCHAR" property="priceMinA" />
@@ -119,7 +119,7 @@
       price_max_d, price_min_d, time, 
       phone)
     values (#{id,jdbcType=BIGINT}, #{param,jdbcType=VARCHAR}, #{modelId,jdbcType=BIGINT}, 
-      #{city,jdbcType=INTEGER}, #{mail,jdbcType=INTEGER}, #{regDate,jdbcType=VARCHAR}, 
+      #{city,jdbcType=INTEGER}, #{mail,jdbcType=VARCHAR}, #{regDate,jdbcType=VARCHAR}, 
       #{priceMaxA,jdbcType=VARCHAR}, #{priceMinA,jdbcType=VARCHAR}, #{priceMaxB,jdbcType=VARCHAR}, 
       #{priceMinB,jdbcType=VARCHAR}, #{priceMaxC,jdbcType=VARCHAR}, #{priceMinC,jdbcType=VARCHAR}, 
       #{priceMaxD,jdbcType=VARCHAR}, #{priceMinD,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
@@ -191,7 +191,7 @@
         #{city,jdbcType=INTEGER},
       </if>
       <if test="mail != null">
-        #{mail,jdbcType=INTEGER},
+        #{mail,jdbcType=VARCHAR},
       </if>
       <if test="regDate != null">
         #{regDate,jdbcType=VARCHAR},
@@ -250,7 +250,7 @@
         city = #{record.city,jdbcType=INTEGER},
       </if>
       <if test="record.mail != null">
-        mail = #{record.mail,jdbcType=INTEGER},
+        mail = #{record.mail,jdbcType=VARCHAR},
       </if>
       <if test="record.regDate != null">
         reg_date = #{record.regDate,jdbcType=VARCHAR},
@@ -296,7 +296,7 @@
       param = #{record.param,jdbcType=VARCHAR},
       model_id = #{record.modelId,jdbcType=BIGINT},
       city = #{record.city,jdbcType=INTEGER},
-      mail = #{record.mail,jdbcType=INTEGER},
+      mail = #{record.mail,jdbcType=VARCHAR},
       reg_date = #{record.regDate,jdbcType=VARCHAR},
       price_max_a = #{record.priceMaxA,jdbcType=VARCHAR},
       price_min_a = #{record.priceMinA,jdbcType=VARCHAR},
@@ -325,7 +325,7 @@
         city = #{city,jdbcType=INTEGER},
       </if>
       <if test="mail != null">
-        mail = #{mail,jdbcType=INTEGER},
+        mail = #{mail,jdbcType=VARCHAR},
       </if>
       <if test="regDate != null">
         reg_date = #{regDate,jdbcType=VARCHAR},
@@ -368,7 +368,7 @@
     set param = #{param,jdbcType=VARCHAR},
       model_id = #{modelId,jdbcType=BIGINT},
       city = #{city,jdbcType=INTEGER},
-      mail = #{mail,jdbcType=INTEGER},
+      mail = #{mail,jdbcType=VARCHAR},
       reg_date = #{regDate,jdbcType=VARCHAR},
       price_max_a = #{priceMaxA,jdbcType=VARCHAR},
       price_min_a = #{priceMinA,jdbcType=VARCHAR},

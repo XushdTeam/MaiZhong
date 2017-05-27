@@ -607,7 +607,7 @@ public class AppServiceImpl implements AppService {
             Gzrecord gzrecord = new Gzrecord();
             gzrecord.setParam(param);
             gzrecord.setCity(Integer.valueOf(paramarry[1]));
-            gzrecord.setMail(Integer.valueOf(paramarry[4]));
+            gzrecord.setMail(paramarry[4]);
             gzrecord.setModelId(Long.valueOf(paramarry[2]));
             gzrecord.setRegDate(paramarry[3]);
             gzrecord.setTime(new Date());

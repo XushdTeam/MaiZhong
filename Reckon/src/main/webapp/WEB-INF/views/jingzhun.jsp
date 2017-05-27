@@ -342,7 +342,7 @@
 
     <div class="jing btn gh">
         <label>过户次数：</label>
-        <a href="JavaScript:void(0)"  data-gh="1">0次</a>
+        <a href="JavaScript:void(0)"  data-gh="4">0次</a>
         <a href="JavaScript:void(0)"  data-gh="1">1次</a>
         <a href="JavaScript:void(0)"  data-gh="2">2次</a>
         <a href="JavaScript:void(0)"  data-gh="3">3次以上</a>
@@ -361,11 +361,13 @@
     <div class="jing jck btn ck">
         <label>车况：</label>
         <a href="JavaScript:void(0)"  data-ck="1">A(优秀)车况好没有任何故障 </a>
-        <a href="JavaScript:void(0)"  data-ck="2" style="padding-right: 36px;">B(良好)有过少量剐蹭或钣金 </a>
+        <a href="JavaScript:void(0)"  data-ck="3">C(一般)有过前后轻碰事故 </a>
+
 
         <br>
           <i style="display: block; height: 15px;"></i>
-        <a href="JavaScript:void(0)"  data-ck="3">C(一般)有过前后轻碰事故 </a>
+
+        <a href="JavaScript:void(0)"  data-ck="2" style="padding-right: 36px;">B(良好)有过少量剐蹭或钣金 </a>
         <a href="JavaScript:void(0)"  data-ck="4">D(较差)有发生过伤及主体框架的碰撞或较大事故 </a>
     </div>
 

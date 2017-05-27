@@ -444,7 +444,7 @@ public class ReckonServiceImpl implements ReckonService {
             Gzrecord gzrecord = new Gzrecord();
             gzrecord.setParam(param);
             gzrecord.setCity(Integer.valueOf(paramarry[1]));
-            gzrecord.setMail(Integer.valueOf(paramarry[4]));
+            gzrecord.setMail(paramarry[4]);
             gzrecord.setModelId(Long.valueOf(paramarry[2]));
             gzrecord.setRegDate(paramarry[3]);
             gzrecord.setTime(new Date());
@@ -678,14 +678,17 @@ public class ReckonServiceImpl implements ReckonService {
 
         JSONObject colorObject = JSON.parseObject(colorParam);
         String rate = colorObject.getString("p" + color);
-        //颜色影响
-        basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
+        //颜色影响*（不扣）
+        //basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
 
         String jqxParam = jedisClient.hget("GZ_PARAM", "jqx");
         JSONObject jqxObject = JSON.parseObject(jqxParam);
         rate = jqxObject.getString("p" + jqx);
-        //交强险影响
+        //交强险影响 减法
         basePrice = basePrice.subtract(new BigDecimal(rate));
+        if (basePrice.compareTo(BigDecimal.ZERO) < 0) {
+            basePrice = BigDecimal.ZERO;
+        }
 
         String ghParam = jedisClient.hget("GZ_PARAM", "gh");
         JSONObject ghObject = JSON.parseObject(ghParam);
@@ -693,11 +696,12 @@ public class ReckonServiceImpl implements ReckonService {
         //过户次数影响
         basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
 
-        String ghtParam = jedisClient.hget("GZ_PARAM", "ghtime");
-        JSONObject ghtObject = JSON.parseObject(ghtParam);
-        rate = ghtObject.getString("p" + ghtime);
-        //过户时间影响
-        basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
+        //2017.5.27
+        //String ghtParam = jedisClient.hget("GZ_PARAM", "ghtime");
+        //JSONObject ghtObject = JSON.parseObject(ghtParam);
+        //rate = ghtObject.getString("p" + ghtime);
+        //过户时间影响 *（不扣）
+        //basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
 
         String xzParam = jedisClient.hget("GZ_PARAM", "xz");
         JSONObject xzObject = JSON.parseObject(xzParam);
@@ -708,9 +712,11 @@ public class ReckonServiceImpl implements ReckonService {
         String njParam = jedisClient.hget("GZ_PARAM", "nj");
         JSONObject njObject = JSON.parseObject(njParam);
         rate = njObject.getString("p" + nj);
-        //年检
+        //年检 (减法)
         basePrice = basePrice.subtract(new BigDecimal(rate));
-
+        if (basePrice.compareTo(BigDecimal.ZERO) < 0) {
+            basePrice = BigDecimal.ZERO;
+        }
         String methodParam = jedisClient.hget("GZ_PARAM", "method");
         JSONObject mObject = JSON.parseObject(methodParam);
         rate = mObject.getString("p" + method);
@@ -720,8 +726,12 @@ public class ReckonServiceImpl implements ReckonService {
         if (basePrice.compareTo(BigDecimal.ZERO) < 0) {
             basePrice = BigDecimal.ZERO;
         }
+        if (basePrice.compareTo(new BigDecimal(1))<0){
+            guzhiDTO.setSalePrice(basePrice.setScale(3, BigDecimal.ROUND_HALF_DOWN).toString());
+        }else{
+            guzhiDTO.setSalePrice(basePrice.setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+        }
 
-        guzhiDTO.setSalePrice(basePrice.setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
 
         OrdersExample example = new OrdersExample();
         OrdersExample.Criteria criteria = example.createCriteria();
@@ -800,7 +810,7 @@ public class ReckonServiceImpl implements ReckonService {
             for (Line line : lines) {
 
                 String res = HttpClientUtil.doGet("http://www.aihuishou.com/util/GetMetroSiteByLine?lineId=" + line.getId());
-                System.out.println(res);
+                //System.out.println(res);
                 JSONArray jsonArray = JSON.parseArray(res);
 
                 for (Object o : jsonArray) {
@@ -988,8 +998,11 @@ public class ReckonServiceImpl implements ReckonService {
             orderDTO.setOrderNumber(String.valueOf(orders.getOrderNumber()));//订单编号
             orderDTO.setUserId(String.valueOf(orders.getUserId()));//用户Id
             Model model = modelMapper.selectByPrimaryKey(orders.getModelId());//车型对象
-
+            //System.out.println(model.getSeriesId());
+            //System.out.println(model.getModelId());
             Series series = seriesMapper.selectByPrimaryKey(model.getSeriesId());
+
+
             orderDTO.setSeriesImg(series.getSeriesPic());//车系图片
             orderDTO.setModel(model);
             orderDTO.setModelName(orders.getModelName());//车型名称
@@ -1295,7 +1308,7 @@ public class ReckonServiceImpl implements ReckonService {
              * Step 4. 发布SMS消息
              */
             TopicMessage ret = topic.publishMessage(msg, messageAttributes);
-            System.out.println(ret.getMessageId());
+            //System.out.println(ret.getMessageId());
         } catch (ServiceException se) {
             client.close();
             return JsonResult.OK("发送失败,请重新发送");

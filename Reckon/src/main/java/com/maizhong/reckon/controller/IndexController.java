@@ -146,7 +146,7 @@ public class IndexController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/guzhi/{param}")
+    @RequestMapping(value = "/guzhi/{param:.+}")
     public String compute(@PathVariable String param,Model model){
 
         String params = param;
@@ -164,7 +164,7 @@ public class IndexController {
      * @param param
      * @return
      */
-    @RequestMapping(value = "/sale/{param}")
+    @RequestMapping(value = "/sale/{param:.+}")
     public String sale(Model model,@PathVariable String param){
 
         IndexDTO indexDTO = indexService.getIndexDTO(param);
@@ -175,7 +175,7 @@ public class IndexController {
         return "jingzhun";
     }
 
-    @RequestMapping(value = "/sale/model/{param}")
+    @RequestMapping(value = "/sale/model/{param:.+}")
     public String saleSe(Model model,@PathVariable String param){
 
         IndexDTO indexDTO = indexService.getIndexDTOSe(param);
@@ -210,7 +210,7 @@ public class IndexController {
      * @param param
      * @return
      */
-    @RequestMapping(value="/saleguzhi/{param}")
+    @RequestMapping(value="/saleguzhi/{param:.+}")
     public String saleguzhi(@PathVariable String param, Model model,
                             @CookieValue(value = "phone",required = true) String phone
     ){

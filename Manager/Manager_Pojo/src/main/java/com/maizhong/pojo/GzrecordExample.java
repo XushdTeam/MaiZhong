@@ -365,52 +365,62 @@ public class GzrecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andMailEqualTo(Integer value) {
+        public Criteria andMailEqualTo(String value) {
             addCriterion("mail =", value, "mail");
             return (Criteria) this;
         }
 
-        public Criteria andMailNotEqualTo(Integer value) {
+        public Criteria andMailNotEqualTo(String value) {
             addCriterion("mail <>", value, "mail");
             return (Criteria) this;
         }
 
-        public Criteria andMailGreaterThan(Integer value) {
+        public Criteria andMailGreaterThan(String value) {
             addCriterion("mail >", value, "mail");
             return (Criteria) this;
         }
 
-        public Criteria andMailGreaterThanOrEqualTo(Integer value) {
+        public Criteria andMailGreaterThanOrEqualTo(String value) {
             addCriterion("mail >=", value, "mail");
             return (Criteria) this;
         }
 
-        public Criteria andMailLessThan(Integer value) {
+        public Criteria andMailLessThan(String value) {
             addCriterion("mail <", value, "mail");
             return (Criteria) this;
         }
 
-        public Criteria andMailLessThanOrEqualTo(Integer value) {
+        public Criteria andMailLessThanOrEqualTo(String value) {
             addCriterion("mail <=", value, "mail");
             return (Criteria) this;
         }
 
-        public Criteria andMailIn(List<Integer> values) {
+        public Criteria andMailLike(String value) {
+            addCriterion("mail like", value, "mail");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailNotLike(String value) {
+            addCriterion("mail not like", value, "mail");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailIn(List<String> values) {
             addCriterion("mail in", values, "mail");
             return (Criteria) this;
         }
 
-        public Criteria andMailNotIn(List<Integer> values) {
+        public Criteria andMailNotIn(List<String> values) {
             addCriterion("mail not in", values, "mail");
             return (Criteria) this;
         }
 
-        public Criteria andMailBetween(Integer value1, Integer value2) {
+        public Criteria andMailBetween(String value1, String value2) {
             addCriterion("mail between", value1, value2, "mail");
             return (Criteria) this;
         }
 
-        public Criteria andMailNotBetween(Integer value1, Integer value2) {
+        public Criteria andMailNotBetween(String value1, String value2) {
             addCriterion("mail not between", value1, value2, "mail");
             return (Criteria) this;
         }

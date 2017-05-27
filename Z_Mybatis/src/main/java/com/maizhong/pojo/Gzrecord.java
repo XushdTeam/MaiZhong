@@ -11,7 +11,7 @@ public class Gzrecord {
 
     private Integer city;
 
-    private Integer mail;
+    private String mail;
 
     private String regDate;
 
@@ -32,6 +32,8 @@ public class Gzrecord {
     private String priceMinD;
 
     private Date time;
+
+    private Long phone;
 
     public Long getId() {
         return id;
@@ -65,12 +67,12 @@ public class Gzrecord {
         this.city = city;
     }
 
-    public Integer getMail() {
+    public String getMail() {
         return mail;
     }
 
-    public void setMail(Integer mail) {
-        this.mail = mail;
+    public void setMail(String mail) {
+        this.mail = mail == null ? null : mail.trim();
     }
 
     public String getRegDate() {
@@ -151,5 +153,13 @@ public class Gzrecord {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public Long getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Long phone) {
+        this.phone = phone;
     }
 }

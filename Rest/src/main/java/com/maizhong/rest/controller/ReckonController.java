@@ -173,7 +173,7 @@ public class ReckonController {
      * @param param
      * @return
      */
-    @RequestMapping(value = "/guzhi/{param}", method = RequestMethod.GET)
+    @RequestMapping(value = "/guzhi/{param:.+}", method = RequestMethod.GET)
     @ResponseBody
     public JsonResult getGuzhi(@PathVariable String param) {
 
@@ -188,7 +188,7 @@ public class ReckonController {
      * @param otherKey
      * @return
      */
-    @RequestMapping(value = "/getSaleGZ/{guzhiKey}/{otherKey}/{phone}")
+    @RequestMapping(value = "/getSaleGZ/{guzhiKey:.+}/{otherKey}/{phone}")
     @ResponseBody
     public JsonResult getSaleGZ(@PathVariable String guzhiKey,
                                 @PathVariable String otherKey,

@@ -1,8 +1,5 @@
 package com.maizhong.pojo;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 
 public class Gzrecord {
@@ -14,7 +11,7 @@ public class Gzrecord {
 
     private Integer city;
 
-    private Integer mail;
+    private String mail;
 
     private String regDate;
 
@@ -70,12 +67,12 @@ public class Gzrecord {
         this.city = city;
     }
 
-    public Integer getMail() {
+    public String getMail() {
         return mail;
     }
 
-    public void setMail(Integer mail) {
-        this.mail = mail;
+    public void setMail(String mail) {
+        this.mail = mail == null ? null : mail.trim();
     }
 
     public String getRegDate() {
@@ -149,8 +146,7 @@ public class Gzrecord {
     public void setPriceMinD(String priceMinD) {
         this.priceMinD = priceMinD == null ? null : priceMinD.trim();
     }
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
+
     public Date getTime() {
         return time;
     }
