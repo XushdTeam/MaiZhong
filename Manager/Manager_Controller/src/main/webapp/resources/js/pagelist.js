@@ -74,6 +74,7 @@ layui.define(["app","form","laytpl","laypage",'laydate','util'],function (export
          * @param callback
          */
         initPage:function(pages,url,searchFileds,callback){
+
             laypage({
                 cont: 'page',
                 pages: pages,//总页数
@@ -93,6 +94,7 @@ layui.define(["app","form","laytpl","laypage",'laydate','util'],function (export
                     }
                 }
             });
+            
         },
         /**
          * 初始模版函数

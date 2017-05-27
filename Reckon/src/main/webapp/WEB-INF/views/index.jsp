@@ -16,6 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Windows-Target" contect="_top">
     <meta name="keywords" content="悟空收车，悟空，二手车，估值，收购"/>
     <meta name="description" content="悟空收车专业的二手车估值收购平台，验车快，当天到账，售后跟踪"/>
 	<link rel="icon" href="/favicon.ico" />

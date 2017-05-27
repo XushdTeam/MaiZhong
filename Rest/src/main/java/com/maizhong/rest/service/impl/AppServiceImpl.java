@@ -622,26 +622,25 @@ public class AppServiceImpl implements AppService {
             for (Object eval_price : eval_prices) {
                 JSONObject object = (JSONObject) eval_price;
 //
+
                 if (object.getString("condition").equals("excellent")) {
                     //车况优秀
-                    gzrecord.setPriceMaxA(object.getString("dealer_buy_price"));
+                    gzrecord.setPriceMaxA(object.getString("individual_low_sold_price"));
                     gzrecord.setPriceMinA(object.getString("dealer_low_buy_price"));
                 }
                 if (object.getString("condition").equals("good")) {
                     //车况良好
-                    gzrecord.setPriceMaxB(object.getString("dealer_buy_price"));
+                    gzrecord.setPriceMaxB(object.getString("individual_low_sold_price"));
                     gzrecord.setPriceMinB(object.getString("dealer_low_buy_price"));
                 }
                 if (object.getString("condition").equals("normal")) {
                     //车况一般
-                    gzrecord.setPriceMaxC(object.getString("dealer_buy_price"));
+                    gzrecord.setPriceMaxC(object.getString("individual_low_sold_price"));
                     gzrecord.setPriceMinC(object.getString("dealer_low_buy_price"));
                     //车况较差
-                    gzrecord.setPriceMaxD(new BigDecimal(object.getInteger("dealer_buy_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+                    gzrecord.setPriceMaxD(new BigDecimal(object.getInteger("individual_low_sold_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
                     gzrecord.setPriceMinD(new BigDecimal(object.getInteger("dealer_low_buy_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
 //
-//                    gzrecord.setPriceMaxD(new BigDecimal(object.getInteger("dealer_buy_price") * 0.94 * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
-//                    gzrecord.setPriceMinD(new BigDecimal(object.getInteger("dealer_low_buy_price") * 0.94 * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
                 }
 
             }

@@ -6,6 +6,7 @@ package com.maizhong.common.enums;
 public enum DicParentEnum {
     FUNCTION(1,"系统功能"),
     ADTYPE(13,"广告类型"),
+    RATE(28,"利率"),
     CMID(17,"栏目类型");
 
     private int state;

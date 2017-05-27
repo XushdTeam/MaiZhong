@@ -135,55 +135,38 @@ public class ReckonServiceImpl implements ReckonService {
     @Override
     public void getBrandData() {
 
-        String res = HttpClientUtil.doGet(CHE_BRAND + "?token=" + token);
-        JSONObject jsonObject = JSON.parseObject(res);
-
-        JSONArray brand_list = jsonObject.getJSONArray("brand_list");
-
-        for (Object o : brand_list) {
-            JSONObject object = (JSONObject) o;
-            Brand brand = new Brand();
-            brand.setBrandId(object.getLong("brand_id"));
-            brand.setBrandName(object.getString("brand_name"));
-            brand.setInitial(object.getString("initial"));
-            brand.setUpdateTime(object.getDate("update_time"));
-            brand.setLargeLogo("http://assets.che300.com/theme/images/brand/large/b" + object.getString("brand_id") + ".jpg");
-            brand.setSmallLogo("http://assets.che300.com/theme/images/brand/small/b" + object.getString("brand_id") + ".jpg");
-
-            brandMapper.insert(brand);
-        }
-
+//
     }
 
     @Override
     public void getSeriesData() {
 
-        BrandExample example = new BrandExample();
-        example.setOrderByClause("brand_id");
-        List<Brand> brands = brandMapper.selectByExample(example);
-        for (Brand brand : brands) {
-            String res = HttpClientUtil.doGet(CHE_SERIES + "?token=" + token + "&brandId=" + brand.getBrandId());
-            System.out.println(res);
-            JSONObject jsonObject = JSON.parseObject(res);
-            JSONArray series_list = jsonObject.getJSONArray("series_list");
-            for (Object o : series_list) {
-                JSONObject object = (JSONObject) o;
-                Series series = new Series();
-                series.setBrandId(brand.getBrandId());
-                series.setSeriesId(object.getInteger("series_id"));
-                series.setSeriesName(object.getString("series_name"));
-                series.setSeriesGroupName(object.getString("series_group_name"));
-                series.setUpdateTime(object.getDate("update_time"));
-                series.setSeriesPic(object.getString("series_pic").replace("\\", ""));
-                jedisClient.hset("CAR_SERIES_KEY", object.getString("series_id"), JSON.toJSONString(series));
-                seriesMapper.insert(series);
-            }
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+//        BrandExample example = new BrandExample();
+//        example.setOrderByClause("brand_id");
+//        List<Brand> brands = brandMapper.selectByExample(example);
+//        for (Brand brand : brands) {
+//            String res = HttpClientUtil.doGet(CHE_SERIES + "?token=" + token + "&brandId=" + brand.getBrandId());
+//            System.out.println(res);
+//            JSONObject jsonObject = JSON.parseObject(res);
+//            JSONArray series_list = jsonObject.getJSONArray("series_list");
+//            for (Object o : series_list) {
+//                JSONObject object = (JSONObject) o;
+//                Series series = new Series();
+//                series.setBrandId(brand.getBrandId());
+//                series.setSeriesId(object.getInteger("series_id"));
+//                series.setSeriesName(object.getString("series_name"));
+//                series.setSeriesGroupName(object.getString("series_group_name"));
+//                series.setUpdateTime(object.getDate("update_time"));
+//                series.setSeriesPic(object.getString("series_pic").replace("\\", ""));
+//                jedisClient.hset("CAR_SERIES_KEY", object.getString("series_id"), JSON.toJSONString(series));
+//                seriesMapper.insert(series);
+//            }
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     /**
@@ -263,6 +246,7 @@ public class ReckonServiceImpl implements ReckonService {
         String hget = null;
         try {
             hget = jedisClient.hget(SERIES_GROUP_BRAND, brandId);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -386,6 +370,9 @@ public class ReckonServiceImpl implements ReckonService {
                 //STEP 4 放到缓存
                 jedisClient.hset("CAR_SERIES_MODEL", seriesId, JSON.toJSONString(model_list));
 
+
+
+
                 //STEP 5 存入数据库
                 for (Object o : model_list) {
                     JSONObject object = (JSONObject) o;
@@ -403,7 +390,7 @@ public class ReckonServiceImpl implements ReckonService {
                     model.setUpdateTime(object.getDate("update_time"));
                     model.setShortName(object.getString("short_name"));
                     model.setModelPrice(object.getBigDecimal("model_price"));
-                    modelMapper.insert(model);
+//                    modelMapper.insert(model);
 
                     jedisClient.hset("CAR_MODEL", object.getInteger("model_id") + "", JSON.toJSONString(model));
                 }
@@ -443,10 +430,17 @@ public class ReckonServiceImpl implements ReckonService {
             String[] paramarry = param.split("c|m|r|g");
             String url = String.format("%s?token=%s&modelId=%s&regDate=%s&mile=%s&zone=%s", GUZHI, token, paramarry[2], paramarry[3], paramarry[4], paramarry[1]);
 
+
+
+
             String res = HttpClientUtil.doGet(url);
 
             JSONObject jsonObject = JSON.parseObject(res);
             JSONArray eval_prices = jsonObject.getJSONArray("eval_prices");
+
+
+
+
 
 
             Gzrecord gzrecord = new Gzrecord();
@@ -462,20 +456,20 @@ public class ReckonServiceImpl implements ReckonService {
 //
                 if (object.getString("condition").equals("excellent")) {
                     //车况优秀
-                    gzrecord.setPriceMaxA(object.getString("dealer_buy_price"));
+                    gzrecord.setPriceMaxA(object.getString("individual_low_sold_price"));
                     gzrecord.setPriceMinA(object.getString("dealer_low_buy_price"));
                 }
                 if (object.getString("condition").equals("good")) {
                     //车况良好
-                    gzrecord.setPriceMaxB(object.getString("dealer_buy_price"));
+                    gzrecord.setPriceMaxB(object.getString("individual_low_sold_price"));
                     gzrecord.setPriceMinB(object.getString("dealer_low_buy_price"));
                 }
                 if (object.getString("condition").equals("normal")) {
                     //车况一般
-                    gzrecord.setPriceMaxC(object.getString("dealer_buy_price"));
+                    gzrecord.setPriceMaxC(object.getString("individual_low_sold_price"));
                     gzrecord.setPriceMinC(object.getString("dealer_low_buy_price"));
                     //车况较差
-                    gzrecord.setPriceMaxD(new BigDecimal(object.getInteger("dealer_buy_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+                    gzrecord.setPriceMaxD(new BigDecimal(object.getInteger("individual_low_sold_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
                     gzrecord.setPriceMinD(new BigDecimal(object.getInteger("dealer_low_buy_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
 //
 //                    gzrecord.setPriceMaxD(new BigDecimal(object.getInteger("dealer_buy_price") * 0.94 * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
@@ -503,6 +497,18 @@ public class ReckonServiceImpl implements ReckonService {
             String modelRedis = jedisClient.hget("CAR_MODEL", gzrecord.getModelId() + "");
 
             Model model = JsonUtils.jsonToPojo(modelRedis, Model.class);
+
+            if(StringUtils.isNotBlank(modelRedis)){
+
+                ModelExample example = new ModelExample();
+                ModelExample.Criteria criteria = example.createCriteria();
+                criteria.andModelIdEqualTo(Long.parseLong(paramarry[2]));
+                long l = modelMapper.countByExample(example);
+                if(l==0){
+                    modelMapper.insert(model);
+                }
+            }
+
 
             guzhiDTO.setMaxYear(model.getMaxRegYear() + "");
             guzhiDTO.setMinYear(model.getMinRegYear() + "");
@@ -565,17 +571,17 @@ public class ReckonServiceImpl implements ReckonService {
                 nj = otherArry[5], method = otherArry[6];
         BigDecimal basePrice;
         if (StringUtils.equals("1", ck)) {
-            basePrice = new BigDecimal(guzhiDTO.getPriceB_min());
+            basePrice = new BigDecimal(guzhiDTO.getPriceA_min());
             guzhiDTO.setCk("车况优秀,好没有任何故障");
         } else if (StringUtils.equals("2", ck)) {
             guzhiDTO.setCk("车况良好,有过少量剐蹭或钣金");
-            basePrice = new BigDecimal(guzhiDTO.getPriceC_min());
+            basePrice = new BigDecimal(guzhiDTO.getPriceB_min());
         } else if (StringUtils.equals("3", ck)) {
             guzhiDTO.setCk("车况一般,有过前后轻碰事故");
-            basePrice = new BigDecimal(guzhiDTO.getPriceD_min());
+            basePrice = new BigDecimal(guzhiDTO.getPriceC_min());
         } else {
             guzhiDTO.setCk("车况较差,有发生过伤及主体框架的碰撞或较大事故");
-            basePrice = new BigDecimal(guzhiDTO.getPriceD_min()).multiply(new BigDecimal("0.95"));
+            basePrice = new BigDecimal(guzhiDTO.getPriceD_min());
         }
         //颜色
         switch (color) {
