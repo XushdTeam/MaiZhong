@@ -57,6 +57,21 @@ layui.use(['layer', 'app'], function () {
             }
         });
     };
+    
+    active.doConfirm = function(){
+        var url = $(this).data("href");
+        var text = $(this).data("text");
+        app.layerConfirm(text, ['确定', '容我想想'], function () {
+            app.ajaxPost(url, {}, function (e, r) {
+                if (e) {
+                    app.layerAlertE(e);
+                }
+                else {
+                    app.layerAlertS(r.message);
+                }
+            });
+        });
+    };
     //删除
     active.doDelete = function () {
         var url = $(this).data("href");

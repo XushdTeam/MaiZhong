@@ -1,5 +1,8 @@
 package com.maizhong.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Brand {
@@ -9,6 +12,8 @@ public class Brand {
 
     private String initial;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     private String smallLogo;

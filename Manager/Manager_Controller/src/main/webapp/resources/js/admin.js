@@ -10,6 +10,9 @@ layui.define(['app', 'navbar', 'tab'], function(exports){
         navbar = layui.navbar(),
         tab = layui.tab({elem: '.layui-tab-card'});
     var obj = {};
+
+  
+
     obj.init = function () {
         //清楚菜单缓存
         layui.data("tb_navbar", null);

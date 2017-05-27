@@ -119,6 +119,7 @@
     layui.use('admin',function () {
         layui.admin.init();
     });
+
 </script>
 <!-- js脚本开始 -->
     <div>
