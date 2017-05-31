@@ -29,12 +29,24 @@
     </bean>
 
     <!--jedis 客户端单机版-->
+    <!--<bean id="redisClient" class="redis.clients.jedis.JedisPool">-->
+        <!--<constructor-arg name="host" value="127.0.0.1"></constructor-arg>-->
+        <!--&lt;!&ndash;<constructor-arg name="host" value="192.168.2.111"></constructor-arg>&ndash;&gt;-->
+        <!--<constructor-arg name="port" value="6379"></constructor-arg>-->
+        <!--<constructor-arg name="poolConfig" ref="jedisPoolConfig"></constructor-arg>-->
+    <!--</bean>-->
     <bean id="redisClient" class="redis.clients.jedis.JedisPool">
-        <constructor-arg name="host" value="127.0.0.1"></constructor-arg>
         <!--<constructor-arg name="host" value="192.168.2.111"></constructor-arg>-->
+        <constructor-arg name="host" value="r-m5ebc7c2ad058bb4.redis.rds.aliyuncs.com"></constructor-arg>
+        <!--<constructor-arg name="host" value="118.190.113.162"></constructor-arg>-->
         <constructor-arg name="port" value="6379"></constructor-arg>
+        <constructor-arg name="password" value="529529Xushd"></constructor-arg>
+        <constructor-arg name="timeout" value="0"></constructor-arg>
         <constructor-arg name="poolConfig" ref="jedisPoolConfig"></constructor-arg>
+
     </bean>
+
+
 
     <!--jedis 单机版-->
     <bean id="jedisClient" class="com.maizhong.dao.impl.JedisClientSingleImpl"/>
