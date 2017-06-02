@@ -457,8 +457,8 @@ public class ReckonServiceImpl implements ReckonService {
                     gzrecord.setPriceMaxC(object.getString("individual_low_sold_price"));
                     gzrecord.setPriceMinC(object.getString("dealer_low_buy_price"));
                     //车况较差
-                    gzrecord.setPriceMaxD(new BigDecimal(object.getInteger("individual_low_sold_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
-                    gzrecord.setPriceMinD(new BigDecimal(object.getInteger("dealer_low_buy_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+                    gzrecord.setPriceMaxD(new BigDecimal(object.getDouble("individual_low_sold_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+                    gzrecord.setPriceMinD(new BigDecimal(object.getDouble("dealer_low_buy_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
 //
 //                    gzrecord.setPriceMaxD(new BigDecimal(object.getInteger("dealer_buy_price") * 0.94 * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
 //                    gzrecord.setPriceMinD(new BigDecimal(object.getInteger("dealer_low_buy_price") * 0.94 * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());

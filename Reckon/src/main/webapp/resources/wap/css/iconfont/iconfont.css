@@ -1,0 +1,70 @@
+
+@font-face {font-family: "iconfont";
+ 	src: url('iconfont.ttf?t=1492407130917') format('truetype');
+  
+}
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+.icon-icontitlehuishouye:before { content: "\e635"; }
+
+.icon-ticket:before { content: "\e677"; }
+
+.icon-vipsale:before { content: "\e719"; font-size: 85%;}
+
+.icon-we:before { content: "\e6f5"; }
+
+.icon-iphone:before { content: "\e888"; }
+
+.icon-set:before { content: "\e6ae"; color: #F60;}
+
+.icon-account:before { content: "\e6b8"; font-size: 85%;}
+
+.icon-clock:before { content: "\e6bb"; color: #F60;}
+
+.icon-service:before { content: "\e6c7"; color: #F60;}
+
+.icon-history:before { content: "\e6f3"; }
+
+.icon-manageorder:before { content: "\e723"; color: #F60;}
+
+.icon-awcompute:before { content: "\e61e"; font-size: 85%;}
+
+.icon-sortlight:before { content: "\e7ad"; }
+
+.icon-my1:before { content: "\e642"; }
+
+.icon-newshot:before { content: "\e7c5"; }
+
+
+.icon-calendar:before { content: "\e6bf"; }
+
+.icon-help:before { content: "\e60b"; color: #F60;}
+
+.icon-electronics:before { content: "\e6da"; }
+
+
+.icon-dollar:before { content: "\e702"; }
+
+.icon-clear:before { content: "\e619"; color: #F60;}
+
+.icon-mobilephone:before { content: "\e72a"; }
+
+
+.icon-help1:before { content: "\e645"; color: #F60; }
+
+.icon-clear1:before { content: "\e605"; }
+
+.icon-exit:before { content: "\e72d"; }
+
+.icon-clock-copy:before { content: "\e7c6"; }
+
+
+
