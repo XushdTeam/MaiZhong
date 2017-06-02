@@ -263,6 +263,23 @@ public class AppController {
         return result;
     }
 
+    /**
+     * 获取精准详细估值结果
+     *
+     * @param guzhiKey
+     * @param otherKey
+     * @return
+     */
+    @RequestMapping(value = "/getSaleGZDetail/{guzhiKey:.+}/{otherKey}", method = RequestMethod.GET)
+    @ResponseBody
+    public JsonResult getSaleGZDetail(@PathVariable String guzhiKey,
+                                @PathVariable String otherKey,
+                                HttpServletRequest request) {
+        JsonResult result = appService.getSaleGZDetail(guzhiKey, otherKey, request);
+        return result;
+    }
+
+
 
     /**
      * 从缓存获取估值信息 通过手机

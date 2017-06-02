@@ -1,11 +1,12 @@
 package com.maizhong.service;
-
-import com.alibaba.fastjson.JSONObject;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.pojo.OrderInfo;
 import com.maizhong.pojo.Orders;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
+import java.util.List;
 
 /**
  * Description:
@@ -27,4 +28,8 @@ public interface OrderService  {
     Orders getOrdersByOrderNumber(Long aLong);
 
     PageResult yuyueList(PageSearchParam param);
+
+    void exportExcel(HSSFWorkbook wb);
+
+    void exportExcelOne(HSSFWorkbook wb, String orderId);
 }

@@ -5,9 +5,11 @@ import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.result.PageResult;
 import com.maizhong.common.target.ControllerLog;
+import com.maizhong.common.utils.TimeUtils;
 import com.maizhong.pojo.OrderInfo;
 import com.maizhong.pojo.Orders;
 import com.maizhong.service.OrderService;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.Date;
 
 /**
  * Description: 订单管理
@@ -77,7 +86,7 @@ public class OrderController {
         return JsonResult.OK(result);
     }
 
-/**
+    /**
      * 订单修改
      *
      * @param id
@@ -87,7 +96,7 @@ public class OrderController {
     @RequestMapping(value = "/orders/handle/{id}")
     public String handle(@PathVariable String id, Model model) {
 
-        model.addAttribute("baseUrl", "/orders/handle/"+id);
+        model.addAttribute("baseUrl", "/orders/handle/" + id);
         Orders orders = orderService.getOrdersById(Long.valueOf(id));
         OrderInfo orderInfo = orderService.getOrdersInfo(orders.getOrderNumber());
         model.addAttribute("orders", orders);
@@ -118,8 +127,6 @@ public class OrderController {
     }
 
 
-
-
     /**
      * 订单更新
      *
@@ -129,7 +136,7 @@ public class OrderController {
      */
     @RequestMapping(value = "/orders/check/{orderNumber}")
     public String check(@PathVariable String orderNumber, Model model) {
-        model.addAttribute("baseUrl", "/orders/check/"+orderNumber);
+        model.addAttribute("baseUrl", "/orders/check/" + orderNumber);
         Orders orders = orderService.getOrdersByOrderNumber(Long.valueOf(orderNumber));
         OrderInfo orderInfo = orderService.getOrdersInfo(orders.getOrderNumber());
         model.addAttribute("orders", orders);
@@ -138,8 +145,6 @@ public class OrderController {
         model.addAttribute("saveUrl", "/orders/update");
         return "order/orders_setting";
     }
-
-
 
 
     /**
@@ -172,4 +177,62 @@ public class OrderController {
         return JsonResult.build(result);
     }
 
+
+    /**
+     * EXCEL导出订单全部
+     */
+    @RequestMapping(value = "/orders/export")
+    @ResponseBody
+    public void exportExcel(HttpServletRequest request, HttpServletResponse resp) throws UnsupportedEncodingException {
+
+        HSSFWorkbook wb = new HSSFWorkbook();
+        request.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/x-download");
+        String fileName1 = TimeUtils.getFormatDateTime3(new Date());
+        String fileName = fileName1.substring(0, 10) + "-订单列表.xls";
+        fileName = URLEncoder.encode(fileName, "UTF-8");
+        resp.addHeader("Content-Disposition", "attachment;filename=" + fileName);
+       orderService.exportExcel(wb);
+
+        try {
+            OutputStream out = resp.getOutputStream();
+            wb.write(out);
+            out.close();
+        }  catch (Exception e1) {
+            System.out.println("=====导出excel异常====");
+        }
+
+    }
+
+
+
+
+    /**
+     * EXCEL导出订单--一个
+     */
+    @RequestMapping(value = "/orders/exportOne/{orderId}")
+    @ResponseBody
+    public void exportExcelOne(HttpServletRequest request, HttpServletResponse resp,@PathVariable("orderId") String orderId) throws UnsupportedEncodingException {
+
+        HSSFWorkbook wb = new HSSFWorkbook();
+        request.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/x-download");
+        String fileName1 = TimeUtils.getFormatDateTime3(new Date());
+        String fileName = fileName1.substring(0, 10) + "-订单详情.xls";
+        fileName = URLEncoder.encode(fileName, "UTF-8");
+        resp.addHeader("Content-Disposition", "attachment;filename=" + fileName);
+        orderService.exportExcelOne(wb,orderId);
+
+        try {
+            OutputStream out = resp.getOutputStream();
+            wb.write(out);
+            out.close();
+        }  catch (Exception e1) {
+            System.out.println("=====导出excel异常====");
+        }
+
+    }
 }
+

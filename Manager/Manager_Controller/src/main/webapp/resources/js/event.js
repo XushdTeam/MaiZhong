@@ -127,6 +127,11 @@ layui.use(['layer', 'app'], function () {
             history.go(-1);
         }
     };
+
+    active.goHref=function () {
+        var url = $(this).data("href");
+        location.href =url;
+    }
     //子父节点展开收缩
     active.doToggle = function () {
         var parentId = $(this).data("id");

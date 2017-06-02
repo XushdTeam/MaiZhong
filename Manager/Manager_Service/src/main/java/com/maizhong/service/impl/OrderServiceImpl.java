@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.PageResult;
+import com.maizhong.common.utils.TimeUtils;
 import com.maizhong.mapper.OrderInfoMapper;
 import com.maizhong.mapper.OrdersMapper;
 import com.maizhong.pojo.OrderInfo;
@@ -13,6 +14,7 @@ import com.maizhong.pojo.Orders;
 import com.maizhong.pojo.OrdersExample;
 import com.maizhong.service.OrderService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -161,11 +163,11 @@ public class OrderServiceImpl implements OrderService {
                 orderInfo.setJqx("两个月以上");
             }
             //过户
-            if (StringUtils.equals(orderInfo.getGh(), "1")) {
+            if (StringUtils.equals(orderInfo.getGh(), "4")) {
                 orderInfo.setGh("0次");
-            } else if (StringUtils.equals(orderInfo.getGh(), "2")) {
+            } else if (StringUtils.equals(orderInfo.getGh(), "1")) {
                 orderInfo.setGh("1次");
-            } else if (StringUtils.equals(orderInfo.getGh(), "3")) {
+            } else if (StringUtils.equals(orderInfo.getGh(), "2")) {
                 orderInfo.setGh("2次");
             } else {
                 orderInfo.setGh("3次及以上");
@@ -175,8 +177,7 @@ public class OrderServiceImpl implements OrderService {
                 orderInfo.setGhtime("无过户");
             } else if (StringUtils.equals(orderInfo.getGhtime(), "2")) {
                 orderInfo.setGhtime("六个月以内");
-            }
-            {
+            } else {
                 orderInfo.setGhtime("六个月以上");
             }
             //性质
@@ -268,6 +269,7 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 未预约订单
+     *
      * @param param
      * @return
      */
@@ -308,6 +310,514 @@ public class OrderServiceImpl implements OrderService {
         List<Orders> ordersList = ordersMapper.selectByExample(example);
         PageInfo pageInfo = new PageInfo(ordersList);
         return new PageResult(pageInfo);
+    }
+
+    /**
+     * 导出订单
+     *
+     * @param wb
+     */
+    @Override
+    public void exportExcel(HSSFWorkbook wb) {
+
+
+        List<Orders> ordersList = ordersMapper.selectByExample(null);
+        HSSFSheet sheet = wb.createSheet("订单记录");
+        sheet.setDefaultRowHeight((short) (2 * 256));
+
+        HSSFFont font = wb.createFont();
+        font.setFontName("宋体");
+        font.setFontHeightInPoints((short) 16);
+        HSSFRow row = sheet.createRow(0);
+        sheet.createRow(1);
+
+        HSSFCellStyle style = wb.createCellStyle();
+        style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+
+        HSSFCell cell = row.createCell(0);
+        cell.setCellValue("序号");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(1);
+        cell.setCellValue("订单编号");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(2);
+        cell.setCellValue("用户手机");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(3);
+        cell.setCellValue("车型名称");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(4);
+        cell.setCellValue("预估价格");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(5);
+        cell.setCellValue("预估时间");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(6);
+        cell.setCellValue("交易价格");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(7);
+        cell.setCellValue("交易时间");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(8);
+        cell.setCellValue("联系人称呼");
+        cell.setCellStyle(style);
+
+
+        cell = row.createCell(9);
+        cell.setCellValue("验车电话");
+        cell.setCellStyle(style);
+
+
+        cell = row.createCell(10);
+        cell.setCellValue("验车方式");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(11);
+        cell.setCellValue("验车地址");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(12);
+        cell.setCellValue("验车时间");
+        cell.setCellStyle(style);
+
+
+        cell = row.createCell(13);
+        cell.setCellValue("城市");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(14);
+        cell.setCellValue("公里数");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(15);
+        cell.setCellValue("上牌时间");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(16);
+        cell.setCellValue("颜色");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(17);
+        cell.setCellValue("过户次数");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(18);
+        cell.setCellValue("过户时间");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(19);
+        cell.setCellValue("交强险");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(20);
+        cell.setCellValue("年检");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(21);
+        cell.setCellValue("使用性质");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(22);
+        cell.setCellValue("使用方");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(23);
+        cell.setCellValue("车况");
+        cell.setCellStyle(style);
+
+
+        cell = row.createCell(24);
+        cell.setCellValue("订单状态");
+        cell.setCellStyle(style);
+
+        for (int i = 0; i < ordersList.size(); i++) {
+            HSSFRow row1 = sheet.createRow(i + 1);
+
+            Orders orders = ordersList.get(i);
+            OrderInfo orderInfo = getOrdersInfo(orders.getOrderNumber());
+            row1.createCell(0).setCellValue(i + 1);//序号
+            row1.createCell(1).setCellValue(String.valueOf(orders.getOrderNumber()));//订单编号
+            row1.createCell(2).setCellValue(String.valueOf(orders.getUserId()));//用户手机
+            row1.createCell(3).setCellValue(orders.getModelName());//车型名称
+            row1.createCell(4).setCellValue(orders.getReckonPrice());//预估价格
+            try {
+                row1.createCell(6).setCellValue(orders.getDealPrice());//交易价格
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (StringUtils.isNotBlank(orders.getDealTime())) {
+                row1.createCell(7).setCellValue(orders.getDealTime().substring(0, 10));//交易时间
+            }
+
+            row1.createCell(8).setCellValue(orders.getLinkMan());//联系人称呼
+            row1.createCell(9).setCellValue(orders.getLinkPhone());//验车电话
+
+            if (orders.getDealWay() != null) {
+                if (orders.getDealWay() == 1)
+                    row1.createCell(10).setCellValue("4S店验车");//验车方式
+            } else if (orders.getDealWay() == 2) {
+                row1.createCell(10).setCellValue("地铁站验车");//验车方式
+            } else if (orders.getDealWay() == 3) {
+                row1.createCell(10).setCellValue("上门验车");//验车方式
+            }
+
+
+            row1.createCell(11).setCellValue(orders.getAddress());//验车地址
+            row1.createCell(12).setCellValue(orders.getCheckTime());//验车时间
+            row1.createCell(13).setCellValue(orderInfo.getCityId());//城市
+            row1.createCell(14).setCellValue(orderInfo.getsKm());//公里数
+            row1.createCell(15).setCellValue(orderInfo.getRegDate());//上牌时间
+            row1.createCell(16).setCellValue(orderInfo.getColor());//颜色
+            row1.createCell(17).setCellValue(orderInfo.getGh());//过户次数
+            row1.createCell(18).setCellValue(orderInfo.getGhtime());//过户时间
+            row1.createCell(19).setCellValue(orderInfo.getJqx());//交强险
+            row1.createCell(20).setCellValue(orderInfo.getNj());//年检
+            row1.createCell(21).setCellValue(orderInfo.getXz());//使用性质
+            row1.createCell(22).setCellValue(orderInfo.getMethod());//使用方
+            row1.createCell(23).setCellValue(orderInfo.getCk());//车况
+
+            switch (orders.getStatus()) {
+                case 0:
+                    row1.createCell(24).setCellValue("未预约");
+                    break;
+                case 1:
+                    row1.createCell(24).setCellValue("等待验收");
+                    break;
+                case 2:
+                    row1.createCell(24).setCellValue("车辆处理");
+                    break;
+                case 3:
+                    row1.createCell(24).setCellValue("等待过户");
+                    break;
+                case 4:
+                    row1.createCell(24).setCellValue("过户完成");
+                    break;
+                case 5:
+                    row1.createCell(24).setCellValue("更新指标");
+                    break;
+                case 6:
+                    row1.createCell(24).setCellValue("已完结");
+                    break;
+            }
+
+
+        }
+
+        for (int m = 0; m <= 24; m++) {
+            sheet.autoSizeColumn(m, true);
+        }
+
+    }
+
+    /**
+     * 根据订单Id导出ECXEL
+     *
+     * @param wb
+     * @param orderId
+     */
+    @Override
+    public void exportExcelOne(HSSFWorkbook wb, String orderId) {
+        Long id = 1L;
+        try {
+            id = Long.valueOf(orderId);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        Orders orders = ordersMapper.selectByPrimaryKey(id);
+
+        HSSFSheet sheet = wb.createSheet("订单记录");
+        sheet.setDefaultRowHeight((short) (2 * 256));
+
+        HSSFFont font = wb.createFont();
+        font.setFontName("宋体");
+        font.setFontHeightInPoints((short) 12);
+        font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);//粗体显示
+        HSSFRow row = sheet.createRow(0);
+        HSSFRow row1 = sheet.createRow(1);
+        HSSFRow row2 = sheet.createRow(2);
+        HSSFRow row3 = sheet.createRow(3);
+        HSSFRow row4 = sheet.createRow(4);
+        HSSFRow row5 = sheet.createRow(5);
+
+        HSSFCellStyle style = wb.createCellStyle();
+        style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+        style.setFont(font);
+        style.setBorderBottom(HSSFCellStyle.BORDER_THIN); //下边框
+        style.setBorderLeft(HSSFCellStyle.BORDER_THIN);//左边框
+        style.setBorderTop(HSSFCellStyle.BORDER_THIN);//上边框
+        style.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框
+
+        HSSFCellStyle setBorder = wb.createCellStyle();
+        setBorder.setBorderBottom(HSSFCellStyle.BORDER_THIN); //下边框
+        setBorder.setBorderLeft(HSSFCellStyle.BORDER_THIN);//左边框
+        setBorder.setBorderTop(HSSFCellStyle.BORDER_THIN);//上边框
+        setBorder.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框
+
+        HSSFCellStyle setBorder2 = wb.createCellStyle();
+        setBorder2.setBorderBottom(HSSFCellStyle.BORDER_THIN); //下边框
+        setBorder2.setBorderLeft(HSSFCellStyle.BORDER_THIN);//左边框
+        setBorder2.setBorderTop(HSSFCellStyle.BORDER_THIN);//上边框
+        setBorder2.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框
+        setBorder2.setWrapText(true);
+
+
+        HSSFCell cell = row.createCell(0);
+        cell.setCellValue("序号");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(1);
+        cell.setCellValue("订单编号");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(2);
+        cell.setCellValue("用户手机");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(3);
+        cell.setCellValue("车型名称");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(4);
+        cell.setCellValue("预估价格");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(5);
+        cell.setCellValue("交易价格");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(6);
+        cell.setCellValue("交易时间");
+        cell.setCellStyle(style);
+
+        cell = row.createCell(7);
+        cell.setCellValue("联系人称呼");
+        cell.setCellStyle(style);
+        /*换行*/
+
+
+        cell = row2.createCell(0);
+        cell.setCellValue("城市");
+        cell.setCellStyle(style);
+
+        cell = row2.createCell(1);
+        cell.setCellValue("验车电话");
+        cell.setCellStyle(style);
+
+
+        cell = row2.createCell(2);
+        cell.setCellValue("验车方式");
+        cell.setCellStyle(style);
+
+        cell = row2.createCell(3);
+        cell.setCellValue("验车地址");
+        cell.setCellStyle(style);
+
+        cell = row2.createCell(4);
+        cell.setCellValue("验车时间");
+        cell.setCellStyle(style);
+
+        cell = row2.createCell(5);
+        cell.setCellValue("公里数");
+        cell.setCellStyle(style);
+
+        cell = row2.createCell(6);
+        cell.setCellValue("上牌时间");
+        cell.setCellStyle(style);
+
+
+        cell = row2.createCell(7);
+        cell.setCellValue("颜色");
+        cell.setCellStyle(style);
+
+         /*换行*/
+        cell = row4.createCell(0);
+        cell.setCellValue("过户次数");
+        cell.setCellStyle(style);
+
+        cell = row4.createCell(1);
+        cell.setCellValue("过户时间");
+        cell.setCellStyle(style);
+
+        cell = row4.createCell(2);
+        cell.setCellValue("交强险");
+        cell.setCellStyle(style);
+
+        cell = row4.createCell(3);
+        cell.setCellValue("年检");
+        cell.setCellStyle(style);
+
+        cell = row4.createCell(4);
+        cell.setCellValue("使用性质");
+        cell.setCellStyle(style);
+
+        cell = row4.createCell(5);
+        cell.setCellValue("使用方");
+        cell.setCellStyle(style);
+
+        cell = row4.createCell(6);
+        cell.setCellValue("车况");
+        cell.setCellStyle(style);
+
+        cell = row4.createCell(7);
+        cell.setCellValue("订单状态");
+        cell.setCellStyle(style);
+
+
+
+
+        OrderInfo orderInfo = getOrdersInfo(orders.getOrderNumber());
+        cell = row1.createCell(0);
+        cell.setCellValue(1);//序号
+        cell.setCellStyle(setBorder);
+
+        cell = row1.createCell(1);
+        cell.setCellValue(String.valueOf(orders.getOrderNumber()));//订单编号
+        cell.setCellStyle(setBorder);
+
+
+        cell = row1.createCell(2);
+        cell.setCellValue(String.valueOf(orders.getUserId()));//用户手机
+        cell.setCellStyle(setBorder);
+
+
+        cell = row1.createCell(3);
+        cell.setCellValue(orders.getModelName());//车型名称
+        cell.setCellStyle(setBorder);
+
+
+        cell = row1.createCell(4);
+        cell.setCellValue(orders.getReckonPrice());//预估价格
+        cell.setCellStyle(setBorder);
+
+
+        try {
+            cell = row1.createCell(5);
+            cell.setCellValue(orders.getDealPrice());//交易价格
+            cell.setCellStyle(setBorder);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (StringUtils.isNotBlank(orders.getDealTime())) {
+            cell = row1.createCell(6);
+            cell.setCellValue(orders.getDealTime().substring(0, 10));//交易时间
+            cell.setCellStyle(setBorder);
+        }
+
+        cell = row1.createCell(7);
+        cell.setCellValue(orders.getLinkMan());//联系人称呼
+        cell.setCellStyle(setBorder);
+
+
+        cell = row3.createCell(0);
+        cell.setCellValue(orderInfo.getCityId());//城市
+        cell.setCellStyle(setBorder);
+
+
+        cell = row3.createCell(1);
+        cell.setCellValue(orders.getLinkPhone());//验车电话
+        cell.setCellStyle(setBorder);
+
+        if (orders.getDealWay() != null) {
+            cell = row3.createCell(2);
+            cell.setCellStyle(setBorder);
+            if (orders.getDealWay() == 1)
+                cell.setCellValue("4S店验车");//验车方式
+        } else if (orders.getDealWay() == 2) {
+            cell.setCellValue("地铁站验车");//验车方式
+        } else if (orders.getDealWay() == 3) {
+            cell.setCellValue("上门验车");//验车方式
+        }
+
+
+        cell = row3.createCell(3);
+        cell.setCellValue(orders.getAddress());//验车地址
+        cell.setCellStyle(setBorder);
+
+        cell = row3.createCell(4);
+        cell.setCellValue(orders.getCheckTime());//验车时间
+        cell.setCellStyle(setBorder);
+
+
+        cell = row3.createCell(5);
+        cell.setCellValue(orderInfo.getsKm());//公里数
+        cell.setCellStyle(setBorder);
+
+        cell = row3.createCell(6);
+        cell.setCellValue(orderInfo.getRegDate());//上牌时间
+        cell.setCellStyle(setBorder);
+
+
+        cell = row3.createCell(7);
+        cell.setCellValue(orderInfo.getColor());//颜色\
+        cell.setCellStyle(setBorder);
+
+
+        cell = row5.createCell(0);
+        cell.setCellValue(orderInfo.getGh());//过户次数
+        cell.setCellStyle(setBorder);
+
+        cell = row5.createCell(1);
+        cell.setCellValue(orderInfo.getGhtime());//过户时间
+        cell.setCellStyle(setBorder);
+
+        cell = row5.createCell(2);
+        cell.setCellValue(orderInfo.getJqx());//交强险
+        cell.setCellStyle(setBorder);
+        cell = row5.createCell(3);
+        cell.setCellValue(orderInfo.getNj());//年检
+        cell.setCellStyle(setBorder);
+
+        cell = row5.createCell(4);
+        cell.setCellValue(orderInfo.getXz());//使用性质
+        cell.setCellStyle(setBorder);
+
+        cell = row5.createCell(5);
+        cell.setCellValue(orderInfo.getMethod());//使用方
+        cell.setCellStyle(setBorder);
+
+        cell = row5.createCell(6);
+        cell.setCellValue(orderInfo.getCk());//车况
+        cell.setCellStyle(setBorder);
+
+        cell=row5.createCell(7);
+        cell.setCellStyle(setBorder);
+        switch (orders.getStatus()) {
+            case 0:
+               cell .setCellValue("未预约");
+                break;
+            case 1:
+                cell.setCellValue("等待验收");
+                break;
+            case 2:
+                cell.setCellValue("车辆处理");
+                break;
+            case 3:
+                cell.setCellValue("等待过户");
+                break;
+            case 4:
+                cell.setCellValue("过户完成");
+                break;
+            case 5:
+                cell.setCellValue("更新指标");
+                break;
+            case 6:
+                cell.setCellValue("已完结");
+                break;
+        }
+
+        for (int m = 0; m <= 11; m++) {
+            sheet.autoSizeColumn(m, true);
+        }
+
+
     }
 
 

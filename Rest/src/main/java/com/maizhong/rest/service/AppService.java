@@ -70,4 +70,6 @@ public interface AppService {
     JsonResult getModelById(String id);
 
     JsonResult getSaleNum();
+
+    JsonResult getSaleGZDetail(String guzhiKey, String otherKey, HttpServletRequest request);
 }

@@ -48,6 +48,10 @@
     </blockquote>
     <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
 
+        <a class="layui-btn layui-btn-small  do-action" data-type="goHref" data-href="/orders/exportOne/${orders.orderId}">
+            <i class="icon-edit  fa fa-file-excel-o"></i>导出EXCEL
+        </a>
+
         <table class="layui-table" lay-skin="line" >
             <colgroup>
                 <col width="7%">
@@ -187,7 +191,7 @@
                     <div class="layui-form-item layui-input-inline">
                         <label class="layui-form-label">交易价格</label>
                         <div class="layui-input-inline">
-                            <input name="dealPrice" autocomplete="off" value="${orders.dealPrice}" id="dealPrice"  lay-verify="number"
+                            <input name="dealPrice" autocomplete="off" value="${orders.dealPrice}" id="dealPrice"
                                    class="layui-input" type="text">
                         </div>
                     </div>

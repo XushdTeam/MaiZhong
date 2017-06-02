@@ -70,6 +70,11 @@
                     <div class="l-list">
                         <a class="layui-btn layui-btn-small do-action" data-type="doRefresh" data-href="${baseUrl}"><i
                                 class="fa fa-refresh"></i>刷新</a>
+
+
+                        <a class="layui-btn layui-btn-small  do-action" data-type="goHref" data-href="/orders/export">
+                            <i class="icon-edit  fa fa-file-excel-o"></i>导出EXCEL
+                        </a>
                     </div>
                 </div>
             </div>
