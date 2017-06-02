@@ -1,0 +1,20 @@
+<svg width="100.00000000000001" height="100.00000000000001" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+ <defs>
+  <filter id="svg_1_blur">
+   <feGaussianBlur stdDeviation="0" in="SourceGraphic"/>
+  </filter>
+ </defs>
+ <g>
+  <title>background</title>
+  <rect fill="#b2b2b2" id="canvas_background" height="102" width="102" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <text font-weight="bold" filter="url(#svg_1_blur)" xml:space="preserve" text-anchor="start" font-family="Junction, sans-serif" font-size="24" id="svg_1" y="40.82968" x="18.78906" stroke-width="0" stroke="#000" fill="#666666">悟  空</text>
+  <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Oswald, sans-serif" font-size="24" id="svg_2" y="75.05318" x="18.86458" stroke-width="0" stroke="#000" fill="#666666">收  车</text>
+ </g>
+</svg>

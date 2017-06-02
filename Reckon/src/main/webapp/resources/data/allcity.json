@@ -1,0 +1,2960 @@
+[{
+	"city_id": "390",
+	"city_name": "阿勒泰",
+	"admin_code": "654300",
+	"initial": "A",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "66",
+	"city_name": "鞍山",
+	"admin_code": "210300",
+	"initial": "A",
+	"prov_id": "8",
+	"prov_name": "辽宁"
+},
+{
+	"city_id": "117",
+	"city_name": "阿拉尔",
+	"admin_code": "659002",
+	"initial": "A",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "131",
+	"city_name": "安阳",
+	"admin_code": "410500",
+	"initial": "A",
+	"prov_id": "17",
+	"prov_name": "河南"
+},
+{
+	"city_id": "209",
+	"city_name": "安庆",
+	"admin_code": "340800",
+	"initial": "A",
+	"prov_id": "13",
+	"prov_name": "安徽"
+},
+{
+	"city_id": "248",
+	"city_name": "安康",
+	"admin_code": "610900",
+	"initial": "A",
+	"prov_id": "28",
+	"prov_name": "陕西"
+},
+{
+	"city_id": "311",
+	"city_name": "阿拉善",
+	"admin_code": "152900",
+	"initial": "A",
+	"prov_id": "33",
+	"prov_name": "内蒙古"
+},
+{
+	"city_id": "109",
+	"city_name": "安顺",
+	"admin_code": "520400",
+	"initial": "A",
+	"prov_id": "24",
+	"prov_name": "贵州"
+},
+{
+	"city_id": "310",
+	"city_name": "阿图什",
+	"admin_code": "653000",
+	"initial": "A",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "379",
+	"city_name": "阿坝",
+	"admin_code": "513200",
+	"initial": "A",
+	"prov_id": "22",
+	"prov_name": "四川"
+},
+{
+	"city_id": "171",
+	"city_name": "阿里",
+	"admin_code": "542500",
+	"initial": "A",
+	"prov_id": "30",
+	"prov_name": "西藏"
+},
+{
+	"city_id": "225",
+	"city_name": "阿克苏",
+	"admin_code": "652900",
+	"initial": "A",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "369",
+	"city_name": "保亭",
+	"admin_code": "469035",
+	"initial": "B",
+	"prov_id": "25",
+	"prov_name": "海南"
+},
+{
+	"city_id": "205",
+	"city_name": "白城",
+	"admin_code": "220800",
+	"initial": "B",
+	"prov_id": "9",
+	"prov_name": "吉林"
+},
+{
+	"city_id": "271",
+	"city_name": "百色",
+	"admin_code": "451000",
+	"initial": "B",
+	"prov_id": "29",
+	"prov_name": "广西"
+},
+{
+	"city_id": "147",
+	"city_name": "保定",
+	"admin_code": "130600",
+	"initial": "B",
+	"prov_id": "5",
+	"prov_name": "河北"
+},
+{
+	"city_id": "368",
+	"city_name": "巴中",
+	"admin_code": "511900",
+	"initial": "B",
+	"prov_id": "22",
+	"prov_name": "四川"
+},
+{
+	"city_id": "370",
+	"city_name": "博乐",
+	"admin_code": "652700",
+	"initial": "B",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "324",
+	"city_name": "白沙",
+	"admin_code": "469030",
+	"initial": "B",
+	"prov_id": "25",
+	"prov_name": "海南"
+},
+{
+	"city_id": "354",
+	"city_name": "滨州",
+	"admin_code": "371600",
+	"initial": "B",
+	"prov_id": "16",
+	"prov_name": "山东"
+},
+{
+	"city_id": "142",
+	"city_name": "北海",
+	"admin_code": "450500",
+	"initial": "B",
+	"prov_id": "29",
+	"prov_name": "广西"
+},
+{
+	"city_id": "343",
+	"city_name": "亳州",
+	"admin_code": "341600",
+	"initial": "B",
+	"prov_id": "13",
+	"prov_name": "安徽"
+},
+{
+	"city_id": "393",
+	"city_name": "博尔塔拉",
+	"admin_code": "652700",
+	"initial": "B",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "122",
+	"city_name": "本溪",
+	"admin_code": "210500",
+	"initial": "B",
+	"prov_id": "8",
+	"prov_name": "辽宁"
+},
+{
+	"city_id": "85",
+	"city_name": "宝鸡",
+	"admin_code": "610300",
+	"initial": "B",
+	"prov_id": "28",
+	"prov_name": "陕西"
+},
+{
+	"city_id": "71",
+	"city_name": "蚌埠",
+	"admin_code": "340300",
+	"initial": "B",
+	"prov_id": "13",
+	"prov_name": "安徽"
+},
+{
+	"city_id": "327",
+	"city_name": "巴音郭楞",
+	"admin_code": "652800",
+	"initial": "B",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "1",
+	"city_name": "北京",
+	"admin_code": "110100",
+	"initial": "B",
+	"prov_id": "1",
+	"prov_name": "北京"
+},
+{
+	"city_id": "151",
+	"city_name": "白山",
+	"admin_code": "220600",
+	"initial": "B",
+	"prov_id": "9",
+	"prov_name": "吉林"
+},
+{
+	"city_id": "226",
+	"city_name": "巴彦淖尔",
+	"admin_code": "150800",
+	"initial": "B",
+	"prov_id": "33",
+	"prov_name": "内蒙古"
+},
+{
+	"city_id": "165",
+	"city_name": "毕节",
+	"admin_code": "522400",
+	"initial": "B",
+	"prov_id": "24",
+	"prov_name": "贵州"
+},
+{
+	"city_id": "62",
+	"city_name": "包头",
+	"admin_code": "150200",
+	"initial": "B",
+	"prov_id": "33",
+	"prov_name": "内蒙古"
+},
+{
+	"city_id": "111",
+	"city_name": "保山",
+	"admin_code": "530500",
+	"initial": "B",
+	"prov_id": "26",
+	"prov_name": "云南"
+},
+{
+	"city_id": "79",
+	"city_name": "白银",
+	"admin_code": "620400",
+	"initial": "B",
+	"prov_id": "21",
+	"prov_name": "甘肃"
+},
+{
+	"city_id": "9",
+	"city_name": "长春",
+	"admin_code": "220100",
+	"initial": "C",
+	"prov_id": "9",
+	"prov_name": "吉林"
+},
+{
+	"city_id": "188",
+	"city_name": "常德",
+	"admin_code": "430700",
+	"initial": "C",
+	"prov_id": "19",
+	"prov_name": "湖南"
+},
+{
+	"city_id": "316",
+	"city_name": "巢湖",
+	"admin_code": "341400",
+	"initial": "C",
+	"prov_id": "13",
+	"prov_name": "安徽"
+},
+{
+	"city_id": "19",
+	"city_name": "长沙",
+	"admin_code": "430100",
+	"initial": "C",
+	"prov_id": "19",
+	"prov_name": "湖南"
+},
+{
+	"city_id": "378",
+	"city_name": "潮州",
+	"admin_code": "445100",
+	"initial": "C",
+	"prov_id": "20",
+	"prov_name": "广东"
+},
+{
+	"city_id": "308",
+	"city_name": "楚雄",
+	"admin_code": "532300",
+	"initial": "C",
+	"prov_id": "26",
+	"prov_name": "云南"
+},
+{
+	"city_id": "118",
+	"city_name": "赤峰",
+	"admin_code": "150400",
+	"initial": "C",
+	"prov_id": "33",
+	"prov_name": "内蒙古"
+},
+{
+	"city_id": "87",
+	"city_name": "昌都",
+	"admin_code": "542100",
+	"initial": "C",
+	"prov_id": "30",
+	"prov_name": "西藏"
+},
+{
+	"city_id": "4",
+	"city_name": "重庆",
+	"admin_code": "500100",
+	"initial": "C",
+	"prov_id": "4",
+	"prov_name": "重庆"
+},
+{
+	"city_id": "201",
+	"city_name": "承德",
+	"admin_code": "130800",
+	"initial": "C",
+	"prov_id": "5",
+	"prov_name": "河北"
+},
+{
+	"city_id": "338",
+	"city_name": "昌江",
+	"admin_code": "469031",
+	"initial": "C",
+	"prov_id": "25",
+	"prov_name": "海南"
+},
+{
+	"city_id": "264",
+	"city_name": "郴州",
+	"admin_code": "431000",
+	"initial": "C",
+	"prov_id": "19",
+	"prov_name": "湖南"
+},
+{
+	"city_id": "353",
+	"city_name": "池州",
+	"admin_code": "341700",
+	"initial": "C",
+	"prov_id": "13",
+	"prov_name": "安徽"
+},
+{
+	"city_id": "92",
+	"city_name": "长治",
+	"admin_code": "140400",
+	"initial": "C",
+	"prov_id": "6",
+	"prov_name": "山西"
+},
+{
+	"city_id": "259",
+	"city_name": "滁州",
+	"admin_code": "341100",
+	"initial": "C",
+	"prov_id": "13",
+	"prov_name": "安徽"
+},
+{
+	"city_id": "227",
+	"city_name": "沧州",
+	"admin_code": "130900",
+	"initial": "C",
+	"prov_id": "5",
+	"prov_name": "河北"
+},
+{
+	"city_id": "313",
+	"city_name": "朝阳",
+	"admin_code": "211300",
+	"initial": "C",
+	"prov_id": "8",
+	"prov_name": "辽宁"
+},
+{
+	"city_id": "246",
+	"city_name": "澄迈",
+	"admin_code": "469027",
+	"initial": "C",
+	"prov_id": "25",
+	"prov_name": "海南"
+},
+{
+	"city_id": "340",
+	"city_name": "崇左",
+	"admin_code": "451400",
+	"initial": "C",
+	"prov_id": "29",
+	"prov_name": "广西"
+},
+{
+	"city_id": "22",
+	"city_name": "成都",
+	"admin_code": "510100",
+	"initial": "C",
+	"prov_id": "22",
+	"prov_name": "四川"
+},
+{
+	"city_id": "341",
+	"city_name": "昌吉",
+	"admin_code": "652300",
+	"initial": "C",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "97",
+	"city_name": "常州",
+	"admin_code": "320400",
+	"initial": "C",
+	"prov_id": "11",
+	"prov_name": "江苏"
+},
+{
+	"city_id": "348",
+	"city_name": "达州",
+	"admin_code": "511700",
+	"initial": "D",
+	"prov_id": "22",
+	"prov_name": "四川"
+},
+{
+	"city_id": "38",
+	"city_name": "大连",
+	"admin_code": "210200",
+	"initial": "D",
+	"prov_id": "8",
+	"prov_name": "辽宁"
+},
+{
+	"city_id": "331",
+	"city_name": "德州",
+	"admin_code": "371400",
+	"initial": "D",
+	"prov_id": "16",
+	"prov_name": "山东"
+},
+{
+	"city_id": "138",
+	"city_name": "儋州",
+	"admin_code": "469003",
+	"initial": "D",
+	"prov_id": "25",
+	"prov_name": "海南"
+},
+{
+	"city_id": "288",
+	"city_name": "定西",
+	"admin_code": "621100",
+	"initial": "D",
+	"prov_id": "21",
+	"prov_name": "甘肃"
+},
+{
+	"city_id": "152",
+	"city_name": "大庆",
+	"admin_code": "230600",
+	"initial": "D",
+	"prov_id": "10",
+	"prov_name": "黑龙江"
+},
+{
+	"city_id": "36",
+	"city_name": "大同",
+	"admin_code": "140200",
+	"initial": "D",
+	"prov_id": "6",
+	"prov_name": "山西"
+},
+{
+	"city_id": "314",
+	"city_name": "大兴安岭",
+	"admin_code": "232700",
+	"initial": "D",
+	"prov_id": "10",
+	"prov_name": "黑龙江"
+},
+{
+	"city_id": "325",
+	"city_name": "大理",
+	"admin_code": "532900",
+	"initial": "D",
+	"prov_id": "26",
+	"prov_name": "云南"
+},
+{
+	"city_id": "136",
+	"city_name": "德阳",
+	"admin_code": "510600",
+	"initial": "D",
+	"prov_id": "22",
+	"prov_name": "四川"
+},
+{
+	"city_id": "339",
+	"city_name": "德宏",
+	"admin_code": "533100",
+	"initial": "D",
+	"prov_id": "26",
+	"prov_name": "云南"
+},
+{
+	"city_id": "220",
+	"city_name": "东方",
+	"admin_code": "469007",
+	"initial": "D",
+	"prov_id": "25",
+	"prov_name": "海南"
+},
+{
+	"city_id": "150",
+	"city_name": "丹东",
+	"admin_code": "210600",
+	"initial": "D",
+	"prov_id": "8",
+	"prov_name": "辽宁"
+},
+{
+	"city_id": "130",
+	"city_name": "东营",
+	"admin_code": "370500",
+	"initial": "D",
+	"prov_id": "16",
+	"prov_name": "山东"
+},
+{
+	"city_id": "360",
+	"city_name": "迪庆",
+	"admin_code": "533400",
+	"initial": "D",
+	"prov_id": "26",
+	"prov_name": "云南"
+},
+{
+	"city_id": "367",
+	"city_name": "东莞",
+	"admin_code": "441900",
+	"initial": "D",
+	"prov_id": "20",
+	"prov_name": "广东"
+},
+{
+	"city_id": "268",
+	"city_name": "定安",
+	"admin_code": "469025",
+	"initial": "D",
+	"prov_id": "25",
+	"prov_name": "海南"
+},
+{
+	"city_id": "366",
+	"city_name": "恩施",
+	"admin_code": "422800",
+	"initial": "E",
+	"prov_id": "18",
+	"prov_name": "湖北"
+},
+{
+	"city_id": "187",
+	"city_name": "鄂州",
+	"admin_code": "420700",
+	"initial": "E",
+	"prov_id": "18",
+	"prov_name": "湖北"
+},
+{
+	"city_id": "173",
+	"city_name": "鄂尔多斯",
+	"admin_code": "150600",
+	"initial": "E",
+	"prov_id": "33",
+	"prov_name": "内蒙古"
+},
+{
+	"city_id": "351",
+	"city_name": "阜康",
+	"admin_code": "652300",
+	"initial": "F",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "230",
+	"city_name": "阜新",
+	"admin_code": "210900",
+	"initial": "F",
+	"prov_id": "8",
+	"prov_name": "辽宁"
+},
+{
+	"city_id": "162",
+	"city_name": "佛山",
+	"admin_code": "440600",
+	"initial": "F",
+	"prov_id": "20",
+	"prov_name": "广东"
+},
+{
+	"city_id": "94",
+	"city_name": "抚顺",
+	"admin_code": "210400",
+	"initial": "F",
+	"prov_id": "8",
+	"prov_name": "辽宁"
+},
+{
+	"city_id": "170",
+	"city_name": "防城港",
+	"admin_code": "450600",
+	"initial": "F",
+	"prov_id": "29",
+	"prov_name": "广西"
+},
+{
+	"city_id": "260",
+	"city_name": "抚州",
+	"admin_code": "361000",
+	"initial": "f",
+	"prov_id": "15",
+	"prov_name": "江西"
+},
+{
+	"city_id": "281",
+	"city_name": "阜阳",
+	"admin_code": "341200",
+	"initial": "F",
+	"prov_id": "13",
+	"prov_name": "安徽"
+},
+{
+	"city_id": "14",
+	"city_name": "福州",
+	"admin_code": "350100",
+	"initial": "F",
+	"prov_id": "14",
+	"prov_name": "福建"
+},
+{
+	"city_id": "23",
+	"city_name": "贵阳",
+	"admin_code": "520100",
+	"initial": "G",
+	"prov_id": "24",
+	"prov_name": "贵州"
+},
+{
+	"city_id": "86",
+	"city_name": "桂林",
+	"admin_code": "450300",
+	"initial": "G",
+	"prov_id": "29",
+	"prov_name": "广西"
+},
+{
+	"city_id": "184",
+	"city_name": "赣州",
+	"admin_code": "360700",
+	"initial": "G",
+	"prov_id": "15",
+	"prov_name": "江西"
+},
+{
+	"city_id": "20",
+	"city_name": "广州",
+	"admin_code": "440100",
+	"initial": "G",
+	"prov_id": "20",
+	"prov_name": "广东"
+},
+{
+	"city_id": "116",
+	"city_name": "固原",
+	"admin_code": "640400",
+	"initial": "G",
+	"prov_id": "31",
+	"prov_name": "宁夏"
+},
+{
+	"city_id": "336",
+	"city_name": "甘南",
+	"admin_code": "623000",
+	"initial": "G",
+	"prov_id": "21",
+	"prov_name": "甘肃"
+},
+{
+	"city_id": "191",
+	"city_name": "广元",
+	"admin_code": "510800",
+	"initial": "G",
+	"prov_id": "22",
+	"prov_name": "四川"
+},
+{
+	"city_id": "168",
+	"city_name": "果洛",
+	"admin_code": "632600",
+	"initial": "G",
+	"prov_id": "27",
+	"prov_name": "青海"
+},
+{
+	"city_id": "383",
+	"city_name": "甘孜",
+	"admin_code": "513300",
+	"initial": "G",
+	"prov_id": "22",
+	"prov_name": "四川"
+},
+{
+	"city_id": "337",
+	"city_name": "广安",
+	"admin_code": "511600",
+	"initial": "G",
+	"prov_id": "22",
+	"prov_name": "四川"
+},
+{
+	"city_id": "224",
+	"city_name": "贵港",
+	"admin_code": "450800",
+	"initial": "G",
+	"prov_id": "29",
+	"prov_name": "广西"
+},
+{
+	"city_id": "274",
+	"city_name": "衡水",
+	"admin_code": "131100",
+	"initial": "H",
+	"prov_id": "5",
+	"prov_name": "河北"
+},
+{
+	"city_id": "278",
+	"city_name": "黑河",
+	"admin_code": "231100",
+	"initial": "H",
+	"prov_id": "10",
+	"prov_name": "黑龙江"
+},
+{
+	"city_id": "155",
+	"city_name": "淮北",
+	"admin_code": "340600",
+	"initial": "H",
+	"prov_id": "13",
+	"prov_name": "安徽"
+},
+{
+	"city_id": "222",
+	"city_name": "海西",
+	"admin_code": "632800",
+	"initial": "H",
+	"prov_id": "27",
+	"prov_name": "青海"
+},
+{
+	"city_id": "56",
+	"city_name": "海东",
+	"admin_code": "632100",
+	"initial": "H",
+	"prov_id": "27",
+	"prov_name": "青海"
+},
+{
+	"city_id": "126",
+	"city_name": "湖州",
+	"admin_code": "330500",
+	"initial": "H",
+	"prov_id": "12",
+	"prov_name": "浙江"
+},
+{
+	"city_id": "196",
+	"city_name": "汉中",
+	"admin_code": "610700",
+	"initial": "H",
+	"prov_id": "28",
+	"prov_name": "陕西"
+},
+{
+	"city_id": "13",
+	"city_name": "合肥",
+	"admin_code": "340100",
+	"initial": "H",
+	"prov_id": "13",
+	"prov_name": "安徽"
+},
+{
+	"city_id": "272",
+	"city_name": "哈密",
+	"admin_code": "652200",
+	"initial": "H",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "84",
+	"city_name": "海北",
+	"admin_code": "632200",
+	"initial": "H",
+	"prov_id": "27",
+	"prov_name": "青海"
+},
+{
+	"city_id": "292",
+	"city_name": "贺州",
+	"admin_code": "451100",
+	"initial": "H",
+	"prov_id": "29",
+	"prov_name": "广西"
+},
+{
+	"city_id": "335",
+	"city_name": "河源",
+	"admin_code": "441600",
+	"initial": "H",
+	"prov_id": "20",
+	"prov_name": "广东"
+},
+{
+	"city_id": "293",
+	"city_name": "和田",
+	"admin_code": "653200",
+	"initial": "H",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "112",
+	"city_name": "黄南",
+	"admin_code": "632300",
+	"initial": "H",
+	"prov_id": "27",
+	"prov_name": "青海"
+},
+{
+	"city_id": "10",
+	"city_name": "哈尔滨",
+	"admin_code": "230100",
+	"initial": "H",
+	"prov_id": "10",
+	"prov_name": "黑龙江"
+},
+{
+	"city_id": "159",
+	"city_name": "鹤壁",
+	"admin_code": "410600",
+	"initial": "H",
+	"prov_id": "17",
+	"prov_name": "河南"
+},
+{
+	"city_id": "24",
+	"city_name": "海口",
+	"admin_code": "460100",
+	"initial": "H",
+	"prov_id": "25",
+	"prov_name": "海南"
+},
+{
+	"city_id": "235",
+	"city_name": "黄山",
+	"admin_code": "341000",
+	"initial": "H",
+	"prov_id": "13",
+	"prov_name": "安徽"
+},
+{
+	"city_id": "309",
+	"city_name": "河池",
+	"admin_code": "451200",
+	"initial": "H",
+	"prov_id": "29",
+	"prov_name": "广西"
+},
+{
+	"city_id": "12",
+	"city_name": "杭州",
+	"admin_code": "330100",
+	"initial": "H",
+	"prov_id": "12",
+	"prov_name": "浙江"
+},
+{
+	"city_id": "364",
+	"city_name": "菏泽",
+	"admin_code": "371700",
+	"initial": "H",
+	"prov_id": "16",
+	"prov_name": "山东"
+},
+{
+	"city_id": "207",
+	"city_name": "淮安",
+	"admin_code": "320800",
+	"initial": "H",
+	"prov_id": "11",
+	"prov_name": "江苏"
+},
+{
+	"city_id": "140",
+	"city_name": "海南藏族",
+	"admin_code": "632500",
+	"initial": "H",
+	"prov_id": "27",
+	"prov_name": "青海"
+},
+{
+	"city_id": "105",
+	"city_name": "衡阳",
+	"admin_code": "430400",
+	"initial": "H",
+	"prov_id": "19",
+	"prov_name": "湖南"
+},
+{
+	"city_id": "48",
+	"city_name": "黄石",
+	"admin_code": "420200",
+	"initial": "H",
+	"prov_id": "18",
+	"prov_name": "湖北"
+},
+{
+	"city_id": "200",
+	"city_name": "呼伦贝尔",
+	"admin_code": "150700",
+	"initial": "H",
+	"prov_id": "33",
+	"prov_name": "内蒙古"
+},
+{
+	"city_id": "99",
+	"city_name": "淮南",
+	"admin_code": "340400",
+	"initial": "H",
+	"prov_id": "13",
+	"prov_name": "安徽"
+},
+{
+	"city_id": "32",
+	"city_name": "呼和浩特",
+	"admin_code": "150100",
+	"initial": "H",
+	"prov_id": "33",
+	"prov_name": "内蒙古"
+},
+{
+	"city_id": "68",
+	"city_name": "鹤岗",
+	"admin_code": "230400",
+	"initial": "H",
+	"prov_id": "10",
+	"prov_name": "黑龙江"
+},
+{
+	"city_id": "269",
+	"city_name": "红河",
+	"admin_code": "532500",
+	"initial": "H",
+	"prov_id": "26",
+	"prov_name": "云南"
+},
+{
+	"city_id": "303",
+	"city_name": "怀化",
+	"admin_code": "431200",
+	"initial": "H",
+	"prov_id": "19",
+	"prov_name": "湖南"
+},
+{
+	"city_id": "91",
+	"city_name": "邯郸",
+	"admin_code": "130400",
+	"initial": "H",
+	"prov_id": "5",
+	"prov_name": "河北"
+},
+{
+	"city_id": "329",
+	"city_name": "葫芦岛",
+	"admin_code": "211400",
+	"initial": "H",
+	"prov_id": "8",
+	"prov_name": "辽宁"
+},
+{
+	"city_id": "263",
+	"city_name": "黄冈",
+	"admin_code": "421100",
+	"initial": "H",
+	"prov_id": "18",
+	"prov_name": "湖北"
+},
+{
+	"city_id": "287",
+	"city_name": "惠州",
+	"admin_code": "441300",
+	"initial": "H",
+	"prov_id": "20",
+	"prov_name": "广东"
+},
+{
+	"city_id": "98",
+	"city_name": "嘉兴",
+	"admin_code": "330400",
+	"initial": "J",
+	"prov_id": "12",
+	"prov_name": "浙江"
+},
+{
+	"city_id": "16",
+	"city_name": "济南",
+	"admin_code": "370100",
+	"initial": "J",
+	"prov_id": "16",
+	"prov_name": "山东"
+},
+{
+	"city_id": "175",
+	"city_name": "晋中",
+	"admin_code": "140700",
+	"initial": "J",
+	"prov_id": "6",
+	"prov_name": "山西"
+},
+{
+	"city_id": "124",
+	"city_name": "鸡西",
+	"admin_code": "230300",
+	"initial": "J",
+	"prov_id": "10",
+	"prov_name": "黑龙江"
+},
+{
+	"city_id": "212",
+	"city_name": "济宁",
+	"admin_code": "370800",
+	"initial": "J",
+	"prov_id": "16",
+	"prov_name": "山东"
+},
+{
+	"city_id": "39",
+	"city_name": "吉林",
+	"admin_code": "220200",
+	"initial": "J",
+	"prov_id": "9",
+	"prov_name": "吉林"
+},
+{
+	"city_id": "135",
+	"city_name": "嘉峪关",
+	"admin_code": "620200",
+	"initial": "J",
+	"prov_id": "21",
+	"prov_name": "甘肃"
+},
+{
+	"city_id": "189",
+	"city_name": "江门",
+	"admin_code": "440700",
+	"initial": "J",
+	"prov_id": "20",
+	"prov_name": "广东"
+},
+{
+	"city_id": "382",
+	"city_name": "揭阳",
+	"admin_code": "445200",
+	"initial": "J",
+	"prov_id": "20",
+	"prov_name": "广东"
+},
+{
+	"city_id": "372",
+	"city_name": "济源",
+	"admin_code": "410881",
+	"initial": "J",
+	"prov_id": "17",
+	"prov_name": "河南"
+},
+{
+	"city_id": "211",
+	"city_name": "吉安",
+	"admin_code": "360800",
+	"initial": "J",
+	"prov_id": "15",
+	"prov_name": "江西"
+},
+{
+	"city_id": "181",
+	"city_name": "金华",
+	"admin_code": "330700",
+	"initial": "J",
+	"prov_id": "12",
+	"prov_name": "浙江"
+},
+{
+	"city_id": "45",
+	"city_name": "景德镇",
+	"admin_code": "360200",
+	"initial": "J",
+	"prov_id": "15",
+	"prov_name": "江西"
+},
+{
+	"city_id": "214",
+	"city_name": "荆门",
+	"admin_code": "420800",
+	"initial": "J",
+	"prov_id": "18",
+	"prov_name": "湖北"
+},
+{
+	"city_id": "232",
+	"city_name": "佳木斯",
+	"admin_code": "230800",
+	"initial": "J",
+	"prov_id": "10",
+	"prov_name": "黑龙江"
+},
+{
+	"city_id": "120",
+	"city_name": "晋城",
+	"admin_code": "140500",
+	"initial": "J",
+	"prov_id": "6",
+	"prov_name": "山西"
+},
+{
+	"city_id": "101",
+	"city_name": "九江",
+	"admin_code": "360400",
+	"initial": "J",
+	"prov_id": "15",
+	"prov_name": "江西"
+},
+{
+	"city_id": "213",
+	"city_name": "焦作",
+	"admin_code": "410800",
+	"initial": "J",
+	"prov_id": "17",
+	"prov_name": "河南"
+},
+{
+	"city_id": "51",
+	"city_name": "金昌",
+	"admin_code": "620300",
+	"initial": "J",
+	"prov_id": "21",
+	"prov_name": "甘肃"
+},
+{
+	"city_id": "177",
+	"city_name": "锦州",
+	"admin_code": "210700",
+	"initial": "J",
+	"prov_id": "8",
+	"prov_name": "辽宁"
+},
+{
+	"city_id": "243",
+	"city_name": "酒泉",
+	"admin_code": "620900",
+	"initial": "J",
+	"prov_id": "21",
+	"prov_name": "甘肃"
+},
+{
+	"city_id": "104",
+	"city_name": "荆州",
+	"admin_code": "421000",
+	"initial": "J",
+	"prov_id": "18",
+	"prov_name": "湖北"
+},
+{
+	"city_id": "61",
+	"city_name": "克拉玛依",
+	"admin_code": "650200",
+	"initial": "K",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "250",
+	"city_name": "喀什",
+	"admin_code": "653100",
+	"initial": "K",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "25",
+	"city_name": "昆明",
+	"admin_code": "530100",
+	"initial": "K",
+	"prov_id": "26",
+	"prov_name": "云南"
+},
+{
+	"city_id": "395",
+	"city_name": "克孜勒苏",
+	"admin_code": "653000",
+	"initial": "K",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "380",
+	"city_name": "奎屯",
+	"admin_code": "654000",
+	"initial": "K",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "47",
+	"city_name": "开封",
+	"admin_code": "410200",
+	"initial": "K",
+	"prov_id": "17",
+	"prov_name": "河南"
+},
+{
+	"city_id": "210",
+	"city_name": "龙岩",
+	"admin_code": "350800",
+	"initial": "L",
+	"prov_id": "14",
+	"prov_name": "福建"
+},
+{
+	"city_id": "75",
+	"city_name": "洛阳",
+	"admin_code": "410300",
+	"initial": "L",
+	"prov_id": "17",
+	"prov_name": "河南"
+},
+{
+	"city_id": "320",
+	"city_name": "娄底",
+	"admin_code": "431300",
+	"initial": "L",
+	"prov_id": "19",
+	"prov_name": "湖南"
+},
+{
+	"city_id": "280",
+	"city_name": "丽水",
+	"admin_code": "331100",
+	"initial": "L",
+	"prov_id": "12",
+	"prov_name": "浙江"
+},
+{
+	"city_id": "267",
+	"city_name": "乐山",
+	"admin_code": "511100",
+	"initial": "L",
+	"prov_id": "22",
+	"prov_name": "四川"
+},
+{
+	"city_id": "307",
+	"city_name": "临高",
+	"admin_code": "469028",
+	"initial": "L",
+	"prov_id": "25",
+	"prov_name": "海南"
+},
+{
+	"city_id": "344",
+	"city_name": "聊城",
+	"admin_code": "371500",
+	"initial": "L",
+	"prov_id": "16",
+	"prov_name": "山东"
+},
+{
+	"city_id": "53",
+	"city_name": "六盘水",
+	"admin_code": "520200",
+	"initial": "L",
+	"prov_id": "24",
+	"prov_name": "贵州"
+},
+{
+	"city_id": "167",
+	"city_name": "丽江",
+	"admin_code": "530700",
+	"initial": "L",
+	"prov_id": "26",
+	"prov_name": "云南"
+},
+{
+	"city_id": "284",
+	"city_name": "漯河",
+	"admin_code": "411100",
+	"initial": "L",
+	"prov_id": "17",
+	"prov_name": "河南"
+},
+{
+	"city_id": "108",
+	"city_name": "泸州",
+	"admin_code": "510500",
+	"initial": "L",
+	"prov_id": "22",
+	"prov_name": "四川"
+},
+{
+	"city_id": "255",
+	"city_name": "辽阳",
+	"admin_code": "211000",
+	"initial": "L",
+	"prov_id": "8",
+	"prov_name": "辽宁"
+},
+{
+	"city_id": "330",
+	"city_name": "六安",
+	"admin_code": "341500",
+	"initial": "L",
+	"prov_id": "13",
+	"prov_name": "安徽"
+},
+{
+	"city_id": "305",
+	"city_name": "陇南",
+	"admin_code": "621200",
+	"initial": "L",
+	"prov_id": "21",
+	"prov_name": "甘肃"
+},
+{
+	"city_id": "180",
+	"city_name": "连云港",
+	"admin_code": "320700",
+	"initial": "L",
+	"prov_id": "11",
+	"prov_name": "江苏"
+},
+{
+	"city_id": "322",
+	"city_name": "临夏",
+	"admin_code": "622900",
+	"initial": "L",
+	"prov_id": "21",
+	"prov_name": "甘肃"
+},
+{
+	"city_id": "95",
+	"city_name": "辽源",
+	"admin_code": "220400",
+	"initial": "L",
+	"prov_id": "9",
+	"prov_name": "吉林"
+},
+{
+	"city_id": "253",
+	"city_name": "临汾",
+	"admin_code": "141000",
+	"initial": "L",
+	"prov_id": "6",
+	"prov_name": "山西"
+},
+{
+	"city_id": "221",
+	"city_name": "临沧",
+	"admin_code": "530900",
+	"initial": "L",
+	"prov_id": "26",
+	"prov_name": "云南"
+},
+{
+	"city_id": "21",
+	"city_name": "兰州",
+	"admin_code": "620100",
+	"initial": "L",
+	"prov_id": "21",
+	"prov_name": "甘肃"
+},
+{
+	"city_id": "326",
+	"city_name": "来宾",
+	"admin_code": "451300",
+	"initial": "L",
+	"prov_id": "29",
+	"prov_name": "广西"
+},
+{
+	"city_id": "349",
+	"city_name": "乐东",
+	"admin_code": "469033",
+	"initial": "L",
+	"prov_id": "25",
+	"prov_name": "海南"
+},
+{
+	"city_id": "275",
+	"city_name": "吕梁",
+	"admin_code": "141100",
+	"initial": "L",
+	"prov_id": "6",
+	"prov_name": "山西"
+},
+{
+	"city_id": "300",
+	"city_name": "莱芜",
+	"admin_code": "371200",
+	"initial": "L",
+	"prov_id": "16",
+	"prov_name": "山东"
+},
+{
+	"city_id": "252",
+	"city_name": "廊坊",
+	"admin_code": "131000",
+	"initial": "L",
+	"prov_id": "5",
+	"prov_name": "河北"
+},
+{
+	"city_id": "359",
+	"city_name": "陵水",
+	"admin_code": "469034",
+	"initial": "L",
+	"prov_id": "25",
+	"prov_name": "海南"
+},
+{
+	"city_id": "198",
+	"city_name": "林芝",
+	"admin_code": "542600",
+	"initial": "L",
+	"prov_id": "30",
+	"prov_name": "西藏"
+},
+{
+	"city_id": "317",
+	"city_name": "临沂",
+	"admin_code": "371300",
+	"initial": "L",
+	"prov_id": "16",
+	"prov_name": "山东"
+},
+{
+	"city_id": "387",
+	"city_name": "凉山",
+	"admin_code": "513400",
+	"initial": "L",
+	"prov_id": "22",
+	"prov_name": "四川"
+},
+{
+	"city_id": "58",
+	"city_name": "柳州",
+	"admin_code": "450200",
+	"initial": "L",
+	"prov_id": "29",
+	"prov_name": "广西"
+},
+{
+	"city_id": "29",
+	"city_name": "拉萨",
+	"admin_code": "540100",
+	"initial": "L",
+	"prov_id": "30",
+	"prov_name": "西藏"
+},
+{
+	"city_id": "304",
+	"city_name": "梅州",
+	"admin_code": "441400",
+	"initial": "M",
+	"prov_id": "20",
+	"prov_name": "广东"
+},
+{
+	"city_id": "361",
+	"city_name": "米泉",
+	"admin_code": "652300",
+	"initial": "M",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "306",
+	"city_name": "眉山",
+	"admin_code": "511400",
+	"initial": "M",
+	"prov_id": "22",
+	"prov_name": "四川"
+},
+{
+	"city_id": "206",
+	"city_name": "牡丹江",
+	"admin_code": "231000",
+	"initial": "M",
+	"prov_id": "10",
+	"prov_name": "黑龙江"
+},
+{
+	"city_id": "164",
+	"city_name": "绵阳",
+	"admin_code": "510700",
+	"initial": "M",
+	"prov_id": "22",
+	"prov_name": "四川"
+},
+{
+	"city_id": "242",
+	"city_name": "茂名",
+	"admin_code": "440900",
+	"initial": "M",
+	"prov_id": "20",
+	"prov_name": "广东"
+},
+{
+	"city_id": "127",
+	"city_name": "马鞍山",
+	"admin_code": "340500",
+	"initial": "M",
+	"prov_id": "13",
+	"prov_name": "安徽"
+},
+{
+	"city_id": "244",
+	"city_name": "内江",
+	"admin_code": "511000",
+	"initial": "N",
+	"prov_id": "22",
+	"prov_name": "四川"
+},
+{
+	"city_id": "59",
+	"city_name": "那曲",
+	"admin_code": "542400",
+	"initial": "N",
+	"prov_id": "30",
+	"prov_name": "西藏"
+},
+{
+	"city_id": "236",
+	"city_name": "宁德",
+	"admin_code": "350900",
+	"initial": "N",
+	"prov_id": "14",
+	"prov_name": "福建"
+},
+{
+	"city_id": "153",
+	"city_name": "南通",
+	"admin_code": "320600",
+	"initial": "N",
+	"prov_id": "11",
+	"prov_name": "江苏"
+},
+{
+	"city_id": "15",
+	"city_name": "南昌",
+	"admin_code": "360100",
+	"initial": "N",
+	"prov_id": "15",
+	"prov_name": "江西"
+},
+{
+	"city_id": "289",
+	"city_name": "南充",
+	"admin_code": "511300",
+	"initial": "N",
+	"prov_id": "22",
+	"prov_name": "四川"
+},
+{
+	"city_id": "11",
+	"city_name": "南京",
+	"admin_code": "320100",
+	"initial": "N",
+	"prov_id": "11",
+	"prov_name": "江苏"
+},
+{
+	"city_id": "318",
+	"city_name": "南阳",
+	"admin_code": "411300",
+	"initial": "N",
+	"prov_id": "17",
+	"prov_name": "河南"
+},
+{
+	"city_id": "350",
+	"city_name": "怒江",
+	"admin_code": "533300",
+	"initial": "N",
+	"prov_id": "26",
+	"prov_name": "云南"
+},
+{
+	"city_id": "42",
+	"city_name": "宁波",
+	"admin_code": "330200",
+	"initial": "N",
+	"prov_id": "12",
+	"prov_name": "浙江"
+},
+{
+	"city_id": "28",
+	"city_name": "南宁",
+	"admin_code": "450100",
+	"initial": "N",
+	"prov_id": "29",
+	"prov_name": "广西"
+},
+{
+	"city_id": "183",
+	"city_name": "南平",
+	"admin_code": "350700",
+	"initial": "N",
+	"prov_id": "14",
+	"prov_name": "福建"
+},
+{
+	"city_id": "80",
+	"city_name": "攀枝花",
+	"admin_code": "510400",
+	"initial": "P",
+	"prov_id": "22",
+	"prov_name": "四川"
+},
+{
+	"city_id": "103",
+	"city_name": "平顶山",
+	"admin_code": "410400",
+	"initial": "P",
+	"prov_id": "17",
+	"prov_name": "河南"
+},
+{
+	"city_id": "72",
+	"city_name": "莆田",
+	"admin_code": "350300",
+	"initial": "P",
+	"prov_id": "14",
+	"prov_name": "福建"
+},
+{
+	"city_id": "194",
+	"city_name": "普洱",
+	"admin_code": "530800",
+	"initial": "P",
+	"prov_id": "26",
+	"prov_name": "云南"
+},
+{
+	"city_id": "277",
+	"city_name": "盘锦",
+	"admin_code": "211100",
+	"initial": "P",
+	"prov_id": "8",
+	"prov_name": "辽宁"
+},
+{
+	"city_id": "73",
+	"city_name": "萍乡",
+	"admin_code": "360300",
+	"initial": "P",
+	"prov_id": "15",
+	"prov_name": "江西"
+},
+{
+	"city_id": "217",
+	"city_name": "平凉",
+	"admin_code": "620800",
+	"initial": "P",
+	"prov_id": "21",
+	"prov_name": "甘肃"
+},
+{
+	"city_id": "239",
+	"city_name": "濮阳",
+	"admin_code": "410900",
+	"initial": "P",
+	"prov_id": "17",
+	"prov_name": "河南"
+},
+{
+	"city_id": "192",
+	"city_name": "黔西南",
+	"admin_code": "522300",
+	"initial": "Q",
+	"prov_id": "24",
+	"prov_name": "贵州"
+},
+{
+	"city_id": "266",
+	"city_name": "庆阳",
+	"admin_code": "621000",
+	"initial": "Q",
+	"prov_id": "21",
+	"prov_name": "甘肃"
+},
+{
+	"city_id": "375",
+	"city_name": "琼中",
+	"admin_code": "469036",
+	"initial": "Q",
+	"prov_id": "25",
+	"prov_name": "海南"
+},
+{
+	"city_id": "219",
+	"city_name": "黔东南",
+	"admin_code": "522600",
+	"initial": "Q",
+	"prov_id": "24",
+	"prov_name": "贵州"
+},
+{
+	"city_id": "46",
+	"city_name": "青岛",
+	"admin_code": "370200",
+	"initial": "Q",
+	"prov_id": "16",
+	"prov_name": "山东"
+},
+{
+	"city_id": "245",
+	"city_name": "黔南",
+	"admin_code": "522700",
+	"initial": "Q",
+	"prov_id": "24",
+	"prov_name": "贵州"
+},
+{
+	"city_id": "128",
+	"city_name": "泉州",
+	"admin_code": "350500",
+	"initial": "Q",
+	"prov_id": "14",
+	"prov_name": "福建"
+},
+{
+	"city_id": "40",
+	"city_name": "齐齐哈尔",
+	"admin_code": "230200",
+	"initial": "Q",
+	"prov_id": "10",
+	"prov_name": "黑龙江"
+},
+{
+	"city_id": "55",
+	"city_name": "曲靖",
+	"admin_code": "530300",
+	"initial": "Q",
+	"prov_id": "26",
+	"prov_name": "云南"
+},
+{
+	"city_id": "208",
+	"city_name": "衢州",
+	"admin_code": "330800",
+	"initial": "Q",
+	"prov_id": "12",
+	"prov_name": "浙江"
+},
+{
+	"city_id": "346",
+	"city_name": "潜江",
+	"admin_code": "429005",
+	"initial": "Q",
+	"prov_id": "18",
+	"prov_name": "湖北"
+},
+{
+	"city_id": "357",
+	"city_name": "清远",
+	"admin_code": "441800",
+	"initial": "Q",
+	"prov_id": "20",
+	"prov_name": "广东"
+},
+{
+	"city_id": "197",
+	"city_name": "钦州",
+	"admin_code": "450700",
+	"initial": "Q",
+	"prov_id": "29",
+	"prov_name": "广西"
+},
+{
+	"city_id": "63",
+	"city_name": "秦皇岛",
+	"admin_code": "130300",
+	"initial": "Q",
+	"prov_id": "5",
+	"prov_name": "河北"
+},
+{
+	"city_id": "256",
+	"city_name": "七台河",
+	"admin_code": "230900",
+	"initial": "Q",
+	"prov_id": "10",
+	"prov_name": "黑龙江"
+},
+{
+	"city_id": "110",
+	"city_name": "琼海",
+	"admin_code": "469002",
+	"initial": "Q",
+	"prov_id": "25",
+	"prov_name": "海南"
+},
+{
+	"city_id": "143",
+	"city_name": "日喀则",
+	"admin_code": "542300",
+	"initial": "R",
+	"prov_id": "30",
+	"prov_name": "西藏"
+},
+{
+	"city_id": "283",
+	"city_name": "日照",
+	"admin_code": "371100",
+	"initial": "R",
+	"prov_id": "16",
+	"prov_name": "山东"
+},
+{
+	"city_id": "178",
+	"city_name": "松原",
+	"admin_code": "220700",
+	"initial": "S",
+	"prov_id": "9",
+	"prov_name": "吉林"
+},
+{
+	"city_id": "125",
+	"city_name": "苏州",
+	"admin_code": "320500",
+	"initial": "S",
+	"prov_id": "11",
+	"prov_name": "江苏"
+},
+{
+	"city_id": "3",
+	"city_name": "上海",
+	"admin_code": "310100",
+	"initial": "S",
+	"prov_id": "3",
+	"prov_name": "上海"
+},
+{
+	"city_id": "89",
+	"city_name": "石河子",
+	"admin_code": "659001",
+	"initial": "S",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "297",
+	"city_name": "绥化",
+	"admin_code": "231200",
+	"initial": "S",
+	"prov_id": "10",
+	"prov_name": "黑龙江"
+},
+{
+	"city_id": "60",
+	"city_name": "石嘴山",
+	"admin_code": "640200",
+	"initial": "S",
+	"prov_id": "31",
+	"prov_name": "宁夏"
+},
+{
+	"city_id": "302",
+	"city_name": "随州",
+	"admin_code": "421300",
+	"initial": "S",
+	"prov_id": "18",
+	"prov_name": "湖北"
+},
+{
+	"city_id": "321",
+	"city_name": "汕尾",
+	"admin_code": "441500",
+	"initial": "S",
+	"prov_id": "20",
+	"prov_name": "广东"
+},
+{
+	"city_id": "396",
+	"city_name": "三沙",
+	"admin_code": "460300",
+	"initial": "S",
+	"prov_id": "25",
+	"prov_name": "海南"
+},
+{
+	"city_id": "154",
+	"city_name": "绍兴",
+	"admin_code": "330600",
+	"initial": "S",
+	"prov_id": "12",
+	"prov_name": "浙江"
+},
+{
+	"city_id": "67",
+	"city_name": "四平",
+	"admin_code": "220300",
+	"initial": "S",
+	"prov_id": "9",
+	"prov_name": "吉林"
+},
+{
+	"city_id": "315",
+	"city_name": "宿迁",
+	"admin_code": "321300",
+	"initial": "S",
+	"prov_id": "11",
+	"prov_name": "江苏"
+},
+{
+	"city_id": "100",
+	"city_name": "三明",
+	"admin_code": "350400",
+	"initial": "S",
+	"prov_id": "14",
+	"prov_name": "福建"
+},
+{
+	"city_id": "301",
+	"city_name": "三门峡",
+	"admin_code": "411200",
+	"initial": "S",
+	"prov_id": "17",
+	"prov_name": "河南"
+},
+{
+	"city_id": "115",
+	"city_name": "山南",
+	"admin_code": "542200",
+	"initial": "S",
+	"prov_id": "30",
+	"prov_name": "西藏"
+},
+{
+	"city_id": "5",
+	"city_name": "石家庄",
+	"admin_code": "130100",
+	"initial": "S",
+	"prov_id": "5",
+	"prov_name": "河北"
+},
+{
+	"city_id": "50",
+	"city_name": "深圳",
+	"admin_code": "440300",
+	"initial": "S",
+	"prov_id": "20",
+	"prov_name": "广东"
+},
+{
+	"city_id": "270",
+	"city_name": "商洛",
+	"admin_code": "611000",
+	"initial": "S",
+	"prov_id": "28",
+	"prov_name": "陕西"
+},
+{
+	"city_id": "54",
+	"city_name": "三亚",
+	"admin_code": "460200",
+	"initial": "S",
+	"prov_id": "25",
+	"prov_name": "海南"
+},
+{
+	"city_id": "332",
+	"city_name": "商丘",
+	"admin_code": "411400",
+	"initial": "S",
+	"prov_id": "17",
+	"prov_name": "河南"
+},
+{
+	"city_id": "133",
+	"city_name": "邵阳",
+	"admin_code": "430500",
+	"initial": "S",
+	"prov_id": "19",
+	"prov_name": "湖南"
+},
+{
+	"city_id": "76",
+	"city_name": "十堰",
+	"admin_code": "420300",
+	"initial": "S",
+	"prov_id": "18",
+	"prov_name": "湖北"
+},
+{
+	"city_id": "106",
+	"city_name": "汕头",
+	"admin_code": "440500",
+	"initial": "S",
+	"prov_id": "20",
+	"prov_name": "广东"
+},
+{
+	"city_id": "356",
+	"city_name": "神农架林区",
+	"admin_code": "429021",
+	"initial": "S",
+	"prov_id": "18",
+	"prov_name": "湖北"
+},
+{
+	"city_id": "8",
+	"city_name": "沈阳",
+	"admin_code": "210100",
+	"initial": "S",
+	"prov_id": "8",
+	"prov_name": "辽宁"
+},
+{
+	"city_id": "282",
+	"city_name": "上饶",
+	"admin_code": "361100",
+	"initial": "S",
+	"prov_id": "15",
+	"prov_name": "江西"
+},
+{
+	"city_id": "218",
+	"city_name": "遂宁",
+	"admin_code": "510900",
+	"initial": "S",
+	"prov_id": "22",
+	"prov_name": "四川"
+},
+{
+	"city_id": "148",
+	"city_name": "朔州",
+	"admin_code": "140600",
+	"initial": "S",
+	"prov_id": "6",
+	"prov_name": "山西"
+},
+{
+	"city_id": "96",
+	"city_name": "双鸭山",
+	"admin_code": "230500",
+	"initial": "S",
+	"prov_id": "10",
+	"prov_name": "黑龙江"
+},
+{
+	"city_id": "299",
+	"city_name": "宿州",
+	"admin_code": "341300",
+	"initial": "s",
+	"prov_id": "13",
+	"prov_name": "安徽"
+},
+{
+	"city_id": "134",
+	"city_name": "韶关",
+	"admin_code": "440200",
+	"initial": "S",
+	"prov_id": "20",
+	"prov_name": "广东"
+},
+{
+	"city_id": "290",
+	"city_name": "屯昌",
+	"admin_code": "469026",
+	"initial": "T",
+	"prov_id": "25",
+	"prov_name": "海南"
+},
+{
+	"city_id": "107",
+	"city_name": "天水",
+	"admin_code": "620500",
+	"initial": "T",
+	"prov_id": "21",
+	"prov_name": "甘肃"
+},
+{
+	"city_id": "6",
+	"city_name": "太原",
+	"admin_code": "140100",
+	"initial": "T",
+	"prov_id": "6",
+	"prov_name": "山西"
+},
+{
+	"city_id": "182",
+	"city_name": "铜陵",
+	"admin_code": "340700",
+	"initial": "T",
+	"prov_id": "13",
+	"prov_name": "安徽"
+},
+{
+	"city_id": "298",
+	"city_name": "泰州",
+	"admin_code": "321200",
+	"initial": "t",
+	"prov_id": "11",
+	"prov_name": "江苏"
+},
+{
+	"city_id": "238",
+	"city_name": "泰安",
+	"admin_code": "370900",
+	"initial": "T",
+	"prov_id": "16",
+	"prov_name": "山东"
+},
+{
+	"city_id": "57",
+	"city_name": "铜川",
+	"admin_code": "610200",
+	"initial": "T",
+	"prov_id": "28",
+	"prov_name": "陕西"
+},
+{
+	"city_id": "146",
+	"city_name": "通辽",
+	"admin_code": "150500",
+	"initial": "T",
+	"prov_id": "33",
+	"prov_name": "内蒙古"
+},
+{
+	"city_id": "145",
+	"city_name": "图木舒克",
+	"admin_code": "659003",
+	"initial": "T",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "333",
+	"city_name": "天门",
+	"admin_code": "429006",
+	"initial": "T",
+	"prov_id": "18",
+	"prov_name": "湖北"
+},
+{
+	"city_id": "296",
+	"city_name": "铁岭",
+	"admin_code": "211200",
+	"initial": "T",
+	"prov_id": "8",
+	"prov_name": "辽宁"
+},
+{
+	"city_id": "35",
+	"city_name": "唐山",
+	"admin_code": "130200",
+	"initial": "T",
+	"prov_id": "5",
+	"prov_name": "河北"
+},
+{
+	"city_id": "123",
+	"city_name": "通化",
+	"admin_code": "220500",
+	"initial": "T",
+	"prov_id": "9",
+	"prov_name": "吉林"
+},
+{
+	"city_id": "137",
+	"city_name": "铜仁",
+	"admin_code": "522200",
+	"initial": "T",
+	"prov_id": "24",
+	"prov_name": "贵州"
+},
+{
+	"city_id": "199",
+	"city_name": "吐鲁番",
+	"admin_code": "652100",
+	"initial": "T",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "384",
+	"city_name": "塔城",
+	"admin_code": "654200",
+	"initial": "T",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "258",
+	"city_name": "台州",
+	"admin_code": "331000",
+	"initial": "T",
+	"prov_id": "12",
+	"prov_name": "浙江"
+},
+{
+	"city_id": "2",
+	"city_name": "天津",
+	"admin_code": "120100",
+	"initial": "T",
+	"prov_id": "2",
+	"prov_name": "天津"
+},
+{
+	"city_id": "251",
+	"city_name": "乌兰察布",
+	"admin_code": "150900",
+	"initial": "W",
+	"prov_id": "33",
+	"prov_name": "内蒙古"
+},
+{
+	"city_id": "90",
+	"city_name": "乌海",
+	"admin_code": "150300",
+	"initial": "W",
+	"prov_id": "33",
+	"prov_name": "内蒙古"
+},
+{
+	"city_id": "114",
+	"city_name": "梧州",
+	"admin_code": "450400",
+	"initial": "W",
+	"prov_id": "29",
+	"prov_name": "广西"
+},
+{
+	"city_id": "166",
+	"city_name": "文昌",
+	"admin_code": "469005",
+	"initial": "W",
+	"prov_id": "25",
+	"prov_name": "海南"
+},
+{
+	"city_id": "88",
+	"city_name": "吴忠",
+	"admin_code": "640300",
+	"initial": "W",
+	"prov_id": "31",
+	"prov_name": "宁夏"
+},
+{
+	"city_id": "43",
+	"city_name": "芜湖",
+	"admin_code": "340200",
+	"initial": "W",
+	"prov_id": "13",
+	"prov_name": "安徽"
+},
+{
+	"city_id": "163",
+	"city_name": "武威",
+	"admin_code": "620600",
+	"initial": "W",
+	"prov_id": "21",
+	"prov_name": "甘肃"
+},
+{
+	"city_id": "193",
+	"city_name": "万宁",
+	"admin_code": "469006",
+	"initial": "W",
+	"prov_id": "25",
+	"prov_name": "海南"
+},
+{
+	"city_id": "261",
+	"city_name": "威海",
+	"admin_code": "371000",
+	"initial": "W",
+	"prov_id": "16",
+	"prov_name": "山东"
+},
+{
+	"city_id": "18",
+	"city_name": "武汉",
+	"admin_code": "420100",
+	"initial": "W",
+	"prov_id": "18",
+	"prov_name": "湖北"
+},
+{
+	"city_id": "172",
+	"city_name": "五家渠",
+	"admin_code": "659004",
+	"initial": "W",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "41",
+	"city_name": "无锡",
+	"admin_code": "320200",
+	"initial": "W",
+	"prov_id": "11",
+	"prov_name": "江苏"
+},
+{
+	"city_id": "247",
+	"city_name": "文山",
+	"admin_code": "532600",
+	"initial": "W",
+	"prov_id": "26",
+	"prov_name": "云南"
+},
+{
+	"city_id": "82",
+	"city_name": "五指山",
+	"admin_code": "469001",
+	"initial": "W",
+	"prov_id": "25",
+	"prov_name": "海南"
+},
+{
+	"city_id": "70",
+	"city_name": "温州",
+	"admin_code": "330300",
+	"initial": "W",
+	"prov_id": "12",
+	"prov_name": "浙江"
+},
+{
+	"city_id": "141",
+	"city_name": "渭南",
+	"admin_code": "610500",
+	"initial": "W",
+	"prov_id": "28",
+	"prov_name": "陕西"
+},
+{
+	"city_id": "31",
+	"city_name": "乌鲁木齐",
+	"admin_code": "650100",
+	"initial": "W",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "185",
+	"city_name": "潍坊",
+	"admin_code": "370700",
+	"initial": "W",
+	"prov_id": "16",
+	"prov_name": "山东"
+},
+{
+	"city_id": "388",
+	"city_name": "乌苏",
+	"admin_code": "654200",
+	"initial": "W",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "291",
+	"city_name": "西双版纳",
+	"admin_code": "532800",
+	"initial": "X",
+	"prov_id": "26",
+	"prov_name": "云南"
+},
+{
+	"city_id": "119",
+	"city_name": "邢台",
+	"admin_code": "130500",
+	"initial": "X",
+	"prov_id": "5",
+	"prov_name": "河北"
+},
+{
+	"city_id": "44",
+	"city_name": "厦门",
+	"admin_code": "350200",
+	"initial": "X",
+	"prov_id": "14",
+	"prov_name": "福建"
+},
+{
+	"city_id": "285",
+	"city_name": "咸宁",
+	"admin_code": "421200",
+	"initial": "X",
+	"prov_id": "18",
+	"prov_name": "湖北"
+},
+{
+	"city_id": "262",
+	"city_name": "许昌",
+	"admin_code": "411000",
+	"initial": "X",
+	"prov_id": "17",
+	"prov_name": "河南"
+},
+{
+	"city_id": "273",
+	"city_name": "锡林郭勒",
+	"admin_code": "152500",
+	"initial": "X",
+	"prov_id": "33",
+	"prov_name": "内蒙古"
+},
+{
+	"city_id": "334",
+	"city_name": "湘西",
+	"admin_code": "433100",
+	"initial": "X",
+	"prov_id": "19",
+	"prov_name": "湖南"
+},
+{
+	"city_id": "27",
+	"city_name": "西安",
+	"admin_code": "610100",
+	"initial": "X",
+	"prov_id": "28",
+	"prov_name": "陕西"
+},
+{
+	"city_id": "160",
+	"city_name": "襄阳",
+	"admin_code": "420600",
+	"initial": "X",
+	"prov_id": "18",
+	"prov_name": "湖北"
+},
+{
+	"city_id": "294",
+	"city_name": "兴安",
+	"admin_code": "152200",
+	"initial": "X",
+	"prov_id": "33",
+	"prov_name": "内蒙古"
+},
+{
+	"city_id": "319",
+	"city_name": "仙桃",
+	"admin_code": "429004",
+	"initial": "X",
+	"prov_id": "18",
+	"prov_name": "湖北"
+},
+{
+	"city_id": "228",
+	"city_name": "忻州",
+	"admin_code": "140900",
+	"initial": "X",
+	"prov_id": "6",
+	"prov_name": "山西"
+},
+{
+	"city_id": "77",
+	"city_name": "湘潭",
+	"admin_code": "430300",
+	"initial": "X",
+	"prov_id": "19",
+	"prov_name": "湖南"
+},
+{
+	"city_id": "186",
+	"city_name": "新乡",
+	"admin_code": "410700",
+	"initial": "X",
+	"prov_id": "17",
+	"prov_name": "河南"
+},
+{
+	"city_id": "113",
+	"city_name": "咸阳",
+	"admin_code": "610400",
+	"initial": "X",
+	"prov_id": "28",
+	"prov_name": "陕西"
+},
+{
+	"city_id": "363",
+	"city_name": "宣城",
+	"admin_code": "341800",
+	"initial": "X",
+	"prov_id": "13",
+	"prov_name": "安徽"
+},
+{
+	"city_id": "240",
+	"city_name": "孝感",
+	"admin_code": "420900",
+	"initial": "X",
+	"prov_id": "18",
+	"prov_name": "湖北"
+},
+{
+	"city_id": "69",
+	"city_name": "徐州",
+	"admin_code": "320300",
+	"initial": "X",
+	"prov_id": "11",
+	"prov_name": "江苏"
+},
+{
+	"city_id": "345",
+	"city_name": "信阳",
+	"admin_code": "411500",
+	"initial": "X",
+	"prov_id": "17",
+	"prov_name": "河南"
+},
+{
+	"city_id": "129",
+	"city_name": "新余",
+	"admin_code": "360500",
+	"initial": "X",
+	"prov_id": "15",
+	"prov_name": "江西"
+},
+{
+	"city_id": "26",
+	"city_name": "西宁",
+	"admin_code": "630100",
+	"initial": "X",
+	"prov_id": "27",
+	"prov_name": "青海"
+},
+{
+	"city_id": "169",
+	"city_name": "延安",
+	"admin_code": "610600",
+	"initial": "Y",
+	"prov_id": "28",
+	"prov_name": "陕西"
+},
+{
+	"city_id": "249",
+	"city_name": "玉林",
+	"admin_code": "450900",
+	"initial": "y",
+	"prov_id": "29",
+	"prov_name": "广西"
+},
+{
+	"city_id": "30",
+	"city_name": "银川",
+	"admin_code": "640100",
+	"initial": "Y",
+	"prov_id": "31",
+	"prov_name": "宁夏"
+},
+{
+	"city_id": "157",
+	"city_name": "鹰潭",
+	"admin_code": "360600",
+	"initial": "Y",
+	"prov_id": "15",
+	"prov_name": "江西"
+},
+{
+	"city_id": "132",
+	"city_name": "宜昌",
+	"admin_code": "420500",
+	"initial": "Y",
+	"prov_id": "18",
+	"prov_name": "湖北"
+},
+{
+	"city_id": "358",
+	"city_name": "雅安",
+	"admin_code": "511800",
+	"initial": "Y",
+	"prov_id": "22",
+	"prov_name": "四川"
+},
+{
+	"city_id": "202",
+	"city_name": "运城",
+	"admin_code": "140800",
+	"initial": "Y",
+	"prov_id": "6",
+	"prov_name": "山西"
+},
+{
+	"city_id": "392",
+	"city_name": "伊犁",
+	"admin_code": "654000",
+	"initial": "Y",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "231",
+	"city_name": "延边",
+	"admin_code": "222400",
+	"initial": "Y",
+	"prov_id": "9",
+	"prov_name": "吉林"
+},
+{
+	"city_id": "223",
+	"city_name": "榆林",
+	"admin_code": "610800",
+	"initial": "Y",
+	"prov_id": "28",
+	"prov_name": "陕西"
+},
+{
+	"city_id": "179",
+	"city_name": "伊春",
+	"admin_code": "230700",
+	"initial": "Y",
+	"prov_id": "10",
+	"prov_name": "黑龙江"
+},
+{
+	"city_id": "241",
+	"city_name": "益阳",
+	"admin_code": "430900",
+	"initial": "Y",
+	"prov_id": "19",
+	"prov_name": "湖南"
+},
+{
+	"city_id": "64",
+	"city_name": "阳泉",
+	"admin_code": "140300",
+	"initial": "Y",
+	"prov_id": "6",
+	"prov_name": "山西"
+},
+{
+	"city_id": "386",
+	"city_name": "云浮",
+	"admin_code": "445300",
+	"initial": "Y",
+	"prov_id": "20",
+	"prov_name": "广东"
+},
+{
+	"city_id": "376",
+	"city_name": "伊宁",
+	"admin_code": "654000",
+	"initial": "Y",
+	"prov_id": "32",
+	"prov_name": "新疆"
+},
+{
+	"city_id": "347",
+	"city_name": "阳江",
+	"admin_code": "441700",
+	"initial": "Y",
+	"prov_id": "20",
+	"prov_name": "广东"
+},
+{
+	"city_id": "237",
+	"city_name": "宜春",
+	"admin_code": "360900",
+	"initial": "y",
+	"prov_id": "15",
+	"prov_name": "江西"
+},
+{
+	"city_id": "323",
+	"city_name": "宜宾",
+	"admin_code": "511500",
+	"initial": "Y",
+	"prov_id": "22",
+	"prov_name": "四川"
+},
+{
+	"city_id": "286",
+	"city_name": "永州",
+	"admin_code": "431100",
+	"initial": "Y",
+	"prov_id": "19",
+	"prov_name": "湖南"
+},
+{
+	"city_id": "233",
+	"city_name": "盐城",
+	"admin_code": "320900",
+	"initial": "Y",
+	"prov_id": "11",
+	"prov_name": "江苏"
+},
+{
+	"city_id": "83",
+	"city_name": "玉溪",
+	"admin_code": "530400",
+	"initial": "Y",
+	"prov_id": "26",
+	"prov_name": "云南"
+},
+{
+	"city_id": "158",
+	"city_name": "烟台",
+	"admin_code": "370600",
+	"initial": "Y",
+	"prov_id": "16",
+	"prov_name": "山东"
+},
+{
+	"city_id": "257",
+	"city_name": "扬州",
+	"admin_code": "321000",
+	"initial": "Y",
+	"prov_id": "11",
+	"prov_name": "江苏"
+},
+{
+	"city_id": "195",
+	"city_name": "玉树",
+	"admin_code": "632700",
+	"initial": "Y",
+	"prov_id": "27",
+	"prov_name": "青海"
+},
+{
+	"city_id": "161",
+	"city_name": "岳阳",
+	"admin_code": "430600",
+	"initial": "Y",
+	"prov_id": "19",
+	"prov_name": "湖南"
+},
+{
+	"city_id": "204",
+	"city_name": "营口",
+	"admin_code": "210800",
+	"initial": "Y",
+	"prov_id": "8",
+	"prov_name": "辽宁"
+},
+{
+	"city_id": "373",
+	"city_name": "中山",
+	"admin_code": "442000",
+	"initial": "Z",
+	"prov_id": "20",
+	"prov_name": "广东"
+},
+{
+	"city_id": "355",
+	"city_name": "周口",
+	"admin_code": "411600",
+	"initial": "Z",
+	"prov_id": "17",
+	"prov_name": "河南"
+},
+{
+	"city_id": "279",
+	"city_name": "镇江",
+	"admin_code": "321100",
+	"initial": "Z",
+	"prov_id": "11",
+	"prov_name": "江苏"
+},
+{
+	"city_id": "139",
+	"city_name": "昭通",
+	"admin_code": "530600",
+	"initial": "Z",
+	"prov_id": "26",
+	"prov_name": "云南"
+},
+{
+	"city_id": "365",
+	"city_name": "驻马店",
+	"admin_code": "411700",
+	"initial": "Z",
+	"prov_id": "17",
+	"prov_name": "河南"
+},
+{
+	"city_id": "215",
+	"city_name": "张家界",
+	"admin_code": "430800",
+	"initial": "Z",
+	"prov_id": "19",
+	"prov_name": "湖南"
+},
+{
+	"city_id": "49",
+	"city_name": "株洲",
+	"admin_code": "430200",
+	"initial": "Z",
+	"prov_id": "19",
+	"prov_name": "湖南"
+},
+{
+	"city_id": "74",
+	"city_name": "淄博",
+	"admin_code": "370300",
+	"initial": "Z",
+	"prov_id": "16",
+	"prov_name": "山东"
+},
+{
+	"city_id": "174",
+	"city_name": "张家口",
+	"admin_code": "130700",
+	"initial": "Z",
+	"prov_id": "5",
+	"prov_name": "河北"
+},
+{
+	"city_id": "81",
+	"city_name": "遵义",
+	"admin_code": "520300",
+	"initial": "Z",
+	"prov_id": "24",
+	"prov_name": "贵州"
+},
+{
+	"city_id": "216",
+	"city_name": "湛江",
+	"admin_code": "440800",
+	"initial": "Z",
+	"prov_id": "20",
+	"prov_name": "广东"
+},
+{
+	"city_id": "374",
+	"city_name": "资阳",
+	"admin_code": "512000",
+	"initial": "Z",
+	"prov_id": "22",
+	"prov_name": "四川"
+},
+{
+	"city_id": "102",
+	"city_name": "枣庄",
+	"admin_code": "370400",
+	"initial": "Z",
+	"prov_id": "16",
+	"prov_name": "山东"
+},
+{
+	"city_id": "190",
+	"city_name": "张掖",
+	"admin_code": "620700",
+	"initial": "Z",
+	"prov_id": "21",
+	"prov_name": "甘肃"
+},
+{
+	"city_id": "78",
+	"city_name": "珠海",
+	"admin_code": "440400",
+	"initial": "Z",
+	"prov_id": "20",
+	"prov_name": "广东"
+},
+{
+	"city_id": "156",
+	"city_name": "漳州",
+	"admin_code": "350600",
+	"initial": "Z",
+	"prov_id": "14",
+	"prov_name": "福建"
+},
+{
+	"city_id": "144",
+	"city_name": "中卫",
+	"admin_code": "640500",
+	"initial": "Z",
+	"prov_id": "31",
+	"prov_name": "宁夏"
+},
+{
+	"city_id": "17",
+	"city_name": "郑州",
+	"admin_code": "410100",
+	"initial": "Z",
+	"prov_id": "17",
+	"prov_name": "河南"
+},
+{
+	"city_id": "265",
+	"city_name": "肇庆",
+	"admin_code": "441200",
+	"initial": "Z",
+	"prov_id": "20",
+	"prov_name": "广东"
+},
+{
+	"city_id": "234",
+	"city_name": "舟山",
+	"admin_code": "330900",
+	"initial": "Z",
+	"prov_id": "12",
+	"prov_name": "浙江"
+},
+{
+	"city_id": "52",
+	"city_name": "自贡",
+	"admin_code": "510300",
+	"initial": "Z",
+	"prov_id": "22",
+	"prov_name": "四川"
+}]

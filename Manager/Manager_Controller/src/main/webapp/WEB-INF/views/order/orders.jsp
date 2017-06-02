@@ -186,7 +186,7 @@
             var websocket = null;
             //判断当前浏览器是否支持WebSocket
             if ('WebSocket' in window) {
-                websocket = new WebSocket("ws://localhost:8085/websocket");
+                websocket = new WebSocket("ws://core.maizhongcar.com/websocket");
             }
             else {
                 alert('当前浏览器 不支持订单监控，请更换浏览器')

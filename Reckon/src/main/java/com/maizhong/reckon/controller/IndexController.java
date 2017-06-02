@@ -37,7 +37,19 @@ public class IndexController {
     private LoginService loginService;
 
     @RequestMapping(value = "/")
-    public String index(Model model){
+    public String index(HttpServletRequest request,Model model){
+
+        UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
+        OperatingSystem os = userAgent.getOperatingSystem();
+        String key = os.toString().toLowerCase();
+
+
+        if(!key.contains("windows")){
+            // 移动端
+            return "redirect:http://m.wukongshouche.com/m/";
+        }
+
+
 
         IndexDTO indexDTO = indexService.getIndexDTO();
         JsonResult result =indexService.getBusinessAddress();

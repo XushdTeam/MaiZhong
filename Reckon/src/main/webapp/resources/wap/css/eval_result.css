@@ -1,0 +1,516 @@
+html, body {
+    background: #fff;
+}
+
+.banner {
+    position: relative;
+    border-bottom: 1px solid #ddd;
+}
+
+.banner > hgroup {
+    background-color: #fff;
+    width: 100%;
+    text-align: center;
+    padding: 7px 0;
+}
+
+.banner > hgroup > h1 {
+    font-size: 18px;
+}
+
+.back-arrow {
+    left: 0;
+    top: 0;
+    width: 41px;
+    height: 41px;
+}
+
+.back-arrow:before {
+    top: 15px;
+    left: 15px;
+    border-left: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+}
+
+.loc-btn {
+    position: absolute;
+    right: 10px;
+    top: 9px;
+    color: #f60;
+}
+
+.loc-btn > img {
+    width: 13px;
+    margin-top: -2px;
+}
+
+/*======*/
+.s-1 {
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.s-1 > .clearfix > img, .s-1 > .clearfix > div {
+    float: left;
+}
+
+.s-1 > .clearfix > img {
+    width: 30%;
+    margin-right: 10px;
+}
+
+.s-1 > .clearfix > .des {
+    width: 65.5%;
+    padding: 10px 0;
+}
+
+.des > div, .des > a {
+    margin-top: 10px;
+}
+
+.des > div > span:first-child {
+    color: #666;
+    font-size: 86%;
+}
+
+.des > div > span:nth-child(2) {
+    color: #00aaee;
+    font-size: 100%;
+}
+
+.s-1 > ul > li {
+    text-align: center;
+    border-right: 1px solid #e6e6e6;
+    -webkit-box-flex: 1;
+    -ms-box-flex: 1;
+    -moz-box-flex: 1;
+    box-flex: 1;
+}
+
+.s-1 > ul > li:last-of-type {
+    border: none;
+}
+
+.s-1 > ul > li > div:first-of-type {
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.s-1 > ul {
+    margin: 20px 0 10px;
+    width: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    display: box;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -ms-box-orient: horizontal;
+    box-orient: horizontal;
+}
+
+.title {
+    padding: 10px;
+    border-top: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+    background: #f5f5fa;
+}
+
+.s-2 > ul, .s-3 > ul {
+    width: 100%;
+    background: #F5F5F5;
+    color: #999;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    display: box;
+    -webkit-box-orient: horizontal;
+    -ms-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    box-orient: horizontal;
+}
+
+.s-2 > ul > li, .s-3 > ul > li {
+    -webkit-box-flex: 1;
+    -ms-box-flex: 1;
+    -moz-box-flex: 1;
+    box-flex: 1;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.s-2 > ul > .active, .s-3 > ul > .active {
+    background: #fff;
+    color: #333;
+}
+
+.price-item {
+    border-style: solid;
+    background: #00AAEE;
+    color: #fff;
+    border-width: 0 10px;
+}
+
+.price-num, .price-section, .price-item {
+    width: 100%;
+    text-align: center;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    display: box;
+    box-sizing: border-box;
+}
+
+.price-section {
+    margin: 0;
+}
+
+.price-section > li:first-child{
+    text-align: left;
+    padding-left: 2%;
+}
+
+.price-section > li:nth-child(2){
+    padding-right: 10%;
+}
+
+.price-section > li:last-child{
+    text-align: right;
+    padding-right: 2%;
+}
+
+.price-item > li, .price-num > li, .price-section > li {
+    position: relative;
+    -webkit-box-flex: 1;
+    -ms-box-flex: 1;
+    -moz-box-flex: 1;
+    box-flex: 1;
+    padding: 5px 0;
+    font-size: 86%;
+}
+
+.price-section > .dealer_low_buy_price {
+    padding-left: 10px;
+    text-align: left;
+}
+
+.price-section > .individual_low_sold_price {
+    text-align: left;
+    padding-left: 20px;
+}
+
+.price-section > .dealer_low_sold_price {
+    text-align: right;
+    padding-right: 20px;
+}
+
+.price-section > .dealer_high_sold_price {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.price-item > li > div {
+    position: absolute;
+    color: #999;
+    top: 30px;
+}
+
+.price-item > li > span {
+    display: block;
+    width: 100%;
+    border-right: 1px solid #fff;
+}
+
+.price-item > li:last-of-type > span {
+    border: none;
+}
+
+.price-item > li:nth-of-type(2) > div:nth-of-type(2) {
+    right: 0;
+}
+
+.price-item > li:nth-of-type(3) > div {
+    right: 0;
+}
+
+.price-arrow {
+    width: 12px;
+    height: 5px;
+    display: inline-block;
+    background: url("../img/price_arrow.png") no-repeat;
+    background-size: cover;
+}
+
+.price-num > li {
+    padding-bottom: 0;
+}
+
+.price-num > li > div:first-child {
+    margin-top: 15px;
+}
+
+.s-2 {
+    margin-bottom: 20px;
+}
+
+.s-5 > div > input, .s-5 > div > span {
+    font-size: 120%;
+    border: 1px solid #f60;
+    padding: 10px 0 10px 10px;
+    border-radius: 5px 0 0 5px;
+    width: 30%;
+    height: 22px;
+}
+
+.s-5 > div > span {
+    position: relative;
+}
+
+.s-5 > div > input {
+    float: left;
+}
+
+.s-5 > div:first-of-type {
+    padding: 40px 10px 0;
+    position: relative;
+}
+
+.s-5 > div > button {
+    border: 1px solid #f60;
+    padding: 10px;
+    height: 44px;
+    background: #f60;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    float: left;
+    width: 18%;
+    margin-left: -5px;
+}
+
+.s-5 > div > span {
+    border-radius: 5px;
+    display: inline-block;
+    float: right;
+    border-color: #e6e6e6;
+    color: #f60;
+}
+
+.s-5 > div > span:before {
+    content: "出手概率（%）";
+    display: block;
+    position: absolute;
+    color: #999;
+    font-size: 12px;
+    top: -24px;
+    left: 0;
+}
+
+.s-5 > div:first-of-type > i {
+    position: absolute;
+    left: 10px;
+    top: 17px;
+    font-size: 12px;
+    color: #999;
+}
+
+.s-5 > div:nth-of-type(2) {
+    color: #f60;
+    padding: 10px 10px 20px;
+    font-size: 12px;
+}
+
+.s-5 > div:nth-of-type(2) > img {
+    height: 14px;
+    margin: -2px 5px 0 0;
+}
+
+.s-6 > div {
+    padding: 10px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+
+.s-6 > div > .top > strong {
+    display: inline-block;
+    width: 75%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    float: left;
+}
+
+.s-6 > div > .top > span {
+    color: #f60;
+    float: right;
+}
+
+.s-6 > div > div {
+    margin: 5px 0;
+}
+
+.s-6 > div > .bot {
+    font-size: 86%;
+    color: #999;
+}
+
+.s-6 > div > .bot > span:not(:last-of-type) {
+    margin-right: 12px;
+    float: left;
+}
+
+.s-6 > div > .bot > span:last-of-type {
+    float: right;
+}
+
+.s-4 > span, .s-3 > span {
+    display: block;
+    padding: 10px;
+    font-size: 86%;
+    color: #999;
+}
+
+.s-3 > div, .s-2 > div {
+    display: none;
+}
+
+.s-3 > .active, .s-2 > .active {
+    display: block;
+}
+
+.fixed {
+    position: fixed;
+    background: #fff;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 998;
+    border-bottom: 1px solid #e6e6e6;
+    min-width: 320px;
+}
+
+.fixed > div {
+    float: right;
+    padding-left: 5px;
+    width: 80%;
+}
+
+.fixed strong {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.fixed > div > span {
+    color: #999;
+    font-size: 86%;
+}
+
+.fixed > div > span > i {
+    color: #0ae;
+}
+
+.fixed > img {
+    height: 40px;
+    float: left;
+}
+
+#recent-price .label2 {
+    font-size: 16px;
+    text-align: center;
+    line-height: 20px;
+}
+
+.s-blips > ul > li {
+    text-align: center;
+    width: 33.33%;
+    padding: 10px 0;
+    float: left;
+    box-sizing: border-box;
+}
+
+.s-blips i {
+    width: 37px;
+    height: 24px;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+.color {
+    font-size: 86%;
+    color: #666;
+    display: inline-block;
+    position: relative;
+}
+
+.est-bg {
+    background: #f60;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+    min-width: 320px;
+}
+
+.est-bg > a {
+    display: block;
+    padding: 10px 0;
+    color: #FFFFFF;
+}
+.est-bg > a:active {   
+    color: #FFFFFF;
+}
+
+.car-attr {
+    display: block;
+    color: #666 !important;
+}
+
+s {
+    text-decoration: line-through;
+}
+
+.no_history_info {
+    text-align: center;
+    font-size: 18px;
+    color: #f60;
+    padding: 15px 0;
+}
+
+.fix-bottom-cover{
+    height: 47px;
+    width: 100%;
+}
+
+footer {
+    visibility: hidden;
+}
+
+@media screen and (min-device-width: 360px) {
+    .price-section > .individual_low_sold_price {
+        padding-left: 30px;
+    }
+
+    .price-section > .dealer_low_sold_price {
+        padding-right: 30px;
+    }
+}
+
+@media screen and (min-device-width: 414px) {
+    .price-section > .individual_low_sold_price {
+        padding-left: 35px;
+    }
+
+    .price-section > .dealer_low_sold_price {
+        padding-right: 35px;
+    }
+}
