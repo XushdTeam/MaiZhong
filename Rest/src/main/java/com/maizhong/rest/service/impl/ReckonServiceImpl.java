@@ -994,8 +994,24 @@ public class ReckonServiceImpl implements ReckonService {
             orderDTO.setOrderNumber(String.valueOf(orders.getOrderNumber()));//订单编号
             orderDTO.setUserId(String.valueOf(orders.getUserId()));//用户Id
             Model model = modelMapper.selectByPrimaryKey(orders.getModelId());//车型对象
-            //System.out.println(model.getSeriesId());
-            //System.out.println(model.getModelId());
+            //先从缓存获取相关订单信息  如果缓存有，插入数据库，没有则跳过
+
+            if (model==null){
+                String car_model = jedisClient.hget("CAR_MODEL", orders.getModelId() + "");
+                if (StringUtils.isNotBlank(car_model)){
+                    model = JsonUtils.jsonToPojo(car_model, Model.class);
+                    try {
+                        modelMapper.insert(model);
+                    } catch (Exception e) {
+                        continue;
+                    }
+
+                }else {
+                    continue;
+                }
+            }
+
+
             Series series = seriesMapper.selectByPrimaryKey(model.getSeriesId());
 
 
