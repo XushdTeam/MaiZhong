@@ -534,7 +534,7 @@
                 this.tab = param.id;
             },
             openMap:function(param){
-                $api.remove('bmapItem')
+                $api.rmStorage('bmapItem')
                 $api.setStorage('bmapItem',param.item)
                 window.location.href = '/m/bmap'
             },

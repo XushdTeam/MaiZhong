@@ -38,6 +38,11 @@
             padding-top: 2rem;
             opacity: 0.72;
         }
+        .header{
+            top: 10px;
+            position: absolute;
+            left: 10px;
+        }
     </style>
 </head>
 <body >
@@ -52,7 +57,9 @@
                 <div class="head-dsb" >
                     <p class="dsb-id">{{userInfo.login}}</p>
                 </div>
+                <div class="header"><a href="/m">返回首页</a></div>
             </div>
+
             <ul class="mui-table-view mui-table-view-chevron" style="margin-top: .9rem;">
                 <li class="mui-table-view-cell" v-tap="{methods:goto,url:'/m/order'}">
                     <a href="javascript:void(0)" class="mui-navigate-right iconfont icon-manageorder"> 我的订单</a>

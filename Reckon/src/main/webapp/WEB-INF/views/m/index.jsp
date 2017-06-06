@@ -90,12 +90,13 @@
     </style>
 </head>
 <body>
+<div id="app">
 <div style="background: url(/resources/wap/image/t_banner.jpg) no-repeat; height: 3.5rem; background-size:100% ;"
-     id="t_banner">
+     id="t_banner" v-tap="{methods:goto,url:'/app/download'}" >
     <span style=" padding: 1.3rem 2rem; font-size:1.2rem;color: #666;"
           onclick="javascript:document.getElementById('t_banner').style.display='none'">X</span>
 </div>
-<div id="app">
+
 <header id="header" class="mui-bar mui-bar-transparent">
     <h1 class="mui-title mui-ti"><img src="/resources/wap/image/logo.png" width="120rem">
         <i class="mui-icon mui-icon-contact mui-icon-icon-contact-filled mui-hed" v-tap="{methods:goto,url:'/m/my'}"></i>
@@ -140,8 +141,8 @@
                         <dd v-for="car in hotdeal">
                             <a class="icon-half">
                                 <img :src="car.img"  :data-img='car.img'
-                                     v-tap="{methods:goto,model:car}">
-                                <h4 v-tap="{methods:goto,model:car}" class="mui-ellipsis-2">{{car.title}}</h4>
+                                     v-tap="{methods:selectCarDeal,model:car}">
+                                <h4 v-tap="{methods:selectCarDeal,model:car}" class="mui-ellipsis-2">{{car.title}}</h4>
                                 <span class="data" v-tap="{methods:selectCarDeal,model:car}">{{car.param}}</span>
                                 <div class="price-wrap" v-tap="{methods:selectCarDeal,model:car}">
                                     ￥<strong class="price" style="border-top: none;">{{car.price}}</strong>
@@ -190,7 +191,7 @@
         </div>
 
         <div class="mui-foot">
-            <p><a href="#"><span>下载APP </span> </a> &nbsp;&nbsp;&nbsp;<a href="#"><span> 服务保障</span></a></p>
+            <p><a href="/app/download"><span>下载APP </span> </a> &nbsp;&nbsp;&nbsp;<a href="/activity/1"><span> 服务保障</span></a></p>
 
         </div>
     </div>
@@ -216,11 +217,13 @@
             goto: function (param) {
                 window.location = param.url;
             },hotbrandM:function(param) {
-                $api.remove('hotbrandItem')
+                $api.rmStorage('hotbrandItem')
+                $api.rmStorage('model')
                 $api.setStorage('hotbrandItem',param.model)
                 window.location.href = '/m/series/'+param.model.brandId
 
             },hotseriesM:function(param){
+                $api.rmStorage('model')
                 window.location.href = "/m/model/"+param.model.seriesId;
             },gotosale:function(param){
                 $api.rmStorage('model');
