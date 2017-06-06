@@ -63,4 +63,6 @@ public interface ReckonService {
     JsonResult testUploadOss(String json);
 
     JsonResult getDocById(long docId);
+
+    JsonResult getSaleGZDetail(String guzhiKey, String otherKey, long phone);
 }

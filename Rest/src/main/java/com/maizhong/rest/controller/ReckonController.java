@@ -199,6 +199,22 @@ public class ReckonController {
     }
 
     /**
+     * 近准估值 带估值车辆 信息
+     * @param guzhiKey
+     * @param otherKey
+     * @param phone
+     * @return
+     */
+    @RequestMapping(value = "/getSaleGZDT/{guzhiKey:.+}/{otherKey}/{phone}")
+    @ResponseBody
+    public JsonResult getSaleGZDetail(@PathVariable String guzhiKey,
+                                      @PathVariable String otherKey,
+                                      @PathVariable long phone){
+        JsonResult result = reckonService.getSaleGZDetail(guzhiKey, otherKey, phone);
+        return result;
+    }
+
+    /**
      * 从缓存获取估值信息
      *
      * @return
