@@ -53,9 +53,31 @@
     </div>
 </div><!--top end-->
 
-
+<div class="can">
+    <dl>
+        <dt><img src="${data.seriesImg}?imageMogr2/thumbnail/x100" height="100" width="133"></dt>
+        <dd class="dd1">${data.modelName}</dd>
+        <dd><span>城市 | ${data.city}</span>
+            <span>上牌 | ${data.regdate}</span>
+            <span>里程 | ${data.mail}万公里</span>
+            <span>手自动 | ${data.gearType}</span>
+            <span>排量 | ${data.liter}</span>
+            <span>颜色 | ${data.color}</span>
+        </dd>
+        <dd>
+            <span>过户次数 | ${data.gh}</span>
+            <span>最后过户时间 | ${data.ghtime}</span>
+            <span>交强险 | ${data.jqx}</span>
+            <span>年检 | ${data.nj}</span>
+            <span>性质 | ${data.xz}</span>
+            <span>使用 | ${data.method}</span>
+            <span>车况 | ${data.ck}</span>
+        </dd>
+    </dl>
+</div>
+<div class="clear"></div>
 <div class="jiage">
-    <div class="jias"><span>￥</span>${price}万</div>
+    <div class="jias"><span>￥</span>${data.salePrice}万</div>
     <div class="jzj">精准价</div>
     <div class="pos"></div>
     <a class="xieyi" href=" javascript:showoutc();"><input type="checkbox" name="1" checked>我已阅读并同意《悟空收车协议》</a>

@@ -4,7 +4,6 @@ import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.HttpClientUtil;
 import com.maizhong.common.utils.JsonUtils;
-import com.maizhong.pojo.Model;
 import com.maizhong.reckon.service.MindexService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,6 +17,8 @@ public class MindexServiceImpl implements MindexService {
 
     @Value("${WAP_URL}")
     private String WAP_URL;
+    @Value("${REST_URL}")
+    private String REST_URL;
 
 
     @Override
@@ -74,5 +75,80 @@ public class MindexServiceImpl implements MindexService {
 
 
 
+    }
+
+    @Override
+    public JsonResult getAgreement() {
+
+        try {
+
+            String res = HttpClientUtil.doGet(WAP_URL+"getOrderAgreement");
+            return JsonUtils.jsonToPojo(res,JsonResult.class);
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Override
+    public Object getMyorderList(String phone) {
+
+        try {
+
+            String res = HttpClientUtil.doGet(REST_URL+"getOrdersByPhone/"+phone);
+            JsonResult result = JsonUtils.jsonToPojo(res, JsonResult.class);
+            return result.getData();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+
+
+
+    }
+
+    @Override
+    public Object getSaleGZByOrder(String orderNum) {
+
+        try {
+            String res = HttpClientUtil.doGet(WAP_URL+"getSaleGZByOrder/"+orderNum);
+            JsonResult result = JsonUtils.jsonToPojo(res,JsonResult.class);
+            return result.getData();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return null;
+    }
+
+    @Override
+    public Object getHelpContent() {
+        try {
+            String res = HttpClientUtil.doGet(WAP_URL+"getHelpTitle");
+            JsonResult result = JsonUtils.jsonToPojo(res,JsonResult.class);
+            return result.getData();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Object getHelpDetail(String itemId) {
+
+        try{
+
+            String res = HttpClientUtil.doGet(WAP_URL+"getHelpContent/"+itemId);
+            JsonResult result = JsonUtils.jsonToPojo(res,JsonResult.class);
+            return result.getData();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

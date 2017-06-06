@@ -26,7 +26,7 @@ public interface IndexService {
 
     IndexDTO getIndexDTO(String param);
 
-    String saleguzhi(String guzhiKey, String otherKey, Long phone);
+    Object saleguzhi(String guzhiKey, String otherKey, Long phone);
 
     GuzhiDTO getYuyueInfo(String phone);
 

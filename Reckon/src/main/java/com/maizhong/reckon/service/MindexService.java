@@ -14,4 +14,14 @@ public interface MindexService {
     Object getModelById(String modelId);
 
     Object getGuzhi(String param);
+
+    JsonResult getAgreement();
+
+    Object getMyorderList(String phone);
+
+    Object getSaleGZByOrder(String orderNum);
+
+    Object getHelpContent();
+
+    Object getHelpDetail(String itemId);
 }
