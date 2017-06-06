@@ -32,4 +32,8 @@ public interface OrderService  {
     void exportExcel(HSSFWorkbook wb);
 
     void exportExcelOne(HSSFWorkbook wb, String orderId);
+
+    PageResult yancheList(PageSearchParam param);
+
+    PageResult shouhouList(PageSearchParam param);
 }

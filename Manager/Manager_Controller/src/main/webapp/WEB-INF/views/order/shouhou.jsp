@@ -20,7 +20,7 @@
 <body>
 <div class="main-wrap">
     <blockquote class="layui-elem-quote fhui-admin-main_hd">
-        <h2>订单审核</h2>
+        <h2>售后服务</h2>
     </blockquote>
     <div class="y-role">
         <div class="search-bar">
@@ -72,9 +72,9 @@
                                 class="fa fa-refresh"></i>刷新</a>
 
 
-                        <a class="layui-btn layui-btn-small  do-action" data-type="goHref" data-href="/orders/export">
+                      <%--  <a class="layui-btn layui-btn-small  do-action" data-type="goHref" data-href="/orders/export">
                             <i class="icon-edit  fa fa-file-excel-o"></i>导出EXCEL
-                        </a>
+                        </a>--%>
                     </div>
                 </div>
             </div>
@@ -145,10 +145,6 @@
                                onclick="openOrders('${handleUrl}/{{item.orderId}}')"><i
                                     class="icon-edit fa fa-pencil-square-o"></i>编辑</a>
 
-                            <%--<a class="layui-btn layui-btn-small do-action" data-type="doAddEdit" id="editOrder"
-                               data-href="${handleUrl}/{{item.orderId}}"><i
-                                    class="icon-edit fa fa-pencil-square-o"></i>编辑</a>--%>
-
                             <a class="layui-btn layui-btn-small layui-btn-danger do-action" data-type="doDelete"
                                data-text="确定删除<span class=red>{{ item.modelName }}</span>吗？"
                                data-href="${deleteUrl}/{{item.orderId}}"><i
@@ -181,6 +177,7 @@
             layui.pagelist.basePagingInit(8);
         });
     </script>
+
     <script type="text/javascript">
 
         layui.use(['layer', 'tab'], function () { //独立版的layer无需执行这一句
@@ -188,73 +185,7 @@
 
             var tab = layui.tab({elem: '.layui-tab-card'});
 
-            var websocket = null;
-            //判断当前浏览器是否支持WebSocket
-            if ('WebSocket' in window) {
-              /*  websocket = new WebSocket("ws://core.maizhongcar.com/websocket");*/
-                websocket = new WebSocket("ws://192.168.2.111:8085/websocket");
-            }
-            else {
-                alert('当前浏览器 不支持订单监控，请更换浏览器')
-            }
 
-            //连接发生错误的回调方法
-            websocket.onerror = function () {
-                setMessageInnerHTML("订单监控连接失败，请稍后刷新重试或更换浏览器");
-            };
-
-            //接收到消息的回调方法
-            websocket.onmessage = function (event) {
-                setMessageInnerHTML(event.data);
-            }
-
-            //连接关闭的回调方法
-            websocket.onclose = function () {
-                setMessageInnerHTML("连接关闭");
-            }
-
-            //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
-            window.onbeforeunload = function () {
-                closeWebSocket();
-            }
-
-            //将消息显示在网页上
-            function setMessageInnerHTML(innerHTML) {
-                if (innerHTML && innerHTML != '连接关闭') {
-                    $('#chatAudio')[0].play(); //播放声音
-                    var dv_num = 0;
-                    $('.panel-htop').each(function(){
-                        dv_num +=1;
-                    });
-                    var turnLeft=0;
-                    var lines=Math.floor(dv_num / 4);
-                    if(lines>0){
-                        turnLeft=280*lines;
-                    }
-
-                    $.messager.show({
-                        title: '您有新订单了！',
-                        msg: innerHTML,
-                        width:280,
-                        height:160,
-                        timeout:0,
-                        showType: 'show(fast)',
-                        draggable:true,
-                        style:{
-                            right:turnLeft,
-                            left:'',
-                            top:document.body.scrollTop+document.documentElement.scrollTop+160*(dv_num%4),
-                            bottom:''
-                        }
-                    });
-                }
-                ;
-            }
-
-            //关闭WebSocket连接
-            function closeWebSocket() {
-                websocket.close();
-            }
         });
 
         function openOrders(href) {

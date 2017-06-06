@@ -83,6 +83,91 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
+
+    /**
+     *获取需要评估师验车的订单列表
+     * @param param
+     * @return
+     */
+    @Override
+    public PageResult yancheList(PageSearchParam param) {
+
+        OrdersExample example = new OrdersExample();
+        OrdersExample.Criteria criteria = example.createCriteria();
+        String status = param.getFiled("status");
+        if (StringUtils.isNotBlank(status)) {
+            try {
+                criteria.andStatusEqualTo(Integer.valueOf(status));
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        String orderNumber = param.getFiled("orderNumber");
+
+        if (StringUtils.isNotBlank(orderNumber)) {
+            try {
+                criteria.andOrderNumberEqualTo(Long.valueOf(orderNumber));
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+
+        String userId = param.getFiled("user_id");
+        if (StringUtils.isNotBlank(userId)) {
+            try {
+                criteria.andUserIdEqualTo(Long.valueOf(userId));
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        criteria.andDelflagEqualTo(0);
+        criteria.andStatusEqualTo(1);
+        example.setOrderByClause("order_id DESC");
+        PageHelper.startPage(param.getPageIndex(), param.getPageSize());
+        List<Orders> ordersList = ordersMapper.selectByExample(example);
+        PageInfo pageInfo = new PageInfo(ordersList);
+        return new PageResult(pageInfo);
+    }
+
+    /**
+     * 售后订单
+     * @param param
+     * @return
+     */
+    @Override
+    public PageResult shouhouList(PageSearchParam param) {
+
+        OrdersExample example = new OrdersExample();
+        OrdersExample.Criteria criteria = example.createCriteria();
+
+        String orderNumber = param.getFiled("orderNumber");
+
+        if (StringUtils.isNotBlank(orderNumber)) {
+            try {
+                criteria.andOrderNumberEqualTo(Long.valueOf(orderNumber));
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+
+        String userId = param.getFiled("user_id");
+        if (StringUtils.isNotBlank(userId)) {
+            try {
+                criteria.andUserIdEqualTo(Long.valueOf(userId));
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        criteria.andDelflagEqualTo(0);
+        criteria.andStatusGreaterThan(1);
+        example.setOrderByClause("order_id DESC");
+        PageHelper.startPage(param.getPageIndex(), param.getPageSize());
+        List<Orders> ordersList = ordersMapper.selectByExample(example);
+        PageInfo pageInfo = new PageInfo(ordersList);
+        return new PageResult(pageInfo);
+    }
+
+
     /**
      * 获取订单
      *
@@ -819,6 +904,7 @@ public class OrderServiceImpl implements OrderService {
 
 
     }
+
 
 
 }

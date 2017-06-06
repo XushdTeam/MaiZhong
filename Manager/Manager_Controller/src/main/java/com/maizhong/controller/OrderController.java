@@ -59,7 +59,37 @@ public class OrderController {
 
 
     /**
-     * 订单管理
+     * 评估师验车
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/yanche", method = RequestMethod.GET)
+    public String yanche(Model model) {
+        model.addAttribute("baseUrl", "/yanche");
+        model.addAttribute("listUrl", "/orders/yanche");
+        model.addAttribute("handleUrl", "/yanche/handle");
+        model.addAttribute("deleteUrl", "/orders/delete");
+        return "/order/yanche";
+    }
+
+    /**
+     * 售后服务
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/shouhou", method = RequestMethod.GET)
+    public String shouhou(Model model) {
+        model.addAttribute("baseUrl", "/shouhou");
+        model.addAttribute("listUrl", "/orders/shouhou");
+        model.addAttribute("handleUrl", "/shouhou/handle");
+        model.addAttribute("deleteUrl", "/orders/delete");
+        return "/order/shouhou";
+    }
+
+
+
+    /**
+     * 订单管理---完整订单
      *
      * @param param
      * @return
@@ -73,7 +103,7 @@ public class OrderController {
     }
 
     /**
-     * 订单管理
+     * 订单管理--不完整订单
      *
      * @param param
      * @return
@@ -87,12 +117,37 @@ public class OrderController {
     }
 
     /**
-     * 订单修改
-     *
-     * @param id
-     * @param model
+     * 对需要验车的完整订单进行查询--为评估师验车做准备
+     * @param param
      * @return
      */
+    @ControllerLog(module = "订单管理", methods = "验车信息")
+    @RequestMapping(value = "/orders/yanche")
+    @ResponseBody
+    public JsonResult yancheList(PageSearchParam param) {
+        PageResult result = orderService.yancheList(param);
+        return JsonResult.OK(result);
+    }
+
+    /**
+     * 对需要售后的订单进行显示
+     * @param param
+     * @return
+     */
+    @ControllerLog(module = "订单管理", methods = "售后信息")
+    @RequestMapping(value = "/orders/shouhou")
+    @ResponseBody
+    public JsonResult shouhouList(PageSearchParam param) {
+        PageResult result = orderService.shouhouList(param);
+        return JsonResult.OK(result);
+    }
+    /**
+     * 订单修改
+     *
+    * @param id
+    * @param model
+    * @return
+            */
     @RequestMapping(value = "/orders/handle/{id}")
     public String handle(@PathVariable String id, Model model) {
 
@@ -105,6 +160,47 @@ public class OrderController {
         model.addAttribute("saveUrl", "/orders/update");
         return "order/orders_setting";
     }
+
+    /**
+     * 订单--验车
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/yanche/handle/{id}")
+    public String yanceHandle(@PathVariable String id,Model model){
+        model.addAttribute("baseUrl", "/yanche/handle/" + id);
+        Orders orders = orderService.getOrdersById(Long.valueOf(id));
+        OrderInfo orderInfo = orderService.getOrdersInfo(orders.getOrderNumber());
+        model.addAttribute("orders", orders);
+        model.addAttribute("orderInfo", orderInfo);
+        model.addAttribute("handle", "订单管理/验车信息");
+        model.addAttribute("saveUrl", "/orders/update");
+        return "order/yanche_setting";
+
+    }
+
+
+    /**
+     * 订单售后
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/shouhou/handle/{id}")
+    public String shouhouHandle(@PathVariable String id,Model model){
+        model.addAttribute("baseUrl", "/shouhou/handle/" + id);
+        Orders orders = orderService.getOrdersById(Long.valueOf(id));
+        OrderInfo orderInfo = orderService.getOrdersInfo(orders.getOrderNumber());
+        model.addAttribute("orders", orders);
+        model.addAttribute("orderInfo", orderInfo);
+        model.addAttribute("handle", "订单管理/售后服务");
+        model.addAttribute("saveUrl", "/orders/update");
+        return "order/shouhou_setting";
+
+    }
+
+
 
     /**
      * 订单修改
@@ -193,19 +289,17 @@ public class OrderController {
         String fileName = fileName1.substring(0, 10) + "-订单列表.xls";
         fileName = URLEncoder.encode(fileName, "UTF-8");
         resp.addHeader("Content-Disposition", "attachment;filename=" + fileName);
-       orderService.exportExcel(wb);
+        orderService.exportExcel(wb);
 
         try {
             OutputStream out = resp.getOutputStream();
             wb.write(out);
             out.close();
-        }  catch (Exception e1) {
+        } catch (Exception e1) {
             System.out.println("=====导出excel异常====");
         }
 
     }
-
-
 
 
     /**
@@ -213,7 +307,7 @@ public class OrderController {
      */
     @RequestMapping(value = "/orders/exportOne/{orderId}")
     @ResponseBody
-    public void exportExcelOne(HttpServletRequest request, HttpServletResponse resp,@PathVariable("orderId") String orderId) throws UnsupportedEncodingException {
+    public void exportExcelOne(HttpServletRequest request, HttpServletResponse resp, @PathVariable("orderId") String orderId) throws UnsupportedEncodingException {
 
         HSSFWorkbook wb = new HSSFWorkbook();
         request.setCharacterEncoding("UTF-8");
@@ -223,13 +317,13 @@ public class OrderController {
         String fileName = fileName1.substring(0, 10) + "-订单详情.xls";
         fileName = URLEncoder.encode(fileName, "UTF-8");
         resp.addHeader("Content-Disposition", "attachment;filename=" + fileName);
-        orderService.exportExcelOne(wb,orderId);
+        orderService.exportExcelOne(wb, orderId);
 
         try {
             OutputStream out = resp.getOutputStream();
             wb.write(out);
             out.close();
-        }  catch (Exception e1) {
+        } catch (Exception e1) {
             System.out.println("=====导出excel异常====");
         }
 
