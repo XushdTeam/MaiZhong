@@ -261,8 +261,8 @@
             dealData: []
         },
         methods: {
-            sale: function () {
-                openWin('precise', './precise.html', {child: true})
+            sale:function(){
+                window.location.href = "/m/precise"
             }
         }
     })

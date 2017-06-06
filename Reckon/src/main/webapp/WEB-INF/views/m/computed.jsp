@@ -167,10 +167,15 @@
                 }
             },
             cityChange:function(param){
+
                 this.city = param.item
                 $api.dom("#modal").classList.remove('mui-active');
             },
             chooseTime: function () {
+                if(!this.model.model_id){
+                    mui.toast("请选择车型")
+                    return
+                }
                 $api.dom("#modal2").classList.add('mui-active');
             },
             changeYear:function(param){
@@ -188,7 +193,10 @@
                 toggleMenu();
             },
             submit: function () {
-
+                var input = document.querySelectorAll('input');
+                $api.each(input,function(i,j){
+                    j.blur();
+                })
                 if (!vm.model.model_id) {
                     mui.toast('请选择品牌和车型');
                     return;
@@ -208,14 +216,24 @@
                 var param = vm.city.prov_id + "c" + vm.city.city_id + "m" + vm.model.model_id
                         + "r" + vm.time.value + "g" + vm.mile;
                 window.location.href = "/m/guzhi/"+param;
-
+                $api.rmStorage('model');
+                $api.setStorage('model',this.model);
+                $api.rmStorage('city');
+                $api.setStorage('city',this.city);
+                $api.rmStorage('mile');
+                $api.setStorage('mile',this.mile);
+                $api.rmStorage('time');
+                $api.setStorage('time',this.time);
             }
         }
     })
 
     mui.ready(function () {
         var bdata = ${model};
-        if (bdata)vm.model = bdata
+        if (bdata.model_id){
+            vm.model = bdata
+            vm.yearList = getYear(bdata.min_reg_year,bdata.max_reg_year);
+        }
         loadJScript()
         var list = document.getElementById('list');
         //calc hieght
@@ -223,7 +241,7 @@
         //create
         window.indexedList = new mui.IndexedList(list);
 
-        vm.yearList = getYear(bdata.min_reg_year,bdata.max_reg_year);
+
     });
 
 

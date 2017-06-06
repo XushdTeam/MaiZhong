@@ -95,12 +95,13 @@
     <span style=" padding: 1.3rem 2rem; font-size:1.2rem;color: #666;"
           onclick="javascript:document.getElementById('t_banner').style.display='none'">X</span>
 </div>
+<div id="app">
 <header id="header" class="mui-bar mui-bar-transparent">
     <h1 class="mui-title mui-ti"><img src="/resources/wap/image/logo.png" width="120rem">
-        <i class="mui-icon mui-icon-contact mui-icon-icon-contact-filled mui-hed" v-tap="{methods:goto,url:'/m/persion'}"></i>
+        <i class="mui-icon mui-icon-contact mui-icon-icon-contact-filled mui-hed" v-tap="{methods:goto,url:'/m/my'}"></i>
     </h1>
 </header>
-<div id="app">
+
     <div id="body">
         <div id="slider" class="mui-slider">
             <div class="mui-slider-group mui-slider-loop">
@@ -113,13 +114,13 @@
         </div>
         <nav class="deal-bar">
             <a class="buy-car-btn iconfont icon-awcompute" v-tap="{methods:goto,url:'/m/computed'}">免费估值</a>
-            <a class="sell-car-btn iconfont icon-vipsale" v-tap="{methods:goto,url:'/m/sale'}">我要卖车</a>
+            <a class="sell-car-btn iconfont icon-vipsale" v-tap="{methods:gotosale,url:'/m/precise'}">我要卖车</a>
         </nav>
         <div class="quick-wrap wrap newly-add">
             <a class="mores" v-tap="{methods:goto,url:'/m/allbrand'}">更多 &gt;</a>
             <h2>热收车型</h2>
             <nav class="brands">
-                <a v-for="(brand,index) in hotbrand" v-tap="{methods:goto,model:brand}">
+                <a v-for="(brand,index) in hotbrand" v-tap="{methods:hotbrandM,model:brand}">
                     <img :src="brand.largeLogo">
                     {{brand.brand}}
                 </a>
@@ -128,7 +129,7 @@
         <div class="quick-wrap wrap newly-add">
             <h2>热收车系</h2>
             <nav class="price" v-for="group in hotseries">
-                <a v-for="item in group.child " v-tap="{methods:goto,model:item}">{{item.seriesName}}</a>
+                <a v-for="item in group.child " v-tap="{methods:hotseriesM,model:item}">{{item.seriesName}}</a>
             </nav>
         </div>
         <div class="quick-wrap wrap newly-add">
@@ -166,7 +167,7 @@
                             </div>
                             <div class="mui-card-footer" style="height: 53px;">{{talk.time}}{{talk.method}}<span
                                     style="color: #F60;"
-                                    v-tap="{methods:goto,modelId:talk.modelId}">{{talk.car}}</span></div>
+                                    v-tap="{methods:gototalk,modelId:talk.modelId}">{{talk.car}}</span></div>
                         </div>
                     </div>
                 </div>
@@ -177,9 +178,9 @@
             <dl class="knowledge-list">
                 <dd v-for="(wz,index) in wz">
                     <a>
-                        <img :src="wz.img" onload="LoadImage(this)" :data-img='wz.img'
-                             v-tap="{methods:wzcontent,model:wz}">
-                        <h4 v-tap="{methods:wzcontent,model:wz}">{{wz.title}}</h4>
+                        <img :src="wz.img"
+                             v-tap="{methods:goto,url:wz.url}">
+                        <h4 v-tap="{methods:goto,url:wz.url}">{{wz.title}}</h4>
                         <p class="mui-ellipsis-2" v-tap="{methods:goto,url:wz.url}">
                             {{wz.content}}
                         </p>
@@ -214,6 +215,25 @@
         methods: {
             goto: function (param) {
                 window.location = param.url;
+            },hotbrandM:function(param) {
+                $api.remove('hotbrandItem')
+                $api.setStorage('hotbrandItem',param.model)
+                window.location.href = '/m/series/'+param.model.brandId
+
+            },hotseriesM:function(param){
+                window.location.href = "/m/model/"+param.model.seriesId;
+            },gotosale:function(param){
+                $api.rmStorage('model');
+                $api.rmStorage('city');
+                $api.rmStorage('mile');
+                $api.rmStorage('time');
+                window.location = param.url;
+            },gototalk:function(param){
+                window.location = '/m/computed/'+param.modelId;
+
+            },selectCarDeal:function(param){
+                window.location = '/m/computed/'+param.model.mid;
+
             },getData: function () {
                 async.parallel([
                     function (cb) {

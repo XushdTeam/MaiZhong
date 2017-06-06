@@ -7,9 +7,9 @@
     var isAndroid = (/android/gi).test(navigator.appVersion);
     var uzStorage = function(){
         var ls = window.localStorage;
-        if(isAndroid){
-           ls = os.localStorage();
-        }
+        // if(isAndroid){
+        //    ls = os.localStorage();
+        // }
         return ls;
     };
     function parseArguments(url, data, fnSuc, dataType) {

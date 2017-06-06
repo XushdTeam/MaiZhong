@@ -231,9 +231,9 @@ public class IndexController {
         String guzhiKey = arry[0];
         String otherKey = arry[1];
 
-        String price = indexService.saleguzhi(guzhiKey,otherKey, Long.valueOf(phone));
+        Object guzhiObj = indexService.saleguzhi(guzhiKey,otherKey, Long.valueOf(phone));
 
-        model.addAttribute("price",price);
+        model.addAttribute("data",guzhiObj);
 
         return "jiage";
     }

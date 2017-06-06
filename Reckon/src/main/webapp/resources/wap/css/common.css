@@ -188,6 +188,7 @@ a:active{
     text-align: center;
     display: block;
     border-radius: 6px;
+    margin-bottom: 20px;
 }
 .km {
     margin-right: 0.2rem;
@@ -383,8 +384,8 @@ strong {
 
 
 .bgs{ background: #efeff4 !important; height: 700px; overflow: hidden;}
-.mui-color{text-align: center;border: none;color: #666; height: 2.0rem;width: 30%;
-border: 1px solid #e5e5e5; float: right; position: absolute; right: 0; bottom: 1rem;}
+.mui-color{text-align: center;border: none;color: #666; height: 2.0rem;width: 45%;
+border: 1px solid #e5e5e5; float: right; position: absolute; right: 1rem; bottom: 1rem;}
 .butss { line-height: 2.7rem; font-size: 1.2rem; width: 95%; margin: 5rem auto 1.5rem; display: block; 
 background:rgba(255,102,0,0.5);color: #fff; 
 border: 0; border: 1px solid #f60;}

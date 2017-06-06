@@ -175,7 +175,7 @@
             if(e){
                 console.log(JSON.stringify(e))
             }else{
-                console.log(JSON.stringify(r))
+
                 var modelYear = 9999,liter=0,gear=0;
                 var newList = [],liters=[],gears=[];
                 $api.each(r.data,function(j,i){

@@ -1495,5 +1495,226 @@ public class ReckonServiceImpl implements ReckonService {
 
 
     }
+
+    @Override
+    public JsonResult getSaleGZDetail(String guzhiKey, String otherKey, long phone) {
+        JsonResult guzhi = getGuzhi(guzhiKey);
+        GuzhiDTO guzhiDTO = JsonUtils.jsonToPojo(JSON.toJSONString(guzhi.getData()), GuzhiDTO.class);
+        String[] otherArry = otherKey.split("o|j|h|t|x|n|d|k");
+
+        String ck = otherArry[7], color = otherArry[0], jqx = otherArry[1],
+                gh = otherArry[2], ghtime = otherArry[3], xz = otherArry[4],
+                nj = otherArry[5], method = otherArry[6];
+        BigDecimal basePrice;
+        if (StringUtils.equals("1", ck)) {
+            basePrice = new BigDecimal(guzhiDTO.getPriceA_min());
+            guzhiDTO.setCk("车况优秀,好没有任何故障");
+        } else if (StringUtils.equals("2", ck)) {
+            guzhiDTO.setCk("车况良好,有过少量剐蹭或钣金");
+            basePrice = new BigDecimal(guzhiDTO.getPriceB_min());
+        } else if (StringUtils.equals("3", ck)) {
+            guzhiDTO.setCk("车况一般,有过前后轻碰事故");
+            basePrice = new BigDecimal(guzhiDTO.getPriceC_min());
+        } else {
+            guzhiDTO.setCk("车况较差,有发生过伤及主体框架的碰撞或较大事故");
+            basePrice = new BigDecimal(guzhiDTO.getPriceD_min());
+        }
+        //颜色
+        switch (color) {
+            case "1":
+                guzhiDTO.setColor("米色");
+                break;
+            case "2":
+                guzhiDTO.setColor("白色");
+                break;
+            case "3":
+                guzhiDTO.setColor("灰色");
+                break;
+            case "4":
+                guzhiDTO.setColor("红色");
+                break;
+            case "5":
+                guzhiDTO.setColor("棕色");
+                break;
+            case "6":
+                guzhiDTO.setColor("蓝色");
+                break;
+            case "7":
+                guzhiDTO.setColor("黄色");
+                break;
+            case "8":
+                guzhiDTO.setColor("黑色");
+                break;
+            case "9":
+                guzhiDTO.setColor("银色");
+                break;
+            case "10":
+                guzhiDTO.setColor("绿色");
+                break;
+            default:
+                guzhiDTO.setColor("其他颜色");
+                break;
+        }
+        //交强险
+        if (StringUtils.equals(jqx, "1")) {
+            guzhiDTO.setJqx("两个月以内");
+        } else {
+            guzhiDTO.setJqx("两个月以上");
+        }
+        //过户
+        if (StringUtils.equals(gh, "4")) {
+            guzhiDTO.setGh("0次");
+        } else if (StringUtils.equals(gh, "1")) {
+            guzhiDTO.setGh("1次");
+        } else if (StringUtils.equals(gh, "2")) {
+            guzhiDTO.setGh("2次");
+        } else {
+            guzhiDTO.setGh("3次及以上");
+        }
+        //过户时间
+        if (StringUtils.equals(ghtime, "1")) {
+            guzhiDTO.setGhtime("无过户");
+        } else if (StringUtils.equals(ghtime, "2")) {
+            guzhiDTO.setGhtime("六个月以内");
+        }else
+        {
+            guzhiDTO.setGhtime("六个月以上");
+        }
+        //性质
+        if (StringUtils.equals(xz, "1")) {
+            guzhiDTO.setXz("非营运");
+        } else {
+            guzhiDTO.setXz("租赁");
+        }
+        //年检
+        if (StringUtils.equals(nj, "1")) {
+            guzhiDTO.setNj("两个月以内");
+        } else {
+            guzhiDTO.setNj("两个月以上");
+        }
+        //使用方式
+        if (StringUtils.equals(method, "1")) {
+            guzhiDTO.setMethod("公司");
+        } else {
+            guzhiDTO.setMethod("个人");
+        }
+
+
+        String colorParam = jedisClient.hget("GZ_PARAM", "color");
+        if (StringUtils.isBlank(colorParam)) {
+
+            ParamsExample example = new ParamsExample();
+
+            List<Params> paramses = paramsMapper.selectByExample(example);
+
+            for (Params paramse : paramses) {
+                jedisClient.hset("GZ_PARAM", paramse.getId(), JSON.toJSONString(paramse));
+            }
+            colorParam = jedisClient.hget("GZ_PARAM", "color");
+        }
+
+
+        JSONObject colorObject = JSON.parseObject(colorParam);
+        String rate = colorObject.getString("p" + color);
+        //颜色影响*（不扣）
+        //basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
+
+        String jqxParam = jedisClient.hget("GZ_PARAM", "jqx");
+        JSONObject jqxObject = JSON.parseObject(jqxParam);
+        rate = jqxObject.getString("p" + jqx);
+        //交强险影响 减法
+        basePrice = basePrice.subtract(new BigDecimal(rate));
+        if (basePrice.compareTo(BigDecimal.ZERO) < 0) {
+            basePrice = BigDecimal.ZERO;
+        }
+
+        String ghParam = jedisClient.hget("GZ_PARAM", "gh");
+        JSONObject ghObject = JSON.parseObject(ghParam);
+        rate = ghObject.getString("p" + gh);
+        //过户次数影响
+        basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
+
+        //2017.5.27
+        //String ghtParam = jedisClient.hget("GZ_PARAM", "ghtime");
+        //JSONObject ghtObject = JSON.parseObject(ghtParam);
+        //rate = ghtObject.getString("p" + ghtime);
+        //过户时间影响 *（不扣）
+        //basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
+
+        String xzParam = jedisClient.hget("GZ_PARAM", "xz");
+        JSONObject xzObject = JSON.parseObject(xzParam);
+        rate = xzObject.getString("p" + xz);
+        //性质
+        basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
+
+        String njParam = jedisClient.hget("GZ_PARAM", "nj");
+        JSONObject njObject = JSON.parseObject(njParam);
+        rate = njObject.getString("p" + nj);
+        //年检 (减法)
+        basePrice = basePrice.subtract(new BigDecimal(rate));
+        if (basePrice.compareTo(BigDecimal.ZERO) < 0) {
+            basePrice = BigDecimal.ZERO;
+        }
+        String methodParam = jedisClient.hget("GZ_PARAM", "method");
+        JSONObject mObject = JSON.parseObject(methodParam);
+        rate = mObject.getString("p" + method);
+        //使用方式
+        basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
+
+        if (basePrice.compareTo(BigDecimal.ZERO) < 0) {
+            basePrice = BigDecimal.ZERO;
+        }
+        if (basePrice.compareTo(new BigDecimal(1))<0){
+            guzhiDTO.setSalePrice(basePrice.setScale(3, BigDecimal.ROUND_HALF_DOWN).toString());
+        }else{
+            guzhiDTO.setSalePrice(basePrice.setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+        }
+
+
+        OrdersExample example = new OrdersExample();
+        OrdersExample.Criteria criteria = example.createCriteria();
+        criteria.andUserIdEqualTo(phone).andModelIdEqualTo(Long.valueOf(guzhiDTO.getModelId()));
+        long l = ordersMapper.countByExample(example);
+        if (l == 0L) {
+            long orderNum = IDUtils.getOrderId();
+
+            Orders order = new Orders();
+            order.setOrderNumber(orderNum);
+            order.setUserId(phone);
+            order.setModelId(Long.valueOf(guzhiDTO.getModelId()));
+            order.setModelName(guzhiDTO.getModelName());
+            order.setReckonPrice(guzhiDTO.getSalePrice());
+            order.setDealPrice("");
+            order.setReckonTime(new Date());
+            order.setStatus(0);
+            order.setDelflag(0);
+            ordersMapper.insert(order);
+
+            OrderInfo orderInfo = new OrderInfo();
+            orderInfo.setOrderNumber(orderNum);
+            orderInfo.setModelId(Long.valueOf(guzhiDTO.getModelId()));
+            orderInfo.setRegDate(guzhiDTO.getRegdate());
+            //获取下单时间
+            guzhiDTO.setReckonTime(TimeUtils.getFormatDateTime2(new DateTime()));
+            guzhiDTO.setOrderNumber(orderNum);
+
+            orderInfo.setCityId(guzhiDTO.getCity());
+            orderInfo.setsKm(guzhiDTO.getMail());
+            orderInfo.setColor(color);
+            orderInfo.setJqx(jqx);
+            orderInfo.setNj(nj);
+            orderInfo.setXz(xz);
+            orderInfo.setGh(gh);
+            orderInfo.setGhtime(ghtime);
+            orderInfo.setMethod(method);
+            orderInfo.setCk(ck);
+            orderInfo.setDelflag(0);
+            orderInfoMapper.insert(orderInfo);
+
+            jedisClient.hset("ORDER_PHONE", phone + "", JSON.toJSONString(guzhiDTO));
+        }
+
+        return JsonResult.build(200, "", guzhiDTO);
+    }
 }
 

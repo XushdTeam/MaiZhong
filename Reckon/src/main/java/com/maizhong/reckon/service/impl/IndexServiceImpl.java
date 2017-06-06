@@ -274,11 +274,11 @@ public class IndexServiceImpl implements IndexService {
     }
 
     @Override
-    public String saleguzhi(String guzhiKey, String otherKey, Long phone) {
+    public Object saleguzhi(String guzhiKey, String otherKey, Long phone) {
 
         try {
-            String res = HttpClientUtil.doGet(RESTURL+"getSaleGZ/"+guzhiKey+"/"+otherKey+"/"+phone);
-            return JsonUtils.jsonToPojo(res,JsonResult.class).getData().toString();
+            String res = HttpClientUtil.doGet(RESTURL+"getSaleGZDT/"+guzhiKey+"/"+otherKey+"/"+phone);
+            return JsonUtils.jsonToPojo(res,JsonResult.class).getData();
         }catch (Exception e){
 
             e.printStackTrace();
