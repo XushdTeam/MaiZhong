@@ -1,0 +1,67 @@
+[{
+	"child": [{
+		"seriesName": "奥迪A4L",
+		"brandId": 1,
+		"seriesId": 1
+	},
+	{
+		"seriesName": "奥迪A6L",
+		"brandId": 1,
+		"seriesId": 3
+	},
+	{
+		"seriesName": "雅阁",
+		"brandId": 5,
+		"seriesId": 57
+	},
+	{
+		"seriesName": "GL8",
+		"brandId": 6,
+		"seriesId": 80
+	}]
+},
+{
+	"child": [{
+		"seriesName": "宝马3系",
+		"brandId": 7,
+		"seriesId": 89
+	},
+	{
+		"seriesName": "宝马5系",
+		"brandId": 7,
+		"seriesId": 90
+	},
+	{
+		"seriesName": "奔驰E级",
+		"brandId": 9,
+		"seriesId": 133
+	},
+	{
+		"seriesName": "奔驰C级",
+		"brandId": 9,
+		"seriesId": 134
+	}]
+},
+{
+	"child": [{
+		"seriesName": "朗逸",
+		"brandId": 25,
+		"seriesId": 311
+	},
+	{
+		"seriesName": "途观",
+		"brandId": 25,
+		"seriesId": 312
+	},
+	{
+		"seriesName": "帕萨特",
+		"brandId": 25,
+		"seriesId": 313
+	},
+	{
+		"seriesName": "速腾",
+		"brandId": 25,
+		"seriesId": 327
+	}]
+}
+]

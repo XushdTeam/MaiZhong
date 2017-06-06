@@ -35,7 +35,7 @@
         <div v-show="!loading" >
             <ul class="mui-table-view">
                 <li class="mui-table-view-cell mui-media">
-                    <img class="mui-media-object mui-pull-left" :src="model.largeLogo" onload="LoadImage(this)" :data-img='model.largeLogo' >
+                    <img class="mui-media-object mui-pull-left" :src="model.largeLogo" :data-img='model.largeLogo' >
                     <div class="mui-media-body" style="line-height: 42px;">
                         {{model.brand}}
                     </div>

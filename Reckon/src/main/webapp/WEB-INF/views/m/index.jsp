@@ -241,7 +241,7 @@
                 async.parallel([
                     function (cb) {
                         //轮播
-                        mui.getJSON('${OSS}/activity.json', function (d) {
+                        mui.getJSON('/resources/data/activity.json', function (d) {
                             vm.slideImg = d
                             setTimeout(function () {
                                 var slider = mui("#slider");
@@ -253,25 +253,25 @@
                         })
                     }, function (cb) {
                         //热收品牌
-                        mui.getJSON('${OSS}/hotbrand.json', function (d) {
+                        mui.getJSON('/resources/data/hotbrand.json', function (d) {
                             vm.hotbrand = d;
                             cb(null, 2)
                         });
                     }, function (cb) {
                         //热门车系
-                        mui.getJSON('${OSS}/hotseries.json', function (d) {
+                        mui.getJSON('/resources/data/hotseries.json', function (d) {
                             vm.hotseries = d;
                             cb(null, 3)
                         });
                     }, function (cb) {
                         //最近成交
-                        mui.getJSON('${OSS}/hotdeal.json', function (d) {
+                        mui.getJSON('/resources/data/hotdeal.json', function (d) {
                             vm.hotdeal = $api.shuffle(d);
                             cb(null, 4)
                         });
                     }, function (cb) {
                         //最新评论
-                        mui.getJSON('${OSS}/hottalk.json', function (d) {
+                        mui.getJSON('/resources/data/hottalk.json', function (d) {
                             $api.each(d, function (j, i) {
                                 i.img = '/resources/wap/image/user' + (j % 4 + 1) + '.svg';
                                 i.time = datemy(j);
@@ -288,7 +288,7 @@
                             cb(null, 5)
                         });
                     }, function (cb) {
-                        mui.getJSON('${OSS}/wz.json', function (d) {
+                        mui.getJSON('/resources/data/wz.json', function (d) {
                             vm.wz = d
                             cb(null, 6)
                         });
