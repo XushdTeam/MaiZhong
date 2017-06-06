@@ -83,9 +83,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
-
     /**
-     *获取需要评估师验车的订单列表
+     * 获取需要评估师验车的订单列表
+     *
      * @param param
      * @return
      */
@@ -131,6 +131,7 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 售后订单
+     *
      * @param param
      * @return
      */
@@ -404,9 +405,10 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public void exportExcel(HSSFWorkbook wb) {
-
-
-        List<Orders> ordersList = ordersMapper.selectByExample(null);
+        OrdersExample example=new OrdersExample();
+        OrdersExample.Criteria criteria = example.createCriteria();
+        criteria.andStatusNotEqualTo(0);
+        List<Orders> ordersList = ordersMapper.selectByExample(example);
         HSSFSheet sheet = wb.createSheet("订单记录");
         sheet.setDefaultRowHeight((short) (2 * 256));
 
@@ -546,12 +548,13 @@ public class OrderServiceImpl implements OrderService {
             row1.createCell(9).setCellValue(orders.getLinkPhone());//验车电话
 
             if (orders.getDealWay() != null) {
-                if (orders.getDealWay() == 1)
+                if (orders.getDealWay() == 1) {
                     row1.createCell(10).setCellValue("4S店验车");//验车方式
-            } else if (orders.getDealWay() == 2) {
-                row1.createCell(10).setCellValue("地铁站验车");//验车方式
-            } else if (orders.getDealWay() == 3) {
-                row1.createCell(10).setCellValue("上门验车");//验车方式
+                } else if (orders.getDealWay() == 2) {
+                    row1.createCell(10).setCellValue("地铁站验车");//验车方式
+                } else if (orders.getDealWay() == 3) {
+                    row1.createCell(10).setCellValue("上门验车");//验车方式
+                }
             }
 
 
@@ -756,8 +759,6 @@ public class OrderServiceImpl implements OrderService {
         cell.setCellStyle(style);
 
 
-
-
         OrderInfo orderInfo = getOrdersInfo(orders.getOrderNumber());
         cell = row1.createCell(0);
         cell.setCellValue(1);//序号
@@ -872,11 +873,11 @@ public class OrderServiceImpl implements OrderService {
         cell.setCellValue(orderInfo.getCk());//车况
         cell.setCellStyle(setBorder);
 
-        cell=row5.createCell(7);
+        cell = row5.createCell(7);
         cell.setCellStyle(setBorder);
         switch (orders.getStatus()) {
             case 0:
-               cell .setCellValue("未预约");
+                cell.setCellValue("未预约");
                 break;
             case 1:
                 cell.setCellValue("等待验收");
@@ -904,7 +905,6 @@ public class OrderServiceImpl implements OrderService {
 
 
     }
-
 
 
 }
