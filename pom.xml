@@ -15,6 +15,7 @@
         <module>Rest</module>
         <module>BRest</module>
         <module>Reckon</module>
+        <module>Auction</module>
     </modules>
 
     <packaging>pom</packaging>

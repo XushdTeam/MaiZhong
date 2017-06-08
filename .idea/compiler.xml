@@ -22,6 +22,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="Auction" />
         <module name="BRest" />
         <module name="Common" />
         <module name="Manager_Controller" />
@@ -35,6 +36,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.7">
+      <module name="Auction" target="1.7" />
       <module name="BRest" target="1.7" />
       <module name="Common" target="1.7" />
       <module name="dataSync" target="1.5" />
