@@ -372,17 +372,17 @@
             float: left;
             margin-right: 10px;
         }
-        .trade-type-info .select-shop .dealtime:after {
-            position: absolute;
-            right: 15px;
-            top: 58%;
-            margin-top: 0px;
-            width: 7px;
-            height: 12px;
-            background: url(/resources/wap/image/icons-trade.png) -194px -87px no-repeat;
-            background-size: 290px 243px;
-            content: '';
-        }
+        /*.trade-type-info .select-shop .dealtime:after {*/
+            /*position: absolute;*/
+            /*right: 15px;*/
+            /*top: 58%;*/
+            /*margin-top: 0px;*/
+            /*width: 7px;*/
+            /*height: 12px;*/
+            /*background: url(/resources/wap/image/icons-trade.png) -194px -87px no-repeat;*/
+            /*background-size: 290px 243px;*/
+            /*content: '';*/
+        /*}*/
         .lineclass{
             transition-duration: 600ms;
             transform: translateY(-0px);

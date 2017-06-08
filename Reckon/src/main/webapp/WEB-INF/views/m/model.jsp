@@ -84,7 +84,7 @@
                 <template v-for="(vo,index) in modelList">
                     <li v-if="vo.group==1" class="mui-table-view-divider mui-indexed-list-group">{{vo.model_year}}款</li>
                     <li v-else class="mui-table-view-cell mui-indexed-list-item"
-                        v-tap="{methods:modelChange,modelId:vo.model_id}"
+                        v-tap="{methods:modelChange,model:vo}"
                         v-show="isshow(vo)"
                     >
                         <div class="mui-table">
@@ -121,9 +121,18 @@
         },
         methods:{
             modelChange:function(param){
-                var modelId = param.modelId;
+                var modelId = param.model.model_id;
                 if(modelId){
-                    window.location.href= "/m/computed/"+modelId;
+                    var mark = $api.getStorage('salemark')
+                    if(mark){
+                        $api.rmStorage('model')
+                        $api.setStorage('model',param.model)
+                        window.location.href= "/m/precise";
+                    }else{
+                        window.location.href= "/m/computed/"+modelId;
+                    }
+
+
                 }
             },search:function(param){
                 if(param.type=='g'){

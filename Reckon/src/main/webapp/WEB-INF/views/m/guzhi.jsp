@@ -241,7 +241,7 @@
             <br/>
             <br/>
             <div class="est-bg" v-tap="{methods:sale}">
-                <a>我要卖车</a>
+                <a>获取精准价格</a>
             </div>
         </div>
     </transition>

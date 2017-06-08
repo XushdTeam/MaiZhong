@@ -376,6 +376,8 @@
                 if (this.model.model_id) {
                     window.history.back(1);
                 } else {
+                    $api.rmStorage('salemark')
+                    $api.setStorage('salemark',1)
                     window.location.href = "/m/allbrand"
                 }
             },
@@ -592,8 +594,9 @@
         if(model){
             vm.model = model
             vm.yearList = getYear(model.min_reg_year,model.max_reg_year);
-            vm.mile = $api.getStorage('mile');
-            vm.time = $api.getStorage('time');
+            if($api.getStorage('mile'))vm.mile = $api.getStorage('mile');
+
+            if($api.getStorage('time'))vm.time = $api.getStorage('time');
         }
         var city = localStorage.getItem('city');
 

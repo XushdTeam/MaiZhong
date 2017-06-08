@@ -19,6 +19,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -27,6 +28,17 @@ import java.util.*;
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration(locations={"classpath:spring/spring-*.xml"})
 public class RedisTest {
+
+
+
+    @Test
+    public void Test(){
+        String price ="0.001";
+        while (price.endsWith("0")){
+            price = price.substring(0,price.length()-1);
+        }
+        System.out.println(price);
+    }
 
 //    @Autowired
 //    private InterFaceRedisService faceRedisService;

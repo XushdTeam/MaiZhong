@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redis="http://www.springframework.org/schema/redis"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	    http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/redis http://www.springframework.org/schema/redis/spring-redis.xsd">
+    <description>spring-data-redis配置</description>
+
+
+    <bean id="redisConnectionFactory"
+          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="${redis.host}"></property>
+        <property name="port" value="${redis.port}"></property>
+        <property name="usePool" value="true"></property>
+    </bean>
+
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="redisConnectionFactory"></property>
+    </bean>
+
+
+    <bean id="jdkSerializer"
+          class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+
+    <bean id="smsMessageListener"
+          class="org.springframework.data.redis.listener.adapter.MessageListenerAdapter">
+        <property name="delegate" ref="smsMessageDelegateListener" />
+        <property name="serializer" ref="jdkSerializer" />
+    </bean>
+
+    <bean id="sendMessage" class="com.djt.common.cache.redis.queue.SendMessage">
+        <property name="redisTemplate" ref="redisTemplate"/>
+    </bean>
+
+    <redis:listener-container>
+        <redis:listener ref="smsMessageListener" method="handleMessage"
+                        serializer="jdkSerializer" topic="sms_queue_web_online" />
+    </redis:listener-container>
+
+
+
+
+    <!--连接池配置-->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <!--最大连接数-->
+        <property name="maxTotal" value="30"/>
+        <!--最大空闲连接数-->
+        <property name="maxIdle" value="10"/>
+        <!--每次释放链接的最大数目-->
+        <property name="numTestsPerEvictionRun" value="1024"/>
+        <!--释放链接的扫描间隔（毫秒）-->
+        <property name="timeBetweenEvictionRunsMillis" value="30000"/>
+        <!--连接最小空闲时间-->
+        <property name="minEvictableIdleTimeMillis" value="1800000"/>
+        <!--链接空闲多久后释放，当空闲时间>该值 且空闲链接>最大空闲连接数时 直接释放-->
+        <property name="softMinEvictableIdleTimeMillis" value="10000"/>
+        <!--获取连接时的最大等待号描述 小于零：阻塞不确定的时间 默认-1-->
+        <property name="maxWaitMillis" value="1500"/>
+        <!--在获取连接的时候检测有限性 默认false-->
+        <property name="testOnBorrow" value="true"/>
+        <!--在空闲时检查有效性 默认false-->
+        <property name="testWhileIdle" value="true"/>
+        <!--链接耗尽时是否阻塞 false报异常 ture阻塞直到超时 默认true-->
+        <property name="blockWhenExhausted" value="false"/>
+    </bean>
+
+    <!--jedis 客户端单机版-->
+    <bean id="redisClient" class="redis.clients.jedis.JedisPool">
+        <constructor-arg name="host" value="${redis.host}"></constructor-arg>
+        <constructor-arg name="port" value="${redis.port}"></constructor-arg>
+        <constructor-arg name="password" value="${redis.password}"></constructor-arg>
+        <constructor-arg name="timeout" value="0"></constructor-arg>
+        <constructor-arg name="poolConfig" ref="jedisPoolConfig"></constructor-arg>
+    </bean>
+
+    <!--jedis 单机版-->
+    <bean id="jedisClient" class="com.maizhong.dao.impl.JedisClientSingleImpl"/>
+
+    <!--jedis集群版配置-->
+    <!--<bean id="redisClient" class="redis.clients.jedis.JedisCluster">-->
+    <!--<constructor-arg name="nodes">-->
+    <!--<set>-->
+    <!--<bean class="redis.clients.jedis.HostAndPort">-->
+    <!--<constructor-arg name="host" value="192.168.1.189"></constructor-arg>-->
+    <!--<constructor-arg name="port" value="7001"></constructor-arg>-->
+    <!--</bean>-->
+    <!--<bean class="redis.clients.jedis.HostAndPort">-->
+    <!--<constructor-arg name="host" value="192.168.1.189"></constructor-arg>-->
+    <!--<constructor-arg name="port" value="7002"></constructor-arg>-->
+    <!--</bean>-->
+    <!--<bean class="redis.clients.jedis.HostAndPort">-->
+    <!--<constructor-arg name="host" value="192.168.1.189"></constructor-arg>-->
+    <!--<constructor-arg name="port" value="7003"></constructor-arg>-->
+    <!--</bean>-->
+    <!--<bean class="redis.clients.jedis.HostAndPort">-->
+    <!--<constructor-arg name="host" value="192.168.1.189"></constructor-arg>-->
+    <!--<constructor-arg name="port" value="7004"></constructor-arg>-->
+    <!--</bean>-->
+    <!--<bean class="redis.clients.jedis.HostAndPort">-->
+    <!--<constructor-arg name="host" value="192.168.1.189"></constructor-arg>-->
+    <!--<constructor-arg name="port" value="7005"></constructor-arg>-->
+    <!--</bean>-->
+    <!--<bean class="redis.clients.jedis.HostAndPort">-->
+    <!--<constructor-arg name="host" value="192.168.1.189"></constructor-arg>-->
+    <!--<constructor-arg name="port" value="7006"></constructor-arg>-->
+    <!--</bean>-->
+    <!--</set>-->
+    <!--</constructor-arg>-->
+    <!--<constructor-arg name="poolConfig" ref="jedisPoolConfig"></constructor-arg>-->
+    <!--</bean>-->
+    <!--jedis 集群版-->
+    <!--<bean id="jedisClient" class="com.upingwang.web.base.dao.impl.JedisClientClusterImpl"/>-->
+</beans>

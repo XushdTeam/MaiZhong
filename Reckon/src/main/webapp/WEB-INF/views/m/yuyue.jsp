@@ -333,7 +333,7 @@
     mui.ready(function () {
         var orderInfo = ${orderInfo}
         if(orderInfo){
-            $api.remove('orderItem')
+            $api.rmStorage('orderItem')
             $api.setStorage('orderItem',orderInfo)
             vm.orderInfo = orderInfo
             //vm.week = r.data.oneWeek;

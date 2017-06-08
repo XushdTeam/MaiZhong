@@ -717,7 +717,16 @@ public class ReckonServiceImpl implements ReckonService {
             basePrice = BigDecimal.ZERO;
         }
         if (basePrice.compareTo(new BigDecimal(1))<0){
-            guzhiDTO.setSalePrice(basePrice.setScale(3, BigDecimal.ROUND_HALF_DOWN).toString());
+            /**
+             * 201706068
+             * 小于1w 保留3位小数 若最后一位为零 保留2位小数
+             * Xushd
+             */
+            String price = basePrice.setScale(3, BigDecimal.ROUND_HALF_DOWN).toString();
+            while (price.endsWith("0")){
+                price = price.substring(0,price.length()-1);
+            }
+            guzhiDTO.setSalePrice(price);
         }else{
             guzhiDTO.setSalePrice(basePrice.setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
         }
@@ -1671,7 +1680,16 @@ public class ReckonServiceImpl implements ReckonService {
             basePrice = BigDecimal.ZERO;
         }
         if (basePrice.compareTo(new BigDecimal(1))<0){
-            guzhiDTO.setSalePrice(basePrice.setScale(3, BigDecimal.ROUND_HALF_DOWN).toString());
+            /**
+             * 201706068
+             * 小于1w 保留3位小数 若最后一位为零 保留2位小数
+             * Xushd
+             */
+            String price = basePrice.setScale(3, BigDecimal.ROUND_HALF_DOWN).toString();
+            while (price.endsWith("0")){
+                price = price.substring(0,price.length()-1);
+            }
+            guzhiDTO.setSalePrice(price);
         }else{
             guzhiDTO.setSalePrice(basePrice.setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
         }

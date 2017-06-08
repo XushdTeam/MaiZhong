@@ -139,7 +139,7 @@
         methods:{
             detail:function(param){
                 var item = param.item;
-                $api.remove('orderDetailItem')
+                $api.rmStorage('orderDetailItem')
                 $api.setStorage('orderDetailItem',param.item)
                 window.location.href = '/m/orderdetail'
 

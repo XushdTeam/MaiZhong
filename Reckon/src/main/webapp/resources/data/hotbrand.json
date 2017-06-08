@@ -1,0 +1,101 @@
+[
+{
+	"brand": "奔驰",
+	"brandId": 9,
+	"largeLogo": "http://assets.che300.com/theme/images/brand/large/b9.jpg"
+},
+{
+	"brand": "宝马",
+	"brandId": 7,
+	"largeLogo": "http://assets.che300.com/theme/images/brand/large/b7.jpg"
+},
+{
+	"brand": "奥迪",
+	"brandId": 1,
+	"largeLogo": "http://assets.che300.com/theme/images/brand/large/b1.jpg"
+},
+{
+	"brand": "大众",
+	"brandId": 25,
+	"largeLogo": "http://assets.che300.com/theme/images/brand/large/b25.jpg"
+},
+{
+	"brand": "本田",
+	"brandId": 5,
+	"largeLogo": "http://assets.che300.com/theme/images/brand/large/b5.jpg"
+},
+{
+	"brand": "丰田",
+	"brandId": 36,
+	"largeLogo": "http://assets.che300.com/theme/images/brand/large/b36.jpg"
+},
+{
+	"brand": "日产",
+	"brandId": 108,
+	"largeLogo": "http://assets.che300.com/theme/images/brand/large/b108.jpg"
+},
+{
+	"brand": "别克",
+	"brandId": 6,
+	"largeLogo": "http://assets.che300.com/theme/images/brand/large/b6.jpg"
+},
+{
+	"brand": "福特",
+	"brandId": 35,
+	"largeLogo": "http://assets.che300.com/theme/images/brand/large/b35.jpg"
+},
+{
+	"brand": "现代",
+	"brandId": 125,
+	"largeLogo": "http://assets.che300.com/theme/images/brand/large/b125.jpg"
+},
+{
+	"brand": "雪佛兰",
+	"brandId": 126,
+	"largeLogo": "http://assets.che300.com/theme/images/brand/large/b126.jpg"
+},
+{
+	"brand": "铃木",
+	"brandId": 78,
+	"largeLogo": "http://assets.che300.com/theme/images/brand/large/b78.jpg"
+},
+{
+	"brand": "哈弗",
+	"brandId": 50,
+	"largeLogo": "http://assets.che300.com/theme/images/brand/large/b50.jpg"
+},
+{
+	"brand": "吉利帝豪",
+	"brandId": 63,
+	"largeLogo": "http://assets.che300.com/theme/images/brand/large/b63.jpg"
+},
+{
+	"brand": "标致",
+	"brandId": 10,
+	"largeLogo": "http://assets.che300.com/theme/images/brand/large/b10.jpg"
+},
+{
+	"brand": "雪铁龙",
+	"brandId": 127,
+	"largeLogo": "http://assets.che300.com/theme/images/brand/large/b127.jpg"
+},
+{
+	"brand": "马自达",
+	"brandId": 92,
+	"largeLogo": "http://assets.che300.com/theme/images/brand/large/b92.jpg"
+},
+{
+	"brand": "江淮",
+	"brandId": 60,
+	"largeLogo": "http://assets.che300.com/theme/images/brand/large/b60.jpg"
+},
+{
+	"brand": "长城",
+	"brandId": 22,
+	"largeLogo": "http://assets.che300.com/theme/images/brand/large/b22.jpg"
+},
+{
+	"brand": "长安轿车",
+	"brandId": 21,
+	"largeLogo": "http://assets.che300.com/theme/images/brand/large/b21.jpg"
+}]
