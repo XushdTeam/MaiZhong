@@ -1384,7 +1384,9 @@ public class ReckonServiceImpl implements ReckonService {
                     User user = new User();
                     user.setPhone(Long.valueOf(phone));
                     user.setStatus(1);
+                    user.setCreateTime(new Date());
                     user.setDelflag(0);
+                    user.setUserRole(0);
                     userMapper.insert(user);
                 }
             } catch (Exception e) {

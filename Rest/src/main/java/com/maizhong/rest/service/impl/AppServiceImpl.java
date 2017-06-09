@@ -168,6 +168,8 @@ public class AppServiceImpl implements AppService {
                         user.setPhone(Long.valueOf(phone));
                         user.setStatus(1);
                         user.setDelflag(0);
+                        user.setCreateTime(new Date());
+                        user.setUserRole(0);
                         userMapper.insert(user);
                     }
                 } catch (Exception e) {
@@ -552,6 +554,8 @@ public class AppServiceImpl implements AppService {
             if (users == null || users.size() == 0) {
                 User user = new User();
                 user.setPhone(Long.valueOf(phone));
+                user.setCreateTime(new Date());
+                user.setUserRole(0);
                 user.setStatus(1);
                 user.setDelflag(0);
                 userMapper.insert(user);
