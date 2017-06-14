@@ -8,6 +8,13 @@
     <result column="linkman_phone" jdbcType="VARCHAR" property="linkmanPhone" />
     <result column="is_contact" jdbcType="INTEGER" property="isContact" />
     <result column="linkman_name" jdbcType="VARCHAR" property="linkmanName" />
+    <result column="bank_account" jdbcType="VARCHAR" property="bankAccount" />
+    <result column="shop_name" jdbcType="VARCHAR" property="shopName" />
+    <result column="shop_address" jdbcType="VARCHAR" property="shopAddress" />
+    <result column="user_role" jdbcType="INTEGER" property="userRole" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="user_job" jdbcType="VARCHAR" property="userJob" />
     <result column="user_img" jdbcType="VARCHAR" property="userImg" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="delflag" jdbcType="INTEGER" property="delflag" />
@@ -71,8 +78,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, phone, address, linkman_phone, is_contact, linkman_name, user_img, status, 
-    delflag
+    user_id, phone, address, linkman_phone, is_contact, linkman_name, bank_account, shop_name, 
+    shop_address, user_role, user_name, create_time, user_job, user_img, status, delflag
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.pojo.UserExample" resultMap="BaseResultMap">
     select
@@ -107,12 +114,16 @@
   <insert id="insert" parameterType="com.maizhong.pojo.User">
     insert into user (user_id, phone, address, 
       linkman_phone, is_contact, linkman_name, 
-      user_img, status, delflag
-      )
+      bank_account, shop_name, shop_address, 
+      user_role, user_name, create_time, 
+      user_job, user_img, status, 
+      delflag)
     values (#{userId,jdbcType=BIGINT}, #{phone,jdbcType=BIGINT}, #{address,jdbcType=VARCHAR}, 
       #{linkmanPhone,jdbcType=VARCHAR}, #{isContact,jdbcType=INTEGER}, #{linkmanName,jdbcType=VARCHAR}, 
-      #{userImg,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{delflag,jdbcType=INTEGER}
-      )
+      #{bankAccount,jdbcType=VARCHAR}, #{shopName,jdbcType=VARCHAR}, #{shopAddress,jdbcType=VARCHAR}, 
+      #{userRole,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{userJob,jdbcType=VARCHAR}, #{userImg,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{delflag,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.pojo.User">
     insert into user
@@ -134,6 +145,27 @@
       </if>
       <if test="linkmanName != null">
         linkman_name,
+      </if>
+      <if test="bankAccount != null">
+        bank_account,
+      </if>
+      <if test="shopName != null">
+        shop_name,
+      </if>
+      <if test="shopAddress != null">
+        shop_address,
+      </if>
+      <if test="userRole != null">
+        user_role,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="userJob != null">
+        user_job,
       </if>
       <if test="userImg != null">
         user_img,
@@ -163,6 +195,27 @@
       </if>
       <if test="linkmanName != null">
         #{linkmanName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccount != null">
+        #{bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null">
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopAddress != null">
+        #{shopAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userRole != null">
+        #{userRole,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userJob != null">
+        #{userJob,jdbcType=VARCHAR},
       </if>
       <if test="userImg != null">
         #{userImg,jdbcType=VARCHAR},
@@ -202,6 +255,27 @@
       <if test="record.linkmanName != null">
         linkman_name = #{record.linkmanName,jdbcType=VARCHAR},
       </if>
+      <if test="record.bankAccount != null">
+        bank_account = #{record.bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopName != null">
+        shop_name = #{record.shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopAddress != null">
+        shop_address = #{record.shopAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userRole != null">
+        user_role = #{record.userRole,jdbcType=INTEGER},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userJob != null">
+        user_job = #{record.userJob,jdbcType=VARCHAR},
+      </if>
       <if test="record.userImg != null">
         user_img = #{record.userImg,jdbcType=VARCHAR},
       </if>
@@ -224,6 +298,13 @@
       linkman_phone = #{record.linkmanPhone,jdbcType=VARCHAR},
       is_contact = #{record.isContact,jdbcType=INTEGER},
       linkman_name = #{record.linkmanName,jdbcType=VARCHAR},
+      bank_account = #{record.bankAccount,jdbcType=VARCHAR},
+      shop_name = #{record.shopName,jdbcType=VARCHAR},
+      shop_address = #{record.shopAddress,jdbcType=VARCHAR},
+      user_role = #{record.userRole,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      user_job = #{record.userJob,jdbcType=VARCHAR},
       user_img = #{record.userImg,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=INTEGER},
       delflag = #{record.delflag,jdbcType=INTEGER}
@@ -249,6 +330,27 @@
       <if test="linkmanName != null">
         linkman_name = #{linkmanName,jdbcType=VARCHAR},
       </if>
+      <if test="bankAccount != null">
+        bank_account = #{bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null">
+        shop_name = #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopAddress != null">
+        shop_address = #{shopAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userRole != null">
+        user_role = #{userRole,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userJob != null">
+        user_job = #{userJob,jdbcType=VARCHAR},
+      </if>
       <if test="userImg != null">
         user_img = #{userImg,jdbcType=VARCHAR},
       </if>
@@ -268,6 +370,13 @@
       linkman_phone = #{linkmanPhone,jdbcType=VARCHAR},
       is_contact = #{isContact,jdbcType=INTEGER},
       linkman_name = #{linkmanName,jdbcType=VARCHAR},
+      bank_account = #{bankAccount,jdbcType=VARCHAR},
+      shop_name = #{shopName,jdbcType=VARCHAR},
+      shop_address = #{shopAddress,jdbcType=VARCHAR},
+      user_role = #{userRole,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      user_job = #{userJob,jdbcType=VARCHAR},
       user_img = #{userImg,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
       delflag = #{delflag,jdbcType=INTEGER}

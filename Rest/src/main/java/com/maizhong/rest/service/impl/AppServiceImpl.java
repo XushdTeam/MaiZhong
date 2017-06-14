@@ -158,11 +158,20 @@ public class AppServiceImpl implements AppService {
                     e.printStackTrace();
                 }
                 try {
-                    User user = new User();
-                    user.setPhone(Long.valueOf(phone));
-                    user.setStatus(1);
-                    user.setDelflag(0);
-                    userMapper.insert(user);
+                    UserExample example = new UserExample();
+                    UserExample.Criteria criteria = example.createCriteria();
+                    criteria.andPhoneEqualTo(Long.valueOf(phone));
+                    List<User> users = userMapper.selectByExample(example);
+
+                    if (users == null || users.size() == 0) {
+                        User user = new User();
+                        user.setPhone(Long.valueOf(phone));
+                        user.setStatus(1);
+                        user.setDelflag(0);
+                        user.setCreateTime(new Date());
+                        user.setUserRole(0);
+                        userMapper.insert(user);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -545,6 +554,8 @@ public class AppServiceImpl implements AppService {
             if (users == null || users.size() == 0) {
                 User user = new User();
                 user.setPhone(Long.valueOf(phone));
+                user.setCreateTime(new Date());
+                user.setUserRole(0);
                 user.setStatus(1);
                 user.setDelflag(0);
                 userMapper.insert(user);
