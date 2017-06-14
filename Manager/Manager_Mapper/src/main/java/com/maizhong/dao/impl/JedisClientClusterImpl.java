@@ -118,5 +118,20 @@ public class JedisClientClusterImpl implements JedisClient {
         return result;
     }
 
+    @Override
+    public void lpush(byte[] key, byte[] value) {
+
+    }
+
+    @Override
+    public byte[] rpop(byte[] key) {
+        return new byte[0];
+    }
+
+    @Override
+    public long llen(byte[] key) {
+        return 0;
+    }
+
 
 }

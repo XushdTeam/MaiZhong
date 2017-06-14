@@ -1,15 +1,14 @@
-package com.maizhong.dao.impl;
+package com.maizhong.auction.dao.impl;
 
 
 import com.google.common.collect.Lists;
 import com.maizhong.common.utils.JsonUtils;
-import com.maizhong.dao.JedisClient;
+import com.maizhong.auction.dao.JedisClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * JREDIS Daoimpl 单例

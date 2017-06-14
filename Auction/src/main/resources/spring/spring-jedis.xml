@@ -1,43 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redis="http://www.springframework.org/schema/redis"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-	    http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/redis http://www.springframework.org/schema/redis/spring-redis.xsd">
-    <description>spring-data-redis配置</description>
-
-
-    <bean id="redisConnectionFactory"
-          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
-        <property name="hostName" value="${redis.host}"></property>
-        <property name="port" value="${redis.port}"></property>
-        <property name="usePool" value="true"></property>
-    </bean>
-
-    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
-        <property name="connectionFactory" ref="redisConnectionFactory"></property>
-    </bean>
-
-
-    <bean id="jdkSerializer"
-          class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
-
-    <bean id="smsMessageListener"
-          class="org.springframework.data.redis.listener.adapter.MessageListenerAdapter">
-        <property name="delegate" ref="smsMessageDelegateListener" />
-        <property name="serializer" ref="jdkSerializer" />
-    </bean>
-
-    <bean id="sendMessage" class="com.djt.common.cache.redis.queue.SendMessage">
-        <property name="redisTemplate" ref="redisTemplate"/>
-    </bean>
-
-    <redis:listener-container>
-        <redis:listener ref="smsMessageListener" method="handleMessage"
-                        serializer="jdkSerializer" topic="sms_queue_web_online" />
-    </redis:listener-container>
-
-
-
+	    http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <description>spring-redis配置</description>
 
     <!--连接池配置-->
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
@@ -73,7 +39,7 @@
     </bean>
 
     <!--jedis 单机版-->
-    <bean id="jedisClient" class="com.maizhong.dao.impl.JedisClientSingleImpl"/>
+    <bean id="jedicClient" class="com.maizhong.auction.dao.impl.JedisClientSingleImpl"/>
 
     <!--jedis集群版配置-->
     <!--<bean id="redisClient" class="redis.clients.jedis.JedisCluster">-->

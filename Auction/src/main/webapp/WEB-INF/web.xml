@@ -14,11 +14,7 @@
         <param-name>log4jConfigLocation</param-name>
         <param-value>classpath:properties/log4j.properties</param-value>
     </context-param>
-    <!-- &lt;!&ndash;启动一个watchdog线程每1800秒扫描一下log4j配置文件的变化&ndash;&gt;
-     <context-param>
-         <param-name>log4jRefreshInterval</param-name>
-         <param-value>1800000</param-value>
-     </context-param>-->
+
     <!--spring log4j监听器-->
     <listener>
         <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
@@ -28,7 +24,10 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
+            classpath:spring/spring-dao.xml
             classpath:spring/spring-service.xml
+            classpath:spring/spring-jedis.xml
+
         </param-value>
     </context-param>
     <listener>
@@ -67,6 +66,7 @@
         <!-- 伪静态化 -->
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
 
 
 

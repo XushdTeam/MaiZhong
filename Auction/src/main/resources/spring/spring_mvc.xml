@@ -40,11 +40,21 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+
+    <!--     配置拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/app/**"/>
+            <bean class="com.maizhong.auction.interceptor.AppInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <mvc:resources location="/resources/" mapping="/resources/**"/>
     <mvc:resources mapping="/favicon.ico" location="/favicon.ico"/>
 
+
     <!-- 全局异常配置 -->
-    <!--<bean id="exceptionResolver" class="com.maizhong.resolver.GlobalExceptionResolver"/>-->
+    <bean id="exceptionResolver" class="com.maizhong.auction.resolver.GlobalExceptionResolver"/>
 
 
 </beans>

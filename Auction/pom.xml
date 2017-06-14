@@ -78,12 +78,38 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
         </dependency>
+        <!-- Mybatis-->
+        <!--连接池-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
+        <!-- Mybatis-->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+        </dependency>
+        <!--Mysql-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+
+
     </dependencies>
 
     <build>
         <!-- 配置插件 -->
         <plugins>
-            <!--Tomcat7 -->
             <!--Tomcat7 -->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
@@ -91,10 +117,23 @@
                 <configuration>
                     <port>8090</port>
                     <path>/</path>
+                    <protocol>org.apache.coyote.http11.Http11NioProtocol</protocol>
+                    <uriEncoding>UTF-8</uriEncoding>
                     <url>http://192.168.2.111:8090/manager/text</url>
                     <update>true</update>
                     <username>admin</username>
                     <password>admin</password>
+                </configuration>
+            </plugin>
+            <!-- Mybatis generator代码生成插件 配置 -->
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.5</version>
+                <configuration>
+                    <configurationFile>${basedir}/src/test/resources/generatorConfig.xml</configurationFile>
+                    <overwrite>true</overwrite>
+                    <verbose>true</verbose>
                 </configuration>
             </plugin>
         </plugins>

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -19,26 +21,29 @@ public class PushController {
 
 
     @RequestMapping("/push")
-    public void getDate(HttpServletResponse response, HttpServletRequest request){
+    public void getDate(HttpServletResponse response,
+                        HttpServletRequest request){
 
-
-        OutputStream bos = null;
+        response.setContentType("text/event-stream");
+        response.setCharacterEncoding("UTF-8");
+        boolean isOver = true;
         try {
-            Date date = new Date();
-            String result = "data:"+date.toString()+"\n\n";
-            response.setContentType("text/event-stream");
-            response.setCharacterEncoding("UTF-8");
-            PrintWriter writer = response.getWriter();
-            writer.write(result);//这里需要两个\n
-            writer.flush();
+            while (isOver){
+                PrintWriter writer = response.getWriter();
+                Date date = new Date();
+                String result = "data:"+date.toString()+"\n\n";
+                writer.write(result);//这里需要两个\n
+                writer.flush();
+                System.out.println("-------任务执行 "+date.toString()+"--------");
+                TimeUnit.SECONDS.sleep(5);
+            }
+        }catch (Exception e){
 
-            TimeUnit.SECONDS.sleep(5);
-
-        } catch (Exception e) {
             e.printStackTrace();
-        }finally{
-
         }
+
+
+
 
     }
 
