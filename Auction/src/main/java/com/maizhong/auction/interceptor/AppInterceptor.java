@@ -27,5 +27,6 @@ public class AppInterceptor extends HandlerInterceptorAdapter {
             response.setStatus(404);
             return false;
         }
+        //return true;
     }
 }

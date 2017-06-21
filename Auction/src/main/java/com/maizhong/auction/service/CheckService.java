@@ -7,4 +7,21 @@ import com.maizhong.common.result.JsonResult;
  */
 public interface CheckService {
     JsonResult checkLogin(String account, String pass);
+
+    JsonResult changePwd(String pass, String token);
+
+    JsonResult feedback(String content, String token);
+
+    JsonResult getHelp();
+
+    JsonResult getHelpDetail(long id);
+
+
+    JsonResult getNewsList();
+
+    JsonResult getNewsDetail(long id);
+
+    JsonResult newCarbase(String token);
+
+    JsonResult checkCarList(String token);
 }
