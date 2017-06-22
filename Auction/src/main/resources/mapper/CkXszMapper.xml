@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maizhong.auction.mapper.CkXszMapper">
+  <resultMap id="BaseResultMap" type="com.maizhong.auction.pojo.CkXsz">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="car_id" jdbcType="BIGINT" property="carId" />
+    <result column="pic1" jdbcType="VARCHAR" property="pic1" />
+    <result column="pic2" jdbcType="VARCHAR" property="pic2" />
+    <result column="pic3" jdbcType="VARCHAR" property="pic3" />
+    <result column="wj" jdbcType="INTEGER" property="wj" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="lx" jdbcType="INTEGER" property="lx" />
+    <result column="xz" jdbcType="INTEGER" property="xz" />
+    <result column="ppxh" jdbcType="VARCHAR" property="ppxh" />
+    <result column="cjh" jdbcType="VARCHAR" property="cjh" />
+    <result column="fdjh" jdbcType="VARCHAR" property="fdjh" />
+    <result column="njh" jdbcType="VARCHAR" property="njh" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, car_id, pic1, pic2, pic3, wj, number, lx, xz, ppxh, cjh, fdjh, njh
+  </sql>
+  <select id="selectByExample" parameterType="com.maizhong.auction.pojo.CkXszExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ck_xsz
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ck_xsz
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ck_xsz
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maizhong.auction.pojo.CkXszExample">
+    delete from ck_xsz
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maizhong.auction.pojo.CkXsz">
+    insert into ck_xsz (id, car_id, pic1, 
+      pic2, pic3, wj, number, 
+      lx, xz, ppxh, cjh, 
+      fdjh, njh)
+    values (#{id,jdbcType=BIGINT}, #{carId,jdbcType=BIGINT}, #{pic1,jdbcType=VARCHAR}, 
+      #{pic2,jdbcType=VARCHAR}, #{pic3,jdbcType=VARCHAR}, #{wj,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR}, 
+      #{lx,jdbcType=INTEGER}, #{xz,jdbcType=INTEGER}, #{ppxh,jdbcType=VARCHAR}, #{cjh,jdbcType=VARCHAR}, 
+      #{fdjh,jdbcType=VARCHAR}, #{njh,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maizhong.auction.pojo.CkXsz">
+    <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID() AS id
+    </selectKey>
+    insert into ck_xsz
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="carId != null">
+        car_id,
+      </if>
+      <if test="pic1 != null">
+        pic1,
+      </if>
+      <if test="pic2 != null">
+        pic2,
+      </if>
+      <if test="pic3 != null">
+        pic3,
+      </if>
+      <if test="wj != null">
+        wj,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="lx != null">
+        lx,
+      </if>
+      <if test="xz != null">
+        xz,
+      </if>
+      <if test="ppxh != null">
+        ppxh,
+      </if>
+      <if test="cjh != null">
+        cjh,
+      </if>
+      <if test="fdjh != null">
+        fdjh,
+      </if>
+      <if test="njh != null">
+        njh,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="carId != null">
+        #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="pic1 != null">
+        #{pic1,jdbcType=VARCHAR},
+      </if>
+      <if test="pic2 != null">
+        #{pic2,jdbcType=VARCHAR},
+      </if>
+      <if test="pic3 != null">
+        #{pic3,jdbcType=VARCHAR},
+      </if>
+      <if test="wj != null">
+        #{wj,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="lx != null">
+        #{lx,jdbcType=INTEGER},
+      </if>
+      <if test="xz != null">
+        #{xz,jdbcType=INTEGER},
+      </if>
+      <if test="ppxh != null">
+        #{ppxh,jdbcType=VARCHAR},
+      </if>
+      <if test="cjh != null">
+        #{cjh,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjh != null">
+        #{fdjh,jdbcType=VARCHAR},
+      </if>
+      <if test="njh != null">
+        #{njh,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maizhong.auction.pojo.CkXszExample" resultType="java.lang.Long">
+    select count(*) from ck_xsz
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ck_xsz
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.carId != null">
+        car_id = #{record.carId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pic1 != null">
+        pic1 = #{record.pic1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pic2 != null">
+        pic2 = #{record.pic2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pic3 != null">
+        pic3 = #{record.pic3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wj != null">
+        wj = #{record.wj,jdbcType=INTEGER},
+      </if>
+      <if test="record.number != null">
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lx != null">
+        lx = #{record.lx,jdbcType=INTEGER},
+      </if>
+      <if test="record.xz != null">
+        xz = #{record.xz,jdbcType=INTEGER},
+      </if>
+      <if test="record.ppxh != null">
+        ppxh = #{record.ppxh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cjh != null">
+        cjh = #{record.cjh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fdjh != null">
+        fdjh = #{record.fdjh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.njh != null">
+        njh = #{record.njh,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ck_xsz
+    set id = #{record.id,jdbcType=BIGINT},
+      car_id = #{record.carId,jdbcType=BIGINT},
+      pic1 = #{record.pic1,jdbcType=VARCHAR},
+      pic2 = #{record.pic2,jdbcType=VARCHAR},
+      pic3 = #{record.pic3,jdbcType=VARCHAR},
+      wj = #{record.wj,jdbcType=INTEGER},
+      number = #{record.number,jdbcType=VARCHAR},
+      lx = #{record.lx,jdbcType=INTEGER},
+      xz = #{record.xz,jdbcType=INTEGER},
+      ppxh = #{record.ppxh,jdbcType=VARCHAR},
+      cjh = #{record.cjh,jdbcType=VARCHAR},
+      fdjh = #{record.fdjh,jdbcType=VARCHAR},
+      njh = #{record.njh,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.auction.pojo.CkXsz">
+    update ck_xsz
+    <set>
+      <if test="carId != null">
+        car_id = #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="pic1 != null">
+        pic1 = #{pic1,jdbcType=VARCHAR},
+      </if>
+      <if test="pic2 != null">
+        pic2 = #{pic2,jdbcType=VARCHAR},
+      </if>
+      <if test="pic3 != null">
+        pic3 = #{pic3,jdbcType=VARCHAR},
+      </if>
+      <if test="wj != null">
+        wj = #{wj,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="lx != null">
+        lx = #{lx,jdbcType=INTEGER},
+      </if>
+      <if test="xz != null">
+        xz = #{xz,jdbcType=INTEGER},
+      </if>
+      <if test="ppxh != null">
+        ppxh = #{ppxh,jdbcType=VARCHAR},
+      </if>
+      <if test="cjh != null">
+        cjh = #{cjh,jdbcType=VARCHAR},
+      </if>
+      <if test="fdjh != null">
+        fdjh = #{fdjh,jdbcType=VARCHAR},
+      </if>
+      <if test="njh != null">
+        njh = #{njh,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maizhong.auction.pojo.CkXsz">
+    update ck_xsz
+    set car_id = #{carId,jdbcType=BIGINT},
+      pic1 = #{pic1,jdbcType=VARCHAR},
+      pic2 = #{pic2,jdbcType=VARCHAR},
+      pic3 = #{pic3,jdbcType=VARCHAR},
+      wj = #{wj,jdbcType=INTEGER},
+      number = #{number,jdbcType=VARCHAR},
+      lx = #{lx,jdbcType=INTEGER},
+      xz = #{xz,jdbcType=INTEGER},
+      ppxh = #{ppxh,jdbcType=VARCHAR},
+      cjh = #{cjh,jdbcType=VARCHAR},
+      fdjh = #{fdjh,jdbcType=VARCHAR},
+      njh = #{njh,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

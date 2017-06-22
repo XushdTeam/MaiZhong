@@ -1,5 +1,9 @@
 package com.maizhong.auction.service;
 
+import com.maizhong.auction.pojo.CkCzinfo;
+import com.maizhong.auction.pojo.CkDjz;
+import com.maizhong.auction.pojo.CkQtz;
+import com.maizhong.auction.pojo.CkXsz;
 import com.maizhong.common.result.JsonResult;
 
 /**
@@ -24,4 +28,13 @@ public interface CheckService {
     JsonResult newCarbase(String token);
 
     JsonResult checkCarList(String token);
+
+
+    JsonResult saveXSZ(CkXsz xsz);
+
+    JsonResult saveDJZ(CkDjz djz);
+
+    JsonResult saveQTZ(CkQtz qtz);
+
+    JsonResult saveCZXX(CkCzinfo czinfo);
 }

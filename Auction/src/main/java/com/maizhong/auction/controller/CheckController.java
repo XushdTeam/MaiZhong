@@ -1,8 +1,9 @@
 package com.maizhong.auction.controller;
 
-import com.maizhong.auction.pojo.CkCarbase;
+import com.maizhong.auction.pojo.*;
 import com.maizhong.auction.service.CheckService;
 import com.maizhong.auction.service.ImgUploadService;
+import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -121,6 +122,11 @@ public class CheckController {
         return result;
     }
 
+    /**
+     * 获取汽车列表
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/app/check/car/list")
     public JsonResult checkCarList(HttpServletRequest request){
         String token = (String) request.getAttribute("token");
@@ -128,5 +134,52 @@ public class CheckController {
         return result;
     }
 
+    /**
+     * 保存行驶证信息
+     * @param xsz
+     * @return
+     */
+    @RequestMapping(value = "/app/check/car/xsz/save")
+    public JsonResult checkCarXSZ(CkXsz xsz){
+        if(xsz==null)return JsonResult.Error(OperateEnum.FAILE);
+        JsonResult result = checkService.saveXSZ(xsz);
+        return result;
+    }
+
+    /**
+     * 保存登记证信息
+     * @param djz
+     * @return
+     */
+    @RequestMapping(value = "/app/check/car/djz/save")
+    public JsonResult checkCarDJZ(CkDjz djz){
+        if(djz==null)return JsonResult.Error(OperateEnum.FAILE);
+        JsonResult result = checkService.saveDJZ(djz);
+        return result;
+    }
+
+    /**
+     * 保存其他证件信息
+     * @param qtz
+     * @return
+     */
+    @RequestMapping(value = "/app/check/car/qtz/save")
+    public JsonResult checkCarQTZ(CkQtz qtz){
+        if(qtz==null)return JsonResult.Error(OperateEnum.FAILE);
+        JsonResult result = checkService.saveQTZ(qtz);
+        return result;
+    }
+
+    /**
+     * 保存车主信息
+     * @param czinfo
+     * @return
+     */
+    @RequestMapping(value = "/app/check/car/czxx/save")
+    public JsonResult checkCarCZINFO(CkCzinfo czinfo){
+        if(czinfo==null)return JsonResult.Error(OperateEnum.FAILE);
+        JsonResult result = checkService.saveCZXX(czinfo);
+        return result;
+    }
 
 }

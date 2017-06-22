@@ -35,6 +35,14 @@ public class CheckServiceImpl implements CheckService {
     @Autowired
     private CkCarbaseMapper ckCarbaseMapper;
     @Autowired
+    private CkXszMapper ckXszMapper;
+    @Autowired
+    private CkDjzMapper ckDjzMapper;
+    @Autowired
+    private CkQtzMapper ckQtzMapper;
+    @Autowired
+    private CkCzinfoMapper ckCzinfoMapper;
+    @Autowired
     private JedisClient jedisClient;
 
     @Override
@@ -188,6 +196,86 @@ public class CheckServiceImpl implements CheckService {
         return JsonResult.OK(ckCarbases);
 
     }
+
+    @Override
+    public JsonResult saveXSZ(CkXsz xsz) {
+        if(xsz.getCarId()==null)return JsonResult.Error(OperateEnum.FAILE);
+        if(xsz.getId()==-1){
+            //新增
+            xsz.setId(null);
+            int i = ckXszMapper.insertSelective(xsz);
+            if(i>0){
+                return JsonResult.OK(xsz.getId());
+            }
+        }else{
+            //更新
+            int i = ckXszMapper.updateByPrimaryKeySelective(xsz);
+            if(i>0){
+                return JsonResult.OK();
+            }
+        }
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
+    }
+
+    @Override
+    public JsonResult saveDJZ(CkDjz djz) {
+        if(djz.getCarId()==null)return JsonResult.Error(OperateEnum.FAILE);
+        if(djz.getId()==-1){
+            //新增
+            djz.setId(null);
+            int i = ckDjzMapper.insertSelective(djz);
+            if(i>0){
+                return JsonResult.OK(djz.getId());
+            }
+        }else{
+            //更新
+            int i = ckDjzMapper.updateByPrimaryKeySelective(djz);
+            if(i>0){
+                return JsonResult.OK();
+            }
+        }
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
+    }
+
+    @Override
+    public JsonResult saveQTZ(CkQtz qtz) {
+        if(qtz.getCarId()==null)return JsonResult.Error(OperateEnum.FAILE);
+        if(qtz.getId()==-1){
+            //新增
+            qtz.setId(null);
+            int i = ckQtzMapper.insertSelective(qtz);
+            if(i>0){
+                return JsonResult.OK(qtz.getId());
+            }
+        }else{
+            //修改
+            int i =ckQtzMapper.updateByPrimaryKeySelective(qtz);
+            if(i>0){
+                return JsonResult.OK();
+            }
+        }
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
+    }
+
+    @Override
+    public JsonResult saveCZXX(CkCzinfo czinfo) {
+        if(czinfo.getCarId()==null)return JsonResult.Error(OperateEnum.FAILE);
+        if(czinfo.getId()==-1){
+            czinfo.setId(null);
+            int i = ckCzinfoMapper.insertSelective(czinfo);
+            if(i>0){
+                return JsonResult.OK(czinfo.getId());
+            }
+        }else{
+            int i = ckCzinfoMapper.updateByPrimaryKeySelective(czinfo);
+            if(i>0){
+                return JsonResult.OK();
+            }
+        }
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
+
+    }
+
 
     private CkUser getUserByToken(String token){
         String redisUser = jedisClient.hget("CHECK_ACCOUNT_USER",token);
