@@ -135,6 +135,18 @@ public class CheckController {
     }
 
     /**
+     * 删除车辆
+     * @param carId
+     * @return
+     */
+    @RequestMapping(value = "/app/check/car/del/{carId}")
+    public JsonResult checkCarDel(@PathVariable long carId){
+        JsonResult result = checkService.checkCarDel(carId);
+        return result;
+    }
+
+
+    /**
      * 保存行驶证信息
      * @param xsz
      * @return
@@ -181,5 +193,40 @@ public class CheckController {
         JsonResult result = checkService.saveCZXX(czinfo);
         return result;
     }
+
+    /**
+     * 获取检测车辆STEP1信息 （xsz,djz,qtz,czxx）
+     * @param carId
+     * @return
+     */
+    @RequestMapping(value = "/app/check/car/step1/{carId}")
+    public JsonResult checkCarSTEP1(@PathVariable long carId){
+        JsonResult result = checkService.getCarStep1(carId);
+        return result;
+    }
+
+    /**
+     * 检测车辆基本照片
+     * @param ckBaseimg
+     * @return
+     */
+    @RequestMapping(value = "/app/check/car/baseimg")
+    public JsonResult checkCarBaseImg(CkBaseimg ckBaseimg){
+        if(ckBaseimg==null)return JsonResult.Error(OperateEnum.FAILE);
+        JsonResult result = checkService.saveCarBaseImg(ckBaseimg);
+        return result;
+    }
+
+    /**
+     * 获取基本照片
+     * @param carId
+     * @return
+     */
+    @RequestMapping(value = "/app/check/getcar/baseimg/{carId}")
+    public JsonResult getCarBaseImg(@PathVariable long carId){
+        JsonResult result = checkService.getCarBaseImg(carId);
+        return result;
+    }
+
 
 }
