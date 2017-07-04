@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maizhong.auction.mapper.CkPzMapper">
+  <resultMap id="BaseResultMap" type="com.maizhong.auction.pojo.CkPz">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="car_id" jdbcType="BIGINT" property="carId" />
+    <result column="abs" jdbcType="INTEGER" property="abs" />
+    <result column="abs_bug" jdbcType="INTEGER" property="absBug" />
+    <result column="qn" jdbcType="INTEGER" property="qn" />
+    <result column="qn_bug" jdbcType="INTEGER" property="qnBug" />
+    <result column="zxzl" jdbcType="INTEGER" property="zxzl" />
+    <result column="zxzl_bug" jdbcType="INTEGER" property="zxzlBug" />
+    <result column="ccbl" jdbcType="INTEGER" property="ccbl" />
+    <result column="ccbl_bug" jdbcType="INTEGER" property="ccblBug" />
+    <result column="tc" jdbcType="INTEGER" property="tc" />
+    <result column="tc_bug" jdbcType="INTEGER" property="tcBug" />
+    <result column="cwhsj" jdbcType="INTEGER" property="cwhsj" />
+    <result column="cwhsj_bug" jdbcType="INTEGER" property="cwhsjBug" />
+    <result column="zycz" jdbcType="INTEGER" property="zycz" />
+    <result column="zytjfs" jdbcType="INTEGER" property="zytjfs" />
+    <result column="zygn" jdbcType="INTEGER" property="zygn" />
+    <result column="zy_bug" jdbcType="INTEGER" property="zyBug" />
+    <result column="kt" jdbcType="INTEGER" property="kt" />
+    <result column="kt_bug" jdbcType="INTEGER" property="ktBug" />
+    <result column="yysb" jdbcType="INTEGER" property="yysb" />
+    <result column="yysb_bug" jdbcType="INTEGER" property="yysbBug" />
+    <result column="dh" jdbcType="INTEGER" property="dh" />
+    <result column="dh_bug" jdbcType="INTEGER" property="dhBug" />
+    <result column="dsxh" jdbcType="INTEGER" property="dsxh" />
+    <result column="dsxh_bug" jdbcType="INTEGER" property="dsxhBug" />
+    <result column="dcld" jdbcType="INTEGER" property="dcld" />
+    <result column="dcld_bug" jdbcType="INTEGER" property="dcldBug" />
+    <result column="dcyx" jdbcType="INTEGER" property="dcyx" />
+    <result column="dcyx_bug" jdbcType="INTEGER" property="dcyxBug" />
+    <result column="lg" jdbcType="INTEGER" property="lg" />
+    <result column="lg_bug" jdbcType="INTEGER" property="lgBug" />
+    <result column="qdj_bug" jdbcType="INTEGER" property="qdjBug" />
+    <result column="gzd_bug" jdbcType="VARCHAR" property="gzdBug" />
+    <result column="other" jdbcType="VARCHAR" property="other" />
+    <result column="other_bug" jdbcType="INTEGER" property="otherBug" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, car_id, abs, abs_bug, qn, qn_bug, zxzl, zxzl_bug, ccbl, ccbl_bug, tc, tc_bug, 
+    cwhsj, cwhsj_bug, zycz, zytjfs, zygn, zy_bug, kt, kt_bug, yysb, yysb_bug, dh, dh_bug, 
+    dsxh, dsxh_bug, dcld, dcld_bug, dcyx, dcyx_bug, lg, lg_bug, qdj_bug, gzd_bug, other, 
+    other_bug
+  </sql>
+  <select id="selectByExample" parameterType="com.maizhong.auction.pojo.CkPzExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ck_pz
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ck_pz
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ck_pz
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maizhong.auction.pojo.CkPzExample">
+    delete from ck_pz
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maizhong.auction.pojo.CkPz">
+    insert into ck_pz (id, car_id, abs, 
+      abs_bug, qn, qn_bug, 
+      zxzl, zxzl_bug, ccbl, 
+      ccbl_bug, tc, tc_bug, 
+      cwhsj, cwhsj_bug, zycz, 
+      zytjfs, zygn, zy_bug, 
+      kt, kt_bug, yysb, yysb_bug, 
+      dh, dh_bug, dsxh, dsxh_bug, 
+      dcld, dcld_bug, dcyx, 
+      dcyx_bug, lg, lg_bug, 
+      qdj_bug, gzd_bug, other, 
+      other_bug)
+    values (#{id,jdbcType=BIGINT}, #{carId,jdbcType=BIGINT}, #{abs,jdbcType=INTEGER}, 
+      #{absBug,jdbcType=INTEGER}, #{qn,jdbcType=INTEGER}, #{qnBug,jdbcType=INTEGER}, 
+      #{zxzl,jdbcType=INTEGER}, #{zxzlBug,jdbcType=INTEGER}, #{ccbl,jdbcType=INTEGER}, 
+      #{ccblBug,jdbcType=INTEGER}, #{tc,jdbcType=INTEGER}, #{tcBug,jdbcType=INTEGER}, 
+      #{cwhsj,jdbcType=INTEGER}, #{cwhsjBug,jdbcType=INTEGER}, #{zycz,jdbcType=INTEGER}, 
+      #{zytjfs,jdbcType=INTEGER}, #{zygn,jdbcType=INTEGER}, #{zyBug,jdbcType=INTEGER}, 
+      #{kt,jdbcType=INTEGER}, #{ktBug,jdbcType=INTEGER}, #{yysb,jdbcType=INTEGER}, #{yysbBug,jdbcType=INTEGER}, 
+      #{dh,jdbcType=INTEGER}, #{dhBug,jdbcType=INTEGER}, #{dsxh,jdbcType=INTEGER}, #{dsxhBug,jdbcType=INTEGER}, 
+      #{dcld,jdbcType=INTEGER}, #{dcldBug,jdbcType=INTEGER}, #{dcyx,jdbcType=INTEGER}, 
+      #{dcyxBug,jdbcType=INTEGER}, #{lg,jdbcType=INTEGER}, #{lgBug,jdbcType=INTEGER}, 
+      #{qdjBug,jdbcType=INTEGER}, #{gzdBug,jdbcType=VARCHAR}, #{other,jdbcType=VARCHAR}, 
+      #{otherBug,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maizhong.auction.pojo.CkPz">
+    <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID() AS id
+    </selectKey>
+    insert into ck_pz
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="carId != null">
+        car_id,
+      </if>
+      <if test="abs != null">
+        abs,
+      </if>
+      <if test="absBug != null">
+        abs_bug,
+      </if>
+      <if test="qn != null">
+        qn,
+      </if>
+      <if test="qnBug != null">
+        qn_bug,
+      </if>
+      <if test="zxzl != null">
+        zxzl,
+      </if>
+      <if test="zxzlBug != null">
+        zxzl_bug,
+      </if>
+      <if test="ccbl != null">
+        ccbl,
+      </if>
+      <if test="ccblBug != null">
+        ccbl_bug,
+      </if>
+      <if test="tc != null">
+        tc,
+      </if>
+      <if test="tcBug != null">
+        tc_bug,
+      </if>
+      <if test="cwhsj != null">
+        cwhsj,
+      </if>
+      <if test="cwhsjBug != null">
+        cwhsj_bug,
+      </if>
+      <if test="zycz != null">
+        zycz,
+      </if>
+      <if test="zytjfs != null">
+        zytjfs,
+      </if>
+      <if test="zygn != null">
+        zygn,
+      </if>
+      <if test="zyBug != null">
+        zy_bug,
+      </if>
+      <if test="kt != null">
+        kt,
+      </if>
+      <if test="ktBug != null">
+        kt_bug,
+      </if>
+      <if test="yysb != null">
+        yysb,
+      </if>
+      <if test="yysbBug != null">
+        yysb_bug,
+      </if>
+      <if test="dh != null">
+        dh,
+      </if>
+      <if test="dhBug != null">
+        dh_bug,
+      </if>
+      <if test="dsxh != null">
+        dsxh,
+      </if>
+      <if test="dsxhBug != null">
+        dsxh_bug,
+      </if>
+      <if test="dcld != null">
+        dcld,
+      </if>
+      <if test="dcldBug != null">
+        dcld_bug,
+      </if>
+      <if test="dcyx != null">
+        dcyx,
+      </if>
+      <if test="dcyxBug != null">
+        dcyx_bug,
+      </if>
+      <if test="lg != null">
+        lg,
+      </if>
+      <if test="lgBug != null">
+        lg_bug,
+      </if>
+      <if test="qdjBug != null">
+        qdj_bug,
+      </if>
+      <if test="gzdBug != null">
+        gzd_bug,
+      </if>
+      <if test="other != null">
+        other,
+      </if>
+      <if test="otherBug != null">
+        other_bug,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="carId != null">
+        #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="abs != null">
+        #{abs,jdbcType=INTEGER},
+      </if>
+      <if test="absBug != null">
+        #{absBug,jdbcType=INTEGER},
+      </if>
+      <if test="qn != null">
+        #{qn,jdbcType=INTEGER},
+      </if>
+      <if test="qnBug != null">
+        #{qnBug,jdbcType=INTEGER},
+      </if>
+      <if test="zxzl != null">
+        #{zxzl,jdbcType=INTEGER},
+      </if>
+      <if test="zxzlBug != null">
+        #{zxzlBug,jdbcType=INTEGER},
+      </if>
+      <if test="ccbl != null">
+        #{ccbl,jdbcType=INTEGER},
+      </if>
+      <if test="ccblBug != null">
+        #{ccblBug,jdbcType=INTEGER},
+      </if>
+      <if test="tc != null">
+        #{tc,jdbcType=INTEGER},
+      </if>
+      <if test="tcBug != null">
+        #{tcBug,jdbcType=INTEGER},
+      </if>
+      <if test="cwhsj != null">
+        #{cwhsj,jdbcType=INTEGER},
+      </if>
+      <if test="cwhsjBug != null">
+        #{cwhsjBug,jdbcType=INTEGER},
+      </if>
+      <if test="zycz != null">
+        #{zycz,jdbcType=INTEGER},
+      </if>
+      <if test="zytjfs != null">
+        #{zytjfs,jdbcType=INTEGER},
+      </if>
+      <if test="zygn != null">
+        #{zygn,jdbcType=INTEGER},
+      </if>
+      <if test="zyBug != null">
+        #{zyBug,jdbcType=INTEGER},
+      </if>
+      <if test="kt != null">
+        #{kt,jdbcType=INTEGER},
+      </if>
+      <if test="ktBug != null">
+        #{ktBug,jdbcType=INTEGER},
+      </if>
+      <if test="yysb != null">
+        #{yysb,jdbcType=INTEGER},
+      </if>
+      <if test="yysbBug != null">
+        #{yysbBug,jdbcType=INTEGER},
+      </if>
+      <if test="dh != null">
+        #{dh,jdbcType=INTEGER},
+      </if>
+      <if test="dhBug != null">
+        #{dhBug,jdbcType=INTEGER},
+      </if>
+      <if test="dsxh != null">
+        #{dsxh,jdbcType=INTEGER},
+      </if>
+      <if test="dsxhBug != null">
+        #{dsxhBug,jdbcType=INTEGER},
+      </if>
+      <if test="dcld != null">
+        #{dcld,jdbcType=INTEGER},
+      </if>
+      <if test="dcldBug != null">
+        #{dcldBug,jdbcType=INTEGER},
+      </if>
+      <if test="dcyx != null">
+        #{dcyx,jdbcType=INTEGER},
+      </if>
+      <if test="dcyxBug != null">
+        #{dcyxBug,jdbcType=INTEGER},
+      </if>
+      <if test="lg != null">
+        #{lg,jdbcType=INTEGER},
+      </if>
+      <if test="lgBug != null">
+        #{lgBug,jdbcType=INTEGER},
+      </if>
+      <if test="qdjBug != null">
+        #{qdjBug,jdbcType=INTEGER},
+      </if>
+      <if test="gzdBug != null">
+        #{gzdBug,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null">
+        #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="otherBug != null">
+        #{otherBug,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maizhong.auction.pojo.CkPzExample" resultType="java.lang.Long">
+    select count(*) from ck_pz
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ck_pz
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.carId != null">
+        car_id = #{record.carId,jdbcType=BIGINT},
+      </if>
+      <if test="record.abs != null">
+        abs = #{record.abs,jdbcType=INTEGER},
+      </if>
+      <if test="record.absBug != null">
+        abs_bug = #{record.absBug,jdbcType=INTEGER},
+      </if>
+      <if test="record.qn != null">
+        qn = #{record.qn,jdbcType=INTEGER},
+      </if>
+      <if test="record.qnBug != null">
+        qn_bug = #{record.qnBug,jdbcType=INTEGER},
+      </if>
+      <if test="record.zxzl != null">
+        zxzl = #{record.zxzl,jdbcType=INTEGER},
+      </if>
+      <if test="record.zxzlBug != null">
+        zxzl_bug = #{record.zxzlBug,jdbcType=INTEGER},
+      </if>
+      <if test="record.ccbl != null">
+        ccbl = #{record.ccbl,jdbcType=INTEGER},
+      </if>
+      <if test="record.ccblBug != null">
+        ccbl_bug = #{record.ccblBug,jdbcType=INTEGER},
+      </if>
+      <if test="record.tc != null">
+        tc = #{record.tc,jdbcType=INTEGER},
+      </if>
+      <if test="record.tcBug != null">
+        tc_bug = #{record.tcBug,jdbcType=INTEGER},
+      </if>
+      <if test="record.cwhsj != null">
+        cwhsj = #{record.cwhsj,jdbcType=INTEGER},
+      </if>
+      <if test="record.cwhsjBug != null">
+        cwhsj_bug = #{record.cwhsjBug,jdbcType=INTEGER},
+      </if>
+      <if test="record.zycz != null">
+        zycz = #{record.zycz,jdbcType=INTEGER},
+      </if>
+      <if test="record.zytjfs != null">
+        zytjfs = #{record.zytjfs,jdbcType=INTEGER},
+      </if>
+      <if test="record.zygn != null">
+        zygn = #{record.zygn,jdbcType=INTEGER},
+      </if>
+      <if test="record.zyBug != null">
+        zy_bug = #{record.zyBug,jdbcType=INTEGER},
+      </if>
+      <if test="record.kt != null">
+        kt = #{record.kt,jdbcType=INTEGER},
+      </if>
+      <if test="record.ktBug != null">
+        kt_bug = #{record.ktBug,jdbcType=INTEGER},
+      </if>
+      <if test="record.yysb != null">
+        yysb = #{record.yysb,jdbcType=INTEGER},
+      </if>
+      <if test="record.yysbBug != null">
+        yysb_bug = #{record.yysbBug,jdbcType=INTEGER},
+      </if>
+      <if test="record.dh != null">
+        dh = #{record.dh,jdbcType=INTEGER},
+      </if>
+      <if test="record.dhBug != null">
+        dh_bug = #{record.dhBug,jdbcType=INTEGER},
+      </if>
+      <if test="record.dsxh != null">
+        dsxh = #{record.dsxh,jdbcType=INTEGER},
+      </if>
+      <if test="record.dsxhBug != null">
+        dsxh_bug = #{record.dsxhBug,jdbcType=INTEGER},
+      </if>
+      <if test="record.dcld != null">
+        dcld = #{record.dcld,jdbcType=INTEGER},
+      </if>
+      <if test="record.dcldBug != null">
+        dcld_bug = #{record.dcldBug,jdbcType=INTEGER},
+      </if>
+      <if test="record.dcyx != null">
+        dcyx = #{record.dcyx,jdbcType=INTEGER},
+      </if>
+      <if test="record.dcyxBug != null">
+        dcyx_bug = #{record.dcyxBug,jdbcType=INTEGER},
+      </if>
+      <if test="record.lg != null">
+        lg = #{record.lg,jdbcType=INTEGER},
+      </if>
+      <if test="record.lgBug != null">
+        lg_bug = #{record.lgBug,jdbcType=INTEGER},
+      </if>
+      <if test="record.qdjBug != null">
+        qdj_bug = #{record.qdjBug,jdbcType=INTEGER},
+      </if>
+      <if test="record.gzdBug != null">
+        gzd_bug = #{record.gzdBug,jdbcType=VARCHAR},
+      </if>
+      <if test="record.other != null">
+        other = #{record.other,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otherBug != null">
+        other_bug = #{record.otherBug,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ck_pz
+    set id = #{record.id,jdbcType=BIGINT},
+      car_id = #{record.carId,jdbcType=BIGINT},
+      abs = #{record.abs,jdbcType=INTEGER},
+      abs_bug = #{record.absBug,jdbcType=INTEGER},
+      qn = #{record.qn,jdbcType=INTEGER},
+      qn_bug = #{record.qnBug,jdbcType=INTEGER},
+      zxzl = #{record.zxzl,jdbcType=INTEGER},
+      zxzl_bug = #{record.zxzlBug,jdbcType=INTEGER},
+      ccbl = #{record.ccbl,jdbcType=INTEGER},
+      ccbl_bug = #{record.ccblBug,jdbcType=INTEGER},
+      tc = #{record.tc,jdbcType=INTEGER},
+      tc_bug = #{record.tcBug,jdbcType=INTEGER},
+      cwhsj = #{record.cwhsj,jdbcType=INTEGER},
+      cwhsj_bug = #{record.cwhsjBug,jdbcType=INTEGER},
+      zycz = #{record.zycz,jdbcType=INTEGER},
+      zytjfs = #{record.zytjfs,jdbcType=INTEGER},
+      zygn = #{record.zygn,jdbcType=INTEGER},
+      zy_bug = #{record.zyBug,jdbcType=INTEGER},
+      kt = #{record.kt,jdbcType=INTEGER},
+      kt_bug = #{record.ktBug,jdbcType=INTEGER},
+      yysb = #{record.yysb,jdbcType=INTEGER},
+      yysb_bug = #{record.yysbBug,jdbcType=INTEGER},
+      dh = #{record.dh,jdbcType=INTEGER},
+      dh_bug = #{record.dhBug,jdbcType=INTEGER},
+      dsxh = #{record.dsxh,jdbcType=INTEGER},
+      dsxh_bug = #{record.dsxhBug,jdbcType=INTEGER},
+      dcld = #{record.dcld,jdbcType=INTEGER},
+      dcld_bug = #{record.dcldBug,jdbcType=INTEGER},
+      dcyx = #{record.dcyx,jdbcType=INTEGER},
+      dcyx_bug = #{record.dcyxBug,jdbcType=INTEGER},
+      lg = #{record.lg,jdbcType=INTEGER},
+      lg_bug = #{record.lgBug,jdbcType=INTEGER},
+      qdj_bug = #{record.qdjBug,jdbcType=INTEGER},
+      gzd_bug = #{record.gzdBug,jdbcType=VARCHAR},
+      other = #{record.other,jdbcType=VARCHAR},
+      other_bug = #{record.otherBug,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.auction.pojo.CkPz">
+    update ck_pz
+    <set>
+      <if test="carId != null">
+        car_id = #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="abs != null">
+        abs = #{abs,jdbcType=INTEGER},
+      </if>
+      <if test="absBug != null">
+        abs_bug = #{absBug,jdbcType=INTEGER},
+      </if>
+      <if test="qn != null">
+        qn = #{qn,jdbcType=INTEGER},
+      </if>
+      <if test="qnBug != null">
+        qn_bug = #{qnBug,jdbcType=INTEGER},
+      </if>
+      <if test="zxzl != null">
+        zxzl = #{zxzl,jdbcType=INTEGER},
+      </if>
+      <if test="zxzlBug != null">
+        zxzl_bug = #{zxzlBug,jdbcType=INTEGER},
+      </if>
+      <if test="ccbl != null">
+        ccbl = #{ccbl,jdbcType=INTEGER},
+      </if>
+      <if test="ccblBug != null">
+        ccbl_bug = #{ccblBug,jdbcType=INTEGER},
+      </if>
+      <if test="tc != null">
+        tc = #{tc,jdbcType=INTEGER},
+      </if>
+      <if test="tcBug != null">
+        tc_bug = #{tcBug,jdbcType=INTEGER},
+      </if>
+      <if test="cwhsj != null">
+        cwhsj = #{cwhsj,jdbcType=INTEGER},
+      </if>
+      <if test="cwhsjBug != null">
+        cwhsj_bug = #{cwhsjBug,jdbcType=INTEGER},
+      </if>
+      <if test="zycz != null">
+        zycz = #{zycz,jdbcType=INTEGER},
+      </if>
+      <if test="zytjfs != null">
+        zytjfs = #{zytjfs,jdbcType=INTEGER},
+      </if>
+      <if test="zygn != null">
+        zygn = #{zygn,jdbcType=INTEGER},
+      </if>
+      <if test="zyBug != null">
+        zy_bug = #{zyBug,jdbcType=INTEGER},
+      </if>
+      <if test="kt != null">
+        kt = #{kt,jdbcType=INTEGER},
+      </if>
+      <if test="ktBug != null">
+        kt_bug = #{ktBug,jdbcType=INTEGER},
+      </if>
+      <if test="yysb != null">
+        yysb = #{yysb,jdbcType=INTEGER},
+      </if>
+      <if test="yysbBug != null">
+        yysb_bug = #{yysbBug,jdbcType=INTEGER},
+      </if>
+      <if test="dh != null">
+        dh = #{dh,jdbcType=INTEGER},
+      </if>
+      <if test="dhBug != null">
+        dh_bug = #{dhBug,jdbcType=INTEGER},
+      </if>
+      <if test="dsxh != null">
+        dsxh = #{dsxh,jdbcType=INTEGER},
+      </if>
+      <if test="dsxhBug != null">
+        dsxh_bug = #{dsxhBug,jdbcType=INTEGER},
+      </if>
+      <if test="dcld != null">
+        dcld = #{dcld,jdbcType=INTEGER},
+      </if>
+      <if test="dcldBug != null">
+        dcld_bug = #{dcldBug,jdbcType=INTEGER},
+      </if>
+      <if test="dcyx != null">
+        dcyx = #{dcyx,jdbcType=INTEGER},
+      </if>
+      <if test="dcyxBug != null">
+        dcyx_bug = #{dcyxBug,jdbcType=INTEGER},
+      </if>
+      <if test="lg != null">
+        lg = #{lg,jdbcType=INTEGER},
+      </if>
+      <if test="lgBug != null">
+        lg_bug = #{lgBug,jdbcType=INTEGER},
+      </if>
+      <if test="qdjBug != null">
+        qdj_bug = #{qdjBug,jdbcType=INTEGER},
+      </if>
+      <if test="gzdBug != null">
+        gzd_bug = #{gzdBug,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null">
+        other = #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="otherBug != null">
+        other_bug = #{otherBug,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maizhong.auction.pojo.CkPz">
+    update ck_pz
+    set car_id = #{carId,jdbcType=BIGINT},
+      abs = #{abs,jdbcType=INTEGER},
+      abs_bug = #{absBug,jdbcType=INTEGER},
+      qn = #{qn,jdbcType=INTEGER},
+      qn_bug = #{qnBug,jdbcType=INTEGER},
+      zxzl = #{zxzl,jdbcType=INTEGER},
+      zxzl_bug = #{zxzlBug,jdbcType=INTEGER},
+      ccbl = #{ccbl,jdbcType=INTEGER},
+      ccbl_bug = #{ccblBug,jdbcType=INTEGER},
+      tc = #{tc,jdbcType=INTEGER},
+      tc_bug = #{tcBug,jdbcType=INTEGER},
+      cwhsj = #{cwhsj,jdbcType=INTEGER},
+      cwhsj_bug = #{cwhsjBug,jdbcType=INTEGER},
+      zycz = #{zycz,jdbcType=INTEGER},
+      zytjfs = #{zytjfs,jdbcType=INTEGER},
+      zygn = #{zygn,jdbcType=INTEGER},
+      zy_bug = #{zyBug,jdbcType=INTEGER},
+      kt = #{kt,jdbcType=INTEGER},
+      kt_bug = #{ktBug,jdbcType=INTEGER},
+      yysb = #{yysb,jdbcType=INTEGER},
+      yysb_bug = #{yysbBug,jdbcType=INTEGER},
+      dh = #{dh,jdbcType=INTEGER},
+      dh_bug = #{dhBug,jdbcType=INTEGER},
+      dsxh = #{dsxh,jdbcType=INTEGER},
+      dsxh_bug = #{dsxhBug,jdbcType=INTEGER},
+      dcld = #{dcld,jdbcType=INTEGER},
+      dcld_bug = #{dcldBug,jdbcType=INTEGER},
+      dcyx = #{dcyx,jdbcType=INTEGER},
+      dcyx_bug = #{dcyxBug,jdbcType=INTEGER},
+      lg = #{lg,jdbcType=INTEGER},
+      lg_bug = #{lgBug,jdbcType=INTEGER},
+      qdj_bug = #{qdjBug,jdbcType=INTEGER},
+      gzd_bug = #{gzdBug,jdbcType=VARCHAR},
+      other = #{other,jdbcType=VARCHAR},
+      other_bug = #{otherBug,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

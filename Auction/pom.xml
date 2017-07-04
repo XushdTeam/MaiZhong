@@ -102,25 +102,11 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-
-
-        <dependency>
-            <groupId>org.jsoup</groupId>
-            <artifactId>jsoup</artifactId>
-            <version>1.10.2</version>
-        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.directwebremoting/dwr &ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>org.directwebremoting</groupId>-->
-            <!--<artifactId>dwr</artifactId>-->
-            <!--<version>3.0.2-RELEASE</version>-->
-        <!--</dependency>-->
-
 
     </dependencies>
 

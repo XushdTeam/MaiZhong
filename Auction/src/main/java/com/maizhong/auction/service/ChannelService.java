@@ -1,7 +1,5 @@
 package com.maizhong.auction.service;
 
-import com.maizhong.auction.dto.RedisMessage;
-
 /**
  * Created by Xushd on 2017/6/10.
  */

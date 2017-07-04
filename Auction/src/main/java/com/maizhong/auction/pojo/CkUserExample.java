@@ -495,6 +495,126 @@ public class CkUserExample {
             return (Criteria) this;
         }
 
+        public Criteria andStatusIsNull() {
+            addCriterion("status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNotNull() {
+            addCriterion("status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusEqualTo(Integer value) {
+            addCriterion("status =", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotEqualTo(Integer value) {
+            addCriterion("status <>", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThan(Integer value) {
+            addCriterion("status >", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("status >=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThan(Integer value) {
+            addCriterion("status <", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("status <=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<Integer> values) {
+            addCriterion("status in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotIn(List<Integer> values) {
+            addCriterion("status not in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusBetween(Integer value1, Integer value2) {
+            addCriterion("status between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("status not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagIsNull() {
+            addCriterion("delflag is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagIsNotNull() {
+            addCriterion("delflag is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagEqualTo(Integer value) {
+            addCriterion("delflag =", value, "delflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagNotEqualTo(Integer value) {
+            addCriterion("delflag <>", value, "delflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagGreaterThan(Integer value) {
+            addCriterion("delflag >", value, "delflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagGreaterThanOrEqualTo(Integer value) {
+            addCriterion("delflag >=", value, "delflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagLessThan(Integer value) {
+            addCriterion("delflag <", value, "delflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagLessThanOrEqualTo(Integer value) {
+            addCriterion("delflag <=", value, "delflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagIn(List<Integer> values) {
+            addCriterion("delflag in", values, "delflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagNotIn(List<Integer> values) {
+            addCriterion("delflag not in", values, "delflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagBetween(Integer value1, Integer value2) {
+            addCriterion("delflag between", value1, value2, "delflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelflagNotBetween(Integer value1, Integer value2) {
+            addCriterion("delflag not between", value1, value2, "delflag");
+            return (Criteria) this;
+        }
+
         public Criteria andUpdateTimeIsNull() {
             addCriterion("update_time is null");
             return (Criteria) this;

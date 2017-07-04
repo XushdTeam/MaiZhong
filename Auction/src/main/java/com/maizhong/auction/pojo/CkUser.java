@@ -15,7 +15,21 @@ public class CkUser {
 
     private String password;
 
+    private Integer status;
+
+    private Integer delflag;
+
     private Date updateTime;
+
+    private String companyName;
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
 
     public Long getId() {
         return id;
@@ -63,6 +77,22 @@ public class CkUser {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getDelflag() {
+        return delflag;
+    }
+
+    public void setDelflag(Integer delflag) {
+        this.delflag = delflag;
     }
 
     public Date getUpdateTime() {

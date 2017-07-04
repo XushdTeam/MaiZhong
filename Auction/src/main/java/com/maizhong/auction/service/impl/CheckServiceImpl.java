@@ -1,14 +1,11 @@
 package com.maizhong.auction.service.impl;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.maizhong.auction.dao.JedisClient;
 import com.maizhong.auction.dto.CarBaseDto;
 import com.maizhong.auction.mapper.*;
 import com.maizhong.auction.pojo.*;
 import com.maizhong.auction.service.CheckService;
-import com.maizhong.common.dto.CarBaseDTO;
-import com.maizhong.common.dto.CarBrandDTO;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.IDUtils;
@@ -16,15 +13,12 @@ import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.common.utils.TimeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionDefinition;
-import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
 
-import javax.annotation.Resource;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Xushd on 2017/6/14.
@@ -53,10 +47,33 @@ public class CheckServiceImpl implements CheckService {
     @Autowired
     private CkBaseimgMapper ckBaseimgMapper;
     @Autowired
+    private CkPzMapper ckPzMapper;
+    @Autowired
+    private CkDlMapper ckDlMapper;
+
+    @Autowired
+    private CkCkwgqxMapper ckCkwgqxMapper;
+    @Autowired
+    private CkCknsqxMapper ckCknsqxMapper;
+    @Autowired
+    private CkCksgMapper ckCksgMapper;
+    @Autowired
+    private CkCkpsMapper ckCkpsMapper;
+    @Autowired
+    private CkCkhsMapper ckCkhsMapper;
+    @Autowired
+    private CkVerifyMapper ckVerifyMapper;
+    @Autowired
+    private CkOtherMapper ckOtherMapper;
+    @Autowired
+    private CkCarmodelMapper carmodelMapper;
+
+    @Autowired
     private JedisClient jedisClient;
 
-    @Resource(name = "transactionManager")
-    private DataSourceTransactionManager transactionManager;
+
+//    @Resource(name = "transactionManager")
+//    private DataSourceTransactionManager transactionManager;
 
 
     @Override
@@ -248,6 +265,7 @@ public class CheckServiceImpl implements CheckService {
             xsz.setId(null);
             int i = ckXszMapper.insertSelective(xsz);
             if (i > 0) {
+
                 return JsonResult.OK(xsz.getId());
             }
         } else {
@@ -319,6 +337,11 @@ public class CheckServiceImpl implements CheckService {
 
     }
 
+    /**
+     * 获取手续信息
+     * @param carId
+     * @return
+     */
     @Override
     public JsonResult getCarStep1(long carId) {
 
@@ -328,24 +351,28 @@ public class CheckServiceImpl implements CheckService {
         CkXszExample.Criteria xszExampleCriteria = xszExample.createCriteria();
         xszExampleCriteria.andCarIdEqualTo(carId);
         List<CkXsz> ckXszs = ckXszMapper.selectByExample(xszExample);
+        if(ckXszs.size()==0)ckXszs.add(new CkXsz());
         object.put("xsz", ckXszs.get(0));
         //djz
         CkDjzExample djzExample = new CkDjzExample();
         CkDjzExample.Criteria djzExampleCriteria = djzExample.createCriteria();
         djzExampleCriteria.andCarIdEqualTo(carId);
         List<CkDjz> ckDjzs = ckDjzMapper.selectByExample(djzExample);
+        if(ckDjzs.size()==0)ckDjzs.add(new CkDjz());
         object.put("djz", ckDjzs.get(0));
         //tqz
         CkQtzExample qtzExample = new CkQtzExample();
         CkQtzExample.Criteria qtzExampleCriteria = qtzExample.createCriteria();
         qtzExampleCriteria.andCarIdEqualTo(carId);
         List<CkQtz> ckQtzs = ckQtzMapper.selectByExample(qtzExample);
+        if(ckQtzs.size()==0)ckQtzs.add(new CkQtz());
         object.put("qtz", ckQtzs.get(0));
         //czxx
         CkCzinfoExample ckCzinfoExample = new CkCzinfoExample();
         CkCzinfoExample.Criteria ckCzinfoExampleCriteria = ckCzinfoExample.createCriteria();
         ckCzinfoExampleCriteria.andCarIdEqualTo(carId);
         List<CkCzinfo> ckCzinfos = ckCzinfoMapper.selectByExample(ckCzinfoExample);
+        if(ckCzinfos.size()==0)ckCzinfos.add(new CkCzinfo());
         object.put("czxx", ckCzinfos.get(0));
 
         return JsonResult.OK(object);
@@ -379,11 +406,17 @@ public class CheckServiceImpl implements CheckService {
         if (ckBaseimgs.size() == 0) {
             CkBaseimg ckBaseimg = new CkBaseimg();
             ckBaseimg.setId(-1L);
+            ckBaseimg.setCarId(carId);
             ckBaseimgs.add(ckBaseimg);
         }
         return JsonResult.OK(ckBaseimgs.get(0));
     }
 
+    /**
+     * 车辆删除
+     * @param carId
+     * @return
+     */
     @Override
     @Transactional
     public JsonResult checkCarDel(long carId) {
@@ -419,6 +452,357 @@ public class CheckServiceImpl implements CheckService {
         if(i>0)return JsonResult.OK();
         return JsonResult.Error(OperateEnum.SERVER_ERROR);
 
+
+    }
+
+    /**
+     * 保存车辆配置信息
+     * @param ckPz
+     * @return
+     */
+    @Override
+    public JsonResult savePZ(CkPz ckPz) {
+        if (ckPz.getCarId() == null) return JsonResult.Error(OperateEnum.FAILE);
+        if (ckPz.getId() == -1) {
+            ckPz.setId(null);
+            int i = ckPzMapper.insertSelective(ckPz);
+            if (i > 0) {
+                return JsonResult.OK(ckPz.getId());
+            }
+        } else {
+            int i = ckPzMapper.updateByPrimaryKeySelective(ckPz);
+            if (i > 0) {
+                return JsonResult.OK();
+            }
+        }
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
+
+    }
+
+    /**
+     * 保存或更新车辆的动力检测信息
+     * @param ckDl
+     * @return
+     */
+    @Override
+    public JsonResult saveDL(CkDl ckDl) {
+        if (ckDl.getCarId() == null) return JsonResult.Error(OperateEnum.FAILE);
+        if (ckDl.getId() == -1) {
+            ckDl.setId(null);
+            int i = ckDlMapper.insertSelective(ckDl);
+            if (i > 0) {
+                return JsonResult.OK(ckDl.getId());
+            }
+        } else {
+            int i = ckDlMapper.updateByPrimaryKeySelective(ckDl);
+            if (i > 0) {
+                return JsonResult.OK();
+            }
+        }
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
+    }
+
+    /**
+     * 获取配置动力检测信息
+     * @param carId
+     * @return
+     */
+    @Override
+    public JsonResult getCarStep4(long carId) {
+
+        JSONObject jsonObject = new JSONObject();
+
+        CkPzExample ckPzExample = new CkPzExample();
+        CkPzExample.Criteria ckPzExampleCriteria = ckPzExample.createCriteria();
+        ckPzExampleCriteria.andCarIdEqualTo(carId);
+        List<CkPz> ckPzs = ckPzMapper.selectByExample(ckPzExample);
+        if(ckPzs.size()==0)ckPzs.add(new CkPz());
+        jsonObject.put("pz",ckPzs.get(0));
+
+        CkDlExample ckDlExample = new CkDlExample();
+        CkDlExample.Criteria ckDlExampleCriteria = ckDlExample.createCriteria();
+        ckDlExampleCriteria.andCarIdEqualTo(carId);
+        List<CkDl> ckDls = ckDlMapper.selectByExample(ckDlExample);
+        if(ckDls.size()==0)ckDls.add(new CkDl());
+        jsonObject.put("dl",ckDls.get(0));
+
+
+        return JsonResult.OK(jsonObject);
+    }
+
+    /**
+     * 外观缺陷保存
+     * @param list
+     * @param carId
+     * @return
+     */
+    @Override
+    @Transactional
+    public JsonResult saveWgqx(List<CkCkwgqx> list, long carId) {
+
+        //清楚当前车辆的所有外观缺陷
+        CkCkwgqxExample example = new CkCkwgqxExample();
+        CkCkwgqxExample.Criteria criteria = example.createCriteria();
+        criteria.andCarIdEqualTo(carId);
+        ckCkwgqxMapper.deleteByExample(example);
+        for (CkCkwgqx ckCkwgqx : list) {
+            ckCkwgqx.setCarId(carId);
+            ckCkwgqx.setId(null);
+            ckCkwgqxMapper.insertSelective(ckCkwgqx);
+        }
+        List<CkCkwgqx> ckCkwgqxes = ckCkwgqxMapper.selectByExample(example);
+        return JsonResult.OK(ckCkwgqxes);
+    }
+
+    /**
+     * 内饰缺陷保存
+     * @param list
+     * @param carId
+     * @return
+     */
+    @Override
+    @Transactional
+    public JsonResult saveNsqx(List<CkCknsqx> list, long carId) {
+
+        CkCknsqxExample example = new CkCknsqxExample();
+        CkCknsqxExample.Criteria criteria = example.createCriteria();
+        criteria.andCarIdEqualTo(carId);
+        ckCknsqxMapper.deleteByExample(example);
+        for (CkCknsqx ckCknsqx : list) {
+            ckCknsqx.setCarId(carId);
+            ckCknsqx.setId(null);
+            ckCknsqxMapper.insertSelective(ckCknsqx);
+        }
+
+        List<CkCknsqx> ckCknsqxes = ckCknsqxMapper.selectByExample(example);
+        return JsonResult.OK(ckCknsqxes);
+
+    }
+
+    /**
+     * 保存事故信息
+     * @param list
+     * @param carId
+     * @return
+     */
+    @Override
+    @Transactional
+    public JsonResult saveSg(List<CkCksg> list, long carId) {
+
+        CkCksgExample example = new CkCksgExample();
+        CkCksgExample.Criteria criteria = example.createCriteria();
+        criteria.andCarIdEqualTo(carId);
+        ckCksgMapper.deleteByExample(example);
+
+        for (CkCksg ckCksg : list) {
+            ckCksg.setCarId(carId);
+            ckCksg.setId(null);
+            ckCksgMapper.insertSelective(ckCksg);
+        }
+        List<CkCksg> ckCksgs = ckCksgMapper.selectByExample(example);
+        return JsonResult.OK(ckCksgs);
+    }
+
+    /**
+     * 保存泡水信息
+     * @param list
+     * @param carId
+     * @return
+     */
+    @Override
+    @Transactional
+    public JsonResult savePs(List<CkCkps> list, long carId) {
+        CkCkpsExample example = new CkCkpsExample();
+        CkCkpsExample.Criteria criteria = example.createCriteria();
+        criteria.andCarIdEqualTo(carId);
+        ckCkpsMapper.deleteByExample(example);
+        for (CkCkps ckCkps : list) {
+            ckCkps.setCarId(carId);
+            ckCkps.setId(null);
+            ckCkpsMapper.insertSelective(ckCkps);
+        }
+        List<CkCkps> ckCkps = ckCkpsMapper.selectByExample(example);
+        return JsonResult.OK(ckCkps);
+    }
+
+    /**
+     * 保存火烧信息
+     * @param list
+     * @param carId
+     * @return
+     */
+    @Override
+    public JsonResult saveHs(List<CkCkhs> list, long carId) {
+
+        CkCkhsExample example = new CkCkhsExample();
+        CkCkhsExample.Criteria criteria = example.createCriteria();
+        criteria.andCarIdEqualTo(carId);
+        ckCkhsMapper.deleteByExample(example);
+        for (CkCkhs ckCkhs : list) {
+            ckCkhs.setCarId(carId);
+            ckCkhs.setId(null);
+            ckCkhsMapper.insertSelective(ckCkhs);
+        }
+        List<CkCkhs> ckCkhs = ckCkhsMapper.selectByExample(example);
+        return JsonResult.OK(ckCkhs);
+
+    }
+
+    @Override
+    public JsonResult getCarStep3(long carId) {
+        JSONObject object = new JSONObject();
+        //外观
+        CkCkwgqxExample example1 = new CkCkwgqxExample();
+        CkCkwgqxExample.Criteria criteria1 = example1.createCriteria();
+        criteria1.andCarIdEqualTo(carId);
+        List<CkCkwgqx> ckCkwgqxes = ckCkwgqxMapper.selectByExample(example1);
+        object.put("wgqx",ckCkwgqxes);
+        //内饰
+        CkCknsqxExample example2 = new CkCknsqxExample();
+        CkCknsqxExample.Criteria criteria2 = example2.createCriteria();
+        criteria2.andCarIdEqualTo(carId);
+        ckCknsqxMapper.selectByExample(example2);
+        List<CkCknsqx> ckCknsqxes = ckCknsqxMapper.selectByExample(example2);
+        object.put("nsqx",ckCknsqxes);
+        //事故
+        CkCksgExample example3 = new CkCksgExample();
+        CkCksgExample.Criteria criteria3 = example3.createCriteria();
+        criteria3.andCarIdEqualTo(carId);
+        List<CkCksg> ckCksgs = ckCksgMapper.selectByExample(example3);
+        object.put("sg",ckCksgs);
+        //泡水
+        CkCkpsExample example4 = new CkCkpsExample();
+        CkCkpsExample.Criteria criteria4 = example4.createCriteria();
+        criteria4.andCarIdEqualTo(carId);
+        List<CkCkps> ckCkps = ckCkpsMapper.selectByExample(example4);
+        object.put("ps",ckCkps);
+        //火烧
+        CkCkhsExample example5 = new CkCkhsExample();
+        CkCkhsExample.Criteria criteria5 = example5.createCriteria();
+        criteria5.andCarIdEqualTo(carId);
+        List<CkCkhs> ckCkhs = ckCkhsMapper.selectByExample(example5);
+        object.put("hs",ckCkhs);
+        return JsonResult.OK(object);
+    }
+
+    @Override
+    public JsonResult checkCarVerify(CkVerify verify) {
+        if(verify.getCarId()==null)return JsonResult.Error(OperateEnum.FAILE);
+        if (verify.getId() == -1) {
+            verify.setId(null);
+            int i = ckVerifyMapper.insertSelective(verify);
+            if (i > 0) {
+                return JsonResult.OK(verify.getId());
+            }
+        } else {
+            int i = ckVerifyMapper.updateByPrimaryKeySelective(verify);
+            if (i > 0) {
+                return JsonResult.OK();
+            }
+        }
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
+
+    }
+
+    @Override
+    public JsonResult checkCarOther(CkOther other) {
+        if(other.getCarId()==null)return JsonResult.Error(OperateEnum.FAILE);
+        if(other.getId()==-1){
+            other.setId(null);
+            int i = ckOtherMapper.insertSelective(other);
+            if(i>0){
+                return JsonResult.OK(other.getId());
+            }
+        }else{
+            int i = ckOtherMapper.updateByPrimaryKeySelective(other);
+            if(i>0){
+                return JsonResult.OK();
+            }
+        }
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
+    }
+
+    @Override
+    public JsonResult checkCarModel(CkCarmodel carmodel) {
+        if(carmodel.getCarId()==null)return JsonResult.Error(OperateEnum.FAILE);
+        if(carmodel.getId()==-1){
+            carmodel.setId(null);
+            int i = carmodelMapper.insertSelective(carmodel);
+            if(i>0){
+                return JsonResult.OK(carmodel.getId());
+            }
+        }else{
+            int i = carmodelMapper.updateByPrimaryKeySelective(carmodel);
+            if(i>0){
+                return JsonResult.OK();
+            }
+        }
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
+
+    }
+
+    @Override
+    public JsonResult getCarStep5(long carId) {
+
+        JSONObject jsonObject = new JSONObject();
+
+        CkCarmodelExample carmodelExample = new CkCarmodelExample();
+        CkCarmodelExample.Criteria carmodelExampleCriteria = carmodelExample.createCriteria();
+        carmodelExampleCriteria.andCarIdEqualTo(carId);
+        List<CkCarmodel> ckCarmodels = carmodelMapper.selectByExample(carmodelExample);
+        if(ckCarmodels.size()==0)ckCarmodels.add(new CkCarmodel());
+        jsonObject.put("model",ckCarmodels.get(0));
+
+        CkVerifyExample verifyExample = new CkVerifyExample();
+        CkVerifyExample.Criteria verifyExampleCriteria = verifyExample.createCriteria();
+        verifyExampleCriteria.andCarIdEqualTo(carId);
+        List<CkVerify> ckVerifies = ckVerifyMapper.selectByExample(verifyExample);
+        if(ckVerifies.size()==0)ckVerifies.add(new CkVerify());
+        jsonObject.put("verify",ckVerifies.get(0));
+
+        CkOtherExample otherExample = new CkOtherExample();
+        CkOtherExample.Criteria otherExampleCriteria = otherExample.createCriteria();
+        otherExampleCriteria.andCarIdEqualTo(carId);
+        List<CkOther> ckOthers = ckOtherMapper.selectByExample(otherExample);
+        if(ckOthers.size()==0)ckOthers.add(new CkOther());
+        jsonObject.put("other",ckOthers.get(0));
+
+
+        //要核对的信息
+        JSONObject objectHD = new JSONObject();
+        //行驶证
+        CkXszExample xszExample = new CkXszExample();
+        CkXszExample.Criteria xszExampleCriteria = xszExample.createCriteria();
+        xszExampleCriteria.andCarIdEqualTo(carId);
+        List<CkXsz> ckXszs = ckXszMapper.selectByExample(xszExample);
+        if(ckXszs.size()==0)ckXszs.add(new CkXsz());
+        objectHD.put("number", ckXszs.get(0).getNumber());
+        objectHD.put("pic1", ckXszs.get(0).getPic1());
+        objectHD.put("cjh", ckXszs.get(0).getCjh());
+        //djz
+        CkDjzExample djzExample = new CkDjzExample();
+        CkDjzExample.Criteria djzExampleCriteria = djzExample.createCriteria();
+        djzExampleCriteria.andCarIdEqualTo(carId);
+        List<CkDjz> ckDjzs = ckDjzMapper.selectByExample(djzExample);
+        if(ckDjzs.size()==0)ckDjzs.add(new CkDjz());
+        objectHD.put("ltgg", ckDjzs.get(0).getLtgg());
+        objectHD.put("ccrq", ckDjzs.get(0).getCcrq());
+
+        CkBaseimgExample ckBaseimgExample = new CkBaseimgExample();
+        CkBaseimgExample.Criteria criteria = ckBaseimgExample.createCriteria();
+        criteria.andCarIdEqualTo(carId);
+        List<CkBaseimg> ckBaseimgs = ckBaseimgMapper.selectByExample(ckBaseimgExample);
+        if(ckBaseimgs.size()==0)ckBaseimgs.add(new CkBaseimg());
+        objectHD.put("cphImg",ckBaseimgs.get(0).getCph());
+        objectHD.put("zq45Img",ckBaseimgs.get(0).getZq45());
+        objectHD.put("cjhImg",ckBaseimgs.get(0).getCjh());
+        objectHD.put("fdcjhImg",ckBaseimgs.get(0).getFdcjh());
+        objectHD.put("ybpImg",ckBaseimgs.get(0).getYbp());
+        objectHD.put("mpImg",ckBaseimgs.get(0).getMp());
+        objectHD.put("ltxhImg",ckBaseimgs.get(0).getLtxh());
+
+        jsonObject.put("HD",objectHD);
+        return JsonResult.OK(jsonObject);
 
     }
 

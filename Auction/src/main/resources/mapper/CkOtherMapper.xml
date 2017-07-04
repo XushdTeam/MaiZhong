@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maizhong.auction.mapper.CkOtherMapper">
+  <resultMap id="BaseResultMap" type="com.maizhong.auction.pojo.CkOther">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="car_id" jdbcType="BIGINT" property="carId" />
+    <result column="wz_f" jdbcType="INTEGER" property="wzF" />
+    <result column="wz_q" jdbcType="VARCHAR" property="wzQ" />
+    <result column="pfbz" jdbcType="INTEGER" property="pfbz" />
+    <result column="other" jdbcType="VARCHAR" property="other" />
+    <result column="qmgjd" jdbcType="INTEGER" property="qmgjd" />
+    <result column="pj" jdbcType="INTEGER" property="pj" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, car_id, wz_f, wz_q, pfbz, other, qmgjd, pj
+  </sql>
+  <select id="selectByExample" parameterType="com.maizhong.auction.pojo.CkOtherExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ck_other
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ck_other
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ck_other
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maizhong.auction.pojo.CkOtherExample">
+    delete from ck_other
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maizhong.auction.pojo.CkOther">
+    insert into ck_other (id, car_id, wz_f, 
+      wz_q, pfbz, other, qmgjd, 
+      pj)
+    values (#{id,jdbcType=BIGINT}, #{carId,jdbcType=BIGINT}, #{wzF,jdbcType=INTEGER}, 
+      #{wzQ,jdbcType=VARCHAR}, #{pfbz,jdbcType=INTEGER}, #{other,jdbcType=VARCHAR}, #{qmgjd,jdbcType=INTEGER}, 
+      #{pj,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maizhong.auction.pojo.CkOther">
+    <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID() AS id
+    </selectKey>
+    insert into ck_other
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="carId != null">
+        car_id,
+      </if>
+      <if test="wzF != null">
+        wz_f,
+      </if>
+      <if test="wzQ != null">
+        wz_q,
+      </if>
+      <if test="pfbz != null">
+        pfbz,
+      </if>
+      <if test="other != null">
+        other,
+      </if>
+      <if test="qmgjd != null">
+        qmgjd,
+      </if>
+      <if test="pj != null">
+        pj,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="carId != null">
+        #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="wzF != null">
+        #{wzF,jdbcType=INTEGER},
+      </if>
+      <if test="wzQ != null">
+        #{wzQ,jdbcType=VARCHAR},
+      </if>
+      <if test="pfbz != null">
+        #{pfbz,jdbcType=INTEGER},
+      </if>
+      <if test="other != null">
+        #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="qmgjd != null">
+        #{qmgjd,jdbcType=INTEGER},
+      </if>
+      <if test="pj != null">
+        #{pj,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maizhong.auction.pojo.CkOtherExample" resultType="java.lang.Long">
+    select count(*) from ck_other
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ck_other
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.carId != null">
+        car_id = #{record.carId,jdbcType=BIGINT},
+      </if>
+      <if test="record.wzF != null">
+        wz_f = #{record.wzF,jdbcType=INTEGER},
+      </if>
+      <if test="record.wzQ != null">
+        wz_q = #{record.wzQ,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pfbz != null">
+        pfbz = #{record.pfbz,jdbcType=INTEGER},
+      </if>
+      <if test="record.other != null">
+        other = #{record.other,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qmgjd != null">
+        qmgjd = #{record.qmgjd,jdbcType=INTEGER},
+      </if>
+      <if test="record.pj != null">
+        pj = #{record.pj,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ck_other
+    set id = #{record.id,jdbcType=BIGINT},
+      car_id = #{record.carId,jdbcType=BIGINT},
+      wz_f = #{record.wzF,jdbcType=INTEGER},
+      wz_q = #{record.wzQ,jdbcType=VARCHAR},
+      pfbz = #{record.pfbz,jdbcType=INTEGER},
+      other = #{record.other,jdbcType=VARCHAR},
+      qmgjd = #{record.qmgjd,jdbcType=INTEGER},
+      pj = #{record.pj,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.auction.pojo.CkOther">
+    update ck_other
+    <set>
+      <if test="carId != null">
+        car_id = #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="wzF != null">
+        wz_f = #{wzF,jdbcType=INTEGER},
+      </if>
+      <if test="wzQ != null">
+        wz_q = #{wzQ,jdbcType=VARCHAR},
+      </if>
+      <if test="pfbz != null">
+        pfbz = #{pfbz,jdbcType=INTEGER},
+      </if>
+      <if test="other != null">
+        other = #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="qmgjd != null">
+        qmgjd = #{qmgjd,jdbcType=INTEGER},
+      </if>
+      <if test="pj != null">
+        pj = #{pj,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maizhong.auction.pojo.CkOther">
+    update ck_other
+    set car_id = #{carId,jdbcType=BIGINT},
+      wz_f = #{wzF,jdbcType=INTEGER},
+      wz_q = #{wzQ,jdbcType=VARCHAR},
+      pfbz = #{pfbz,jdbcType=INTEGER},
+      other = #{other,jdbcType=VARCHAR},
+      qmgjd = #{qmgjd,jdbcType=INTEGER},
+      pj = #{pj,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

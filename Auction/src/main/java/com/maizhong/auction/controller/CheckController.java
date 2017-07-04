@@ -1,17 +1,20 @@
 package com.maizhong.auction.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.maizhong.auction.pojo.*;
 import com.maizhong.auction.service.CheckService;
 import com.maizhong.auction.service.ImgUploadService;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
+import com.maizhong.common.utils.JsonUtils;
+import net.sf.json.JSON;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by Xushd on 2017/6/14.
@@ -228,5 +231,168 @@ public class CheckController {
         return result;
     }
 
+    /**
+     * 保存/更新车辆配置信息
+     * @param ckPz
+     * @return
+     */
+    @RequestMapping(value = "/app/check/car/pz/save")
+    public JsonResult checkPz(CkPz ckPz){
+        if(ckPz==null)return JsonResult.Error(OperateEnum.FAILE);
+        JsonResult result = checkService.savePZ(ckPz);
+        return result;
+    }
+
+    /**
+     * 保存/更新车辆动力检测信息
+     * @param ckDl
+     * @return
+     */
+    @RequestMapping(value = "/app/check/car/dl/save")
+    public JsonResult checkDL(CkDl ckDl){
+        if(ckDl==null)return JsonResult.Error(OperateEnum.FAILE);
+        JsonResult result = checkService.saveDL(ckDl);
+        return result;
+    }
+
+
+    /**
+     * 获取车辆信息的配置动力 pz dl
+     * @param carId
+     * @return
+     */
+    @RequestMapping(value = "/app/check/car/step4/{carId}")
+    public JsonResult checkCarSTEP4(@PathVariable long carId){
+        JsonResult result = checkService.getCarStep4(carId);
+        return result;
+    }
+
+    /**
+     * 外观缺陷故障保存
+     * @param list
+     * @return
+     */
+    @RequestMapping(value = "/app/check/car/wgqx/save/{carId}")
+    public JsonResult checkWgqx(String list,@PathVariable long carId){
+        if(StringUtils.isBlank(list))return JsonResult.Error(OperateEnum.FAILE);
+        List<CkCkwgqx> ckCkwgqxes = JsonUtils.jsonToList(list, CkCkwgqx.class);
+        JsonResult result = checkService.saveWgqx(ckCkwgqxes,carId);
+        return result;
+    }
+
+    /**
+     * 内饰缺陷故障保存
+     * @param list
+     * @param carId
+     * @return
+     */
+    @RequestMapping(value = "/app/check/car/nsqx/save/{carId}")
+    public JsonResult checkNsqx(String list,@PathVariable long carId){
+        if(StringUtils.isBlank(list))return JsonResult.Error(OperateEnum.FAILE);
+        List<CkCknsqx>  ckCknsqxs= JsonUtils.jsonToList(list, CkCknsqx.class);
+        JsonResult result = checkService.saveNsqx(ckCknsqxs,carId);
+        return result;
+    }
+
+    /**
+     * 事故信息
+     * @param list
+     * @param carId
+     * @return
+     */
+    @RequestMapping(value = "/app/check/car/sg/save/{carId}")
+    public JsonResult checkSgqx(String list,@PathVariable long carId){
+        if(StringUtils.isBlank(list))return JsonResult.Error(OperateEnum.FAILE);
+        List<CkCksg> ckCksgs = JsonUtils.jsonToList(list, CkCksg.class);
+        JsonResult result = checkService.saveSg(ckCksgs,carId);
+        return result;
+    }
+
+    /**
+     * 泡水
+     * @param list
+     * @param carId
+     * @return
+     */
+    @RequestMapping(value = "/app/check/car/ps/save/{carId}")
+    public JsonResult checkPs(String list,@PathVariable long carId){
+        if(StringUtils.isBlank(list))return JsonResult.Error(OperateEnum.FAILE);
+        List<CkCkps> ckCkps = JsonUtils.jsonToList(list, CkCkps.class);
+        JsonResult result = checkService.savePs(ckCkps,carId);
+        return result;
+    }
+
+    /**
+     * 火烧
+     * @param list
+     * @param carId
+     * @return
+     */
+    @RequestMapping(value = "/app/check/car/hs/save/{carId}")
+    public JsonResult checkHs(String list,@PathVariable long carId){
+        if(StringUtils.isBlank(list))return JsonResult.Error(OperateEnum.FAILE);
+        List<CkCkhs> ckCkhs = JsonUtils.jsonToList(list, CkCkhs.class);
+        JsonResult result = checkService.saveHs(ckCkhs,carId);
+        return result;
+    }
+
+    /**
+     * 获取车辆的检测情况
+     * @param carId
+     * @return
+     */
+    @RequestMapping(value = "/app/check/car/step3/{carId}")
+    public JsonResult checkCarSTEP3(@PathVariable long carId){
+        JsonResult result = checkService.getCarStep3(carId);
+        return result;
+    }
+
+
+    /**
+     * 核对信息保存
+     * @param verify
+     * @return
+     */
+    @RequestMapping(value = "/app/check/car/verify/save")
+    public JsonResult checkCarVerify(CkVerify verify){
+        if(verify==null)return JsonResult.Error(OperateEnum.FAILE);
+        JsonResult result = checkService.checkCarVerify(verify);
+        return result;
+    }
+
+    /**
+     * 附加信息保存
+     * @param other
+     * @return
+     */
+    @RequestMapping(value = "/app/check/car/other/save")
+    public JsonResult checkCarOther(CkOther other){
+        if(other==null)return JsonResult.Error(OperateEnum.FAILE);
+        JsonResult result = checkService.checkCarOther(other);
+        return result;
+    }
+
+    /**
+     * 车型信息保存
+     * @param carmodel
+     * @return
+     */
+    @RequestMapping(value = "/app/check/car/model/save")
+    public JsonResult checkCarModel(CkCarmodel carmodel){
+        if(carmodel==null)return JsonResult.Error(OperateEnum.FAILE);
+        JsonResult result = checkService.checkCarModel(carmodel);
+        return result;
+    }
+
+    /**
+     * 获取核对所有信息
+     * @param carId
+     * @return
+     */
+    @RequestMapping(value = "/app/check/car/step5/{carId}")
+    public JsonResult checkCarSTEP5(@PathVariable long carId){
+        JsonResult result = checkService.getCarStep5(carId);
+        return result;
+    }
 
 }
