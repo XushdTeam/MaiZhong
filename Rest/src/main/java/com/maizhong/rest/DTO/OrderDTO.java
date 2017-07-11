@@ -27,6 +27,15 @@ public class OrderDTO {
     private String seriesImg;//车系图片
     private OrderInfo orderInfo;//评测信息详情
     private String status;//订单状态
+    private String ratePrice;//返利
+
+    public String getRatePrice() {
+        return ratePrice;
+    }
+
+    public void setRatePrice(String ratePrice) {
+        this.ratePrice = ratePrice;
+    }
 
     public String getStatus() {
         return status;

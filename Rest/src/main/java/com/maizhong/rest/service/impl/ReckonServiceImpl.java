@@ -1000,6 +1000,8 @@ public class ReckonServiceImpl implements ReckonService {
         List<OrderDTO> orderDTOList = new ArrayList<>();
         for (Orders orders : ordersList) {
             OrderDTO orderDTO = new OrderDTO();
+            //返利 20170615
+            orderDTO.setRatePrice(orders.getRatePrice());
             orderDTO.setOrderNumber(String.valueOf(orders.getOrderNumber()));//订单编号
             orderDTO.setUserId(String.valueOf(orders.getUserId()));//用户Id
             Model model = modelMapper.selectByPrimaryKey(orders.getModelId());//车型对象

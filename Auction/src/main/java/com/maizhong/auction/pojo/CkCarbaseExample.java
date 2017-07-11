@@ -544,6 +544,266 @@ public class CkCarbaseExample {
             addCriterion("create_time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
+
+        public Criteria andExamineUserIdIsNull() {
+            addCriterion("examine_user_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUserIdIsNotNull() {
+            addCriterion("examine_user_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUserIdEqualTo(Long value) {
+            addCriterion("examine_user_id =", value, "examineUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUserIdNotEqualTo(Long value) {
+            addCriterion("examine_user_id <>", value, "examineUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUserIdGreaterThan(Long value) {
+            addCriterion("examine_user_id >", value, "examineUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUserIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("examine_user_id >=", value, "examineUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUserIdLessThan(Long value) {
+            addCriterion("examine_user_id <", value, "examineUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUserIdLessThanOrEqualTo(Long value) {
+            addCriterion("examine_user_id <=", value, "examineUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUserIdIn(List<Long> values) {
+            addCriterion("examine_user_id in", values, "examineUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUserIdNotIn(List<Long> values) {
+            addCriterion("examine_user_id not in", values, "examineUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUserIdBetween(Long value1, Long value2) {
+            addCriterion("examine_user_id between", value1, value2, "examineUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUserIdNotBetween(Long value1, Long value2) {
+            addCriterion("examine_user_id not between", value1, value2, "examineUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUsernameIsNull() {
+            addCriterion("examine_username is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUsernameIsNotNull() {
+            addCriterion("examine_username is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUsernameEqualTo(String value) {
+            addCriterion("examine_username =", value, "examineUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUsernameNotEqualTo(String value) {
+            addCriterion("examine_username <>", value, "examineUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUsernameGreaterThan(String value) {
+            addCriterion("examine_username >", value, "examineUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUsernameGreaterThanOrEqualTo(String value) {
+            addCriterion("examine_username >=", value, "examineUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUsernameLessThan(String value) {
+            addCriterion("examine_username <", value, "examineUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUsernameLessThanOrEqualTo(String value) {
+            addCriterion("examine_username <=", value, "examineUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUsernameLike(String value) {
+            addCriterion("examine_username like", value, "examineUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUsernameNotLike(String value) {
+            addCriterion("examine_username not like", value, "examineUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUsernameIn(List<String> values) {
+            addCriterion("examine_username in", values, "examineUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUsernameNotIn(List<String> values) {
+            addCriterion("examine_username not in", values, "examineUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUsernameBetween(String value1, String value2) {
+            addCriterion("examine_username between", value1, value2, "examineUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineUsernameNotBetween(String value1, String value2) {
+            addCriterion("examine_username not between", value1, value2, "examineUsername");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineReasonIsNull() {
+            addCriterion("examine_reason is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineReasonIsNotNull() {
+            addCriterion("examine_reason is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineReasonEqualTo(String value) {
+            addCriterion("examine_reason =", value, "examineReason");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineReasonNotEqualTo(String value) {
+            addCriterion("examine_reason <>", value, "examineReason");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineReasonGreaterThan(String value) {
+            addCriterion("examine_reason >", value, "examineReason");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineReasonGreaterThanOrEqualTo(String value) {
+            addCriterion("examine_reason >=", value, "examineReason");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineReasonLessThan(String value) {
+            addCriterion("examine_reason <", value, "examineReason");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineReasonLessThanOrEqualTo(String value) {
+            addCriterion("examine_reason <=", value, "examineReason");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineReasonLike(String value) {
+            addCriterion("examine_reason like", value, "examineReason");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineReasonNotLike(String value) {
+            addCriterion("examine_reason not like", value, "examineReason");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineReasonIn(List<String> values) {
+            addCriterion("examine_reason in", values, "examineReason");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineReasonNotIn(List<String> values) {
+            addCriterion("examine_reason not in", values, "examineReason");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineReasonBetween(String value1, String value2) {
+            addCriterion("examine_reason between", value1, value2, "examineReason");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineReasonNotBetween(String value1, String value2) {
+            addCriterion("examine_reason not between", value1, value2, "examineReason");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineTimeIsNull() {
+            addCriterion("examine_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineTimeIsNotNull() {
+            addCriterion("examine_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineTimeEqualTo(Date value) {
+            addCriterion("examine_time =", value, "examineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineTimeNotEqualTo(Date value) {
+            addCriterion("examine_time <>", value, "examineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineTimeGreaterThan(Date value) {
+            addCriterion("examine_time >", value, "examineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("examine_time >=", value, "examineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineTimeLessThan(Date value) {
+            addCriterion("examine_time <", value, "examineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineTimeLessThanOrEqualTo(Date value) {
+            addCriterion("examine_time <=", value, "examineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineTimeIn(List<Date> values) {
+            addCriterion("examine_time in", values, "examineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineTimeNotIn(List<Date> values) {
+            addCriterion("examine_time not in", values, "examineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineTimeBetween(Date value1, Date value2) {
+            addCriterion("examine_time between", value1, value2, "examineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamineTimeNotBetween(Date value1, Date value2) {
+            addCriterion("examine_time not between", value1, value2, "examineTime");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -30,7 +30,7 @@
 <body>
     <div class="b_bos">
         <div class="bg_1"></div>
-        <a href="http://downloadpkg.apicloud.com/app/download?path=http://7yjb4g.com1.z0.glb.clouddn.com/452e8a2629110e043e0b15ac018a5339_d" class="button" style="<c:if test="${key=='ios'}">display:none;</c:if> ">Android下载</a>
+        <a href="http://downloadpkg.apicloud.com/app/download?path=http://7yjb4g.com1.z0.glb.clouddn.com/04ff55df600c32288b84465f381a2304_d" class="button" style="<c:if test="${key=='ios'}">display:none;</c:if> ">Android下载</a>
         <a href="https://itunes.apple.com/us/app/%E6%82%9F%E7%A9%BA%E6%94%B6%E8%BD%A6/id1237538091?l=zh&ls=1&mt=8" class="button" style="<c:if test="${key=='android'}">display:none;</c:if> ">iphone下载</a>
     </div>
 </body>

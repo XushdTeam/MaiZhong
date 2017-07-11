@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maizhong.auction.mapper.TpNowMapper">
+  <resultMap id="BaseResultMap" type="com.maizhong.auction.pojo.TpNow">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="car_id" jdbcType="BIGINT" property="carId" />
+    <result column="ch" jdbcType="VARCHAR" property="ch" />
+    <result column="over_time" jdbcType="BIGINT" property="overTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, car_id, ch, over_time
+  </sql>
+  <select id="selectByExample" parameterType="com.maizhong.auction.pojo.TpNowExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tp_now
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tp_now
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tp_now
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maizhong.auction.pojo.TpNowExample">
+    delete from tp_now
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maizhong.auction.pojo.TpNow">
+    insert into tp_now (id, car_id, ch, 
+      over_time)
+    values (#{id,jdbcType=BIGINT}, #{carId,jdbcType=BIGINT}, #{ch,jdbcType=VARCHAR}, 
+      #{overTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maizhong.auction.pojo.TpNow">
+    insert into tp_now
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="carId != null">
+        car_id,
+      </if>
+      <if test="ch != null">
+        ch,
+      </if>
+      <if test="overTime != null">
+        over_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="carId != null">
+        #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="ch != null">
+        #{ch,jdbcType=VARCHAR},
+      </if>
+      <if test="overTime != null">
+        #{overTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maizhong.auction.pojo.TpNowExample" resultType="java.lang.Long">
+    select count(*) from tp_now
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tp_now
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.carId != null">
+        car_id = #{record.carId,jdbcType=BIGINT},
+      </if>
+      <if test="record.ch != null">
+        ch = #{record.ch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overTime != null">
+        over_time = #{record.overTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tp_now
+    set id = #{record.id,jdbcType=BIGINT},
+      car_id = #{record.carId,jdbcType=BIGINT},
+      ch = #{record.ch,jdbcType=VARCHAR},
+      over_time = #{record.overTime,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.auction.pojo.TpNow">
+    update tp_now
+    <set>
+      <if test="carId != null">
+        car_id = #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="ch != null">
+        ch = #{ch,jdbcType=VARCHAR},
+      </if>
+      <if test="overTime != null">
+        over_time = #{overTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maizhong.auction.pojo.TpNow">
+    update tp_now
+    set car_id = #{carId,jdbcType=BIGINT},
+      ch = #{ch,jdbcType=VARCHAR},
+      over_time = #{overTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

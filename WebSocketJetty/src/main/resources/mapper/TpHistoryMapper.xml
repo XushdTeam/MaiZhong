@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maizhong.auction.mapper.TpHistoryMapper">
+  <resultMap id="BaseResultMap" type="com.maizhong.auction.pojo.TpHistory">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="car_id" jdbcType="BIGINT" property="carId" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="plus" jdbcType="INTEGER" property="plus" />
+    <result column="bussiness_name" jdbcType="VARCHAR" property="bussinessName" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="auction_date" jdbcType="TIMESTAMP" property="auctionDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, car_id, price, plus, bussiness_name, user_id, auction_date
+  </sql>
+  <select id="selectByExample" parameterType="com.maizhong.auction.pojo.TpHistoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tp_history
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tp_history
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tp_history
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maizhong.auction.pojo.TpHistoryExample">
+    delete from tp_history
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maizhong.auction.pojo.TpHistory">
+    insert into tp_history (id, car_id, price, 
+      plus, bussiness_name, user_id, 
+      auction_date)
+    values (#{id,jdbcType=BIGINT}, #{carId,jdbcType=BIGINT}, #{price,jdbcType=VARCHAR}, 
+      #{plus,jdbcType=INTEGER}, #{bussinessName,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+      #{auctionDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maizhong.auction.pojo.TpHistory">
+    insert into tp_history
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="carId != null">
+        car_id,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="plus != null">
+        plus,
+      </if>
+      <if test="bussinessName != null">
+        bussiness_name,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="auctionDate != null">
+        auction_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="carId != null">
+        #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="plus != null">
+        #{plus,jdbcType=INTEGER},
+      </if>
+      <if test="bussinessName != null">
+        #{bussinessName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="auctionDate != null">
+        #{auctionDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maizhong.auction.pojo.TpHistoryExample" resultType="java.lang.Long">
+    select count(*) from tp_history
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tp_history
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.carId != null">
+        car_id = #{record.carId,jdbcType=BIGINT},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plus != null">
+        plus = #{record.plus,jdbcType=INTEGER},
+      </if>
+      <if test="record.bussinessName != null">
+        bussiness_name = #{record.bussinessName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.auctionDate != null">
+        auction_date = #{record.auctionDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tp_history
+    set id = #{record.id,jdbcType=BIGINT},
+      car_id = #{record.carId,jdbcType=BIGINT},
+      price = #{record.price,jdbcType=VARCHAR},
+      plus = #{record.plus,jdbcType=INTEGER},
+      bussiness_name = #{record.bussinessName,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      auction_date = #{record.auctionDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.auction.pojo.TpHistory">
+    update tp_history
+    <set>
+      <if test="carId != null">
+        car_id = #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="plus != null">
+        plus = #{plus,jdbcType=INTEGER},
+      </if>
+      <if test="bussinessName != null">
+        bussiness_name = #{bussinessName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="auctionDate != null">
+        auction_date = #{auctionDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maizhong.auction.pojo.TpHistory">
+    update tp_history
+    set car_id = #{carId,jdbcType=BIGINT},
+      price = #{price,jdbcType=VARCHAR},
+      plus = #{plus,jdbcType=INTEGER},
+      bussiness_name = #{bussinessName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      auction_date = #{auctionDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

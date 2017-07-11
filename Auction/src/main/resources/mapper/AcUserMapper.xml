@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maizhong.auction.mapper.AcUserMapper">
+  <resultMap id="BaseResultMap" type="com.maizhong.auction.pojo.AcUser">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="BIGINT" property="phone" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="head_img" jdbcType="VARCHAR" property="headImg" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="referee" jdbcType="VARCHAR" property="referee" />
+    <result column="company_id" jdbcType="BIGINT" property="companyId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="id_num" jdbcType="VARCHAR" property="idNum" />
+    <result column="pic1" jdbcType="VARCHAR" property="pic1" />
+    <result column="pic2" jdbcType="VARCHAR" property="pic2" />
+    <result column="pic3" jdbcType="VARCHAR" property="pic3" />
+    <result column="bzj" jdbcType="VARCHAR" property="bzj" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, phone, password, head_img, city, referee, company_id, type, status, id_num, 
+    pic1, pic2, pic3, bzj, create_user, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.maizhong.auction.pojo.AcUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ac_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ac_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ac_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maizhong.auction.pojo.AcUserExample">
+    delete from ac_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maizhong.auction.pojo.AcUser">
+    insert into ac_user (id, name, phone, 
+      password, head_img, city, 
+      referee, company_id, type, 
+      status, id_num, pic1, 
+      pic2, pic3, bzj, create_user, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=BIGINT}, 
+      #{password,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{referee,jdbcType=VARCHAR}, #{companyId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{idNum,jdbcType=VARCHAR}, #{pic1,jdbcType=VARCHAR}, 
+      #{pic2,jdbcType=VARCHAR}, #{pic3,jdbcType=VARCHAR}, #{bzj,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maizhong.auction.pojo.AcUser">
+    insert into ac_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="headImg != null">
+        head_img,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="referee != null">
+        referee,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="idNum != null">
+        id_num,
+      </if>
+      <if test="pic1 != null">
+        pic1,
+      </if>
+      <if test="pic2 != null">
+        pic2,
+      </if>
+      <if test="pic3 != null">
+        pic3,
+      </if>
+      <if test="bzj != null">
+        bzj,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=BIGINT},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="headImg != null">
+        #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="referee != null">
+        #{referee,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="idNum != null">
+        #{idNum,jdbcType=VARCHAR},
+      </if>
+      <if test="pic1 != null">
+        #{pic1,jdbcType=VARCHAR},
+      </if>
+      <if test="pic2 != null">
+        #{pic2,jdbcType=VARCHAR},
+      </if>
+      <if test="pic3 != null">
+        #{pic3,jdbcType=VARCHAR},
+      </if>
+      <if test="bzj != null">
+        #{bzj,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maizhong.auction.pojo.AcUserExample" resultType="java.lang.Long">
+    select count(*) from ac_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ac_user
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=BIGINT},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headImg != null">
+        head_img = #{record.headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null">
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.referee != null">
+        referee = #{record.referee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null">
+        company_id = #{record.companyId,jdbcType=BIGINT},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.idNum != null">
+        id_num = #{record.idNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pic1 != null">
+        pic1 = #{record.pic1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pic2 != null">
+        pic2 = #{record.pic2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pic3 != null">
+        pic3 = #{record.pic3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bzj != null">
+        bzj = #{record.bzj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ac_user
+    set id = #{record.id,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=BIGINT},
+      password = #{record.password,jdbcType=VARCHAR},
+      head_img = #{record.headImg,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      referee = #{record.referee,jdbcType=VARCHAR},
+      company_id = #{record.companyId,jdbcType=BIGINT},
+      type = #{record.type,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      id_num = #{record.idNum,jdbcType=VARCHAR},
+      pic1 = #{record.pic1,jdbcType=VARCHAR},
+      pic2 = #{record.pic2,jdbcType=VARCHAR},
+      pic3 = #{record.pic3,jdbcType=VARCHAR},
+      bzj = #{record.bzj,jdbcType=VARCHAR},
+      create_user = #{record.createUser,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.auction.pojo.AcUser">
+    update ac_user
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=BIGINT},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="headImg != null">
+        head_img = #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="referee != null">
+        referee = #{referee,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="idNum != null">
+        id_num = #{idNum,jdbcType=VARCHAR},
+      </if>
+      <if test="pic1 != null">
+        pic1 = #{pic1,jdbcType=VARCHAR},
+      </if>
+      <if test="pic2 != null">
+        pic2 = #{pic2,jdbcType=VARCHAR},
+      </if>
+      <if test="pic3 != null">
+        pic3 = #{pic3,jdbcType=VARCHAR},
+      </if>
+      <if test="bzj != null">
+        bzj = #{bzj,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maizhong.auction.pojo.AcUser">
+    update ac_user
+    set name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=BIGINT},
+      password = #{password,jdbcType=VARCHAR},
+      head_img = #{headImg,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      referee = #{referee,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=BIGINT},
+      type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      id_num = #{idNum,jdbcType=VARCHAR},
+      pic1 = #{pic1,jdbcType=VARCHAR},
+      pic2 = #{pic2,jdbcType=VARCHAR},
+      pic3 = #{pic3,jdbcType=VARCHAR},
+      bzj = #{bzj,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

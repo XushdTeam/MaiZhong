@@ -692,6 +692,11 @@ public class CheckServiceImpl implements CheckService {
             verify.setId(null);
             int i = ckVerifyMapper.insertSelective(verify);
             if (i > 0) {
+                //修改主表状态
+                CkCarbase carbase = new CkCarbase();
+                carbase.setId(verify.getCarId());
+                carbase.setStatus(1);
+                ckCarbaseMapper.updateByPrimaryKeySelective(carbase);
                 return JsonResult.OK(verify.getId());
             }
         } else {
@@ -729,11 +734,26 @@ public class CheckServiceImpl implements CheckService {
             carmodel.setId(null);
             int i = carmodelMapper.insertSelective(carmodel);
             if(i>0){
+                if(StringUtils.isNotBlank(carmodel.getModelName())){
+                    CkCarbase ckCarbase = new CkCarbase();
+                    ckCarbase.setId(carmodel.getCarId());
+                    ckCarbase.setModelId(carmodel.getModelId());
+                    ckCarbase.setModelName(carmodel.getModelName());
+
+                    ckCarbaseMapper.updateByPrimaryKeySelective(ckCarbase);
+                }
                 return JsonResult.OK(carmodel.getId());
             }
         }else{
             int i = carmodelMapper.updateByPrimaryKeySelective(carmodel);
             if(i>0){
+                if(StringUtils.isNotBlank(carmodel.getModelName())){
+                    CkCarbase ckCarbase = new CkCarbase();
+                    ckCarbase.setId(carmodel.getCarId());
+                    ckCarbase.setModelId(carmodel.getModelId());
+                    ckCarbase.setModelName(carmodel.getModelName());
+                    ckCarbaseMapper.updateByPrimaryKeySelective(ckCarbase);
+                }
                 return JsonResult.OK();
             }
         }
@@ -803,6 +823,41 @@ public class CheckServiceImpl implements CheckService {
 
         jsonObject.put("HD",objectHD);
         return JsonResult.OK(jsonObject);
+
+    }
+
+    /**
+     * 提交审核
+     * @param carId
+     * @return
+     */
+    @Override
+    public JsonResult checkCarExamine(long carId) {
+
+        CkCarbase carbase = ckCarbaseMapper.selectByPrimaryKey(carId);
+        if(carbase.getStatus()==1||carbase.getStatus()==9){
+            carbase.setStatus(2);
+            carbase.setCreateTime(new Date());
+            int i = ckCarbaseMapper.updateByPrimaryKeySelective(carbase);
+            if(i>0)return JsonResult.OK();
+        }else{
+            return JsonResult.Error("状态有误");
+        }
+        return JsonResult.Error(OperateEnum.FAILE);
+    }
+
+    /**
+     * 获取驳回原因
+     * @param id
+     * @return
+     */
+    @Override
+    public JsonResult getRejectReason(long id) {
+
+
+        CkCarbase ckCarbase = ckCarbaseMapper.selectByPrimaryKey(id);
+
+        return JsonResult.OK(ckCarbase);
 
     }
 

@@ -17,6 +17,14 @@ public class CkCarbase {
 
     private Date createTime;
 
+    private Long examineUserId;
+
+    private String examineUsername;
+
+    private String examineReason;
+
+    private Date examineTime;
+
     public Long getId() {
         return id;
     }
@@ -71,5 +79,37 @@ public class CkCarbase {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Long getExamineUserId() {
+        return examineUserId;
+    }
+
+    public void setExamineUserId(Long examineUserId) {
+        this.examineUserId = examineUserId;
+    }
+
+    public String getExamineUsername() {
+        return examineUsername;
+    }
+
+    public void setExamineUsername(String examineUsername) {
+        this.examineUsername = examineUsername == null ? null : examineUsername.trim();
+    }
+
+    public String getExamineReason() {
+        return examineReason;
+    }
+
+    public void setExamineReason(String examineReason) {
+        this.examineReason = examineReason == null ? null : examineReason.trim();
+    }
+
+    public Date getExamineTime() {
+        return examineTime;
+    }
+
+    public void setExamineTime(Date examineTime) {
+        this.examineTime = examineTime;
     }
 }

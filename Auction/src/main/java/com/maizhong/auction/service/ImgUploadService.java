@@ -8,4 +8,6 @@ import com.maizhong.common.result.JsonResult;
 public interface ImgUploadService {
 
     JsonResult uploadImg(String imgStr, String type);
+
+    JsonResult xszSb(String imgUrl);
 }

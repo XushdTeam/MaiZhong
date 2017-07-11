@@ -3,6 +3,7 @@ package com.maizhong.auction.controller;
 import com.maizhong.auction.service.IndexService;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.JsonUtils;
+import net.sf.json.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Xushd on 2017/6/7.
@@ -61,6 +64,18 @@ public class IndexController {
         return result;
     }
 
+    /**
+     * 退出登录
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/system/logOff")
+    @ResponseBody
+    public JsonResult logOff(HttpServletRequest request){
+        String token = (String) request.getAttribute("token");
+        JsonResult result = indexService.logOff(token);
+        return result;
+    }
 
 
 }

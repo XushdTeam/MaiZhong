@@ -11,4 +11,6 @@ public interface IndexService {
     JsonResult checkLoginStatus(String token);
 
     String getSystemMenu(String token);
+
+    JsonResult logOff(String token);
 }

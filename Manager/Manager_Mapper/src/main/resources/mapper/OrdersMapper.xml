@@ -10,6 +10,8 @@
     <result column="reckon_price" jdbcType="VARCHAR" property="reckonPrice" />
     <result column="way_id" jdbcType="BIGINT" property="wayId" />
     <result column="deal_price" jdbcType="VARCHAR" property="dealPrice" />
+    <result column="org_price" jdbcType="VARCHAR" property="orgPrice" />
+    <result column="rate_price" jdbcType="VARCHAR" property="ratePrice" />
     <result column="check_time" jdbcType="VARCHAR" property="checkTime" />
     <result column="deal_time" jdbcType="VARCHAR" property="dealTime" />
     <result column="deal_way" jdbcType="INTEGER" property="dealWay" />
@@ -81,7 +83,7 @@
   <sql id="Base_Column_List">
     order_id, order_number, user_id, model_id, model_name, reckon_price, way_id, deal_price, 
     check_time, deal_time, deal_way, link_man, link_phone, address, reckon_time, status, 
-    delflag
+    delflag,org_price,rate_price
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.pojo.OrdersExample" resultMap="BaseResultMap">
     select
@@ -119,13 +121,13 @@
       way_id, deal_price, check_time, 
       deal_time, deal_way, link_man, 
       link_phone, address, reckon_time, 
-      status, delflag)
+      status, delflag, org_price, rate_price)
     values (#{orderId,jdbcType=BIGINT}, #{orderNumber,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
       #{modelId,jdbcType=BIGINT}, #{modelName,jdbcType=VARCHAR}, #{reckonPrice,jdbcType=VARCHAR}, 
       #{wayId,jdbcType=BIGINT}, #{dealPrice,jdbcType=VARCHAR}, #{checkTime,jdbcType=VARCHAR}, 
       #{dealTime,jdbcType=VARCHAR}, #{dealWay,jdbcType=INTEGER}, #{linkMan,jdbcType=VARCHAR}, 
       #{linkPhone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{reckonTime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=INTEGER}, #{delflag,jdbcType=INTEGER})
+      #{status,jdbcType=INTEGER}, #{delflag,jdbcType=INTEGER},#{orgPrice,jdbcType=VARCHAR},#{ratePrice,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.pojo.Orders">
     insert into orders
@@ -181,6 +183,12 @@
       <if test="delflag != null">
         delflag,
       </if>
+      <if test="orgPrice != null">
+        org_price,
+      </if>
+      <if test="ratePrice != null">
+        rate_price,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="orderId != null">
@@ -233,6 +241,12 @@
       </if>
       <if test="delflag != null">
         #{delflag,jdbcType=INTEGER},
+      </if>
+      <if test="orgPrice != null">
+        #{orgPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="ratePrice != null">
+        #{ratePrice,jdbcType=VARCHAR}
       </if>
     </trim>
   </insert>
@@ -296,6 +310,12 @@
       <if test="record.delflag != null">
         delflag = #{record.delflag,jdbcType=INTEGER},
       </if>
+      <if test="record.orgPrice != null">
+        org_price = #{record.orgPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ratePrice != null">
+        rate_price = #{record.ratePrice,jdbcType=VARCHAR}
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -319,7 +339,9 @@
       address = #{record.address,jdbcType=VARCHAR},
       reckon_time = #{record.reckonTime,jdbcType=TIMESTAMP},
       status = #{record.status,jdbcType=INTEGER},
-      delflag = #{record.delflag,jdbcType=INTEGER}
+      delflag = #{record.delflag,jdbcType=INTEGER},
+      org_price = #{record.orgPrice,jdbcType=VARCHAR},
+      rate_price = #{record.ratePrice,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -375,6 +397,12 @@
       <if test="delflag != null">
         delflag = #{delflag,jdbcType=INTEGER},
       </if>
+      <if test="orgPrice != null">
+        org_price = #{orgPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="ratePrice != null">
+        rate_price = #{ratePrice,jdbcType=VARCHAR}
+      </if>
     </set>
     where order_id = #{orderId,jdbcType=BIGINT}
   </update>
@@ -395,7 +423,9 @@
       address = #{address,jdbcType=VARCHAR},
       reckon_time = #{reckonTime,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=INTEGER},
-      delflag = #{delflag,jdbcType=INTEGER}
+      delflag = #{delflag,jdbcType=INTEGER},
+      org_price = #{orgPrice,jdbcType=VARCHAR},
+      rate_price = #{ratePrice,jdbcType=VARCHAR}
     where order_id = #{orderId,jdbcType=BIGINT}
   </update>
 </mapper>

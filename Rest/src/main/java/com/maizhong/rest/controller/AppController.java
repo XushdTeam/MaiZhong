@@ -187,6 +187,8 @@ public class AppController {
         return result;
     }
 
+
+
     /**
      * 用户登录
      *
@@ -273,9 +275,11 @@ public class AppController {
     @RequestMapping(value = "/getSaleGZDetail/{guzhiKey:.+}/{otherKey}", method = RequestMethod.GET)
     @ResponseBody
     public JsonResult getSaleGZDetail(@PathVariable String guzhiKey,
-                                @PathVariable String otherKey,
+                                @PathVariable String otherKey,String rate,
                                 HttpServletRequest request) {
-        JsonResult result = appService.getSaleGZDetail(guzhiKey, otherKey, request);
+        int vrate = 0;
+        if(StringUtils.isNotBlank(rate))vrate = Integer.parseInt(rate);
+        JsonResult result = appService.getSaleGZDetail(guzhiKey, otherKey,vrate, request);
         return result;
     }
 
@@ -420,5 +424,21 @@ public class AppController {
     public JsonResult getSaleNum(){
         JsonResult result=appService.getSaleNum();
         return result;
+    }
+
+    /**
+     * 同步用户信息
+     * @since 2017年6月15日 09:59:08
+     * @author Xushd
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/syncUserInfo")
+    @ResponseBody
+    public JsonResult syncUserInfo(HttpServletRequest request){
+        String token = (String) request.getAttribute("token");
+        JsonResult  result =  appService.syncUserInfo(token);
+        return result;
+
     }
 }

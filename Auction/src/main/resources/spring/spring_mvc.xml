@@ -54,6 +54,10 @@
             <mvc:mapping path="/system/**"/>
             <bean class="com.maizhong.auction.interceptor.WebInterceptor" />
         </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/check/**"/>
+            <bean class="com.maizhong.auction.interceptor.WebInterceptor" />
+        </mvc:interceptor>
     </mvc:interceptors>
 
     <mvc:resources location="/resources/" mapping="/resources/**"/>

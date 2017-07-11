@@ -106,10 +106,26 @@ public class CheckController {
         return result;
     }
 
-
+    /**
+     * 图片上传
+     * @param imgStr
+     * @return
+     */
     @RequestMapping(value = "/app/check/base/img/upload")
     public JsonResult checkBaseImgUpload(String imgStr){
         JsonResult result = imgUploadService.uploadImg(imgStr,"check/base/");
+        return result;
+    }
+
+    /**
+     * 行驶证图片识别
+     * @param imgUrl
+     * @return
+     */
+    @RequestMapping(value = "/app/check/xsz/sb")
+    public JsonResult checkXSZsb(String imgUrl){
+
+        JsonResult result = imgUploadService.xszSb(imgUrl);
         return result;
     }
 
@@ -395,4 +411,26 @@ public class CheckController {
         return result;
     }
 
+    /**
+     *
+     * 提交审核
+     * @param carId
+     * @return
+     */
+    @RequestMapping(value = "/app/check/car/examine/{carId}")
+    public JsonResult checkCarStatus(@PathVariable long carId){
+        JsonResult result = checkService.checkCarExamine(carId);
+        return result;
+    }
+
+    /**
+     * 查看驳回原因
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/app/check/car/examine/reject/{id}")
+    public JsonResult checkeRejectReason(@PathVariable long id){
+        JsonResult result = checkService.getRejectReason(id);
+        return result;
+    }
 }

@@ -3,9 +3,8 @@ package com.maizhong.auction.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.maizhong.auction.dao.JedisClient;
-import com.maizhong.auction.mapper.CkUserMapper;
-import com.maizhong.auction.mapper.SysCompanyMapper;
-import com.maizhong.auction.mapper.SysUserMapper;
+import com.maizhong.auction.dto.CarExamineDto;
+import com.maizhong.auction.mapper.*;
 import com.maizhong.auction.pojo.*;
 import com.maizhong.auction.service.SystemService;
 import com.maizhong.common.dto.PageSearchParam;
@@ -14,11 +13,13 @@ import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.IDUtils;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.common.utils.SqlUtils;
+import com.maizhong.common.utils.TimeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +35,12 @@ public class SystemServiceImpl implements SystemService {
     private CkUserMapper ckUserMapper;
     @Autowired
     private SysCompanyMapper sysCompanyMapper;
+    @Autowired
+    private CkCarbaseMapper carbaseMapper;
+    @Autowired
+    private CkBaseimgMapper ckBaseimgMapper;
+    @Autowired
+    private CkXszMapper ckXszMapper;
     @Autowired
     private JedisClient jedisClient;
 
@@ -363,6 +370,165 @@ public class SystemServiceImpl implements SystemService {
             return JsonResult.OK();
         }
         return JsonResult.Error(OperateEnum.FAILE);
+    }
+
+    /**
+     * 获取审核车辆
+     * @param param
+     * @return
+     */
+    @Override
+    public JsonResult getExamineCarList(PageSearchParam param) {
+
+        PageHelper.startPage(param.getPageIndex(),param.getPageSize());
+        CkCarbaseExample example = new CkCarbaseExample();
+        CkCarbaseExample.Criteria criteria = example.createCriteria();
+        criteria.andStatusEqualTo(2);
+        if(StringUtils.isNotBlank(param.getFiled("timeBegin"))){
+            criteria.andCreateTimeGreaterThanOrEqualTo(TimeUtils.getDate(param.getFiled("timeBegin")));
+        }
+        if(StringUtils.isNotBlank(param.getFiled("timeEnd"))){
+            criteria.andCreateTimeLessThanOrEqualTo(TimeUtils.getDate(param.getFiled("timeBegin")));
+        }
+        List<CkCarbase> list = carbaseMapper.selectByExample(example);
+
+        List<CarExamineDto> rows = new ArrayList<>();
+        for (CkCarbase carbase : list) {
+            CarExamineDto dto = new CarExamineDto();
+            dto.setId(carbase.getId());
+            dto.setCreateTime(carbase.getCreateTime());
+            dto.setModelName(carbase.getModelName());
+            dto.setUserName(carbase.getUserName());
+            dto.setUserPhone(carbase.getUserPhone());
+            dto.setStatus(carbase.getStatus());
+            //牌照号码
+            CkXszExample ckXszExample = new CkXszExample();
+            CkXszExample.Criteria ckXszExampleCriteria = ckXszExample.createCriteria();
+            ckXszExampleCriteria.andCarIdEqualTo(carbase.getId());
+            List<CkXsz> ckXszs = ckXszMapper.selectByExample(ckXszExample);
+            if(ckXszs.size()==0)ckXszs.add(new CkXsz());
+            dto.setCarNum(ckXszs.get(0).getNumber());
+            //左45
+            CkBaseimgExample ckBaseimgExample = new CkBaseimgExample();
+            CkBaseimgExample.Criteria ckBaseimgExampleCriteria = ckBaseimgExample.createCriteria();
+            ckBaseimgExampleCriteria.andCarIdEqualTo(carbase.getId());
+            List<CkBaseimg> ckBaseimgs = ckBaseimgMapper.selectByExample(ckBaseimgExample);
+            if(ckBaseimgs.size()==0)ckBaseimgs.add(new CkBaseimg());
+            dto.setPicMain(ckBaseimgs.get(0).getZq45());
+            //商户名称
+            CkUserExample ckUserExample = new CkUserExample();
+            CkUserExample.Criteria ckUserExampleCriteria = ckUserExample.createCriteria();
+            ckUserExampleCriteria.andUserPhoneEqualTo(carbase.getUserPhone());
+            List<CkUser> ckUsers = ckUserMapper.selectByExample(ckUserExample);
+            if(ckUsers.size()==0)continue;
+            SysCompany company = sysCompanyMapper.selectByPrimaryKey(ckUsers.get(0).getComanyId());
+            dto.setCompanyName(company.getName());
+            rows.add(dto);
+        }
+        PageInfo<CarExamineDto> pageInfo = new PageInfo(rows);
+
+        return JsonResult.OK(pageInfo);
+    }
+
+    /**
+     * 审核通过
+     * @param id
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult examinePass(long id, String token) {
+
+        SysUser user = this.getSysUserByToken(token);
+        CkCarbase ckCarbase = new CkCarbase();
+        ckCarbase.setId(id);
+        ckCarbase.setStatus(3);
+        ckCarbase.setExamineUserId(user.getId());
+        ckCarbase.setExamineUsername(user.getUsername());
+        ckCarbase.setExamineTime(new Date());
+        ckCarbase.setExamineReason("通过");
+        int i = carbaseMapper.updateByPrimaryKeySelective(ckCarbase);
+        if(i>0)return JsonResult.OK();
+
+        return JsonResult.Error(OperateEnum.FAILE);
+    }
+
+    /**
+     * 驳回审核
+     * @param id
+     * @param reason
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult examineReject(long id, String reason, String token) {
+
+        SysUser user = this.getSysUserByToken(token);
+        CkCarbase ckCarbase = new CkCarbase();
+        ckCarbase.setId(id);
+        ckCarbase.setStatus(9);
+        ckCarbase.setExamineUserId(user.getId());
+        ckCarbase.setExamineUsername(user.getUsername());
+        ckCarbase.setExamineTime(new Date());
+        ckCarbase.setExamineReason(reason);
+        int i = carbaseMapper.updateByPrimaryKeySelective(ckCarbase);
+        if(i>0)return JsonResult.OK();
+
+        return JsonResult.Error(OperateEnum.FAILE);
+
+    }
+
+    @Override
+    public JsonResult getWaitCarList(PageSearchParam param) {
+        PageHelper.startPage(param.getPageIndex(),param.getPageSize());
+        CkCarbaseExample example = new CkCarbaseExample();
+        CkCarbaseExample.Criteria criteria = example.createCriteria();
+        criteria.andStatusEqualTo(3);
+        if(StringUtils.isNotBlank(param.getFiled("timeBegin"))){
+            criteria.andCreateTimeGreaterThanOrEqualTo(TimeUtils.getDate(param.getFiled("timeBegin")));
+        }
+        if(StringUtils.isNotBlank(param.getFiled("timeEnd"))){
+            criteria.andCreateTimeLessThanOrEqualTo(TimeUtils.getDate(param.getFiled("timeBegin")));
+        }
+        List<CkCarbase> list = carbaseMapper.selectByExample(example);
+
+        List<CarExamineDto> rows = new ArrayList<>();
+        for (CkCarbase carbase : list) {
+            CarExamineDto dto = new CarExamineDto();
+            dto.setId(carbase.getId());
+            dto.setCreateTime(carbase.getCreateTime());
+            dto.setModelName(carbase.getModelName());
+            dto.setUserName(carbase.getUserName());
+            dto.setUserPhone(carbase.getUserPhone());
+            dto.setStatus(carbase.getStatus());
+            //牌照号码
+            CkXszExample ckXszExample = new CkXszExample();
+            CkXszExample.Criteria ckXszExampleCriteria = ckXszExample.createCriteria();
+            ckXszExampleCriteria.andCarIdEqualTo(carbase.getId());
+            List<CkXsz> ckXszs = ckXszMapper.selectByExample(ckXszExample);
+            if(ckXszs.size()==0)ckXszs.add(new CkXsz());
+            dto.setCarNum(ckXszs.get(0).getNumber());
+            //左45
+            CkBaseimgExample ckBaseimgExample = new CkBaseimgExample();
+            CkBaseimgExample.Criteria ckBaseimgExampleCriteria = ckBaseimgExample.createCriteria();
+            ckBaseimgExampleCriteria.andCarIdEqualTo(carbase.getId());
+            List<CkBaseimg> ckBaseimgs = ckBaseimgMapper.selectByExample(ckBaseimgExample);
+            if(ckBaseimgs.size()==0)ckBaseimgs.add(new CkBaseimg());
+            dto.setPicMain(ckBaseimgs.get(0).getZq45());
+            //商户名称
+            CkUserExample ckUserExample = new CkUserExample();
+            CkUserExample.Criteria ckUserExampleCriteria = ckUserExample.createCriteria();
+            ckUserExampleCriteria.andUserPhoneEqualTo(carbase.getUserPhone());
+            List<CkUser> ckUsers = ckUserMapper.selectByExample(ckUserExample);
+            if(ckUsers.size()==0)continue;
+            SysCompany company = sysCompanyMapper.selectByPrimaryKey(ckUsers.get(0).getComanyId());
+            dto.setCompanyName(company.getName());
+            rows.add(dto);
+        }
+        PageInfo<CarExamineDto> pageInfo = new PageInfo(rows);
+
+        return JsonResult.OK(pageInfo);
+
     }
 
     private SysUser getSysUserByToken(String token){

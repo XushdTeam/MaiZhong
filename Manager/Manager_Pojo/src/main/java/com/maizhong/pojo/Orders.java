@@ -26,6 +26,32 @@ public class Orders {
 
     private String dealTime;
 
+
+
+    //20170615 Xushd 估值价格
+    private String orgPrice;
+
+
+
+    //20170615 Xushd 返利价格
+    private String ratePrice;
+
+    public String getOrgPrice() {
+        return orgPrice;
+    }
+
+    public void setOrgPrice(String orgPrice) {
+        this.orgPrice = orgPrice;
+    }
+
+    public String getRatePrice() {
+        return ratePrice;
+    }
+
+    public void setRatePrice(String ratePrice) {
+        this.ratePrice = ratePrice;
+    }
+
     private Integer dealWay;
 
     private String linkMan;
@@ -153,8 +179,7 @@ public class Orders {
     }
 
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+
     public Date getReckonTime() {
         return reckonTime;
     }

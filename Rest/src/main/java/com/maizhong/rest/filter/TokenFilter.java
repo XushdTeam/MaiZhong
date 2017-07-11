@@ -28,6 +28,7 @@ public class TokenFilter extends HandlerInterceptorAdapter {
             return true;
             /*return true;*/
         } else {
+            request.setAttribute("token",token);
             return true;
         }
     }

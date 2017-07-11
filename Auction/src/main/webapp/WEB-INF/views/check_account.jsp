@@ -196,7 +196,22 @@
         },methods:{
             handleCommand (command) {
                 if(command == 'loginout'){
+                    this.$confirm('确定要退出?', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }).then(() => {
+                        $.getJSON("/system/logOff",function(d){
+                            if(d.status==200){
+                                var date = new Date()
+                                date.setTime(date.getTime()+1*1000);//30min
+                                $.cookie('token', null, { expires: date, path: '/' });
+                                window.location.href = "/";
+                            }
+                        })
+                    }).catch(() => {
 
+                    });
                 }
             },handleSelect (href) {
                 window.location.href = href;

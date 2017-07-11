@@ -35,4 +35,12 @@ public interface SystemService {
     JsonResult statusCompany(long id, int status);
 
     JsonResult delCompany(long id);
+
+    JsonResult getExamineCarList(PageSearchParam param);
+
+    JsonResult examinePass(long id, String token);
+
+    JsonResult examineReject(long id, String reason, String token);
+
+    JsonResult getWaitCarList(PageSearchParam param);
 }

@@ -23,14 +23,17 @@
 
 
 
-
 .icon-jiance:before { content: "\e60c"; }
 
 .icon-icon1460188478041:before { content: "\e62c"; }
 
+.icon-tongguo:before { content: "\e60d"; }
+
 .icon-zhanghaoguanli:before { content: "\e6b9"; }
 
 .icon-pingtaiyonghu:before { content: "\e655"; }
+
+.icon-work-reject:before { content: "\e60e"; }
 
 .icon-ajiancerenyuan:before { content: "\e6ed"; }
 
@@ -38,11 +41,18 @@
 
 .icon-shuaxin:before { content: "\e609"; }
 
+.icon-mr:before { content: "\e610"; }
+
 .icon-shanghu:before { content: "\e617"; }
 
 .icon-shenhe:before { content: "\e6b6"; }
 
+.icon-dengdai:before { content: "\e74c"; }
+
 .icon-bianji:before { content: "\e604"; }
+
+
+
 
 
 

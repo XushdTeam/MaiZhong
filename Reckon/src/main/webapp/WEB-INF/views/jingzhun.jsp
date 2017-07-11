@@ -388,7 +388,7 @@
 
 
 <div class="clear"></div>
-<div class="anniu"><a style="display: block;color: #FFF" onclick="submitForm()">确认估值</a></div>
+<div class="anniu"><a style="display: block;color: #FFF" onclick="submitForm()">确认卖车</a></div>
 
 <div class="clear"></div>
 

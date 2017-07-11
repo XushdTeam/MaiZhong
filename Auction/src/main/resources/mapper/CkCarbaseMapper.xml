@@ -9,6 +9,10 @@
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="user_phone" jdbcType="BIGINT" property="userPhone" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="examine_user_id" jdbcType="BIGINT" property="examineUserId" />
+    <result column="examine_username" jdbcType="VARCHAR" property="examineUsername" />
+    <result column="examine_reason" jdbcType="VARCHAR" property="examineReason" />
+    <result column="examine_time" jdbcType="TIMESTAMP" property="examineTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, model_name, model_id, status, user_name, user_phone, create_time
+    id, model_name, model_id, status, user_name, user_phone, create_time, examine_user_id, 
+    examine_username, examine_reason, examine_time
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.auction.pojo.CkCarbaseExample" resultMap="BaseResultMap">
     select
@@ -104,10 +109,12 @@
   <insert id="insert" parameterType="com.maizhong.auction.pojo.CkCarbase">
     insert into ck_carbase (id, model_name, model_id, 
       status, user_name, user_phone, 
-      create_time)
+      create_time, examine_user_id, examine_username, 
+      examine_reason, examine_time)
     values (#{id,jdbcType=BIGINT}, #{modelName,jdbcType=VARCHAR}, #{modelId,jdbcType=BIGINT}, 
       #{status,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPhone,jdbcType=BIGINT}, 
-      #{createTime,jdbcType=TIMESTAMP})
+      #{createTime,jdbcType=TIMESTAMP}, #{examineUserId,jdbcType=BIGINT}, #{examineUsername,jdbcType=VARCHAR}, 
+      #{examineReason,jdbcType=VARCHAR}, #{examineTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.auction.pojo.CkCarbase">
     <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
@@ -136,6 +143,18 @@
       <if test="createTime != null">
         create_time,
       </if>
+      <if test="examineUserId != null">
+        examine_user_id,
+      </if>
+      <if test="examineUsername != null">
+        examine_username,
+      </if>
+      <if test="examineReason != null">
+        examine_reason,
+      </if>
+      <if test="examineTime != null">
+        examine_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -158,6 +177,18 @@
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examineUserId != null">
+        #{examineUserId,jdbcType=BIGINT},
+      </if>
+      <if test="examineUsername != null">
+        #{examineUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="examineReason != null">
+        #{examineReason,jdbcType=VARCHAR},
+      </if>
+      <if test="examineTime != null">
+        #{examineTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -191,6 +222,18 @@
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.examineUserId != null">
+        examine_user_id = #{record.examineUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.examineUsername != null">
+        examine_username = #{record.examineUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examineReason != null">
+        examine_reason = #{record.examineReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examineTime != null">
+        examine_time = #{record.examineTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -204,7 +247,11 @@
       status = #{record.status,jdbcType=INTEGER},
       user_name = #{record.userName,jdbcType=VARCHAR},
       user_phone = #{record.userPhone,jdbcType=BIGINT},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      examine_user_id = #{record.examineUserId,jdbcType=BIGINT},
+      examine_username = #{record.examineUsername,jdbcType=VARCHAR},
+      examine_reason = #{record.examineReason,jdbcType=VARCHAR},
+      examine_time = #{record.examineTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -230,6 +277,18 @@
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="examineUserId != null">
+        examine_user_id = #{examineUserId,jdbcType=BIGINT},
+      </if>
+      <if test="examineUsername != null">
+        examine_username = #{examineUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="examineReason != null">
+        examine_reason = #{examineReason,jdbcType=VARCHAR},
+      </if>
+      <if test="examineTime != null">
+        examine_time = #{examineTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -240,7 +299,11 @@
       status = #{status,jdbcType=INTEGER},
       user_name = #{userName,jdbcType=VARCHAR},
       user_phone = #{userPhone,jdbcType=BIGINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      examine_user_id = #{examineUserId,jdbcType=BIGINT},
+      examine_username = #{examineUsername,jdbcType=VARCHAR},
+      examine_reason = #{examineReason,jdbcType=VARCHAR},
+      examine_time = #{examineTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

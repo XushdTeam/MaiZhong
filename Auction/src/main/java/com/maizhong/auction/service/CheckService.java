@@ -70,4 +70,8 @@ public interface CheckService {
     JsonResult checkCarModel(CkCarmodel carmodel);
 
     JsonResult getCarStep5(long carId);
+
+    JsonResult checkCarExamine(long carId);
+
+    JsonResult getRejectReason(long id);
 }

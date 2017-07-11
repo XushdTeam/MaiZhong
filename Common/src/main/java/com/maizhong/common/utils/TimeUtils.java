@@ -32,6 +32,14 @@ public class TimeUtils {
     }
 
     /**
+     * 获取当前数据的时间戳
+     * @return
+     */
+    public static long getCurrentTime(){
+        DateTime dateTime = new DateTime();
+        return dateTime.getMillis();
+    }
+    /**
      * 获取前一天时间
      *
      * @param date
@@ -49,7 +57,10 @@ public class TimeUtils {
         SimpleDateFormat format3 = new SimpleDateFormat(format_default);
         return format3.format(date);
     }
-
+    public static String getFormatDateTimeShort(Date date) {
+        SimpleDateFormat format3 = new SimpleDateFormat(format_default_s);
+        return format3.format(date);
+    }
     /**
      * 通过字符串获取Date
      *
@@ -59,6 +70,28 @@ public class TimeUtils {
     public static Date getDate(String time) {
         DateTime dateTime = DateTime.parse(time, format);
         return dateTime.toDate();
+    }
+
+
+    /**
+     * 获取当前时间后几分钟的时间戳
+     * @param minutes
+     * @return
+     */
+    public static long getOverTime(int minutes){
+        DateTime dateTime = new DateTime();
+        dateTime = dateTime.plusMinutes(minutes);
+        return dateTime.getMillis();
+    }
+
+    /**
+     * 时间戳是否大于系统当前时间
+     * @param time
+     * @return
+     */
+    public static boolean compare(long time){
+        if(time>new DateTime().getMillis())return true;
+        return false;
     }
 
     public static Date getDate2(String time) {

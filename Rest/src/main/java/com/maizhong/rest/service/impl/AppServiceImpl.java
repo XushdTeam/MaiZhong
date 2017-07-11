@@ -547,6 +547,7 @@ public class AppServiceImpl implements AppService {
             object.put("token", token);
             object.put("phone", phone);
 
+
             UserExample example = new UserExample();
             UserExample.Criteria criteria = example.createCriteria();
             criteria.andPhoneEqualTo(Long.valueOf(phone));
@@ -560,9 +561,17 @@ public class AppServiceImpl implements AppService {
                 user.setDelflag(0);
                 userMapper.insert(user);
                 object.put("userImg", null);
+                object.put("company",user.getShopName());
+                object.put("userName",user.getUserName());
+                object.put("role",user.getUserRole());
+                object.put("job",user.getUserJob());
             } else {
                 User user = users.get(users.size() - 1);
                 object.put("userImg", user.getUserImg());
+                object.put("company",user.getShopName());
+                object.put("userName",user.getUserName());
+                object.put("role",user.getUserRole());
+                object.put("job",user.getUserJob());
             }
             return JsonResult.build(200, "登录成功", object);
         } else {
@@ -933,7 +942,7 @@ public class AppServiceImpl implements AppService {
      */
 
     @Override
-    public JsonResult getSaleGZDetail(String guzhiKey, String otherKey, HttpServletRequest request) {
+    public JsonResult getSaleGZDetail(String guzhiKey, String otherKey,int vrate, HttpServletRequest request) {
         String token = request.getHeader("X-Maizhong-AppKey");//获取token
         String phone = jedisClient.get("APP_LOGIN_PHONE" + ":" + token);//获取手机号
         if (StringUtils.isBlank(phone)) {
@@ -1105,6 +1114,12 @@ public class AppServiceImpl implements AppService {
         //使用方式
         basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
 
+        BigDecimal org_price = basePrice;
+        //返利 2017 0615 Xushd
+        Double v = Double.valueOf(vrate);
+        v = v/10000;
+        basePrice = basePrice.subtract(new BigDecimal(v));
+
         if (basePrice.compareTo(BigDecimal.ZERO) < 0) {
             basePrice = BigDecimal.ZERO;
         }
@@ -1125,11 +1140,11 @@ public class AppServiceImpl implements AppService {
         }
 
 
-        OrdersExample example = new OrdersExample();
-        OrdersExample.Criteria criteria = example.createCriteria();
-        criteria.andUserIdEqualTo(Long.valueOf(phone)).andModelIdEqualTo(Long.valueOf(guzhiDTO.getModelId()));
-        long l = ordersMapper.countByExample(example);
-        if (l == 0L) {
+//        OrdersExample example = new OrdersExample();
+//        OrdersExample.Criteria criteria = example.createCriteria();
+//        criteria.andUserIdEqualTo(Long.valueOf(phone)).andModelIdEqualTo(Long.valueOf(guzhiDTO.getModelId()));
+//        long l = ordersMapper.countByExample(example);
+      //  if (l == 0L) {
             long orderNum = IDUtils.getOrderId();
 
             Orders order = new Orders();
@@ -1142,6 +1157,10 @@ public class AppServiceImpl implements AppService {
             order.setReckonTime(new Date());
             order.setStatus(0);
             order.setDelflag(0);
+            //20170615 估值价格
+            order.setOrgPrice(org_price.toString());
+            //20170615 返利
+            order.setRatePrice(vrate+"");
             ordersMapper.insert(order);
 
             OrderInfo orderInfo = new OrderInfo();
@@ -1165,12 +1184,48 @@ public class AppServiceImpl implements AppService {
             orderInfo.setDelflag(0);
             orderInfoMapper.insert(orderInfo);
 
-            jedisClient.hset("ORDER_PHONE", phone + "", JSON.toJSONString(guzhiDTO));
-        }
-
+      //  }
+        jedisClient.hset("ORDER_PHONE", phone + "", JSON.toJSONString(guzhiDTO));
         return JsonResult.build(200, "", guzhiDTO);
 
         /**/
+    }
+
+    /**
+     * 同步用户信息
+     * @since 2017年6月15日 09:59:08
+     * @author Xushd
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult syncUserInfo(String token) {
+        String redisPhone = jedisClient.get("APP_LOGIN_PHONE:"+token);
+        if(StringUtils.isNotBlank(redisPhone)){
+            JSONObject object = new JSONObject();
+            UserExample example = new UserExample();
+            UserExample.Criteria criteria = example.createCriteria();
+            criteria.andPhoneEqualTo(Long.valueOf(redisPhone));
+            List<User> users = userMapper.selectByExample(example);
+            object.put("token", token);
+            object.put("phone", redisPhone);
+            if (users == null || users.size() == 0) {
+                object.put("userImg", null);
+                object.put("company","");
+                object.put("userName","");
+                object.put("role",0);
+                object.put("job","");
+            } else {
+                User user = users.get(0);
+                object.put("userImg", user.getUserImg());
+                object.put("company",user.getShopName());
+                object.put("userName",user.getUserName());
+                object.put("role",user.getUserRole());
+                object.put("job",user.getUserJob());
+            }
+            return JsonResult.OK(object);
+        }
+        return JsonResult.Error("TOKEN IS TIMEOUT");
     }
 
 

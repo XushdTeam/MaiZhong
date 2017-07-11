@@ -132,4 +132,12 @@ public class IndexServiceImpl implements IndexService {
         }
         return JsonUtils.objectToJson(list);
     }
+
+    @Override
+    public JsonResult logOff(String token) {
+
+        jedisClient.del("WEB_LOGIN:"+token);
+
+        return JsonResult.OK();
+    }
 }

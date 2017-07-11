@@ -1,5 +1,10 @@
 package com.maizhong.common.utils;
 
+import org.apache.commons.codec.binary.Hex;
+
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 import java.util.UUID;
 
@@ -52,5 +57,25 @@ public class IDUtils {
         String temp = str.substring(0, 8) + str.substring(9, 13) + str.substring(14, 18) + str.substring(19, 23) + str.substring(24);
         return temp;
 
+    }
+
+    /**
+     * sha256 加密
+     * @param pass
+     * @return
+     */
+    public static String sha256(String pass){
+        MessageDigest messageDigest;
+        String encdeStr = "";
+        try {
+            messageDigest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = messageDigest.digest(pass.getBytes("UTF-8"));
+            encdeStr = Hex.encodeHexString(hash);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return encdeStr;
     }
 }

@@ -13,6 +13,7 @@
     <file url="file://$PROJECT_DIR$/Portal" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Reckon" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Rest" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WebSocketJetty" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Z_Mybatis" charset="UTF-8" />
   </component>
 </project>

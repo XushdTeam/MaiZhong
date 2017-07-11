@@ -46,7 +46,7 @@
 
         <!-- 指定数据库表 -->
 
-        <table schema="" tableName="sys_company"/>
+        <table schema="" tableName="ac_user"/>
 
 
 

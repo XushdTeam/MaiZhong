@@ -158,4 +158,20 @@ a{text-decoration: none}
     transition: color .15s linear;
     color: #97a8be;
 }
+.itembody{
+    margin: 5px;
+    min-height: 100px;
+    width: 700px;
+}
+.baseImgBody{
+    margin: 5px;
+    min-height: 100px;
+    width: 100%;
+}
+.red{
+    color: red;
+}
+.el-form-item__label{
+    color: #1D8CE0;
+}
 [v-cloak] { display: none }

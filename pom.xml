@@ -16,6 +16,7 @@
         <module>BRest</module>
         <module>Reckon</module>
         <module>Auction</module>
+        <module>WebSocketJetty</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -51,6 +52,7 @@
         <goolecollect.version>1.0</goolecollect.version>
         <aliyun-oss.version>2.5.0</aliyun-oss.version>
         <fastjson.version>1.2.7</fastjson.version>
+        <common-codec.version>1.10</common-codec.version>
     </properties>
 
     <dependencyManagement>
@@ -126,7 +128,11 @@
                 <artifactId>commons-net</artifactId>
                 <version>${commons-net.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>commons-net</groupId>
+                <artifactId>commons-net</artifactId>
+                <version>${commons-net.version}</version>
+            </dependency>
             <!--hibernate验证-->
             <dependency>
                 <groupId>org.hibernate</groupId>
@@ -215,6 +221,17 @@
                 <artifactId>spring-test</artifactId>
                 <version>${spring.version}</version>
             </dependency>
+            <!-- 使用spring websocket依赖的jar包 -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-websocket</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-messaging</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
             <!--JSP相关-->
             <dependency>
                 <groupId>jstl</groupId>
@@ -291,6 +308,12 @@
                 <groupId>nl.bitwalker</groupId>
                 <artifactId>UserAgentUtils</artifactId>
                 <version>1.2.4</version>
+            </dependency>
+            <!--加密-->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${common-codec.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

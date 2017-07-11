@@ -71,5 +71,7 @@ public interface AppService {
 
     JsonResult getSaleNum();
 
-    JsonResult getSaleGZDetail(String guzhiKey, String otherKey, HttpServletRequest request);
+    JsonResult getSaleGZDetail(String guzhiKey, String otherKey,int vrate, HttpServletRequest request);
+
+    JsonResult syncUserInfo(String token);
 }
