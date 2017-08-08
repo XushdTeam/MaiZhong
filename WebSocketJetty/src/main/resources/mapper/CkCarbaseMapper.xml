@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maizhong.auction.mapper.CkCarbaseMapper">
+  <resultMap id="BaseResultMap" type="com.maizhong.auction.pojo.CkCarbase">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="model_name" jdbcType="VARCHAR" property="modelName" />
+    <result column="model_id" jdbcType="BIGINT" property="modelId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_phone" jdbcType="BIGINT" property="userPhone" />
+    <result column="start_price" jdbcType="VARCHAR" property="startPrice" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="examine_user_id" jdbcType="BIGINT" property="examineUserId" />
+    <result column="examine_username" jdbcType="VARCHAR" property="examineUsername" />
+    <result column="examine_reason" jdbcType="VARCHAR" property="examineReason" />
+    <result column="examine_time" jdbcType="TIMESTAMP" property="examineTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, model_name, model_id, status, user_name, user_phone, start_price, create_time, 
+    examine_user_id, examine_username, examine_reason, examine_time
+  </sql>
+  <select id="selectByExample" parameterType="com.maizhong.auction.pojo.CkCarbaseExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ck_carbase
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ck_carbase
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ck_carbase
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maizhong.auction.pojo.CkCarbaseExample">
+    delete from ck_carbase
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maizhong.auction.pojo.CkCarbase">
+    insert into ck_carbase (id, model_name, model_id, 
+      status, user_name, user_phone, 
+      start_price, create_time, examine_user_id, 
+      examine_username, examine_reason, examine_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{modelName,jdbcType=VARCHAR}, #{modelId,jdbcType=BIGINT}, 
+      #{status,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPhone,jdbcType=BIGINT}, 
+      #{startPrice,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{examineUserId,jdbcType=BIGINT}, 
+      #{examineUsername,jdbcType=VARCHAR}, #{examineReason,jdbcType=VARCHAR}, #{examineTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.maizhong.auction.pojo.CkCarbase">
+    insert into ck_carbase
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="modelName != null">
+        model_name,
+      </if>
+      <if test="modelId != null">
+        model_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userPhone != null">
+        user_phone,
+      </if>
+      <if test="startPrice != null">
+        start_price,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="examineUserId != null">
+        examine_user_id,
+      </if>
+      <if test="examineUsername != null">
+        examine_username,
+      </if>
+      <if test="examineReason != null">
+        examine_reason,
+      </if>
+      <if test="examineTime != null">
+        examine_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="modelName != null">
+        #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="modelId != null">
+        #{modelId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=BIGINT},
+      </if>
+      <if test="startPrice != null">
+        #{startPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examineUserId != null">
+        #{examineUserId,jdbcType=BIGINT},
+      </if>
+      <if test="examineUsername != null">
+        #{examineUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="examineReason != null">
+        #{examineReason,jdbcType=VARCHAR},
+      </if>
+      <if test="examineTime != null">
+        #{examineTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maizhong.auction.pojo.CkCarbaseExample" resultType="java.lang.Long">
+    select count(*) from ck_carbase
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ck_carbase
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.modelName != null">
+        model_name = #{record.modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelId != null">
+        model_id = #{record.modelId,jdbcType=BIGINT},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPhone != null">
+        user_phone = #{record.userPhone,jdbcType=BIGINT},
+      </if>
+      <if test="record.startPrice != null">
+        start_price = #{record.startPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.examineUserId != null">
+        examine_user_id = #{record.examineUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.examineUsername != null">
+        examine_username = #{record.examineUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examineReason != null">
+        examine_reason = #{record.examineReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examineTime != null">
+        examine_time = #{record.examineTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ck_carbase
+    set id = #{record.id,jdbcType=BIGINT},
+      model_name = #{record.modelName,jdbcType=VARCHAR},
+      model_id = #{record.modelId,jdbcType=BIGINT},
+      status = #{record.status,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_phone = #{record.userPhone,jdbcType=BIGINT},
+      start_price = #{record.startPrice,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      examine_user_id = #{record.examineUserId,jdbcType=BIGINT},
+      examine_username = #{record.examineUsername,jdbcType=VARCHAR},
+      examine_reason = #{record.examineReason,jdbcType=VARCHAR},
+      examine_time = #{record.examineTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.auction.pojo.CkCarbase">
+    update ck_carbase
+    <set>
+      <if test="modelName != null">
+        model_name = #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="modelId != null">
+        model_id = #{modelId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        user_phone = #{userPhone,jdbcType=BIGINT},
+      </if>
+      <if test="startPrice != null">
+        start_price = #{startPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examineUserId != null">
+        examine_user_id = #{examineUserId,jdbcType=BIGINT},
+      </if>
+      <if test="examineUsername != null">
+        examine_username = #{examineUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="examineReason != null">
+        examine_reason = #{examineReason,jdbcType=VARCHAR},
+      </if>
+      <if test="examineTime != null">
+        examine_time = #{examineTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maizhong.auction.pojo.CkCarbase">
+    update ck_carbase
+    set model_name = #{modelName,jdbcType=VARCHAR},
+      model_id = #{modelId,jdbcType=BIGINT},
+      status = #{status,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=BIGINT},
+      start_price = #{startPrice,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      examine_user_id = #{examineUserId,jdbcType=BIGINT},
+      examine_username = #{examineUsername,jdbcType=VARCHAR},
+      examine_reason = #{examineReason,jdbcType=VARCHAR},
+      examine_time = #{examineTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -213,6 +213,9 @@ public class CheckServiceImpl implements CheckService {
         carbase.setOrderNum(ordernum);
         int i = ckCarbaseMapper.insertSelective(carbase);
         if (i > 0) {
+            if(ordernum!=0L){
+
+            }
             return JsonResult.OK(carbase);
         }
         return JsonResult.Error(OperateEnum.SERVER_ERROR);

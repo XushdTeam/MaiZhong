@@ -8,7 +8,7 @@
     <!--连接池配置-->
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
         <!--最大连接数-->
-        <property name="maxTotal" value="30"/>
+        <property name="maxTotal" value="50"/>
         <!--最大空闲连接数-->
         <property name="maxIdle" value="10"/>
         <!--每次释放链接的最大数目-->

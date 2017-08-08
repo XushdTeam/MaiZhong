@@ -7,6 +7,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * ID生成工具类
@@ -47,6 +49,16 @@ public class IDUtils {
     }
 
     /**
+     * 生成6为验证码
+     * @return
+     */
+    public static String getVerifyCode(){
+        Random random = new Random();
+        int code = random.nextInt(999999);
+        return String.valueOf(code);
+    }
+
+    /**
      * UUID 没有‘-’
      * @return
      */
@@ -77,5 +89,20 @@ public class IDUtils {
             e.printStackTrace();
         }
         return encdeStr;
+    }
+
+    /**
+     * 正则替换所有特殊字符
+     * @param orgStr
+     * @return
+     */
+    public static String replaceSpecStr(String orgStr){
+        if (null!=orgStr&&!"".equals(orgStr.trim())) {
+            String regEx="[\\s~·`!！@#￥$%^……&*（()）\\-——\\-_=+【\\[\\]】｛{}｝\\|、\\\\；;：:‘'“”\"，,《<。.》>、/？?]";
+            Pattern p = Pattern.compile(regEx);
+            Matcher m = p.matcher(orgStr);
+            return m.replaceAll("");
+        }
+        return null;
     }
 }

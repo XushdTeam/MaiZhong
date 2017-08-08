@@ -404,16 +404,16 @@ public class ReckonServiceImpl implements ReckonService {
         try {
 
             String redisJson = null;
-            try {
-                redisJson = jedisClient.hget("GUZHI", param);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            if (StringUtils.isNotBlank(redisJson)) {
-
-                return JsonResult.OK(JsonUtils.jsonToPojo(redisJson, GuzhiDTO.class));
-            }
+//            try {
+//                redisJson = jedisClient.hget("GUZHI", param);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//
+//            if (StringUtils.isNotBlank(redisJson)) {
+//
+//                return JsonResult.OK(JsonUtils.jsonToPojo(redisJson, GuzhiDTO.class));
+//            }
 
             String[] paramarry = param.split("c|m|r|g");
             String url = String.format("%s?token=%s&modelId=%s&regDate=%s&mile=%s&zone=%s", GUZHI, token, paramarry[2], paramarry[3], paramarry[4], paramarry[1]);
@@ -442,26 +442,34 @@ public class ReckonServiceImpl implements ReckonService {
             for (Object eval_price : eval_prices) {
                 JSONObject object = (JSONObject) eval_price;
 //
+                /**
+                 * 修改 2017-0804 修改 段位价格整体下移
+                 */
                 if (object.getString("condition").equals("excellent")) {
+                    //车况优秀
+//                    gzrecord.setPriceMaxA(object.getString("individual_low_sold_price"));
+//                    gzrecord.setPriceMinA(object.getString("dealer_low_buy_price"));
+                }
+                if (object.getString("condition").equals("good")) {
                     //车况优秀
                     gzrecord.setPriceMaxA(object.getString("individual_low_sold_price"));
                     gzrecord.setPriceMinA(object.getString("dealer_low_buy_price"));
+
                 }
-                if (object.getString("condition").equals("good")) {
+                if (object.getString("condition").equals("normal")) {
                     //车况良好
                     gzrecord.setPriceMaxB(object.getString("individual_low_sold_price"));
                     gzrecord.setPriceMinB(object.getString("dealer_low_buy_price"));
-                }
-                if (object.getString("condition").equals("normal")) {
+//                    //车况一般
+//                    gzrecord.setPriceMaxC(object.getString("individual_low_sold_price"));
+//                    gzrecord.setPriceMinC(object.getString("dealer_low_buy_price"));
                     //车况一般
-                    gzrecord.setPriceMaxC(object.getString("individual_low_sold_price"));
-                    gzrecord.setPriceMinC(object.getString("dealer_low_buy_price"));
-                    //车况较差
-                    gzrecord.setPriceMaxD(new BigDecimal(object.getDouble("individual_low_sold_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
-                    gzrecord.setPriceMinD(new BigDecimal(object.getDouble("dealer_low_buy_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
-//
-//                    gzrecord.setPriceMaxD(new BigDecimal(object.getInteger("dealer_buy_price") * 0.94 * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
-//                    gzrecord.setPriceMinD(new BigDecimal(object.getInteger("dealer_low_buy_price") * 0.94 * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+                    gzrecord.setPriceMaxC(new BigDecimal(object.getDouble("individual_low_sold_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+                    gzrecord.setPriceMinC(new BigDecimal(object.getDouble("dealer_low_buy_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+
+//                  //车况较差
+                    gzrecord.setPriceMaxD(new BigDecimal(object.getDouble("individual_low_sold_price") * 0.94 * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+                    gzrecord.setPriceMinD(new BigDecimal(object.getDouble("dealer_low_buy_price") * 0.94 * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
                 }
 
             }

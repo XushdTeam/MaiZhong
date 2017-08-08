@@ -100,5 +100,7 @@ public interface JedisClient {
      */
     long sadd(String key,String value);
 
+    List<byte[]> lrange(byte[] key);
+
 
 }

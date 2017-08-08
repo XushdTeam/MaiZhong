@@ -8,5 +8,5 @@ import com.maizhong.common.result.JsonResult;
 public interface AcutionService {
     JsonResult getCarNow();
 
-    JsonResult addPrice(String ch, long carId, long plus, long price);
+    JsonResult addPrice(String ch, long carId, long plus, long price, String token);
 }

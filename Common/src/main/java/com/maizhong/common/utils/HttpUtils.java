@@ -111,14 +111,12 @@ public class HttpUtils {
      * @param method
      * @param headers
      * @param querys
-     * @param body
      * @return
      * @throws Exception
      */
     public static HttpResponse doPost(String host, String path, String method,
                                       Map<String, String> headers,
-                                      Map<String, String> querys,
-                                      String body)
+                                      Map<String, String> querys,String body)
             throws Exception {
         HttpClient httpClient = wrapClient(host);
 

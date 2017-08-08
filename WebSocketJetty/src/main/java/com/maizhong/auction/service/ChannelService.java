@@ -1,6 +1,7 @@
 package com.maizhong.auction.service;
 
 import com.maizhong.auction.dto.AuctionHistoryDTO;
+import com.maizhong.auction.pojo.AcBidRecord;
 
 /**
  * Created by Xushd on 2017/6/26.
@@ -18,7 +19,7 @@ public interface ChannelService {
 
     void clearChannel(int chNum);
 
-    void addSocketQueue(AuctionHistoryDTO historyDTO);
+    void addSocketQueue(AcBidRecord acBidRecord);
 
     void sendSocket();
 

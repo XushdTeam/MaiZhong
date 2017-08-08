@@ -30,7 +30,7 @@
     <script src="/resources/js/owl.carousel.js" type="text/javascript"></script>
     <script src="/resources/js/jquery.cxscroll.js" type="text/javascript"></script>
     <script src="/resources/js/jquery.cookie.min.js"></script>
-    <script src="/resources/js/js.js"></script>
+    <script src="/resources/js/slider.js"></script>
     <script language="javascript">
         function imgdragstart(){return false;}
     </script>

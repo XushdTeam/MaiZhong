@@ -7,6 +7,8 @@ package com.maizhong.auction.dto;
 
 public class CarAcutionDTO {
 
+    private long id;
+
     private long carId;
 
     //结束时间 时间戳
@@ -16,6 +18,17 @@ public class CarAcutionDTO {
     private String nowPrice;
 
     private String channel;
+
+    //当前出价用户id
+    private long lastUserId;
+
+    public long getLastUserId() {
+        return lastUserId;
+    }
+
+    public void setLastUserId(long lastUserId) {
+        this.lastUserId = lastUserId;
+    }
 
     public String getChannel() {
         return channel;
@@ -32,6 +45,14 @@ public class CarAcutionDTO {
     }
 
     public CarAcutionDTO() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public long getCarId() {

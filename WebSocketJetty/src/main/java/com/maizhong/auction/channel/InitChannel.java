@@ -39,9 +39,9 @@ public class InitChannel implements ServletContextListener {
 
         LOGGER.info("-----开启轮训线程-----");
 
-        channelService.clearChannel(chNum);
+        //channelService.clearChannel(chNum);
 
-        channelService.createAuctionQueue(chNum);
+        //channelService.createAuctionQueue(chNum);
 
         for (int i = 0; i < chNum; i++) {
             String channel = "CH"+i;
@@ -92,6 +92,9 @@ public class InitChannel implements ServletContextListener {
         }
     }
 
+    /**
+     * 数据存储
+     */
     class ThreadDataSave implements Runnable{
 
         @Override
@@ -107,12 +110,16 @@ public class InitChannel implements ServletContextListener {
         }
     }
 
+    /**
+     * 消息推送
+     */
     class ThreadSocket implements Runnable{
 
         @Override
         public void run() {
             while (true) {
                 try {
+                    TimeUnit.SECONDS.sleep(1);
                     channelService.sendSocket();
                 } catch (Exception ex) {
                     ex.printStackTrace();

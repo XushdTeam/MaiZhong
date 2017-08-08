@@ -132,7 +132,7 @@
                 <configuration>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                     <webApp>
-                        <contextPath>/</contextPath>
+                        <contextPath>/WebSocketJetty</contextPath>
                     </webApp>
                 </configuration>
             </plugin>

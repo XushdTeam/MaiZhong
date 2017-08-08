@@ -24,7 +24,7 @@
     <link rel="stylesheet" type="text/css" href="/resources/font/iconfont.css" />
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
     <script src="/resources/js/jquery.cookie.min.js" type="text/javascript"></script>
-    <script src="/resources/js/js.js"></script>
+    <script src="/resources/js/slider.js"></script>
 </head>
 <body>
 

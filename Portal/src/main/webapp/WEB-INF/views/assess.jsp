@@ -17,7 +17,7 @@
     <Link Rel="SHORTCUT ICON" href="img/tao.ico">
     <link rel="Bookmark" href="img/tao.ico">
     <script src="/resources/script/jquery-1.8.0.min.js" type="text/javascript"></script>
-    <script src="/resources/script/js.js"></script>
+    <script src="/resources/script/slider.js"></script>
 </head>
 <body>
 

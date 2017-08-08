@@ -2,18 +2,14 @@ package com.maizhong.auction.service.impl;
 
 import com.maizhong.auction.channel.InitChannel;
 import com.maizhong.auction.dao.JedisClient;
-import com.maizhong.auction.dto.AuctionHistoryDTO;
+import com.maizhong.auction.dto.AutoPrice;
 import com.maizhong.auction.dto.CarAcutionDTO;
-import com.maizhong.auction.mapper.TpAuctionoverMapper;
-import com.maizhong.auction.mapper.TpHistoryMapper;
-import com.maizhong.auction.mapper.TpNowMapper;
+import com.maizhong.auction.mapper.*;
 import com.maizhong.auction.pojo.*;
 import com.maizhong.auction.service.ChannelService;
 import com.maizhong.auction.socket.SpringWebSocketHandler;
-import com.maizhong.common.result.JsonResult;
-import com.maizhong.common.utils.JsonUtils;
-import com.maizhong.common.utils.ObjectUtil;
-import com.maizhong.common.utils.TimeUtils;
+import com.maizhong.common.dto.WaitAuctionQueueDto;
+import com.maizhong.common.utils.*;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.socket.TextMessage;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.math.BigDecimal;
+import java.sql.Time;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -34,22 +30,30 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class ChannelServiceImpl implements ChannelService {
 
-    public static Logger LOGGER = LoggerFactory.getLogger(InitChannel.class);
+    public static Logger LOGGER = LoggerFactory.getLogger(ChannelServiceImpl.class);
 
     @Autowired
     private JedisClient jedisClient;
 
-    @Autowired
-    private TpAuctionoverMapper tpAuctionoverMapper;
+//    @Autowired
+//    private AcAuctionOverMapper acAuctionOverMapper;
 
     @Autowired
-    private TpHistoryMapper tpHistoryMapper;
+    private AcAuctionRecordMapper acAuctionRecordMapper;
+    @Autowired
+    private AcBidRecordMapper acBidRecordMapper;
 
     @Autowired
-    private TpNowMapper tpNowMapper;
+    private AcOrderMapper acOrderMapper;
+
+    @Autowired
+    private AcAuctionNowMapper acAuctionNowMapper;
 
     @Autowired
     private SpringWebSocketHandler socketHandler;
+
+    @Autowired
+    private CkCarbaseMapper ckCarbaseMapper;
 
     /**
      * 创建拍卖队列
@@ -75,9 +79,9 @@ public class ChannelServiceImpl implements ChannelService {
     }
 
 
-
-
-
+    /**
+     * 拍卖结束后 数据轮训
+     */
     @Override
     @Transactional
     public void dataSave() {
@@ -87,39 +91,49 @@ public class ChannelServiceImpl implements ChannelService {
             try {
                 CarAcutionDTO dto = ObjectUtil.deserializer(rpop, CarAcutionDTO.class);
                 long carId = dto.getCarId();
+                long recordId = dto.getId();
 
-                TpAuctionover over = new TpAuctionover();
-                over.setCarId(carId);
-                over.setPrice(dto.getNowPrice());
-                over.setChannel(dto.getChannel());
+                CkCarbase carbase = new CkCarbase();
+                carbase.setId(carId);
 
-                TpHistoryExample example = new TpHistoryExample();
-                TpHistoryExample.Criteria criteria = example.createCriteria();
-                criteria.andCarIdEqualTo(carId);
-                List<TpHistory> tpHistories = tpHistoryMapper.selectByExample(example);
-                if(tpHistories.size()==0){
-
-                    over.setUserId(0L);
-                    over.setBussinessName("无用户出价");
-
+                long lastUserId = dto.getLastUserId();
+                if(lastUserId==0L){
+                    //无人出价
+                    //流拍
+                    carbase.setStatus(6);
                 }else{
-                    TpHistory tpHistory = tpHistories.get(tpHistories.size() - 1);
-                    over.setUserId(tpHistory.getUserId());
-                    over.setBussinessName(tpHistory.getBussinessName());
+                    //创建订单
+                    long orderNum = IDUtils.getOrderId();
+                    AcOrder order = new AcOrder();
+                    order.setOrderNum(orderNum);
+                    order.setCarId(carId);
+                    order.setPrice(dto.getNowPrice());
+                    order.setUserId(lastUserId);
+                    order.setStatus(0);
+                    order.setChKey(dto.getChannel());
+                    order.setCreateTime(new Date());
+                    //等待确认
+                    carbase.setStatus(7);
+                    acOrderMapper.insertSelective(order);
+                    LOGGER.info("INSET ORDER 车辆 ID {} 订单编号 {}",carId,orderNum);
+
                 }
-                over.setCreateTime(new Date());
-                over.setUpdateTime(new Date());
 
-                tpAuctionoverMapper.insertSelective(over);
+                ckCarbaseMapper.updateByPrimaryKeySelective(carbase);
+                LOGGER.info("UPDATE CARBASE 车辆 ID {} 拍卖状态 {}",carId,carbase.getStatus());
 
-                LOGGER.info("INSET {}",carId);
+                AcAuctionRecord record = new AcAuctionRecord();
+                record.setId(recordId);
+                record.setStatus(1);
+                record.setPrice(dto.getNowPrice());
+                record.setUserId(dto.getLastUserId());
+                record.setEndTime(TimeUtils.getNowTime());
 
-                TpNowExample tpNowExample = new TpNowExample();
-                TpNowExample.Criteria criteria1 = tpNowExample.createCriteria();
-                criteria1.andCarIdEqualTo(carId);
-                tpNowMapper.deleteByExample(tpNowExample);
+                acAuctionRecordMapper.updateByPrimaryKeySelective(record);
+                LOGGER.info("UPDATE RECORD carID {} recordId {}",carId,recordId);
 
-                LOGGER.info("Clear {}",carId);
+                jedisClient.del("AUTOPRICE_CAR:"+carId);
+                LOGGER.info("CLEAR AUTOPRICE carID {} ",carId);
 
             }catch (Exception e){
                 e.printStackTrace();
@@ -146,8 +160,9 @@ public class ChannelServiceImpl implements ChannelService {
             //不为空
             CarAcutionDTO carAcutionDTO = JsonUtils.jsonToPojo(now, CarAcutionDTO.class);
             if(TimeUtils.compare(carAcutionDTO.getOverTime())){
-                //未结束
-
+                //未结束 继续轮训
+                //智能报价处理
+                autoPrice(carAcutionDTO);
             }else{
                 //结束
                 jedisClient.set("CHANNEL:" + ch,"over");
@@ -161,6 +176,10 @@ public class ChannelServiceImpl implements ChannelService {
         }
     }
 
+    /***
+     * 通道清理
+     * @param chNum
+     */
     @Override
     public void clearChannel(int chNum) {
         jedisClient.del("DataQueue");
@@ -173,42 +192,121 @@ public class ChannelServiceImpl implements ChannelService {
 
     }
 
+    /**
+     * 出价记录 发送队列
+     * @param acBidRecord
+     */
     @Override
-    public void addSocketQueue(AuctionHistoryDTO historyDTO) {
+    public void addSocketQueue(AcBidRecord acBidRecord) {
         byte[] redisKey = "Socket".getBytes();
-        jedisClient.lpush(redisKey, ObjectUtil.serializer(historyDTO));
+        jedisClient.lpush(redisKey, ObjectUtil.serializer(acBidRecord));
     }
 
+    /**
+     * 轮需 出价记录 队列 有发送
+     */
     @Override
     public void sendSocket() {
 
         byte[] redisKey = ("Socket").getBytes();
         byte[] rpop = jedisClient.rpop(redisKey);
         if(rpop!=null){
-            AuctionHistoryDTO deserializer = ObjectUtil.deserializer(rpop, AuctionHistoryDTO.class);
-
+            AcBidRecord deserializer = ObjectUtil.deserializer(rpop, AcBidRecord.class);
+            deserializer.setNowTime(TimeUtils.getCurrentTime());
             TextMessage msg = new TextMessage(JsonUtils.objectToJson(deserializer));
 
             try {
-                socketHandler.sendMessageToCH(msg,deserializer.getCh());
+                //发送出价信息
+                socketHandler.sendMessageToCH(msg,deserializer.getChKey());
+                //数据持久化出价记录
+                acBidRecordMapper.insertSelective(deserializer);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            TpHistory history = new TpHistory();
-            history.setPrice(deserializer.getPrice());
-            history.setUserId(deserializer.getUserId());
-            history.setPlus(deserializer.getPuls());
-            history.setCarId(deserializer.getCarId());
-            history.setBussinessName(deserializer.getBussinessName());
-            history.setAuctionDate(deserializer.getAuctionDate());
-            tpHistoryMapper.insertSelective(history);
+
+
         }
 
 
     }
 
     /**
-     * 数据持久化队列添加
+     * 智能报价处理
+     */
+    private void autoPrice(CarAcutionDTO carAcutionDTO){
+        Long userId = carAcutionDTO.getLastUserId();
+        Long carId = carAcutionDTO.getCarId();
+        String channel = carAcutionDTO.getChannel();
+
+        String price = carAcutionDTO.getNowPrice();
+        String key = "AUTOPRICE_QUEUE:"+carId;
+
+        byte[] rpop = jedisClient.rpop(key.getBytes());
+
+        if(rpop!=null){
+            AutoPrice autoPrice = ObjectUtil.deserializer(rpop, AutoPrice.class);
+            if(autoPrice.getCarId()==carId){
+                //如果最高价是本人
+                if(userId==autoPrice.getUserId()){
+                    //如果当前最高价小于智能报价 放回队列
+                    if(Double.valueOf(price)<Double.valueOf(autoPrice.getPrice())){
+                        jedisClient.lpush(key.getBytes(),rpop);
+                    }else{
+                        jedisClient.hset("AUTOPRICE_CAR:" + carId, String.valueOf(autoPrice.getUserId()),"over");
+                    }
+                }else{
+                    //最高价不是本人
+                    //加价
+                    BigDecimal now = new BigDecimal(price);
+                    BigDecimal auto = new BigDecimal(autoPrice.getPrice()).divide(new BigDecimal(10000));
+                    //当前价格小于智能报价
+                    if(now.compareTo(auto)<0){
+                        BigDecimal diff = auto.subtract(now);
+
+                        String token = jedisClient.hget("AC_USER_PHONE", autoPrice.getPhone() + "");
+                        Map<String,String> head = new HashMap<>();
+                        Map<String,String> query = new HashMap<>();
+                        Map<String,String> body = new HashMap<>();
+                        head.put("X-Maizhong-AppKey",token);
+
+
+                        //如果智能报价与当前价格差值小于500 直接给智能报价
+                        if(diff.compareTo(new BigDecimal("0.05"))<0){
+
+                            body.put("plus",diff.toString());
+                            body.put("price",now.toString());
+
+                        }else{
+                            //加500
+                            body.put("plus","0.05");
+                            body.put("price",now.toString());
+                            //放回队列
+                            jedisClient.lpush(key.getBytes(),rpop);
+                        }
+                        try {
+                            LOGGER.info("智能出价 {}",body.toString());
+                            HttpUtils.doPost("http://192.168.2.186:8090","/app/addPrice/"+channel+"/"+carId,null,head,query,body);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }else{
+                        jedisClient.hset("AUTOPRICE_CAR:" + carId, String.valueOf(autoPrice.getUserId()),"over");
+                    }
+
+                }
+            }else{
+                jedisClient.hset("AUTOPRICE_CAR:" + carId, String.valueOf(autoPrice.getUserId()),"over");
+            }
+
+        }
+
+
+
+    }
+
+    /**
+     * 拍卖结束 数据持久化队列添加
      */
     private void addDataQueue(CarAcutionDTO carAcutionDTO){
         byte[] redisKey = "DataQueue".getBytes();
@@ -229,16 +327,36 @@ public class ChannelServiceImpl implements ChannelService {
                 //没有车了
                 TimeUnit.SECONDS.sleep(5);
             }else{
-                CarAcutionDTO dto = ObjectUtil.deserializer(rpop, CarAcutionDTO.class);
-                TpNow now = new TpNow();
-                now.setCarId(dto.getCarId());
-                now.setCh(ch);
+
+                WaitAuctionQueueDto dto = ObjectUtil.deserializer(rpop, WaitAuctionQueueDto.class);
                 TimeUnit.SECONDS.sleep(4);
-                long overTime = TimeUtils.getOverTime(15);
-                dto.setOverTime(overTime);
-                now.setOverTime(overTime);
-                tpNowMapper.insertSelective(now);
-                nextCar = JsonUtils.objectToJson(dto);
+
+                long carId = dto.getCarId();
+                long overTime = TimeUtils.getOverTime(dto.getMinutes());
+                //创建拍卖记录
+                AcAuctionRecord record = new AcAuctionRecord();
+                record.setCarId(carId);
+                record.setChKey(ch);
+                record.setStartTime(TimeUtils.getNowTime());
+                record.setTime(Long.valueOf(dto.getMinutes()));
+                record.setEndTime(String.valueOf(overTime));
+                record.setStatus(0);
+                record.setUserId(0L);
+                acAuctionRecordMapper.insertSelective(record);
+                //更新状态为正在拍
+                CkCarbase ckCarbase = new CkCarbase();
+                ckCarbase.setId(carId);
+                ckCarbase.setStatus(5);
+                ckCarbaseMapper.updateByPrimaryKeySelective(ckCarbase);
+                //通道数据
+                CarAcutionDTO carAcutionDTO = new CarAcutionDTO();
+                carAcutionDTO.setNowPrice(dto.getStartPrice());
+                carAcutionDTO.setChannel(ch);
+                carAcutionDTO.setCarId(carId);
+                carAcutionDTO.setOverTime(overTime);
+                carAcutionDTO.setId(record.getId());
+                carAcutionDTO.setLastUserId(0L);
+                nextCar = JsonUtils.objectToJson(carAcutionDTO);
             }
         }catch (Exception e){
             e.printStackTrace();

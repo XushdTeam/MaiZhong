@@ -20,7 +20,7 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/guzhi.css" />
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
     <script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="/resources/js/js.js" type="text/javascript"></script>
+    <script src="/resources/js/slider.js" type="text/javascript"></script>
     <style>
 
         .error{

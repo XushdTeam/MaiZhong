@@ -656,7 +656,7 @@
             <div class="testing-end c6 fs14 tc mt50 mb25" style="background: #FFF">
                 <p class="mt15">检测日期:<span id="CheckDate">${carInfo.checkDate}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     报告编码:<span id="TredeCode">${carInfo.checkNum}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                    注：”本报告解释权归《北京迈众汽车信息服务有限公司所有》
+                    注：“本报告解释权归《北京迈众汽车信息服务有限公司所有》”
                 </p>
             </div>
 

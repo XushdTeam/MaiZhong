@@ -220,6 +220,22 @@ public class JedisClientSingleImpl implements JedisClient {
         return len;
     }
 
+    @Override
+    public List<byte[]> lrange(byte[] key) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            List<byte[]> lrange = jedis.lrange(key, 0, -1);
+            return lrange;
+        }catch (Exception e){
+
+        }finally {
+            jedis.close();
+        }
+
+        return null;
+    }
+
     /**
      * 查询出所有的集合
      * @param key

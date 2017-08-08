@@ -21,7 +21,7 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/site.css" />
     <link rel="stylesheet" type="text/css" href="/resources/font/iconfont.css" />
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
-    <script src="/resources/js/js.js" type="text/javascript"></script>
+    <script src="/resources/js/slider.js" type="text/javascript"></script>
     <script src="https://cdn.bootcss.com/layer/3.0.1/layer.js"></script>
     <script src="/resources/js/jquery.cookie.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=N8kgZsufZYtKgEXbtUoTHrKlaqgAxTFY"></script>

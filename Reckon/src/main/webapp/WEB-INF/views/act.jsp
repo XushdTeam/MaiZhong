@@ -26,7 +26,7 @@
     <script src="/resources/js/jquery.SuperSlide.2.1.1.js" type="text/javascript"></script>
     <script src="/resources/js/jquery.cookie.min.js"></script>
     <script src="http://cdn.bootcss.com/layer/3.0.1/layer.min.js" type="text/javascript"></script>
-    <script src="/resources/js/js.js"></script>
+    <script src="/resources/js/slider.js"></script>
     <script language="javascript">
         function imgdragstart(){return false;}
     </script>
@@ -176,7 +176,7 @@
 
 
 <script src="/resources/js/awardRotate.js"></script>
-<script src="/resources/js/js.js"></script>
+<script src="/resources/js/slider.js"></script>
 
 <script>
     //数组排序

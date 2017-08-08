@@ -25,7 +25,7 @@
 
     <script src="/resources/js/jquery-1.8.3.min.js" type="text/javascript"></script>
     <script src="/resources/js/jquery.cookie.min.js"></script>
-    <script src="/resources/js/js.js"></script>
+    <script src="/resources/js/slider.js"></script>
     <script language="javascript">
         function imgdragstart(){return false;}
     </script>

@@ -18,6 +18,7 @@ public class TimeUtils {
 
     private static final String format_default = "yyyy-MM-dd HH:mm:ss";
     private static final String format_default_s = "yyyy-MM-dd";
+
     private static final DateTimeFormatter format = DateTimeFormat.forPattern(format_default);
     private static final DateTimeFormatter format2 = DateTimeFormat.forPattern(format_default_s);
 
@@ -72,6 +73,18 @@ public class TimeUtils {
         return dateTime.toDate();
     }
 
+    /**
+     * Date => String
+     * @param date
+     * @param format
+     * @return
+     */
+    public static String getFormatDateTime(Date date,String format){
+
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        return sdf.format(date);
+    }
+
 
     /**
      * 获取当前时间后几分钟的时间戳
@@ -92,6 +105,15 @@ public class TimeUtils {
     public static boolean compare(long time){
         if(time>new DateTime().getMillis())return true;
         return false;
+    }
+
+    /**
+     * 获取时间戳与当前系统时间的差值
+     * @param time
+     * @return
+     */
+    public static long getDiff(long time){
+        return (time - new DateTime().getMillis());
     }
 
     public static Date getDate2(String time) {
