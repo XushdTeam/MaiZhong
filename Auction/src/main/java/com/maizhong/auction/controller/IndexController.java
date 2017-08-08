@@ -374,4 +374,10 @@ public class IndexController {
         model.addAttribute("carInfo",dto);
         return "detail";
     }
+
+    @RequestMapping(value = "/to/{url}")
+    public String gotoUrl(@PathVariable String url){
+
+        return url;
+    }
 }
