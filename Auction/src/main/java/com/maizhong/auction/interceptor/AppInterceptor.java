@@ -13,13 +13,14 @@ public class AppInterceptor extends HandlerInterceptorAdapter {
 
 
 
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestURI = request.getRequestURI();
         String token = request.getHeader("X-Maizhong-AppKey");
 
         //没有Token返回404 进行拦截
-        if (StringUtils.isNotBlank(token)||"/app/check/login".equals(requestURI)) {
+        if (StringUtils.isNotBlank(token)||"/app/check/login".equals(requestURI)||StringUtils.contains(requestURI,"/app/personal/getToken/")) {
 
             request.setAttribute("token",token);
             return true;

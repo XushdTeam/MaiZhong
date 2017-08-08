@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>车辆审核</title>
+    <title>代拍车辆</title>
     <link href="https://cdn.bootcss.com/element-ui/1.3.7/theme-default/index.css" rel="stylesheet">
     <link href="/resources/css/app.css" rel="stylesheet">
     <link href="/resources/css/iconfont.css" rel="stylesheet">
@@ -34,7 +34,7 @@
             <div class="list" v-show="handle=='list'">
                 <div class="row blockquote">
                     <el-breadcrumb separator="/">
-                        <el-breadcrumb-item><a @click="handle='list'">车辆审核</a></el-breadcrumb-item>
+                        <el-breadcrumb-item><a @click="handle='list'">代拍车辆</a></el-breadcrumb-item>
                     </el-breadcrumb>
                 </div>
                 <%--查询--%>
@@ -74,25 +74,55 @@
                         <el-table-column prop="carNum" label="牌照号码"width="120"></el-table-column>
                         <el-table-column prop="userName" label="检测员"width="120"></el-table-column>
                         <el-table-column prop="userPhone" label="联系电话"width="140"></el-table-column>
-                        <el-table-column prop="companyName" label="所属商户"width="200"></el-table-column>
+                        <el-table-column prop="companyName" label="所属商户"width="150"></el-table-column>
+                        <el-table-column prop="startPrice" label="起拍价"width="150">
+                            <template scope="scope">
+                                <el-input v-model="scope.row.startPrice"
+                                          v-show="scope.row.change"
+                                          placeholder="请输入起拍价"></el-input>
+                                <span v-show="!scope.row.change">{{scope.row.startPrice}} 万元</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="startPrice" label="保留价"width="150">
+                            <template scope="scope">
+                                <el-input v-model="scope.row.savePrice"
+                                          v-show="scope.row.change2"
+                                          placeholder="请输入保留价"></el-input>
+                                <span v-show="!scope.row.change2">{{scope.row.savePrice}} 万元</span>
+                            </template>
+                        </el-table-column>
                         <el-table-column prop="status" label="操作">
                             <template scope="scope">
-                                <el-button
+                                <el-button v-show="!scope.row.change2&&!scope.row.change"
                                         type="info" size="small"
                                         @click="look(scope.row)">
-                                    <i class="iconfont icon-mr"></i>审查
+                                    <i class="iconfont icon-mr"></i>详情
                                 </el-button>
-                                <el-button
+                                <el-button v-show="!scope.row.change&&!scope.row.change2"
                                         size="small" type="success"
-                                        @click="pass(scope.row)">
-                                    <i class="iconfont icon-tongguo"></i>通过
+                                        @click="changPrice(scope.$index)">
+                                    <i class="iconfont icon-tongguo"></i>修改起拍价
                                 </el-button>
-                                <el-button
-                                        size="small" type="danger"
-                                        @click="reject(scope.row)">
-                                    <i class="iconfont icon-work-reject"></i>驳回
+                                <el-button v-show="!scope.row.change2&&!scope.row.change"
+                                           size="small" type="success"
+                                           @click="changSavePrice(scope.$index)">
+                                    <i class="iconfont icon-tongguo"></i>修改保留价
                                 </el-button>
-
+                                <el-button v-show="scope.row.change"
+                                        size="small" type="success"
+                                        @click="saveStartPrice(scope.row)">
+                                    <i class="iconfont icon-tongguo"></i>保存
+                                </el-button>
+                                <el-button v-show="scope.row.change2"
+                                           size="small" type="success"
+                                           @click="saveSavePrice(scope.row)">
+                                    <i class="iconfont icon-tongguo"></i>保存
+                                </el-button>
+                                <el-button v-show="scope.row.change2||scope.row.change"
+                                           size="small" type="warning"
+                                           @click="cancle(scope.$index)">
+                                    <i class="iconfont icon-tongguo"></i>取消
+                                </el-button>
                             </template>
                         </el-table-column>
                     </el-table>
@@ -113,8 +143,8 @@
             <div class="handel" v-show="handle!='list'">
                 <div class="row blockquote">
                     <el-breadcrumb separator="/">
-                        <el-breadcrumb-item><a @click="handle='list'">车辆审核</a></el-breadcrumb-item>
-                        <el-breadcrumb-item v-show="handle=='look'">审查</el-breadcrumb-item>
+                        <el-breadcrumb-item><a @click="handle='list'">代拍车辆</a></el-breadcrumb-item>
+                        <el-breadcrumb-item v-show="handle=='look'">详情</el-breadcrumb-item>
                     </el-breadcrumb>
                 </div>
                 <%--操作--%>
@@ -123,32 +153,9 @@
                         <el-col :span="6">
                             <el-button type="primary" icon="arrow-left" @click="handle='list'"></el-button>
                         </el-col>
-                        <el-col :span="6">
-                            <el-button type="success" size="large" @click="pass(cur_row)">
-                                <i class="iconfont icon-tongguo"></i>通过
-                            </el-button>
-                            <el-button type="danger" size="large" @click="reject(cur_row)">
-                                <i class="iconfont icon-work-reject"></i>驳回
-                            </el-button>
-                        </el-col>
                     </el-row>
                 </div>
-                <%--概览--%>
-                <div class="row">
-                    <el-table :data="cur_arry" highlight-current-row style="width: 1101px;" height="112">
-                        <el-table-column prop="id" label="ID"width="100"></el-table-column>
-                        <el-table-column prop="picMain" label="图片"width="100">
-                            <template scope="scope">
-                                <img :src="scope.row.picMain" height="50" width="50" style="margin: 10px 0px;">
-                            </template>
-                        </el-table-column>
-                        <el-table-column prop="modelName" label="车型名称"width="250"></el-table-column>
-                        <el-table-column prop="carNum" label="牌照号码"width="150"></el-table-column>
-                        <el-table-column prop="userName" label="检测员"width="150"></el-table-column>
-                        <el-table-column prop="userPhone" label="联系电话"width="150"></el-table-column>
-                        <el-table-column prop="companyName" label="所属商户"width="200"></el-table-column>
-                    </el-table>
-                </div>
+
                 <%--详细信息--%>
                 <div class="row" >
                     <el-tabs v-model="activeName" @tab-click="handleClick">
@@ -893,20 +900,6 @@
                 </div>
             </div>
         </transition>
-        <%--驳回--%>
-        <el-dialog title="请输入驳回原因" v-model="reasonDialog">
-            <div class="row">
-                <el-form ref="form" :model="form" :rules="rules">
-                    <el-form-item prop="reason">
-                        <el-input type="textarea" :rows="5" v-model="form.reason"></el-input>
-                    </el-form-item>
-                </el-form>
-            </div>
-            <div slot="footer" class="dialog-footer">
-                <el-button @click="reasonDialog = false">取 消</el-button>
-                <el-button type="primary" @click="rejectOK">确 定</el-button>
-            </div>
-        </el-dialog>
         <%--图片预览--%>
         <el-dialog v-model="dialogImgVisible" size="tiny">
             <img width="100%" :src="dialogImageUrl" alt="">
@@ -939,6 +932,7 @@
                     { max: 500, message: '最多500字符'}
                 ]
             },
+            temp:[],
             cur_arry:[],
             qx:['','故障','卡滞','异响','漏油','沉重'],
             firstData:{},
@@ -973,8 +967,12 @@
             },handleSelect (href) {
                 window.location.href = href;
             },init () {
-                $.post('/system/check/examine/list',this.searchForm,(d)=>{
+                $.post('/system/check/wait/list',this.searchForm,(d)=>{
                     if(d.status==200){
+                        $.each(d.data.list,(j,i)=>{
+                            i.change = false;
+                            i.change2 = false;
+                        })
                         VM.pageInfo = d.data;
                     }else{
                         this.error(d.message);
@@ -985,6 +983,48 @@
                 this.searchForm.pageIndex = pageNum;
                 this.init();
 
+            },saveStartPrice(row){
+                if(!row.startPrice){
+                    this.error("起拍价不能为空")
+                }else{
+                    if(/^\d+(?:\.\d{1,2})?$/.test(row.startPrice)) {
+                        VM.loading = true;
+                        $.post("/system/car/startprice/" + row.id, {price: row.startPrice}, (d) => {
+                            if (d.status == 200) {
+                                VM.success();
+                                VM.refrush();
+                            } else {
+                                VM.error(d.message);
+                                VM.refrush();
+                            }
+                            VM.loading = false;
+                        }, "JSON")
+                    }else{
+                        this.error("起拍价格式错误");
+                    }
+                }
+            },saveSavePrice (row) {
+                if (!row.savePrice ) {
+                    this.error("保留价不能为空");
+                    return;
+                } else {
+                    if(/^\d+(?:\.\d{1,2})?$/.test(row.savePrice)){
+                        VM.loading = true;
+                        $.post("/system/car/saveprice/"+row.id,{price:row.savePrice},(d)=>{
+                            if(d.status==200){
+                                VM.success();
+                                VM.refrush();
+                            }else{
+                                VM.error(d.message);
+                                VM.refrush();
+                            }
+                            VM.loading = false;
+                        },"JSON")
+                    }else{
+                        this.error("保留价格式错误");
+                    }
+
+                }
             },reject (row) {
                 this.cur_row = row;
                 this.confrim("确定驳回 编号："+row.id+" 的 "+row.modelName,()=>{
@@ -1035,10 +1075,18 @@
                             VM.firstData.czxx = d.data.czxx;
                         }
                         VM.loading = false;
-                        VM.activeName = "1";
                     })
+                    VM.activeName = "1"
                 }
 
+            },changPrice(index){
+                this.pageInfo.list[index].change = true;
+
+            },changSavePrice (index) {
+                this.pageInfo.list[index].change2 = true;
+            },cancle (index) {
+                this.pageInfo.list[index].change = false;
+                this.pageInfo.list[index].change2 = false;
             },refrush () {
                 this.searchForm= {
                     searchFileds:{username: '',phoneNum:''},

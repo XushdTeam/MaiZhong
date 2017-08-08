@@ -1,5 +1,7 @@
 package com.maizhong.auction.service;
 
+import com.maizhong.auction.dto.CarDetailDto;
+import com.maizhong.auction.pojo.AcUser;
 import com.maizhong.common.result.JsonResult;
 
 /**
@@ -13,4 +15,18 @@ public interface IndexService {
     String getSystemMenu(String token);
 
     JsonResult logOff(String token);
+
+    JsonResult loginByPhone(long phone, String verify);
+
+    JsonResult getVerifyCodeRegist(long phone);
+
+    JsonResult registUser(long phone, String verify,int type);
+
+    AcUser getUserInfo(String token);
+
+    JsonResult loginByPass(long account, String pass);
+
+    JsonResult getTopCar(String token);
+
+    CarDetailDto getCarDetail(long carId);
 }

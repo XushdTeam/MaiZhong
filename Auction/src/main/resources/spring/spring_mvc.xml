@@ -52,10 +52,10 @@
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/system/**"/>
-            <bean class="com.maizhong.auction.interceptor.WebInterceptor" />
+            <bean class="com.maizhong.auction.interceptor.WebInterceptorManage" />
         </mvc:interceptor>
         <mvc:interceptor>
-            <mvc:mapping path="/check/**"/>
+            <mvc:mapping path="/auction/**"/>
             <bean class="com.maizhong.auction.interceptor.WebInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>

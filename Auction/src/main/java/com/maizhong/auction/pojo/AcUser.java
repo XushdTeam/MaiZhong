@@ -33,6 +33,8 @@ public class AcUser {
 
     private String bzj;
 
+    private Long pickupman;
+
     private String createUser;
 
     private Date createTime;
@@ -155,6 +157,14 @@ public class AcUser {
 
     public void setBzj(String bzj) {
         this.bzj = bzj == null ? null : bzj.trim();
+    }
+
+    public Long getPickupman() {
+        return pickupman;
+    }
+
+    public void setPickupman(Long pickupman) {
+        this.pickupman = pickupman;
     }
 
     public String getCreateUser() {

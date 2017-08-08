@@ -24,7 +24,7 @@ public interface CheckService {
 
     JsonResult getNewsDetail(long id);
 
-    JsonResult newCarbase(String token);
+    JsonResult newCarbase(String token, long ordernum);
 
     JsonResult checkCarList(String token);
 
@@ -74,4 +74,7 @@ public interface CheckService {
     JsonResult checkCarExamine(long carId);
 
     JsonResult getRejectReason(long id);
+
+    JsonResult getMyTask(String token);
+
 }

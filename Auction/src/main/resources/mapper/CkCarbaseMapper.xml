@@ -8,11 +8,15 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="user_phone" jdbcType="BIGINT" property="userPhone" />
+    <result column="start_price" jdbcType="VARCHAR" property="startPrice" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="examine_user_id" jdbcType="BIGINT" property="examineUserId" />
     <result column="examine_username" jdbcType="VARCHAR" property="examineUsername" />
     <result column="examine_reason" jdbcType="VARCHAR" property="examineReason" />
     <result column="examine_time" jdbcType="TIMESTAMP" property="examineTime" />
+    <result column="auction_count" jdbcType="INTEGER" property="auctionCount" />
+    <result column="save_price" jdbcType="VARCHAR" property="savePrice" />
+    <result column="order_num" jdbcType="BIGINT" property="orderNum" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -73,8 +77,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, model_name, model_id, status, user_name, user_phone, create_time, examine_user_id, 
-    examine_username, examine_reason, examine_time
+    id, model_name, model_id, status, user_name, user_phone, start_price, create_time, 
+    examine_user_id, examine_username, examine_reason, examine_time, auction_count, save_price, 
+    order_num
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.auction.pojo.CkCarbaseExample" resultMap="BaseResultMap">
     select
@@ -109,17 +114,19 @@
   <insert id="insert" parameterType="com.maizhong.auction.pojo.CkCarbase">
     insert into ck_carbase (id, model_name, model_id, 
       status, user_name, user_phone, 
-      create_time, examine_user_id, examine_username, 
-      examine_reason, examine_time)
+      start_price, create_time, examine_user_id, 
+      examine_username, examine_reason, examine_time, 
+      auction_count, save_price, order_num
+      )
     values (#{id,jdbcType=BIGINT}, #{modelName,jdbcType=VARCHAR}, #{modelId,jdbcType=BIGINT}, 
       #{status,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPhone,jdbcType=BIGINT}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{examineUserId,jdbcType=BIGINT}, #{examineUsername,jdbcType=VARCHAR}, 
-      #{examineReason,jdbcType=VARCHAR}, #{examineTime,jdbcType=TIMESTAMP})
+      #{startPrice,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{examineUserId,jdbcType=BIGINT}, 
+      #{examineUsername,jdbcType=VARCHAR}, #{examineReason,jdbcType=VARCHAR}, #{examineTime,jdbcType=TIMESTAMP}, 
+      #{auctionCount,jdbcType=INTEGER}, #{savePrice,jdbcType=VARCHAR}, #{orderNum,jdbcType=BIGINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.auction.pojo.CkCarbase">
-    <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
-      SELECT LAST_INSERT_ID() AS id
-    </selectKey>
+    <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id"> SELECT LAST_INSERT_ID() AS id</selectKey>
     insert into ck_carbase
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -140,6 +147,9 @@
       <if test="userPhone != null">
         user_phone,
       </if>
+      <if test="startPrice != null">
+        start_price,
+      </if>
       <if test="createTime != null">
         create_time,
       </if>
@@ -154,6 +164,15 @@
       </if>
       <if test="examineTime != null">
         examine_time,
+      </if>
+      <if test="auctionCount != null">
+        auction_count,
+      </if>
+      <if test="savePrice != null">
+        save_price,
+      </if>
+      <if test="orderNum != null">
+        order_num,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -175,6 +194,9 @@
       <if test="userPhone != null">
         #{userPhone,jdbcType=BIGINT},
       </if>
+      <if test="startPrice != null">
+        #{startPrice,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -189,6 +211,15 @@
       </if>
       <if test="examineTime != null">
         #{examineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auctionCount != null">
+        #{auctionCount,jdbcType=INTEGER},
+      </if>
+      <if test="savePrice != null">
+        #{savePrice,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null">
+        #{orderNum,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -219,6 +250,9 @@
       <if test="record.userPhone != null">
         user_phone = #{record.userPhone,jdbcType=BIGINT},
       </if>
+      <if test="record.startPrice != null">
+        start_price = #{record.startPrice,jdbcType=VARCHAR},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -234,6 +268,15 @@
       <if test="record.examineTime != null">
         examine_time = #{record.examineTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.auctionCount != null">
+        auction_count = #{record.auctionCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.savePrice != null">
+        save_price = #{record.savePrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderNum != null">
+        order_num = #{record.orderNum,jdbcType=BIGINT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -247,11 +290,15 @@
       status = #{record.status,jdbcType=INTEGER},
       user_name = #{record.userName,jdbcType=VARCHAR},
       user_phone = #{record.userPhone,jdbcType=BIGINT},
+      start_price = #{record.startPrice,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       examine_user_id = #{record.examineUserId,jdbcType=BIGINT},
       examine_username = #{record.examineUsername,jdbcType=VARCHAR},
       examine_reason = #{record.examineReason,jdbcType=VARCHAR},
-      examine_time = #{record.examineTime,jdbcType=TIMESTAMP}
+      examine_time = #{record.examineTime,jdbcType=TIMESTAMP},
+      auction_count = #{record.auctionCount,jdbcType=INTEGER},
+      save_price = #{record.savePrice,jdbcType=VARCHAR},
+      order_num = #{record.orderNum,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -274,6 +321,9 @@
       <if test="userPhone != null">
         user_phone = #{userPhone,jdbcType=BIGINT},
       </if>
+      <if test="startPrice != null">
+        start_price = #{startPrice,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -289,6 +339,15 @@
       <if test="examineTime != null">
         examine_time = #{examineTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="auctionCount != null">
+        auction_count = #{auctionCount,jdbcType=INTEGER},
+      </if>
+      <if test="savePrice != null">
+        save_price = #{savePrice,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null">
+        order_num = #{orderNum,jdbcType=BIGINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -299,11 +358,15 @@
       status = #{status,jdbcType=INTEGER},
       user_name = #{userName,jdbcType=VARCHAR},
       user_phone = #{userPhone,jdbcType=BIGINT},
+      start_price = #{startPrice,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       examine_user_id = #{examineUserId,jdbcType=BIGINT},
       examine_username = #{examineUsername,jdbcType=VARCHAR},
       examine_reason = #{examineReason,jdbcType=VARCHAR},
-      examine_time = #{examineTime,jdbcType=TIMESTAMP}
+      examine_time = #{examineTime,jdbcType=TIMESTAMP},
+      auction_count = #{auctionCount,jdbcType=INTEGER},
+      save_price = #{savePrice,jdbcType=VARCHAR},
+      order_num = #{orderNum,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

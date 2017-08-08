@@ -15,6 +15,8 @@ public class CkVerify {
 
     private String bxlc;
 
+    private String startPrice;
+
     public Long getId() {
         return id;
     }
@@ -69,5 +71,13 @@ public class CkVerify {
 
     public void setBxlc(String bxlc) {
         this.bxlc = bxlc == null ? null : bxlc.trim();
+    }
+
+    public String getStartPrice() {
+        return startPrice;
+    }
+
+    public void setStartPrice(String startPrice) {
+        this.startPrice = startPrice == null ? null : startPrice.trim();
     }
 }

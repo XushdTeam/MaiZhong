@@ -67,6 +67,8 @@ public class CheckServiceImpl implements CheckService {
     private CkOtherMapper ckOtherMapper;
     @Autowired
     private CkCarmodelMapper carmodelMapper;
+    @Autowired
+    private PsSaleNeedMapper psSaleNeedMapper;
 
     @Autowired
     private JedisClient jedisClient;
@@ -201,13 +203,14 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public JsonResult newCarbase(String token) {
+    public JsonResult newCarbase(String token, long ordernum) {
         CkUser user = this.getUserByToken(token);
         CkCarbase carbase = new CkCarbase();
         carbase.setStatus(0);
         carbase.setUserName(user.getUserName());
         carbase.setUserPhone(user.getUserPhone());
         carbase.setCreateTime(new Date());
+        carbase.setOrderNum(ordernum);
         int i = ckCarbaseMapper.insertSelective(carbase);
         if (i > 0) {
             return JsonResult.OK(carbase);
@@ -696,12 +699,17 @@ public class CheckServiceImpl implements CheckService {
                 CkCarbase carbase = new CkCarbase();
                 carbase.setId(verify.getCarId());
                 carbase.setStatus(1);
+                carbase.setStartPrice(verify.getStartPrice());
                 ckCarbaseMapper.updateByPrimaryKeySelective(carbase);
                 return JsonResult.OK(verify.getId());
             }
         } else {
             int i = ckVerifyMapper.updateByPrimaryKeySelective(verify);
             if (i > 0) {
+                CkCarbase carbase = new CkCarbase();
+                carbase.setId(verify.getCarId());
+                carbase.setStartPrice(verify.getStartPrice());
+                ckCarbaseMapper.updateByPrimaryKeySelective(carbase);
                 return JsonResult.OK();
             }
         }
@@ -859,6 +867,23 @@ public class CheckServiceImpl implements CheckService {
 
         return JsonResult.OK(ckCarbase);
 
+    }
+
+    /**
+     * 获取我的任务
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult getMyTask(String token) {
+
+        CkUser ckUser = this.getUserByToken(token);
+
+        PsSaleNeedExample example = new PsSaleNeedExample();
+        example.createCriteria().andCheckUserEqualTo(ckUser.getId());
+        List<PsSaleNeed> psSaleNeeds = psSaleNeedMapper.selectByExample(example);
+
+        return JsonResult.OK(psSaleNeeds);
     }
 
 

@@ -19,6 +19,118 @@ public class CarInfoDto {
     private String status;
     private String dealPrice;
     private String dealTime;
+    private String orderNum;
+
+    //是否出价
+    private boolean myAuction;
+    private String nowPrice;
+    private long overTime;
+    private long nowTime;
+
+    private String savePrice;
+
+    private String chKey;
+
+    //是否在竞拍 关注列表中用
+    private boolean isAuction;
+
+    //拍卖次数
+    private int auctionCount;
+
+    //关注数
+    private long likeCounts;
+
+    //我是否关注
+    private boolean imMyLike;
+
+    public boolean isImMyLike() {
+        return imMyLike;
+    }
+
+    public void setImMyLike(boolean imMyLike) {
+        this.imMyLike = imMyLike;
+    }
+
+    public long getLikeCounts() {
+        return likeCounts;
+    }
+
+    public void setLikeCounts(long likeCounts) {
+        this.likeCounts = likeCounts;
+    }
+
+    public String getSavePrice() {
+        return savePrice;
+    }
+
+    public void setSavePrice(String savePrice) {
+        this.savePrice = savePrice;
+    }
+
+    public boolean isAuction() {
+        return isAuction;
+    }
+
+    public void setAuction(boolean auction) {
+        isAuction = auction;
+    }
+
+    public String getChKey() {
+        return chKey;
+    }
+
+    public void setChKey(String chKey) {
+        this.chKey = chKey;
+    }
+
+    public String getOrderNum() {
+        return orderNum;
+    }
+
+    public void setOrderNum(String orderNum) {
+        this.orderNum = orderNum;
+    }
+
+    public long getOverTime() {
+        return overTime;
+    }
+
+    public void setOverTime(long overTime) {
+        this.overTime = overTime;
+    }
+
+    public long getNowTime() {
+        return nowTime;
+    }
+
+    public void setNowTime(long nowTime) {
+        this.nowTime = nowTime;
+    }
+
+    public String getNowPrice() {
+        return nowPrice;
+    }
+
+    public void setNowPrice(String nowPrice) {
+        this.nowPrice = nowPrice;
+    }
+
+    public int getAuctionCount() {
+        return auctionCount;
+    }
+
+    public void setAuctionCount(int auctionCount) {
+        this.auctionCount = auctionCount;
+    }
+
+
+    public boolean isMyAuction() {
+        return myAuction;
+    }
+
+    public void setMyAuction(boolean myAuction) {
+        this.myAuction = myAuction;
+    }
 
     public String getStatus() {
         return status;

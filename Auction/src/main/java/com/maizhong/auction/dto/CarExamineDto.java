@@ -26,7 +26,58 @@ public class CarExamineDto {
 
     private String companyName;
 
+    private String startPrice;
+
+    private String chKey;
+
+    private String bussinessName;
+
+    private String endPrice;
+
+    private String savePrice;
+
+    public String getSavePrice() {
+        return savePrice;
+    }
+
+    public void setSavePrice(String savePrice) {
+        this.savePrice = savePrice;
+    }
+
     public CarExamineDto() {
+    }
+
+
+    public String getChKey() {
+        return chKey;
+    }
+
+    public void setChKey(String chKey) {
+        this.chKey = chKey;
+    }
+
+    public String getBussinessName() {
+        return bussinessName;
+    }
+
+    public void setBussinessName(String bussinessName) {
+        this.bussinessName = bussinessName;
+    }
+
+    public String getEndPrice() {
+        return endPrice;
+    }
+
+    public void setEndPrice(String endPrice) {
+        this.endPrice = endPrice;
+    }
+
+    public String getStartPrice() {
+        return startPrice;
+    }
+
+    public void setStartPrice(String startPrice) {
+        this.startPrice = startPrice;
     }
 
     public Long getId() {

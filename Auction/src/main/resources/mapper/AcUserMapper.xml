@@ -17,6 +17,7 @@
     <result column="pic2" jdbcType="VARCHAR" property="pic2" />
     <result column="pic3" jdbcType="VARCHAR" property="pic3" />
     <result column="bzj" jdbcType="VARCHAR" property="bzj" />
+    <result column="pickupman" jdbcType="BIGINT" property="pickupman" />
     <result column="create_user" jdbcType="VARCHAR" property="createUser" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
@@ -80,7 +81,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, name, phone, password, head_img, city, referee, company_id, type, status, id_num, 
-    pic1, pic2, pic3, bzj, create_user, create_time
+    pic1, pic2, pic3, bzj, pickupman, create_user, create_time
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.auction.pojo.AcUserExample" resultMap="BaseResultMap">
     select
@@ -117,16 +118,19 @@
       password, head_img, city, 
       referee, company_id, type, 
       status, id_num, pic1, 
-      pic2, pic3, bzj, create_user, 
-      create_time)
+      pic2, pic3, bzj, pickupman, 
+      create_user, create_time)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=BIGINT}, 
       #{password,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
       #{referee,jdbcType=VARCHAR}, #{companyId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, 
       #{status,jdbcType=INTEGER}, #{idNum,jdbcType=VARCHAR}, #{pic1,jdbcType=VARCHAR}, 
-      #{pic2,jdbcType=VARCHAR}, #{pic3,jdbcType=VARCHAR}, #{bzj,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP})
+      #{pic2,jdbcType=VARCHAR}, #{pic3,jdbcType=VARCHAR}, #{bzj,jdbcType=VARCHAR}, #{pickupman,jdbcType=BIGINT}, 
+      #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.auction.pojo.AcUser">
+    <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID() AS id
+    </selectKey>
     insert into ac_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -173,6 +177,9 @@
       </if>
       <if test="bzj != null">
         bzj,
+      </if>
+      <if test="pickupman != null">
+        pickupman,
       </if>
       <if test="createUser != null">
         create_user,
@@ -226,6 +233,9 @@
       </if>
       <if test="bzj != null">
         #{bzj,jdbcType=VARCHAR},
+      </if>
+      <if test="pickupman != null">
+        #{pickupman,jdbcType=BIGINT},
       </if>
       <if test="createUser != null">
         #{createUser,jdbcType=VARCHAR},
@@ -289,6 +299,9 @@
       <if test="record.bzj != null">
         bzj = #{record.bzj,jdbcType=VARCHAR},
       </if>
+      <if test="record.pickupman != null">
+        pickupman = #{record.pickupman,jdbcType=BIGINT},
+      </if>
       <if test="record.createUser != null">
         create_user = #{record.createUser,jdbcType=VARCHAR},
       </if>
@@ -317,6 +330,7 @@
       pic2 = #{record.pic2,jdbcType=VARCHAR},
       pic3 = #{record.pic3,jdbcType=VARCHAR},
       bzj = #{record.bzj,jdbcType=VARCHAR},
+      pickupman = #{record.pickupman,jdbcType=BIGINT},
       create_user = #{record.createUser,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -368,6 +382,9 @@
       <if test="bzj != null">
         bzj = #{bzj,jdbcType=VARCHAR},
       </if>
+      <if test="pickupman != null">
+        pickupman = #{pickupman,jdbcType=BIGINT},
+      </if>
       <if test="createUser != null">
         create_user = #{createUser,jdbcType=VARCHAR},
       </if>
@@ -393,6 +410,7 @@
       pic2 = #{pic2,jdbcType=VARCHAR},
       pic3 = #{pic3,jdbcType=VARCHAR},
       bzj = #{bzj,jdbcType=VARCHAR},
+      pickupman = #{pickupman,jdbcType=BIGINT},
       create_user = #{createUser,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

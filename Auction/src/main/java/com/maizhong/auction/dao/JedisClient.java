@@ -83,6 +83,14 @@ public interface JedisClient {
      */
     long llen(byte[] key);
 
+    /**
+     * 取出所有集合
+     * @param key
+     * @return
+     */
+    List<byte[]> lrange(byte[] key);
+
+
 
 
 }

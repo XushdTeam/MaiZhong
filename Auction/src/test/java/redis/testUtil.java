@@ -4,6 +4,8 @@ import com.maizhong.auction.dao.JedisClient;
 import com.maizhong.auction.dto.CarInfoDto;
 import com.maizhong.auction.mapper.TpShopMapper;
 import com.maizhong.auction.service.ImgUploadService;
+import com.maizhong.auction.service.PersonalAppService;
+import com.maizhong.common.utils.IDUtils;
 import com.maizhong.common.utils.ObjectUtil;
 import com.maizhong.common.utils.TimeUtils;
 import org.junit.Test;
@@ -30,11 +32,15 @@ public class testUtil {
     @Autowired
     private ImgUploadService imgUploadService;
 
+    @Autowired
+    private PersonalAppService appService;
+
     @Test
     public void getShop(){
 
-
-        System.out.println(new CarInfoDto().toString());
+        String verifyCode = IDUtils.getVerifyCode();
+        System.out.println(verifyCode);
+//        System.out.println(new CarInfoDto().toString());
 
         //imgUploadService.xszSb("http://oss.maizhongcar.com/check/base/1499392878957061.jpg");
 
@@ -66,6 +72,11 @@ public class testUtil {
 //            }
 //        }
 
+    }
+
+    @Test
+    public void sendSMS(){
+        appService.getVerifyCode(17600601529L);
     }
 
 

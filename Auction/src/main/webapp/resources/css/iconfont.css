@@ -23,6 +23,22 @@
 
 
 
+
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-chengjiao:before { content: "\e646"; }
+
+.icon-liupai:before { content: "\e628"; }
+
+.icon-iconfontrenminbifuben:before { content: "\e665"; }
+
 .icon-jiance:before { content: "\e60c"; }
 
 .icon-icon1460188478041:before { content: "\e62c"; }
@@ -31,7 +47,13 @@
 
 .icon-zhanghaoguanli:before { content: "\e6b9"; }
 
+.icon-2:before { content: "\e620"; }
+
 .icon-pingtaiyonghu:before { content: "\e655"; }
+
+.icon-chengjiao1:before { content: "\e68b"; }
+
+.icon-now:before { content: "\e704"; }
 
 .icon-work-reject:before { content: "\e60e"; }
 
@@ -43,6 +65,8 @@
 
 .icon-mr:before { content: "\e610"; }
 
+.icon-tongdaoguanli:before { content: "\e606"; }
+
 .icon-shanghu:before { content: "\e617"; }
 
 .icon-shenhe:before { content: "\e6b6"; }
@@ -50,6 +74,14 @@
 .icon-dengdai:before { content: "\e74c"; }
 
 .icon-bianji:before { content: "\e604"; }
+
+.icon-tongdaoguanli1:before { content: "\e656"; }
+
+
+
+
+
+
 
 
 

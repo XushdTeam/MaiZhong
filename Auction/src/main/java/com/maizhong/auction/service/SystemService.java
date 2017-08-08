@@ -43,4 +43,30 @@ public interface SystemService {
     JsonResult examineReject(long id, String reason, String token);
 
     JsonResult getWaitCarList(PageSearchParam param);
+
+    JsonResult selectChannel();
+
+    JsonResult selectChannelQueueByKey(String key);
+
+    JsonResult channelAdd(String carIds, int time, String ch);
+
+    JsonResult setCarStartPrice(long carId, String price);
+
+    JsonResult getChannelOverList(PageSearchParam param);
+
+    JsonResult carDeal(long carId);
+
+    JsonResult carSecond(long carId);
+
+    JsonResult getCompanyUserList(PageSearchParam param);
+
+    JsonResult changeStatusUser(long id, int status, String token);
+
+    JsonResult companyUserDel(long id, String token);
+
+    JsonResult companyBzjAdd(long id, long plus, String token);
+
+    JsonResult auctionCarList();
+
+    JsonResult setCarSavePrice(long carId, String price);
 }

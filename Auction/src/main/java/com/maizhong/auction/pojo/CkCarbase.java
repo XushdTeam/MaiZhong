@@ -15,6 +15,8 @@ public class CkCarbase {
 
     private Long userPhone;
 
+    private String startPrice;
+
     private Date createTime;
 
     private Long examineUserId;
@@ -24,6 +26,12 @@ public class CkCarbase {
     private String examineReason;
 
     private Date examineTime;
+
+    private Integer auctionCount;
+
+    private String savePrice;
+
+    private Long orderNum;
 
     public Long getId() {
         return id;
@@ -73,6 +81,14 @@ public class CkCarbase {
         this.userPhone = userPhone;
     }
 
+    public String getStartPrice() {
+        return startPrice;
+    }
+
+    public void setStartPrice(String startPrice) {
+        this.startPrice = startPrice == null ? null : startPrice.trim();
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -111,5 +127,29 @@ public class CkCarbase {
 
     public void setExamineTime(Date examineTime) {
         this.examineTime = examineTime;
+    }
+
+    public Integer getAuctionCount() {
+        return auctionCount;
+    }
+
+    public void setAuctionCount(Integer auctionCount) {
+        this.auctionCount = auctionCount;
+    }
+
+    public String getSavePrice() {
+        return savePrice;
+    }
+
+    public void setSavePrice(String savePrice) {
+        this.savePrice = savePrice == null ? null : savePrice.trim();
+    }
+
+    public Long getOrderNum() {
+        return orderNum;
+    }
+
+    public void setOrderNum(Long orderNum) {
+        this.orderNum = orderNum;
     }
 }

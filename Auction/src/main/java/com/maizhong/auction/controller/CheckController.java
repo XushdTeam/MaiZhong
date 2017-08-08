@@ -134,10 +134,10 @@ public class CheckController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/app/check/newcar",method = RequestMethod.POST)
-    public JsonResult checkCarNew(HttpServletRequest request){
+    @RequestMapping(value = "/app/check/newcar/{ordernum}",method = RequestMethod.POST)
+    public JsonResult checkCarNew(HttpServletRequest request,@PathVariable long ordernum){
         String token = (String) request.getAttribute("token");
-        JsonResult result = checkService.newCarbase(token);
+        JsonResult result = checkService.newCarbase(token,ordernum);
         return result;
     }
 
@@ -432,5 +432,17 @@ public class CheckController {
     public JsonResult checkeRejectReason(@PathVariable long id){
         JsonResult result = checkService.getRejectReason(id);
         return result;
+    }
+
+    /**
+     * 获取我的检测任务
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/app/check/mytask")
+    @ResponseBody
+    public JsonResult checkMyTask(HttpServletRequest request){
+        String token = (String) request.getAttribute("token");
+        return checkService.getMyTask(token);
     }
 }

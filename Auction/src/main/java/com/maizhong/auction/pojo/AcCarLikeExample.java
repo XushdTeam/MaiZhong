@@ -3,14 +3,14 @@ package com.maizhong.auction.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TpNowExample {
+public class AcCarLikeExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public TpNowExample() {
+    public AcCarLikeExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,66 +104,6 @@ public class TpNowExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andIdIsNull() {
-            addCriterion("id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdIsNotNull() {
-            addCriterion("id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdEqualTo(Long value) {
-            addCriterion("id =", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdNotEqualTo(Long value) {
-            addCriterion("id <>", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdGreaterThan(Long value) {
-            addCriterion("id >", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("id >=", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdLessThan(Long value) {
-            addCriterion("id <", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdLessThanOrEqualTo(Long value) {
-            addCriterion("id <=", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdIn(List<Long> values) {
-            addCriterion("id in", values, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdNotIn(List<Long> values) {
-            addCriterion("id not in", values, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdBetween(Long value1, Long value2) {
-            addCriterion("id between", value1, value2, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdNotBetween(Long value1, Long value2) {
-            addCriterion("id not between", value1, value2, "id");
-            return (Criteria) this;
-        }
-
         public Criteria andCarIdIsNull() {
             addCriterion("car_id is null");
             return (Criteria) this;
@@ -224,133 +164,63 @@ public class TpNowExample {
             return (Criteria) this;
         }
 
-        public Criteria andChIsNull() {
-            addCriterion("ch is null");
+        public Criteria andUserIdIsNull() {
+            addCriterion("user_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andChIsNotNull() {
-            addCriterion("ch is not null");
+        public Criteria andUserIdIsNotNull() {
+            addCriterion("user_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andChEqualTo(String value) {
-            addCriterion("ch =", value, "ch");
+        public Criteria andUserIdEqualTo(Long value) {
+            addCriterion("user_id =", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andChNotEqualTo(String value) {
-            addCriterion("ch <>", value, "ch");
+        public Criteria andUserIdNotEqualTo(Long value) {
+            addCriterion("user_id <>", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andChGreaterThan(String value) {
-            addCriterion("ch >", value, "ch");
+        public Criteria andUserIdGreaterThan(Long value) {
+            addCriterion("user_id >", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andChGreaterThanOrEqualTo(String value) {
-            addCriterion("ch >=", value, "ch");
+        public Criteria andUserIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("user_id >=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andChLessThan(String value) {
-            addCriterion("ch <", value, "ch");
+        public Criteria andUserIdLessThan(Long value) {
+            addCriterion("user_id <", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andChLessThanOrEqualTo(String value) {
-            addCriterion("ch <=", value, "ch");
+        public Criteria andUserIdLessThanOrEqualTo(Long value) {
+            addCriterion("user_id <=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andChLike(String value) {
-            addCriterion("ch like", value, "ch");
+        public Criteria andUserIdIn(List<Long> values) {
+            addCriterion("user_id in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andChNotLike(String value) {
-            addCriterion("ch not like", value, "ch");
+        public Criteria andUserIdNotIn(List<Long> values) {
+            addCriterion("user_id not in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andChIn(List<String> values) {
-            addCriterion("ch in", values, "ch");
+        public Criteria andUserIdBetween(Long value1, Long value2) {
+            addCriterion("user_id between", value1, value2, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andChNotIn(List<String> values) {
-            addCriterion("ch not in", values, "ch");
-            return (Criteria) this;
-        }
-
-        public Criteria andChBetween(String value1, String value2) {
-            addCriterion("ch between", value1, value2, "ch");
-            return (Criteria) this;
-        }
-
-        public Criteria andChNotBetween(String value1, String value2) {
-            addCriterion("ch not between", value1, value2, "ch");
-            return (Criteria) this;
-        }
-
-        public Criteria andOverTimeIsNull() {
-            addCriterion("over_time is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOverTimeIsNotNull() {
-            addCriterion("over_time is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOverTimeEqualTo(Long value) {
-            addCriterion("over_time =", value, "overTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOverTimeNotEqualTo(Long value) {
-            addCriterion("over_time <>", value, "overTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOverTimeGreaterThan(Long value) {
-            addCriterion("over_time >", value, "overTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOverTimeGreaterThanOrEqualTo(Long value) {
-            addCriterion("over_time >=", value, "overTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOverTimeLessThan(Long value) {
-            addCriterion("over_time <", value, "overTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOverTimeLessThanOrEqualTo(Long value) {
-            addCriterion("over_time <=", value, "overTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOverTimeIn(List<Long> values) {
-            addCriterion("over_time in", values, "overTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOverTimeNotIn(List<Long> values) {
-            addCriterion("over_time not in", values, "overTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOverTimeBetween(Long value1, Long value2) {
-            addCriterion("over_time between", value1, value2, "overTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOverTimeNotBetween(Long value1, Long value2) {
-            addCriterion("over_time not between", value1, value2, "overTime");
+        public Criteria andUserIdNotBetween(Long value1, Long value2) {
+            addCriterion("user_id not between", value1, value2, "userId");
             return (Criteria) this;
         }
     }

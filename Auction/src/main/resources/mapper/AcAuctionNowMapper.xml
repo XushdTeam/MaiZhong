@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.maizhong.auction.mapper.TpNowMapper">
-  <resultMap id="BaseResultMap" type="com.maizhong.auction.pojo.TpNow">
+<mapper namespace="com.maizhong.auction.mapper.AcAuctionNowMapper">
+  <resultMap id="BaseResultMap" type="com.maizhong.auction.pojo.AcAuctionNow">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="car_id" jdbcType="BIGINT" property="carId" />
-    <result column="ch" jdbcType="VARCHAR" property="ch" />
-    <result column="over_time" jdbcType="BIGINT" property="overTime" />
+    <result column="ch_key" jdbcType="VARCHAR" property="chKey" />
+    <result column="start_time" jdbcType="VARCHAR" property="startTime" />
+    <result column="end_time" jdbcType="VARCHAR" property="endTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, car_id, ch, over_time
+    id, car_id, ch_key, start_time, end_time
   </sql>
-  <select id="selectByExample" parameterType="com.maizhong.auction.pojo.TpNowExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.maizhong.auction.pojo.AcAuctionNowExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tp_now
+    from ac_auction_now
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,27 +86,27 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tp_now
+    from ac_auction_now
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from tp_now
+    delete from ac_auction_now
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.maizhong.auction.pojo.TpNowExample">
-    delete from tp_now
+  <delete id="deleteByExample" parameterType="com.maizhong.auction.pojo.AcAuctionNowExample">
+    delete from ac_auction_now
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.maizhong.auction.pojo.TpNow">
-    insert into tp_now (id, car_id, ch, 
-      over_time)
-    values (#{id,jdbcType=BIGINT}, #{carId,jdbcType=BIGINT}, #{ch,jdbcType=VARCHAR}, 
-      #{overTime,jdbcType=BIGINT})
+  <insert id="insert" parameterType="com.maizhong.auction.pojo.AcAuctionNow">
+    insert into ac_auction_now (id, car_id, ch_key, 
+      start_time, end_time)
+    values (#{id,jdbcType=BIGINT}, #{carId,jdbcType=BIGINT}, #{chKey,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.maizhong.auction.pojo.TpNow">
-    insert into tp_now
+  <insert id="insertSelective" parameterType="com.maizhong.auction.pojo.AcAuctionNow">
+    insert into ac_auction_now
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -113,11 +114,14 @@
       <if test="carId != null">
         car_id,
       </if>
-      <if test="ch != null">
-        ch,
+      <if test="chKey != null">
+        ch_key,
       </if>
-      <if test="overTime != null">
-        over_time,
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -127,22 +131,25 @@
       <if test="carId != null">
         #{carId,jdbcType=BIGINT},
       </if>
-      <if test="ch != null">
-        #{ch,jdbcType=VARCHAR},
+      <if test="chKey != null">
+        #{chKey,jdbcType=VARCHAR},
       </if>
-      <if test="overTime != null">
-        #{overTime,jdbcType=BIGINT},
+      <if test="startTime != null">
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.maizhong.auction.pojo.TpNowExample" resultType="java.lang.Long">
-    select count(*) from tp_now
+  <select id="countByExample" parameterType="com.maizhong.auction.pojo.AcAuctionNowExample" resultType="java.lang.Long">
+    select count(*) from ac_auction_now
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update tp_now
+    update ac_auction_now
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
@@ -150,11 +157,14 @@
       <if test="record.carId != null">
         car_id = #{record.carId,jdbcType=BIGINT},
       </if>
-      <if test="record.ch != null">
-        ch = #{record.ch,jdbcType=VARCHAR},
+      <if test="record.chKey != null">
+        ch_key = #{record.chKey,jdbcType=VARCHAR},
       </if>
-      <if test="record.overTime != null">
-        over_time = #{record.overTime,jdbcType=BIGINT},
+      <if test="record.startTime != null">
+        start_time = #{record.startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endTime != null">
+        end_time = #{record.endTime,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -162,35 +172,41 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update tp_now
+    update ac_auction_now
     set id = #{record.id,jdbcType=BIGINT},
       car_id = #{record.carId,jdbcType=BIGINT},
-      ch = #{record.ch,jdbcType=VARCHAR},
-      over_time = #{record.overTime,jdbcType=BIGINT}
+      ch_key = #{record.chKey,jdbcType=VARCHAR},
+      start_time = #{record.startTime,jdbcType=VARCHAR},
+      end_time = #{record.endTime,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.auction.pojo.TpNow">
-    update tp_now
+  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.auction.pojo.AcAuctionNow">
+    update ac_auction_now
     <set>
       <if test="carId != null">
         car_id = #{carId,jdbcType=BIGINT},
       </if>
-      <if test="ch != null">
-        ch = #{ch,jdbcType=VARCHAR},
+      <if test="chKey != null">
+        ch_key = #{chKey,jdbcType=VARCHAR},
       </if>
-      <if test="overTime != null">
-        over_time = #{overTime,jdbcType=BIGINT},
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.maizhong.auction.pojo.TpNow">
-    update tp_now
+  <update id="updateByPrimaryKey" parameterType="com.maizhong.auction.pojo.AcAuctionNow">
+    update ac_auction_now
     set car_id = #{carId,jdbcType=BIGINT},
-      ch = #{ch,jdbcType=VARCHAR},
-      over_time = #{overTime,jdbcType=BIGINT}
+      ch_key = #{chKey,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
 </mapper>

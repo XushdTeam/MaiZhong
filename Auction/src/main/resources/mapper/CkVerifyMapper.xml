@@ -9,6 +9,7 @@
     <result column="cjh" jdbcType="VARCHAR" property="cjh" />
     <result column="ltgg" jdbcType="VARCHAR" property="ltgg" />
     <result column="bxlc" jdbcType="VARCHAR" property="bxlc" />
+    <result column="start_price" jdbcType="VARCHAR" property="startPrice" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, car_id, xsz, djz, cjh, ltgg, bxlc
+    id, car_id, xsz, djz, cjh, ltgg, bxlc, start_price
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.auction.pojo.CkVerifyExample" resultMap="BaseResultMap">
     select
@@ -103,11 +104,11 @@
   </delete>
   <insert id="insert" parameterType="com.maizhong.auction.pojo.CkVerify">
     insert into ck_verify (id, car_id, xsz, 
-      djz, cjh, ltgg, bxlc
-      )
+      djz, cjh, ltgg, bxlc, 
+      start_price)
     values (#{id,jdbcType=BIGINT}, #{carId,jdbcType=BIGINT}, #{xsz,jdbcType=VARCHAR}, 
-      #{djz,jdbcType=VARCHAR}, #{cjh,jdbcType=VARCHAR}, #{ltgg,jdbcType=VARCHAR}, #{bxlc,jdbcType=VARCHAR}
-      )
+      #{djz,jdbcType=VARCHAR}, #{cjh,jdbcType=VARCHAR}, #{ltgg,jdbcType=VARCHAR}, #{bxlc,jdbcType=VARCHAR}, 
+      #{startPrice,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.auction.pojo.CkVerify">
     insert into ck_verify
@@ -133,6 +134,9 @@
       <if test="bxlc != null">
         bxlc,
       </if>
+      <if test="startPrice != null">
+        start_price,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -155,6 +159,9 @@
       </if>
       <if test="bxlc != null">
         #{bxlc,jdbcType=VARCHAR},
+      </if>
+      <if test="startPrice != null">
+        #{startPrice,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -188,6 +195,9 @@
       <if test="record.bxlc != null">
         bxlc = #{record.bxlc,jdbcType=VARCHAR},
       </if>
+      <if test="record.startPrice != null">
+        start_price = #{record.startPrice,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -201,7 +211,8 @@
       djz = #{record.djz,jdbcType=VARCHAR},
       cjh = #{record.cjh,jdbcType=VARCHAR},
       ltgg = #{record.ltgg,jdbcType=VARCHAR},
-      bxlc = #{record.bxlc,jdbcType=VARCHAR}
+      bxlc = #{record.bxlc,jdbcType=VARCHAR},
+      start_price = #{record.startPrice,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +238,9 @@
       <if test="bxlc != null">
         bxlc = #{bxlc,jdbcType=VARCHAR},
       </if>
+      <if test="startPrice != null">
+        start_price = #{startPrice,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -237,7 +251,8 @@
       djz = #{djz,jdbcType=VARCHAR},
       cjh = #{cjh,jdbcType=VARCHAR},
       ltgg = #{ltgg,jdbcType=VARCHAR},
-      bxlc = #{bxlc,jdbcType=VARCHAR}
+      bxlc = #{bxlc,jdbcType=VARCHAR},
+      start_price = #{startPrice,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

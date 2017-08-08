@@ -32,19 +32,20 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
         }
         String requestType = request.getHeader("X-Requested-With");
         if (StringUtils.isNotBlank(token)) {
-            JsonResult result = indexService.checkLoginStatus(token);
-            if(result.getStatus()==200){
-                request.setAttribute("token",token);
-                request.setAttribute("username",result.getMessage());
-                return true;
-            }
+            request.setAttribute("token",token);
+            return true;
+        }
+        StringBuffer requestURL = request.getRequestURL();
+        if(StringUtils.contains(String.valueOf(requestURL),"/auction")){
+            request.setAttribute("token","null");
+            return true;
         }
         if(StringUtils.isBlank(requestType)){
             request.getRequestDispatcher("/").forward(request, response);
         }else{
             //ajax
             PrintWriter writer = response.getWriter();
-            writer.write(JsonUtils.objectToJson(JsonResult.build(100,"登录超时","")));
+            writer.write(JsonUtils.objectToJson(JsonResult.build(100,"LOGIN TIME OUT","")));
             writer.flush();
         }
         return false;

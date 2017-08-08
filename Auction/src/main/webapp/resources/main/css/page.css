@@ -1,0 +1,50 @@
+.pageinfo{padding:10px 0 0 38%;display:none}
+.pages{overflow:hidden;font-size:12px;margin:0;padding:0;list-style-type:none}
+.pages li{padding-bottom:0;margin:0;padding-left:0;padding-right:0;padding-top:0;line-height:12px;overflow-x:visible;width:auto;white-space:nowrap;
+	float:left;margin-left:7px;_width:10px}
+.pages .dotted{color:#0876b2;font-weight:bold}
+.pages li A{cursor:pointer;text-decoration:none;border-bottom:#ccc 1px solid;border-left:#ccc 1px solid;padding-bottom:0;line-height:18px;
+	padding-left:.4em;padding-right:.4em;display:block;background:#fff;height:18px;border-top:#ccc 1px solid;border-right:#ccc 1px solid
+	;padding-top:0;margin:0 0 0 0;color:#444}
+.pages li SPAN{color:#ccc;border-bottom:#ccc 1px solid;border-left:#ccc 1px solid;padding-bottom:0;
+line-height:18px;padding-left:.4em;padding-right:.4em;display:block;height:18px;border-top:#ccc 1px solid;border-right:#ccc 1px solid;padding-top:0}
+.pages li A span{color:#444;line-height:18px;padding:0;display:block;height:18px;border:none}
+.pages .beginEnd{padding-bottom:0;padding-left:1em;padding-right:1em;padding-top:0}
+.pages A{color:#0876b2;text-decoration:none}
+.pages A:visited{color:#0876b2}
+.pages A:hover{background:#f60;color:#fff;text-decoration:none;font-weight:normal}
+.pages A:hover span{color:#fff}
+.pages .current{background:#f60;border:1px solid #f60;color:#fff;text-decoration:none}
+.pages .current{line-height:16px;font-weight:bold}
+#Pagination_1{padding:10px 0 0 20%}
+#Pagination_help{padding:10px 0 0 20px;width:700px;position:absolute;bottom:30px}
+.red{color:red}
+.infor{ margin:10px 10px 60px 10px; }
+.infor h2{ font-size: 24px; line-height: 50px; border-bottom: 1px solid #eee;}
+.infor h2 span{ width: 10px; background: #f60;padding: 5px ;margin-right:20px }
+.infor p{ font-size: 16px; line-height: 45px;margin-left: 60px }
+.infor .lay{ border: 1px solid #f60;color: #f60;height: 30px;
+    line-height: 30px; border-radius: 9px ;float: right;  padding: 0 10px; margin-right:590px;cursor: pointer;}
+.infor_div{color: #f60; font-size: 18px; line-height: 45px; margin-left: 90px}
+.infor_com{ margin:20px 20px 80px 20px; }
+.infor .head{ color: #333; margin:30px 0 0 100px; font-size: 24px}
+.two .img{ margin-left: 90px; width: 300px}
+.two .img>p{ text-align: center;margin-left: 0 }
+.two .infor_div{ width: 400px;overflow: hidden; margin-top: 10px}
+.two .infor_div label{ width: 100px; display:block; float: left; }
+.two .infor_div input{ width: 230px; float: left;display:block; vertical-align:middle; height:35px; line-height: 45px; padding-left:10px  }
+.two .but{ background:#f60;color: #fff; width: 300px; display: block;border: none; height: 45px; line-height: 45px; margin:30px 0 0 90px; outline: none}
+/*修改密码*/
+.infor_coms{ margin:90px 0 270px; width: 700px }
+.infor_coms .infor_pass{margin-left: 160px}
+.infor_pass label{ font-size: 18px; color: #f60; line-height:45px; }
+.infor_pass input{ border: 1px solid #f60;color: #f60; padding: 7px 10px }
+.buts{ background: #f60;color: #fff;border: none; outline: none; padding: 10px 20px; 
+	text-align: center;display: block; width: 180px; margin:30px auto;cursor: pointer;}
+.infor_center{ background: #e5e5e5; line-height: 35px;overflow: hidden; }
+.infor_center .span1,.infor_cen .span1{width: 470px; float: left; padding: 0 30px}
+.infor_center .span2,.infor_cen .span2{width: 200px;float: left;}
+.infor_center .span3,.infor_cen .span3{width: 150px;float: left;}
+.infor_cen{ line-height: 45px; }
+.infor i{ float: right; font-size: 12px; }
+.pl30.pb15{ margin-bottom: 200px }

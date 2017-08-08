@@ -573,6 +573,76 @@ public class CkVerifyExample {
             addCriterion("bxlc not between", value1, value2, "bxlc");
             return (Criteria) this;
         }
+
+        public Criteria andStartPriceIsNull() {
+            addCriterion("start_price is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartPriceIsNotNull() {
+            addCriterion("start_price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartPriceEqualTo(String value) {
+            addCriterion("start_price =", value, "startPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartPriceNotEqualTo(String value) {
+            addCriterion("start_price <>", value, "startPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartPriceGreaterThan(String value) {
+            addCriterion("start_price >", value, "startPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartPriceGreaterThanOrEqualTo(String value) {
+            addCriterion("start_price >=", value, "startPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartPriceLessThan(String value) {
+            addCriterion("start_price <", value, "startPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartPriceLessThanOrEqualTo(String value) {
+            addCriterion("start_price <=", value, "startPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartPriceLike(String value) {
+            addCriterion("start_price like", value, "startPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartPriceNotLike(String value) {
+            addCriterion("start_price not like", value, "startPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartPriceIn(List<String> values) {
+            addCriterion("start_price in", values, "startPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartPriceNotIn(List<String> values) {
+            addCriterion("start_price not in", values, "startPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartPriceBetween(String value1, String value2) {
+            addCriterion("start_price between", value1, value2, "startPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andStartPriceNotBetween(String value1, String value2) {
+            addCriterion("start_price not between", value1, value2, "startPrice");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

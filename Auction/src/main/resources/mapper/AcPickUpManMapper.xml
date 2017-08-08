@@ -114,6 +114,9 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.auction.pojo.AcPickUpMan">
+    <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID() AS id
+    </selectKey>
     insert into ac_pick_up_man
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

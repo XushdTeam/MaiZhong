@@ -1,6 +1,7 @@
 package com.maizhong.auction.pojo;
 
 public class CkXsz {
+
     private Long id;
 
     private Long carId;

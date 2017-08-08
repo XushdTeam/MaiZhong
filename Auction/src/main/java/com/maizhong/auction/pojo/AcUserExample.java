@@ -1105,6 +1105,66 @@ public class AcUserExample {
             return (Criteria) this;
         }
 
+        public Criteria andPickupmanIsNull() {
+            addCriterion("pickupman is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPickupmanIsNotNull() {
+            addCriterion("pickupman is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPickupmanEqualTo(Long value) {
+            addCriterion("pickupman =", value, "pickupman");
+            return (Criteria) this;
+        }
+
+        public Criteria andPickupmanNotEqualTo(Long value) {
+            addCriterion("pickupman <>", value, "pickupman");
+            return (Criteria) this;
+        }
+
+        public Criteria andPickupmanGreaterThan(Long value) {
+            addCriterion("pickupman >", value, "pickupman");
+            return (Criteria) this;
+        }
+
+        public Criteria andPickupmanGreaterThanOrEqualTo(Long value) {
+            addCriterion("pickupman >=", value, "pickupman");
+            return (Criteria) this;
+        }
+
+        public Criteria andPickupmanLessThan(Long value) {
+            addCriterion("pickupman <", value, "pickupman");
+            return (Criteria) this;
+        }
+
+        public Criteria andPickupmanLessThanOrEqualTo(Long value) {
+            addCriterion("pickupman <=", value, "pickupman");
+            return (Criteria) this;
+        }
+
+        public Criteria andPickupmanIn(List<Long> values) {
+            addCriterion("pickupman in", values, "pickupman");
+            return (Criteria) this;
+        }
+
+        public Criteria andPickupmanNotIn(List<Long> values) {
+            addCriterion("pickupman not in", values, "pickupman");
+            return (Criteria) this;
+        }
+
+        public Criteria andPickupmanBetween(Long value1, Long value2) {
+            addCriterion("pickupman between", value1, value2, "pickupman");
+            return (Criteria) this;
+        }
+
+        public Criteria andPickupmanNotBetween(Long value1, Long value2) {
+            addCriterion("pickupman not between", value1, value2, "pickupman");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateUserIsNull() {
             addCriterion("create_user is null");
             return (Criteria) this;

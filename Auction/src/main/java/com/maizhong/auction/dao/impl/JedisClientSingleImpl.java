@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -199,6 +200,21 @@ public class JedisClientSingleImpl implements JedisClient {
         return len;
     }
 
+    @Override
+    public List<byte[]> lrange(byte[] key) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            List<byte[]> lrange = jedis.lrange(key, 0, -1);
+            return lrange;
+        }catch (Exception e){
+
+        }finally {
+            jedis.close();
+        }
+
+        return new ArrayList<byte[]>();
+    }
 
 
 }

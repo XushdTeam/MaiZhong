@@ -46,7 +46,7 @@
 
         <!-- 指定数据库表 -->
 
-        <table schema="" tableName="ac_user"/>
+        <table schema="" tableName="ck_carbase"/>
 
 
 

@@ -1,67 +1,106 @@
 <%--
   Created by IntelliJ IDEA.
   User: Xushd
-  Date: 2017/7/3
-  Time: 10:55
+  Date: 2017/7/31
+  Time: 10:17
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>优品拍车</title>
-    <link href="https://cdn.bootcss.com/element-ui/1.3.7/theme-default/index.css" rel="stylesheet">
-    <link href="/resources/css/app.css" rel="stylesheet">
-    <link href="/resources/css/iconfont.css" rel="stylesheet">
-    <script src="http://cdn.bootcss.com/jquery/3.2.0/jquery.min.js"></script>
-    <script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="https://cdn.bootcss.com/vue/2.3.4/vue.min.js"></script>
-    <script src="https://cdn.bootcss.com/element-ui/1.3.7/index.js"></script>
-
+    <title>优评拍车</title>
+    <%@ include file="head.jsp"%>
 </head>
-<body>
-<div id="app" class="wrapper">
-    <%@ include file="navbar.jsp"%>
-    <%@ include file="slider.jsp"%>
-    <div class="content">
-        <transition name="move" mode="out-in">
-
-        </transition>
+<body >
+    <%--nav--%>
+    <%@ include file="nav.jsp"%>
+    <%--banner--%>
+    <div class="htmleaf-container">
+        <div class="banner">
+            <ul>
+            </ul>
+            <ol>
+            </ol>
+            <i class="left"></i><i class="right"></i>
+        </div>
     </div>
-</div>
+    <%--three --%>
+    <div class="main-conter">
+        <dl>
+            <dt><img src="/resources/main/img/scrm.png"></dt>
+            <dd>成交快</dd>
+            <p>优品拍车成交快首次上拍可获得300元优惠券礼品，优品拍车成交快首次上拍可获得300元优惠券礼品</p>
+        </dl>
+        <dl>
+            <dt><img src="/resources/main/img/liu.png"></dt>
+            <dd>流程少</dd>
+            <p>优品拍车成交快首次上拍可获得300元优惠券礼品，优品拍车成交快首次上拍可获得300元优惠券礼品</p>
+        </dl>
+
+        <dl>
+            <dt><img src="/resources/main/img/xin.png"></dt>
+            <dd>超省心</dd>
+            <p>优品拍车成交快首次上拍可获得300元优惠券礼品，优品拍车成交快首次上拍可获得300元优惠券礼品</p>
+        </dl>
+    </div>
+    <%----%>
+    <div class="jilu-con">
+        <div class="jilu">
+            <h2>拍卖历史</h2>
+            <div class="lists">
+                <a href="" class="shadow-car">
+                    <p class="pic">
+                        <img src="/resources/main/img/5.jpg" alt="大众 速腾 2007年1.6L手动">
+                    </p>
+                    <h3 class="title">大众&nbsp;速腾&nbsp;2007年1.6L手动</h3>
+                    <p class="option">9年车龄/7.8万公里/北京</p>
+                    <p class="row">
+                        <span class="date">2017.07.22成交 </span>
+                        <strong class="price">3.20万</strong>
+                    </p>
+                </a>
+            </div>
+
+            <div style="clear: both;"></div>
+            <div class="mores">查看更多</div>
+        </div>
+    </div>
+    <%--app 下载--%>
+    <div class="app">
+        <img src="/resources/main/img/4.jpg" width="100%">
+    </div>
+    <%--新闻--%>
+    <div class="new">
+        <h2>媒体报道</h2>
+        <p class="p1">
+            <span>新闻标题一</span>
+            版权所有北京巅峰科技有限公司 | 京ICP证041552号-1 | 京公网安备110108401009号
+        </p>
+        <p class="p2">
+            <span>新闻标题二</span>
+
+            版权所有北京巅峰科技有限公司 | 京ICP证041552号-1 | 京公网安备110108401009号 版权所有北京巅峰科技有限公司 </p>
+
+        <p>
+            <span>新闻标题三</span>
+            版权所有北京巅峰科技有限公司 | 京ICP证041552号-1 | 京公网安备110108401009号 版权所有北京巅峰科技有限公司 </p>
+    </div>
+
+    <%--footer--%>
+    <%@ include file="footer.jsp"%>
+    <script type="text/javascript" src="/resources/main/js/slider.js"></script>
+    <script>
+
+
+        new Slider({
+            images_height:'540px',
+            images_url:[
+                '/resources/main/img/1.jpg',
+                '/resources/main/img/1.jpg',
+                '/resources/main/img/1.jpg'
+            ]
+        });
+
+    </script>
 </body>
-<script>
-    var VM = new Vue({
-        el:"#app",
-        data:{
-            onRoutes:'index',
-            items:${menu}
-        },
-        methods:{
-            loginout () {
-
-            },handleCommand (command) {
-                if(command == 'loginout'){
-                    this.$confirm('确定要退出?', '提示', {
-                        confirmButtonText: '确定',
-                        cancelButtonText: '取消',
-                        type: 'warning'
-                    }).then(() => {
-                        $.getJSON("/system/logOff",function(d){
-                            if(d.status==200){
-                                var date = new Date()
-                                date.setTime(date.getTime()+1*1000);//30min
-                                $.cookie('token', null, { expires: date, path: '/' });
-                                window.location.href = "/";
-                            }
-                        })
-                    }).catch(() => {
-
-                    });
-                }
-            },handleSelect (href) {
-                window.location.href = href;
-            }
-        }
-    })
-</script>
 </html>
