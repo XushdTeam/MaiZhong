@@ -30,8 +30,13 @@
         <div class="regst">
             <div class="regl">
                 <div class="reg_left">
-                    <div class="reg_head">保证金是干什么的</div>
-                    <p>保证金用于保证交易双方遵守平台规则进行交易；当用户有违规行为时将根据《优品拍车交易规则和争议处理》及相关规定，用于向守约方、优信拍支付违约金...</p>
+                    <div class="reg_head">保证金被冻结怎么办？</div>
+                    <p>在以下四种情况下您的保证金会被解冻出来：
+                        1、您的出价被其他商户超过
+                        2、车辆竞拍结束后，您出价最高但卖方不同意卖车，
+                        3、您支付车款成功后
+                        4、卖方在交易过程中出现违约
+                    </p>
                 </div>
                 <div class="reg_right">
                     <img src="/resources/main/img/m.png">
@@ -41,8 +46,8 @@
             <div class="regr">
                 <div class="reg_left">
                     <div class="reg_head">车况等级怎么定义</div>
-                    <p> 综合车况等级
-                        A级
+                    <p> 综合车况等级:
+                      A级
                         全车除前后保险杠外无修复痕迹
                         B级
                         全车结构件无损伤，加强件无严重损伤，允许覆盖件和加强件有修复

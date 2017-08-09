@@ -52,31 +52,22 @@
                     <tr class="c3 bgf5 fs14">
                         <td colspan="2" width="550">
                             <div class="select_box select_box2">
-                                <span class="c3 text">车辆</span><i class="dot"></i>
-                                <ul class="select_ul c6" style="display: none;" id="show_car">
-                                    <li id="car_0" class="box_hover">全部</li>
-                                    <li id="car_1">活动车</li>
-                                </ul>
+                                <span class="c3 text">车辆</span>
+
                             </div>
                         </td>
-                        <td width="260">合手价</td>
+                        <td width="260" style="padding-left: 80px">合手价</td>
                         <td width="230">
                             <div class="select_box select_box2">
-                                <span class="c3 text">竞拍结束时间</span><i class="dot"></i>
-                                <ul class="select_ul c6" style="display: none;" id="show_time">
-                                    <li id="time_0" class="box_hover">全部</li>
-                                    <li id="time_1">本周</li>
-                                    <li id="time_2">本月</li>
-                                    <li id="time_3">近三月</li>
-                                    <li id="time_4">近六月</li>
-                                </ul>
+                                <span class="c3 text">竞拍结束时间</span>
+
                             </div>
                         </td>
                     </tr>
                     </thead>
                     <tbody id="HistoryAuctionCar">
-                    <tr height="90" class="trhover">
-                        <td width="90px" class="pl10">
+                    <tr height="120" class="trhover">
+                        <td width="140px" class="pl10">
                             <div class="carnew">
                                 <img src="main/img/5.jpg">
                             </div>
@@ -96,8 +87,8 @@
                         </td>
                         <td class="pl20">2017/07/26 15:43</td>
                     </tr>
-                    <tr height="90" class="trhover">
-                        <td width="90px" class="pl10">
+                    <tr height="120" class="trhover">
+                        <td width="140px" class="pl10">
                             <div class="carnew">
                                 <img src="main/img/5.jpg">
                             </div>
@@ -108,7 +99,7 @@
                                     <span class="fl carname" style="cursor: pointer">2012款 CS35 1.6L MT 舒适</span>
                                 </a>
                                 <p class="fr fs12 cwhite w60">
-                                    <span class="shou" title="首次上线">首</span>
+                                    <span class="shou" title="首次上线">首次上拍</span>
                                 </p>
                             </div>
                             <p class="mt10">北京&nbsp;&nbsp;初登：2013-10&nbsp;&nbsp;等级：50D</p>
@@ -119,8 +110,8 @@
                         </td>
                         <td class="pl20">2017/07/26 14:00</td>
                     </tr>
-                    <tr height="90" class="trhover">
-                        <td width="90px" class="pl10">
+                    <tr height="120" class="trhover">
+                        <td width="140px" class="pl10">
                             <div class="carnew">
                                 <img src="main/img/5.jpg">
                             </div>
@@ -140,8 +131,8 @@
                         </td>
                         <td class="pl20">2017/07/26 14:00</td>
                     </tr>
-                    <tr height="90" class="trhover">
-                        <td width="90px" class="pl10">
+                    <tr height="120" class="trhover">
+                        <td width="140px" class="pl10">
                             <div class="carnew">
                                 <img src="main/img/5.jpg">
                             </div>
@@ -161,8 +152,8 @@
                         </td>
                         <td class="pl20">2017/07/26 14:00</td>
                     </tr>
-                    <tr height="90" class="trhover bgqing">
-                        <td width="90px" class="pl10">
+                    <tr height="120" class="trhover bgqing">
+                        <td width="140px" class="pl10">
                             <div class="carnew">
                                 <img src="main/img/5.jpg">
                             </div>
@@ -173,7 +164,7 @@
                                     <span class="fl carname" style="cursor: pointer">2004款 捷达 1.6L MT GIF 豪华</span>
                                 </a>
                                 <p class="fr fs12 cwhite w60">
-                                    <span class="shou" title="首次上线">首</span>
+                                    <span class="shou" title="首次上线">首次上拍</span>
                                 </p>
                             </div>
                             <p class="mt10">北京&nbsp;&nbsp;初登：2006-09&nbsp;&nbsp;等级：50B</p>
@@ -182,8 +173,8 @@
                         <td><span class="fs16 ccheng ml10">15500</span></td>
                         <td class="pl20">2017/07/25 16:13</td>
                     </tr>
-                    <tr height="90" class="trhover">
-                        <td width="90px" class="pl10">
+                    <tr height="120" class="trhover">
+                        <td width="140px" class="pl10">
                             <div class="carnew">
                                 <img src="main/img/5.jpg">
                             </div>
@@ -194,7 +185,7 @@
                                     <span class="fl carname" style="cursor: pointer">2015款 320Li 2.0T AT 时尚</span>
                                 </a>
                                 <p class="fr fs12 cwhite w60">
-                                    <span class="shou" title="首次上线">首</span>
+                                    <span class="shou" title="首次上线">首次上拍</span>
                                 </p>
                             </div>
                             <p class="mt10">北京&nbsp;&nbsp;初登：2014-10&nbsp;&nbsp;等级：65B</p>
@@ -205,8 +196,8 @@
                         </td>
                         <td class="pl20">2017/07/25 15:41</td>
                     </tr>
-                    <tr height="90" class="trhover">
-                        <td width="90px" class="pl10">
+                    <tr height="120" class="trhover">
+                        <td width="140px" class="pl10">
                             <div class="carnew">
                                 <img src="main/img/5.jpg">
                             </div>
@@ -217,7 +208,7 @@
                                     <span class="fl carname" style="cursor: pointer">2008款 凯越 1.6L MT 舒适</span>
                                 </a>
                                 <p class="fr fs12 cwhite w60">
-                                    <span class="shou" title="首次上线">首</span>
+                                    <span class="shou" title="首次上线">首次上拍</span>
                                 </p>
                             </div>
                             <p class="mt10">北京&nbsp;&nbsp;初登：2008-07&nbsp;&nbsp;等级：50B</p>
@@ -231,7 +222,7 @@
 
                     </tbody>
                 </table>
-                <div id="pagination" class="pageinfo" style="padding: 20px 0px 20px 38%; display: block;">
+                <div id="pagination" class="pageinfo" style="  display: block;">
                     <ul class="pages">
                         <li>
                             <span class="beginEnd">首页</span>

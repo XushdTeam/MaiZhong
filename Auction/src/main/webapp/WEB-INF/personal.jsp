@@ -41,7 +41,7 @@
                 <dl class="userpho fl">
                     <dt>
                         <img src="resources/main/img/photo.jpg" alt="头像" class="photo">
-                    <p class="togphoto" style="display: none;">更换头像</p>
+                        <p class="togphoto" style="display: none;">更换头像</p>
                     </dt>
                     <dd>
                         <p class="name fs16 c3 mt10">268vhxqf</p>
@@ -160,11 +160,16 @@
 
 <script type="text/javascript">
     $(function(){
-        $(".photo").hover(function(){
-            $(".togphoto").show();
-        } )
 
-        $(".togphoto").click(function(){
+        $(".photo").mouseenter(function(){
+          $(".togphoto").show();
+       })
+
+        $(".photo").mouseleave(function(){
+            $(".togphoto").hide();
+        })
+
+        $(".togphoto,.photo").click(function(){
             $(".headimage").show();
         })
         $(".js-popup-hide").click(function(){
