@@ -786,8 +786,8 @@ font-size:12px}
 .jilu .mores{clear: both; background:#f60; width:120px; margin:20px auto; height:40px; line-height: 40px; color:#fff; text-align:center; cursor:pointer;}
 .new{ width: 1200px; margin:30px auto; overflow: hidden;}
 .new h2{ text-align:center; line-height: 95px; font-size: 36px;color: #333  }
-.new p{ width: 300px; height: 200px; float: left;overflow: hidden; padding:10px 20px;
- background:#999; color: #fff; margin-left: 50px; margin-top:30px; margin-bottom:60px; font-size: 14px;}
-.new p span{ display:block; font-size: 18px; color: #fff; text-align: center; line-height: 65px }
+.new p{ width: 280px; height: 200px; float: left;overflow: hidden; padding:10px 20px;
+ background:#999; color: #fff; margin-left: 70px; margin-top:30px; margin-bottom:60px; font-size: 14px;}
+.new p span{ display:block; font-size: 18px; color: #fff; text-align: center; line-height: 95px }
 .new p.p1{ background: #1a91f7 }
 .new p.p2{ background: #f79400 }
