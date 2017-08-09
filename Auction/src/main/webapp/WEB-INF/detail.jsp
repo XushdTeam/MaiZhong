@@ -59,9 +59,9 @@
                     <div class="banners">
                         <div class="large_box">
                             <ul>
-                                <c:forEach items="${carInfo.baseImgArry}" var="item">
+                                <c:forEach items="${carInfo.baseImgArry}" var="item" varStatus="status">
                                     <li style="display: none;">
-                                        <img src="${item.img}" width="580" height="400">
+                                        <img src="${item.img}" width="580" height="400" onclick="showImg(${status.index})">
                                         <span class="large_fixe_span">${item.desc}</span>
                                     </li>
                                 </c:forEach>
@@ -429,9 +429,9 @@
             <p class="page-line mt20"></p>
             <%--基本照片--%>
             <ul class="car-pho clearfix mt30">
-                <c:forEach items="${carInfo.baseImgArry}" var="item">
+                <c:forEach items="${carInfo.baseImgArry}" var="item" varStatus="status">
                     <li>
-                        <img src="${item.img}" onclick="showImg(24)">
+                        <img src="${item.img}" onclick="showImg(${status.index})">
                         <span> ${item.desc}</span>
                     </li>
                 </c:forEach>
@@ -444,9 +444,9 @@
             <%--事故照片--%>
             <c:if test="${carInfo.sg.size()!=0}">
                 <ul class="car-pho clearfix mt30" style="display:none;">
-                    <c:forEach items="${carInfo.sg}" var="item">
+                    <c:forEach items="${carInfo.sg}" var="item" varStatus="status">
                     <li>
-                        <img src="${item.img}" onclick="carDetail.ShowBigPicture(24)"><span> ${item.desc}</span>
+                        <img src="${item.img}" onclick="showImg(${status.index+carInfo.baseImgArry.size()})"><span> ${item.desc}</span>
                     </li>
                     </c:forEach>
                 </ul>
@@ -467,9 +467,9 @@
                     <ul class="car-pho clearfix mt30" style="display:none;">
                         <div style="float: left;width: 100%;">
                             <p class="pt20 pb30 fs14  ccheng">外观缺陷</p>
-                            <c:forEach items="${carInfo.wgqx}" var="item">
+                            <c:forEach items="${carInfo.wgqx}" var="item" varStatus="status">
                                 <li>
-                                    <img src="${item.img}" onclick="carDetail.ShowBigPicture(24)"><span> ${item.desc}</span>
+                                    <img src="${item.img}" onclick="showImg(${status.index+carInfo.baseImgArry.size()+carInfo.sg.size()})"><span> ${item.desc}</span>
                                 </li>
                             </c:forEach>
                             <c:if test="${carInfo.wgqx.size()==0}">
@@ -478,9 +478,9 @@
                         </div>
                         <div style="float: left;width: 100%;">
                             <p class="pt20 pb30 fs14  ccheng">内饰缺陷</p>
-                            <c:forEach items="${carInfo.nsqx}" var="item">
+                            <c:forEach items="${carInfo.nsqx}" var="item" varStatus="status">
                                 <li>
-                                    <img src="${item.img}" onclick="carDetail.ShowBigPicture(24)"><span> ${item.desc}</span>
+                                    <img src="${item.img}" onclick="showImg(${status.index+carInfo.baseImgArry.size()+carInfo.sg.size()+carInfo.wgqx.size()})"><span> ${item.desc}</span>
                                 </li>
                             </c:forEach>
                             <c:if test="${carInfo.nsqx.size()==0}">
@@ -502,9 +502,9 @@
                     <ul class="car-pho clearfix mt30" style="display:none;">
                         <div style="float: left;width: 100%;">
                             <p class="pt20 pb30 fs14  ccheng">泡水</p>
-                            <c:forEach items="${carInfo.ps}" var="item">
+                            <c:forEach items="${carInfo.ps}" var="item" varStatus="status">
                                 <li>
-                                    <img src="${item.img}" onclick="carDetail.ShowBigPicture(24)"><span> ${item.desc}</span>
+                                    <img src="${item.img}" onclick="showImg(${status.index+carInfo.baseImgArry.size()+carInfo.sg.size()+carInfo.wgqx.size()+carInfo.nsqx.size()})"><span> ${item.desc}</span>
                                 </li>
                             </c:forEach>
                             <c:if test="${carInfo.ps.size()==0}">
@@ -513,9 +513,9 @@
                         </div>
                         <div style="float: left;width: 100%;">
                             <p class="pt20 pb30 fs14  ccheng">火烧</p>
-                            <c:forEach items="${carInfo.hs}" var="item">
+                            <c:forEach items="${carInfo.hs}" var="item" varStatus="status">
                                 <li>
-                                    <img src="${item.img}" onclick="carDetail.ShowBigPicture(24)"><span> ${item.desc}</span>
+                                    <img src="${item.img}" onclick="showImg(${status.index+carInfo.baseImgArry.size()+carInfo.sg.size()+carInfo.wgqx.size()+carInfo.ps.size()})"><span> ${item.desc}</span>
                                 </li>
                             </c:forEach>
                             <c:if test="${carInfo.hs.size()==0}">
@@ -656,7 +656,7 @@
             <div class="testing-end c6 fs14 tc mt50 mb25" style="background: #FFF">
                 <p class="mt15">检测日期:<span id="CheckDate">${carInfo.checkDate}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     报告编码:<span id="TredeCode">${carInfo.checkNum}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                    注：“本报告解释权归《北京迈众汽车信息服务有限公司所有》”
+                    注：“本报告解释权归《北京迈众汽车信息服务有限公司》所有”
                 </p>
             </div>
 
@@ -708,11 +708,75 @@
         <div class="content bgwhite pr car-info-zoom" style="display: none; width: 1200px;" id="ImgDialog">
             <a href="javascript:;" class="prev"></a>
             <a href="javascript:;" class="next"></a>
-            <span class="test-close close" onclick="closeImg()" style="right: 15px; top: 5px;">×</span>
+            <span class="test-close close" onclick="closeImg()" style="right: -18px; top: -17px;">×</span>
             <div class="p30">
                 <div class="clearfix">
                     <div class="car-info-zoom-left fl" style="width: 800px; height: 600px;">
-
+                        <div class="car-big" style="width: 800px; height: 600px;">
+                            <ul class="clearfix" id="BigPicture" style="width: 42400px;">
+                                <%--基本照片--%>
+                                <c:forEach items="${carInfo.baseImgArry}" var="item">
+                                <li>
+                                    <img src="${item.img}" style="width: 800px; height: 600px;">
+                                    <span style="display: none;">
+                                        <span style="float: left; margin-left: 5px;"> 基本照片 </span>
+                                     ${item.desc}
+                                    </span>
+                                </li>
+                                </c:forEach>
+                                <%--事故照片--%>
+                                <c:forEach items="${carInfo.sg}" var="item">
+                                <li>
+                                    <img src="${item.img}" style="width: 800px; height: 600px;">
+                                    <span style="display: none;">
+                                        <span style="float: left; margin-left: 5px;"> 事故照片 </span>
+                                     ${item.desc}
+                                    </span>
+                                </li>
+                                </c:forEach>
+                                <%--外观缺陷--%>
+                                <c:forEach items="${carInfo.wgqx}" var="item">
+                                <li>
+                                    <img src="${item.img}" style="width: 800px; height: 600px;">
+                                    <span style="display: none;">
+                                        <span style="float: left; margin-left: 5px;"> 外观缺陷 </span>
+                                     ${item.desc}
+                                    </span>
+                                </li>
+                                </c:forEach>
+                                <%--内饰缺陷--%>
+                                <c:forEach items="${carInfo.nsqx}" var="item">
+                                <li>
+                                    <img src="${item.img}" style="width: 800px; height: 600px;">
+                                    <span style="display: none;">
+                                        <span style="float: left; margin-left: 5px;"> 内饰缺陷 </span>
+                                     ${item.desc}
+                                    </span>
+                                </li>
+                                </c:forEach>
+                                <%--泡水--%>
+                                <c:forEach items="${carInfo.ps}" var="item">
+                                <li>
+                                    <img src="${item.img}" style="width: 800px; height: 600px;">
+                                    <span style="display: none;">
+                                        <span style="float: left; margin-left: 5px;"> 泡水 </span>
+                                     ${item.desc}
+                                    </span>
+                                </li>
+                                </c:forEach>
+                                <%--火烧--%>
+                                <c:forEach items="${carInfo.hs}" var="item">
+                                <li>
+                                    <img src="${item.img}" style="width: 800px; height: 600px;">
+                                    <span style="display: none;">
+                                        <span style="float: left; margin-left: 5px;"> 火烧 </span>
+                                     ${item.desc}
+                                    </span>
+                                </li>
+                                </c:forEach>
+                            </ul>
+                            <p class="car-big-tit" id="photo_long_desc"></p>
+                        </div>
                     </div>
 
                 </div>
@@ -725,6 +789,20 @@
     <%@ include file="footer.jsp"%>
     <script src="/resources/main/js/carousel.min.js" type="text/javascript"></script>
     <script type="text/javascript">
+
+        var carDetail = {
+            NowPhotoIndex:0,
+            IsSwitching:!1,
+            ImgTabSwitch(n){
+                var u = $(".car-info-zoom .car-big ul li").length,
+                    e = $(".car-info-zoom .car-big ul li img").eq(0).width();
+                this.NowPhotoIndex < 0 && (this.NowPhotoIndex = u - 1, n = !1), this.NowPhotoIndex == u && (this.NowPhotoIndex = 0, n = !1),$(".car-info-zoom .car-sm ul li").eq(this.NowPhotoIndex).addClass("current").siblings().removeClass("current"),
+                         $(".car-info-zoom .car-big-tit").html($(".car-info-zoom .car-big ul li").eq(this.NowPhotoIndex).children("span").html()), n ? ($(".car-info-zoom .car-big ul").animate({left: -e * this.NowPhotoIndex}), $(".car-info-zoom .car-big ul").stop().animate({left: -e * this.NowPhotoIndex
+                }, function() { carDetail.IsSwitching = !1})) : ($(".car-info-zoom .car-big ul").css("left", -e * this.NowPhotoIndex), this.IsSwitching = !1);
+            }
+
+        }
+
         var CheckTitleTop=0;
         $(function(){
             /* 商品轮播图（带缩略图的轮播效果） */
@@ -760,6 +838,14 @@
                     scrollTop: $(".page-tit-report").eq(n.index()).offset().top - $(".car-info-top").height() - 10
                 }, 0)
             });
+            //下一张
+            $(".car-info-zoom .next").click(function() {
+                carDetail.IsSwitching || (carDetail.NowPhotoIndex++, carDetail.IsSwitching = !0, carDetail.ImgTabSwitch(!0))
+            });
+            //上一张
+            $(".car-info-zoom .prev").click(function() {
+                carDetail.IsSwitching || (carDetail.NowPhotoIndex--, carDetail.IsSwitching = !0, carDetail.ImgTabSwitch(!0))
+            });
         });
         //图片div切换
         var photoSwitch = function(n){
@@ -774,9 +860,11 @@
             }, 0)
         }
         //图片弹层
-        var showImg = function(){
+        var showImg = function(n){
             $("#ImgDialogPopup").show();
-            $("#ImgDialog").show()
+            $("#ImgDialog").show();
+            carDetail.NowPhotoIndex = n;
+            carDetail.ImgTabSwitch(!1);
         }
 
         var closeImg = function() {

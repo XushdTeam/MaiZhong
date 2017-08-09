@@ -77,4 +77,5 @@ public interface CheckService {
 
     JsonResult getMyTask(String token);
 
+    JsonResult checkUpdateSavePrice(long carId, String price, String token);
 }

@@ -445,4 +445,15 @@ public class CheckController {
         String token = (String) request.getAttribute("token");
         return checkService.getMyTask(token);
     }
+
+    /**
+     * 修改保留价
+     * @return
+     */
+    @RequestMapping(value = "/app/check/chang/save/price/{carId}")
+    @ResponseBody
+    public JsonResult checkUpdateSavePrice(@PathVariable long carId, String price,HttpServletRequest request){
+        String token = (String)request.getAttribute("token");
+        return checkService.checkUpdateSavePrice(carId,price,token);
+    }
 }

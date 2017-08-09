@@ -133,4 +133,37 @@ public class PersonalAppController extends BaseController {
         String token = super.getToken(request);
         return appService.saleCar(phone,cityId,token);
     }
+
+    /**
+     * wo de pai che list
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/app/personal/mycar/list")
+    public JsonResult myCarList(HttpServletRequest request){
+
+        String token = super.getToken(request);
+        return appService.myCarList(token);
+    }
+
+    /**
+     * 检测列表
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/app/personal/check/list")
+    public JsonResult myCheckList(HttpServletRequest request){
+        String token = super.getToken(request);
+        return appService.myCarList(token);
+    }
+
+    /**
+     * 检车报告
+     * @param carId
+     * @return
+     */
+    @RequestMapping(value = "/app/personal/check/detail/{carId}")
+    public JsonResult calDetail(@PathVariable long carId){
+        return appService.getCarDetail(carId);
+    }
 }

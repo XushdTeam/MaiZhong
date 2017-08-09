@@ -3,6 +3,8 @@ package com.maizhong.auction.service.impl;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.maizhong.auction.dao.JedisClient;
+import com.maizhong.auction.dto.CarDetailDto;
+import com.maizhong.auction.dto.CarInfoDto;
 import com.maizhong.auction.mapper.*;
 import com.maizhong.auction.pojo.*;
 import com.maizhong.auction.service.PersonalAppService;
@@ -16,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -37,6 +40,9 @@ public class PersonalAppServiceImpl extends BaseServiceImpl implements PersonalA
 
     @Autowired
     private PsSaleNeedMapper psSaleNeedMapper;
+
+    @Autowired
+    private CkCarbaseMapper ckCarbaseMapper;
     /**
      * 获取token
      * @param deviceId
@@ -258,6 +264,54 @@ public class PersonalAppServiceImpl extends BaseServiceImpl implements PersonalA
         return JsonResult.Error(OperateEnum.FAILE);
     }
 
+    /**
+     * wo de pai che list
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult myCarList(String token) {
+
+        PsUser psUser = super.getPersonalUserByToken(token);
+
+        PsSaleNeedExample example = new PsSaleNeedExample();
+        example.createCriteria().andUserIdEqualTo(psUser.getId());
+
+        List<PsSaleNeed> psSaleNeeds = psSaleNeedMapper.selectByExample(example);
+
+        CkCarbaseExample ex = new CkCarbaseExample();
+
+        List<CarInfoDto> list = new ArrayList<>();
+        for (PsSaleNeed psSaleNeed : psSaleNeeds) {
+            String orderNumber = psSaleNeed.getOrderNumber();
+            ex.clear();
+            ex.createCriteria().andOrderNumEqualTo(Long.valueOf(orderNumber));
+            List<CkCarbase> ckCarbases = ckCarbaseMapper.selectByExample(ex);
+            for (CkCarbase ckCarbasis : ckCarbases) {
+                Long id = ckCarbasis.getId();
+                String car_info = super.getJedisClient().hget("CAR_INFO", String.valueOf(id));
+                CarInfoDto infoDto = JsonUtils.jsonToPojo(car_info, CarInfoDto.class);
+                infoDto.setStatus(ckCarbasis.getStatus()+"");
+                list.add(infoDto);
+            }
+
+        }
+
+
+        return JsonResult.OK(list);
+    }
+
+    /**
+     * 检车报告
+     * @param carId
+     * @return
+     */
+    @Override
+    public JsonResult getCarDetail(long carId) {
+
+        String car_detail = super.getJedisClient().hget("CAR_DETAIL", String.valueOf(carId));
+        return JsonResult.OK(JsonUtils.jsonToPojo(car_detail, CarDetailDto.class));
+    }
 
 
 }

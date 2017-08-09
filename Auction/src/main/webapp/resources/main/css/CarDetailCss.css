@@ -676,13 +676,11 @@ a {
     border-radius: 50%;
     background: rgba(187, 195, 74, 0.47);
     height: 40px;
-}
-
-
-.test-close:hover {
     color: #FFF!important;
     background: #F60!important;
 }
+
+
 
 .report-btn {
     display: inline-block;

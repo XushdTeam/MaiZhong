@@ -214,7 +214,11 @@ public class CheckServiceImpl implements CheckService {
         int i = ckCarbaseMapper.insertSelective(carbase);
         if (i > 0) {
             if(ordernum!=0L){
-
+                PsSaleNeedExample example = new PsSaleNeedExample();
+                example.createCriteria().andOrderNumberEqualTo(String.valueOf(ordernum));
+                PsSaleNeed need = new PsSaleNeed();
+                need.setStatus(1);
+                psSaleNeedMapper.updateByExampleSelective(need,example);
             }
             return JsonResult.OK(carbase);
         }
@@ -887,6 +891,25 @@ public class CheckServiceImpl implements CheckService {
         List<PsSaleNeed> psSaleNeeds = psSaleNeedMapper.selectByExample(example);
 
         return JsonResult.OK(psSaleNeeds);
+    }
+
+    /**
+     * 修改保留价
+     * @param carId
+     * @param price
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult checkUpdateSavePrice(long carId, String price, String token) {
+
+        CkCarbase ckCarbase = new CkCarbase();
+        ckCarbase.setId(carId);
+        ckCarbase.setSavePrice(price);
+        int i = ckCarbaseMapper.updateByPrimaryKeySelective(ckCarbase);
+        if(i>0)return JsonResult.OK();
+
+        return JsonResult.Error(OperateEnum.FAILE);
     }
 
 

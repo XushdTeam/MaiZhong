@@ -27,4 +27,7 @@ public interface PersonalAppService {
     JsonResult saleCar(long phone, int cityId, String token);
 
 
+    JsonResult myCarList(String token);
+
+    JsonResult getCarDetail(long carId);
 }
