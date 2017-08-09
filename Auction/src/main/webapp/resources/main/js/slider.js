@@ -107,14 +107,14 @@
 
                 }
             }
-            timer = setInterval(nextPlay,50000);
+            timer = setInterval(nextPlay,3000);
             //鼠标经过banner，停止定时器,离开则继续播放
             $('.banner').mouseenter(function(){
                 clearInterval(timer);
                 //左右箭头显示(淡入)
                 $('.banner i').fadeIn();
             }).mouseleave(function(){
-                timer = setInterval(nextPlay,50000);
+                timer = setInterval(nextPlay,3000);
                 //左右箭头隐藏(淡出)
                 $('.banner i').fadeOut();
             });

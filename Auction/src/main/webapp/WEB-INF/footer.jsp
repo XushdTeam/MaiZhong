@@ -16,10 +16,8 @@
         <div class="fl ml30 pt10">
             <div class="footer_nav">
                 <a href=" " target="_blank">公司简介</a> |
-                <a href=" " target="_blank">发展历程</a> |
                 <a href=" " target="_blank">招贤纳士</a> |
-                <a href=" " target="_blank">联系我们</a> |
-                <a href=" " target="_blank">友情链接</a>
+                <a href=" " target="_blank">联系我们</a>
             </div>
             <div class="pt5">
                 版权所有北京迈众信息科技有限公司 | 京ICP备17017795号-3

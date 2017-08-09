@@ -650,3 +650,20 @@
 [v-cloak] {
 	display: none;
 }
+
+
+.lineBid{ margin-top: 30px }
+.regs{ background: #f5f5f5;width:100%;overflow: hidden;}
+.reg_con{ width: 1200px; margin:0 auto; padding: 50px 0; overflow: hidden;}
+.reg_head{ font-size: 30px; line-height: 75px;color: #000 }
+.reg_con p{ font-size: 15px; line-height: 30px}
+.reg_con p b{ font-size: 24px; }
+.reg_left{width:30%; float: left; margin-left: 15%; margin-right:10%; margin-top: 20px}
+.regst{ overflow: hidden; }
+.regl,.regr{ width: 49.87%;float: left; padding: 50px 0; background: #f5f5f5; margin-top: 5px;}
+.regl p,.regr p{ font-size: 15px; line-height: 23px; height: 160px}
+.regr{ float: right;margin-right: 0 }
+.regsty{ margin-top: 5px }
+.regsty .reg_left{width: auto;}
+.reg_right button{ background: #f60;color: #fff;border: none;line-height: 40px;
+	padding: 0 30px;margin-top: 40px;outline: none;cursor: pointer;}
