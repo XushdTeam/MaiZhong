@@ -20,11 +20,11 @@ line-height:18px;padding-left:.4em;padding-right:.4em;display:block;height:18px;
 #Pagination_help{padding:10px 0 0 20px;width:700px;position:absolute;bottom:30px}
 .red{color:red}
 .infor{ margin:10px 10px 60px 10px; }
-.infor h2{ font-size: 24px; line-height: 50px; border-bottom: 1px solid #eee;}
+.infor h2{ font-size: 24px; line-height: 50px; border-bottom: 1px dotted #ccc;}
 .infor h2 span{ width: 10px; background: #f60;padding: 5px ;margin-right:20px }
 .infor p{ font-size: 16px; line-height: 45px;margin-left: 60px }
 .infor .lay{ border: 1px solid #f60;color: #f60;height: 30px;
-    line-height: 30px; border-radius: 9px ;float: right;  padding: 0 10px; margin-right:590px;cursor: pointer;}
+    line-height: 30px; border-radius: 9px ;float: right;  padding: 0 10px; margin-right:530px;cursor: pointer;}
 .infor_div{color: #f60; font-size: 18px; line-height: 45px; margin-left: 90px}
 .infor_com{ margin:20px 20px 80px 20px; }
 .infor .head{ color: #333; margin:30px 0 0 100px; font-size: 24px}
@@ -36,15 +36,15 @@ line-height:18px;padding-left:.4em;padding-right:.4em;display:block;height:18px;
 .two .but{ background:#f60;color: #fff; width: 300px; display: block;border: none; height: 45px; line-height: 45px; margin:30px 0 0 90px; outline: none}
 /*修改密码*/
 .infor_coms{ margin:90px 0 270px; width: 700px }
-.infor_coms .infor_pass{margin-left: 160px}
+.infor_coms .infor_pass{margin-left: 160px; line-height: 55px;}
 .infor_pass label{ font-size: 18px; color: #f60; line-height:45px; }
 .infor_pass input{ border: 1px solid #f60;color: #f60; padding: 7px 10px }
 .buts{ background: #f60;color: #fff;border: none; outline: none; padding: 10px 20px; 
-	text-align: center;display: block; width: 180px; margin:30px auto;cursor: pointer;}
+	text-align: center;display: block; width: 195px; margin:30px 0 0 270px;cursor: pointer;}
 .infor_center{ background: #e5e5e5; line-height: 35px;overflow: hidden; }
-.infor_center .span1,.infor_cen .span1{width: 470px; float: left; padding: 0 30px}
+.infor_center .span1,.infor_cen .span1{width: 440px; float: left; padding: 0 30px}
 .infor_center .span2,.infor_cen .span2{width: 200px;float: left;}
 .infor_center .span3,.infor_cen .span3{width: 150px;float: left;}
 .infor_cen{ line-height: 45px; }
 .infor i{ float: right; font-size: 12px; }
-.pl30.pb15{ margin-bottom: 200px }
+.pl30.pb15.pt15{ text-align: center; padding-left: 0 !important;}

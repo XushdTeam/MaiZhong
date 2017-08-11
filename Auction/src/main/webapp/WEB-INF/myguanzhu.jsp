@@ -40,13 +40,7 @@
         </div>
 
         <div class="fr w1060">
-            <div class="bbs1b h41 pr">
-                <span class="fs16 c3 righttit">历史竞价</span>
-                <span class="icon_tips">
-                    <img src="main/tishi.jpg"></span>
-                <span class="tips_box">显示出用户对近6个月内所参与过报价的车辆列表（不包括竞拍中的交易车辆）</span>
-
-            </div>
+            <div class="newtit fs20 c3 mt25"><span class="newtit-tex">关注车辆</span></div>
             <div class="pr10 pl10 pt25">
                 <table class="fs14 c9 tabcar w">
                     <thead>
@@ -67,71 +61,7 @@
                     </tr>
                     </thead>
                     <tbody id="HistoryAuctionCar">
-                    <tr height="120" class="trhover">
-                        <td width="140px" class="pl10">
-                            <div class="carnew">
-                                <img src="main/img/5.jpg">
-                            </div>
-                        </td>
-                        <td width="270px" class="pl10 pr10">
-                            <div class="fs14 clearfix">
-                                <a target="_blank" title="2012款 CS35 1.6L MT 舒适" href="" id="model_11082049" class="fl cblack">
-                                    <span class="fl carname" style="cursor: pointer">2012款 CS35 1.6L MT 舒适</span>
-                                </a>
-                                <p class="fr fs12 cwhite w60"></p>
-                            </div>
-                            <p class="mt10">北京&nbsp;&nbsp;初登：2013-10&nbsp;&nbsp;等级：50D</p>
-                            <p>里程：8.4万&nbsp;&nbsp;排放：国四</p>
-                        </td>
-                        <td>
-                            <span class="fs16 ccheng ml10">41200</span>
-                        </td>
-                        <td class="pl20">2017/07/26 15:43</td>
-                    </tr>
-                    <tr height="120" class="trhover">
-                        <td width="140px" class="pl10">
-                            <div class="carnew">
-                                <img src="main/img/5.jpg">
-                            </div>
-                        </td>
-                        <td width="270px" class="pl10 pr10">
-                            <div class="fs14 clearfix">
-                                <a target="_blank" title="2012款 CS35 1.6L MT 舒适" href="" id="model_11081246" class="fl cblack">
-                                    <span class="fl carname" style="cursor: pointer">2012款 CS35 1.6L MT 舒适</span>
-                                </a>
-                                <p class="fr fs12 cwhite w60">
-                                    <span class="shou" title="首次上线">首次上拍</span>
-                                </p>
-                            </div>
-                            <p class="mt10">北京&nbsp;&nbsp;初登：2013-10&nbsp;&nbsp;等级：50D</p>
-                            <p>里程：8.4万&nbsp;&nbsp;排放：国四</p>
-                        </td>
-                        <td>
-                            <span class="fs16 ccheng ml10">41000</span>
-                        </td>
-                        <td class="pl20">2017/07/26 14:00</td>
-                    </tr>
-                    <tr height="120" class="trhover">
-                        <td width="140px" class="pl10">
-                            <div class="carnew">
-                                <img src="main/img/5.jpg">
-                            </div>
-                        </td>
-                        <td width="270px" class="pl10 pr10">
-                            <div class="fs14 clearfix">
-                                <a target="_blank" title="2013款 瑞风M5 2.0T AT 公务版" href=" " id="model_11081242" class="fl cblack">
-                                    <span class="fl carname" style="cursor: pointer">2013款 瑞风M5 2.0T AT 公务版</span>
-                                </a>
-                                <p class="fr fs12 cwhite w60"></p>
-                            </div>
-                            <p class="mt10">北京&nbsp;&nbsp;初登：2016-09&nbsp;&nbsp;等级：65B</p>
-                            <p>里程：1.8万&nbsp;&nbsp;排放：国五</p>
-                        </td>
-                        <td>
-                            <span class="fs16 ccheng ml10">110200</span>
-                        </td>
-                        <td class="pl20">2017/07/26 14:00</td>
-                    </tr>
+
                     <tr height="120" class="trhover">
                         <td width="140px" class="pl10">
                             <div class="carnew">

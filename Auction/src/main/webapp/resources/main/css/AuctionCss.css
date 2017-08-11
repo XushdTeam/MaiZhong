@@ -568,7 +568,10 @@
 .mb25{margin-bottom:25px}
 .c6{color:#666}#iPev{padding-right:5px}
 #iNex{padding-left:5px}
-#pagination.pageinfo{text-align:center;padding:30px 0 40px 38%}
+#pagination.pageinfo{text-align:center;padding:30px 0 40px 0}
+#pagination .pages{
+	display: table; margin: 20px auto}
+#pagination .pages li{ display: table-cell;}
 #pagination .pages li span,#pagination .pages li A{height:28px;line-height:28px;min-width:18px;text-align:center}
 #pagination .pages .current,#pagination .pages A:hover{background:#fff7f1;color:#ff8536;border-color:#ffd8c1}
 #pagination .pages A:hover span{color:#ff8536}

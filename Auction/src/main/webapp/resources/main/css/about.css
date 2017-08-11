@@ -1,9 +1,10 @@
-.lis_left{ width:180px; float: left; background: #e5e5e5; 
-	border-radius: 8px; padding: 30px 20px; margin-top: 50px}
-.lis_right{ width: 920px; float: right;min-height: 500px; 
+.lis_left{ width:230px; float: left; background: #fff;
+	  padding: 0px 0px; margin-top: 50px}
+.lis_right{ width: 930px; float: right;min-height: 500px;
 	margin-bottom: 100px; font-size: 14px; line-height: 30px; margin-top: 50px; background: #fff;box-shadow:  0px 1px 1px #c5c5c5}
 .lis_left ul a{ font-size: 18px; text-align: center;color: #666; line-height: 65px; display: block; border-bottom: 1px dotted #999} 
 .lis_left ul a.none{ border: none }
+.lis_left ul a.hover,.lis_left ul a:hover{background: #f60;color: #fff; display: block}
 .lis_right>div{ padding:35px 35px 70px; }
 .bg_color{ background: #f5f5f5; margin-top: -25px}
 .lis_right h3{ line-height: 65px;padding-left: 30px;  font-size: 24px;border-bottom:1px solid #ccc;}

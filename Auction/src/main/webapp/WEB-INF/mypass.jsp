@@ -28,6 +28,7 @@
                     <li id="ConfirmOrderList"><a href=" ">成交确认</a></li>
                     <li id="OrderList"><a href=" ">订单车辆</a></li>
                     <li id="HistoryAuctionCarList"><a href=" "  >历史竞价</a></li>
+                    <li id="CarList"><a href=" "  >关注车辆</a></li>
                 </ul>
                 <h3 class="fs14 c3 lh27 mt20">个人设置</h3>
                 <ul class="fs12 newsubnav">
@@ -48,12 +49,12 @@
                     </div>
                     <div class="infor_pass">
                         <label>输入新密码：</label>
-                        <input type="text" name="" placeholder="请输入身份证号">
+                        <input type="text" name="" placeholder="请输入新密码">
                     </div>
 
                     <div class="infor_pass">
                         <label>确认新密码：</label>
-                        <input type="text" name="" placeholder="请输入身份证号">
+                        <input type="text" name="" placeholder="确认新密码">
                     </div>
                     <button class="buts">确定提交</button>
                 </div>
