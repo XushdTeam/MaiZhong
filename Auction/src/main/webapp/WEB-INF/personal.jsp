@@ -23,25 +23,26 @@
             <div class="pl30 pb15 pt15">
                 <h3 class="fs14 c3 lh27">交易中心</h3>
                 <ul class="fs12 newsubnav">
-                    <li id="ConfirmOrderList"><a href=" ">成交确认</a></li>
-                    <li id="OrderList"><a href=" ">订单车辆</a></li>
-                    <li id="HistoryAuctionCarList"><a href=" "  >历史竞价</a></li>
+                      <li id="ConfirmOrderList"><a href=" ">成交确认</a></li>
+                      <li id="OrderList"><a href=" ">订单车辆</a></li>
+                      <li id="HistoryAuctionCarList"><a href=" "  >历史竞价</a></li>
+                      <li id="CarList"><a href=" "  >关注车辆</a></li>
                 </ul>
                 <h3 class="fs14 c3 lh27 mt20">个人设置</h3>
                 <ul class="fs12 newsubnav">
-                    <li id="Account"><a href=" ">基本信息</a></li>
-                    <li id="EditPwd"><a href=" ">修改密码</a></li>
-                    <li id="Message"><a href=" ">投诉建议</a></li>
+                     <li id="Account"><a href=" ">基本信息</a></li>
+                     <li id="EditPwd"><a href=" ">修改密码</a></li>
+                     <li id="Message"><a href=" ">投诉建议</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="fr w1060">
-            <div class="bgf8 pt15 pb15 pl20 clearfix">
+            <div class=" pt15 pb15 pl20 clearfix">
                 <dl class="userpho fl">
                     <dt>
                         <img src="resources/main/img/photo.jpg" alt="头像" class="photo">
-                    <p class="togphoto" style="display: none;">更换头像</p>
+                        <p class="togphoto" style="display: none;">更换头像</p>
                     </dt>
                     <dd>
                         <p class="name fs16 c3 mt10">268vhxqf</p>
@@ -86,29 +87,8 @@
                 </div>
 
             </div>
-            <!--订阅车辆-->
-            <div class="newtit pr fs20 c3 mt25">
-                <span class="newtit-tex">订阅车辆</span>
-                <a href="javascript:void(0);" class="ccheng ml25 fs14" onclick="CusList.GotoCum();">订阅管理</a>
-                <div class="newtit-art c6 fs14">
-                    <a href="javascript:;" class="ccheng pr">下载APP</a>设置订阅车辆，接收车辆推送更方便
-                    <dl class="downtext">
-                        <dt>
-                            <img src="main/app.png"></dt>
-                        <dd>下载APP订阅车辆<br>
-                            接受推送更方便</dd>
-                        <span class="dotg"></span>
-                        <span class="dotw"></span>
-                    </dl>
-                </div>
-            </div>
-            <div id="custList"><p class="fs16 c3 mt20">北京 3-6年</p>
-                <div id="cece2ca7-4351-49dd-be25-94d7ed7f5065" class="nocar tac fs16">老板，不要着急，有新车辆会及时通知您哟~</div>
-                <p class="mt20 bbs1"></p>
 
-                <p class="fs16 c3 mt20">北京 丰田</p>
-                <div id="d6b20136-87fc-49c7-a1ee-bda23e054093" class="nocar tac fs16">老板，不要着急，有新车辆会及时通知您哟~</div>
-                <p class="mt20 bbs1"></p></div>
+
         </div>
 
     </div>
@@ -160,11 +140,16 @@
 
 <script type="text/javascript">
     $(function(){
-        $(".photo").hover(function(){
-            $(".togphoto").show();
-        } )
 
-        $(".togphoto").click(function(){
+        $(".photo").mouseenter(function(){
+          $(".togphoto").show();
+       })
+
+        $(".photo").mouseleave(function(){
+            $(".togphoto").hide();
+        })
+
+        $(".togphoto,.photo").click(function(){
             $(".headimage").show();
         })
         $(".js-popup-hide").click(function(){

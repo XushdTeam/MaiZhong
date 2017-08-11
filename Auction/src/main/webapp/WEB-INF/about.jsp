@@ -20,7 +20,7 @@
         <div class="mt25 clearfix">
             <div class="lis_left">
                 <ul>
-                    <li><a href="#">公司简介</a></li>
+                    <li><a href="#" class="hover" >公司简介</a></li>
                     <li><a href="#">招贤纳士</a></li>
                     <li><a href="#" class="none">联系我们</a></li>
                 </ul>

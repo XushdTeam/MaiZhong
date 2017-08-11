@@ -568,7 +568,10 @@
 .mb25{margin-bottom:25px}
 .c6{color:#666}#iPev{padding-right:5px}
 #iNex{padding-left:5px}
-#pagination.pageinfo{text-align:center;padding:30px 0 40px 38%}
+#pagination.pageinfo{text-align:center;padding:30px 0 40px 0}
+#pagination .pages{
+	display: table; margin: 20px auto}
+#pagination .pages li{ display: table-cell;}
 #pagination .pages li span,#pagination .pages li A{height:28px;line-height:28px;min-width:18px;text-align:center}
 #pagination .pages .current,#pagination .pages A:hover{background:#fff7f1;color:#ff8536;border-color:#ffd8c1}
 #pagination .pages A:hover span{color:#ff8536}
@@ -658,7 +661,9 @@
 .reg_head{ font-size: 30px; line-height: 75px;color: #000 }
 .reg_con p{ font-size: 15px; line-height: 30px}
 .reg_con p b{ font-size: 24px; }
-.reg_left{width:30%; float: left; margin-left: 15%; margin-right:10%; margin-top: 20px}
+.reg_left{width:320px; float: left; margin-left: 10%; margin-right:8%; margin-top: 20px}
+.regs .reg_left{ width: 370px !important;}
+.regsty .reg_left{ width: 180px !important;}
 .regst{ overflow: hidden; }
 .regl,.regr{ width: 49.87%;float: left; padding: 50px 0; background: #f5f5f5; margin-top: 5px;}
 .regl p,.regr p{ font-size: 15px; line-height: 23px; height: 160px}
