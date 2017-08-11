@@ -1,6 +1,8 @@
 package com.maizhong.auction.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.maizhong.auction.dto.CarDetailDto;
+import com.maizhong.auction.dto.CarInfoDto;
 import com.maizhong.auction.pojo.AcUser;
 import com.maizhong.auction.service.AuctionService;
 import com.maizhong.auction.service.IndexService;
@@ -35,7 +37,7 @@ public class IndexController {
     private PersonalAppService personalAppService;
 
     @RequestMapping(value = "/manage")
-    public String indexManage(@CookieValue(value = "token",required = false) String token,Model model){
+    public String indexManage(@CookieValue(value = "m_token",required = false) String token,Model model){
         if(StringUtils.isBlank(token)){
             return "redirect:/manage/login";
         }
@@ -367,11 +369,22 @@ public class IndexController {
      * @return
      */
     @RequestMapping(value = "/list/detail/{carId}")
-    public String carDetail(@PathVariable long carId,Model model){
+    public String carDetail(@CookieValue(value = "token",required = false) String token,@PathVariable long carId,Model model){
+
+        if(StringUtils.isNotBlank(token)){
+            AcUser user =  indexService.getUserInfo(token);
+            if(user!=null){
+                model.addAttribute("username",user.getName());
+                model.addAttribute("userId",user.getId());
+            }
+        }
 
         CarDetailDto dto = indexService.getCarDetail(carId);
+
+
         model.addAttribute("title",dto.getModelName());
         model.addAttribute("carInfo",dto);
+
         return "detail";
     }
 
@@ -379,5 +392,71 @@ public class IndexController {
     public String gotoUrl(@PathVariable String url){
 
         return url;
+    }
+
+    /**
+     * 获取当前车辆拍卖状态
+     * @param carId
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/auction/car/now/{carId}")
+    @ResponseBody
+    public JsonResult getCarNow(@PathVariable long carId,HttpServletRequest request){
+        String token = (String) request.getAttribute("token");
+
+        JsonResult result = indexService.getCarNow(carId,token);
+        return result;
+    }
+
+    /**
+     * 出价
+     * @param ch
+     * @param carId
+     * @param plus
+     * @param price
+     * @return
+     */
+    @RequestMapping(value = "/auction/addPrice/{ch}/{carId}")
+    @ResponseBody
+    public JsonResult addPrice(@PathVariable String ch,
+                               @PathVariable long carId,
+                               String plus,
+                               String price,
+                               HttpServletRequest request){
+        String token = (String) request.getAttribute("token");
+        JsonResult result = auctionService.addPrice(ch,carId,plus,price,token);
+        return result;
+    }
+
+    /**
+     * 智能报价
+     * @param carId
+     * @param price
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/auction/car/auto/price/{carId}/{price}")
+    @ResponseBody
+    public JsonResult autoPrice(@PathVariable long carId,
+                                @PathVariable long price,
+                                HttpServletRequest request){
+        String token = (String) request.getAttribute("token");
+        if(StringUtils.equals(token,"null"))return JsonResult.Error("未登录");
+        JsonResult result = auctionService.autoPrice(carId,price,token);
+        return result;
+    }
+
+    /**
+     * 出价记录
+     * @param auctionId
+     * @return
+     */
+    @RequestMapping(value = "/auction/bidrecord/list/{auctionId}")
+    @ResponseBody
+    public JsonResult getBidList(@PathVariable long auctionId){
+
+        JsonResult result = indexService.getBidRecordList(auctionId);
+        return result;
     }
 }

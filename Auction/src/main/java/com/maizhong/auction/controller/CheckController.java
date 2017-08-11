@@ -160,6 +160,7 @@ public class CheckController {
      */
     @RequestMapping(value = "/app/check/car/del/{carId}")
     public JsonResult checkCarDel(@PathVariable long carId){
+
         JsonResult result = checkService.checkCarDel(carId);
         return result;
     }

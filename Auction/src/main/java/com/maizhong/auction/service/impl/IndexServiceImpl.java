@@ -1,12 +1,16 @@
 package com.maizhong.auction.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.maizhong.auction.dao.JedisClient;
+import com.maizhong.auction.dto.BidRecordDto;
 import com.maizhong.auction.dto.CarDetailDto;
 import com.maizhong.auction.dto.CarInfoDto;
 import com.maizhong.auction.dto.MenuDto;
 import com.maizhong.auction.mapper.*;
 import com.maizhong.auction.pojo.*;
+import com.maizhong.auction.service.AuctionService;
 import com.maizhong.auction.service.IndexService;
 import com.maizhong.common.enums.AuthEnum;
 import com.maizhong.common.enums.OperateEnum;
@@ -15,6 +19,8 @@ import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.AliSMSUtils;
 import com.maizhong.common.utils.IDUtils;
 import com.maizhong.common.utils.JsonUtils;
+import com.maizhong.common.utils.TimeUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +52,12 @@ public class IndexServiceImpl implements IndexService {
 
     @Autowired
     private AcCarLikeMapper acCarLikeMapper;
+
+    @Autowired
+    private AuctionService auctionService;
+
+    @Autowired
+    private AcBidRecordMapper acBidRecordMapper;
 
 
     /**
@@ -237,8 +249,10 @@ public class IndexServiceImpl implements IndexService {
             acUser.setName(String.valueOf(phone));
             acUser.setType(type);
             acUser.setCity("北京车商");
+            acUser.setBzj("0");
             int i = acUserMapper.insertSelective(acUser);
             if(i>0){
+                acUser = acUserMapper.selectByPrimaryKey(acUser.getId());
                 String token = IDUtils.getUUID();
                 jedisClient.hset("AC_USER_PHONE",String.valueOf(phone),token);
                 jedisClient.hset("AC_USER_TOKEN",token,JsonUtils.objectToJson(acUser));
@@ -338,6 +352,56 @@ public class IndexServiceImpl implements IndexService {
         String car_detail = jedisClient.hget("CAR_DETAIL", String.valueOf(carId));
         return JsonUtils.jsonToPojo(car_detail, CarDetailDto.class);
 
+    }
+
+    @Override
+    public CarInfoDto getCarInfo(long carId) {
+
+        String car_info = jedisClient.hget("CAR_INFO", String.valueOf(carId));
+
+
+        return JsonUtils.jsonToPojo(car_info,CarInfoDto.class);
+    }
+
+    @Override
+    public JsonResult getCarNow(long carId, String token) {
+
+        String car_info = jedisClient.hget("CAR_INFO", String.valueOf(carId));
+
+        if(StringUtils.isBlank(car_info))return JsonResult.Error("carId is error");
+
+        CarInfoDto infoDto = JsonUtils.jsonToPojo(car_info, CarInfoDto.class);
+
+        String chKey = infoDto.getChKey();
+
+        return auctionService.getCarNow(carId,chKey,token);
+
+    }
+
+    /**
+     * 出价记录
+     * @param auctionId
+     * @return
+     */
+    @Override
+    public JsonResult getBidRecordList(long auctionId) {
+
+        AcBidRecordExample example = new AcBidRecordExample();
+
+        example.createCriteria().andAuctionIdEqualTo(auctionId);
+        example.setOrderByClause("create_time desc");
+        List<AcBidRecord> acBidRecords = acBidRecordMapper.selectByExample(example);
+
+        JSONArray list = new JSONArray();
+        for (AcBidRecord acBidRecord : acBidRecords) {
+            JSONObject obj = new JSONObject();
+            obj.put("price",acBidRecord.getPrice());
+            obj.put("createTime",TimeUtils.getFormatDateTime3(acBidRecord.getCreateTime()).substring(10,19));
+            obj.put("bussinessName",acBidRecord.getBussinessName());
+            obj.put("userId",acBidRecord.getUserId());
+            list.add(obj);
+        }
+        return JsonResult.OK(list);
     }
 
 }

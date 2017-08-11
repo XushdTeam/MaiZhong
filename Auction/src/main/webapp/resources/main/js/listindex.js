@@ -1,6 +1,7 @@
 /**
  * Created by Xushd on 2017/8/1.
  */
+
 var vm = new Vue({
     el: '#app',
     data: {

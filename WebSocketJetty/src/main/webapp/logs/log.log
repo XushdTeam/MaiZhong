@@ -6844,3 +6844,1068 @@ Caused by: java.net.SocketException: Network is unreachable: connect
 	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:213)
 	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:297)
 	... 14 more
+[INFO][2017-08-09 11:03:04] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285) main Root WebApplicationContext: initialization started 
+[INFO][2017-08-09 11:03:04] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing Root WebApplicationContext: startup date [Wed Aug 09 11:03:04 CST 2017]; root of context hierarchy 
+[INFO][2017-08-09 11:03:04] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-dao.xml] 
+[INFO][2017-08-09 11:03:04] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-service.xml] 
+[INFO][2017-08-09 11:03:04] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-jedis.xml] 
+[INFO][2017-08-09 11:03:05] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\db.properties] 
+[INFO][2017-08-09 11:03:05] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\log4j.properties] 
+[INFO][2017-08-09 11:03:05] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\resource.properties] 
+[INFO][2017-08-09 11:03:05] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-09 11:03:05] com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:722) main {dataSource-1} inited 
+[INFO][2017-08-09 11:03:07] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Wed Aug 09 11:03:04 CST 2017]; root of context hierarchy 
+[INFO][2017-08-09 11:03:07] org.springframework.scheduling.concurrent.ExecutorConfigurationSupport.initialize(ExecutorConfigurationSupport.java:165) main Initializing ExecutorService  'defaultSockJsTaskScheduler' 
+[INFO][2017-08-09 11:03:07] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/socketServer] onto handler of type [class org.springframework.web.socket.server.support.WebSocketHttpRequestHandler] 
+[INFO][2017-08-09 11:03:07] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/sockjs/**] onto handler of type [class org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler] 
+[INFO][2017-08-09 11:03:07] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325) main Root WebApplicationContext: initialization completed in 2848 ms 
+[INFO][2017-08-09 11:03:07] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:40) main -----开启轮训线程----- 
+[INFO][2017-08-09 11:03:07] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH0 
+[INFO][2017-08-09 11:03:07] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH1 
+[INFO][2017-08-09 11:03:07] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH2 
+[INFO][2017-08-09 11:03:07] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH3 
+[INFO][2017-08-09 11:03:07] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH4 
+[INFO][2017-08-09 11:03:07] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH5 
+[INFO][2017-08-09 11:03:07] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH6 
+[INFO][2017-08-09 11:03:07] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH7 
+[INFO][2017-08-09 11:03:07] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH8 
+[INFO][2017-08-09 11:03:07] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH9 
+[INFO][2017-08-09 11:03:07] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:55) main -----开启数据存储轮训线程----- 
+[INFO][2017-08-09 11:03:07] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:63) main -----开启发送轮训线程----- 
+[INFO][2017-08-09 11:03:07] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:485) main FrameworkServlet 'socket-jetty': initialization started 
+[INFO][2017-08-09 11:03:07] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Wed Aug 09 11:03:07 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-09 11:03:07] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring_mvc.xml] 
+[INFO][2017-08-09 11:03:07] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-09 11:03:07] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:217) main Mapped "{[/]}" onto public java.lang.String com.maizhong.auction.controller.IndexController.index() 
+[INFO][2017-08-09 11:03:07] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Wed Aug 09 11:03:07 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-09 11:03:07] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Wed Aug 09 11:03:07 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-09 11:03:07] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0' 
+[INFO][2017-08-09 11:03:07] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/favicon.ico] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1' 
+[INFO][2017-08-09 11:03:07] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:504) main FrameworkServlet 'socket-jetty': initialization completed in 502 ms 
+[INFO][2017-08-09 11:05:17] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:288) CH1 智能出价 {plus=0.05, price=11.22} 
+[INFO][2017-08-09 12:05:07] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 280 拍卖状态 6 
+[INFO][2017-08-09 12:05:07] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 280 recordId 46 
+[INFO][2017-08-09 12:05:07] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 280  
+[INFO][2017-08-09 12:05:14] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 307 拍卖状态 6 
+[INFO][2017-08-09 12:05:14] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 307 recordId 48 
+[INFO][2017-08-09 12:05:14] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 307  
+[INFO][2017-08-09 12:05:17] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:118) datasave INSET ORDER 车辆 ID 304 订单编号 150225151771931 
+[INFO][2017-08-09 12:05:17] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 304 拍卖状态 7 
+[INFO][2017-08-09 12:05:17] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 304 recordId 47 
+[INFO][2017-08-09 12:05:17] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 304  
+[INFO][2017-08-09 12:05:23] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 308 拍卖状态 6 
+[INFO][2017-08-09 12:05:23] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 308 recordId 49 
+[INFO][2017-08-09 12:05:23] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 308  
+[INFO][2017-08-09 12:05:38] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 315 拍卖状态 6 
+[INFO][2017-08-09 12:05:38] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 315 recordId 50 
+[INFO][2017-08-09 12:05:38] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 315  
+[INFO][2017-08-09 12:07:31] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 317 拍卖状态 6 
+[INFO][2017-08-09 12:07:31] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 317 recordId 51 
+[INFO][2017-08-09 12:07:31] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 317  
+[INFO][2017-08-09 13:05:12] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 309 拍卖状态 6 
+[INFO][2017-08-09 13:05:12] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 309 recordId 52 
+[INFO][2017-08-09 13:05:12] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 309  
+[INFO][2017-08-09 13:05:20] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 313 拍卖状态 6 
+[INFO][2017-08-09 13:05:20] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 313 recordId 53 
+[INFO][2017-08-09 13:05:20] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 313  
+[INFO][2017-08-09 13:05:22] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 310 拍卖状态 6 
+[INFO][2017-08-09 13:05:22] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 310 recordId 54 
+[INFO][2017-08-09 13:05:22] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 310  
+[INFO][2017-08-09 13:05:28] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 314 拍卖状态 6 
+[INFO][2017-08-09 13:05:28] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 314 recordId 55 
+[INFO][2017-08-09 13:05:28] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 314  
+[INFO][2017-08-09 13:05:44] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 315 拍卖状态 6 
+[INFO][2017-08-09 13:05:44] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 315 recordId 56 
+[INFO][2017-08-09 13:05:44] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 315  
+[INFO][2017-08-09 15:52:57] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285) main Root WebApplicationContext: initialization started 
+[INFO][2017-08-09 15:52:57] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing Root WebApplicationContext: startup date [Wed Aug 09 15:52:57 CST 2017]; root of context hierarchy 
+[INFO][2017-08-09 15:52:57] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-dao.xml] 
+[INFO][2017-08-09 15:52:57] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-service.xml] 
+[INFO][2017-08-09 15:52:57] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-jedis.xml] 
+[INFO][2017-08-09 15:52:58] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\db.properties] 
+[INFO][2017-08-09 15:52:58] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\log4j.properties] 
+[INFO][2017-08-09 15:52:58] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\resource.properties] 
+[INFO][2017-08-09 15:52:58] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-09 15:52:58] com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:722) main {dataSource-1} inited 
+[INFO][2017-08-09 15:53:00] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Wed Aug 09 15:52:57 CST 2017]; root of context hierarchy 
+[INFO][2017-08-09 15:53:00] org.springframework.scheduling.concurrent.ExecutorConfigurationSupport.initialize(ExecutorConfigurationSupport.java:165) main Initializing ExecutorService  'defaultSockJsTaskScheduler' 
+[INFO][2017-08-09 15:53:00] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/socketServer] onto handler of type [class org.springframework.web.socket.server.support.WebSocketHttpRequestHandler] 
+[INFO][2017-08-09 15:53:00] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/sockjs/**] onto handler of type [class org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler] 
+[INFO][2017-08-09 15:53:00] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325) main Root WebApplicationContext: initialization completed in 2745 ms 
+[INFO][2017-08-09 15:53:00] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:40) main -----开启轮训线程----- 
+[INFO][2017-08-09 15:53:00] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH0 
+[INFO][2017-08-09 15:53:00] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH1 
+[INFO][2017-08-09 15:53:00] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH2 
+[INFO][2017-08-09 15:53:00] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH3 
+[INFO][2017-08-09 15:53:00] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH4 
+[INFO][2017-08-09 15:53:00] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH5 
+[INFO][2017-08-09 15:53:00] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH6 
+[INFO][2017-08-09 15:53:00] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH7 
+[INFO][2017-08-09 15:53:00] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH8 
+[INFO][2017-08-09 15:53:00] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH9 
+[INFO][2017-08-09 15:53:00] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:55) main -----开启数据存储轮训线程----- 
+[INFO][2017-08-09 15:53:00] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:63) main -----开启发送轮训线程----- 
+[INFO][2017-08-09 15:53:00] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:485) main FrameworkServlet 'socket-jetty': initialization started 
+[INFO][2017-08-09 15:53:00] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Wed Aug 09 15:53:00 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-09 15:53:00] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring_mvc.xml] 
+[INFO][2017-08-09 15:53:00] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-09 15:53:00] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:217) main Mapped "{[/]}" onto public java.lang.String com.maizhong.auction.controller.IndexController.index() 
+[INFO][2017-08-09 15:53:00] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Wed Aug 09 15:53:00 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-09 15:53:00] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Wed Aug 09 15:53:00 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-09 15:53:00] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0' 
+[INFO][2017-08-09 15:53:00] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/favicon.ico] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1' 
+[INFO][2017-08-09 15:53:00] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:504) main FrameworkServlet 'socket-jetty': initialization completed in 317 ms 
+[INFO][2017-08-09 16:01:07] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285) main Root WebApplicationContext: initialization started 
+[INFO][2017-08-09 16:01:07] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing Root WebApplicationContext: startup date [Wed Aug 09 16:01:07 CST 2017]; root of context hierarchy 
+[INFO][2017-08-09 16:01:07] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-dao.xml] 
+[INFO][2017-08-09 16:01:07] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-service.xml] 
+[INFO][2017-08-09 16:01:08] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-jedis.xml] 
+[INFO][2017-08-09 16:01:08] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\db.properties] 
+[INFO][2017-08-09 16:01:08] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\log4j.properties] 
+[INFO][2017-08-09 16:01:08] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\resource.properties] 
+[INFO][2017-08-09 16:01:08] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-09 16:01:08] com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:722) main {dataSource-1} inited 
+[INFO][2017-08-09 16:01:10] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Wed Aug 09 16:01:07 CST 2017]; root of context hierarchy 
+[INFO][2017-08-09 16:01:10] org.springframework.scheduling.concurrent.ExecutorConfigurationSupport.initialize(ExecutorConfigurationSupport.java:165) main Initializing ExecutorService  'defaultSockJsTaskScheduler' 
+[INFO][2017-08-09 16:01:10] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/socketServer] onto handler of type [class org.springframework.web.socket.server.support.WebSocketHttpRequestHandler] 
+[INFO][2017-08-09 16:01:10] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/sockjs/**] onto handler of type [class org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler] 
+[INFO][2017-08-09 16:01:10] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325) main Root WebApplicationContext: initialization completed in 2661 ms 
+[INFO][2017-08-09 16:01:10] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:40) main -----开启轮训线程----- 
+[INFO][2017-08-09 16:01:10] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH0 
+[INFO][2017-08-09 16:01:10] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH1 
+[INFO][2017-08-09 16:01:10] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH2 
+[INFO][2017-08-09 16:01:10] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH3 
+[INFO][2017-08-09 16:01:10] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH4 
+[INFO][2017-08-09 16:01:10] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH5 
+[INFO][2017-08-09 16:01:10] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH6 
+[INFO][2017-08-09 16:01:10] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH7 
+[INFO][2017-08-09 16:01:10] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH8 
+[INFO][2017-08-09 16:01:10] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH9 
+[INFO][2017-08-09 16:01:10] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:55) main -----开启数据存储轮训线程----- 
+[INFO][2017-08-09 16:01:10] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:63) main -----开启发送轮训线程----- 
+[INFO][2017-08-09 16:01:10] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:485) main FrameworkServlet 'socket-jetty': initialization started 
+[INFO][2017-08-09 16:01:10] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Wed Aug 09 16:01:10 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-09 16:01:10] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring_mvc.xml] 
+[INFO][2017-08-09 16:01:10] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-09 16:01:10] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:217) main Mapped "{[/]}" onto public java.lang.String com.maizhong.auction.controller.IndexController.index() 
+[INFO][2017-08-09 16:01:10] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Wed Aug 09 16:01:10 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-09 16:01:10] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Wed Aug 09 16:01:10 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-09 16:01:10] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0' 
+[INFO][2017-08-09 16:01:10] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/favicon.ico] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1' 
+[INFO][2017-08-09 16:01:10] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:504) main FrameworkServlet 'socket-jetty': initialization completed in 292 ms 
+[INFO][2017-08-09 16:08:08] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 319 拍卖状态 6 
+[INFO][2017-08-09 16:08:08] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 319 recordId 66 
+[INFO][2017-08-09 16:08:08] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 319  
+[INFO][2017-08-10 09:24:00] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285) main Root WebApplicationContext: initialization started 
+[INFO][2017-08-10 09:24:00] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing Root WebApplicationContext: startup date [Thu Aug 10 09:24:00 CST 2017]; root of context hierarchy 
+[INFO][2017-08-10 09:24:01] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-dao.xml] 
+[INFO][2017-08-10 09:24:01] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-service.xml] 
+[INFO][2017-08-10 09:24:01] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-jedis.xml] 
+[INFO][2017-08-10 09:24:02] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\db.properties] 
+[INFO][2017-08-10 09:24:02] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\log4j.properties] 
+[INFO][2017-08-10 09:24:02] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\resource.properties] 
+[INFO][2017-08-10 09:24:02] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-10 09:24:02] com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:722) main {dataSource-1} inited 
+[INFO][2017-08-10 09:24:04] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Thu Aug 10 09:24:00 CST 2017]; root of context hierarchy 
+[INFO][2017-08-10 09:24:04] org.springframework.scheduling.concurrent.ExecutorConfigurationSupport.initialize(ExecutorConfigurationSupport.java:165) main Initializing ExecutorService  'defaultSockJsTaskScheduler' 
+[INFO][2017-08-10 09:24:04] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/socketServer] onto handler of type [class org.springframework.web.socket.server.support.WebSocketHttpRequestHandler] 
+[INFO][2017-08-10 09:24:04] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/sockjs/**] onto handler of type [class org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler] 
+[INFO][2017-08-10 09:24:04] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325) main Root WebApplicationContext: initialization completed in 3769 ms 
+[INFO][2017-08-10 09:24:04] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:40) main -----开启轮训线程----- 
+[INFO][2017-08-10 09:24:04] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH0 
+[INFO][2017-08-10 09:24:04] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH1 
+[INFO][2017-08-10 09:24:04] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH2 
+[INFO][2017-08-10 09:24:04] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH3 
+[INFO][2017-08-10 09:24:04] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH4 
+[INFO][2017-08-10 09:24:04] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH5 
+[INFO][2017-08-10 09:24:04] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH6 
+[INFO][2017-08-10 09:24:04] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH7 
+[INFO][2017-08-10 09:24:04] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH8 
+[INFO][2017-08-10 09:24:04] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH9 
+[INFO][2017-08-10 09:24:04] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:55) main -----开启数据存储轮训线程----- 
+[INFO][2017-08-10 09:24:04] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:63) main -----开启发送轮训线程----- 
+[INFO][2017-08-10 09:24:04] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:485) main FrameworkServlet 'socket-jetty': initialization started 
+[INFO][2017-08-10 09:24:04] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Thu Aug 10 09:24:04 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-10 09:24:04] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring_mvc.xml] 
+[INFO][2017-08-10 09:24:04] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-10 09:24:04] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:217) main Mapped "{[/]}" onto public java.lang.String com.maizhong.auction.controller.IndexController.index() 
+[INFO][2017-08-10 09:24:04] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Thu Aug 10 09:24:04 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-10 09:24:04] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Thu Aug 10 09:24:04 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-10 09:24:05] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0' 
+[INFO][2017-08-10 09:24:05] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/favicon.ico] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1' 
+[INFO][2017-08-10 09:24:05] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:504) main FrameworkServlet 'socket-jetty': initialization completed in 332 ms 
+[ERROR][2017-08-10 14:41:14] org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:95) qtp385566685-19 Unhandled error for ExceptionWebSocketHandlerDecorator [delegate=LoggingWebSocketHandlerDecorator [delegate=com.maizhong.auction.socket.SpringWebSocketHandler@16857f41]] 
+java.util.ConcurrentModificationException
+	at java.util.HashMap$HashIterator.nextEntry(HashMap.java:922)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:962)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:960)
+	at com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:73)
+	at org.springframework.web.socket.handler.WebSocketHandlerDecorator.afterConnectionClosed(WebSocketHandlerDecorator.java:85)
+	at org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator.afterConnectionClosed(LoggingWebSocketHandlerDecorator.java:72)
+	at org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:92)
+	at org.springframework.web.socket.adapter.jetty.JettyWebSocketHandlerAdapter.onWebSocketClose(JettyWebSocketHandlerAdapter.java:120)
+	at sun.reflect.GeneratedMethodAccessor46.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jetty.websocket.common.events.annotated.CallableMethod.call(CallableMethod.java:70)
+	at org.eclipse.jetty.websocket.common.events.annotated.OptionalSessionCallableMethod.call(OptionalSessionCallableMethod.java:72)
+	at org.eclipse.jetty.websocket.common.events.JettyAnnotatedEventDriver.onClose(JettyAnnotatedEventDriver.java:139)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.notifyClose(WebSocketSession.java:342)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.onConnectionStateChange(WebSocketSession.java:374)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onAbnormalClose(IOState.java:218)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.onLocalClose(AbstractWebSocketConnection.java:163)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.writeSuccess(AbstractWebSocketConnection.java:153)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.notifyCallbackSuccess(FrameFlusher.java:406)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeedEntries(FrameFlusher.java:241)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeeded(FrameFlusher.java:231)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:321)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:129)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.flush(FrameFlusher.java:152)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.process(FrameFlusher.java:216)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:246)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:208)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.enqueue(FrameFlusher.java:381)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.outgoingFrame(AbstractWebSocketConnection.java:567)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onConnectionStateChange(AbstractWebSocketConnection.java:459)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onCloseRemote(IOState.java:351)
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:120)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:309)
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:214)
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:220)
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:258)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:632)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:480)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:544)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:745)
+[ERROR][2017-08-10 14:41:14] org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:95) qtp385566685-52 Unhandled error for ExceptionWebSocketHandlerDecorator [delegate=LoggingWebSocketHandlerDecorator [delegate=com.maizhong.auction.socket.SpringWebSocketHandler@16857f41]] 
+java.util.ConcurrentModificationException
+	at java.util.HashMap$HashIterator.nextEntry(HashMap.java:922)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:962)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:960)
+	at com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:73)
+	at org.springframework.web.socket.handler.WebSocketHandlerDecorator.afterConnectionClosed(WebSocketHandlerDecorator.java:85)
+	at org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator.afterConnectionClosed(LoggingWebSocketHandlerDecorator.java:72)
+	at org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:92)
+	at org.springframework.web.socket.adapter.jetty.JettyWebSocketHandlerAdapter.onWebSocketClose(JettyWebSocketHandlerAdapter.java:120)
+	at sun.reflect.GeneratedMethodAccessor46.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jetty.websocket.common.events.annotated.CallableMethod.call(CallableMethod.java:70)
+	at org.eclipse.jetty.websocket.common.events.annotated.OptionalSessionCallableMethod.call(OptionalSessionCallableMethod.java:72)
+	at org.eclipse.jetty.websocket.common.events.JettyAnnotatedEventDriver.onClose(JettyAnnotatedEventDriver.java:139)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.notifyClose(WebSocketSession.java:342)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.onConnectionStateChange(WebSocketSession.java:374)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onAbnormalClose(IOState.java:218)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.onLocalClose(AbstractWebSocketConnection.java:163)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.writeSuccess(AbstractWebSocketConnection.java:153)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.notifyCallbackSuccess(FrameFlusher.java:406)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeedEntries(FrameFlusher.java:241)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeeded(FrameFlusher.java:231)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:321)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:129)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.flush(FrameFlusher.java:152)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.process(FrameFlusher.java:216)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:246)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:208)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.enqueue(FrameFlusher.java:381)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.outgoingFrame(AbstractWebSocketConnection.java:567)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onConnectionStateChange(AbstractWebSocketConnection.java:459)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onCloseRemote(IOState.java:351)
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:120)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:309)
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:214)
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:220)
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:258)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:632)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:480)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:544)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:745)
+[ERROR][2017-08-10 14:41:14] org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:95) qtp385566685-54 Unhandled error for ExceptionWebSocketHandlerDecorator [delegate=LoggingWebSocketHandlerDecorator [delegate=com.maizhong.auction.socket.SpringWebSocketHandler@16857f41]] 
+java.util.ConcurrentModificationException
+	at java.util.HashMap$HashIterator.nextEntry(HashMap.java:922)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:962)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:960)
+	at com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:73)
+	at org.springframework.web.socket.handler.WebSocketHandlerDecorator.afterConnectionClosed(WebSocketHandlerDecorator.java:85)
+	at org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator.afterConnectionClosed(LoggingWebSocketHandlerDecorator.java:72)
+	at org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:92)
+	at org.springframework.web.socket.adapter.jetty.JettyWebSocketHandlerAdapter.onWebSocketClose(JettyWebSocketHandlerAdapter.java:120)
+	at sun.reflect.GeneratedMethodAccessor46.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jetty.websocket.common.events.annotated.CallableMethod.call(CallableMethod.java:70)
+	at org.eclipse.jetty.websocket.common.events.annotated.OptionalSessionCallableMethod.call(OptionalSessionCallableMethod.java:72)
+	at org.eclipse.jetty.websocket.common.events.JettyAnnotatedEventDriver.onClose(JettyAnnotatedEventDriver.java:139)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.notifyClose(WebSocketSession.java:342)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.onConnectionStateChange(WebSocketSession.java:374)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onAbnormalClose(IOState.java:218)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.onLocalClose(AbstractWebSocketConnection.java:163)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.writeSuccess(AbstractWebSocketConnection.java:153)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.notifyCallbackSuccess(FrameFlusher.java:406)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeedEntries(FrameFlusher.java:241)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeeded(FrameFlusher.java:231)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:321)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:129)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.flush(FrameFlusher.java:152)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.process(FrameFlusher.java:216)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:246)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:208)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.enqueue(FrameFlusher.java:381)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.outgoingFrame(AbstractWebSocketConnection.java:567)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onConnectionStateChange(AbstractWebSocketConnection.java:459)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onCloseRemote(IOState.java:351)
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:120)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:309)
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:214)
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:220)
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:258)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:632)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:480)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:544)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:745)
+[ERROR][2017-08-10 14:41:14] org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:95) qtp385566685-53 Unhandled error for ExceptionWebSocketHandlerDecorator [delegate=LoggingWebSocketHandlerDecorator [delegate=com.maizhong.auction.socket.SpringWebSocketHandler@16857f41]] 
+java.util.ConcurrentModificationException
+	at java.util.HashMap$HashIterator.nextEntry(HashMap.java:922)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:962)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:960)
+	at com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:73)
+	at org.springframework.web.socket.handler.WebSocketHandlerDecorator.afterConnectionClosed(WebSocketHandlerDecorator.java:85)
+	at org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator.afterConnectionClosed(LoggingWebSocketHandlerDecorator.java:72)
+	at org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:92)
+	at org.springframework.web.socket.adapter.jetty.JettyWebSocketHandlerAdapter.onWebSocketClose(JettyWebSocketHandlerAdapter.java:120)
+	at sun.reflect.GeneratedMethodAccessor46.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jetty.websocket.common.events.annotated.CallableMethod.call(CallableMethod.java:70)
+	at org.eclipse.jetty.websocket.common.events.annotated.OptionalSessionCallableMethod.call(OptionalSessionCallableMethod.java:72)
+	at org.eclipse.jetty.websocket.common.events.JettyAnnotatedEventDriver.onClose(JettyAnnotatedEventDriver.java:139)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.notifyClose(WebSocketSession.java:342)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.onConnectionStateChange(WebSocketSession.java:374)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onAbnormalClose(IOState.java:218)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.onLocalClose(AbstractWebSocketConnection.java:163)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.writeSuccess(AbstractWebSocketConnection.java:153)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.notifyCallbackSuccess(FrameFlusher.java:406)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeedEntries(FrameFlusher.java:241)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeeded(FrameFlusher.java:231)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:321)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:129)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.flush(FrameFlusher.java:152)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.process(FrameFlusher.java:216)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:246)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:208)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.enqueue(FrameFlusher.java:381)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.outgoingFrame(AbstractWebSocketConnection.java:567)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onConnectionStateChange(AbstractWebSocketConnection.java:459)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onCloseRemote(IOState.java:351)
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:120)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:309)
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:214)
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:220)
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:258)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:632)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:480)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:544)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:745)
+[ERROR][2017-08-10 14:41:14] org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:95) qtp385566685-18 Unhandled error for ExceptionWebSocketHandlerDecorator [delegate=LoggingWebSocketHandlerDecorator [delegate=com.maizhong.auction.socket.SpringWebSocketHandler@16857f41]] 
+java.util.ConcurrentModificationException
+	at java.util.HashMap$HashIterator.nextEntry(HashMap.java:922)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:962)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:960)
+	at com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:73)
+	at org.springframework.web.socket.handler.WebSocketHandlerDecorator.afterConnectionClosed(WebSocketHandlerDecorator.java:85)
+	at org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator.afterConnectionClosed(LoggingWebSocketHandlerDecorator.java:72)
+	at org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:92)
+	at org.springframework.web.socket.adapter.jetty.JettyWebSocketHandlerAdapter.onWebSocketClose(JettyWebSocketHandlerAdapter.java:120)
+	at sun.reflect.GeneratedMethodAccessor46.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jetty.websocket.common.events.annotated.CallableMethod.call(CallableMethod.java:70)
+	at org.eclipse.jetty.websocket.common.events.annotated.OptionalSessionCallableMethod.call(OptionalSessionCallableMethod.java:72)
+	at org.eclipse.jetty.websocket.common.events.JettyAnnotatedEventDriver.onClose(JettyAnnotatedEventDriver.java:139)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.notifyClose(WebSocketSession.java:342)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.onConnectionStateChange(WebSocketSession.java:374)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onAbnormalClose(IOState.java:218)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.onLocalClose(AbstractWebSocketConnection.java:163)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.writeSuccess(AbstractWebSocketConnection.java:153)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.notifyCallbackSuccess(FrameFlusher.java:406)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeedEntries(FrameFlusher.java:241)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeeded(FrameFlusher.java:231)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:321)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:129)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.flush(FrameFlusher.java:152)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.process(FrameFlusher.java:216)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:246)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:208)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.enqueue(FrameFlusher.java:381)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.outgoingFrame(AbstractWebSocketConnection.java:567)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onConnectionStateChange(AbstractWebSocketConnection.java:459)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onCloseRemote(IOState.java:351)
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:120)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:309)
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:214)
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:220)
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:258)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:632)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:480)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:544)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:745)
+[ERROR][2017-08-10 14:41:14] org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:95) qtp385566685-14 Unhandled error for ExceptionWebSocketHandlerDecorator [delegate=LoggingWebSocketHandlerDecorator [delegate=com.maizhong.auction.socket.SpringWebSocketHandler@16857f41]] 
+java.util.ConcurrentModificationException
+	at java.util.HashMap$HashIterator.nextEntry(HashMap.java:922)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:962)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:960)
+	at com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:73)
+	at org.springframework.web.socket.handler.WebSocketHandlerDecorator.afterConnectionClosed(WebSocketHandlerDecorator.java:85)
+	at org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator.afterConnectionClosed(LoggingWebSocketHandlerDecorator.java:72)
+	at org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:92)
+	at org.springframework.web.socket.adapter.jetty.JettyWebSocketHandlerAdapter.onWebSocketClose(JettyWebSocketHandlerAdapter.java:120)
+	at sun.reflect.GeneratedMethodAccessor46.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jetty.websocket.common.events.annotated.CallableMethod.call(CallableMethod.java:70)
+	at org.eclipse.jetty.websocket.common.events.annotated.OptionalSessionCallableMethod.call(OptionalSessionCallableMethod.java:72)
+	at org.eclipse.jetty.websocket.common.events.JettyAnnotatedEventDriver.onClose(JettyAnnotatedEventDriver.java:139)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.notifyClose(WebSocketSession.java:342)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.onConnectionStateChange(WebSocketSession.java:374)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onAbnormalClose(IOState.java:218)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.onLocalClose(AbstractWebSocketConnection.java:163)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.writeSuccess(AbstractWebSocketConnection.java:153)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.notifyCallbackSuccess(FrameFlusher.java:406)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeedEntries(FrameFlusher.java:241)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeeded(FrameFlusher.java:231)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:321)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:129)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.flush(FrameFlusher.java:152)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.process(FrameFlusher.java:216)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:246)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:208)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.enqueue(FrameFlusher.java:381)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.outgoingFrame(AbstractWebSocketConnection.java:567)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onConnectionStateChange(AbstractWebSocketConnection.java:459)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onCloseRemote(IOState.java:351)
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:120)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:309)
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:214)
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:220)
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:258)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:632)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:480)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:544)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:745)
+[ERROR][2017-08-10 14:41:14] org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:95) qtp385566685-13 Unhandled error for ExceptionWebSocketHandlerDecorator [delegate=LoggingWebSocketHandlerDecorator [delegate=com.maizhong.auction.socket.SpringWebSocketHandler@16857f41]] 
+java.util.ConcurrentModificationException
+	at java.util.HashMap$HashIterator.nextEntry(HashMap.java:922)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:962)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:960)
+	at com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:73)
+	at org.springframework.web.socket.handler.WebSocketHandlerDecorator.afterConnectionClosed(WebSocketHandlerDecorator.java:85)
+	at org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator.afterConnectionClosed(LoggingWebSocketHandlerDecorator.java:72)
+	at org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:92)
+	at org.springframework.web.socket.adapter.jetty.JettyWebSocketHandlerAdapter.onWebSocketClose(JettyWebSocketHandlerAdapter.java:120)
+	at sun.reflect.GeneratedMethodAccessor46.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jetty.websocket.common.events.annotated.CallableMethod.call(CallableMethod.java:70)
+	at org.eclipse.jetty.websocket.common.events.annotated.OptionalSessionCallableMethod.call(OptionalSessionCallableMethod.java:72)
+	at org.eclipse.jetty.websocket.common.events.JettyAnnotatedEventDriver.onClose(JettyAnnotatedEventDriver.java:139)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.notifyClose(WebSocketSession.java:342)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.onConnectionStateChange(WebSocketSession.java:374)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onAbnormalClose(IOState.java:218)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.onLocalClose(AbstractWebSocketConnection.java:163)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.writeSuccess(AbstractWebSocketConnection.java:153)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.notifyCallbackSuccess(FrameFlusher.java:406)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeedEntries(FrameFlusher.java:241)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeeded(FrameFlusher.java:231)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:321)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:129)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.flush(FrameFlusher.java:152)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.process(FrameFlusher.java:216)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:246)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:208)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.enqueue(FrameFlusher.java:381)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.outgoingFrame(AbstractWebSocketConnection.java:567)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onConnectionStateChange(AbstractWebSocketConnection.java:459)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onCloseRemote(IOState.java:351)
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:120)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:309)
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:214)
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:220)
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:258)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:632)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:480)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:544)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:745)
+[ERROR][2017-08-10 14:41:14] org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:95) qtp385566685-63 Unhandled error for ExceptionWebSocketHandlerDecorator [delegate=LoggingWebSocketHandlerDecorator [delegate=com.maizhong.auction.socket.SpringWebSocketHandler@16857f41]] 
+java.util.ConcurrentModificationException
+	at java.util.HashMap$HashIterator.nextEntry(HashMap.java:922)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:962)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:960)
+	at com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:73)
+	at org.springframework.web.socket.handler.WebSocketHandlerDecorator.afterConnectionClosed(WebSocketHandlerDecorator.java:85)
+	at org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator.afterConnectionClosed(LoggingWebSocketHandlerDecorator.java:72)
+	at org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:92)
+	at org.springframework.web.socket.adapter.jetty.JettyWebSocketHandlerAdapter.onWebSocketClose(JettyWebSocketHandlerAdapter.java:120)
+	at sun.reflect.GeneratedMethodAccessor46.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jetty.websocket.common.events.annotated.CallableMethod.call(CallableMethod.java:70)
+	at org.eclipse.jetty.websocket.common.events.annotated.OptionalSessionCallableMethod.call(OptionalSessionCallableMethod.java:72)
+	at org.eclipse.jetty.websocket.common.events.JettyAnnotatedEventDriver.onClose(JettyAnnotatedEventDriver.java:139)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.notifyClose(WebSocketSession.java:342)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.onConnectionStateChange(WebSocketSession.java:374)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onAbnormalClose(IOState.java:218)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.onLocalClose(AbstractWebSocketConnection.java:163)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.writeSuccess(AbstractWebSocketConnection.java:153)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.notifyCallbackSuccess(FrameFlusher.java:406)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeedEntries(FrameFlusher.java:241)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeeded(FrameFlusher.java:231)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:321)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:129)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.flush(FrameFlusher.java:152)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.process(FrameFlusher.java:216)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:246)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:208)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.enqueue(FrameFlusher.java:381)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.outgoingFrame(AbstractWebSocketConnection.java:567)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onConnectionStateChange(AbstractWebSocketConnection.java:459)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onCloseRemote(IOState.java:351)
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:120)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:309)
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:214)
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:220)
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:258)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:632)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:480)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:544)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:745)
+[ERROR][2017-08-10 14:41:14] org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:95) qtp385566685-16 Unhandled error for ExceptionWebSocketHandlerDecorator [delegate=LoggingWebSocketHandlerDecorator [delegate=com.maizhong.auction.socket.SpringWebSocketHandler@16857f41]] 
+java.util.ConcurrentModificationException
+	at java.util.HashMap$HashIterator.nextEntry(HashMap.java:922)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:962)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:960)
+	at com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:73)
+	at org.springframework.web.socket.handler.WebSocketHandlerDecorator.afterConnectionClosed(WebSocketHandlerDecorator.java:85)
+	at org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator.afterConnectionClosed(LoggingWebSocketHandlerDecorator.java:72)
+	at org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:92)
+	at org.springframework.web.socket.adapter.jetty.JettyWebSocketHandlerAdapter.onWebSocketClose(JettyWebSocketHandlerAdapter.java:120)
+	at sun.reflect.GeneratedMethodAccessor46.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jetty.websocket.common.events.annotated.CallableMethod.call(CallableMethod.java:70)
+	at org.eclipse.jetty.websocket.common.events.annotated.OptionalSessionCallableMethod.call(OptionalSessionCallableMethod.java:72)
+	at org.eclipse.jetty.websocket.common.events.JettyAnnotatedEventDriver.onClose(JettyAnnotatedEventDriver.java:139)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.notifyClose(WebSocketSession.java:342)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.onConnectionStateChange(WebSocketSession.java:374)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onAbnormalClose(IOState.java:218)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.onLocalClose(AbstractWebSocketConnection.java:163)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.writeSuccess(AbstractWebSocketConnection.java:153)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.notifyCallbackSuccess(FrameFlusher.java:406)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeedEntries(FrameFlusher.java:241)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeeded(FrameFlusher.java:231)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:321)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:129)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.flush(FrameFlusher.java:152)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.process(FrameFlusher.java:216)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:246)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:208)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.enqueue(FrameFlusher.java:381)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.outgoingFrame(AbstractWebSocketConnection.java:567)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onConnectionStateChange(AbstractWebSocketConnection.java:459)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onCloseRemote(IOState.java:351)
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:120)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:309)
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:214)
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:220)
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:258)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:632)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:480)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:544)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:745)
+[ERROR][2017-08-10 14:41:14] org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:95) qtp385566685-55 Unhandled error for ExceptionWebSocketHandlerDecorator [delegate=LoggingWebSocketHandlerDecorator [delegate=com.maizhong.auction.socket.SpringWebSocketHandler@16857f41]] 
+java.util.ConcurrentModificationException
+	at java.util.HashMap$HashIterator.nextEntry(HashMap.java:922)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:962)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:960)
+	at com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:73)
+	at org.springframework.web.socket.handler.WebSocketHandlerDecorator.afterConnectionClosed(WebSocketHandlerDecorator.java:85)
+	at org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator.afterConnectionClosed(LoggingWebSocketHandlerDecorator.java:72)
+	at org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:92)
+	at org.springframework.web.socket.adapter.jetty.JettyWebSocketHandlerAdapter.onWebSocketClose(JettyWebSocketHandlerAdapter.java:120)
+	at sun.reflect.GeneratedMethodAccessor46.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jetty.websocket.common.events.annotated.CallableMethod.call(CallableMethod.java:70)
+	at org.eclipse.jetty.websocket.common.events.annotated.OptionalSessionCallableMethod.call(OptionalSessionCallableMethod.java:72)
+	at org.eclipse.jetty.websocket.common.events.JettyAnnotatedEventDriver.onClose(JettyAnnotatedEventDriver.java:139)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.notifyClose(WebSocketSession.java:342)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.onConnectionStateChange(WebSocketSession.java:374)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onAbnormalClose(IOState.java:218)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.onLocalClose(AbstractWebSocketConnection.java:163)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.writeSuccess(AbstractWebSocketConnection.java:153)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.notifyCallbackSuccess(FrameFlusher.java:406)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeedEntries(FrameFlusher.java:241)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeeded(FrameFlusher.java:231)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:321)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:129)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.flush(FrameFlusher.java:152)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.process(FrameFlusher.java:216)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:246)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:208)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.enqueue(FrameFlusher.java:381)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.outgoingFrame(AbstractWebSocketConnection.java:567)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onConnectionStateChange(AbstractWebSocketConnection.java:459)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onCloseRemote(IOState.java:351)
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:120)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:309)
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:214)
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:220)
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:258)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:632)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:480)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:544)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:745)
+[ERROR][2017-08-10 14:41:14] org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:95) qtp385566685-56 Unhandled error for ExceptionWebSocketHandlerDecorator [delegate=LoggingWebSocketHandlerDecorator [delegate=com.maizhong.auction.socket.SpringWebSocketHandler@16857f41]] 
+java.util.ConcurrentModificationException
+	at java.util.HashMap$HashIterator.nextEntry(HashMap.java:922)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:962)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:960)
+	at com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:73)
+	at org.springframework.web.socket.handler.WebSocketHandlerDecorator.afterConnectionClosed(WebSocketHandlerDecorator.java:85)
+	at org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator.afterConnectionClosed(LoggingWebSocketHandlerDecorator.java:72)
+	at org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:92)
+	at org.springframework.web.socket.adapter.jetty.JettyWebSocketHandlerAdapter.onWebSocketClose(JettyWebSocketHandlerAdapter.java:120)
+	at sun.reflect.GeneratedMethodAccessor46.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jetty.websocket.common.events.annotated.CallableMethod.call(CallableMethod.java:70)
+	at org.eclipse.jetty.websocket.common.events.annotated.OptionalSessionCallableMethod.call(OptionalSessionCallableMethod.java:72)
+	at org.eclipse.jetty.websocket.common.events.JettyAnnotatedEventDriver.onClose(JettyAnnotatedEventDriver.java:139)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.notifyClose(WebSocketSession.java:342)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.onConnectionStateChange(WebSocketSession.java:374)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onAbnormalClose(IOState.java:218)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.onLocalClose(AbstractWebSocketConnection.java:163)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.writeSuccess(AbstractWebSocketConnection.java:153)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.notifyCallbackSuccess(FrameFlusher.java:406)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeedEntries(FrameFlusher.java:241)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeeded(FrameFlusher.java:231)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:321)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:129)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.flush(FrameFlusher.java:152)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.process(FrameFlusher.java:216)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:246)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:208)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.enqueue(FrameFlusher.java:381)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.outgoingFrame(AbstractWebSocketConnection.java:567)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onConnectionStateChange(AbstractWebSocketConnection.java:459)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onCloseRemote(IOState.java:351)
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:120)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:309)
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:214)
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:220)
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:258)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:632)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:480)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:544)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:745)
+[ERROR][2017-08-10 14:41:14] org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:95) qtp385566685-58 Unhandled error for ExceptionWebSocketHandlerDecorator [delegate=LoggingWebSocketHandlerDecorator [delegate=com.maizhong.auction.socket.SpringWebSocketHandler@16857f41]] 
+java.util.ConcurrentModificationException
+	at java.util.HashMap$HashIterator.nextEntry(HashMap.java:922)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:962)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:960)
+	at com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:73)
+	at org.springframework.web.socket.handler.WebSocketHandlerDecorator.afterConnectionClosed(WebSocketHandlerDecorator.java:85)
+	at org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator.afterConnectionClosed(LoggingWebSocketHandlerDecorator.java:72)
+	at org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:92)
+	at org.springframework.web.socket.adapter.jetty.JettyWebSocketHandlerAdapter.onWebSocketClose(JettyWebSocketHandlerAdapter.java:120)
+	at sun.reflect.GeneratedMethodAccessor46.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jetty.websocket.common.events.annotated.CallableMethod.call(CallableMethod.java:70)
+	at org.eclipse.jetty.websocket.common.events.annotated.OptionalSessionCallableMethod.call(OptionalSessionCallableMethod.java:72)
+	at org.eclipse.jetty.websocket.common.events.JettyAnnotatedEventDriver.onClose(JettyAnnotatedEventDriver.java:139)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.notifyClose(WebSocketSession.java:342)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.onConnectionStateChange(WebSocketSession.java:374)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onAbnormalClose(IOState.java:218)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.onLocalClose(AbstractWebSocketConnection.java:163)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.writeSuccess(AbstractWebSocketConnection.java:153)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.notifyCallbackSuccess(FrameFlusher.java:406)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeedEntries(FrameFlusher.java:241)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeeded(FrameFlusher.java:231)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:321)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:129)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.flush(FrameFlusher.java:152)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.process(FrameFlusher.java:216)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:246)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:208)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.enqueue(FrameFlusher.java:381)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.outgoingFrame(AbstractWebSocketConnection.java:567)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onConnectionStateChange(AbstractWebSocketConnection.java:459)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onCloseRemote(IOState.java:351)
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:120)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:309)
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:214)
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:220)
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:258)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:632)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:480)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:544)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:745)
+[ERROR][2017-08-10 14:46:15] org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:95) qtp385566685-68 Unhandled error for ExceptionWebSocketHandlerDecorator [delegate=LoggingWebSocketHandlerDecorator [delegate=com.maizhong.auction.socket.SpringWebSocketHandler@16857f41]] 
+java.util.ConcurrentModificationException
+	at java.util.HashMap$HashIterator.nextEntry(HashMap.java:922)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:962)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:960)
+	at com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:73)
+	at org.springframework.web.socket.handler.WebSocketHandlerDecorator.afterConnectionClosed(WebSocketHandlerDecorator.java:85)
+	at org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator.afterConnectionClosed(LoggingWebSocketHandlerDecorator.java:72)
+	at org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:92)
+	at org.springframework.web.socket.adapter.jetty.JettyWebSocketHandlerAdapter.onWebSocketClose(JettyWebSocketHandlerAdapter.java:120)
+	at sun.reflect.GeneratedMethodAccessor46.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jetty.websocket.common.events.annotated.CallableMethod.call(CallableMethod.java:70)
+	at org.eclipse.jetty.websocket.common.events.annotated.OptionalSessionCallableMethod.call(OptionalSessionCallableMethod.java:72)
+	at org.eclipse.jetty.websocket.common.events.JettyAnnotatedEventDriver.onClose(JettyAnnotatedEventDriver.java:139)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.notifyClose(WebSocketSession.java:342)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.onConnectionStateChange(WebSocketSession.java:374)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onAbnormalClose(IOState.java:218)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.onLocalClose(AbstractWebSocketConnection.java:163)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.writeSuccess(AbstractWebSocketConnection.java:153)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.notifyCallbackSuccess(FrameFlusher.java:406)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeedEntries(FrameFlusher.java:241)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeeded(FrameFlusher.java:231)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:321)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:129)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.flush(FrameFlusher.java:152)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.process(FrameFlusher.java:216)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:246)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:208)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.enqueue(FrameFlusher.java:381)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.outgoingFrame(AbstractWebSocketConnection.java:567)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onConnectionStateChange(AbstractWebSocketConnection.java:459)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onCloseRemote(IOState.java:351)
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:120)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:309)
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:214)
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:220)
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:258)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:632)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:480)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:544)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:745)
+[ERROR][2017-08-10 14:46:15] org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:95) qtp385566685-80 Unhandled error for ExceptionWebSocketHandlerDecorator [delegate=LoggingWebSocketHandlerDecorator [delegate=com.maizhong.auction.socket.SpringWebSocketHandler@16857f41]] 
+java.util.ConcurrentModificationException
+	at java.util.HashMap$HashIterator.nextEntry(HashMap.java:922)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:962)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:960)
+	at com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:73)
+	at org.springframework.web.socket.handler.WebSocketHandlerDecorator.afterConnectionClosed(WebSocketHandlerDecorator.java:85)
+	at org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator.afterConnectionClosed(LoggingWebSocketHandlerDecorator.java:72)
+	at org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:92)
+	at org.springframework.web.socket.adapter.jetty.JettyWebSocketHandlerAdapter.onWebSocketClose(JettyWebSocketHandlerAdapter.java:120)
+	at sun.reflect.GeneratedMethodAccessor46.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jetty.websocket.common.events.annotated.CallableMethod.call(CallableMethod.java:70)
+	at org.eclipse.jetty.websocket.common.events.annotated.OptionalSessionCallableMethod.call(OptionalSessionCallableMethod.java:72)
+	at org.eclipse.jetty.websocket.common.events.JettyAnnotatedEventDriver.onClose(JettyAnnotatedEventDriver.java:139)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.notifyClose(WebSocketSession.java:342)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.onConnectionStateChange(WebSocketSession.java:374)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onAbnormalClose(IOState.java:218)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.onLocalClose(AbstractWebSocketConnection.java:163)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.writeSuccess(AbstractWebSocketConnection.java:153)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.notifyCallbackSuccess(FrameFlusher.java:406)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeedEntries(FrameFlusher.java:241)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeeded(FrameFlusher.java:231)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:321)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:129)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.flush(FrameFlusher.java:152)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.process(FrameFlusher.java:216)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:246)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:208)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.enqueue(FrameFlusher.java:381)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.outgoingFrame(AbstractWebSocketConnection.java:567)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onConnectionStateChange(AbstractWebSocketConnection.java:459)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onCloseRemote(IOState.java:351)
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:120)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:309)
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:214)
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:220)
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:258)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:632)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:480)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:544)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:745)
+[ERROR][2017-08-10 14:46:15] org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:95) qtp385566685-55 Unhandled error for ExceptionWebSocketHandlerDecorator [delegate=LoggingWebSocketHandlerDecorator [delegate=com.maizhong.auction.socket.SpringWebSocketHandler@16857f41]] 
+java.util.ConcurrentModificationException
+	at java.util.HashMap$HashIterator.nextEntry(HashMap.java:922)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:962)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:960)
+	at com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:73)
+	at org.springframework.web.socket.handler.WebSocketHandlerDecorator.afterConnectionClosed(WebSocketHandlerDecorator.java:85)
+	at org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator.afterConnectionClosed(LoggingWebSocketHandlerDecorator.java:72)
+	at org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:92)
+	at org.springframework.web.socket.adapter.jetty.JettyWebSocketHandlerAdapter.onWebSocketClose(JettyWebSocketHandlerAdapter.java:120)
+	at sun.reflect.GeneratedMethodAccessor46.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jetty.websocket.common.events.annotated.CallableMethod.call(CallableMethod.java:70)
+	at org.eclipse.jetty.websocket.common.events.annotated.OptionalSessionCallableMethod.call(OptionalSessionCallableMethod.java:72)
+	at org.eclipse.jetty.websocket.common.events.JettyAnnotatedEventDriver.onClose(JettyAnnotatedEventDriver.java:139)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.notifyClose(WebSocketSession.java:342)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.onConnectionStateChange(WebSocketSession.java:374)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onAbnormalClose(IOState.java:218)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.onLocalClose(AbstractWebSocketConnection.java:163)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.writeSuccess(AbstractWebSocketConnection.java:153)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.notifyCallbackSuccess(FrameFlusher.java:406)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeedEntries(FrameFlusher.java:241)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeeded(FrameFlusher.java:231)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:321)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:129)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.flush(FrameFlusher.java:152)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.process(FrameFlusher.java:216)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:246)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:208)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.enqueue(FrameFlusher.java:381)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.outgoingFrame(AbstractWebSocketConnection.java:567)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onConnectionStateChange(AbstractWebSocketConnection.java:459)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onCloseRemote(IOState.java:351)
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:120)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:309)
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:214)
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:220)
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:258)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:632)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:480)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:544)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:745)
+[ERROR][2017-08-10 14:46:15] org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:95) qtp385566685-197 Unhandled error for ExceptionWebSocketHandlerDecorator [delegate=LoggingWebSocketHandlerDecorator [delegate=com.maizhong.auction.socket.SpringWebSocketHandler@16857f41]] 
+java.util.ConcurrentModificationException
+	at java.util.HashMap$HashIterator.nextEntry(HashMap.java:922)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:962)
+	at java.util.HashMap$EntryIterator.next(HashMap.java:960)
+	at com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:73)
+	at org.springframework.web.socket.handler.WebSocketHandlerDecorator.afterConnectionClosed(WebSocketHandlerDecorator.java:85)
+	at org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator.afterConnectionClosed(LoggingWebSocketHandlerDecorator.java:72)
+	at org.springframework.web.socket.handler.ExceptionWebSocketHandlerDecorator.afterConnectionClosed(ExceptionWebSocketHandlerDecorator.java:92)
+	at org.springframework.web.socket.adapter.jetty.JettyWebSocketHandlerAdapter.onWebSocketClose(JettyWebSocketHandlerAdapter.java:120)
+	at sun.reflect.GeneratedMethodAccessor46.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.eclipse.jetty.websocket.common.events.annotated.CallableMethod.call(CallableMethod.java:70)
+	at org.eclipse.jetty.websocket.common.events.annotated.OptionalSessionCallableMethod.call(OptionalSessionCallableMethod.java:72)
+	at org.eclipse.jetty.websocket.common.events.JettyAnnotatedEventDriver.onClose(JettyAnnotatedEventDriver.java:139)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.notifyClose(WebSocketSession.java:342)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.onConnectionStateChange(WebSocketSession.java:374)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onAbnormalClose(IOState.java:218)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.onLocalClose(AbstractWebSocketConnection.java:163)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection$OnCloseLocalCallback.writeSuccess(AbstractWebSocketConnection.java:153)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.notifyCallbackSuccess(FrameFlusher.java:406)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeedEntries(FrameFlusher.java:241)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.succeeded(FrameFlusher.java:231)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:321)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:129)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.flush(FrameFlusher.java:152)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher$Flusher.process(FrameFlusher.java:216)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:246)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:208)
+	at org.eclipse.jetty.websocket.common.io.FrameFlusher.enqueue(FrameFlusher.java:381)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.outgoingFrame(AbstractWebSocketConnection.java:567)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onConnectionStateChange(AbstractWebSocketConnection.java:459)
+	at org.eclipse.jetty.websocket.common.io.IOState.notifyStateListeners(IOState.java:184)
+	at org.eclipse.jetty.websocket.common.io.IOState.onCloseRemote(IOState.java:351)
+	at org.eclipse.jetty.websocket.common.events.AbstractEventDriver.incomingFrame(AbstractEventDriver.java:120)
+	at org.eclipse.jetty.websocket.common.WebSocketSession.incomingFrame(WebSocketSession.java:309)
+	at org.eclipse.jetty.websocket.common.extensions.ExtensionStack.incomingFrame(ExtensionStack.java:214)
+	at org.eclipse.jetty.websocket.common.Parser.notifyFrame(Parser.java:220)
+	at org.eclipse.jetty.websocket.common.Parser.parse(Parser.java:258)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.readParse(AbstractWebSocketConnection.java:632)
+	at org.eclipse.jetty.websocket.common.io.AbstractWebSocketConnection.onFillable(AbstractWebSocketConnection.java:480)
+	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:544)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:555)
+	at java.lang.Thread.run(Thread.java:745)
+[INFO][2017-08-11 09:27:39] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285) main Root WebApplicationContext: initialization started 
+[INFO][2017-08-11 09:27:39] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing Root WebApplicationContext: startup date [Fri Aug 11 09:27:39 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 09:27:39] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-dao.xml] 
+[INFO][2017-08-11 09:27:39] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-service.xml] 
+[INFO][2017-08-11 09:27:39] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-jedis.xml] 
+[INFO][2017-08-11 09:27:40] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\db.properties] 
+[INFO][2017-08-11 09:27:40] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\log4j.properties] 
+[INFO][2017-08-11 09:27:40] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\resource.properties] 
+[INFO][2017-08-11 09:27:40] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 09:27:40] com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:722) main {dataSource-1} inited 
+[INFO][2017-08-11 09:27:41] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 11 09:27:39 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 09:27:42] org.springframework.scheduling.concurrent.ExecutorConfigurationSupport.initialize(ExecutorConfigurationSupport.java:165) main Initializing ExecutorService  'defaultSockJsTaskScheduler' 
+[INFO][2017-08-11 09:27:42] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/socketServer] onto handler of type [class org.springframework.web.socket.server.support.WebSocketHttpRequestHandler] 
+[INFO][2017-08-11 09:27:42] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/sockjs/**] onto handler of type [class org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler] 
+[INFO][2017-08-11 09:27:42] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325) main Root WebApplicationContext: initialization completed in 2982 ms 
+[INFO][2017-08-11 09:27:42] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:40) main -----开启轮训线程----- 
+[INFO][2017-08-11 09:27:42] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH0 
+[INFO][2017-08-11 09:27:42] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH1 
+[INFO][2017-08-11 09:27:42] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH2 
+[INFO][2017-08-11 09:27:42] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH3 
+[INFO][2017-08-11 09:27:42] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH4 
+[INFO][2017-08-11 09:27:42] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH5 
+[INFO][2017-08-11 09:27:42] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH6 
+[INFO][2017-08-11 09:27:42] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH7 
+[INFO][2017-08-11 09:27:42] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH8 
+[INFO][2017-08-11 09:27:42] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH9 
+[INFO][2017-08-11 09:27:42] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:55) main -----开启数据存储轮训线程----- 
+[INFO][2017-08-11 09:27:42] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:63) main -----开启发送轮训线程----- 
+[INFO][2017-08-11 09:27:42] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:485) main FrameworkServlet 'socket-jetty': initialization started 
+[INFO][2017-08-11 09:27:42] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 09:27:42 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 09:27:42] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring_mvc.xml] 
+[INFO][2017-08-11 09:27:42] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 09:27:42] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:217) main Mapped "{[/]}" onto public java.lang.String com.maizhong.auction.controller.IndexController.index() 
+[INFO][2017-08-11 09:27:43] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 09:27:42 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 09:27:43] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 09:27:42 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 09:27:43] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0' 
+[INFO][2017-08-11 09:27:43] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/favicon.ico] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1' 
+[INFO][2017-08-11 09:27:43] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:504) main FrameworkServlet 'socket-jetty': initialization completed in 370 ms 
+[INFO][2017-08-11 09:27:46] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:118) datasave INSET ORDER 车辆 ID 319 订单编号 150241486624895 
+[INFO][2017-08-11 09:27:46] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 319 拍卖状态 7 
+[INFO][2017-08-11 09:27:46] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 319 recordId 67 
+[INFO][2017-08-11 09:27:46] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 319  
+[INFO][2017-08-11 09:30:08] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:288) CH0 智能出价 {plus=0.05, price=6.5} 
+[INFO][2017-08-11 09:45:06] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:118) datasave INSET ORDER 车辆 ID 319 订单编号 150241590648036 
+[INFO][2017-08-11 09:45:06] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 319 拍卖状态 7 
+[INFO][2017-08-11 09:45:06] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 319 recordId 68 
+[INFO][2017-08-11 09:45:06] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 319  
+[INFO][2017-08-11 09:55:10] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285) main Root WebApplicationContext: initialization started 
+[INFO][2017-08-11 09:55:10] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing Root WebApplicationContext: startup date [Fri Aug 11 09:55:10 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 09:55:10] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-dao.xml] 
+[INFO][2017-08-11 09:55:10] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-service.xml] 
+[INFO][2017-08-11 09:55:10] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-jedis.xml] 
+[INFO][2017-08-11 09:55:10] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\db.properties] 
+[INFO][2017-08-11 09:55:10] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\log4j.properties] 
+[INFO][2017-08-11 09:55:10] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\resource.properties] 
+[INFO][2017-08-11 09:55:10] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 09:55:11] com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:722) main {dataSource-1} inited 
+[INFO][2017-08-11 09:55:12] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 11 09:55:10 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 09:55:12] org.springframework.scheduling.concurrent.ExecutorConfigurationSupport.initialize(ExecutorConfigurationSupport.java:165) main Initializing ExecutorService  'defaultSockJsTaskScheduler' 
+[INFO][2017-08-11 09:55:12] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/socketServer] onto handler of type [class org.springframework.web.socket.server.support.WebSocketHttpRequestHandler] 
+[INFO][2017-08-11 09:55:12] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/sockjs/**] onto handler of type [class org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler] 
+[INFO][2017-08-11 09:55:12] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325) main Root WebApplicationContext: initialization completed in 2606 ms 
+[INFO][2017-08-11 09:55:12] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:40) main -----开启轮训线程----- 
+[INFO][2017-08-11 09:55:12] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH0 
+[INFO][2017-08-11 09:55:12] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH1 
+[INFO][2017-08-11 09:55:12] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH2 
+[INFO][2017-08-11 09:55:12] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH3 
+[INFO][2017-08-11 09:55:12] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH4 
+[INFO][2017-08-11 09:55:12] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH5 
+[INFO][2017-08-11 09:55:12] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH6 
+[INFO][2017-08-11 09:55:12] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH7 
+[INFO][2017-08-11 09:55:12] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH8 
+[INFO][2017-08-11 09:55:12] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH9 
+[INFO][2017-08-11 09:55:12] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:55) main -----开启数据存储轮训线程----- 
+[INFO][2017-08-11 09:55:12] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:63) main -----开启发送轮训线程----- 
+[INFO][2017-08-11 09:55:12] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:485) main FrameworkServlet 'socket-jetty': initialization started 
+[INFO][2017-08-11 09:55:12] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 09:55:12 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 09:55:12] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring_mvc.xml] 
+[INFO][2017-08-11 09:55:12] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 09:55:12] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:217) main Mapped "{[/]}" onto public java.lang.String com.maizhong.auction.controller.IndexController.index() 
+[INFO][2017-08-11 09:55:12] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 09:55:12 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 09:55:12] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 09:55:12 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 09:55:12] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0' 
+[INFO][2017-08-11 09:55:12] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/favicon.ico] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1' 
+[INFO][2017-08-11 09:55:13] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:504) main FrameworkServlet 'socket-jetty': initialization completed in 301 ms 
+[INFO][2017-08-11 09:55:40] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285) main Root WebApplicationContext: initialization started 
+[INFO][2017-08-11 09:55:40] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing Root WebApplicationContext: startup date [Fri Aug 11 09:55:40 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 09:55:40] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-dao.xml] 
+[INFO][2017-08-11 09:55:40] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-service.xml] 
+[INFO][2017-08-11 09:55:40] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-jedis.xml] 
+[INFO][2017-08-11 09:55:41] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\db.properties] 
+[INFO][2017-08-11 09:55:41] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\log4j.properties] 
+[INFO][2017-08-11 09:55:41] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\resource.properties] 
+[INFO][2017-08-11 09:55:41] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 09:55:41] com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:722) main {dataSource-1} inited 
+[INFO][2017-08-11 09:55:43] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 11 09:55:40 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 09:55:44] org.springframework.scheduling.concurrent.ExecutorConfigurationSupport.initialize(ExecutorConfigurationSupport.java:165) main Initializing ExecutorService  'defaultSockJsTaskScheduler' 
+[INFO][2017-08-11 09:55:44] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/socketServer] onto handler of type [class org.springframework.web.socket.server.support.WebSocketHttpRequestHandler] 
+[INFO][2017-08-11 09:55:44] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/sockjs/**] onto handler of type [class org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler] 
+[INFO][2017-08-11 09:55:44] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325) main Root WebApplicationContext: initialization completed in 3995 ms 
+[INFO][2017-08-11 09:55:44] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:40) main -----开启轮训线程----- 
+[INFO][2017-08-11 09:55:44] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH0 
+[INFO][2017-08-11 09:55:44] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH1 
+[INFO][2017-08-11 09:55:44] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH2 
+[INFO][2017-08-11 09:55:44] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH3 
+[INFO][2017-08-11 09:55:44] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH4 
+[INFO][2017-08-11 09:55:44] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH5 
+[INFO][2017-08-11 09:55:44] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH6 
+[INFO][2017-08-11 09:55:44] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH7 
+[INFO][2017-08-11 09:55:44] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH8 
+[INFO][2017-08-11 09:55:44] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH9 
+[INFO][2017-08-11 09:55:44] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:55) main -----开启数据存储轮训线程----- 
+[INFO][2017-08-11 09:55:44] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:63) main -----开启发送轮训线程----- 
+[INFO][2017-08-11 09:55:44] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:485) main FrameworkServlet 'socket-jetty': initialization started 
+[INFO][2017-08-11 09:55:44] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 09:55:44 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 09:55:44] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring_mvc.xml] 
+[INFO][2017-08-11 09:55:44] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 09:55:44] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:217) main Mapped "{[/]}" onto public java.lang.String com.maizhong.auction.controller.IndexController.index() 
+[INFO][2017-08-11 09:55:44] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 09:55:44 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 09:55:44] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 09:55:44 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 09:55:44] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0' 
+[INFO][2017-08-11 09:55:44] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/favicon.ico] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1' 
+[INFO][2017-08-11 09:55:44] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:504) main FrameworkServlet 'socket-jetty': initialization completed in 549 ms 

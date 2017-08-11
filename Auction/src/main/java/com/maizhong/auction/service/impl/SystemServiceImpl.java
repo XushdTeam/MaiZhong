@@ -1548,9 +1548,10 @@ public class SystemServiceImpl implements SystemService {
                 case 3: dto.setZytjfs("记忆"); break;
                 default: dto.setZytjfs("不详");
             }
-            //座椅功能1电加热2通风3按摩
+            //座椅功能1电加热2通风3按摩0无
             int zygn = ckPz.getZygn();
             switch (zygn) {
+                case 0: dto.setZygn("无"); break;
                 case 1: dto.setZygn("电加热"); break;
                 case 2: dto.setZygn("通风"); break;
                 case 3: dto.setZygn("按摩"); break;

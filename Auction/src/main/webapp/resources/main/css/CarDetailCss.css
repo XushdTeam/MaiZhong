@@ -499,7 +499,7 @@ a {
 }
 
 .car-info-art .one, .car-info-art .two, .car-info-art .three {
-    background: url(/images/cardetail/artBg.png) left top no-repeat
+    background: url(/resources/main/img/artBg.png) left top no-repeat
 }
 
 .car-info-art .two {
@@ -1158,6 +1158,9 @@ i {
 
 .ccheng {
     color: #f60
+}
+.clv {
+    color: #13CE66;
 }
 
 .cblack {

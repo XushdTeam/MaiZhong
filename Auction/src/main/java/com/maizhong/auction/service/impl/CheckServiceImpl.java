@@ -282,7 +282,7 @@ public class CheckServiceImpl implements CheckService {
             //更新
             int i = ckXszMapper.updateByPrimaryKeySelective(xsz);
             if (i > 0) {
-                return JsonResult.OK();
+                return JsonResult.OK(xsz.getId());
             }
         }
         return JsonResult.Error(OperateEnum.SERVER_ERROR);
@@ -302,7 +302,7 @@ public class CheckServiceImpl implements CheckService {
             //更新
             int i = ckDjzMapper.updateByPrimaryKeySelective(djz);
             if (i > 0) {
-                return JsonResult.OK();
+                return JsonResult.OK(djz.getId());
             }
         }
         return JsonResult.Error(OperateEnum.SERVER_ERROR);
@@ -322,7 +322,7 @@ public class CheckServiceImpl implements CheckService {
             //修改
             int i = ckQtzMapper.updateByPrimaryKeySelective(qtz);
             if (i > 0) {
-                return JsonResult.OK();
+                return JsonResult.OK(qtz.getId());
             }
         }
         return JsonResult.Error(OperateEnum.SERVER_ERROR);
@@ -340,7 +340,7 @@ public class CheckServiceImpl implements CheckService {
         } else {
             int i = ckCzinfoMapper.updateByPrimaryKeySelective(czinfo);
             if (i > 0) {
-                return JsonResult.OK();
+                return JsonResult.OK(czinfo.getId());
             }
         }
         return JsonResult.Error(OperateEnum.SERVER_ERROR);
@@ -400,7 +400,7 @@ public class CheckServiceImpl implements CheckService {
         } else {
             int i = ckBaseimgMapper.updateByPrimaryKeySelective(ckBaseimg);
             if (i > 0) {
-                return JsonResult.OK();
+                return JsonResult.OK(ckBaseimg.getId());
             }
         }
         return JsonResult.Error(OperateEnum.SERVER_ERROR);
@@ -458,6 +458,47 @@ public class CheckServiceImpl implements CheckService {
         CkBaseimgExample.Criteria ckBaseimgExampleCriteria = ckBaseimgExample.createCriteria();
         ckBaseimgExampleCriteria.andCarIdEqualTo(carId);
         ckBaseimgMapper.deleteByExample(ckBaseimgExample);
+        //ck_wgqx
+        CkCkwgqxExample ckCkwgqxExample = new CkCkwgqxExample();
+        ckCkwgqxExample.createCriteria().andCarIdEqualTo(carId);
+        ckCkwgqxMapper.deleteByExample(ckCkwgqxExample);
+        //ck_nsqx
+        CkCknsqxExample cknsqxExample = new CkCknsqxExample();
+        cknsqxExample.createCriteria().andCarIdEqualTo(carId);
+        ckCknsqxMapper.deleteByExample(cknsqxExample);
+        //ck_sg
+        CkCksgExample ckCksgExample = new CkCksgExample();
+        ckCksgExample.createCriteria().andCarIdEqualTo(carId);
+        ckCksgMapper.deleteByExample(ckCksgExample);
+        //ck_dl
+        CkDlExample dlExample = new CkDlExample();
+        dlExample.createCriteria().andCarIdEqualTo(carId);
+        ckDlMapper.deleteByExample(dlExample);
+        //ck_pz
+        CkPzExample pzExample = new CkPzExample();
+        pzExample.createCriteria().andCarIdEqualTo(carId);
+        ckPzMapper.deleteByExample(pzExample);
+        //ck_ps
+        CkCkpsExample ckCkpsExample = new CkCkpsExample();
+        ckCkpsExample.createCriteria().andCarIdEqualTo(carId);
+        ckCkpsMapper.deleteByExample(ckCkpsExample);
+        //ck_hs
+        CkCkhsExample ckCkhsExample = new CkCkhsExample();
+        ckCkhsExample.createCriteria().andCarIdEqualTo(carId);
+        ckCkhsMapper.deleteByExample(ckCkhsExample);
+        //ck_other
+        CkOtherExample otherExample = new CkOtherExample();
+        otherExample.createCriteria().andCarIdEqualTo(carId);
+        ckOtherMapper.deleteByExample(otherExample);
+        //ck_verify
+        CkVerifyExample verifyExample = new CkVerifyExample();
+        verifyExample.createCriteria().andCarIdEqualTo(carId);
+        ckVerifyMapper.deleteByExample(verifyExample);
+        //ck_carmodel
+        CkCarmodelExample carmodelExample = new CkCarmodelExample();
+        carmodelExample.createCriteria().andCarIdEqualTo(carId);
+        carmodelMapper.deleteByExample(carmodelExample);
+
 
         if(i>0)return JsonResult.OK();
         return JsonResult.Error(OperateEnum.SERVER_ERROR);
@@ -482,7 +523,7 @@ public class CheckServiceImpl implements CheckService {
         } else {
             int i = ckPzMapper.updateByPrimaryKeySelective(ckPz);
             if (i > 0) {
-                return JsonResult.OK();
+                return JsonResult.OK(ckPz.getId());
             }
         }
         return JsonResult.Error(OperateEnum.SERVER_ERROR);
@@ -506,7 +547,7 @@ public class CheckServiceImpl implements CheckService {
         } else {
             int i = ckDlMapper.updateByPrimaryKeySelective(ckDl);
             if (i > 0) {
-                return JsonResult.OK();
+                return JsonResult.OK(ckDl.getId());
             }
         }
         return JsonResult.Error(OperateEnum.SERVER_ERROR);
@@ -717,7 +758,7 @@ public class CheckServiceImpl implements CheckService {
                 carbase.setId(verify.getCarId());
                 carbase.setStartPrice(verify.getStartPrice());
                 ckCarbaseMapper.updateByPrimaryKeySelective(carbase);
-                return JsonResult.OK();
+                return JsonResult.OK(verify.getId());
             }
         }
         return JsonResult.Error(OperateEnum.SERVER_ERROR);
@@ -736,7 +777,7 @@ public class CheckServiceImpl implements CheckService {
         }else{
             int i = ckOtherMapper.updateByPrimaryKeySelective(other);
             if(i>0){
-                return JsonResult.OK();
+                return JsonResult.OK(other.getId());
             }
         }
         return JsonResult.Error(OperateEnum.SERVER_ERROR);
@@ -769,7 +810,7 @@ public class CheckServiceImpl implements CheckService {
                     ckCarbase.setModelName(carmodel.getModelName());
                     ckCarbaseMapper.updateByPrimaryKeySelective(ckCarbase);
                 }
-                return JsonResult.OK();
+                return JsonResult.OK(carmodel.getId());
             }
         }
         return JsonResult.Error(OperateEnum.SERVER_ERROR);

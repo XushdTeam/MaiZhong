@@ -114,6 +114,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.auction.pojo.PsUser">
+    <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id"> SELECT LAST_INSERT_ID() AS id</selectKey>
     insert into ps_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

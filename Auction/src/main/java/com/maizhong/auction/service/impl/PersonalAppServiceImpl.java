@@ -111,6 +111,7 @@ public class PersonalAppServiceImpl extends BaseServiceImpl implements PersonalA
                 //登录
                 user = psUsers.get(0);
             }
+            user.setToken(token);
             jedisClient.hset("APP_PERSONAL",token, JsonUtils.objectToJson(user));
             jedisClient.del("SMS:" + phone);
             return JsonResult.OK(user);

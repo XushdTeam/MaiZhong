@@ -822,6 +822,7 @@ public class AuctionServiceImpl implements AuctionService {
                 object.put("nowTime",TimeUtils.getCurrentTime());
                 object.put("lastUserId",carAcutionDTO.getLastUserId());
                 object.put("auction",true);
+                object.put("chKey",chKey);
                 object.put("auctionId",carAcutionDTO.getId());
 
                 if(acUser!=null){
@@ -834,11 +835,20 @@ public class AuctionServiceImpl implements AuctionService {
                     }else{
                         object.put("ismyplus",false);
                     }
+
                     AcCarLikeExample ex = new AcCarLikeExample();
                     AcCarLikeExample.Criteria cr = ex.createCriteria();
-                    cr.andCarIdEqualTo(carId).andUserIdEqualTo(acUser.getId());
-                    l = acCarLikeMapper.countByExample(ex);
-                    if(l>0){
+                    cr.andCarIdEqualTo(carId);
+                    List<AcCarLikeKey> acCarLikeKeys = acCarLikeMapper.selectByExample(ex);
+                    object.put("likeCount",acCarLikeKeys.size());
+                    int ismylike = 0;
+                    for (AcCarLikeKey acCarLikeKey : acCarLikeKeys) {
+                        if(acCarLikeKey.getUserId()==acUser.getId()){
+                            ismylike = 1;
+                            break;
+                        }
+                    }
+                    if(ismylike>0){
                         object.put("like",true);
                     }else{
                         object.put("like",false);
@@ -853,6 +863,33 @@ public class AuctionServiceImpl implements AuctionService {
                         object.put("auto",false);
                     }
 
+                    //出价列表 根据保证金的金额
+                    JSONArray list = new JSONArray();
+                    BigDecimal bzj = new BigDecimal(acUser.getBzj());
+                    int level = 5;
+                    if(bzj.compareTo(new BigDecimal(5000))>=0){
+                        level = 0;
+                    }else if(bzj.compareTo(new BigDecimal(3000))>=0 && bzj.compareTo(new BigDecimal(5000))<0){
+                        level = 1;
+                    }else if(bzj.compareTo(new BigDecimal(200))>=0 && bzj.compareTo(new BigDecimal(3000))<0){
+                        level = 2;
+                    }
+
+                    int[] ps = {200,300,500,1000,2000};
+                    for (int i = 0; i < ps.length; i++) {
+                        JSONObject obj = new JSONObject();
+                        obj.put("p",ps[i]);
+                        if(i >= level){
+                            obj.put("c",1);
+                        }else{
+                            obj.put("c",0);
+                        }
+                        list.add(obj);
+                    }
+                    object.put("priceList",list);
+                    if(level==0){
+                        object.put("isReal",0);
+                    }
                 }else{
                     object.put("like",false);
                     object.put("ismyplus",false);
@@ -887,12 +924,22 @@ public class AuctionServiceImpl implements AuctionService {
         }
         AcCarLikeExample ex = new AcCarLikeExample();
         AcCarLikeExample.Criteria cr = ex.createCriteria();
-        cr.andCarIdEqualTo(carId).andUserIdEqualTo(acUser.getId());
-        long l = acCarLikeMapper.countByExample(ex);
-        if(l>0){
-            object.put("like",true);
-        }else{
-            object.put("like",false);
+        cr.andCarIdEqualTo(carId);
+        List<AcCarLikeKey> acCarLikeKeys = acCarLikeMapper.selectByExample(ex);
+        object.put("likeCount",acCarLikeKeys.size());
+        if(acUser!=null){
+            int ismylike = 0;
+            for (AcCarLikeKey acCarLikeKey : acCarLikeKeys) {
+                if(acCarLikeKey.getUserId()==acUser.getId()){
+                    ismylike = 1;
+                    break;
+                }
+            }
+            if(ismylike>0){
+                object.put("like",true);
+            }else{
+                object.put("like",false);
+            }
         }
         return JsonResult.OK(object);
 

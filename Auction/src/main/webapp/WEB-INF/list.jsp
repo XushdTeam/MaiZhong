@@ -94,8 +94,8 @@
                         <em class="">(<i>{{item.likeCounts}}</i>)</em>
                     </a>
                 </div>
-                <div class="doSt">
 
+                <div class="doSt">
                 </div>
                 <div class="clear"></div>
             </div>

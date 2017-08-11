@@ -99,10 +99,10 @@
 
                                var date = new Date(),token = d.data;
                                if(VM.form.checked){
-                                   $.cookie('token', token, { expires: 7, path: '/' });
+                                   $.cookie('m_token', token, { expires: 7, path: '/' });
                                }else{
                                    date.setTime(date.getTime()+60*30*1000);//30min
-                                   $.cookie('token', token, { expires: date, path: '/' });
+                                   $.cookie('m_token', token, { expires: date, path: '/' });
                                }
                                setTimeout(function(){
                                    window.location.href = "/manage/";

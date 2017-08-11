@@ -1,6 +1,7 @@
 package com.maizhong.auction.service;
 
 import com.maizhong.auction.dto.CarDetailDto;
+import com.maizhong.auction.dto.CarInfoDto;
 import com.maizhong.auction.pojo.AcUser;
 import com.maizhong.common.result.JsonResult;
 
@@ -29,4 +30,10 @@ public interface IndexService {
     JsonResult getTopCar(String token);
 
     CarDetailDto getCarDetail(long carId);
+
+    CarInfoDto getCarInfo(long carId);
+
+    JsonResult getCarNow(long carId, String token);
+
+    JsonResult getBidRecordList(long auctionId);
 }

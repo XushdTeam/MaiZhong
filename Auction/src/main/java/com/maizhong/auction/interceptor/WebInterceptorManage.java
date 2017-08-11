@@ -26,7 +26,7 @@ public class WebInterceptorManage extends HandlerInterceptorAdapter {
         String token = null;
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
-            if(cookie.getName().equals("token")){
+            if(cookie.getName().equals("m_token")){
                 token = cookie.getValue();
             }
         }
