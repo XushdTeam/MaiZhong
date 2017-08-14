@@ -17,7 +17,7 @@
 <%@ include file="nav.jsp" %>
 
 <div class="w1200 mauto" id="app" v-clock>
-    <div class="place mt20"><a href=" ">个人中心</a> &gt;&gt;&nbsp;<span class="c9" id="YeQianSan">历史竞价</span></div>
+    <div class="place mt20"><a href=" ">个人中心</a> &gt;&gt;&nbsp;<span class="c9" id="YeQianSan">${title}</span></div>
     <div class="mt25 clearfix">
         <div class="fl w130 bgf8">
             <div class="pl30 pb15 pt15">
@@ -32,16 +32,16 @@
                 <ul class="fs12 newsubnav">
                     <li id="Account"><span @click="personal" style="cursor: hand">基本信息</span></li>
                     <li id="EditPwd"><span @click="changePassword" style="cursor: hand">修改密码</span></li>
-                    <li id="Message"><span @click="yijian" style="cursor: hand">投诉建议</span></li>
+                 <%--   <li id="Message"><span @click="yijian" style="cursor: hand">投诉建议</span></li>--%>
                 </ul>
             </div>
         </div>
 
         <div class="fr w1060">
             <div class="bbs1b h41 pr">
-                <span class="fs16 c3 righttit">历史竞价</span>
-                <span class="icon_tips">
-                    <img src="main/tishi.jpg"></span>
+                <span class="fs16 c3 righttit">${title}</span>
+                <%--<span class="icon_tips">
+                    <img src="main/tishi.jpg"></span>--%>
                 <span class="tips_box">显示出用户对近6个月内所参与过报价的车辆列表（不包括竞拍中的交易车辆）</span>
 
             </div>

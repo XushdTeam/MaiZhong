@@ -55,6 +55,7 @@ public class PersonalController {
                 model.addAttribute("username",user.getName());
                 model.addAttribute("userInfo",user);
                 model.addAttribute("from",1);
+                model.addAttribute("title","成交确认");
             }
             return "mylist";
         }else{
@@ -80,6 +81,7 @@ public class PersonalController {
                 model.addAttribute("username",user.getName());
                 model.addAttribute("userInfo",user);
                 model.addAttribute("from",2);
+                model.addAttribute("title","订单车辆");
             }
             return "mylist";
         }else{
@@ -102,6 +104,7 @@ public class PersonalController {
                 model.addAttribute("username",user.getName());
                 model.addAttribute("userInfo",user);
                 model.addAttribute("from",3);
+                model.addAttribute("title","历史订单");
             }
             return "mylist";
         }else{
@@ -123,6 +126,7 @@ public class PersonalController {
                 model.addAttribute("username",user.getName());
                 model.addAttribute("userInfo",user);
                 model.addAttribute("from",4);
+                model.addAttribute("title","关注车辆");
             }
             return "mylist";
         }else{
