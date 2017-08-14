@@ -50,13 +50,56 @@
             <div class="lists">
                 <a href="" class="shadow-car">
                     <p class="pic">
-                        <img src="/resources/main/img/5.jpg" alt="大众 速腾 2007年1.6L手动">
+                        <img src="/resources/main/img/d.jpg" alt="大众 速腾 2007年1.6L手动">
                     </p>
-                    <h3 class="title">大众&nbsp;速腾&nbsp;2007年1.6L手动</h3>
-                    <p class="option">9年车龄/7.8万公里/北京</p>
+                    <h3 class="title">2013款 阁瑞斯MPV 2.0L...</h3>
+                    <p class="option">13年上牌/9万公里/北京</p>
+                    <p class="row">
+                        <span class="date">2017.08.02成交 </span>
+                        <strong class="price">5.20万</strong>
+                    </p>
+                </a>
+            </div>
+
+
+            <div class="lists">
+                <a href="" class="shadow-car">
+                    <p class="pic">
+                        <img src="/resources/main/img/d1.jpg" alt="大众 速腾 2007年1.6L手动">
+                    </p>
+                    <h3 class="title">2006款 &nbsp; 蒙迪欧&nbsp;  2.5L ...</h3>
+                    <p class="option">07年上牌/10万公里/北京</p>
                     <p class="row">
                         <span class="date">2017.07.22成交 </span>
                         <strong class="price">3.20万</strong>
+                    </p>
+                </a>
+            </div>
+
+            <div class="lists">
+                <a href="" class="shadow-car">
+                    <p class="pic">
+                        <img src="/resources/main/img/d3.jpg" alt="大众 速腾 2007年1.6L手动">
+                    </p>
+                    <h3 class="title">2007款&nbsp; 景程 SX 豪华版 MT</h3>
+                    <p class="option">07年上牌/9万公里/北京</p>
+                    <p class="row">
+                        <span class="date">2017.07.28成交 </span>
+                        <strong class="price">2.0万</strong>
+                    </p>
+                </a>
+            </div>
+
+            <div class="lists">
+                <a href="" class="shadow-car">
+                    <p class="pic">
+                        <img src="/resources/main/img/d4.jpg" alt="大众 速腾 2007年1.6L手动">
+                    </p>
+                    <h3 class="title">2013款 瑞风S5 2.0T 手动 尊享版</h3>
+                    <p class="option">13年上牌/1万公里/北京</p>
+                    <p class="row">
+                        <span class="date">2017.08.10成交 </span>
+                        <strong class="price">6.0万</strong>
                     </p>
                 </a>
             </div>

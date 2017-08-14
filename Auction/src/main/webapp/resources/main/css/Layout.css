@@ -776,7 +776,7 @@ font-size:12px}
 .main-conter>dl dd{ font-size: 18px; color: #333; line-height: 60px }
 .main-conter>dl p{ width: 65%; margin:0 auto; line-height: 25px; font-size: 14px }
 .jilu-con{ background: #f5f5f5 }
-.jilu{ width: 1300px; margin:0px auto; padding: 50px 0; overflow: hidden;}
+.jilu{ width: 1260px; margin:0px auto; padding: 50px 0; overflow: hidden;}
 .jilu h2{ text-align:center; line-height: 95px; font-size: 36px;color: #333 }
 .jilu .lists a{ color: #666 }
 .jilu .lists { background: #fff; width: 280px;overflow: hidden;padding:  0 0 10px 0; float: left; margin:50px 15px;box-shadow: 0 0 4px 0 rgba(0,0,0,0.07), 0 0 12px 0 rgba(0,0,0,0.07);}
@@ -791,7 +791,7 @@ font-size:12px}
 .new{ width: 1200px; margin:30px auto; overflow: hidden;}
 .new h2{ text-align:center; line-height: 95px; font-size: 36px;color: #333  }
 .new p{ width: 280px; height: 200px; float: left;overflow: hidden; padding:10px 20px;
- background:#999; color: #fff; margin-left: 70px; margin-top:30px; margin-bottom:60px; font-size: 14px;}
+ background:#999; color: #fff; margin-left: 61px; margin-top:30px; margin-bottom:60px; font-size: 14px;}
 .new p span{ display:block; font-size: 18px; color: #fff; text-align: center; line-height: 95px }
 .new p.p1{ background: #1a91f7 }
 .new p.p2{ background: #f79400 }
