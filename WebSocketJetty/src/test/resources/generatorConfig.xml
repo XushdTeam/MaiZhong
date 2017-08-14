@@ -47,7 +47,7 @@
         <!-- 指定数据库表 -->
 
         <!--<table schema="" tableName="tp_history"/>-->
-        <table schema="" tableName="ac_bid_record"/>
+        <table schema="" tableName="ac_freeze"/>
 
 
 

@@ -4,10 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.maizhong.auction.dao.JedisClient;
-import com.maizhong.auction.dto.BidRecordDto;
-import com.maizhong.auction.dto.CarDetailDto;
-import com.maizhong.auction.dto.CarInfoDto;
-import com.maizhong.auction.dto.MenuDto;
+import com.maizhong.auction.dto.*;
 import com.maizhong.auction.mapper.*;
 import com.maizhong.auction.pojo.*;
 import com.maizhong.auction.service.AuctionService;
@@ -16,15 +13,13 @@ import com.maizhong.common.enums.AuthEnum;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.enums.SMSTemplateEnum;
 import com.maizhong.common.result.JsonResult;
-import com.maizhong.common.utils.AliSMSUtils;
-import com.maizhong.common.utils.IDUtils;
-import com.maizhong.common.utils.JsonUtils;
-import com.maizhong.common.utils.TimeUtils;
+import com.maizhong.common.utils.*;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +53,12 @@ public class IndexServiceImpl implements IndexService {
 
     @Autowired
     private AcBidRecordMapper acBidRecordMapper;
+
+    @Autowired
+    private AcAuctionRecordMapper acAuctionRecordMapper;
+
+    @Autowired
+    private AcFreezeMapper acFreezeMapper;
 
 
     /**
@@ -363,18 +364,130 @@ public class IndexServiceImpl implements IndexService {
         return JsonUtils.jsonToPojo(car_info,CarInfoDto.class);
     }
 
+    /**
+     * 获取当前拍卖车辆信息
+     * @param auctionId
+     * @param token
+     * @return
+     */
     @Override
-    public JsonResult getCarNow(long carId, String token) {
+    public JsonResult getCarNow(long auctionId, String token) {
 
-        String car_info = jedisClient.hget("CAR_INFO", String.valueOf(carId));
+        AcUser acUser = this.getUserInfo(token);
 
-        if(StringUtils.isBlank(car_info))return JsonResult.Error("carId is error");
+        AuctionNow auctionNow = new AuctionNow();
 
-        CarInfoDto infoDto = JsonUtils.jsonToPojo(car_info, CarInfoDto.class);
+        auctionNow.setAuctionId(auctionId);
 
-        String chKey = infoDto.getChKey();
+        AcAuctionRecord record = acAuctionRecordMapper.selectByPrimaryKey(auctionId);
+        Long carId = record.getCarId();
+        String chKey = record.getChKey();
 
-        return auctionService.getCarNow(carId,chKey,token);
+        auctionNow.setChKey(chKey);
+        auctionNow.setAuction(0);
+
+        auctionNow.setCurPrice(record.getPrice());
+        auctionNow.setLastUserId(record.getUserId());
+
+        if(record.getStatus()==0){
+            //拍卖进行中
+            String redieCH = jedisClient.get("CHANNEL:" + chKey);
+            if((StringUtils.isNotBlank(redieCH)&&!StringUtils.equals("over",redieCH))){
+
+                CarAcutionDTO carAcutionDTO = JsonUtils.jsonToPojo(redieCH, CarAcutionDTO.class);
+
+                if(carAcutionDTO.getId()==auctionId){
+
+                    auctionNow.setAuction(1);
+                    auctionNow.setCurPrice(carAcutionDTO.getNowPrice());
+                    auctionNow.setOverTime(carAcutionDTO.getOverTime());
+                    auctionNow.setNowTime(TimeUtils.getCurrentTime());
+                    auctionNow.setLastUserId(carAcutionDTO.getLastUserId());
+                }
+            }
+        }
+
+        //出价记录
+        auctionNow.setMyPlus(0);
+
+        AcBidRecordExample example = new AcBidRecordExample();
+        example.createCriteria().andAuctionIdEqualTo(auctionId);
+        example.setOrderByClause("id desc");
+        List<AcBidRecord> acBidRecords = acBidRecordMapper.selectByExample(example);
+        List<BidDto> bidList = new ArrayList<>();
+        for (AcBidRecord acBidRecord : acBidRecords) {
+            BidDto dto = new BidDto();
+            dto.setPrice(acBidRecord.getPrice());
+            dto.setTime(TimeUtils.getFormatDateTime3(acBidRecord.getCreateTime()).substring(10,19));
+            dto.setName(acBidRecord.getBussinessName());
+            dto.setUserId(acBidRecord.getUserId());
+            bidList.add(dto);
+            //判断我是否出价
+            if(acUser!=null&&acUser.getId()==acBidRecord.getUserId()&&auctionNow.getMyPlus()==0){
+                auctionNow.setMyPlus(1);
+            }
+        }
+        auctionNow.setBidList(bidList);
+
+        //我是否最高价
+        auctionNow.setMyTop(0);
+        if(auctionNow.getMyPlus()==1){
+            if(auctionNow.getLastUserId()==acUser.getId()){
+                auctionNow.setMyTop(1);
+            }
+        }
+
+        //关注
+        AcCarLikeExample ex = new AcCarLikeExample();
+        ex.createCriteria().andCarIdEqualTo(carId);
+        List<AcCarLikeKey> acCarLikeKeys = acCarLikeMapper.selectByExample(ex);
+        auctionNow.setLikeCount(acCarLikeKeys.size());
+        auctionNow.setMyLike(0);
+        for (AcCarLikeKey acCarLikeKey : acCarLikeKeys) {
+            if(acCarLikeKey.getUserId()==acUser.getId()){
+                auctionNow.setMyLike(1);
+                break;
+            }
+        }
+
+        //出价列表 根据保证金的金额
+        List<PlusDto> plusList = new ArrayList<>();
+        if(acUser!=null && !StringUtils.equals(acUser.getBzj(),"0")){
+            BigDecimal bzj = new BigDecimal(acUser.getBzj());
+            int level = 5;
+            if(bzj.compareTo(new BigDecimal(5000))>=0){
+                level = 0;
+            }else if(bzj.compareTo(new BigDecimal(3000))>=0 && bzj.compareTo(new BigDecimal(5000))<0){
+                level = 1;
+            }else if(bzj.compareTo(new BigDecimal(200))>=0 && bzj.compareTo(new BigDecimal(3000))<0){
+                level = 2;
+            }
+            int[] ps = {200,300,500,1000,2000};
+            for (int i = 0; i < ps.length; i++) {
+                PlusDto dto = new PlusDto();
+                dto.setPlus(ps[i]);
+                if(i >= level){
+                    dto.setUsable(1);
+                }else{
+                    dto.setUsable(0);
+                }
+                plusList.add(dto);
+            }
+        }
+        auctionNow.setPlusList(plusList);
+
+        // 智能
+        auctionNow.setMyAuto(0);
+        auctionNow.setAutoPrice("0");
+        if(acUser!=null){
+            String auto = jedisClient.hget("AUTOPRICE_CAR:" + auctionId, String.valueOf(acUser.getId()));
+            if(StringUtils.isNotBlank(auto)){
+                auctionNow.setMyAuto(1);
+                auctionNow.setAutoPrice(auto);
+            }
+        }
+
+        return JsonResult.OK(auctionNow);
 
     }
 
@@ -402,6 +515,60 @@ public class IndexServiceImpl implements IndexService {
             list.add(obj);
         }
         return JsonResult.OK(list);
+    }
+
+    /**
+     * 智能报价
+     * @param auctionId
+     * @param price
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult autoPrice(long auctionId, long price, String token) {
+
+        AcUser acUser = this.getUserInfo(token);
+
+        if(acUser==null)return JsonResult.Error("未登录");
+        Boolean isPlused = false;
+        //保证金扣除冻结是否大于2000 大于可以加价 否则不可以
+        BigDecimal bzj = new BigDecimal(acUser.getBzj());
+        if(bzj.compareTo(new BigDecimal(0))==0){
+            return JsonResult.Error("该帐号未缴纳保证金!");
+        }else if(bzj.compareTo(new BigDecimal(2000))<0){
+            return JsonResult.Error("该帐号保证金不足2000");
+        }else{
+            AcFreezeExample example = new AcFreezeExample();
+            example.createCriteria().andUserIdEqualTo(acUser.getId());
+            List<AcFreeze> acFreezes = acFreezeMapper.selectByExample(example);
+            for (AcFreeze acFreeze : acFreezes) {
+                if (acFreeze.getAuctionId()==auctionId){
+                    isPlused = true;break;
+                }
+            }
+            if(!isPlused){
+                int size = acFreezes.size();
+                BigDecimal freezePrice = new BigDecimal(2000).multiply(new BigDecimal(size));
+                BigDecimal subtract = bzj.subtract(freezePrice);
+                if(subtract.compareTo(new BigDecimal(2000))<0){
+                    return JsonResult.Error("该帐号保证金余额不足2000");
+                }
+            }
+        }
+
+        String key = "AUTOPRICE_QUEUE:"+auctionId;
+
+        AutoPrice dto = new AutoPrice();
+        dto.setAuctionId(auctionId);
+        dto.setPrice(price);
+        dto.setUserId(acUser.getId());
+        dto.setPhone(acUser.getPhone());
+        jedisClient.lpush(key.getBytes(), ObjectUtil.serializer(dto));
+
+        jedisClient.hset("AUTOPRICE_CAR:" + auctionId, String.valueOf(acUser.getId()),price+"");
+
+        return JsonResult.OK();
+
     }
 
 }

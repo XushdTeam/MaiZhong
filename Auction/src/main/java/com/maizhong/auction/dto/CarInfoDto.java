@@ -6,6 +6,8 @@ package com.maizhong.auction.dto;
  */
 public class CarInfoDto {
 
+    //拍卖ID
+    private long auctionId;
     private long carId;
     private String modelName;
     private String zq45;
@@ -42,6 +44,14 @@ public class CarInfoDto {
 
     //我是否关注
     private boolean imMyLike;
+
+    public long getAuctionId() {
+        return auctionId;
+    }
+
+    public void setAuctionId(long auctionId) {
+        this.auctionId = auctionId;
+    }
 
     public boolean isImMyLike() {
         return imMyLike;

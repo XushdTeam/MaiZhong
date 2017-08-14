@@ -75,7 +75,7 @@ var vm = new Vue({
         },detail(item){
             if(item.auction){
                 //正在拍
-                window.location.href = '/list/detail/'+item.carId;
+                window.location.href = '/list/detail/'+item.auctionId+'/'+item.carId;
             }else{
                 //未拍
                 window.location.href = '/list/detail/'+item.carId;

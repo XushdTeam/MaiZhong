@@ -47,7 +47,7 @@
                         <p class="togphoto" style="display: none;">更换头像</p>
                     </dt>
                     <dd>
-                        <p class="name fs16 c3 mt10">268vhxqf</p>
+                        <p class="name fs16 c3 mt10">${userInfo.name}</p>
                         <p class="mt5">
                             <img src="resources/main/img/VP.gif" alt="普通商户" class="vm"><span class="vm ml5 fs12 c3">普通商户</span>
                         </p>

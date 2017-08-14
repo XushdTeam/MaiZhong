@@ -5,7 +5,7 @@ package com.maizhong.auction.dto;
  */
 public class AutoPrice {
 
-    private long carId;
+    private long auctionId;
     private long userId;
     private long price;
     private long phone;
@@ -21,12 +21,12 @@ public class AutoPrice {
     public AutoPrice() {
     }
 
-    public long getCarId() {
-        return carId;
+    public long getAuctionId() {
+        return auctionId;
     }
 
-    public void setCarId(long carId) {
-        this.carId = carId;
+    public void setAuctionId(long auctionId) {
+        this.auctionId = auctionId;
     }
 
     public long getUserId() {

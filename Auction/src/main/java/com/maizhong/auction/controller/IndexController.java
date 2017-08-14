@@ -142,7 +142,18 @@ public class IndexController {
      * @return
      */
     @RequestMapping(value = "/personal")
-    public String personal(Model model){
+    public String personal(@CookieValue(value = "token",required = false) String token,Model model){
+        if(StringUtils.isBlank(token)){
+            return "redirect:/user/login";
+        }
+        AcUser user =  indexService.getUserInfo(token);
+        if(user!=null){
+            model.addAttribute("username",user.getName());
+            model.addAttribute("userInfo",user);
+        }else{
+            return "redirect:/user/login";
+        }
+
         model.addAttribute("menu","/personal");
         return "personal";
     }
@@ -368,8 +379,10 @@ public class IndexController {
      * 车辆详情
      * @return
      */
-    @RequestMapping(value = "/list/detail/{carId}")
-    public String carDetail(@CookieValue(value = "token",required = false) String token,@PathVariable long carId,Model model){
+    @RequestMapping(value = "/list/detail/{auctionId}/{carId}")
+    public String carDetail(@CookieValue(value = "token",required = false) String token,
+                            @PathVariable long auctionId,
+                            @PathVariable long carId, Model model){
 
         if(StringUtils.isNotBlank(token)){
             AcUser user =  indexService.getUserInfo(token);
@@ -380,10 +393,9 @@ public class IndexController {
         }
 
         CarDetailDto dto = indexService.getCarDetail(carId);
-
-
         model.addAttribute("title",dto.getModelName());
         model.addAttribute("carInfo",dto);
+        model.addAttribute("auctionId",auctionId);
 
         return "detail";
     }
@@ -396,16 +408,16 @@ public class IndexController {
 
     /**
      * 获取当前车辆拍卖状态
-     * @param carId
+     * @param auctionId
      * @param request
      * @return
      */
-    @RequestMapping(value = "/auction/car/now/{carId}")
+    @RequestMapping(value = "/auction/car/now/{auctionId}")
     @ResponseBody
-    public JsonResult getCarNow(@PathVariable long carId,HttpServletRequest request){
+    public JsonResult getCarNow(@PathVariable long auctionId,HttpServletRequest request){
         String token = (String) request.getAttribute("token");
 
-        JsonResult result = indexService.getCarNow(carId,token);
+        JsonResult result = indexService.getCarNow(auctionId,token);
         return result;
     }
 
@@ -417,33 +429,34 @@ public class IndexController {
      * @param price
      * @return
      */
-    @RequestMapping(value = "/auction/addPrice/{ch}/{carId}")
+    @RequestMapping(value = "/auction/addPrice/{ch}/{carId}/{auctionId}")
     @ResponseBody
     public JsonResult addPrice(@PathVariable String ch,
                                @PathVariable long carId,
+                               @PathVariable long auctionId,
                                String plus,
                                String price,
                                HttpServletRequest request){
         String token = (String) request.getAttribute("token");
-        JsonResult result = auctionService.addPrice(ch,carId,plus,price,token);
+        JsonResult result = auctionService.addPrice(ch,carId,plus,price,token,auctionId);
         return result;
     }
 
     /**
      * 智能报价
-     * @param carId
+     * @param auctionId
      * @param price
      * @param request
      * @return
      */
-    @RequestMapping(value = "/auction/car/auto/price/{carId}/{price}")
+    @RequestMapping(value = "/auction/car/auto/price/{auctionId}/{price}")
     @ResponseBody
-    public JsonResult autoPrice(@PathVariable long carId,
+    public JsonResult autoPrice(@PathVariable long auctionId,
                                 @PathVariable long price,
                                 HttpServletRequest request){
         String token = (String) request.getAttribute("token");
         if(StringUtils.equals(token,"null"))return JsonResult.Error("未登录");
-        JsonResult result = auctionService.autoPrice(carId,price,token);
+        JsonResult result = indexService.autoPrice(auctionId,price,token);
         return result;
     }
 

@@ -7909,3 +7909,781 @@ java.util.ConcurrentModificationException
 [INFO][2017-08-11 09:55:44] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0' 
 [INFO][2017-08-11 09:55:44] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/favicon.ico] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1' 
 [INFO][2017-08-11 09:55:44] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:504) main FrameworkServlet 'socket-jetty': initialization completed in 549 ms 
+[INFO][2017-08-11 10:49:23] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 319 拍卖状态 6 
+[INFO][2017-08-11 10:49:23] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 319 recordId 69 
+[INFO][2017-08-11 10:49:23] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 319  
+[INFO][2017-08-11 11:21:30] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 319 拍卖状态 6 
+[INFO][2017-08-11 11:21:30] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 319 recordId 70 
+[INFO][2017-08-11 11:21:30] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 319  
+[INFO][2017-08-11 11:54:27] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:288) CH2 智能出价 {plus=0.05, price=5.00} 
+[INFO][2017-08-11 11:54:45] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:288) CH2 智能出价 {plus=0.05, price=5.05} 
+[INFO][2017-08-11 11:54:48] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:288) CH2 智能出价 {plus=0.05, price=5.10} 
+[INFO][2017-08-11 11:54:52] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:288) CH2 智能出价 {plus=0.05, price=5.15} 
+[INFO][2017-08-11 11:54:55] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:288) CH2 智能出价 {plus=0.05, price=5.20} 
+[INFO][2017-08-11 11:54:58] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:288) CH2 智能出价 {plus=0.05, price=5.25} 
+[INFO][2017-08-11 11:55:01] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:288) CH2 智能出价 {plus=0.05, price=5.30} 
+[INFO][2017-08-11 11:55:04] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:288) CH2 智能出价 {plus=0.05, price=5.35} 
+[INFO][2017-08-11 11:55:07] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:288) CH2 智能出价 {plus=0.05, price=5.40} 
+[INFO][2017-08-11 11:55:10] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:288) CH2 智能出价 {plus=0.05, price=5.45} 
+[INFO][2017-08-11 11:55:13] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:288) CH2 智能出价 {plus=0.05, price=5.50} 
+[INFO][2017-08-11 11:55:16] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:288) CH2 智能出价 {plus=0.05, price=5.55} 
+[INFO][2017-08-11 11:55:19] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:288) CH2 智能出价 {plus=0.05, price=5.60} 
+[INFO][2017-08-11 11:55:22] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:288) CH2 智能出价 {plus=0.05, price=5.65} 
+[INFO][2017-08-11 11:55:25] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:288) CH2 智能出价 {plus=0.05, price=5.70} 
+[INFO][2017-08-11 11:55:28] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:288) CH2 智能出价 {plus=0.05, price=5.75} 
+[INFO][2017-08-11 11:55:31] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:288) CH2 智能出价 {plus=0.05, price=5.80} 
+[INFO][2017-08-11 11:55:34] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:288) CH2 智能出价 {plus=0.05, price=5.85} 
+[INFO][2017-08-11 11:55:37] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:288) CH2 智能出价 {plus=0.05, price=5.90} 
+[INFO][2017-08-11 11:57:13] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:288) CH2 智能出价 {plus=0.03, price=5.97} 
+[INFO][2017-08-11 12:32:07] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 319 拍卖状态 6 
+[INFO][2017-08-11 12:32:07] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 319 recordId 71 
+[INFO][2017-08-11 12:32:07] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 319  
+[INFO][2017-08-11 12:32:10] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 328 拍卖状态 6 
+[INFO][2017-08-11 12:32:10] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 328 recordId 72 
+[INFO][2017-08-11 12:32:10] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 328  
+[INFO][2017-08-11 12:32:18] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:118) datasave INSET ORDER 车辆 ID 329 订单编号 150242593885953 
+[INFO][2017-08-11 12:32:18] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 329 拍卖状态 7 
+[INFO][2017-08-11 12:32:18] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 329 recordId 73 
+[INFO][2017-08-11 12:32:18] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 329  
+[INFO][2017-08-11 13:02:08] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285) main Root WebApplicationContext: initialization started 
+[INFO][2017-08-11 13:02:08] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing Root WebApplicationContext: startup date [Fri Aug 11 13:02:08 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 13:02:08] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-dao.xml] 
+[INFO][2017-08-11 13:02:09] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-service.xml] 
+[INFO][2017-08-11 13:02:09] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-jedis.xml] 
+[INFO][2017-08-11 13:02:10] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\db.properties] 
+[INFO][2017-08-11 13:02:10] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\log4j.properties] 
+[INFO][2017-08-11 13:02:10] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\resource.properties] 
+[INFO][2017-08-11 13:02:10] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 13:02:11] com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:722) main {dataSource-1} inited 
+[INFO][2017-08-11 13:02:15] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 11 13:02:08 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 13:02:15] org.springframework.scheduling.concurrent.ExecutorConfigurationSupport.initialize(ExecutorConfigurationSupport.java:165) main Initializing ExecutorService  'defaultSockJsTaskScheduler' 
+[INFO][2017-08-11 13:02:15] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/socketServer] onto handler of type [class org.springframework.web.socket.server.support.WebSocketHttpRequestHandler] 
+[INFO][2017-08-11 13:02:15] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/sockjs/**] onto handler of type [class org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler] 
+[INFO][2017-08-11 13:02:15] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325) main Root WebApplicationContext: initialization completed in 7201 ms 
+[INFO][2017-08-11 13:02:15] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:40) main -----开启轮训线程----- 
+[INFO][2017-08-11 13:02:15] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH0 
+[INFO][2017-08-11 13:02:15] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH1 
+[INFO][2017-08-11 13:02:15] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH2 
+[INFO][2017-08-11 13:02:15] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH3 
+[INFO][2017-08-11 13:02:15] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH4 
+[INFO][2017-08-11 13:02:15] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH5 
+[INFO][2017-08-11 13:02:15] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH6 
+[INFO][2017-08-11 13:02:15] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH7 
+[INFO][2017-08-11 13:02:15] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH8 
+[INFO][2017-08-11 13:02:15] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH9 
+[INFO][2017-08-11 13:02:15] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:55) main -----开启数据存储轮训线程----- 
+[INFO][2017-08-11 13:02:15] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:63) main -----开启发送轮训线程----- 
+[INFO][2017-08-11 13:02:15] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:485) main FrameworkServlet 'socket-jetty': initialization started 
+[INFO][2017-08-11 13:02:15] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 13:02:15 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 13:02:15] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring_mvc.xml] 
+[INFO][2017-08-11 13:02:16] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 13:02:16] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:217) main Mapped "{[/]}" onto public java.lang.String com.maizhong.auction.controller.IndexController.index() 
+[INFO][2017-08-11 13:02:16] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 13:02:15 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 13:02:16] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 13:02:15 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 13:02:16] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0' 
+[INFO][2017-08-11 13:02:16] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/favicon.ico] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1' 
+[INFO][2017-08-11 13:02:16] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:504) main FrameworkServlet 'socket-jetty': initialization completed in 467 ms 
+[INFO][2017-08-11 13:11:59] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285) main Root WebApplicationContext: initialization started 
+[INFO][2017-08-11 13:12:00] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing Root WebApplicationContext: startup date [Fri Aug 11 13:12:00 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 13:12:00] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-dao.xml] 
+[INFO][2017-08-11 13:12:01] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-service.xml] 
+[INFO][2017-08-11 13:12:01] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-jedis.xml] 
+[INFO][2017-08-11 13:12:02] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\db.properties] 
+[INFO][2017-08-11 13:12:02] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\log4j.properties] 
+[INFO][2017-08-11 13:12:02] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\resource.properties] 
+[INFO][2017-08-11 13:12:02] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 13:12:03] com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:722) main {dataSource-1} inited 
+[INFO][2017-08-11 13:12:05] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 11 13:12:00 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 13:12:05] org.springframework.scheduling.concurrent.ExecutorConfigurationSupport.initialize(ExecutorConfigurationSupport.java:165) main Initializing ExecutorService  'defaultSockJsTaskScheduler' 
+[INFO][2017-08-11 13:12:05] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/socketServer] onto handler of type [class org.springframework.web.socket.server.support.WebSocketHttpRequestHandler] 
+[INFO][2017-08-11 13:12:05] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/sockjs/**] onto handler of type [class org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler] 
+[INFO][2017-08-11 13:12:05] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325) main Root WebApplicationContext: initialization completed in 5742 ms 
+[INFO][2017-08-11 13:12:05] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:40) main -----开启轮训线程----- 
+[INFO][2017-08-11 13:12:05] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH0 
+[INFO][2017-08-11 13:12:05] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH1 
+[INFO][2017-08-11 13:12:05] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH2 
+[INFO][2017-08-11 13:12:05] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH3 
+[INFO][2017-08-11 13:12:05] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH4 
+[INFO][2017-08-11 13:12:05] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH5 
+[INFO][2017-08-11 13:12:05] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH6 
+[INFO][2017-08-11 13:12:05] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH7 
+[INFO][2017-08-11 13:12:05] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH8 
+[INFO][2017-08-11 13:12:05] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH9 
+[INFO][2017-08-11 13:12:05] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:55) main -----开启数据存储轮训线程----- 
+[INFO][2017-08-11 13:12:05] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:63) main -----开启发送轮训线程----- 
+[INFO][2017-08-11 13:12:05] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:485) main FrameworkServlet 'socket-jetty': initialization started 
+[INFO][2017-08-11 13:12:05] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 13:12:05 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 13:12:05] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring_mvc.xml] 
+[INFO][2017-08-11 13:12:05] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 13:12:06] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:217) main Mapped "{[/]}" onto public java.lang.String com.maizhong.auction.controller.IndexController.index() 
+[INFO][2017-08-11 13:12:06] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 13:12:05 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 13:12:06] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 13:12:05 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 13:12:06] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0' 
+[INFO][2017-08-11 13:12:06] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/favicon.ico] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1' 
+[INFO][2017-08-11 13:12:06] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:504) main FrameworkServlet 'socket-jetty': initialization completed in 474 ms 
+[INFO][2017-08-11 13:46:37] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 319 拍卖状态 6 
+[INFO][2017-08-11 13:46:37] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 319 recordId 74 
+[INFO][2017-08-11 13:46:37] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 319  
+[INFO][2017-08-11 14:16:42] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 328 拍卖状态 6 
+[INFO][2017-08-11 14:16:42] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 328 recordId 75 
+[INFO][2017-08-11 14:16:42] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 328  
+[INFO][2017-08-11 14:46:37] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:289) CH0 智能出价 {plus=0.05, price=4.15} 
+[INFO][2017-08-11 14:46:59] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:118) datasave INSET ORDER 车辆 ID 329 订单编号 150243401932447 
+[INFO][2017-08-11 14:46:59] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 329 拍卖状态 7 
+[INFO][2017-08-11 14:46:59] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 329 recordId 76 
+[INFO][2017-08-11 14:46:59] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 329  
+[INFO][2017-08-11 14:58:36] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:118) datasave INSET ORDER 车辆 ID 329 订单编号 150243471639274 
+[INFO][2017-08-11 14:58:36] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 329 拍卖状态 7 
+[INFO][2017-08-11 14:58:36] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 329 recordId 77 
+[INFO][2017-08-11 14:58:36] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:136) datasave CLEAR AUTOPRICE carID 329  
+[INFO][2017-08-11 15:19:27] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285) main Root WebApplicationContext: initialization started 
+[INFO][2017-08-11 15:19:27] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing Root WebApplicationContext: startup date [Fri Aug 11 15:19:27 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 15:19:27] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-dao.xml] 
+[INFO][2017-08-11 15:19:27] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-service.xml] 
+[INFO][2017-08-11 15:19:28] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-jedis.xml] 
+[INFO][2017-08-11 15:19:28] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\db.properties] 
+[INFO][2017-08-11 15:19:28] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\log4j.properties] 
+[INFO][2017-08-11 15:19:28] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\resource.properties] 
+[INFO][2017-08-11 15:19:28] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 15:19:28] com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:722) main {dataSource-1} inited 
+[INFO][2017-08-11 15:19:30] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 11 15:19:27 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 15:19:30] org.springframework.scheduling.concurrent.ExecutorConfigurationSupport.initialize(ExecutorConfigurationSupport.java:165) main Initializing ExecutorService  'defaultSockJsTaskScheduler' 
+[INFO][2017-08-11 15:19:30] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/socketServer] onto handler of type [class org.springframework.web.socket.server.support.WebSocketHttpRequestHandler] 
+[INFO][2017-08-11 15:19:30] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/sockjs/**] onto handler of type [class org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler] 
+[INFO][2017-08-11 15:19:30] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325) main Root WebApplicationContext: initialization completed in 2685 ms 
+[INFO][2017-08-11 15:19:30] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:40) main -----开启轮训线程----- 
+[INFO][2017-08-11 15:19:30] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH0 
+[INFO][2017-08-11 15:19:30] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH1 
+[INFO][2017-08-11 15:19:30] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH2 
+[INFO][2017-08-11 15:19:30] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH3 
+[INFO][2017-08-11 15:19:30] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH4 
+[INFO][2017-08-11 15:19:30] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH5 
+[INFO][2017-08-11 15:19:30] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH6 
+[INFO][2017-08-11 15:19:30] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH7 
+[INFO][2017-08-11 15:19:30] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH8 
+[INFO][2017-08-11 15:19:30] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH9 
+[INFO][2017-08-11 15:19:30] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:55) main -----开启数据存储轮训线程----- 
+[INFO][2017-08-11 15:19:30] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:63) main -----开启发送轮训线程----- 
+[INFO][2017-08-11 15:19:30] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:485) main FrameworkServlet 'socket-jetty': initialization started 
+[INFO][2017-08-11 15:19:30] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 15:19:30 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 15:19:30] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring_mvc.xml] 
+[INFO][2017-08-11 15:19:30] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 15:19:30] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:217) main Mapped "{[/]}" onto public java.lang.String com.maizhong.auction.controller.IndexController.index() 
+[INFO][2017-08-11 15:19:30] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 15:19:30 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 15:19:30] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 15:19:30 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 15:19:30] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0' 
+[INFO][2017-08-11 15:19:30] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/favicon.ico] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1' 
+[INFO][2017-08-11 15:19:30] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:504) main FrameworkServlet 'socket-jetty': initialization completed in 337 ms 
+[INFO][2017-08-11 15:24:18] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH0 智能出价 {plus=0.05, price=2.07} 
+[INFO][2017-08-11 15:30:40] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH1 智能出价 {plus=0.05, price=5.07} 
+[INFO][2017-08-11 15:31:19] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH1 智能出价 {plus=0.05, price=5.12} 
+[INFO][2017-08-11 15:31:22] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH1 智能出价 {plus=0.05, price=5.17} 
+[INFO][2017-08-11 15:31:25] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH1 智能出价 {plus=0.05, price=5.22} 
+[INFO][2017-08-11 15:31:28] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH1 智能出价 {plus=0.05, price=5.27} 
+[INFO][2017-08-11 15:31:31] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH1 智能出价 {plus=0.05, price=5.32} 
+[INFO][2017-08-11 15:31:34] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH1 智能出价 {plus=0.05, price=5.37} 
+[INFO][2017-08-11 15:31:37] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH1 智能出价 {plus=0.05, price=5.42} 
+[INFO][2017-08-11 15:31:40] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH1 智能出价 {plus=0.05, price=5.47} 
+[INFO][2017-08-11 15:31:43] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH1 智能出价 {plus=0.05, price=5.52} 
+[INFO][2017-08-11 15:31:46] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH1 智能出价 {plus=0.05, price=5.57} 
+[INFO][2017-08-11 15:31:49] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH1 智能出价 {plus=0.05, price=5.62} 
+[INFO][2017-08-11 15:31:52] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH1 智能出价 {plus=0.05, price=5.67} 
+[INFO][2017-08-11 15:31:55] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH1 智能出价 {plus=0.05, price=5.72} 
+[INFO][2017-08-11 15:31:58] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH1 智能出价 {plus=0.05, price=5.77} 
+[INFO][2017-08-11 15:32:01] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH1 智能出价 {plus=0.05, price=5.82} 
+[INFO][2017-08-11 15:32:04] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH1 智能出价 {plus=0.05, price=5.87} 
+[INFO][2017-08-11 15:32:07] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH1 智能出价 {plus=0.05, price=5.92} 
+[INFO][2017-08-11 15:32:10] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH1 智能出价 {plus=0.05, price=5.97} 
+[INFO][2017-08-11 15:32:46] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH0 智能出价 {plus=0.05, price=2.17} 
+[INFO][2017-08-11 15:33:22] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH0 智能出价 {plus=0.05, price=2.27} 
+[INFO][2017-08-11 15:33:59] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:300) CH1 智能出价 {plus=0.03, price=6.07} 
+[INFO][2017-08-11 15:38:23] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:118) datasave INSET ORDER 车辆 ID 330 订单编号 150243710347577 
+[INFO][2017-08-11 15:38:23] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 330 拍卖状态 7 
+[INFO][2017-08-11 15:38:23] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 330 recordId 78 
+[INFO][2017-08-11 15:38:23] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:137) datasave CLEAR AUTOPRICE_QUEUE 
+[INFO][2017-08-11 15:38:29] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:118) datasave INSET ORDER 车辆 ID 331 订单编号 150243710956421 
+[INFO][2017-08-11 15:38:29] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:123) datasave UPDATE CARBASE 车辆 ID 331 拍卖状态 7 
+[INFO][2017-08-11 15:38:29] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:133) datasave UPDATE RECORD carID 331 recordId 79 
+[INFO][2017-08-11 15:38:29] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:137) datasave CLEAR AUTOPRICE_QUEUE 
+[INFO][2017-08-11 16:26:20] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285) main Root WebApplicationContext: initialization started 
+[INFO][2017-08-11 16:26:20] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing Root WebApplicationContext: startup date [Fri Aug 11 16:26:20 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 16:26:20] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-dao.xml] 
+[INFO][2017-08-11 16:26:20] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-service.xml] 
+[INFO][2017-08-11 16:26:20] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-jedis.xml] 
+[INFO][2017-08-11 16:26:21] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\db.properties] 
+[INFO][2017-08-11 16:26:21] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\log4j.properties] 
+[INFO][2017-08-11 16:26:21] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\resource.properties] 
+[INFO][2017-08-11 16:26:21] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 16:26:21] com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:722) main {dataSource-1} inited 
+[INFO][2017-08-11 16:26:23] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 11 16:26:20 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 16:26:23] org.springframework.scheduling.concurrent.ExecutorConfigurationSupport.initialize(ExecutorConfigurationSupport.java:165) main Initializing ExecutorService  'defaultSockJsTaskScheduler' 
+[INFO][2017-08-11 16:26:23] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/socketServer] onto handler of type [class org.springframework.web.socket.server.support.WebSocketHttpRequestHandler] 
+[INFO][2017-08-11 16:26:23] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/sockjs/**] onto handler of type [class org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler] 
+[INFO][2017-08-11 16:26:23] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325) main Root WebApplicationContext: initialization completed in 2790 ms 
+[INFO][2017-08-11 16:26:23] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:40) main -----开启轮训线程----- 
+[INFO][2017-08-11 16:26:23] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH0 
+[INFO][2017-08-11 16:26:23] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH1 
+[INFO][2017-08-11 16:26:23] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH2 
+[INFO][2017-08-11 16:26:23] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH3 
+[INFO][2017-08-11 16:26:23] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH4 
+[INFO][2017-08-11 16:26:23] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH5 
+[INFO][2017-08-11 16:26:23] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH6 
+[INFO][2017-08-11 16:26:23] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH7 
+[INFO][2017-08-11 16:26:23] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH8 
+[INFO][2017-08-11 16:26:23] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH9 
+[INFO][2017-08-11 16:26:23] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:55) main -----开启数据存储轮训线程----- 
+[INFO][2017-08-11 16:26:23] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:63) main -----开启发送轮训线程----- 
+[INFO][2017-08-11 16:26:23] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:485) main FrameworkServlet 'socket-jetty': initialization started 
+[INFO][2017-08-11 16:26:23] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 16:26:23 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 16:26:23] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring_mvc.xml] 
+[INFO][2017-08-11 16:26:23] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 16:26:23] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:217) main Mapped "{[/]}" onto public java.lang.String com.maizhong.auction.controller.IndexController.index() 
+[INFO][2017-08-11 16:26:23] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 16:26:23 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 16:26:23] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 16:26:23 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 16:26:23] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0' 
+[INFO][2017-08-11 16:26:23] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/favicon.ico] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1' 
+[INFO][2017-08-11 16:26:23] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:504) main FrameworkServlet 'socket-jetty': initialization completed in 417 ms 
+[INFO][2017-08-11 16:58:13] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:58:16] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:58:19] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:58:22] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:58:25] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:58:28] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:58:31] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:58:34] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:58:37] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:58:40] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:58:43] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:58:46] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:58:49] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:58:52] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:58:55] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:58:58] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:59:01] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:59:04] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:59:07] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:59:10] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:59:13] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:59:16] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:59:19] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:59:22] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:59:25] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:59:28] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:59:31] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:59:34] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:59:37] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:59:40] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:59:43] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:59:46] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:59:50] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:59:53] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:59:56] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 16:59:59] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:00:02] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:00:05] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:00:08] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:00:11] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:00:14] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:00:17] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:00:20] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:00:23] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:00:26] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:00:29] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:00:32] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:00:35] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:00:38] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:00:41] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:00:44] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:00:47] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:00:50] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:00:53] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:00:56] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:00:59] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:01:02] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:01:05] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:01:08] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:01:11] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:01:14] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:01:17] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:01:20] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:01:23] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:01:26] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:01:29] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:01:32] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:01:35] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:01:38] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:01:41] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:01:44] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:01:47] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:01:50] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:01:53] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:01:56] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:01:59] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:02:02] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:02:05] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:02:08] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:02:11] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:02:14] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:02:17] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:02:20] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:02:23] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:310) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:03:24] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285) main Root WebApplicationContext: initialization started 
+[INFO][2017-08-11 17:03:24] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing Root WebApplicationContext: startup date [Fri Aug 11 17:03:24 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 17:03:24] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-dao.xml] 
+[INFO][2017-08-11 17:03:24] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-service.xml] 
+[INFO][2017-08-11 17:03:25] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-jedis.xml] 
+[INFO][2017-08-11 17:03:25] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\db.properties] 
+[INFO][2017-08-11 17:03:25] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\log4j.properties] 
+[INFO][2017-08-11 17:03:25] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\resource.properties] 
+[INFO][2017-08-11 17:03:25] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 17:03:26] com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:722) main {dataSource-1} inited 
+[WARN][2017-08-11 17:03:26] org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:487) main Exception encountered during context initialization - cancelling refresh attempt 
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [spring/spring-dao.xml]: Invocation of init method failed; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\mapper\AcFreezeMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.maizhong.auction.mapper.AcFreezeMapper.BaseResultMap
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:736)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:434)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:800)
+	at org.eclipse.jetty.servlet.ServletContextHandler.callContextInitialized(ServletContextHandler.java:444)
+	at org.eclipse.jetty.server.handler.ContextHandler.startContext(ContextHandler.java:791)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:294)
+	at org.eclipse.jetty.webapp.WebAppContext.startWebapp(WebAppContext.java:1349)
+	at org.eclipse.jetty.maven.plugin.JettyWebAppContext.startWebapp(JettyWebAppContext.java:297)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1342)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:741)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:505)
+	at org.eclipse.jetty.maven.plugin.JettyWebAppContext.doStart(JettyWebAppContext.java:366)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:132)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:61)
+	at org.eclipse.jetty.server.handler.ContextHandlerCollection.doStart(ContextHandlerCollection.java:163)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:132)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:61)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:132)
+	at org.eclipse.jetty.server.Server.start(Server.java:387)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:61)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:354)
+	at org.eclipse.jetty.maven.plugin.JettyServer.doStart(JettyServer.java:73)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.maven.plugin.AbstractJettyMojo.startJetty(AbstractJettyMojo.java:535)
+	at org.eclipse.jetty.maven.plugin.AbstractJettyMojo.execute(AbstractJettyMojo.java:358)
+	at org.eclipse.jetty.maven.plugin.JettyRunMojo.execute(JettyRunMojo.java:167)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:134)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:207)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:145)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:116)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:80)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:51)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:307)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:193)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:106)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:863)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:288)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:199)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:289)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:229)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:415)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:356)
+	at org.codehaus.classworlds.Launcher.main(Launcher.java:47)
+Caused by: org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\mapper\AcFreezeMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.maizhong.auction.mapper.AcFreezeMapper.BaseResultMap
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:466)
+	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:340)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+	... 65 more
+Caused by: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.maizhong.auction.mapper.AcFreezeMapper.BaseResultMap
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:120)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.parse(XMLMapperBuilder.java:92)
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:464)
+	... 68 more
+Caused by: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.maizhong.auction.mapper.AcFreezeMapper.BaseResultMap
+	at org.apache.ibatis.session.Configuration$StrictMap.put(Configuration.java:802)
+	at org.apache.ibatis.session.Configuration$StrictMap.put(Configuration.java:774)
+	at org.apache.ibatis.session.Configuration.addResultMap(Configuration.java:556)
+	at org.apache.ibatis.builder.MapperBuilderAssistant.addResultMap(MapperBuilderAssistant.java:217)
+	at org.apache.ibatis.builder.ResultMapResolver.resolve(ResultMapResolver.java:47)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.resultMapElement(XMLMapperBuilder.java:285)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.resultMapElement(XMLMapperBuilder.java:252)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.resultMapElements(XMLMapperBuilder.java:244)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:116)
+	... 70 more
+[INFO][2017-08-11 17:03:26] com.alibaba.druid.pool.DruidDataSource.close(DruidDataSource.java:1447) main {dataSource-1} closed 
+[ERROR][2017-08-11 17:03:26] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:331) main Context initialization failed 
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [spring/spring-dao.xml]: Invocation of init method failed; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\mapper\AcFreezeMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.maizhong.auction.mapper.AcFreezeMapper.BaseResultMap
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:736)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:434)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:800)
+	at org.eclipse.jetty.servlet.ServletContextHandler.callContextInitialized(ServletContextHandler.java:444)
+	at org.eclipse.jetty.server.handler.ContextHandler.startContext(ContextHandler.java:791)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:294)
+	at org.eclipse.jetty.webapp.WebAppContext.startWebapp(WebAppContext.java:1349)
+	at org.eclipse.jetty.maven.plugin.JettyWebAppContext.startWebapp(JettyWebAppContext.java:297)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1342)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:741)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:505)
+	at org.eclipse.jetty.maven.plugin.JettyWebAppContext.doStart(JettyWebAppContext.java:366)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:132)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:61)
+	at org.eclipse.jetty.server.handler.ContextHandlerCollection.doStart(ContextHandlerCollection.java:163)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:132)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:61)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:132)
+	at org.eclipse.jetty.server.Server.start(Server.java:387)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:114)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:61)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:354)
+	at org.eclipse.jetty.maven.plugin.JettyServer.doStart(JettyServer.java:73)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.maven.plugin.AbstractJettyMojo.startJetty(AbstractJettyMojo.java:535)
+	at org.eclipse.jetty.maven.plugin.AbstractJettyMojo.execute(AbstractJettyMojo.java:358)
+	at org.eclipse.jetty.maven.plugin.JettyRunMojo.execute(JettyRunMojo.java:167)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:134)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:207)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:145)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:116)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:80)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:51)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:307)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:193)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:106)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:863)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:288)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:199)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:289)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:229)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:415)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:356)
+	at org.codehaus.classworlds.Launcher.main(Launcher.java:47)
+Caused by: org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\mapper\AcFreezeMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.maizhong.auction.mapper.AcFreezeMapper.BaseResultMap
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:466)
+	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:340)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+	... 65 more
+Caused by: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.maizhong.auction.mapper.AcFreezeMapper.BaseResultMap
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:120)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.parse(XMLMapperBuilder.java:92)
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:464)
+	... 68 more
+Caused by: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.maizhong.auction.mapper.AcFreezeMapper.BaseResultMap
+	at org.apache.ibatis.session.Configuration$StrictMap.put(Configuration.java:802)
+	at org.apache.ibatis.session.Configuration$StrictMap.put(Configuration.java:774)
+	at org.apache.ibatis.session.Configuration.addResultMap(Configuration.java:556)
+	at org.apache.ibatis.builder.MapperBuilderAssistant.addResultMap(MapperBuilderAssistant.java:217)
+	at org.apache.ibatis.builder.ResultMapResolver.resolve(ResultMapResolver.java:47)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.resultMapElement(XMLMapperBuilder.java:285)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.resultMapElement(XMLMapperBuilder.java:252)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.resultMapElements(XMLMapperBuilder.java:244)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:116)
+	... 70 more
+[INFO][2017-08-11 17:04:59] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285) main Root WebApplicationContext: initialization started 
+[INFO][2017-08-11 17:04:59] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing Root WebApplicationContext: startup date [Fri Aug 11 17:04:59 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 17:04:59] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-dao.xml] 
+[INFO][2017-08-11 17:04:59] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-service.xml] 
+[INFO][2017-08-11 17:04:59] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-jedis.xml] 
+[INFO][2017-08-11 17:05:00] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\db.properties] 
+[INFO][2017-08-11 17:05:00] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\log4j.properties] 
+[INFO][2017-08-11 17:05:00] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\resource.properties] 
+[INFO][2017-08-11 17:05:00] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 17:05:00] com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:722) main {dataSource-1} inited 
+[INFO][2017-08-11 17:05:02] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 11 17:04:59 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 17:05:02] org.springframework.scheduling.concurrent.ExecutorConfigurationSupport.initialize(ExecutorConfigurationSupport.java:165) main Initializing ExecutorService  'defaultSockJsTaskScheduler' 
+[INFO][2017-08-11 17:05:02] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/socketServer] onto handler of type [class org.springframework.web.socket.server.support.WebSocketHttpRequestHandler] 
+[INFO][2017-08-11 17:05:02] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/sockjs/**] onto handler of type [class org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler] 
+[INFO][2017-08-11 17:05:02] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325) main Root WebApplicationContext: initialization completed in 3064 ms 
+[INFO][2017-08-11 17:05:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:40) main -----开启轮训线程----- 
+[INFO][2017-08-11 17:05:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH0 
+[INFO][2017-08-11 17:05:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH1 
+[INFO][2017-08-11 17:05:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH2 
+[INFO][2017-08-11 17:05:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH3 
+[INFO][2017-08-11 17:05:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH4 
+[INFO][2017-08-11 17:05:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH5 
+[INFO][2017-08-11 17:05:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH6 
+[INFO][2017-08-11 17:05:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH7 
+[INFO][2017-08-11 17:05:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH8 
+[INFO][2017-08-11 17:05:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH9 
+[INFO][2017-08-11 17:05:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:55) main -----开启数据存储轮训线程----- 
+[INFO][2017-08-11 17:05:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:63) main -----开启发送轮训线程----- 
+[INFO][2017-08-11 17:05:02] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:485) main FrameworkServlet 'socket-jetty': initialization started 
+[INFO][2017-08-11 17:05:02] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 17:05:02 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 17:05:02] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring_mvc.xml] 
+[INFO][2017-08-11 17:05:02] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 17:05:02] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:217) main Mapped "{[/]}" onto public java.lang.String com.maizhong.auction.controller.IndexController.index() 
+[INFO][2017-08-11 17:05:02] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 17:05:02 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 17:05:03] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 17:05:02 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 17:05:03] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0' 
+[INFO][2017-08-11 17:05:03] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/favicon.ico] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1' 
+[INFO][2017-08-11 17:05:03] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:504) main FrameworkServlet 'socket-jetty': initialization completed in 357 ms 
+[INFO][2017-08-11 17:05:05] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 17:05:39] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=5.16} 
+[INFO][2017-08-11 17:06:09] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=5.21} 
+[INFO][2017-08-11 17:06:12] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=5.26} 
+[INFO][2017-08-11 17:06:18] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=5.31} 
+[INFO][2017-08-11 17:06:21] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=5.36} 
+[INFO][2017-08-11 17:06:27] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=5.41} 
+[INFO][2017-08-11 17:06:30] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=5.46} 
+[INFO][2017-08-11 17:06:36] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=5.51} 
+[INFO][2017-08-11 17:06:39] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=5.56} 
+[INFO][2017-08-11 17:06:45] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=5.61} 
+[INFO][2017-08-11 17:06:48] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=5.66} 
+[INFO][2017-08-11 17:06:54] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=5.71} 
+[INFO][2017-08-11 17:06:57] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=5.76} 
+[INFO][2017-08-11 17:07:03] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=5.81} 
+[INFO][2017-08-11 17:07:06] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=5.86} 
+[INFO][2017-08-11 17:07:12] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=5.91} 
+[INFO][2017-08-11 17:07:15] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=5.96} 
+[INFO][2017-08-11 17:07:21] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=6.01} 
+[INFO][2017-08-11 17:07:24] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=6.06} 
+[INFO][2017-08-11 17:07:30] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=6.11} 
+[INFO][2017-08-11 17:07:33] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=6.16} 
+[INFO][2017-08-11 17:07:45] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH0 智能出价 {plus=0.05, price=6.23} 
+[INFO][2017-08-11 17:21:05] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:125) datasave INSET ORDER 车辆 ID 318 订单编号 150244326520097 
+[INFO][2017-08-11 17:21:05] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:129) datasave CLEAR AUTOPRICE_QUEUE 
+[INFO][2017-08-11 17:21:05] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:135) datasave CLEAR FREEZE 318 
+[INFO][2017-08-11 17:21:05] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:140) datasave UPDATE CARBASE 车辆 ID 318 拍卖状态 7 
+[INFO][2017-08-11 17:21:05] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:151) datasave UPDATE RECORD carID 318 recordId 80 
+[INFO][2017-08-11 17:21:13] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:125) datasave INSET ORDER 车辆 ID 320 订单编号 150244327330951 
+[INFO][2017-08-11 17:21:13] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:129) datasave CLEAR AUTOPRICE_QUEUE 
+[INFO][2017-08-11 17:21:13] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:135) datasave CLEAR FREEZE 320 
+[INFO][2017-08-11 17:21:13] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:140) datasave UPDATE CARBASE 车辆 ID 320 拍卖状态 7 
+[INFO][2017-08-11 17:21:13] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:151) datasave UPDATE RECORD carID 320 recordId 81 
+[INFO][2017-08-11 17:21:22] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:140) datasave UPDATE CARBASE 车辆 ID 330 拍卖状态 6 
+[INFO][2017-08-11 17:21:22] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:151) datasave UPDATE RECORD carID 330 recordId 83 
+[INFO][2017-08-11 17:21:23] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:140) datasave UPDATE CARBASE 车辆 ID 328 拍卖状态 6 
+[INFO][2017-08-11 17:21:23] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:151) datasave UPDATE RECORD carID 328 recordId 82 
+[INFO][2017-08-11 17:21:28] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:140) datasave UPDATE CARBASE 车辆 ID 335 拍卖状态 6 
+[INFO][2017-08-11 17:21:28] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:151) datasave UPDATE RECORD carID 335 recordId 85 
+[INFO][2017-08-11 17:21:29] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:140) datasave UPDATE CARBASE 车辆 ID 333 拍卖状态 6 
+[INFO][2017-08-11 17:21:29] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:151) datasave UPDATE RECORD carID 333 recordId 84 
+[INFO][2017-08-11 18:08:40] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285) main Root WebApplicationContext: initialization started 
+[INFO][2017-08-11 18:08:41] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing Root WebApplicationContext: startup date [Fri Aug 11 18:08:41 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 18:08:41] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-dao.xml] 
+[INFO][2017-08-11 18:08:41] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-service.xml] 
+[INFO][2017-08-11 18:08:41] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-jedis.xml] 
+[INFO][2017-08-11 18:08:41] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\db.properties] 
+[INFO][2017-08-11 18:08:41] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\log4j.properties] 
+[INFO][2017-08-11 18:08:41] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\resource.properties] 
+[INFO][2017-08-11 18:08:41] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 18:08:42] com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:722) main {dataSource-1} inited 
+[INFO][2017-08-11 18:08:43] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 11 18:08:41 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 18:08:43] org.springframework.scheduling.concurrent.ExecutorConfigurationSupport.initialize(ExecutorConfigurationSupport.java:165) main Initializing ExecutorService  'defaultSockJsTaskScheduler' 
+[INFO][2017-08-11 18:08:43] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/socketServer] onto handler of type [class org.springframework.web.socket.server.support.WebSocketHttpRequestHandler] 
+[INFO][2017-08-11 18:08:43] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/sockjs/**] onto handler of type [class org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler] 
+[INFO][2017-08-11 18:08:43] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325) main Root WebApplicationContext: initialization completed in 2833 ms 
+[INFO][2017-08-11 18:08:43] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:40) main -----开启轮训线程----- 
+[INFO][2017-08-11 18:08:43] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH0 
+[INFO][2017-08-11 18:08:43] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH1 
+[INFO][2017-08-11 18:08:43] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH2 
+[INFO][2017-08-11 18:08:43] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH3 
+[INFO][2017-08-11 18:08:43] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH4 
+[INFO][2017-08-11 18:08:43] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH5 
+[INFO][2017-08-11 18:08:43] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH6 
+[INFO][2017-08-11 18:08:43] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH7 
+[INFO][2017-08-11 18:08:43] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH8 
+[INFO][2017-08-11 18:08:43] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH9 
+[INFO][2017-08-11 18:08:43] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:55) main -----开启数据存储轮训线程----- 
+[INFO][2017-08-11 18:08:43] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:63) main -----开启发送轮训线程----- 
+[INFO][2017-08-11 18:08:43] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:485) main FrameworkServlet 'socket-jetty': initialization started 
+[INFO][2017-08-11 18:08:43] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 18:08:43 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 18:08:43] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring_mvc.xml] 
+[INFO][2017-08-11 18:08:43] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 18:08:44] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:217) main Mapped "{[/]}" onto public java.lang.String com.maizhong.auction.controller.IndexController.index() 
+[INFO][2017-08-11 18:08:44] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 18:08:43 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 18:08:44] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 18:08:43 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 18:08:44] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0' 
+[INFO][2017-08-11 18:08:44] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/favicon.ico] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1' 
+[INFO][2017-08-11 18:08:44] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:504) main FrameworkServlet 'socket-jetty': initialization completed in 295 ms 
+[INFO][2017-08-11 18:10:08] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:140) datasave UPDATE CARBASE 车辆 ID 337 拍卖状态 6 
+[INFO][2017-08-11 18:10:08] com.maizhong.auction.service.impl.ChannelServiceImpl.dataSave(ChannelServiceImpl.java:151) datasave UPDATE RECORD carID 337 recordId 101 
+[INFO][2017-08-11 18:13:26] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionEstablished(SpringWebSocketHandler.java:45) qtp2100573699-15 通道 CH2 userId 150244640681301CH2  Time Fri Aug 11 18:13:26 CST 2017 
+[INFO][2017-08-11 18:14:04] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:85) qtp2100573699-19 Socket会话已经移除:用户ID CH2 Time Fri Aug 11 18:14:04 CST 2017 
+[INFO][2017-08-11 18:14:05] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionEstablished(SpringWebSocketHandler.java:45) qtp2100573699-15 通道 CH2 userId 150244644525615CH2  Time Fri Aug 11 18:14:05 CST 2017 
+[INFO][2017-08-11 18:14:59] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285) main Root WebApplicationContext: initialization started 
+[INFO][2017-08-11 18:14:59] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing Root WebApplicationContext: startup date [Fri Aug 11 18:14:59 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 18:14:59] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-dao.xml] 
+[INFO][2017-08-11 18:15:00] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-service.xml] 
+[INFO][2017-08-11 18:15:00] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-jedis.xml] 
+[INFO][2017-08-11 18:15:00] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\db.properties] 
+[INFO][2017-08-11 18:15:00] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\log4j.properties] 
+[INFO][2017-08-11 18:15:00] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\resource.properties] 
+[INFO][2017-08-11 18:15:00] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 18:15:01] com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:722) main {dataSource-1} inited 
+[INFO][2017-08-11 18:15:03] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 11 18:14:59 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 18:15:03] org.springframework.scheduling.concurrent.ExecutorConfigurationSupport.initialize(ExecutorConfigurationSupport.java:165) main Initializing ExecutorService  'defaultSockJsTaskScheduler' 
+[INFO][2017-08-11 18:15:03] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/socketServer] onto handler of type [class org.springframework.web.socket.server.support.WebSocketHttpRequestHandler] 
+[INFO][2017-08-11 18:15:03] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/sockjs/**] onto handler of type [class org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler] 
+[INFO][2017-08-11 18:15:03] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325) main Root WebApplicationContext: initialization completed in 3722 ms 
+[INFO][2017-08-11 18:15:03] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:40) main -----开启轮训线程----- 
+[INFO][2017-08-11 18:15:03] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH0 
+[INFO][2017-08-11 18:15:03] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH1 
+[INFO][2017-08-11 18:15:03] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH2 
+[INFO][2017-08-11 18:15:03] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH3 
+[INFO][2017-08-11 18:15:03] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH4 
+[INFO][2017-08-11 18:15:03] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH5 
+[INFO][2017-08-11 18:15:03] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH6 
+[INFO][2017-08-11 18:15:03] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH7 
+[INFO][2017-08-11 18:15:03] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH8 
+[INFO][2017-08-11 18:15:03] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH9 
+[INFO][2017-08-11 18:15:03] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:55) main -----开启数据存储轮训线程----- 
+[INFO][2017-08-11 18:15:03] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:63) main -----开启发送轮训线程----- 
+[INFO][2017-08-11 18:15:03] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:485) main FrameworkServlet 'socket-jetty': initialization started 
+[INFO][2017-08-11 18:15:03] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 18:15:03 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 18:15:03] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring_mvc.xml] 
+[INFO][2017-08-11 18:15:03] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 18:15:03] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:217) main Mapped "{[/]}" onto public java.lang.String com.maizhong.auction.controller.IndexController.index() 
+[INFO][2017-08-11 18:15:03] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 18:15:03 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 18:15:03] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 18:15:03 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 18:15:03] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0' 
+[INFO][2017-08-11 18:15:03] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/favicon.ico] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1' 
+[INFO][2017-08-11 18:15:03] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:504) main FrameworkServlet 'socket-jetty': initialization completed in 393 ms 
+[INFO][2017-08-11 18:15:04] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionEstablished(SpringWebSocketHandler.java:45) qtp98944601-16 通道 CH2 userId 150244650440988CH2  Time Fri Aug 11 18:15:04 CST 2017 
+[INFO][2017-08-11 18:16:59] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285) main Root WebApplicationContext: initialization started 
+[INFO][2017-08-11 18:16:59] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing Root WebApplicationContext: startup date [Fri Aug 11 18:16:59 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 18:16:59] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-dao.xml] 
+[INFO][2017-08-11 18:16:59] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-service.xml] 
+[INFO][2017-08-11 18:16:59] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring-jedis.xml] 
+[INFO][2017-08-11 18:17:00] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\db.properties] 
+[INFO][2017-08-11 18:17:00] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\log4j.properties] 
+[INFO][2017-08-11 18:17:00] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) main Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\WebSocketJetty\target\classes\properties\resource.properties] 
+[INFO][2017-08-11 18:17:00] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 18:17:00] com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:722) main {dataSource-1} inited 
+[INFO][2017-08-11 18:17:02] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Aug 11 18:16:59 CST 2017]; root of context hierarchy 
+[INFO][2017-08-11 18:17:02] org.springframework.scheduling.concurrent.ExecutorConfigurationSupport.initialize(ExecutorConfigurationSupport.java:165) main Initializing ExecutorService  'defaultSockJsTaskScheduler' 
+[INFO][2017-08-11 18:17:02] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/socketServer] onto handler of type [class org.springframework.web.socket.server.support.WebSocketHttpRequestHandler] 
+[INFO][2017-08-11 18:17:02] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/websocket/sockjs/**] onto handler of type [class org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler] 
+[INFO][2017-08-11 18:17:02] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325) main Root WebApplicationContext: initialization completed in 3174 ms 
+[INFO][2017-08-11 18:17:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:40) main -----开启轮训线程----- 
+[INFO][2017-08-11 18:17:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH0 
+[INFO][2017-08-11 18:17:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH1 
+[INFO][2017-08-11 18:17:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH2 
+[INFO][2017-08-11 18:17:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH3 
+[INFO][2017-08-11 18:17:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH4 
+[INFO][2017-08-11 18:17:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH5 
+[INFO][2017-08-11 18:17:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH6 
+[INFO][2017-08-11 18:17:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH7 
+[INFO][2017-08-11 18:17:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH8 
+[INFO][2017-08-11 18:17:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:53) main 开启通道轮训:CH9 
+[INFO][2017-08-11 18:17:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:55) main -----开启数据存储轮训线程----- 
+[INFO][2017-08-11 18:17:02] com.maizhong.auction.channel.InitChannel.contextInitialized(InitChannel.java:63) main -----开启发送轮训线程----- 
+[INFO][2017-08-11 18:17:02] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:485) main FrameworkServlet 'socket-jetty': initialization started 
+[INFO][2017-08-11 18:17:02] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) main Refreshing WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 18:17:02 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 18:17:02] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) main Loading XML bean definitions from class path resource [spring/spring_mvc.xml] 
+[INFO][2017-08-11 18:17:02] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) main JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-11 18:17:02] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:217) main Mapped "{[/]}" onto public java.lang.String com.maizhong.auction.controller.IndexController.index() 
+[INFO][2017-08-11 18:17:02] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 18:17:02 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 18:17:02] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) main Looking for @ControllerAdvice: WebApplicationContext for namespace 'socket-jetty-servlet': startup date [Fri Aug 11 18:17:02 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-11 18:17:02] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0' 
+[INFO][2017-08-11 18:17:02] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) main Mapped URL path [/favicon.ico] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1' 
+[INFO][2017-08-11 18:17:02] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:504) main FrameworkServlet 'socket-jetty': initialization completed in 382 ms 
+[INFO][2017-08-11 18:17:03] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionEstablished(SpringWebSocketHandler.java:45) qtp1399745187-17 通道 CH2 userId 150244662336459CH2  Time Fri Aug 11 18:17:03 CST 2017 
+[INFO][2017-08-11 18:17:07] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionEstablished(SpringWebSocketHandler.java:45) qtp1399745187-16 通道 CH2 userId 150244662797136CH2  Time Fri Aug 11 18:17:07 CST 2017 
+[INFO][2017-08-11 18:17:09] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:85) qtp1399745187-19 Socket会话已经移除:用户ID 150244662797136CH2 Time Fri Aug 11 18:17:09 CST 2017 
+[INFO][2017-08-11 18:17:13] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionEstablished(SpringWebSocketHandler.java:45) qtp1399745187-20 通道 CH2 userId 150244663398245CH2  Time Fri Aug 11 18:17:13 CST 2017 
+[INFO][2017-08-11 18:17:15] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionEstablished(SpringWebSocketHandler.java:45) qtp1399745187-22 通道 CH2 userId 150244663587354CH2  Time Fri Aug 11 18:17:15 CST 2017 
+[INFO][2017-08-11 18:17:20] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:85) qtp1399745187-17 Socket会话已经移除:用户ID 150244662336459CH2 Time Fri Aug 11 18:17:20 CST 2017 
+[INFO][2017-08-11 18:17:21] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionEstablished(SpringWebSocketHandler.java:45) qtp1399745187-16 通道 CH2 userId 150244664109047CH2  Time Fri Aug 11 18:17:21 CST 2017 
+[INFO][2017-08-11 18:17:39] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:85) qtp1399745187-19 Socket会话已经移除:用户ID 150244664109047CH2 Time Fri Aug 11 18:17:39 CST 2017 
+[INFO][2017-08-11 18:17:39] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionEstablished(SpringWebSocketHandler.java:45) qtp1399745187-20 通道 CH2 userId 150244665981291CH2  Time Fri Aug 11 18:17:39 CST 2017 
+[INFO][2017-08-11 18:18:05] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:85) qtp1399745187-22 Socket会话已经移除:用户ID 150244663587354CH2 Time Fri Aug 11 18:18:05 CST 2017 
+[INFO][2017-08-11 18:18:05] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionEstablished(SpringWebSocketHandler.java:45) qtp1399745187-17 通道 CH2 userId 150244668544736CH2  Time Fri Aug 11 18:18:05 CST 2017 
+[INFO][2017-08-11 18:18:40] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:85) qtp1399745187-22 Socket会话已经移除:用户ID 150244668544736CH2 Time Fri Aug 11 18:18:40 CST 2017 
+[INFO][2017-08-11 18:18:41] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionEstablished(SpringWebSocketHandler.java:45) qtp1399745187-17 通道 CH2 userId 150244672124442CH2  Time Fri Aug 11 18:18:41 CST 2017 
+[INFO][2017-08-11 18:19:35] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionEstablished(SpringWebSocketHandler.java:45) qtp1399745187-19 通道 CH2 userId 150244677518927CH2  Time Fri Aug 11 18:19:35 CST 2017 
+[INFO][2017-08-11 18:19:41] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:85) qtp1399745187-16 Socket会话已经移除:用户ID 150244677518927CH2 Time Fri Aug 11 18:19:41 CST 2017 
+[INFO][2017-08-11 18:19:43] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionEstablished(SpringWebSocketHandler.java:45) qtp1399745187-19 通道 CH2 userId 150244678352925CH2  Time Fri Aug 11 18:19:43 CST 2017 
+[INFO][2017-08-11 18:19:46] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:85) qtp1399745187-20 Socket会话已经移除:用户ID 150244678352925CH2 Time Fri Aug 11 18:19:46 CST 2017 
+[INFO][2017-08-11 18:19:48] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionEstablished(SpringWebSocketHandler.java:45) qtp1399745187-22 通道 CH2 userId 150244678816174CH2  Time Fri Aug 11 18:19:48 CST 2017 
+[INFO][2017-08-11 18:19:52] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionEstablished(SpringWebSocketHandler.java:45) qtp1399745187-17 通道 CH2 userId 150244679215019CH2  Time Fri Aug 11 18:19:52 CST 2017 
+[INFO][2017-08-11 18:19:55] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:85) qtp1399745187-16 Socket会话已经移除:用户ID 150244678816174CH2 Time Fri Aug 11 18:19:55 CST 2017 
+[INFO][2017-08-11 18:20:01] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionEstablished(SpringWebSocketHandler.java:45) qtp1399745187-19 通道 CH2 userId 150244680118765CH2  Time Fri Aug 11 18:20:01 CST 2017 
+[INFO][2017-08-11 18:20:08] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:85) qtp1399745187-20 Socket会话已经移除:用户ID 150244680118765CH2 Time Fri Aug 11 18:20:08 CST 2017 
+[INFO][2017-08-11 18:20:14] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionEstablished(SpringWebSocketHandler.java:45) qtp1399745187-22 通道 CH2 userId 150244681409903CH2  Time Fri Aug 11 18:20:14 CST 2017 
+[INFO][2017-08-11 18:20:17] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionEstablished(SpringWebSocketHandler.java:45) qtp1399745187-17 通道 CH2 userId 150244681719022CH2  Time Fri Aug 11 18:20:17 CST 2017 
+[INFO][2017-08-11 18:20:31] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:85) qtp1399745187-16 Socket会话已经移除:用户ID 150244679215019CH2 Time Fri Aug 11 18:20:31 CST 2017 
+[INFO][2017-08-11 18:20:48] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionEstablished(SpringWebSocketHandler.java:45) qtp1399745187-19 通道 CH2 userId 150244684893437CH2  Time Fri Aug 11 18:20:48 CST 2017 
+[INFO][2017-08-11 18:20:59] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=4.56} 
+[INFO][2017-08-11 18:21:11] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=4.64} 
+[INFO][2017-08-11 18:21:26] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=4.69} 
+[INFO][2017-08-11 18:21:29] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=4.74} 
+[INFO][2017-08-11 18:21:32] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=4.79} 
+[INFO][2017-08-11 18:21:35] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=4.84} 
+[INFO][2017-08-11 18:21:38] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=4.89} 
+[INFO][2017-08-11 18:21:42] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=4.94} 
+[INFO][2017-08-11 18:21:45] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=4.99} 
+[INFO][2017-08-11 18:21:48] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=5.04} 
+[INFO][2017-08-11 18:21:51] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=5.09} 
+[INFO][2017-08-11 18:21:54] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=5.14} 
+[INFO][2017-08-11 18:21:57] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=5.19} 
+[INFO][2017-08-11 18:22:00] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=5.24} 
+[INFO][2017-08-11 18:22:03] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=5.44} 
+[INFO][2017-08-11 18:22:06] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=5.49} 
+[INFO][2017-08-11 18:22:09] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=5.54} 
+[INFO][2017-08-11 18:22:12] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=5.59} 
+[INFO][2017-08-11 18:22:15] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=5.64} 
+[INFO][2017-08-11 18:22:18] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=5.69} 
+[INFO][2017-08-11 18:22:21] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=5.74} 
+[INFO][2017-08-11 18:22:24] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=5.79} 
+[INFO][2017-08-11 18:22:27] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=5.84} 
+[INFO][2017-08-11 18:22:30] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=5.89} 
+[INFO][2017-08-11 18:22:33] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=6.09} 
+[INFO][2017-08-11 18:22:36] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=6.14} 
+[INFO][2017-08-11 18:22:39] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=6.19} 
+[INFO][2017-08-11 18:22:42] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=6.24} 
+[INFO][2017-08-11 18:22:45] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=6.29} 
+[INFO][2017-08-11 18:22:48] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=6.34} 
+[INFO][2017-08-11 18:22:51] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=6.39} 
+[INFO][2017-08-11 18:22:54] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=6.44} 
+[INFO][2017-08-11 18:22:57] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=6.49} 
+[INFO][2017-08-11 18:23:00] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=6.54} 
+[INFO][2017-08-11 18:23:03] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=6.59} 
+[INFO][2017-08-11 18:23:06] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=6.64} 
+[INFO][2017-08-11 18:23:09] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=6.69} 
+[INFO][2017-08-11 18:23:12] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=6.74} 
+[INFO][2017-08-11 18:23:15] com.maizhong.auction.service.impl.ChannelServiceImpl.autoPrice(ChannelServiceImpl.java:314) CH2 智能出价 {plus=0.05, price=6.79} 
+[INFO][2017-08-11 18:23:31] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:85) qtp1399745187-16 Socket会话已经移除:用户ID 150244684893437CH2 Time Fri Aug 11 18:23:31 CST 2017 
+[INFO][2017-08-11 18:24:40] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionEstablished(SpringWebSocketHandler.java:45) qtp1399745187-19 通道 CH2 userId 150244708079669CH2  Time Fri Aug 11 18:24:40 CST 2017 
+[INFO][2017-08-11 18:25:42] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:85) qtp1399745187-20 Socket会话已经移除:用户ID 150244665981291CH2 Time Fri Aug 11 18:25:42 CST 2017 
+[INFO][2017-08-11 18:25:44] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:85) qtp1399745187-22 Socket会话已经移除:用户ID 150244663398245CH2 Time Fri Aug 11 18:25:44 CST 2017 
+[INFO][2017-08-11 18:25:45] com.maizhong.auction.socket.SpringWebSocketHandler.afterConnectionClosed(SpringWebSocketHandler.java:85) qtp1399745187-17 Socket会话已经移除:用户ID 150244708079669CH2 Time Fri Aug 11 18:25:45 CST 2017 

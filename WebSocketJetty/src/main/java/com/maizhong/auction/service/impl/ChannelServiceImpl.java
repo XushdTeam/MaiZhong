@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.socket.TextMessage;
@@ -54,6 +55,12 @@ public class ChannelServiceImpl implements ChannelService {
 
     @Autowired
     private CkCarbaseMapper ckCarbaseMapper;
+
+    @Autowired
+    private AcFreezeMapper acFreezeMapper;
+
+    @Value("${MAIN_SERVICE}")
+    private String MAINSERVICE;
 
     /**
      * 创建拍卖队列
@@ -117,11 +124,22 @@ public class ChannelServiceImpl implements ChannelService {
                     acOrderMapper.insertSelective(order);
                     LOGGER.info("INSET ORDER 车辆 ID {} 订单编号 {}",carId,orderNum);
 
+                    //清理智能报价队列
+                    jedisClient.del("AUTOPRICE_QUEUE:"+recordId);
+                    LOGGER.info("CLEAR AUTOPRICE_QUEUE",recordId);
+
+                    //清理冻结资金
+                    AcFreezeExample example = new AcFreezeExample();
+                    example.createCriteria().andAuctionIdEqualTo(recordId).andUserIdNotEqualTo(lastUserId);
+                    acFreezeMapper.deleteByExample(example);
+                    LOGGER.info("CLEAR FREEZE {}",carId);
+
                 }
 
                 ckCarbaseMapper.updateByPrimaryKeySelective(carbase);
                 LOGGER.info("UPDATE CARBASE 车辆 ID {} 拍卖状态 {}",carId,carbase.getStatus());
 
+                //更新 拍卖记录
                 AcAuctionRecord record = new AcAuctionRecord();
                 record.setId(recordId);
                 record.setStatus(1);
@@ -131,9 +149,10 @@ public class ChannelServiceImpl implements ChannelService {
 
                 acAuctionRecordMapper.updateByPrimaryKeySelective(record);
                 LOGGER.info("UPDATE RECORD carID {} recordId {}",carId,recordId);
-
-                jedisClient.del("AUTOPRICE_CAR:"+carId);
-                LOGGER.info("CLEAR AUTOPRICE carID {} ",carId);
+//
+//
+//                jedisClient.del("AUTOPRICE_CAR:"+carId);
+//                LOGGER.info("CLEAR AUTOPRICE carID {} ",carId);
 
             }catch (Exception e){
                 e.printStackTrace();
@@ -156,14 +175,20 @@ public class ChannelServiceImpl implements ChannelService {
             //通道为空
             String nextCar = getNextCarQueue(ch);
             jedisClient.set("CHANNEL:" + ch,nextCar);
+
+
         }else{
             //不为空
             CarAcutionDTO carAcutionDTO = JsonUtils.jsonToPojo(now, CarAcutionDTO.class);
             if(TimeUtils.compare(carAcutionDTO.getOverTime())){
                 //未结束 继续轮训
+
                 //智能报价处理
                 autoPrice(carAcutionDTO);
+
             }else{
+
+
                 //结束
                 jedisClient.set("CHANNEL:" + ch,"over");
 
@@ -236,24 +261,25 @@ public class ChannelServiceImpl implements ChannelService {
      */
     private void autoPrice(CarAcutionDTO carAcutionDTO){
         Long userId = carAcutionDTO.getLastUserId();
-        Long carId = carAcutionDTO.getCarId();
+        Long auctionId = carAcutionDTO.getId();
+        long carId = carAcutionDTO.getCarId();
         String channel = carAcutionDTO.getChannel();
 
         String price = carAcutionDTO.getNowPrice();
-        String key = "AUTOPRICE_QUEUE:"+carId;
+        String key = "AUTOPRICE_QUEUE:"+auctionId;
 
         byte[] rpop = jedisClient.rpop(key.getBytes());
 
         if(rpop!=null){
             AutoPrice autoPrice = ObjectUtil.deserializer(rpop, AutoPrice.class);
-            if(autoPrice.getCarId()==carId){
+            if(autoPrice.getAuctionId()==auctionId){
                 //如果最高价是本人
                 if(userId==autoPrice.getUserId()){
                     //如果当前最高价小于智能报价 放回队列
                     if(Double.valueOf(price)<Double.valueOf(autoPrice.getPrice())){
                         jedisClient.lpush(key.getBytes(),rpop);
                     }else{
-                        jedisClient.hset("AUTOPRICE_CAR:" + carId, String.valueOf(autoPrice.getUserId()),"over");
+                        jedisClient.hset("AUTOPRICE_CAR:" + auctionId, String.valueOf(autoPrice.getUserId()),"over");
                     }
                 }else{
                     //最高价不是本人
@@ -286,17 +312,17 @@ public class ChannelServiceImpl implements ChannelService {
                         }
                         try {
                             LOGGER.info("智能出价 {}",body.toString());
-                            HttpUtils.doPost("http://192.168.2.186:8090","/app/addPrice/"+channel+"/"+carId,null,head,query,body);
+                            HttpUtils.doPost(MAINSERVICE,"/app/addPrice/"+channel+"/"+carId+ "/" +auctionId,null,head,query,body);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }else{
-                        jedisClient.hset("AUTOPRICE_CAR:" + carId, String.valueOf(autoPrice.getUserId()),"over");
+                        //jedisClient.hset("AUTOPRICE_CAR:" + auctionId, String.valueOf(autoPrice.getUserId()),"over");
                     }
 
                 }
             }else{
-                jedisClient.hset("AUTOPRICE_CAR:" + carId, String.valueOf(autoPrice.getUserId()),"over");
+                //jedisClient.hset("AUTOPRICE_CAR:" + auctionId, String.valueOf(autoPrice.getUserId()),"over");
             }
 
         }

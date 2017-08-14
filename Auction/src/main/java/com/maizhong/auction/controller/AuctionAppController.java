@@ -160,7 +160,7 @@ public class AuctionAppController {
             return JsonResult.Error(error);
         }
         String token = (String) request.getAttribute("token");
-        if(!auctionService.checkVerifyCode(verifyCode,token))return JsonResult.Error("验证码错误");
+        if(!auctionService.checkVerifyCode(verifyCode,acUser.getPhone()+""))return JsonResult.Error("验证码错误");
         JsonResult result = auctionService.registUser(acUser,token);
         return result;
 
@@ -284,14 +284,15 @@ public class AuctionAppController {
      * @param price
      * @return
      */
-    @RequestMapping(value = "/app/addPrice/{ch}/{carId}")
+    @RequestMapping(value = "/app/addPrice/{ch}/{carId}/{auctionId}")
     public JsonResult addPrice(@PathVariable String ch,
                                @PathVariable long carId,
+                               @PathVariable long auctionId,
                                String plus,
                                String price,
                                HttpServletRequest request){
         String token = (String) request.getAttribute("token");
-        JsonResult result = auctionService.addPrice(ch,carId,plus,price,token);
+        JsonResult result = auctionService.addPrice(ch,carId,plus,price,token,auctionId);
         return result;
     }
 
@@ -386,17 +387,17 @@ public class AuctionAppController {
 
     /**
      * 智能报价
-     * @param carId
+     * @param auctionId
      * @param price
      * @param request
      * @return
      */
-    @RequestMapping(value = "/app/car/auto/price/{carId}/{price}")
-    public JsonResult autoPrice(@PathVariable long carId,
+    @RequestMapping(value = "/app/car/auto/price/{auctionId}/{price}")
+    public JsonResult autoPrice(@PathVariable long auctionId,
                                 @PathVariable long price,
                                 HttpServletRequest request){
         String token = (String) request.getAttribute("token");
-        JsonResult result = auctionService.autoPrice(carId,price,token);
+        JsonResult result = auctionService.autoPrice(auctionId,price,token);
         return result;
     }
 
