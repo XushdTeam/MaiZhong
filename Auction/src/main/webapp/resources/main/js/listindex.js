@@ -78,7 +78,7 @@ var vm = new Vue({
                 window.location.href = '/list/detail/'+item.auctionId+'/'+item.carId;
             }else{
                 //未拍
-                window.location.href = '/list/detail/'+item.carId;
+                window.location.href = '/list/check/report/'+item.carId;
             }
         }
     },components: {
