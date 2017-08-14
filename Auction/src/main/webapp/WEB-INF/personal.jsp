@@ -14,7 +14,7 @@
 </head>
 <body>
 <%@ include file="nav.jsp" %>
-<div class="w1200 mauto" style="z-index: 1000">
+<div class="w1200 mauto" style="z-index: 1000" id="app">
 
     <div class="mt25 clearfix">
 
@@ -25,17 +25,19 @@
                 <ul class="fs12 newsubnav">
                       <li id="ConfirmOrderList"><a href=" ">成交确认</a></li>
                       <li id="OrderList"><a href=" ">订单车辆</a></li>
-                      <li id="HistoryAuctionCarList"><a href=" "  >历史竞价</a></li>
-                      <li id="CarList"><a href=" "  >关注车辆</a></li>
+                      <li id="HistoryAuctionCarList"><a href=" ">历史竞价</a></li>
+                      <li id="CarList"><a href=" ">关注车辆</a></li>
                 </ul>
                 <h3 class="fs14 c3 lh27 mt20">个人设置</h3>
                 <ul class="fs12 newsubnav">
                      <li id="Account"><a href=" ">基本信息</a></li>
-                     <li id="EditPwd"><a href=" ">修改密码</a></li>
+                    <li id="EditPwd"><span @click="changePassword" style="cursor: hand">修改密码</span></li>
                      <li id="Message"><a href=" ">投诉建议</a></li>
                 </ul>
             </div>
         </div>
+
+
 
         <div class="fr w1060">
             <div class=" pt15 pb15 pl20 clearfix">
@@ -82,15 +84,10 @@
                             </tr>
                             </tbody>
                         </table>
-
                     </div>
                 </div>
-
             </div>
-
-
         </div>
-
     </div>
 
     <!--头像弹出层-->
@@ -157,6 +154,23 @@
             $(".togphoto").hide();
         })
     })
+
+
+    var vm = new Vue({
+        el:"#app",
+        data:{
+
+        },
+        methods:{
+            changePassword:function(){
+                window.location.href = '/to/mypass';
+            }
+        }
+    })
+
+
+
+
 </script>
 </body>
 </html>

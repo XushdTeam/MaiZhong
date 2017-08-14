@@ -16,11 +16,9 @@
 <body>
 <%@ include file="nav.jsp" %>
 
-<div class="w1200 mauto">
+<div class="w1200 mauto" id="app">
     <div class="place mt20"><a href=" ">个人中心</a> &gt;&gt;&nbsp;<span class="c9" id="YeQianSan">历史竞价</span></div>
     <div class="mt25 clearfix">
-
-
         <div class="fl w130 bgf8">
             <div class="pl30 pb15 pt15">
                 <h3 class="fs14 c3 lh27">交易中心</h3>
@@ -33,7 +31,7 @@
                 <h3 class="fs14 c3 lh27 mt20">个人设置</h3>
                 <ul class="fs12 newsubnav">
                     <li id="Account"><a href=" ">基本信息</a></li>
-                    <li id="EditPwd"><a href=" ">修改密码</a></li>
+                    <li id="EditPwd"><span @click="changePassword" style="cursor: hand">修改密码</span></li>
                     <li id="Message"><a href=" ">投诉建议</a></li>
                 </ul>
             </div>
@@ -67,7 +65,7 @@
                     </tr>
                     </thead>
                     <tbody id="HistoryAuctionCar">
-                    <tr height="120" class="trhover">
+                    <tr height="120" class="trhover"  v-for="(item,index) in list">
                         <td width="140px" class="pl10">
                             <div class="carnew">
                                 <img src="main/img/5.jpg">
@@ -75,155 +73,22 @@
                         </td>
                         <td width="270px" class="pl10 pr10">
                             <div class="fs14 clearfix">
-                                <a target="_blank" title="2012款 CS35 1.6L MT 舒适" href="" id="model_11082049" class="fl cblack">
-                                    <span class="fl carname" style="cursor: pointer">2012款 CS35 1.6L MT 舒适</span>
+                                <a target="_blank" :title="item.modelName" href="" :id="item.id" class="fl cblack">
+                                    <span class="fl carname" style="cursor: pointer">{{item.modelName}}</span>
                                 </a>
                                 <p class="fr fs12 cwhite w60"></p>
                             </div>
-                            <p class="mt10">北京&nbsp;&nbsp;初登：2013-10&nbsp;&nbsp;等级：50D</p>
-                            <p>里程：8.4万&nbsp;&nbsp;排放：国四</p>
+                            <p class="mt10">{{item.zcd}}&nbsp;&nbsp;初登：{{item.cdrq}}&nbsp;&nbsp;等级：{{item.pj}}</p>
+                            <p>里程：{{item.bxlc}}万&nbsp;&nbsp;排放：{{item.pfbz}}</p>
                         </td>
                         <td>
                             <span class="fs16 ccheng ml10">41200</span>
                         </td>
                         <td class="pl20">2017/07/26 15:43</td>
                     </tr>
-                    <tr height="120" class="trhover">
-                        <td width="140px" class="pl10">
-                            <div class="carnew">
-                                <img src="main/img/5.jpg">
-                            </div>
-                        </td>
-                        <td width="270px" class="pl10 pr10">
-                            <div class="fs14 clearfix">
-                                <a target="_blank" title="2012款 CS35 1.6L MT 舒适" href="" id="model_11081246" class="fl cblack">
-                                    <span class="fl carname" style="cursor: pointer">2012款 CS35 1.6L MT 舒适</span>
-                                </a>
-                                <p class="fr fs12 cwhite w60">
-                                    <span class="shou" title="首次上线">首次上拍</span>
-                                </p>
-                            </div>
-                            <p class="mt10">北京&nbsp;&nbsp;初登：2013-10&nbsp;&nbsp;等级：50D</p>
-                            <p>里程：8.4万&nbsp;&nbsp;排放：国四</p>
-                        </td>
-                        <td>
-                            <span class="fs16 ccheng ml10">41000</span>
-                        </td>
-                        <td class="pl20">2017/07/26 14:00</td>
-                    </tr>
-                    <tr height="120" class="trhover">
-                        <td width="140px" class="pl10">
-                            <div class="carnew">
-                                <img src="main/img/5.jpg">
-                            </div>
-                        </td>
-                        <td width="270px" class="pl10 pr10">
-                            <div class="fs14 clearfix">
-                                <a target="_blank" title="2013款 瑞风M5 2.0T AT 公务版" href=" " id="model_11081242" class="fl cblack">
-                                    <span class="fl carname" style="cursor: pointer">2013款 瑞风M5 2.0T AT 公务版</span>
-                                </a>
-                                <p class="fr fs12 cwhite w60"></p>
-                            </div>
-                            <p class="mt10">北京&nbsp;&nbsp;初登：2016-09&nbsp;&nbsp;等级：65B</p>
-                            <p>里程：1.8万&nbsp;&nbsp;排放：国五</p>
-                        </td>
-                        <td>
-                            <span class="fs16 ccheng ml10">110200</span>
-                        </td>
-                        <td class="pl20">2017/07/26 14:00</td>
-                    </tr>
-                    <tr height="120" class="trhover">
-                        <td width="140px" class="pl10">
-                            <div class="carnew">
-                                <img src="main/img/5.jpg">
-                            </div>
-                        </td>
-                        <td width="270px" class="pl10 pr10">
-                            <div class="fs14 clearfix">
-                                <a target="_blank" title="2004款 捷达 1.6L MT GIF 豪华" href=" " id="model_11081241" class="fl cblack">
-                                    <span class="fl carname" style="cursor: pointer">2004款 捷达 1.6L MT GIF 豪华</span>
-                                </a>
-                                <p class="fr fs12 cwhite w60"></p>
-                            </div>
-                            <p class="mt10">北京&nbsp;&nbsp;初登：2006-09&nbsp;&nbsp;等级：50B</p>
-                            <p>里程：13.2万&nbsp;&nbsp;排放：不详</p>
-                        </td>
-                        <td>
-                            <span class="fs16 ccheng ml10">15000</span>
-                        </td>
-                        <td class="pl20">2017/07/26 14:00</td>
-                    </tr>
-                    <tr height="120" class="trhover bgqing">
-                        <td width="140px" class="pl10">
-                            <div class="carnew">
-                                <img src="main/img/5.jpg">
-                            </div>
-                        </td>
-                        <td width="270px" class="pl10 pr10">
-                            <div class="fs14 clearfix">
-                                <a target="_blank" title="2004款 捷达 1.6L MT GIF 豪华" href=" " id="model_11080973" class="fl cblack">
-                                    <span class="fl carname" style="cursor: pointer">2004款 捷达 1.6L MT GIF 豪华</span>
-                                </a>
-                                <p class="fr fs12 cwhite w60">
-                                    <span class="shou" title="首次上线">首次上拍</span>
-                                </p>
-                            </div>
-                            <p class="mt10">北京&nbsp;&nbsp;初登：2006-09&nbsp;&nbsp;等级：50B</p>
-                            <p>里程：13.2万&nbsp;&nbsp;排放：不详</p>
-                        </td>
-                        <td><span class="fs16 ccheng ml10">15500</span></td>
-                        <td class="pl20">2017/07/25 16:13</td>
-                    </tr>
-                    <tr height="120" class="trhover">
-                        <td width="140px" class="pl10">
-                            <div class="carnew">
-                                <img src="main/img/5.jpg">
-                            </div>
-                        </td>
-                        <td width="270px" class="pl10 pr10">
-                            <div class="fs14 clearfix">
-                                <a target="_blank" title="2015款 320Li 2.0T AT 时尚" href=" " id="model_11080856" class="fl cblack">
-                                    <span class="fl carname" style="cursor: pointer">2015款 320Li 2.0T AT 时尚</span>
-                                </a>
-                                <p class="fr fs12 cwhite w60">
-                                    <span class="shou" title="首次上线">首次上拍</span>
-                                </p>
-                            </div>
-                            <p class="mt10">北京&nbsp;&nbsp;初登：2014-10&nbsp;&nbsp;等级：65B</p>
-                            <p>里程：4.9万&nbsp;&nbsp;排放：国四</p>
-                        </td>
-                        <td>
-                            <span class="fs16 ccheng ml10">222500</span>
-                        </td>
-                        <td class="pl20">2017/07/25 15:41</td>
-                    </tr>
-                    <tr height="120" class="trhover">
-                        <td width="140px" class="pl10">
-                            <div class="carnew">
-                                <img src="main/img/5.jpg">
-                            </div>
-                        </td>
-                        <td width="270px" class="pl10 pr10">
-                            <div class="fs14 clearfix">
-                                <a target="_blank" title="2008款 凯越 1.6L MT 舒适" href=" " id="model_11080701" class="fl cblack">
-                                    <span class="fl carname" style="cursor: pointer">2008款 凯越 1.6L MT 舒适</span>
-                                </a>
-                                <p class="fr fs12 cwhite w60">
-                                    <span class="shou" title="首次上线">首次上拍</span>
-                                </p>
-                            </div>
-                            <p class="mt10">北京&nbsp;&nbsp;初登：2008-07&nbsp;&nbsp;等级：50B</p>
-                            <p>里程：14.7万&nbsp;&nbsp;排放：国四</p>
-                        </td>
-                        <td>
-                            <span class="fs16 ccheng ml10">23700</span>
-                        </td>
-                        <td class="pl20">2017/07/25 15:07</td>
-                    </tr>
-
                     </tbody>
                 </table>
-                <div id="pagination" class="pageinfo" style="  display: block;">
+                <%--<div id="pagination" class="pageinfo" style="  display: block;">
                     <ul class="pages">
                         <li>
                             <span class="beginEnd">首页</span>
@@ -244,13 +109,15 @@
                         <li><a><span class="beginEnd">下一页</span></a></li>
                         <li><a><span class="beginEnd">末页</span></a></li>
                     </ul>
-                </div>
+                </div>--%>
             </div>
         </div>
     </div>
 </div>
 
 <%@ include file="footer.jsp"%>
+<script type="text/javascript" src="/resources/main/js/timer.js"></script>
+<script type="text/javascript" src="/resources/main/js/mylist.js"></script>
 
 </body>
 </html>
