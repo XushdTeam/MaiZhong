@@ -1,8 +1,5 @@
 package com.maizhong.auction.dto;
 
-import com.maizhong.auction.pojo.CkDl;
-import com.maizhong.auction.pojo.CkPz;
-
 import java.util.List;
 
 /**

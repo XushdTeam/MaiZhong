@@ -21,13 +21,13 @@
             <b>在线竞价<span id="allCount">{{list.length}}</span>辆</b>
         </div>
         <div class="liatMain bor1e2 bort0" >
-            <div class="carMains cursor" type="0" v-for="(item,index) in list" @click="detail(item)">
-                <div class="carImg end ">
+            <div class="carMains cursor" type="0" v-for="(item,index) in list" >
+                <div class="carImg end " @click="detail(item)">
                     <div class="mask" :class="{'hide':!item.over}">已结束</div>
                     <i class="smallIcon  "></i>
                     <img :src="item.zq45">
                 </div>
-                <div class="carMes">
+                <div class="carMes" @click="detail(item)">
                     <h3>[{{item.zcd}} {{item.number}}] {{item.modelName}}</h3>
                     <p class="mes"><span>{{item.cdrq}}</span>&nbsp;|&nbsp;<span>{{item.bxlc}}万公里</span></p>
                     <p class="sign">

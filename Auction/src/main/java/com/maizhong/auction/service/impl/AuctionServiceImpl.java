@@ -74,6 +74,9 @@ public class AuctionServiceImpl implements AuctionService {
     @Autowired
     private JedisClient jedisClient;
 
+    @Autowired
+    private AcFreezeMapper acFreezeMapper;
+
 
     /**
      * 根据类型获取文档列表
@@ -419,25 +422,53 @@ public class AuctionServiceImpl implements AuctionService {
 
     /**
      * 智能报价
-     * @param carId
+     * @param auctionId
      * @param price
      * @param token
      * @return
      */
     @Override
-    public JsonResult autoPrice(long carId, long price, String token) {
-        AcUser acUser = this.getAcUserByToken(token);
+    public JsonResult autoPrice(long auctionId, long price, String token) {
 
-        String key = "AUTOPRICE_QUEUE:"+carId;
+        AcUser acUser = this.getAcUserByToken(token);
+        if(acUser==null)return JsonResult.Error("未登录");
+
+        Boolean isPlused = false;
+        //保证金扣除冻结是否大于2000 大于可以加价 否则不可以
+        BigDecimal bzj = new BigDecimal(acUser.getBzj());
+        if(bzj.compareTo(new BigDecimal(0))==0){
+            return JsonResult.Error("该帐号未缴纳保证金!");
+        }else if(bzj.compareTo(new BigDecimal(2000))<0){
+            return JsonResult.Error("该帐号保证金不足2000");
+        }else{
+            AcFreezeExample example = new AcFreezeExample();
+            example.createCriteria().andUserIdEqualTo(acUser.getId());
+            List<AcFreeze> acFreezes = acFreezeMapper.selectByExample(example);
+            for (AcFreeze acFreeze : acFreezes) {
+                if (acFreeze.getAuctionId()==auctionId){
+                    isPlused = true;break;
+                }
+            }
+            if(!isPlused){
+                int size = acFreezes.size();
+                BigDecimal freezePrice = new BigDecimal(2000).multiply(new BigDecimal(size));
+                BigDecimal subtract = bzj.subtract(freezePrice);
+                if(subtract.compareTo(new BigDecimal(2000))<0){
+                    return JsonResult.Error("该帐号保证金余额不足2000");
+                }
+            }
+        }
+
+        String key = "AUTOPRICE_QUEUE:"+auctionId;
 
         AutoPrice dto = new AutoPrice();
-        dto.setCarId(carId);
+        dto.setAuctionId(auctionId);
         dto.setPrice(price);
         dto.setUserId(acUser.getId());
         dto.setPhone(acUser.getPhone());
         jedisClient.lpush(key.getBytes(),ObjectUtil.serializer(dto));
 
-        jedisClient.hset("AUTOPRICE_CAR:" + carId, String.valueOf(acUser.getId()),price+"");
+        jedisClient.hset("AUTOPRICE_CAR:" + auctionId, String.valueOf(acUser.getId()),price+"");
 
         return JsonResult.OK();
 
@@ -524,7 +555,7 @@ public class AuctionServiceImpl implements AuctionService {
     @Override
     public boolean checkVerifyCode(String verifyCode, String token) {
 
-        String code = jedisClient.get("SMS_VERIFY:"+token);
+        String code = jedisClient.get("SMS:"+token);
 
         if(StringUtils.equals(code,verifyCode)){
             return true;
@@ -593,6 +624,7 @@ public class AuctionServiceImpl implements AuctionService {
             String car_info = jedisClient.hget("CAR_INFO", carId + "");
             CarInfoDto carInfoDto = JsonUtils.jsonToPojo(car_info,CarInfoDto.class);
 
+            carInfoDto.setAuctionId(record.getId());
             if(acUser==null){
                 carInfoDto.setMyAuction(false);
             }else{
@@ -657,12 +689,37 @@ public class AuctionServiceImpl implements AuctionService {
      * @return
      */
     @Override
-    public synchronized JsonResult addPrice(String ch, long carId, String  plus, String price, String token) {
+    public synchronized JsonResult addPrice(String ch, long carId, String  plus, String price, String token,long auctionId) {
         try {
 
             AcUser acUser = this.getAcUserByToken(token);
             if(acUser==null)return JsonResult.Error("未登录");
 
+            Boolean isPlused = false;
+            //保证金扣除冻结是否大于2000 大于可以加价 否则不可以
+            BigDecimal bzj = new BigDecimal(acUser.getBzj());
+            if(bzj.compareTo(new BigDecimal(0))==0){
+                return JsonResult.Error("该帐号未缴纳保证金!");
+            }else if(bzj.compareTo(new BigDecimal(2000))<0){
+                return JsonResult.Error("该帐号保证金不足2000");
+            }else{
+                AcFreezeExample example = new AcFreezeExample();
+                example.createCriteria().andUserIdEqualTo(acUser.getId());
+                List<AcFreeze> acFreezes = acFreezeMapper.selectByExample(example);
+                for (AcFreeze acFreeze : acFreezes) {
+                    if (acFreeze.getAuctionId()==auctionId){
+                        isPlused = true;break;
+                    }
+                }
+                if(!isPlused){
+                    int size = acFreezes.size();
+                    BigDecimal freezePrice = new BigDecimal(2000).multiply(new BigDecimal(size));
+                    BigDecimal subtract = bzj.subtract(freezePrice);
+                    if(subtract.compareTo(new BigDecimal(2000))<0){
+                        return JsonResult.Error("该帐号保证金余额不足2000");
+                    }
+                }
+            }
             String redieCH = jedisClient.get("CHANNEL:" + ch);
             if((StringUtils.isNotBlank(redieCH)&&!StringUtils.equals("over",redieCH))){
                 CarAcutionDTO carAcutionDTO = JsonUtils.jsonToPojo(redieCH, CarAcutionDTO.class);
@@ -696,6 +753,18 @@ public class AuctionServiceImpl implements AuctionService {
                         //添加到发送队列
                         this.addSocketQueue(record);
                         LOGGER.info("ADD BID 车辆 ID {} 通道 {}",carId,ch);
+
+                        //判断是否要冻结保证金
+                        if(!isPlused){
+                            AcFreeze freeze = new AcFreeze();
+                            freeze.setFreeze(2000L);
+                            freeze.setUserId(acUser.getId());
+                            freeze.setAuctionId(auctionId);
+                            freeze.setCreateTime(new Date());
+                            acFreezeMapper.insertSelective(freeze);
+
+                        }
+
                         return JsonResult.OK();
                     }
 
@@ -828,7 +897,7 @@ public class AuctionServiceImpl implements AuctionService {
                 if(acUser!=null){
                     AcBidRecordExample example = new AcBidRecordExample();
                     AcBidRecordExample.Criteria criteria = example.createCriteria();
-                    criteria.andUserIdEqualTo(acUser.getId()).andCarIdEqualTo(carId);
+                    criteria.andUserIdEqualTo(acUser.getId()).andAuctionIdEqualTo(carAcutionDTO.getId());
                     long l = acBidRecordMapper.countByExample(example);
                     if(l>0){
                         object.put("ismyplus",true);
@@ -855,7 +924,7 @@ public class AuctionServiceImpl implements AuctionService {
                     }
 
                     //是否开启智能
-                    String auto = jedisClient.hget("AUTOPRICE_CAR:" + carId, String.valueOf(acUser.getId()));
+                    String auto = jedisClient.hget("AUTOPRICE_CAR:" + carAcutionDTO.getId(), String.valueOf(acUser.getId()));
                     if(StringUtils.isNotBlank(auto)&&!StringUtils.equals("over",auto)){
                         object.put("auto",true);
                         object.put("autoPrice",auto);

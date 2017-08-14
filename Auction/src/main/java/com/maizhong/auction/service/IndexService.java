@@ -33,7 +33,9 @@ public interface IndexService {
 
     CarInfoDto getCarInfo(long carId);
 
-    JsonResult getCarNow(long carId, String token);
+    JsonResult getCarNow(long auctionId, String token);
 
     JsonResult getBidRecordList(long auctionId);
+
+    JsonResult autoPrice(long auctionId, long price, String token);
 }

@@ -170,9 +170,9 @@
                                                 <table style="width: 100%;font-size: 14px;line-height: 20px;">
                                                     <tr v-for="item in bidList">
                                                         <td width="34%">
-                                                            <span class="vm">{{item.bussinessName}}</span>
+                                                            <span class="vm">{{item.name}}</span>
                                                             <img v-if="item.userId == userId" src="/resources/main/img/me.png" class="vm car-info-record-self"></td>
-                                                        <td width="33%">{{item.createTime}}</td>
+                                                        <td width="33%">{{item.time}}</td>
                                                         <td width="33%">{{item.price}}万</td>
                                                     </tr>
                                                 </table>
@@ -187,7 +187,7 @@
                                 <div class="pt10 pl15 pr15 fs0 bidArea pr ">
                                     <span class="bidStepList">
                                         <span class="mbtn vm mb10 track" @click="plus(item)"
-                                              :class="{'mbtn_1':item.c}" v-for="item in priceList">+{{item.p}}</span>
+                                              :class="{'mbtn_1':item.usable}" v-for="item in priceList">+{{item.plus}}</span>
                                     </span>
                                     <p class="mipt-box inblock vm mb10">
                                         <span class="mipt-tip"><span class="mipTip">出价不能小于当前价</span><i class="mipt-tip-dot"></i></span>
@@ -214,14 +214,20 @@
 
 
                         <div class="clearfix car-info-art mt25">
-                            <p class="fl car-info-art-left" style="float: left; margin-bottom: 10px;">
+                            <p class="fl car-info-art-left hide" style="float: left; margin-bottom: 10px;">
                                 <a href="javascript:;" class="one" id="getPriceDetail">价格明细</a>
                                 <a href=" " target="_blank" class="three">售后信息</a>
                             </p>
                             <p class="fr" style="float: right;">
-                                <a href="javascript:;">
+                                <a href="javascript:;" v-if="like"  @click="cancleLikeFun">
+                                    <span >已关注</span>
+                                    <span style="display: inline;" >
+                                        (<span>{{likeCount}}</span>)
+                                    </span>
+                                </a>
+                                <a href="javascript:;" v-else @click="likeFun">
                                     <span >关注</span>
-                                    <span class="hide" style="display: inline;">
+                                    <span style="display: inline;"  >
                                         (<span>{{likeCount}}</span>)
                                     </span>
                                 </a>
@@ -828,7 +834,7 @@
                             <div class="mt20 fs0 w290 w294ie bidArea " :class="{'hide':IsEnd}">
                                 <span class="bidStepList">
                                     <span class="mbtn vm mb10 track" @click="plus(item)"
-                                          :class="{'mbtn_1':item.c}" v-for="item in priceList">+{{item.p}}</span>
+                                          :class="{'mbtn_1':item.usable}" v-for="item in priceList">+{{item.plus}}</span>
                                 </span>
                                 <p class="mipt-box inblock vm mt10">
                                     <span class="mipt-tip"><span class="mipTip"></span><i class="mipt-tip-dot"></i></span>
@@ -859,10 +865,10 @@
                                         <table style="width: 100%;font-size: 14px;line-height: 20px;">
                                             <tr v-for="item in bidList">
                                                 <td width="34%">
-                                                    <span class="vm">{{item.bussinessName}}</span>
+                                                    <span class="vm">{{item.name}}</span>
                                                     <img v-if="item.userId == userId" src="/resources/main/img/me.png" class="vm car-info-record-self"></td>
                                                 </td>
-                                                <td width="33%">{{item.createTime}}</td>
+                                                <td width="33%">{{item.time}}</td>
                                                 <td width="33%">{{item.price}}万</td>
                                             </tr>
                                         </table>
@@ -941,14 +947,15 @@
                 isMyPlus: !1,
                 carId:'${carInfo.carId}',
                 userId:'${userId}',
-                auctionId:0,
+                auctionId:'${auctionId}',
                 plusDialog:!1,
                 plusStep:0,
                 totalPrice:0,
                 selfPrice:'',
                 myAuto:!1,
                 autoPrice:0,
-                likeCount:0
+                likeCount:0,
+                like:!1
             },
             components: {
                 'count-down': Timer
@@ -1010,36 +1017,26 @@
                     }, 1000);
                 },
                 syncCarNow(){
-                    $.getJSON('/auction/car/now/'+this.carId,(d)=>{
-                        if(d.status==200){
-                            if(!d.data.auction){
+                    $.getJSON('/auction/car/now/'+this.auctionId,(d)=>{
+                        if(r=d.data,d.status==200){
+                            vm.CurPrice = r.curPrice;
+                            vm.curTime = r.nowTime;
+                            vm.endTime = r.overTime;
+                            vm.priceList = r.plusList;
+                            vm.chKey = r.chKey;
+                            vm.isMyPlus = r.myPlus;
+                            vm.myAuto = r.myAuto;
+                            vm.autoPrice = (parseFloat(r.autoPrice/10000)).toFixed(2);
+                            vm.isMyPlus = r.myPlus;
+                            vm.isMyTop = r.myTop;
+                            vm.likeCount = r.likeCount;
+                            vm.bidList = r.bidList;
+                            vm.like = r.myLike;
+                            if(!r.auction){
                                 vm.over();
-                                vm.CurPrice = d.data.curPrice;
-                                vm.priceList = d.data.priceList;
-                                vm.BidRecord();
-                                if(vm.userId == d.data.lastUserId){
-                                    vm.isMyPlus = 1,vm.isMyTop=1
-                                }
-                                vm.myAuto = d.data.auto;
-                                if(vm.myAuto)vm.autoPrice = (parseFloat(d.data.autoPrice/10000)).toFixed(2);
-                                vm.likeCount = d.data.likeCount;
                             }else{
-                                vm.CurPrice = d.data.curPrice;
-                                vm.curTime = d.data.nowTime;
-                                vm.endTime = d.data.overTime;
-                                vm.priceList = d.data.priceList;
-                                vm.chKey = d.data.chKey;
-                                vm.auctionId = d.data.auctionId;
-                                vm.myAuto = d.data.auto;
-                                if(vm.myAuto)vm.autoPrice = (parseFloat(d.data.autoPrice/10000)).toFixed(2);
                                 vm.Countdown();
                                 vm.InitSock();
-                                vm.BidRecord();
-                                if(vm.userId == d.data.lastUserId){
-                                    vm.isMyPlus = 1,vm.isMyTop=1
-                                }
-                                vm.likeCount = d.data.likeCount;
-
                             }
                         }else{
                             vm.over();
@@ -1051,11 +1048,11 @@
                 },
                 InitSock(){
                     if('WebSocket' in window) {
-                        websocket = new WebSocket("ws://192.168.2.186:65525/WebSocketJetty/websocket/socketServer?ch=" + this.chKey);
+                        websocket = new WebSocket("ws://192.168.2.111:65525/WebSocketJetty/websocket/socketServer?ch=" + this.chKey);
                     } else if('MozWebSocket' in window) {
-                        websocket = new MozWebSocket("ws://192.168.2.186:65525/WebSocketJetty/websocket/socketServer?ch=" + this.chKey);
+                        websocket = new MozWebSocket("ws://192.168.2.111:65525/WebSocketJetty/websocket/socketServer?ch=" + this.chKey);
                     } else {
-                        websocket = new SockJS("ws://192.168.2.186:65525/WebSocketJetty/websocket/sockjs?ch=" + this.chKey);
+                        websocket = new SockJS("ws://192.168.2.111:65525/WebSocketJetty/websocket/sockjs?ch=" + this.chKey);
                     }
                     websocket.onopen = function(event) {
                         console.log("WebSocket:已连接");
@@ -1064,18 +1061,18 @@
                         var data = JSON.parse(event.data);
                         if(vm.carId == data.carId) {
                             vm.CurPrice = data.price;
-                            vm.overTime = data.overTime;
-                            vm.nowTime = data.nowTime;
+                            vm.endTime = data.overTime;
+                            vm.curTime = data.nowTime;
                             if(vm.userId == data.userId){
                                 vm.isMyTop = 1;
                                 vm.isMyPlus = 1;
                             }else{
-                                vm.isMyTop = 1;
+                                vm.isMyTop = !1;
                             }
                             var bid = {};
-                            bid.bussinessName = data.bussinessName;
+                            bid.name = data.bussinessName;
                             bid.price = data.price;
-                            bid.createTime = new Date(parseInt(data.createTime)).toLocaleString().substr(10,20);
+                            bid.time = new Date(parseInt(data.createTime)).toLocaleString().substr(10,20);
                             bid.userId = data.userId;
                             vm.bidList.splice(0,0,bid);
 
@@ -1090,11 +1087,8 @@
                         console.log("WebSocket:已关闭");
                     }
                 },
-                BidRecord(){
-                    $.getJSON("/auction/bidrecord/list/"+this.auctionId,(d)=>{if(d.status==200)vm.bidList=d.data})
-                },
                 plus(item){
-                    vm.plusStep = parseFloat(item.p/10000);
+                    vm.plusStep = parseFloat(item.plus/10000);
                     vm.totalPrice =  (parseFloat(vm.CurPrice) +  vm.plusStep).toFixed(2);
                     $("#plusDialog").show();
                 },
@@ -1148,7 +1142,7 @@
                 },
                 plusConfim(){
                     vm.hidePlus();
-                    $.post('/auction/addPrice/'+this.chKey+'/'+this.carId,{plus:this.plusStep,price:this.CurPrice},(d)=>{
+                    $.post('/auction/addPrice/'+this.chKey+'/'+this.carId+'/'+this.auctionId,{plus:this.plusStep,price:this.CurPrice},(d)=>{
                         if(d.status==200){
                             vm.success('出价成功!');
                             vm.isMyPlus = true;
@@ -1159,10 +1153,11 @@
                 },
                 autoConfim(){
                     vm.hideAuto();
-                    $.getJSON('/auction/car/auto/price/'+this.carId+'/'+this.totalPrice*10000,(d)=>{
+                    $.getJSON('/auction/car/auto/price/'+this.auctionId+'/'+this.totalPrice*10000,(d)=>{
                         if(d.status==200){
                             vm.success('智能报价成功!');
                             vm.myAuto = 1;
+                            vm.autoPrice = this.totalPrice;
                         }else{
                             vm.error(d.message);
                         }
@@ -1180,6 +1175,24 @@
                 BidTxtTip(n) {
                     $(".mipt-tip").show();
                     $(".mipTip").html(n)
+                },
+                cancleLikeFun(){
+                    $.getJSON('/auction/car/like/cancle/'+this.carId,(d)=>{
+                        if(d.status==200){
+                            vm.like = !1;
+                            vm.likeCount -= 1;
+                        }
+                    })
+                },
+                likeFun(){
+                    $.getJSON('/auction/car/like/'+this.carId,(d)=>{
+                        if(d.status==200){
+                            vm.like = 1;
+                            vm.likeCount += 1;
+                        }else if(d.data=='login'){
+                            window.location.href = '/user/login';
+                        }
+                    })
                 }
             },
             mounted(){

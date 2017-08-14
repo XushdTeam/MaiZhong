@@ -41,7 +41,7 @@ public interface AuctionService {
 
     JsonResult getCarDetail(long carId);
 
-    JsonResult addPrice(String ch, long carId, String plus, String price, String token);
+    JsonResult addPrice(String ch, long carId, String plus, String price, String token,long auctionId);
 
     JsonResult getBidRecord(long auctionId, String token);
 
@@ -59,6 +59,6 @@ public interface AuctionService {
 
     JsonResult carLikeList(String token);
 
-    JsonResult autoPrice(long carId, long price, String token);
+    JsonResult autoPrice(long auctionId, long price, String token);
 
 }

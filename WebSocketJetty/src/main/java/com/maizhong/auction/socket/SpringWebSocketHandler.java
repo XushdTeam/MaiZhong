@@ -1,10 +1,15 @@
 package com.maizhong.auction.socket;
 
+import com.maizhong.auction.service.impl.ChannelServiceImpl;
 import com.maizhong.common.utils.IDUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -16,6 +21,8 @@ import java.util.Map;
 @Component
 public class SpringWebSocketHandler implements WebSocketHandler {
 
+
+    public static Logger LOGGER = LoggerFactory.getLogger(SpringWebSocketHandler.class);
 
     public static final Map<String, WebSocketSession> userSocketSessionMap;
 
@@ -31,12 +38,14 @@ public class SpringWebSocketHandler implements WebSocketHandler {
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 
         String ch = (String) session.getAttributes().get("ch");
-        ch = IDUtils.getOrderId()+ch;
-        if (userSocketSessionMap.get(ch) == null) {
-            userSocketSessionMap.put(ch, session);
+        if(StringUtils.isNotBlank(ch)){
+            String userId= IDUtils.getOrderId()+ch;
+            if (userSocketSessionMap.get(userId) == null) {
+                userSocketSessionMap.put(userId, session);
+                LOGGER.info("通道 {} userId {}  Time {}",ch,userId,new Date());
+            }
         }
-        System.out.println("用户 "+ch+" 链接");
-        //session.sendMessage(new TextMessage(JsonUtils.objectToJson(JsonResult.OK("Hello World"))));
+
 
     }
 
@@ -57,7 +66,7 @@ public class SpringWebSocketHandler implements WebSocketHandler {
             Map.Entry<String, WebSocketSession> entry = it.next();
             if (entry.getValue().getId().equals(webSocketSession.getId())) {
                 userSocketSessionMap.remove(entry.getKey());
-                System.out.println("Socket会话已经移除:用户ID" + entry.getKey());
+                LOGGER.info("Socket会话已经移除:用户ID {} Time {}",entry.getKey(),new Date());
                 break;
             }
         }
@@ -65,7 +74,7 @@ public class SpringWebSocketHandler implements WebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession webSocketSession, CloseStatus closeStatus) throws Exception {
-        System.out.println("Websocket:" + webSocketSession.getId() + "已经关闭");
+       
         Iterator<Map.Entry<String, WebSocketSession>> it = userSocketSessionMap
                 .entrySet().iterator();
         // 移除Socket会话
@@ -73,7 +82,7 @@ public class SpringWebSocketHandler implements WebSocketHandler {
             Map.Entry<String, WebSocketSession> entry = it.next();
             if (entry.getValue().getId().equals(webSocketSession.getId())) {
                 userSocketSessionMap.remove(entry.getKey());
-                System.out.println("Socket会话已经移除:用户ID" + entry.getKey());
+                LOGGER.info("Socket会话已经移除:用户ID {} Time {}",entry.getKey(),new Date());
                 break;
             }
         }
