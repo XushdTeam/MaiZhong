@@ -552,10 +552,10 @@ public class SystemController {
      * @param carId
      * @return
      */
-    @RequestMapping(value = "/system/car/deal/{carId}")
+    @RequestMapping(value = "/system/car/deal/{carId}/{auctionId}")
     @ResponseBody
-    public JsonResult carDeal(@PathVariable long carId) {
-        JsonResult result = systemService.carDeal(carId);
+    public JsonResult carDeal(@PathVariable long carId,@PathVariable long auctionId) {
+        JsonResult result = systemService.carDeal(carId,auctionId);
         return result;
     }
 
@@ -565,10 +565,10 @@ public class SystemController {
      * @param carId
      * @return
      */
-    @RequestMapping(value = "/system/car/second/{carId}")
+    @RequestMapping(value = "/system/car/second/{carId}/{auctionId}")
     @ResponseBody
-    public JsonResult carSecond(@PathVariable long carId) {
-        JsonResult result = systemService.carSecond(carId);
+    public JsonResult carSecond(@PathVariable long carId,@PathVariable long auctionId) {
+        JsonResult result = systemService.carSecond(carId,auctionId);
         return result;
     }
 

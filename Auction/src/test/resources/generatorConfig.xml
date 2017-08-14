@@ -46,7 +46,7 @@
 
         <!-- 指定数据库表 -->
 
-        <table schema="" tableName="ac_freeze"/>
+        <table schema="" tableName="ac_order"/>
 
 
 
