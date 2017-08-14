@@ -32,7 +32,7 @@
                 <ul class="fs12 newsubnav">
                     <li id="Account"><span @click="personal" style="cursor: hand">基本信息</span></li>
                     <li id="EditPwd"><span @click="changePassword" style="cursor: hand">修改密码</span></li>
-                    <li id="Message"><span @click="yijian" style="cursor: hand">投诉建议</span></li>
+                    <%--<li id="Message"><span @click="yijian" style="cursor: hand">投诉建议</span></li>--%>
                 </ul>
             </div>
         </div>
