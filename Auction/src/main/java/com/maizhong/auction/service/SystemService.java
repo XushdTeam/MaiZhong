@@ -54,9 +54,9 @@ public interface SystemService {
 
     JsonResult getChannelOverList(PageSearchParam param);
 
-    JsonResult carDeal(long carId);
+    JsonResult carDeal(long carId,long auctionId);
 
-    JsonResult carSecond(long carId);
+    JsonResult carSecond(long carId,long auctionId);
 
     JsonResult getCompanyUserList(PageSearchParam param);
 

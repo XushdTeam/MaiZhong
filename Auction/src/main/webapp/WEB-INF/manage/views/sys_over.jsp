@@ -176,7 +176,7 @@
             }, second(row){
                 this.confrim("确定加入二拍，编号：" + row.id + " 的" + row.modelName, () => {
                     VM.loading = true;
-                    $.getJSON('/system/car/second/' + row.id, (d) => {
+                    $.getJSON('/system/car/second/' + row.id+'/'+row.auctionId, (d) => {
                         if (d.status == 200) {
                             VM.success();
                             VM.refrush();

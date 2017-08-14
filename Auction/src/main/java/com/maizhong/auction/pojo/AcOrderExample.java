@@ -285,6 +285,66 @@ public class AcOrderExample {
             return (Criteria) this;
         }
 
+        public Criteria andAuctionIdIsNull() {
+            addCriterion("auction_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionIdIsNotNull() {
+            addCriterion("auction_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionIdEqualTo(Long value) {
+            addCriterion("auction_id =", value, "auctionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionIdNotEqualTo(Long value) {
+            addCriterion("auction_id <>", value, "auctionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionIdGreaterThan(Long value) {
+            addCriterion("auction_id >", value, "auctionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("auction_id >=", value, "auctionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionIdLessThan(Long value) {
+            addCriterion("auction_id <", value, "auctionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionIdLessThanOrEqualTo(Long value) {
+            addCriterion("auction_id <=", value, "auctionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionIdIn(List<Long> values) {
+            addCriterion("auction_id in", values, "auctionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionIdNotIn(List<Long> values) {
+            addCriterion("auction_id not in", values, "auctionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionIdBetween(Long value1, Long value2) {
+            addCriterion("auction_id between", value1, value2, "auctionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionIdNotBetween(Long value1, Long value2) {
+            addCriterion("auction_id not between", value1, value2, "auctionId");
+            return (Criteria) this;
+        }
+
         public Criteria andPriceIsNull() {
             addCriterion("price is null");
             return (Criteria) this;

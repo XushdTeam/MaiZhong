@@ -397,7 +397,7 @@
                             <p class="pt20 pb30 fs14  ccheng">泡水</p>
                             <c:forEach items="${carInfo.ps}" var="item" varStatus="status">
                                 <li>
-                                    <img src="${item.img}" onclick="showImg(${status.index+carInfo.baseImgArry.size()+carInfo.sg.size()+carInfo.wgqx.size()+carInfo.nsqx.size()})"><span> ${item.desc}</span>
+                                    <img src="${item.img}" onclick="showImg(${status.index+carInfo.baseImgArry.size()+carInfo.sg.size()+carInfo.wgqx.size()+carInfo.nsqx.size()+carInfo.nsqx.size()})"><span> ${item.desc}</span>
                                 </li>
                             </c:forEach>
                             <c:if test="${carInfo.ps.size()==0}">
@@ -408,7 +408,7 @@
                             <p class="pt20 pb30 fs14  ccheng">火烧</p>
                             <c:forEach items="${carInfo.hs}" var="item" varStatus="status">
                                 <li>
-                                    <img src="${item.img}" onclick="showImg(${status.index+carInfo.baseImgArry.size()+carInfo.sg.size()+carInfo.wgqx.size()+carInfo.ps.size()})"><span> ${item.desc}</span>
+                                    <img src="${item.img}" onclick="showImg(${status.index+carInfo.baseImgArry.size()+carInfo.sg.size()+carInfo.wgqx.size()+carInfo.nsqx.size()+carInfo.ps.size()})"><span> ${item.desc}</span>
                                 </li>
                             </c:forEach>
                             <c:if test="${carInfo.hs.size()==0}">

@@ -10,6 +10,8 @@ public class CarExamineDto {
 
     private Long id;
 
+    private Long auctionId;
+
     private String modelName;
 
     private String picMain;
@@ -47,6 +49,14 @@ public class CarExamineDto {
     public CarExamineDto() {
     }
 
+
+    public Long getAuctionId() {
+        return auctionId;
+    }
+
+    public void setAuctionId(Long auctionId) {
+        this.auctionId = auctionId;
+    }
 
     public String getChKey() {
         return chKey;
