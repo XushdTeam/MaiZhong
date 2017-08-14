@@ -146,6 +146,14 @@ public class IndexController {
         if(StringUtils.isBlank(token)){
             return "redirect:/user/login";
         }
+        AcUser user =  indexService.getUserInfo(token);
+        if(user!=null){
+            model.addAttribute("username",user.getName());
+            model.addAttribute("userInfo",user);
+        }else{
+            return "redirect:/user/login";
+        }
+
         model.addAttribute("menu","/personal");
         return "personal";
     }
