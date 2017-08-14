@@ -17,7 +17,7 @@
 <body>
 <%@ include file="nav.jsp" %>
 
-<div class="w1200 mauto" style="z-index: 1000">
+<div class="w1200 mauto" style="z-index: 1000" id="app">
     <div class="place mt20"><a href=" ">个人中心</a> &gt;&gt;&nbsp;<span class="c9" id="YeQianSan">基本信息<span></div>
     <div class="mt25 clearfix">
 
@@ -26,16 +26,16 @@
             <div class="pl30 pb15 pt15">
                 <h3 class="fs14 c3 lh27">交易中心</h3>
                 <ul class="fs12 newsubnav">
-                    <li id="ConfirmOrderList"><a href=" ">成交确认</a></li>
-                    <li id="OrderList"><a href=" ">订单车辆</a></li>
-                    <li id="HistoryAuctionCarList"><a href=" "  >历史竞价</a></li>
-                    <li id="CarList"><a href=" "  >关注车辆</a></li>
+                    <li id="ConfirmOrderList"><span @click="mylist" style="cursor: hand">成交确认</span></li>
+                    <li id="OrderList"><span @click="orderList" style="cursor: hand">订单车辆</span></li>
+                    <li id="HistoryAuctionCarList"><span @click="bidRecordList" style="cursor: hand">历史订单</span></li>
+                    <li id="CarList"><span @click="likeCarList" style="cursor: hand">关注车辆</span></li>
                 </ul>
                 <h3 class="fs14 c3 lh27 mt20">个人设置</h3>
                 <ul class="fs12 newsubnav">
-                    <li id="Account"><a href=" ">基本信息</a></li>
-                    <li id="EditPwd"><a href=" ">修改密码</a></li>
-                    <li id="Message"><a href=" ">投诉建议</a></li>
+                    <li id="Account"><span @click="personal" style="cursor: hand">基本信息</span></li>
+                    <li id="EditPwd"><span @click="changePassword" style="cursor: hand">修改密码</span></li>
+                    <li id="Message"><span @click="yijian" style="cursor: hand">投诉建议</span></li>
                 </ul>
             </div>
         </div>
@@ -116,6 +116,35 @@
             $("#memoirDialogPopup").hide();
         })
     })
+
+    var vm = new Vue({
+        el: "#app",
+        data: {userInfo:{n1:0,n4:0,freeze:0,n3:0,n2:0} },
+        mounted: function () {
+            $.getJSON('/auction/personalInfo', function (param) {
+                vm.userInfo=param.data
+            })
+        },
+        methods: {
+            changePassword: function () {
+                window.location.href = '/auction/personal/changePass';
+            },mylist: function () {
+                window.location.href = '/auction/personal/mylist';
+            },orderList: function () {
+                window.location.href = '/auction/personal/orderList';
+            },bidRecordList: function () {
+                window.location.href = '/auction/personal/bidRecordList';
+            },likeCarList: function () {
+                window.location.href = '/auction/personal/likeCarList';
+            },personal:function () {
+                window.location.href = '/personal';
+            },yijian:function () {
+                window.location.href = '/auction/personal/myyijian';
+            }
+        },computed:{
+        }
+    })
+
 </script>
 </body>
 </html>
