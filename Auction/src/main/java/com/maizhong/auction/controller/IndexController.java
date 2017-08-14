@@ -10,6 +10,7 @@ import com.maizhong.auction.service.PersonalAppService;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.common.utils.VerifyCodeUtils;
+import net.sf.json.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
