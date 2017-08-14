@@ -1048,11 +1048,11 @@
                 },
                 InitSock(){
                     if('WebSocket' in window) {
-                        websocket = new WebSocket("ws://192.168.2.111:65525/WebSocketJetty/websocket/socketServer?ch=" + this.chKey);
+                        websocket = new WebSocket("ws://118.190.35.31:65525/WebSocketJetty/websocket/socketServer?ch=" + this.chKey);
                     } else if('MozWebSocket' in window) {
-                        websocket = new MozWebSocket("ws://192.168.2.111:65525/WebSocketJetty/websocket/socketServer?ch=" + this.chKey);
+                        websocket = new MozWebSocket("ws://118.190.35.31:65525/WebSocketJetty/websocket/socketServer?ch=" + this.chKey);
                     } else {
-                        websocket = new SockJS("ws://192.168.2.111:65525/WebSocketJetty/websocket/sockjs?ch=" + this.chKey);
+                        websocket = new SockJS("ws://118.190.35.31:65525/WebSocketJetty/websocket/sockjs?ch=" + this.chKey);
                     }
                     websocket.onopen = function(event) {
                         console.log("WebSocket:已连接");

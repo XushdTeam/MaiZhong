@@ -443,10 +443,12 @@ public class IndexServiceImpl implements IndexService {
         List<AcCarLikeKey> acCarLikeKeys = acCarLikeMapper.selectByExample(ex);
         auctionNow.setLikeCount(acCarLikeKeys.size());
         auctionNow.setMyLike(0);
-        for (AcCarLikeKey acCarLikeKey : acCarLikeKeys) {
-            if(acCarLikeKey.getUserId()==acUser.getId()){
-                auctionNow.setMyLike(1);
-                break;
+        if(acUser!=null){
+            for (AcCarLikeKey acCarLikeKey : acCarLikeKeys) {
+                if(acCarLikeKey.getUserId()==acUser.getId()){
+                    auctionNow.setMyLike(1);
+                    break;
+                }
             }
         }
 
