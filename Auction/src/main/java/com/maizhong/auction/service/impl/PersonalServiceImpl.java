@@ -3,18 +3,20 @@ package com.maizhong.auction.service.impl;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.maizhong.auction.dao.JedisClient;
-import com.maizhong.auction.mapper.AcFreezeMapper;
-import com.maizhong.auction.mapper.AcOrderMapper;
+import com.maizhong.auction.dto.CarInfoDto;
+import com.maizhong.auction.mapper.*;
 import com.maizhong.auction.pojo.*;
 import com.maizhong.auction.service.PersonalService;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.JsonUtils;
+import com.maizhong.common.utils.TimeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
+
 
 /**
  * Created by Xushd on 2017/8/14.
@@ -30,6 +32,18 @@ public class PersonalServiceImpl implements PersonalService {
 
     @Autowired
     private AcFreezeMapper acFreezeMapper;
+
+    @Autowired
+    private AcCarLikeMapper acCarLikeMapper;
+
+    @Autowired
+    private AcBidRecordMapper acBidRecordMapper;
+
+    @Autowired
+    private AcAuctionRecordMapper acAuctionRecordMapper;
+
+    @Autowired
+    private CkCarbaseMapper ckCarbaseMapper;
 
 
     /**
@@ -80,6 +94,140 @@ public class PersonalServiceImpl implements PersonalService {
         return JsonResult.OK(object);
     }
 
+    /**
+     * 获取成交确认车辆
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult getOrderDealOK(String token) {
+        AcUser acUser = this.getUserInfoByToken(token);
+
+        if(acUser==null)return JsonResult.Error("未登录");
+
+        AcOrderExample example = new AcOrderExample();
+        example.createCriteria().andUserIdEqualTo(acUser.getId()).andStatusEqualTo(1);
+
+        List<AcOrder> acOrders = acOrderMapper.selectByExample(example);
+
+        JSONArray list = new JSONArray();
+
+        for (AcOrder acOrder : acOrders) {
+            Long carId = acOrder.getCarId();
+            String car_info = jedisClient.hget("CAR_INFO", String.valueOf(carId));
+            CarInfoDto infoDto = JsonUtils.jsonToPojo(car_info, CarInfoDto.class);
+            infoDto.setDealTime(TimeUtils.getFormatDateTime3(acOrder.getCreateTime()));
+            infoDto.setDealPrice(acOrder.getPrice());
+            list.add(infoDto);
+        }
+        return JsonResult.OK(list);
+
+    }
+
+    /**
+     * 获取所有订单
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult getOrderList(String token) {
+        AcUser acUser = this.getUserInfoByToken(token);
+
+        if(acUser==null)return JsonResult.Error("未登录");
+
+        AcOrderExample example = new AcOrderExample();
+        example.createCriteria().andUserIdEqualTo(acUser.getId());
+
+        List<AcOrder> acOrders = acOrderMapper.selectByExample(example);
+
+        JSONArray list = new JSONArray();
+
+        for (AcOrder acOrder : acOrders) {
+            Long carId = acOrder.getCarId();
+            String car_info = jedisClient.hget("CAR_INFO", String.valueOf(carId));
+            CarInfoDto infoDto = JsonUtils.jsonToPojo(car_info, CarInfoDto.class);
+            infoDto.setDealTime(TimeUtils.getFormatDateTime3(acOrder.getCreateTime()));
+            infoDto.setDealPrice(acOrder.getPrice());
+            if(acOrder.getStatus()==0){
+                infoDto.setStatus("等待卖方确认");
+            }else if(acOrder.getStatus()==1){
+                infoDto.setStatus("订单已确认");
+            }else if(acOrder.getStatus()==2){
+                infoDto.setStatus("待付款");
+            }else if(acOrder.getStatus()==3){
+                infoDto.setStatus("交付中");
+            }else if(acOrder.getStatus()==4){
+                infoDto.setStatus("交易完成");
+            }
+            list.add(infoDto);
+        }
+        return JsonResult.OK(list);
+    }
+
+    /**
+     * 获取出价车辆
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult getBidRecordList(String token) {
+
+        AcUser acUser = this.getUserInfoByToken(token);
+
+        if(acUser==null)return JsonResult.Error("未登录");
+
+        AcBidRecordExample example = new AcBidRecordExample();
+        example.createCriteria().andUserIdEqualTo(acUser.getId()).andCreateTimeBetween(TimeUtils.getNowMoring(),new Date());
+        example.setDistinct(true);
+        List<AcBidRecord> acBidRecords = acBidRecordMapper.selectByExample(example);
+        JSONArray list = new JSONArray();
+        for (AcBidRecord acBidRecord : acBidRecords) {
+            Long carId = acBidRecord.getCarId();
+            CkCarbase ckCarbase = ckCarbaseMapper.selectByPrimaryKey(carId);
+            String car_info = jedisClient.hget("CAR_INFO", String.valueOf(carId));
+            CarInfoDto infoDto = JsonUtils.jsonToPojo(car_info, CarInfoDto.class);
+            if(ckCarbase.getStatus()==5){
+                infoDto.setAuction(true);
+            }
+            list.add(infoDto);
+
+        }
+
+
+        return JsonResult.OK(list);
+    }
+
+    /**
+     * 获取关注车辆
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult getLikeCarList(String token) {
+
+        AcUser acUser = this.getUserInfoByToken(token);
+
+        if(acUser==null)return JsonResult.Error("未登录");
+
+        AcCarLikeExample example = new AcCarLikeExample();
+        example.createCriteria().andUserIdEqualTo(acUser.getId());
+        JSONArray list = new JSONArray();
+        List<AcCarLikeKey> acCarLikeKeys = acCarLikeMapper.selectByExample(example);
+        for (AcCarLikeKey acCarLikeKey : acCarLikeKeys) {
+
+            Long carId = acCarLikeKey.getCarId();
+            CkCarbase ckCarbase = ckCarbaseMapper.selectByPrimaryKey(carId);
+            String car_info = jedisClient.hget("CAR_INFO", String.valueOf(carId));
+            CarInfoDto infoDto = JsonUtils.jsonToPojo(car_info, CarInfoDto.class);
+            if(ckCarbase.getStatus()==5){
+                infoDto.setAuction(true);
+            }
+            list.add(infoDto);
+
+        }
+
+        return JsonResult.OK(list);
+    }
 
 
     public AcUser getUserInfoByToken(String token){

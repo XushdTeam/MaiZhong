@@ -10,4 +10,11 @@ public interface PersonalService {
 
     JsonResult getPersonalInfo(String token);
 
+    JsonResult getOrderDealOK(String token);
+
+    JsonResult getOrderList(String token);
+
+    JsonResult getBidRecordList(String token);
+
+    JsonResult getLikeCarList(String token);
 }

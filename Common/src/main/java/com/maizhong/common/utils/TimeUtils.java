@@ -62,6 +62,17 @@ public class TimeUtils {
         SimpleDateFormat format3 = new SimpleDateFormat(format_default_s);
         return format3.format(date);
     }
+
+    /**
+     * 获取当日凌晨时间
+     * @return
+     */
+    public static Date getNowMoring(){
+
+        DateTime dt = new DateTime().withMillisOfDay(0);
+        return dt.toDate();
+    }
+
     /**
      * 通过字符串获取Date
      *
