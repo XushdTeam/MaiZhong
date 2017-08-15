@@ -394,7 +394,7 @@
 .carOpt .placeList span{display:inline-block;margin:10px 11px;cursor:pointer}
 .carOpt .placeList span.cur{background:#f60;color:#fff}
 .carList{margin-top:30px}
-.lineBid{height:42px;line-height:42px;background:#e8e8e8;zoom:1;overflow:hidden}
+.lineBid{height:42px;line-height:42px;background:#e5e5e5;zoom:1;overflow:hidden}
 .lineBid b{font-size:16px;padding-left:32px;margin-right:58px;float:left}
 .lineBid>span{margin-right:40px;cursor:pointer;float:left}
 .lineBid .sortIc i{display:inline-block;width:10px;height:10px;background:url(../../images/AuctionCenter/jydt_speite.png) no-repeat;background-position:-1px -21px;margin-left:3px}
@@ -430,7 +430,7 @@
 .carMains .carMes .mes{padding-top:10px}
 .carMains .carMes .mes,.carMesBox .sign a{font-size:14px;color:#666}
 .carMains .carMes .sign{position:absolute;bottom:8px}
-.carMains .carMes .sign span{display:inline-block;height:28px;text-align:center;line-height:28px;padding:0 6px;margin-right:10px}
+.carMains .carMes .sign span{display:inline-block;height:28px;text-align:center;line-height:28px;padding:0 12px;margin-right:10px}
 .carMains .carMes .sign .dj{background:#f60;border:1px solid #f60;color:#fff}
 .carMains .carMes .sign .scsp{border:1px solid #ff656c;color:#ff656c}
 .carMains .carMes .sign .gh{border:1px solid #07a3e2;color:#07a3e2}

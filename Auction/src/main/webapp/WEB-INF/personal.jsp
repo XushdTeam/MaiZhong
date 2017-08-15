@@ -43,7 +43,7 @@
             <div class=" pt15 pb15 pl20 clearfix">
                 <dl class="userpho fl">
                     <dt>
-                        <img src="resources/main/img/photo.jpg" alt="头像" class="photo">
+                        <img src="resources/main/img/photo.png" alt="头像" class="photo">
                         <p class="togphoto" style="display: none;">更换头像</p>
                     </dt>
                     <dd>
@@ -107,18 +107,18 @@
                         <div class="mt20 clearfix">
                             <div class="fl w380 bgf6 h350 tac">
                                 <p class="pt75">
-                                    <img src="resources/main/img/photo.jpg" width="200px" height="200px" alt="头像" class="userimg">
+                                    <img src="resources/main/img/photo.png" width="200px" height="200px" alt="头像" class="userimg">
 
                                 </p>
                             </div>
                             <div class="fr w155 bgf6 tac h350">
                                 <p class="fs16 pt35">效果预览</p>
                                 <p class="mt20">
-                                    <img src="resources/main/img/photo.jpg" width="100px" height="100px" alt="头像" class="userimg">
+                                    <img src="resources/main/img/photo.png" width="100px" height="100px" alt="头像" class="userimg">
                                 </p>
                                 <p class="fs14 cc mt15">100×100像素</p>
                                 <p class="mt30">
-                                    <img src="resources/main/img/photo.jpg" width="50px" height="50px" alt="头像" class="userimg">
+                                    <img src="resources/main/img/photo.png" width="50px" height="50px" alt="头像" class="userimg">
                                 </p>
                                 <p class="fs14 cc mt15">50×50像素</p>
                             </div>

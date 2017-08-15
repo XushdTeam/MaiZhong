@@ -94,55 +94,45 @@
                         <h1 class="pr">
                             <span class="car-info-name  carName" >${carInfo.modelName}</span>
                         </h1>
-                        <ul class="car-info-tab clearfix fs14 mt15">
+                        <ul class="car-info-tab clearfix fs14">
                             <li class="first">
                                 <p class="regDate">${carInfo.djz.cdrq}</p>
-                                <span>初登日期</span>
+
                             </li>
                             <li>
                                 <p class="mileage">${carInfo.verify.bxlc}万公里</p>
-                                <span>行驶里程</span>
+
                             </li>
                             <li>
                                 <p id="rName">${carInfo.djz.zcd}</p>
-                                <span>所在地</span>
+
                             </li>
                             <li>
                                 <p class="pf">${carInfo.other.pfbz}</p>
-                                <span>排放标准</span>
+
                             </li>
                             <li class="last">
                                 <p class="ghTime">${carInfo.djz.ghcs}次</p>
-                                <span>过户次数</span>
+
                             </li>
                         </ul>
-                        <%--等级--%>
-                        <div class="car-info-grade mt15">
-                            <div class="tip-con">
-                                <p>A：全车除前后保险杠外无修复痕迹</p>
-                                <p>B：全车结构件无损伤，加强件无严重损伤，允许覆盖件有修复</p>
-                                <p>C：全车结构件无重大损伤，允许覆盖件和加强件有修复</p>
-                                <p>D：全车结构件发生一处或多处变形类损伤</p>
-                            </div>
-                            <p class="car-info-grade-pr inblock vm"></p>
-                            <p class="car-info-grade-num inblock vm"><span id="rak">${carInfo.other.pj} ${carInfo.other.pjDes1}</span><span class="car-info-grade-tip">Ⅰ</span></p>
-                            <div class="car-info-grade-text inblock vm">
-                                <p id="randDesc">${carInfo.other.pjDes2}</p>
-                            </div>
-                        </div>
+
                         <%--auction--%>
                         <div class="car-info-state mt10">
                             <div class="car-info-state-top clearfix">
-                                <table width="44%" class="fl mt15 ml_5">
+
+                                <table width="90%" class=" mt15 ml_5">
                                     <tr class="fs14" :class="{'cfen':S20}">
                                         <td width="31%">距结束</td>
                                         <td id="leftTime" class="leftTime" >{{timeText}}</td>
+
                                     </tr>
                                     <tr>
                                         <td class="fs14 c4a">当前价</td>
                                         <td class="ccheng">
                                             <span class="fs36 finalOffer">{{CurPrice}}</span><span class="fs18">万</span>
                                         </td>
+                                        <td class="fbs" >等级B级 良好</td>
                                     </tr>
                                     <tr class="onceBidTr  hide" style="display: table-row;">
                                         <td colspan="2" class="ccheng fs12 onceBid" v-show="!isMyPlus">未出价</td>
@@ -160,11 +150,12 @@
                                         <td colspan="2" class="fs12 ccheng hide promotionMsg" id="promotionMsg" promotion=""></td>
                                     </tr>
                                 </table>
-                                <div class="fr w_50 fs12 c6">
+
+                                <div class=" w_50 fs12 c6" style="margin-left: 20px;    border-top: 1px solid #ccc">
                                     <p class="mt15">
                                         出价记录(<span id="bidCount">{{bidList.length}}</span>)
                                     </p>
-                                    <div class="car-info-record mt8 h90" style="height: 97px;">
+                                    <div class="car-info-record mt8 h90" style="height: 97px; ">
                                         <div width="95%" id="bidList" style="right: 20px; height: 97px;overflow: auto;">
                                             <table style="width: 100%;font-size: 14px;line-height: 20px;">
                                                 <table style="width: 100%;font-size: 14px;line-height: 20px;">
@@ -194,7 +185,7 @@
                                         <input type="text" placeholder="请输入出价金额" v-model="selfPrice" class="mipt bidbox hui" style="width: 174px;" maxlength="7">
                                         <span class="moffer inblock bidPrice" @click="selfPlusPrice">出价</span>
                                     </p>
-                                    <span class="mintell inblock vm mb10 ml5 optiBid" :class="{'mintell_1':!myAuto}" @click="autoPlusPrice">智能<br>报价</span>
+                                    <span class="mintell inblock vm mb10 ml5 optiBid" :class="{'mintell_1':!myAuto}" @click="autoPlusPrice">智能报价</span>
                                 </div>
                             </div>
                             <div class="pt10 pl10 mb10 pr10 clearfix optArea" v-if="myAuto">
@@ -234,6 +225,9 @@
                             </p>
                         </div>
 
+                        <%--等级--%>
+
+
                     </div>
                 </div>
                 <h4 class="mt30 page-tit page-tit-report" id="CarInfoTitle">车辆信息</h4>
@@ -245,48 +239,69 @@
                             <td width="24%" class="cblack">${carInfo.djz.cdrq}</td>
                             <td width="11%">使用性质</td>
                             <td width="24%" class="cblack">${carInfo.xsz.xz}</td>
+
+                        </tr>
+                        <tr height="30" >
                             <td width="11%">表显里程</td>
                             <td width="19%" class="cblack">${carInfo.verify.bxlc}万公里</td>
-                        </tr>
-                        <tr height="30">
                             <td width="11%">出厂日期</td>
                             <td width="24%" class="cblack">${carInfo.djz.ccrq}</td>
+                        </tr>
+                        <tr >
+
                             <td width="11%">注册地</td>
                             <td width="24%" class="cblack">${carInfo.djz.zcd}</td>
                             <td width="11%">排放标准</td>
                             <td width="19%" class="cblack">${carInfo.other.pfbz}</td>
+
                         </tr>
                         <tr height="30">
+
                             <td width="11%">排量</td>
                             <td width="24%" class="cblack">${carInfo.djz.pl}</td>
                             <td width="11%">变速箱形式</td>
                             <td width="19%" class="cblack">${carInfo.bsx}</td>
+
+                        </tr>
+
+                        <tr height="30">
+
                             <td width="11%">品牌型号</td>
                             <td width="19%" class="cblack">${carInfo.xsz.ppxh}</td>
-                        </tr>
-                        <tr height="30">
                             <td width="11%">车辆类型</td>
                             <td width="24%" class="cblack">${carInfo.xsz.lx}</td>
+                        </tr>
+                        <tr height="30">
+
                             <td width="11%">驱动方式</td>
                             <td width="24%" class="cblack">${carInfo.qdfs}</td>
                             <td width="11%">燃油类型</td>
                             <td width="19%" class="cblack">${carInfo.djz.rszl}</td>
+
                         </tr>
                         <tr height="30">
+
                             <td width="11%">颜色/车身颜色</td>
                             <td width="24%" class="cblack">${carInfo.djz.color}</td>
-                            <td width="11%">座位数</td>
-                            <td width="24%" class="cblack">${carInfo.djz.hdzks}</td>
                             <td width="11%">轮胎规格</td>
                             <td width="19%" class="cblack">${carInfo.djz.ltgg}</td>
+
+                        </tr>
+                        <tr height="30">
+                            <td width="11%">座位数</td>
+                            <td width="24%" class="cblack">${carInfo.djz.hdzks}</td>
+                            <td width="11%">过户次数</td>
+                            <td width="19%" class="cblack">${carInfo.djz.ghcs}</td>
+
+
+
                         </tr>
                         <tr height="30">
                             <td width="11%">发动机号</td>
                             <td width="24%" class="cblack">${carInfo.xsz.fdjh}</td>
-                            <td width="11%">过户次数</td>
-                            <td width="19%" class="cblack">${carInfo.djz.ghcs}</td>
                             <td width="11%">现使用方</td>
                             <td width="24%" class="cblack">${carInfo.djz.xsyf}</td>
+
                         </tr>
                         <tr height="30">
 
@@ -313,14 +328,18 @@
                             <c:if test="${carInfo.xsz.wj=='无'}">
                                 <td width="24%" class="ccheng" >${carInfo.xsz.wj}</td>
                             </c:if>
-                            <td width="11%">年检有效期</td>
-                            <td width="19%" class="cblack">${carInfo.xsz.njh}</td>
+
                         </tr>
                         <tr height="30">
                             <%--<td width="11%">购车发票</td>--%>
                             <%--<td width="24%" class="cblack">${carInfo.qtz.}</td>--%>
+                                <td width="11%">年检有效期</td>
+                                <td width="19%" class="cblack">${carInfo.xsz.njh}</td>
                             <td width="11%">交强险有效期</td>
                             <td width="24%" class="cblack">${carInfo.qtz.jqxrq}</td>
+
+                        </tr>
+                        <tr height="30">
                             <td width="11%">交强险所在地</td>
                             <td width="19%" class="cblack">${carInfo.qtz.jqxd}</td>
                             <td width="11%">车船税</td>
@@ -332,13 +351,16 @@
                             <td width="24%" class="cblack">${carInfo.xsz.number}</td>
                             <td width="11%">购置税证</td>
                             <td width="19%" class="cblack">${carInfo.qtz.gzs}</td>
-                            <td width="11%">车身铭牌</td>
-                            <td width="24%" class="cblack">${carInfo.verify.djz}</td>
+
                         </tr>
                         <tr height="30">
-
+                            <td width="11%">车身铭牌</td>
+                            <td width="24%" class="cblack">${carInfo.verify.djz}</td>
                             <td width="11%">外观改装</td>
                             <td width="24%" class="cblack">${carInfo.verify.xsz}</td>
+
+                        </tr>
+                        <tr height="30">
                             <td width="11%">违章记录</td>
                             <c:if test="${carInfo.other.wz=='无'}">
                                 <td width="19%" class="cblack"> ${carInfo.other.wz} </td>
@@ -364,12 +386,16 @@
                             <td width="24%" class="cblack">${carInfo.pz.abs} ${carInfo.pz.absBug}</td>
                             <td width="11%">气囊</td>
                             <td width="24%" class="cblack">${carInfo.pz.qn} ${carInfo.pz.qnBug}</td>
-                            <td width="11%">转向助力</td>
-                            <td width="19%" class="cblack">${carInfo.pz.zxzl} ${carInfo.pz.zxzlBug}</td>
+
                         </tr>
                         <tr height="30">
+                            <td width="11%">转向助力</td>
+                            <td width="19%" class="cblack">${carInfo.pz.zxzl} ${carInfo.pz.zxzlBug}</td>
                             <td width="11%">车窗玻璃</td>
                             <td width="24%" class="cblack">${carInfo.pz.ccbl} ${carInfo.pz.ccblBug}</td>
+
+                        </tr>
+                        <tr height="30">
                             <td width="11%">天窗</td>
                             <td width="24%" class="cblack">${carInfo.pz.tc} ${carInfo.pz.tcBug}</td>
                             <td width="11%">车外后视镜</td>
@@ -380,12 +406,16 @@
                             <td width="24%" class="cblack">${carInfo.pz.zycz}</td>
                             <td width="11%">座椅调节方式</td>
                             <td width="24%" class="cblack">${carInfo.pz.zytjfs}</td>
-                            <td width="11%">座椅功能</td>
-                            <td width="19%" class="cblack">${carInfo.pz.zygn}</td>
+
                         </tr>
                         <tr height="30">
+                            <td width="11%">座椅功能</td>
+                            <td width="19%" class="cblack">${carInfo.pz.zygn}</td>
                             <td width="11%">空调</td>
                             <td width="24%" class="ccheng">${carInfo.pz.kt} ${carInfo.pz.ktBug}</td>
+
+                        </tr>
+                        <tr height="30">
                             <td width="11%">影音设备</td>
                             <td width="24%" class="cblack">${carInfo.pz.yysb} ${carInfo.pz.yysbBug}</td>
                             <td width="11%">导航</td>
@@ -396,10 +426,11 @@
                             <td width="24%" class="ccheng">${carInfo.pz.dsxh} ${carInfo.pz.dsxhBug}</td>
                             <td width="11%">倒车雷达</td>
                             <td width="24%" class="ccheng">${carInfo.pz.dcld} ${carInfo.pz.dcldBug}</td>
-                            <td width="11%">倒车影像</td>
-                            <td width="19%" class="ccheng">${carInfo.pz.dcyx} ${carInfo.pz.dcyxBug}</td>
+
                         </tr>
                         <tr height="30">
+                            <td width="11%">倒车影像</td>
+                            <td width="19%" class="ccheng">${carInfo.pz.dcyx} ${carInfo.pz.dcyxBug}</td>
                             <td width="11%">轮毂</td>
                             <td width="24%" class="cblack">${carInfo.pz.lg}</td>
                         </tr>
@@ -671,7 +702,7 @@
         </div>
         <%--TOP float div--%>
         <div class="car-info-top" style="width: 1200px; margin-left: -600px;z-index: 1989; display: none;">
-            <div class="car-info-top-text clearfix">
+            <div class="car-info-top-text clearfix" style="display:none">
                 <div class="fl w_40">
                     <p class="car-info-name car-info-nameT carName">${carInfo.modelName}</p>
                     <p class="fs12 c6 mt10">
@@ -686,14 +717,17 @@
                 <div class="fl w_25">
                     <table width="100%" class="fs14">
                         <tr :class="{'cfen':S20}">
+
                             <td width="20%">距结束</td>
                             <td class="fb leftTime" >{{timeText}}</td>
+
                         </tr>
                         <tr>
                             <td class="fs14 c4a fb">当前价</td>
                             <td class="ccheng">
                                 <span class="fs36 finalOffer">{{CurPrice}}</span><span class="fs18">万</span>
                             </td>
+                            <td class="fbs" >等级B级 良好</td>
                         </tr>
                     </table>
                 </div>
@@ -707,6 +741,7 @@
                 <span class="inblock cur">车辆信息</span>
                 <span class="inblock">车辆图片</span>
                 <span class="inblock">检测信息</span>
+
             </div>
         </div>
         <%--IMG POP--%>
@@ -841,7 +876,7 @@
                                     <input type="text" placeholder="请输入出价金额" v-model="selfPrice" class="mipt bidbox hui" style="width: 185px;" maxlength="7">
                                     <span class="moffer inblock bidPrice" @click="selfPlusPrice">出价</span>
                                 </p>
-                                <span class="mintell inblock vm mt10 ml5 optiBid" :class="{'mintell_1':!myAuto}" @click="autoPlusPrice">智能<br>报价</span>
+                                <span class="mintell inblock vm mt10 ml5 optiBid" :class="{'mintell_1':!myAuto}" @click="autoPlusPrice">智能报价</span>
                             </div>
 
                             <div class="pt10 pl10  pr10 clearfix optArea" v-if="myAuto">
@@ -860,8 +895,8 @@
                                 <p class="mt15">
                                     出价记录(<span>{{bidList.length}}</span>)
                                 </p>
-                                <div class="car-info-record mt8 h90" style="height: 170px;">
-                                    <div width="95%"  style="right: 20px; height: 170px;overflow: auto;">
+                                <div class="car-info-record mt8 h90" style="height: 100px;">
+                                    <div width="95%"  style="right: 20px; height: 100px;overflow: auto;">
                                         <table style="width: 100%;font-size: 14px;line-height: 20px;">
                                             <tr v-for="item in bidList">
                                                 <td width="34%">

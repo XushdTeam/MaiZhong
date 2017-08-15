@@ -43,6 +43,8 @@ a {
 .zi2 {
     z-index: 2
 }
+.fbs{
+    color: #f60; font-size: 24px}
 
 .car-info {
     padding-left: 600px;
@@ -232,8 +234,9 @@ a {
 .car-info-tab li {
     float: left;
     text-align: center;
-    padding: 0 5%;
-    border-right: #d5d5d5 solid 1px
+    padding: 0 3%;
+    border-right: #d5d5d5 solid 1px;
+    margin-top: 7px
 }
 
 .car-info-tab li.first {
@@ -245,8 +248,9 @@ a {
 }
 
 .car-info-tab li p {
-    color: #000;
-    height: 20px;
+
+    color: #999;
+    height: 10px;
     margin-bottom: 5px
 }
 
@@ -258,8 +262,8 @@ a {
 
 .car-info-grade {
     min-height: 85px;
-    background: #f4f4f4;
-    border: 1px solid #e6e6e6;
+    background: #f5f5f5;
+
     position: relative;
     z-index: 2
 }
@@ -317,19 +321,20 @@ a {
     position: absolute;
     width: 26px;
     height: 25px;
-    background: url(/images/cardetail/artBg.png) left -150px;
+
     top: 10px;
     right: 4%
 }
 
 .car-info-state {
     min-height: 200px;
-    border: solid 1px #ffdac2
+    border: solid 1px #ccc
 }
 
 .car-info-state-top {
-    background: #fff5ef;
-    height: 143px
+    background: #f5f5f5;
+    padding-bottom: 20px;
+
 }
 
 .car-info-record {
@@ -375,7 +380,7 @@ a {
     display: inline-block;
     *display: inline;
     *zoom: 1;
-    width: 50px;
+    width: 80px;
     height: 34px;
     line-height: 34px;
     text-align: center;
@@ -436,13 +441,13 @@ a {
 }
 
 .mintell {
-    width: 42px;
+    width: 142px;
     height: 34px;
     padding-top: 2px;
-    line-height: 16px;
+    line-height: 34px;
     background: #999;
     border-radius: 2px;
-    font-size: 12px;
+    font-size: 18px;
     color: #fff;
     text-align: center;
     cursor: pointer
@@ -564,16 +569,16 @@ a {
 
 .car-pho li {
     float: left;
-    width: 280px;
-    height: 210px;
+    width: 560px;
+
     position: relative;
-    margin: 0 20px 10px 0;
+    margin: 0 20px 10px 20px;
     cursor: pointer
 }
 
 .car-pho li img {
-    width: 280px;
-    height: 210px;
+    width:100%;
+
     vertical-align: top
 }
 
@@ -581,7 +586,7 @@ a {
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 260px;
+    width: 540px;
     padding: 0 10px;
     height: 32px;
     line-height: 32px;
@@ -593,11 +598,11 @@ a {
     text-overflow: ellipsis;
     background: rgba(0, 0, 0, .6);
     background: rgba(0, 0, 0, 0) \9;
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType='0', startcolorstr='#99000000', endcolorstr='#99000000')
+
 }
 
 .degree {
-    width: 24px;
+    width: 4px;
     height: 24px
 }
 
@@ -779,16 +784,16 @@ a {
 }
 
 .car-info-top-tab {
-    border: 1px solid #FF6600;
+    line-height:47px;
     border-top: none
 }
 
 .car-info-top-tab span {
     width: 128px;
-    height: 42px;
-    line-height: 42px;
+    height:56px;
+    line-height: 55px;
     color: #666;
-    font-size: 14px;
+    font-size: 18px;
     text-align: center;
     cursor: pointer;
     border-right: solid 1px #FF6600;
@@ -874,8 +879,8 @@ a {
 
 .car-info-over {
     position: absolute;
-    right: 0;
-    top: 20px;
+    right: 35%;
+    top: 20%;
     z-index: 10
 }
 
@@ -1674,7 +1679,7 @@ i {
 }
 
 .w_50 {
-    width: 50%
+    width: 90%
 }
 
 .w_49 {
