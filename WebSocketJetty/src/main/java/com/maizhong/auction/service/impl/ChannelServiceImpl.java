@@ -112,6 +112,7 @@ public class ChannelServiceImpl implements ChannelService {
                     //创建订单
                     long orderNum = IDUtils.getOrderId();
                     AcOrder order = new AcOrder();
+                    order.setAuctionId(recordId);
                     order.setOrderNum(orderNum);
                     order.setCarId(carId);
                     order.setPrice(dto.getNowPrice());

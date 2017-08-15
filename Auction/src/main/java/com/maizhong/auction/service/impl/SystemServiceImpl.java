@@ -77,6 +77,8 @@ public class SystemServiceImpl implements SystemService {
     @Autowired
     private AcAuctionRecordMapper acAuctionRecordMapper;
     @Autowired
+    private AcFreezeMapper acFreezeMapper;
+    @Autowired
     private JedisClient jedisClient;
 
     @Override
@@ -718,6 +720,8 @@ public class SystemServiceImpl implements SystemService {
             dto.setEndPrice(record.getPrice());
             dto.setId(carId);
 
+            dto.setAuctionId(record.getId());
+
             dto.setModelName(carbase.getModelName());
             dto.setUserName(carbase.getUserName());
             dto.setUserPhone(carbase.getUserPhone());
@@ -752,22 +756,18 @@ public class SystemServiceImpl implements SystemService {
      */
     @Override
     @Transactional
-    public JsonResult carDeal(long carId) {
+    public JsonResult carDeal(long carId,long auctionId) {
 
         AcOrderExample example = new AcOrderExample();
-        AcOrderExample.Criteria criteria = example.createCriteria();
-        criteria.andCarIdEqualTo(carId);
+        example.createCriteria().andCarIdEqualTo(carId).andAuctionIdEqualTo(auctionId);
         AcOrder acOrder = new AcOrder();
         acOrder.setStatus(1);
         int i = acOrderMapper.updateByExampleSelective(acOrder, example);
         if (i > 0) {
             AcAuctionRecord record = new AcAuctionRecord();
             record.setStatus(3);
-            AcAuctionRecordExample recordExample = new AcAuctionRecordExample();
-            AcAuctionRecordExample.Criteria recordExampleCriteria = recordExample.createCriteria();
-            recordExampleCriteria.andStatusEqualTo(1).andCarIdEqualTo(carId);
-
-            acAuctionRecordMapper.updateByExampleSelective(record,recordExample);
+            record.setId(auctionId);
+            acAuctionRecordMapper.updateByPrimaryKey(record);
 
             CkCarbase ckCarbase = new CkCarbase();
             ckCarbase.setId(carId);
@@ -786,25 +786,35 @@ public class SystemServiceImpl implements SystemService {
      * @return
      */
     @Override
-    public JsonResult carSecond(long carId) {
-        CkCarbase ckCarbase = new CkCarbase();
+    public JsonResult carSecond(long carId,long auctionId) {
+        CkCarbase ckCarbase = carbaseMapper.selectByPrimaryKey(carId);
         ckCarbase.setId(carId);
         ckCarbase.setStatus(3);
-        ckCarbase.setAuctionCount(2);
+        ckCarbase.setAuctionCount(ckCarbase.getAuctionCount()+1);
         int i = carbaseMapper.updateByPrimaryKeySelective(ckCarbase);
         if (i > 0) {
             AcAuctionRecord record = new AcAuctionRecord();
             record.setStatus(2);
-            AcAuctionRecordExample recordExample = new AcAuctionRecordExample();
-            AcAuctionRecordExample.Criteria recordExampleCriteria = recordExample.createCriteria();
-            recordExampleCriteria.andStatusEqualTo(1).andCarIdEqualTo(carId);
+            record.setId(auctionId);
+            acAuctionRecordMapper.updateByPrimaryKeySelective(record);
 
-            acAuctionRecordMapper.updateByExampleSelective(record,recordExample);
+
+            AcOrder order = new AcOrder();
+            order.setStatus(-1);
 
             AcOrderExample orderExample = new AcOrderExample();
-            AcOrderExample.Criteria orderExampleCriteria = orderExample.createCriteria();
-            orderExampleCriteria.andCarIdEqualTo(carId);
-            acOrderMapper.deleteByExample(orderExample);
+
+            orderExample.createCriteria().andCarIdEqualTo(carId).andAuctionIdEqualTo(auctionId);
+
+            acOrderMapper.updateByExampleSelective(order,orderExample);
+
+            //清楚冻结资金
+            AcFreezeExample acFreezeExample = new AcFreezeExample();
+            acFreezeExample.createCriteria().andAuctionIdEqualTo(auctionId);
+
+            acFreezeMapper.deleteByExample(acFreezeExample);
+
+
 
             return JsonResult.OK();
         }

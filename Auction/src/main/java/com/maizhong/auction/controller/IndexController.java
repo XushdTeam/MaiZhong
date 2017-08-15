@@ -10,6 +10,7 @@ import com.maizhong.auction.service.PersonalAppService;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.common.utils.VerifyCodeUtils;
+import net.sf.json.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -400,11 +401,39 @@ public class IndexController {
         return "detail";
     }
 
-    @RequestMapping(value = "/to/{url}")
-    public String gotoUrl(@PathVariable String url){
+    /**
+     * 检测报告
+     * @param token
+     * @param carId
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/list/check/report/{carId}")
+    public String carDetailNoAuction(@CookieValue(value = "token",required = false) String token,
+                                     @PathVariable long carId,
+                                     Model model){
+        if(StringUtils.isNotBlank(token)){
+            AcUser user =  indexService.getUserInfo(token);
+            if(user!=null){
+                model.addAttribute("username",user.getName());
+                model.addAttribute("userId",user.getId());
+            }
+        }
 
-        return url;
+        CarDetailDto dto = indexService.getCarDetail(carId);
+        model.addAttribute("title",dto.getModelName());
+        model.addAttribute("carInfo",dto);
+
+        return "check_report";
     }
+
+
+
+//    @RequestMapping(value = "/to/{url}")
+//    public String gotoUrl(@PathVariable String url){
+//
+//        return url;
+//    }
 
     /**
      * 获取当前车辆拍卖状态

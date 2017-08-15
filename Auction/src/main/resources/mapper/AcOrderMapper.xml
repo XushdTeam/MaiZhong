@@ -5,6 +5,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="order_num" jdbcType="BIGINT" property="orderNum" />
     <result column="car_id" jdbcType="BIGINT" property="carId" />
+    <result column="auction_id" jdbcType="BIGINT" property="auctionId" />
     <result column="price" jdbcType="VARCHAR" property="price" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="ch_key" jdbcType="VARCHAR" property="chKey" />
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, order_num, car_id, price, user_id, ch_key, status, create_time
+    id, order_num, car_id, auction_id, price, user_id, ch_key, status, create_time
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.auction.pojo.AcOrderExample" resultMap="BaseResultMap">
     select
@@ -104,11 +105,13 @@
   </delete>
   <insert id="insert" parameterType="com.maizhong.auction.pojo.AcOrder">
     insert into ac_order (id, order_num, car_id, 
-      price, user_id, ch_key, 
-      status, create_time)
+      auction_id, price, user_id, 
+      ch_key, status, create_time
+      )
     values (#{id,jdbcType=BIGINT}, #{orderNum,jdbcType=BIGINT}, #{carId,jdbcType=BIGINT}, 
-      #{price,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, #{chKey,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+      #{auctionId,jdbcType=BIGINT}, #{price,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+      #{chKey,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.auction.pojo.AcOrder">
     insert into ac_order
@@ -121,6 +124,9 @@
       </if>
       <if test="carId != null">
         car_id,
+      </if>
+      <if test="auctionId != null">
+        auction_id,
       </if>
       <if test="price != null">
         price,
@@ -147,6 +153,9 @@
       </if>
       <if test="carId != null">
         #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="auctionId != null">
+        #{auctionId,jdbcType=BIGINT},
       </if>
       <if test="price != null">
         #{price,jdbcType=VARCHAR},
@@ -183,6 +192,9 @@
       <if test="record.carId != null">
         car_id = #{record.carId,jdbcType=BIGINT},
       </if>
+      <if test="record.auctionId != null">
+        auction_id = #{record.auctionId,jdbcType=BIGINT},
+      </if>
       <if test="record.price != null">
         price = #{record.price,jdbcType=VARCHAR},
       </if>
@@ -208,6 +220,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       order_num = #{record.orderNum,jdbcType=BIGINT},
       car_id = #{record.carId,jdbcType=BIGINT},
+      auction_id = #{record.auctionId,jdbcType=BIGINT},
       price = #{record.price,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=BIGINT},
       ch_key = #{record.chKey,jdbcType=VARCHAR},
@@ -225,6 +238,9 @@
       </if>
       <if test="carId != null">
         car_id = #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="auctionId != null">
+        auction_id = #{auctionId,jdbcType=BIGINT},
       </if>
       <if test="price != null">
         price = #{price,jdbcType=VARCHAR},
@@ -248,6 +264,7 @@
     update ac_order
     set order_num = #{orderNum,jdbcType=BIGINT},
       car_id = #{carId,jdbcType=BIGINT},
+      auction_id = #{auctionId,jdbcType=BIGINT},
       price = #{price,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=BIGINT},
       ch_key = #{chKey,jdbcType=VARCHAR},

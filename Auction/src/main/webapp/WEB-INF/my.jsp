@@ -34,7 +34,7 @@
                 <ul class="fs12 newsubnav">
                     <li id="Account"><a href=" ">基本信息</a></li>
                     <li id="EditPwd"><a href=" ">修改密码</a></li>
-                    <li id="Message"><a href=" ">投诉建议</a></li>
+                   <%-- <li id="Message"><a href=" ">投诉建议</a></li>--%>
                 </ul>
             </div>
         </div>

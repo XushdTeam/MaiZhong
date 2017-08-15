@@ -9,6 +9,8 @@ public class AcOrder {
 
     private Long carId;
 
+    private Long auctionId;
+
     private String price;
 
     private Long userId;
@@ -41,6 +43,14 @@ public class AcOrder {
 
     public void setCarId(Long carId) {
         this.carId = carId;
+    }
+
+    public Long getAuctionId() {
+        return auctionId;
+    }
+
+    public void setAuctionId(Long auctionId) {
+        this.auctionId = auctionId;
     }
 
     public String getPrice() {

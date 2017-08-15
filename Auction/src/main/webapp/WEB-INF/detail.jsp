@@ -542,7 +542,7 @@
                                 <p class="pt20 pb30 fs14  ccheng">泡水</p>
                                 <c:forEach items="${carInfo.ps}" var="item" varStatus="status">
                                     <li>
-                                        <img src="${item.img}" onclick="showImg(${status.index+carInfo.baseImgArry.size()+carInfo.sg.size()+carInfo.wgqx.size()+carInfo.nsqx.size()})"><span> ${item.desc}</span>
+                                        <img src="${item.img}" onclick="showImg(${status.index+carInfo.baseImgArry.size()+carInfo.sg.size()+carInfo.wgqx.size()+carInfo.nsqx.size()+carInfo.nsqx.size()})"><span> ${item.desc}</span>
                                     </li>
                                 </c:forEach>
                                 <c:if test="${carInfo.ps.size()==0}">
@@ -553,7 +553,7 @@
                                 <p class="pt20 pb30 fs14  ccheng">火烧</p>
                                 <c:forEach items="${carInfo.hs}" var="item" varStatus="status">
                                     <li>
-                                        <img src="${item.img}" onclick="showImg(${status.index+carInfo.baseImgArry.size()+carInfo.sg.size()+carInfo.wgqx.size()+carInfo.ps.size()})"><span> ${item.desc}</span>
+                                        <img src="${item.img}" onclick="showImg(${status.index+carInfo.baseImgArry.size()+carInfo.sg.size()+carInfo.wgqx.size()+carInfo.ps.size()+carInfo.nsqx.size()})"><span> ${item.desc}</span>
                                     </li>
                                 </c:forEach>
                                 <c:if test="${carInfo.hs.size()==0}">
@@ -1083,11 +1083,11 @@
                 },
                 InitSock(){
                     if('WebSocket' in window) {
-                        websocket = new WebSocket("ws://192.168.2.111:65525/WebSocketJetty/websocket/socketServer?ch=" + this.chKey);
+                        websocket = new WebSocket("ws://118.190.35.31:65525/WebSocketJetty/websocket/socketServer?ch=" + this.chKey);
                     } else if('MozWebSocket' in window) {
-                        websocket = new MozWebSocket("ws://192.168.2.111:65525/WebSocketJetty/websocket/socketServer?ch=" + this.chKey);
+                        websocket = new MozWebSocket("ws://118.190.35.31:65525/WebSocketJetty/websocket/socketServer?ch=" + this.chKey);
                     } else {
-                        websocket = new SockJS("ws://192.168.2.111:65525/WebSocketJetty/websocket/sockjs?ch=" + this.chKey);
+                        websocket = new SockJS("ws://118.190.35.31:65525/WebSocketJetty/websocket/sockjs?ch=" + this.chKey);
                     }
                     websocket.onopen = function(event) {
                         console.log("WebSocket:已连接");
