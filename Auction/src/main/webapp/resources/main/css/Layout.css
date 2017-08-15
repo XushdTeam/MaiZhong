@@ -683,7 +683,7 @@ position:relative;cursor:pointer}
 .top .weixin .weixinbox{position:absolute;left:0;top:39px;padding:10px 10px 0;border:1px solid #e4e3e3;display:none;background-color:#fff;z-index:2;width:92px}
 .top .weixin .weixinbox p{text-align:center;color:#959595}
 .top .weixin .weixinbox img{width:92px}
-.nav{width:100%;min-width:1200px;height:88px;border-bottom:solid 2px #f60;background:#fff}
+.nav{width:100%;min-width:1200px;height:88px;border-bottom:solid 2px #f60;background:#fff; margin: 0 auto}
 .nav .logo{display:block;width:230px;height:54px;float:left;margin-top:17px}
 .nav .logo img{display:block; width: 200px}
 .nav ul{display:block;float:left;padding:26px 0px;}
