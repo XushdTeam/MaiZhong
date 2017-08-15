@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>优评拍车</title>
+    <title>优品拍车</title>
     <%@ include file="head.jsp"%>
 </head>
 <body >

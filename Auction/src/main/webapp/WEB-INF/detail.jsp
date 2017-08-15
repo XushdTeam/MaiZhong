@@ -94,26 +94,26 @@
                         <h1 class="pr">
                             <span class="car-info-name  carName" >${carInfo.modelName}</span>
                         </h1>
-                        <ul class="car-info-tab clearfix fs14">
+                        <ul class="car-info-tab clearfix fs14 mt15">
                             <li class="first">
                                 <p class="regDate">${carInfo.djz.cdrq}</p>
-
+                                <span>初登日期</span>
                             </li>
                             <li>
                                 <p class="mileage">${carInfo.verify.bxlc}万公里</p>
-
+                                <span>行驶里程</span>
                             </li>
                             <li>
                                 <p id="rName">${carInfo.djz.zcd}</p>
-
+                                <span>所在地</span>
                             </li>
                             <li>
                                 <p class="pf">${carInfo.other.pfbz}</p>
-
+                                <span>排放标准</span>
                             </li>
                             <li class="last">
                                 <p class="ghTime">${carInfo.djz.ghcs}次</p>
-
+                                <span>过户次数</span>
                             </li>
                         </ul>
 
@@ -132,7 +132,7 @@
                                         <td class="ccheng">
                                             <span class="fs36 finalOffer">{{CurPrice}}</span><span class="fs18">万</span>
                                         </td>
-                                        <td class="fbs" >等级B级 良好</td>
+                                        <td class="fbs" >${carInfo.other.pj} ${carInfo.other.pjDes1}</td>
                                     </tr>
                                     <tr class="onceBidTr  hide" style="display: table-row;">
                                         <td colspan="2" class="ccheng fs12 onceBid" v-show="!isMyPlus">未出价</td>
@@ -185,6 +185,12 @@
                                         <input type="text" placeholder="请输入出价金额" v-model="selfPrice" class="mipt bidbox hui" style="width: 174px;" maxlength="7">
                                         <span class="moffer inblock bidPrice" @click="selfPlusPrice">出价</span>
                                     </p>
+
+                                    <%--<p class="mipt-box inblock vm mb10">--%>
+                                        <%--<span class="mipt-tip"><span class="mipTip">出价不能小于当前价</span><i class="mipt-tip-dot"></i></span>--%>
+                                        <%--<input type="text" placeholder="请输入出价金额" v-model="selfPrice" class="mipt bidbox hui" style="width: 174px;" maxlength="7">--%>
+                                        <%--<span class="moffer inblock bidPrice" @click="selfPlusPrice">智能报价</span>--%>
+                                    <%--</p>--%>
                                     <span class="mintell inblock vm mb10 ml5 optiBid" :class="{'mintell_1':!myAuto}" @click="autoPlusPrice">智能报价</span>
                                 </div>
                             </div>
@@ -702,8 +708,8 @@
         </div>
         <%--TOP float div--%>
         <div class="car-info-top" style="width: 1200px; margin-left: -600px;z-index: 1989; display: none;">
-            <div class="car-info-top-text clearfix" style="display:none">
-                <div class="fl w_40">
+            <div class="car-info-top-text clearfix">
+                <div class="fl " style="width: 600px">
                     <p class="car-info-name car-info-nameT carName">${carInfo.modelName}</p>
                     <p class="fs12 c6 mt10">
                         <span class="regDate">${carInfo.djz.cdrq}</span>
@@ -714,7 +720,7 @@
                         <i class="italicmg">|</i><span class="ghTime">${carInfo.djz.ghcs}次</span>过户
                     </p>
                 </div>
-                <div class="fl w_25">
+                <div class="fr w_25">
                     <table width="100%" class="fs14">
                         <tr :class="{'cfen':S20}">
 
@@ -727,7 +733,6 @@
                             <td class="ccheng">
                                 <span class="fs36 finalOffer">{{CurPrice}}</span><span class="fs18">万</span>
                             </td>
-                            <td class="fbs" >等级B级 良好</td>
                         </tr>
                     </table>
                 </div>
@@ -919,7 +924,7 @@
         <%--plus--%>
         <div class="popup hide" style="z-index: 19890509" id="plusDialog">
             <p class="vam"></p>
-            <div class="content bgwhite w375 pr pr15 pl15 pup-shadow content-two" style="display: inline-block;" >
+            <div class="content bgwhite w375 pr pr15 pl15  content-two" style="display: inline-block;border: 2px solid #FF6600" >
                 <div class="pt20 pb20">
                     <p class="fs14 c6 mt10" id="bidTip">
                     </p>
@@ -942,7 +947,7 @@
         <%--auto_plus--%>
         <div class="popup hide" style="z-index: 10000000; " id="autoDialog">
             <p class="vam"></p>
-            <div class="content bgwhite w375 pr pr15 pl15 content-two" style="" id="optiBidDialog">
+            <div class="content bgwhite w375 pr pr15 pl15 content-two" style="border: 2px solid #FF6600" id="optiBidDialog">
                 <div class="pt20 pb20">
                     <p class="fs18 c4">智能报价</p>
                     <p class="fs14 c6 mt10">
