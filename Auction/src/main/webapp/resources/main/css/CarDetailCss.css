@@ -247,12 +247,13 @@ a {
     border: none
 }
 
-.car-info-tab li p {
 
-    color: #999;
-    height: 10px;
-    margin-bottom: 5px
+.car-info-tab li p {
+    color: #000;
+    height: 20px;
+    margin-bottom: 5px;
 }
+
 
 .car-info-tab li span {
     display: block;
@@ -407,12 +408,12 @@ a {
 
 .mipt-tip-dot {
     position: absolute;
-    top: 20px;
+    top: -12px;
     left: 20px;
     width: 0;
     height: 0;
     border: solid 6px;
-    border-color: #00c7e1 transparent transparent transparent
+    border-color: transparent transparent #F44336 transparent;
 }
 
 .mipt {
@@ -784,14 +785,16 @@ a {
 }
 
 .car-info-top-tab {
-    line-height:47px;
-    border-top: none
+    line-height: 28px;
+    /* border-top: none; */
+    border: 1px solid #F60;
+    border-top: none;
 }
 
 .car-info-top-tab span {
     width: 128px;
-    height:56px;
-    line-height: 55px;
+    height: 40px;
+    line-height: 40px;
     color: #666;
     font-size: 18px;
     text-align: center;
@@ -865,16 +868,16 @@ a {
 
 .mipt-tip {
     position: absolute;
-    top: -30px;
+    top: 40px;
     left: 0;
-    background-color: #07a3e2;
+    background-color: #F44336;
     color: #fff;
     font-size: 12px;
     padding: 0 6px;
     height: 20px;
     line-height: 20px;
     border-radius: 2px;
-    display: none
+    display: none;
 }
 
 .car-info-over {
