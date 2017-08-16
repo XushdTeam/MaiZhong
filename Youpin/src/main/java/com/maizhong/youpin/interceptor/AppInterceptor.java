@@ -18,7 +18,7 @@ public class AppInterceptor extends HandlerInterceptorAdapter {
         String token = request.getHeader("X-Maizhong-AppKey");
 
         //没有Token返回404 进行拦截
-        if (StringUtils.isNotBlank(token)) {
+        if (StringUtils.isNotBlank(token) || StringUtils.contains(String.valueOf(request.getRequestURL()),"/app/token")) {
             request.setAttribute("token",token);
             return true;
         } else {

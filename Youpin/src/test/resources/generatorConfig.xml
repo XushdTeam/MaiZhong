@@ -46,11 +46,11 @@
 
         <!-- 指定数据库表 -->
 
-        <table schema="" tableName="user"/>
-        <table schema="" tableName="sale_record"/>
-        <table schema="" tableName="sale_img"/>
-        <table schema="" tableName="manager_user"/>
-        <table schema="" tableName="company"/>
+        <!--<table schema="" tableName="user"/>-->
+        <!--<table schema="" tableName="sale_record"/>-->
+        <!--<table schema="" tableName="sale_img"/>-->
+        <!--<table schema="" tableName="manager_user"/>-->
+        <table schema="" tableName="doc"/>
 
 
 
