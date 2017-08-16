@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maizhong.youpin.mapper.SaleRecordMapper">
+  <resultMap id="BaseResultMap" type="com.maizhong.youpin.pojo.SaleRecord">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="model_id" jdbcType="BIGINT" property="modelId" />
+    <result column="reg_date" jdbcType="VARCHAR" property="regDate" />
+    <result column="city_id" jdbcType="VARCHAR" property="cityId" />
+    <result column="s_km" jdbcType="VARCHAR" property="sKm" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="jqx" jdbcType="VARCHAR" property="jqx" />
+    <result column="nj" jdbcType="VARCHAR" property="nj" />
+    <result column="xz" jdbcType="VARCHAR" property="xz" />
+    <result column="gh" jdbcType="VARCHAR" property="gh" />
+    <result column="ghtime" jdbcType="VARCHAR" property="ghtime" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="ck" jdbcType="VARCHAR" property="ck" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="ordernum" jdbcType="VARCHAR" property="ordernum" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="createtime" jdbcType="VARCHAR" property="createtime" />
+    <result column="updatetime" jdbcType="VARCHAR" property="updatetime" />
+    <result column="solve_person" jdbcType="VARCHAR" property="solvePerson" />
+    <result column="solve_time" jdbcType="VARCHAR" property="solveTime" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, model_id, reg_date, city_id, s_km, color, jqx, nj, xz, gh, ghtime, method, ck, 
+    price, ordernum, status, createtime, updatetime, solve_person, solve_time, level, 
+    mark
+  </sql>
+  <select id="selectByExample" parameterType="com.maizhong.youpin.pojo.SaleRecordExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sale_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sale_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sale_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maizhong.youpin.pojo.SaleRecordExample">
+    delete from sale_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maizhong.youpin.pojo.SaleRecord">
+    insert into sale_record (id, model_id, reg_date, 
+      city_id, s_km, color, 
+      jqx, nj, xz, gh, 
+      ghtime, method, ck, 
+      price, ordernum, status, 
+      createtime, updatetime, solve_person, 
+      solve_time, level, mark
+      )
+    values (#{id,jdbcType=BIGINT}, #{modelId,jdbcType=BIGINT}, #{regDate,jdbcType=VARCHAR}, 
+      #{cityId,jdbcType=VARCHAR}, #{sKm,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{jqx,jdbcType=VARCHAR}, #{nj,jdbcType=VARCHAR}, #{xz,jdbcType=VARCHAR}, #{gh,jdbcType=VARCHAR}, 
+      #{ghtime,jdbcType=VARCHAR}, #{method,jdbcType=VARCHAR}, #{ck,jdbcType=VARCHAR}, 
+      #{price,jdbcType=VARCHAR}, #{ordernum,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=VARCHAR}, #{updatetime,jdbcType=VARCHAR}, #{solvePerson,jdbcType=VARCHAR}, 
+      #{solveTime,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, #{mark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.maizhong.youpin.pojo.SaleRecord">
+    insert into sale_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="modelId != null">
+        model_id,
+      </if>
+      <if test="regDate != null">
+        reg_date,
+      </if>
+      <if test="cityId != null">
+        city_id,
+      </if>
+      <if test="sKm != null">
+        s_km,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="jqx != null">
+        jqx,
+      </if>
+      <if test="nj != null">
+        nj,
+      </if>
+      <if test="xz != null">
+        xz,
+      </if>
+      <if test="gh != null">
+        gh,
+      </if>
+      <if test="ghtime != null">
+        ghtime,
+      </if>
+      <if test="method != null">
+        method,
+      </if>
+      <if test="ck != null">
+        ck,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="ordernum != null">
+        ordernum,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="solvePerson != null">
+        solve_person,
+      </if>
+      <if test="solveTime != null">
+        solve_time,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="mark != null">
+        mark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="modelId != null">
+        #{modelId,jdbcType=BIGINT},
+      </if>
+      <if test="regDate != null">
+        #{regDate,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null">
+        #{cityId,jdbcType=VARCHAR},
+      </if>
+      <if test="sKm != null">
+        #{sKm,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="jqx != null">
+        #{jqx,jdbcType=VARCHAR},
+      </if>
+      <if test="nj != null">
+        #{nj,jdbcType=VARCHAR},
+      </if>
+      <if test="xz != null">
+        #{xz,jdbcType=VARCHAR},
+      </if>
+      <if test="gh != null">
+        #{gh,jdbcType=VARCHAR},
+      </if>
+      <if test="ghtime != null">
+        #{ghtime,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="ck != null">
+        #{ck,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="ordernum != null">
+        #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="solvePerson != null">
+        #{solvePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="solveTime != null">
+        #{solveTime,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="mark != null">
+        #{mark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maizhong.youpin.pojo.SaleRecordExample" resultType="java.lang.Long">
+    select count(*) from sale_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sale_record
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.modelId != null">
+        model_id = #{record.modelId,jdbcType=BIGINT},
+      </if>
+      <if test="record.regDate != null">
+        reg_date = #{record.regDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityId != null">
+        city_id = #{record.cityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sKm != null">
+        s_km = #{record.sKm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.color != null">
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jqx != null">
+        jqx = #{record.jqx,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nj != null">
+        nj = #{record.nj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xz != null">
+        xz = #{record.xz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gh != null">
+        gh = #{record.gh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ghtime != null">
+        ghtime = #{record.ghtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.method != null">
+        method = #{record.method,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ck != null">
+        ck = #{record.ck,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordernum != null">
+        ordernum = #{record.ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatetime != null">
+        updatetime = #{record.updatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.solvePerson != null">
+        solve_person = #{record.solvePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.solveTime != null">
+        solve_time = #{record.solveTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null">
+        level = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.mark != null">
+        mark = #{record.mark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sale_record
+    set id = #{record.id,jdbcType=BIGINT},
+      model_id = #{record.modelId,jdbcType=BIGINT},
+      reg_date = #{record.regDate,jdbcType=VARCHAR},
+      city_id = #{record.cityId,jdbcType=VARCHAR},
+      s_km = #{record.sKm,jdbcType=VARCHAR},
+      color = #{record.color,jdbcType=VARCHAR},
+      jqx = #{record.jqx,jdbcType=VARCHAR},
+      nj = #{record.nj,jdbcType=VARCHAR},
+      xz = #{record.xz,jdbcType=VARCHAR},
+      gh = #{record.gh,jdbcType=VARCHAR},
+      ghtime = #{record.ghtime,jdbcType=VARCHAR},
+      method = #{record.method,jdbcType=VARCHAR},
+      ck = #{record.ck,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=VARCHAR},
+      ordernum = #{record.ordernum,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      createtime = #{record.createtime,jdbcType=VARCHAR},
+      updatetime = #{record.updatetime,jdbcType=VARCHAR},
+      solve_person = #{record.solvePerson,jdbcType=VARCHAR},
+      solve_time = #{record.solveTime,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=INTEGER},
+      mark = #{record.mark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.youpin.pojo.SaleRecord">
+    update sale_record
+    <set>
+      <if test="modelId != null">
+        model_id = #{modelId,jdbcType=BIGINT},
+      </if>
+      <if test="regDate != null">
+        reg_date = #{regDate,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null">
+        city_id = #{cityId,jdbcType=VARCHAR},
+      </if>
+      <if test="sKm != null">
+        s_km = #{sKm,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="jqx != null">
+        jqx = #{jqx,jdbcType=VARCHAR},
+      </if>
+      <if test="nj != null">
+        nj = #{nj,jdbcType=VARCHAR},
+      </if>
+      <if test="xz != null">
+        xz = #{xz,jdbcType=VARCHAR},
+      </if>
+      <if test="gh != null">
+        gh = #{gh,jdbcType=VARCHAR},
+      </if>
+      <if test="ghtime != null">
+        ghtime = #{ghtime,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        method = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="ck != null">
+        ck = #{ck,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="ordernum != null">
+        ordernum = #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="solvePerson != null">
+        solve_person = #{solvePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="solveTime != null">
+        solve_time = #{solveTime,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="mark != null">
+        mark = #{mark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maizhong.youpin.pojo.SaleRecord">
+    update sale_record
+    set model_id = #{modelId,jdbcType=BIGINT},
+      reg_date = #{regDate,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=VARCHAR},
+      s_km = #{sKm,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      jqx = #{jqx,jdbcType=VARCHAR},
+      nj = #{nj,jdbcType=VARCHAR},
+      xz = #{xz,jdbcType=VARCHAR},
+      gh = #{gh,jdbcType=VARCHAR},
+      ghtime = #{ghtime,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      ck = #{ck,jdbcType=VARCHAR},
+      price = #{price,jdbcType=VARCHAR},
+      ordernum = #{ordernum,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=VARCHAR},
+      updatetime = #{updatetime,jdbcType=VARCHAR},
+      solve_person = #{solvePerson,jdbcType=VARCHAR},
+      solve_time = #{solveTime,jdbcType=VARCHAR},
+      level = #{level,jdbcType=INTEGER},
+      mark = #{mark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

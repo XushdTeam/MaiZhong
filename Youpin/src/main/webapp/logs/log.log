@@ -1,0 +1,93 @@
+[INFO][2017-08-16 13:49:10] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285) localhost-startStop-1 Root WebApplicationContext: initialization started 
+[INFO][2017-08-16 13:49:11] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) localhost-startStop-1 Refreshing Root WebApplicationContext: startup date [Wed Aug 16 13:49:11 CST 2017]; root of context hierarchy 
+[INFO][2017-08-16 13:49:11] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) localhost-startStop-1 Loading XML bean definitions from class path resource [spring/spring-dao.xml] 
+[INFO][2017-08-16 13:49:11] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) localhost-startStop-1 Loading XML bean definitions from class path resource [spring/spring-service.xml] 
+[INFO][2017-08-16 13:49:11] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) localhost-startStop-1 Loading XML bean definitions from class path resource [spring/spring-jedis.xml] 
+[INFO][2017-08-16 13:49:11] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) localhost-startStop-1 Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\Youpin\target\classes\properties\db.properties] 
+[INFO][2017-08-16 13:49:11] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) localhost-startStop-1 Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\Youpin\target\classes\properties\log4j.properties] 
+[INFO][2017-08-16 13:49:11] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) localhost-startStop-1 Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\Youpin\target\classes\properties\resource.properties] 
+[INFO][2017-08-16 13:49:11] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) localhost-startStop-1 JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-16 13:49:12] com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:722) localhost-startStop-1 {dataSource-1} inited 
+[WARN][2017-08-16 13:49:13] org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:487) localhost-startStop-1 Exception encountered during context initialization - cancelling refresh attempt 
+org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.maizhong.auction.dao.impl.JedisClientSingleImpl] for bean with name 'jedicClient' defined in class path resource [spring/spring-jedis.xml]; nested exception is java.lang.ClassNotFoundException: com.maizhong.auction.dao.impl.JedisClientSingleImpl
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1328)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineTargetType(AbstractAutowireCapableBeanFactory.java:622)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.predictBeanType(AbstractAutowireCapableBeanFactory.java:591)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:1397)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:968)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:735)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:434)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4939)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5434)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.ClassNotFoundException: com.maizhong.auction.dao.impl.JedisClientSingleImpl
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1702)
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1547)
+	at org.springframework.util.ClassUtils.forName(ClassUtils.java:249)
+	at org.springframework.beans.factory.support.AbstractBeanDefinition.resolveBeanClass(AbstractBeanDefinition.java:395)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doResolveBeanClass(AbstractBeanFactory.java:1349)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1320)
+	... 19 more
+[INFO][2017-08-16 13:49:13] com.alibaba.druid.pool.DruidDataSource.close(DruidDataSource.java:1447) localhost-startStop-1 {dataSource-1} closed 
+[ERROR][2017-08-16 13:49:13] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:331) localhost-startStop-1 Context initialization failed 
+org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.maizhong.auction.dao.impl.JedisClientSingleImpl] for bean with name 'jedicClient' defined in class path resource [spring/spring-jedis.xml]; nested exception is java.lang.ClassNotFoundException: com.maizhong.auction.dao.impl.JedisClientSingleImpl
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1328)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineTargetType(AbstractAutowireCapableBeanFactory.java:622)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.predictBeanType(AbstractAutowireCapableBeanFactory.java:591)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:1397)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:968)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:735)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:434)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4939)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5434)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.ClassNotFoundException: com.maizhong.auction.dao.impl.JedisClientSingleImpl
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1702)
+	at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1547)
+	at org.springframework.util.ClassUtils.forName(ClassUtils.java:249)
+	at org.springframework.beans.factory.support.AbstractBeanDefinition.resolveBeanClass(AbstractBeanDefinition.java:395)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doResolveBeanClass(AbstractBeanFactory.java:1349)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1320)
+	... 19 more
+[INFO][2017-08-16 13:59:18] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285) localhost-startStop-1 Root WebApplicationContext: initialization started 
+[INFO][2017-08-16 13:59:18] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) localhost-startStop-1 Refreshing Root WebApplicationContext: startup date [Wed Aug 16 13:59:18 CST 2017]; root of context hierarchy 
+[INFO][2017-08-16 13:59:18] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) localhost-startStop-1 Loading XML bean definitions from class path resource [spring/spring-dao.xml] 
+[INFO][2017-08-16 13:59:18] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) localhost-startStop-1 Loading XML bean definitions from class path resource [spring/spring-service.xml] 
+[INFO][2017-08-16 13:59:18] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) localhost-startStop-1 Loading XML bean definitions from class path resource [spring/spring-jedis.xml] 
+[INFO][2017-08-16 13:59:19] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) localhost-startStop-1 Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\Youpin\target\classes\properties\db.properties] 
+[INFO][2017-08-16 13:59:19] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) localhost-startStop-1 Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\Youpin\target\classes\properties\log4j.properties] 
+[INFO][2017-08-16 13:59:19] org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172) localhost-startStop-1 Loading properties file from file [C:\Users\Xushd\IdeaProjects\MaiZhong\Youpin\target\classes\properties\resource.properties] 
+[INFO][2017-08-16 13:59:19] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) localhost-startStop-1 JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-16 13:59:19] com.alibaba.druid.pool.DruidDataSource.init(DruidDataSource.java:722) localhost-startStop-1 {dataSource-1} inited 
+[INFO][2017-08-16 13:59:20] org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325) localhost-startStop-1 Root WebApplicationContext: initialization completed in 2311 ms 
+[INFO][2017-08-16 13:59:20] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:485) localhost-startStop-1 FrameworkServlet 'maizhong-auction': initialization started 
+[INFO][2017-08-16 13:59:20] org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510) localhost-startStop-1 Refreshing WebApplicationContext for namespace 'maizhong-auction-servlet': startup date [Wed Aug 16 13:59:20 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-16 13:59:20] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317) localhost-startStop-1 Loading XML bean definitions from class path resource [spring/spring_mvc.xml] 
+[INFO][2017-08-16 13:59:21] org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153) localhost-startStop-1 JSR-330 'javax.inject.Inject' annotation found and supported for autowiring 
+[INFO][2017-08-16 13:59:21] org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:217) localhost-startStop-1 Mapped "{[/]}" onto private java.lang.String com.maizhong.youpin.controller.IndexController.index() 
+[INFO][2017-08-16 13:59:21] org.hibernate.validator.internal.util.Version.<clinit>(Version.java:27) localhost-startStop-1 HV000001: Hibernate Validator 5.1.1.Final 
+[INFO][2017-08-16 13:59:21] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) localhost-startStop-1 Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-auction-servlet': startup date [Wed Aug 16 13:59:20 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-16 13:59:21] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.initControllerAdviceCache(RequestMappingHandlerAdapter.java:517) localhost-startStop-1 Looking for @ControllerAdvice: WebApplicationContext for namespace 'maizhong-auction-servlet': startup date [Wed Aug 16 13:59:20 CST 2017]; parent: Root WebApplicationContext 
+[INFO][2017-08-16 13:59:21] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) localhost-startStop-1 Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0' 
+[INFO][2017-08-16 13:59:21] org.springframework.web.servlet.handler.AbstractUrlHandlerMapping.registerHandler(AbstractUrlHandlerMapping.java:314) localhost-startStop-1 Mapped URL path [/favicon.ico] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1' 
+[INFO][2017-08-16 13:59:21] org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:504) localhost-startStop-1 FrameworkServlet 'maizhong-auction': initialization completed in 993 ms 
