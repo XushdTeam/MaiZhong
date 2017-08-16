@@ -17,6 +17,8 @@ public class CkCarbase {
 
     private String startPrice;
 
+    private Long auctionId;
+
     private Date createTime;
 
     private Long examineUserId;
@@ -87,6 +89,14 @@ public class CkCarbase {
 
     public void setStartPrice(String startPrice) {
         this.startPrice = startPrice == null ? null : startPrice.trim();
+    }
+
+    public Long getAuctionId() {
+        return auctionId;
+    }
+
+    public void setAuctionId(Long auctionId) {
+        this.auctionId = auctionId;
     }
 
     public Date getCreateTime() {

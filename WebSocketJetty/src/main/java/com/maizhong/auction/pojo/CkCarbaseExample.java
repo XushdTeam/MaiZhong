@@ -555,6 +555,66 @@ public class CkCarbaseExample {
             return (Criteria) this;
         }
 
+        public Criteria andAuctionIdIsNull() {
+            addCriterion("auction_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionIdIsNotNull() {
+            addCriterion("auction_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionIdEqualTo(Long value) {
+            addCriterion("auction_id =", value, "auctionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionIdNotEqualTo(Long value) {
+            addCriterion("auction_id <>", value, "auctionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionIdGreaterThan(Long value) {
+            addCriterion("auction_id >", value, "auctionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("auction_id >=", value, "auctionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionIdLessThan(Long value) {
+            addCriterion("auction_id <", value, "auctionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionIdLessThanOrEqualTo(Long value) {
+            addCriterion("auction_id <=", value, "auctionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionIdIn(List<Long> values) {
+            addCriterion("auction_id in", values, "auctionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionIdNotIn(List<Long> values) {
+            addCriterion("auction_id not in", values, "auctionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionIdBetween(Long value1, Long value2) {
+            addCriterion("auction_id between", value1, value2, "auctionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionIdNotBetween(Long value1, Long value2) {
+            addCriterion("auction_id not between", value1, value2, "auctionId");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;
@@ -872,6 +932,196 @@ public class CkCarbaseExample {
 
         public Criteria andExamineTimeNotBetween(Date value1, Date value2) {
             addCriterion("examine_time not between", value1, value2, "examineTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionCountIsNull() {
+            addCriterion("auction_count is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionCountIsNotNull() {
+            addCriterion("auction_count is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionCountEqualTo(Integer value) {
+            addCriterion("auction_count =", value, "auctionCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionCountNotEqualTo(Integer value) {
+            addCriterion("auction_count <>", value, "auctionCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionCountGreaterThan(Integer value) {
+            addCriterion("auction_count >", value, "auctionCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("auction_count >=", value, "auctionCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionCountLessThan(Integer value) {
+            addCriterion("auction_count <", value, "auctionCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionCountLessThanOrEqualTo(Integer value) {
+            addCriterion("auction_count <=", value, "auctionCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionCountIn(List<Integer> values) {
+            addCriterion("auction_count in", values, "auctionCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionCountNotIn(List<Integer> values) {
+            addCriterion("auction_count not in", values, "auctionCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionCountBetween(Integer value1, Integer value2) {
+            addCriterion("auction_count between", value1, value2, "auctionCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuctionCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("auction_count not between", value1, value2, "auctionCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePriceIsNull() {
+            addCriterion("save_price is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePriceIsNotNull() {
+            addCriterion("save_price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePriceEqualTo(String value) {
+            addCriterion("save_price =", value, "savePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePriceNotEqualTo(String value) {
+            addCriterion("save_price <>", value, "savePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePriceGreaterThan(String value) {
+            addCriterion("save_price >", value, "savePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePriceGreaterThanOrEqualTo(String value) {
+            addCriterion("save_price >=", value, "savePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePriceLessThan(String value) {
+            addCriterion("save_price <", value, "savePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePriceLessThanOrEqualTo(String value) {
+            addCriterion("save_price <=", value, "savePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePriceLike(String value) {
+            addCriterion("save_price like", value, "savePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePriceNotLike(String value) {
+            addCriterion("save_price not like", value, "savePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePriceIn(List<String> values) {
+            addCriterion("save_price in", values, "savePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePriceNotIn(List<String> values) {
+            addCriterion("save_price not in", values, "savePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePriceBetween(String value1, String value2) {
+            addCriterion("save_price between", value1, value2, "savePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andSavePriceNotBetween(String value1, String value2) {
+            addCriterion("save_price not between", value1, value2, "savePrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNumIsNull() {
+            addCriterion("order_num is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNumIsNotNull() {
+            addCriterion("order_num is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNumEqualTo(Long value) {
+            addCriterion("order_num =", value, "orderNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNumNotEqualTo(Long value) {
+            addCriterion("order_num <>", value, "orderNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNumGreaterThan(Long value) {
+            addCriterion("order_num >", value, "orderNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNumGreaterThanOrEqualTo(Long value) {
+            addCriterion("order_num >=", value, "orderNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNumLessThan(Long value) {
+            addCriterion("order_num <", value, "orderNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNumLessThanOrEqualTo(Long value) {
+            addCriterion("order_num <=", value, "orderNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNumIn(List<Long> values) {
+            addCriterion("order_num in", values, "orderNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNumNotIn(List<Long> values) {
+            addCriterion("order_num not in", values, "orderNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNumBetween(Long value1, Long value2) {
+            addCriterion("order_num between", value1, value2, "orderNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNumNotBetween(Long value1, Long value2) {
+            addCriterion("order_num not between", value1, value2, "orderNum");
             return (Criteria) this;
         }
     }

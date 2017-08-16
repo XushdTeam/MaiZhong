@@ -37,5 +37,8 @@ public interface IndexService {
 
     JsonResult getBidRecordList(long auctionId);
 
-    JsonResult autoPrice(long auctionId, long price, String token);
+    JsonResult autoPrice(long auctionId, long price, String token,String chKey);
+
+    String getSocketUrl();
+
 }

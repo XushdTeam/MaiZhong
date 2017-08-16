@@ -128,11 +128,16 @@ public class IndexController {
 
     /**
      * 服务大厅
-     * @param model
+     * @param
      * @return
      */
     @RequestMapping(value = "/warranty")
-    public String  warranty(Model model){
+    public String  warranty(@CookieValue(value = "token",required = false) String token,Model model){
+        AcUser user =  indexService.getUserInfo(token);
+        if(user!=null){
+            model.addAttribute("username",user.getName());
+
+        }
         model.addAttribute("menu","/warranty");
         return "warranty";
     }
@@ -392,11 +397,12 @@ public class IndexController {
                 model.addAttribute("userId",user.getId());
             }
         }
-
+        String sockeUrl = indexService.getSocketUrl();
         CarDetailDto dto = indexService.getCarDetail(carId);
         model.addAttribute("title",dto.getModelName());
         model.addAttribute("carInfo",dto);
         model.addAttribute("auctionId",auctionId);
+        model.addAttribute("socketUrl",sockeUrl);
 
         return "detail";
     }
@@ -478,14 +484,15 @@ public class IndexController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/auction/car/auto/price/{auctionId}/{price}")
+    @RequestMapping(value = "/auction/car/auto/price/{auctionId}/{price}/{chKey}")
     @ResponseBody
     public JsonResult autoPrice(@PathVariable long auctionId,
                                 @PathVariable long price,
+                                @PathVariable String chKey,
                                 HttpServletRequest request){
         String token = (String) request.getAttribute("token");
         if(StringUtils.equals(token,"null"))return JsonResult.Error("未登录");
-        JsonResult result = indexService.autoPrice(auctionId,price,token);
+        JsonResult result = indexService.autoPrice(auctionId,price,token,chKey);
         return result;
     }
 
@@ -500,5 +507,18 @@ public class IndexController {
 
         JsonResult result = indexService.getBidRecordList(auctionId);
         return result;
+    }
+
+    /**
+     * 新闻跳转
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/news/{id}")
+    public String news(@PathVariable int id){
+
+        String page = "/new";
+        return page+id;
+
     }
 }

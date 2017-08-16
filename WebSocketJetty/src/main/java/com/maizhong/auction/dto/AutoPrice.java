@@ -9,6 +9,9 @@ public class AutoPrice {
     private long userId;
     private long price;
 
+
+
+
     private long phone;
     public AutoPrice() {
     }

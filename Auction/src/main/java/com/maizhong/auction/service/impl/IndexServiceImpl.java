@@ -17,6 +17,7 @@ import com.maizhong.common.utils.*;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -60,6 +61,8 @@ public class IndexServiceImpl implements IndexService {
     @Autowired
     private AcFreezeMapper acFreezeMapper;
 
+    @Value("${SOCKET.URL}")
+    private String socketUrl;
 
     /**
      * 后台登录验证
@@ -482,7 +485,7 @@ public class IndexServiceImpl implements IndexService {
         auctionNow.setMyAuto(0);
         auctionNow.setAutoPrice("0");
         if(acUser!=null){
-            String auto = jedisClient.hget("AUTOPRICE_CAR:" + auctionId, String.valueOf(acUser.getId()));
+            String auto = jedisClient.hget("AUTOPRICE_AUCTION:" + auctionId, String.valueOf(acUser.getId()));
             if(StringUtils.isNotBlank(auto)){
                 auctionNow.setMyAuto(1);
                 auctionNow.setAutoPrice(auto);
@@ -527,7 +530,7 @@ public class IndexServiceImpl implements IndexService {
      * @return
      */
     @Override
-    public JsonResult autoPrice(long auctionId, long price, String token) {
+    public synchronized JsonResult autoPrice(long auctionId, long price, String token,String chKey) {
 
         AcUser acUser = this.getUserInfo(token);
 
@@ -558,19 +561,64 @@ public class IndexServiceImpl implements IndexService {
             }
         }
 
+        AcAuctionRecord record = acAuctionRecordMapper.selectByPrimaryKey(auctionId);
+        Long carId = record.getCarId();
+
+
         String key = "AUTOPRICE_QUEUE:"+auctionId;
 
-        AutoPrice dto = new AutoPrice();
-        dto.setAuctionId(auctionId);
-        dto.setPrice(price);
-        dto.setUserId(acUser.getId());
-        dto.setPhone(acUser.getPhone());
-        jedisClient.lpush(key.getBytes(), ObjectUtil.serializer(dto));
 
-        jedisClient.hset("AUTOPRICE_CAR:" + auctionId, String.valueOf(acUser.getId()),price+"");
 
+        byte[] rpop = jedisClient.rpop(key.getBytes());
+
+        if(rpop!=null){
+            AutoPrice deserializer = ObjectUtil.deserializer(rpop, AutoPrice.class);
+
+            long price1 = deserializer.getPrice();
+            //如果现有智能大于当前 则当前用户出价当前智能报价的价格
+            if(price1>price){
+                BigDecimal now = new BigDecimal(price).divide(new BigDecimal(10000));
+                auctionService.addPrice(chKey,carId,now.toString(),"0",token,auctionId);
+                jedisClient.lpush(key.getBytes(), rpop);
+            }else{
+                BigDecimal now = new BigDecimal(price1).divide(new BigDecimal(10000));
+                //现有智能小于等于当期  则现有智能出现有智能的价格
+                auctionService.addPrice(chKey,carId,now.toString(),"0",token,auctionId);
+
+                AutoPrice dto = new AutoPrice();
+                dto.setAuctionId(auctionId);
+                dto.setPrice(price);
+                dto.setUserId(acUser.getId());
+                dto.setPhone(acUser.getPhone());
+
+                jedisClient.lpush(key.getBytes(), ObjectUtil.serializer(dto));
+
+
+            }
+            jedisClient.hset("AUTOPRICE_AUCTION:" + auctionId, String.valueOf(acUser.getId()),price+"");
+        }else{
+
+            AutoPrice dto = new AutoPrice();
+            dto.setAuctionId(auctionId);
+            dto.setPrice(price);
+            dto.setUserId(acUser.getId());
+            dto.setPhone(acUser.getPhone());
+
+            jedisClient.lpush(key.getBytes(), ObjectUtil.serializer(dto));
+
+            jedisClient.hset("AUTOPRICE_AUCTION:" + auctionId, String.valueOf(acUser.getId()),price+"");
+        }
         return JsonResult.OK();
 
+    }
+
+    /**
+     * 获取通信地址
+     * @return
+     */
+    @Override
+    public String getSocketUrl() {
+        return this.socketUrl;
     }
 
 }

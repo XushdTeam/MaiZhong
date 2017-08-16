@@ -10,6 +10,7 @@ public class AutoPrice {
     private long price;
     private long phone;
 
+
     public long getPhone() {
         return phone;
     }
@@ -20,6 +21,8 @@ public class AutoPrice {
 
     public AutoPrice() {
     }
+
+
 
     public long getAuctionId() {
         return auctionId;

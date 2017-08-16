@@ -9,6 +9,7 @@
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="user_phone" jdbcType="BIGINT" property="userPhone" />
     <result column="start_price" jdbcType="VARCHAR" property="startPrice" />
+    <result column="auction_id" jdbcType="BIGINT" property="auctionId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="examine_user_id" jdbcType="BIGINT" property="examineUserId" />
     <result column="examine_username" jdbcType="VARCHAR" property="examineUsername" />
@@ -77,9 +78,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, model_name, model_id, status, user_name, user_phone, start_price, create_time, 
-    examine_user_id, examine_username, examine_reason, examine_time, auction_count, save_price, 
-    order_num
+    id, model_name, model_id, status, user_name, user_phone, start_price, auction_id, 
+    create_time, examine_user_id, examine_username, examine_reason, examine_time, auction_count, 
+    save_price, order_num
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.auction.pojo.CkCarbaseExample" resultMap="BaseResultMap">
     select
@@ -114,16 +115,16 @@
   <insert id="insert" parameterType="com.maizhong.auction.pojo.CkCarbase">
     insert into ck_carbase (id, model_name, model_id, 
       status, user_name, user_phone, 
-      start_price, create_time, examine_user_id, 
-      examine_username, examine_reason, examine_time, 
-      auction_count, save_price, order_num
-      )
+      start_price, auction_id, create_time, 
+      examine_user_id, examine_username, examine_reason, 
+      examine_time, auction_count, save_price, 
+      order_num)
     values (#{id,jdbcType=BIGINT}, #{modelName,jdbcType=VARCHAR}, #{modelId,jdbcType=BIGINT}, 
       #{status,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPhone,jdbcType=BIGINT}, 
-      #{startPrice,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{examineUserId,jdbcType=BIGINT}, 
-      #{examineUsername,jdbcType=VARCHAR}, #{examineReason,jdbcType=VARCHAR}, #{examineTime,jdbcType=TIMESTAMP}, 
-      #{auctionCount,jdbcType=INTEGER}, #{savePrice,jdbcType=VARCHAR}, #{orderNum,jdbcType=BIGINT}
-      )
+      #{startPrice,jdbcType=VARCHAR}, #{auctionId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{examineUserId,jdbcType=BIGINT}, #{examineUsername,jdbcType=VARCHAR}, #{examineReason,jdbcType=VARCHAR}, 
+      #{examineTime,jdbcType=TIMESTAMP}, #{auctionCount,jdbcType=INTEGER}, #{savePrice,jdbcType=VARCHAR}, 
+      #{orderNum,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.auction.pojo.CkCarbase">
     <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id"> SELECT LAST_INSERT_ID() AS id</selectKey>
@@ -149,6 +150,9 @@
       </if>
       <if test="startPrice != null">
         start_price,
+      </if>
+      <if test="auctionId != null">
+        auction_id,
       </if>
       <if test="createTime != null">
         create_time,
@@ -196,6 +200,9 @@
       </if>
       <if test="startPrice != null">
         #{startPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="auctionId != null">
+        #{auctionId,jdbcType=BIGINT},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -253,6 +260,9 @@
       <if test="record.startPrice != null">
         start_price = #{record.startPrice,jdbcType=VARCHAR},
       </if>
+      <if test="record.auctionId != null">
+        auction_id = #{record.auctionId,jdbcType=BIGINT},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -291,6 +301,7 @@
       user_name = #{record.userName,jdbcType=VARCHAR},
       user_phone = #{record.userPhone,jdbcType=BIGINT},
       start_price = #{record.startPrice,jdbcType=VARCHAR},
+      auction_id = #{record.auctionId,jdbcType=BIGINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       examine_user_id = #{record.examineUserId,jdbcType=BIGINT},
       examine_username = #{record.examineUsername,jdbcType=VARCHAR},
@@ -323,6 +334,9 @@
       </if>
       <if test="startPrice != null">
         start_price = #{startPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="auctionId != null">
+        auction_id = #{auctionId,jdbcType=BIGINT},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -359,6 +373,7 @@
       user_name = #{userName,jdbcType=VARCHAR},
       user_phone = #{userPhone,jdbcType=BIGINT},
       start_price = #{startPrice,jdbcType=VARCHAR},
+      auction_id = #{auctionId,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       examine_user_id = #{examineUserId,jdbcType=BIGINT},
       examine_username = #{examineUsername,jdbcType=VARCHAR},

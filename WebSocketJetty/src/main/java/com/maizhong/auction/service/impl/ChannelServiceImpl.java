@@ -136,7 +136,7 @@ public class ChannelServiceImpl implements ChannelService {
                     LOGGER.info("CLEAR FREEZE {}",carId);
 
                 }
-
+                carbase.setAuctionId(0L);
                 ckCarbaseMapper.updateByPrimaryKeySelective(carbase);
                 LOGGER.info("UPDATE CARBASE 车辆 ID {} 拍卖状态 {}",carId,carbase.getStatus());
 
@@ -234,7 +234,7 @@ public class ChannelServiceImpl implements ChannelService {
     @Override
     public void sendSocket() {
 
-        byte[] redisKey = ("Socket").getBytes();
+        byte[] redisKey = ("SocketQueue").getBytes();
         byte[] rpop = jedisClient.rpop(redisKey);
         if(rpop!=null){
             AcBidRecord deserializer = ObjectUtil.deserializer(rpop, AcBidRecord.class);
@@ -269,64 +269,75 @@ public class ChannelServiceImpl implements ChannelService {
         String price = carAcutionDTO.getNowPrice();
         String key = "AUTOPRICE_QUEUE:"+auctionId;
 
+
+
+
+
         byte[] rpop = jedisClient.rpop(key.getBytes());
 
         if(rpop!=null){
             AutoPrice autoPrice = ObjectUtil.deserializer(rpop, AutoPrice.class);
-            if(autoPrice.getAuctionId()==auctionId){
-                //如果最高价是本人
-                if(userId==autoPrice.getUserId()){
-                    //如果当前最高价小于智能报价 放回队列
-                    if(Double.valueOf(price)<Double.valueOf(autoPrice.getPrice())){
-                        jedisClient.lpush(key.getBytes(),rpop);
+
+
+
+                if(autoPrice.getAuctionId()==auctionId){
+                    //如果最高价是本人
+                    if(userId==autoPrice.getUserId()){
+                        //如果当前最高价小于智能报价 放回队列
+                        if(Double.valueOf(price)<Double.valueOf(autoPrice.getPrice())){
+                            jedisClient.lpush(key.getBytes(),rpop);
+                        }else{
+                            //jedisClient.hset("AUTOPRICE_CAR:" + auctionId, String.valueOf(autoPrice.getUserId()),"over");
+                        }
                     }else{
-                        jedisClient.hset("AUTOPRICE_CAR:" + auctionId, String.valueOf(autoPrice.getUserId()),"over");
+                        //最高价不是本人
+                        //加价
+                        BigDecimal now = new BigDecimal(price);
+                        BigDecimal auto = new BigDecimal(autoPrice.getPrice()).divide(new BigDecimal(10000));
+                        //当前价格小于智能报价
+                        if(now.compareTo(auto)<0){
+                            BigDecimal diff = auto.subtract(now);
+
+                            String token = jedisClient.hget("AC_USER_PHONE", autoPrice.getPhone() + "");
+                            Map<String,String> head = new HashMap<>();
+                            Map<String,String> query = new HashMap<>();
+                            Map<String,String> body = new HashMap<>();
+                            head.put("X-Maizhong-AppKey",token);
+
+
+                            //如果智能报价与当前价格差值小于500 直接给智能报价
+                            if(diff.compareTo(new BigDecimal("0.05"))<0){
+
+                                body.put("plus",diff.toString());
+                                body.put("price",now.toString());
+
+                            }else{
+                                //加500
+                                body.put("plus","0.05");
+                                body.put("price",now.toString());
+                                //放回队列
+                                jedisClient.lpush(key.getBytes(),rpop);
+                            }
+                            try {
+                                LOGGER.info("智能出价 {}",body.toString());
+                                HttpUtils.doPost(MAINSERVICE,"/app/addPrice/"+channel+"/"+carId+ "/" +auctionId,null,head,query,body);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }else{
+                            //jedisClient.hset("AUTOPRICE_CAR:" + auctionId, String.valueOf(autoPrice.getUserId()),"over");
+                        }
+
                     }
                 }else{
-                    //最高价不是本人
-                    //加价
-                    BigDecimal now = new BigDecimal(price);
-                    BigDecimal auto = new BigDecimal(autoPrice.getPrice()).divide(new BigDecimal(10000));
-                    //当前价格小于智能报价
-                    if(now.compareTo(auto)<0){
-                        BigDecimal diff = auto.subtract(now);
-
-                        String token = jedisClient.hget("AC_USER_PHONE", autoPrice.getPhone() + "");
-                        Map<String,String> head = new HashMap<>();
-                        Map<String,String> query = new HashMap<>();
-                        Map<String,String> body = new HashMap<>();
-                        head.put("X-Maizhong-AppKey",token);
-
-
-                        //如果智能报价与当前价格差值小于500 直接给智能报价
-                        if(diff.compareTo(new BigDecimal("0.05"))<0){
-
-                            body.put("plus",diff.toString());
-                            body.put("price",now.toString());
-
-                        }else{
-                            //加500
-                            body.put("plus","0.05");
-                            body.put("price",now.toString());
-                            //放回队列
-                            jedisClient.lpush(key.getBytes(),rpop);
-                        }
-                        try {
-                            LOGGER.info("智能出价 {}",body.toString());
-                            HttpUtils.doPost(MAINSERVICE,"/app/addPrice/"+channel+"/"+carId+ "/" +auctionId,null,head,query,body);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }else{
-                        //jedisClient.hset("AUTOPRICE_CAR:" + auctionId, String.valueOf(autoPrice.getUserId()),"over");
-                    }
-
+                    //jedisClient.hset("AUTOPRICE_CAR:" + auctionId, String.valueOf(autoPrice.getUserId()),"over");
                 }
-            }else{
-                //jedisClient.hset("AUTOPRICE_CAR:" + auctionId, String.valueOf(autoPrice.getUserId()),"over");
+
             }
 
-        }
+
+
+
 
 
 
@@ -374,6 +385,7 @@ public class ChannelServiceImpl implements ChannelService {
                 CkCarbase ckCarbase = new CkCarbase();
                 ckCarbase.setId(carId);
                 ckCarbase.setStatus(5);
+                ckCarbase.setAuctionId(record.getId());
                 ckCarbaseMapper.updateByPrimaryKeySelective(ckCarbase);
                 //通道数据
                 CarAcutionDTO carAcutionDTO = new CarAcutionDTO();

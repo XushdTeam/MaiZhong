@@ -1088,11 +1088,11 @@
                 },
                 InitSock(){
                     if('WebSocket' in window) {
-                        websocket = new WebSocket("ws://118.190.35.31:65525/WebSocketJetty/websocket/socketServer?ch=" + this.chKey);
+                        websocket = new WebSocket("${socketUrl}/socketServer?ch=" + this.chKey);
                     } else if('MozWebSocket' in window) {
-                        websocket = new MozWebSocket("ws://118.190.35.31:65525/WebSocketJetty/websocket/socketServer?ch=" + this.chKey);
+                        websocket = new MozWebSocket("${socketUrl}/socketServer?ch=" + this.chKey);
                     } else {
-                        websocket = new SockJS("ws://118.190.35.31:65525/WebSocketJetty/websocket/sockjs?ch=" + this.chKey);
+                        websocket = new SockJS("${socketUrl}/sockjs?ch=" + this.chKey);
                     }
                     websocket.onopen = function(event) {
                         console.log("WebSocket:已连接");
@@ -1112,7 +1112,7 @@
                             var bid = {};
                             bid.name = data.bussinessName;
                             bid.price = data.price;
-                            bid.time = new Date(parseInt(data.createTime)).toLocaleString().substr(10,20);
+                            bid.time = vm.timeStemp(data.createTime);
                             bid.userId = data.userId;
                             vm.bidList.splice(0,0,bid);
 
@@ -1126,6 +1126,21 @@
                         vm.dataFrush = 1;
                         console.log("WebSocket:已关闭");
                     }
+                },
+                timeStemp:function(t){
+                    var date = new Date(t);
+                    var hour = date.getHours(),min = date.getMinutes(),sec = date.getSeconds();
+                    hour = hour < 10 ? "0" + hour : hour;
+                    min = min < 10 ? "0" + min : min;
+                    sec = sec < 10 ? "0" + sec : sec;
+                    var format = '';
+                    if (hour > 0) {
+                        format = hour + `:` +min+ `:` + sec;
+                    }
+                    if ( hour <= 0) {
+                        format = `00:` + min + `:` + sec;
+                    }
+                    return format;
                 },
                 plus(item){
                     vm.plusStep = parseFloat(item.plus/10000);
@@ -1193,7 +1208,7 @@
                 },
                 autoConfim(){
                     vm.hideAuto();
-                    $.getJSON('/auction/car/auto/price/'+this.auctionId+'/'+this.totalPrice*10000,(d)=>{
+                    $.getJSON('/auction/car/auto/price/'+this.auctionId+'/'+this.totalPrice*10000+'/'+this.chKey,(d)=>{
                         if(d.status==200){
                             vm.success('智能报价成功!');
                             vm.myAuto = 1;

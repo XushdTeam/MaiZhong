@@ -468,7 +468,7 @@ public class AuctionServiceImpl implements AuctionService {
         dto.setPhone(acUser.getPhone());
         jedisClient.lpush(key.getBytes(),ObjectUtil.serializer(dto));
 
-        jedisClient.hset("AUTOPRICE_CAR:" + auctionId, String.valueOf(acUser.getId()),price+"");
+        jedisClient.hset("AUTOPRICE_AUCTION:" + auctionId, String.valueOf(acUser.getId()),price+"");
 
         return JsonResult.OK();
 
@@ -924,7 +924,7 @@ public class AuctionServiceImpl implements AuctionService {
                     }
 
                     //是否开启智能
-                    String auto = jedisClient.hget("AUTOPRICE_CAR:" + carAcutionDTO.getId(), String.valueOf(acUser.getId()));
+                    String auto = jedisClient.hget("AUTOPRICE_AUCTION:" + carAcutionDTO.getId(), String.valueOf(acUser.getId()));
                     if(StringUtils.isNotBlank(auto)&&!StringUtils.equals("over",auto)){
                         object.put("auto",true);
                         object.put("autoPrice",auto);
@@ -1023,7 +1023,7 @@ public class AuctionServiceImpl implements AuctionService {
      * @param acBidRecord
      */
     private void addSocketQueue(AcBidRecord acBidRecord) {
-        byte[] redisKey = "Socket".getBytes();
+        byte[] redisKey = ("SocketQueue").getBytes();
         jedisClient.lpush(redisKey, ObjectUtil.serializer(acBidRecord));
     }
     /**
