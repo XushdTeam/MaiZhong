@@ -2,10 +2,13 @@ package com.maizhong.youpin.controller;
 
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.youpin.service.AppService;
+import com.maizhong.youpin.service.ImgUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by Xushd on 2017/8/16.
@@ -15,6 +18,8 @@ public class APPController extends BaseController {
 
     @Autowired
     private AppService appService;
+    @Autowired
+    private ImgUploadService imgUploadService;
 
 
     /**
@@ -45,6 +50,95 @@ public class APPController extends BaseController {
         return appService.getHelpList();
     }
 
+    /**
+     * 发送验证码
+     * @param phone
+     * @return
+     */
+    @RequestMapping(value = "/app/send/verifycode/{phone}")
+    public JsonResult sendVerifyCode(@PathVariable String phone){
+        return appService.sendVerifyCode(phone);
+    }
 
+    /**
+     * 登录
+     * @param phone
+     * @param vercode
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/app/login")
+    public JsonResult login(String phone, String vercode, HttpServletRequest request){
+        String token = super.getToken(request);
+        return appService.login(phone,vercode,token);
+    }
+
+    /**
+     * 退出登录
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/app/logout")
+    public JsonResult logout(HttpServletRequest request){
+        return appService.logout(super.getToken(request));
+    }
+
+    /**
+     * 获取公司名称
+     * @return
+     */
+    @RequestMapping(value = "/app/company/list")
+    public JsonResult getCompany(){
+        return appService.getCompanyList();
+    }
+
+    /**
+     * 修改用户信息
+     * @param company
+     * @param companyName
+     * @param name
+     * @param job
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/app/userinfo/save")
+    public JsonResult updateUserInfo(long company,String companyName,String name,int job,HttpServletRequest request){
+        String token = super.getToken(request);
+        return appService.updateUserInfo(company,companyName,name,job,token);
+    }
+
+    /**
+     * 上传图片
+     * @param base64
+     * @param type
+     * @return
+     */
+    @RequestMapping(value = "/app/uploadImg")
+    public JsonResult uploadImg(String base64,String type){
+        return imgUploadService.uploadImg(base64,type);
+    }
+
+    /**
+     * 修改头像
+     * @param headimg
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/app/change/headimg")
+    public JsonResult changHeadImg(String headimg,HttpServletRequest request){
+        String token = super.getToken(request);
+        return appService.changHeadImg(headimg,token);
+    }
+
+    /**
+     * 同步用户信息
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/app/sync/userinfo")
+    public JsonResult syncUserInfo(HttpServletRequest request){
+        String token = super.getToken(request);
+        return appService.syncUserInfo(token);
+    }
 
 }

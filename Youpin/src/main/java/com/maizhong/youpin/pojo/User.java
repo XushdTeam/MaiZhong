@@ -5,6 +5,8 @@ public class User {
 
     private Long companyId;
 
+    private String companyName;
+
     private String name;
 
     private String phone;
@@ -28,6 +30,14 @@ public class User {
     private String mark;
 
     private Integer delflag;
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
 
     public Long getId() {
         return id;

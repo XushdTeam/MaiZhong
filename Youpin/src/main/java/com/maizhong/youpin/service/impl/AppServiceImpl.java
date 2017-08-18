@@ -3,14 +3,15 @@ package com.maizhong.youpin.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.maizhong.common.enums.SMSTemplateEnum;
 import com.maizhong.common.result.JsonResult;
-import com.maizhong.common.utils.HttpUtils;
-import com.maizhong.common.utils.IDUtils;
-import com.maizhong.common.utils.JsonUtils;
+import com.maizhong.common.utils.*;
+import com.maizhong.youpin.dto.CompanyDto;
 import com.maizhong.youpin.dto.NewsDto;
+import com.maizhong.youpin.mapper.CompanyMapper;
 import com.maizhong.youpin.mapper.DocMapper;
-import com.maizhong.youpin.pojo.Doc;
-import com.maizhong.youpin.pojo.DocExample;
+import com.maizhong.youpin.mapper.UserMapper;
+import com.maizhong.youpin.pojo.*;
 import com.maizhong.youpin.service.AppService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
@@ -18,10 +19,7 @@ import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Xushd on 2017/8/16.
@@ -32,6 +30,10 @@ public class AppServiceImpl extends BaseService implements AppService {
 
     @Autowired
     private DocMapper docMapper;
+    @Autowired
+    private UserMapper userMapper;
+    @Autowired
+    private CompanyMapper companyMapper;
 
     /**
      * 获取相关新闻
@@ -86,6 +88,176 @@ public class AppServiceImpl extends BaseService implements AppService {
 
         return JsonResult.OK(docs);
 
+    }
+
+    /**
+     * 发送验证码
+     * @param phone
+     * @return
+     */
+    @Override
+    public JsonResult sendVerifyCode(String phone) {
+
+        String phoneVerifyCode = super.getJedisClient().get("SMS:" + phone);
+        if(StringUtils.isNotBlank(phoneVerifyCode)){
+            return JsonResult.Error("验证码已发送");
+        }
+        String verifyCode = IDUtils.getVerifyCode();
+        boolean sms = AliSMSUtils.sendSMS2(SMSTemplateEnum.YouPinPaiChe, verifyCode, String.valueOf(phone),"登录");
+        if(sms){
+            super.getJedisClient().set("SMS:"+phone,verifyCode);
+            super.getJedisClient().expire("SMS:"+phone,120);
+            return JsonResult.OK("验证码发送成功，请注意查收！");
+        }
+
+        return JsonResult.Error("发送失败");
+    }
+
+    /**
+     * 登录
+     * @param phone
+     * @param verifyCode
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult login(String phone, String verifyCode, String token) {
+
+        String phoneVerifyCode = super.getJedisClient().get("SMS:" + phone);
+        if(StringUtils.isBlank(phoneVerifyCode)){
+            return JsonResult.Error("验证码过期，请重新发送");
+        } else if(!StringUtils.equals(phoneVerifyCode,verifyCode)){
+            return JsonResult.Error("验证码错误");
+        } else {
+            UserExample example = new UserExample();
+            example.createCriteria().andPhoneEqualTo(phone);
+            List<User> users = userMapper.selectByExample(example);
+            User user = new User();
+            if(users.size()==0){
+                //注册
+                user.setPhone(phone);
+                user.setPassword(IDUtils.sha256(phone.substring(7,10)));
+                user.setDelflag(0);
+                user.setStatus(1);
+                user.setCompanyId(0L);
+                user.setName(phone.replaceAll("(\\d{3})\\d{4}(\\d{4})","$1****$2"));
+                user.setType(1);
+                user.setLevel(0);
+                user.setJob("");
+                user.setRegisttime(TimeUtils.getFormatDateTime3(new Date()));
+                userMapper.insertSelective(user);
+
+            }else{
+                //登录
+                user = users.get(0);
+            }
+
+            super.getJedisClient().set("APP_PERSONAL:"+token, JsonUtils.objectToJson(user));
+            if(!StringUtils.equals("17600601529",phone)){
+                super.getJedisClient().del("SMS:" + phone);
+            }
+            return JsonResult.OK(user);
+        }
+
+    }
+
+    /**
+     * 退出登录
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult logout(String token) {
+        super.getJedisClient().del("APP_PERSONAL:"+token);
+        return JsonResult.OK();
+    }
+
+    /**
+     * 获取公司列表
+     * @return
+     */
+    @Override
+    public JsonResult getCompanyList() {
+
+        String company_json = super.getJedisClient().get("COMPANY_JSON");
+        if(StringUtils.isNotBlank(company_json)){
+            return JsonResult.OK(JsonUtils.jsonToList(company_json, CompanyDto.class));
+        }else{
+            CompanyExample example = new CompanyExample();
+            example.createCriteria().andStatusEqualTo(1).andDelflagEqualTo(0);
+            List<Company> companies = companyMapper.selectByExample(example);
+            List<CompanyDto> list = new ArrayList<>();
+            for (Company company : companies) {
+                CompanyDto dto = new CompanyDto();
+                dto.setId(company.getId());
+                dto.setName(company.getName());
+                dto.setArea(company.getArea());
+                dto.setBrand(company.getLogo());
+                list.add(dto);
+            }
+            super.getJedisClient().set("COMPANY_JSON",JsonUtils.objectToJson(list));
+            return JsonResult.OK(list);
+        }
+
+    }
+
+    /**
+     * 用户信息修改
+     * @param company
+     * @param companyName
+     * @param name
+     * @param job
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult updateUserInfo(long company, String companyName, String name, int job, String token) {
+
+        User user = super.getAppUserByToken(token);
+        if(user==null)return JsonResult.Error("当前用户未登录!");
+
+        user.setCompanyId(company);
+        user.setJob(job+"");
+        user.setName(name);
+        user.setCompanyName(companyName);
+
+        userMapper.updateByPrimaryKeySelective(user);
+
+        super.getJedisClient().set("APP_PERSONAL:"+token,JsonUtils.objectToJson(user));
+
+        return JsonResult.OK(user);
+
+    }
+
+    /**
+     * 修改头像
+     * @param headimg
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult changHeadImg(String headimg, String token) {
+
+        User user = super.getAppUserByToken(token);
+        if(user==null)return JsonResult.Error("当前用户未登录!");
+        user.setHeadimg(headimg);
+        userMapper.updateByPrimaryKey(user);
+        super.getJedisClient().set("APP_PERSONAL:"+token,JsonUtils.objectToJson(user));
+
+        return JsonResult.OK();
+    }
+
+    /**
+     * 同步用户信息
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult syncUserInfo(String token) {
+
+        User user = super.getAppUserByToken(token);
+        if(user==null)return JsonResult.Error("用户已退出登录");
+        return JsonResult.OK(user);
     }
 
     /**
@@ -146,7 +318,7 @@ public class AppServiceImpl extends BaseService implements AppService {
 
         headers.put("Authorization", "APPCODE " + super.getAPPCODE());
         Map<String, String> querys = new HashMap<>();
-        querys.put("channelId", "5572a108b3cdc86cf39001d3");
+        querys.put("channelId", "5572a109b3cdc86cf39001e5");
         querys.put("channelName", "");
         querys.put("maxResult", "10");
         querys.put("needAllList", "1");
