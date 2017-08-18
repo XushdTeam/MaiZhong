@@ -11,11 +11,9 @@ import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.common.utils.SqlUtils;
 import com.maizhong.common.utils.TimeUtils;
 import com.maizhong.youpin.dto.MenuDto;
+import com.maizhong.youpin.dto.RecordDto;
 import com.maizhong.youpin.dto.UserDto;
-import com.maizhong.youpin.mapper.CompanyMapper;
-import com.maizhong.youpin.mapper.ManagerUserMapper;
-import com.maizhong.youpin.mapper.SysMenuMapper;
-import com.maizhong.youpin.mapper.UserMapper;
+import com.maizhong.youpin.mapper.*;
 import com.maizhong.youpin.pojo.*;
 import com.maizhong.youpin.service.ManageService;
 import org.apache.commons.lang3.StringUtils;
@@ -49,6 +47,18 @@ public class ManageServiceImpl extends BaseService implements ManageService {
 
     @Autowired
     private CompanyMapper companyMapper;
+
+    @Autowired
+    private SaleRecordMapper saleRecordMapper;
+
+    @Autowired
+    private SaleImgMapper saleImgMapper;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+
+
 
 
     /**
@@ -330,7 +340,7 @@ public class ManageServiceImpl extends BaseService implements ManageService {
                     Company company = companyMapper.selectByPrimaryKey(user.getCompanyId());
                     if (company != null && company.getId() > 0) {
                         userDto.setCompany(company.getName());
-                    }else{
+                    } else {
                         userDto.setCompany("未知");
                     }
                 } catch (Exception e) {
@@ -382,7 +392,7 @@ public class ManageServiceImpl extends BaseService implements ManageService {
                     Company company = companyMapper.selectByPrimaryKey(user.getCompanyId());
                     if (company != null && company.getId() > 0) {
                         userDto.setCompany(company.getName());
-                    }else{
+                    } else {
                         userDto.setCompany("未知");
                     }
                 } catch (Exception e) {
@@ -411,22 +421,61 @@ public class ManageServiceImpl extends BaseService implements ManageService {
     @Override
     public JsonResult getRecordList(PageSearchParam param) {
 
+        List<RecordDto> recordDtoList=new ArrayList<>();
+
         PageHelper.startPage(param.getPageIndex(), param.getPageSize());
 
-        ManagerUserExample example = new ManagerUserExample();
-        ManagerUserExample.Criteria criteria = example.createCriteria();
-        criteria.andDelflagEqualTo(0);
+        SaleRecordExample example = new SaleRecordExample();
+        SaleRecordExample.Criteria criteria = example.createCriteria();
 
-        if (StringUtils.isNotBlank(param.getFiled("name"))) {
-            criteria.andNameLike(SqlUtils.getLikeSql(param.getFiled("name")));
-        }
-        if (StringUtils.isNotBlank(param.getFiled("phone"))) {
-            criteria.andPhoneEqualTo(param.getFiled("phone"));
+        if (StringUtils.isNotBlank(param.getFiled("status"))) {
+            criteria.andStatusEqualTo(Integer.valueOf(param.getFiled("status")));
         }
 
-        List<ManagerUser> sysUsers = managerUserMapper.selectByExample(example);
+        List<SaleRecord> saleRecords = saleRecordMapper.selectByExample(example);
 
-        PageInfo pageInfo = new PageInfo(sysUsers);
+        for (SaleRecord saleRecord : saleRecords) {
+            try {
+                RecordDto recordDto = new RecordDto();
+                User user = userMapper.selectByPrimaryKey(saleRecord.getUserId());//查询用户
+                Model model=modelMapper.selectByPrimaryKey(saleRecord.getModelId());//获取车辆信息
+                SaleImgExample example1 = new SaleImgExample();
+                SaleImgExample.Criteria criteria1 = example1.createCriteria();
+                criteria1.andRecordIdEqualTo(saleRecord.getId());
+                List<SaleImg> saleImgs = saleImgMapper.selectByExample(example1);//查询图片
+
+                UserDto userDto = new UserDto();
+                userDto.setId(user.getId());
+                userDto.setName(user.getName());
+                userDto.setPhone(user.getPhone());
+                userDto.setLevel(String.valueOf(user.getLevel()));
+                userDto.setType(String.valueOf(user.getType()));
+                userDto.setJob(user.getJob());
+                userDto.setStatus(user.getStatus());
+                userDto.setRegisttime(user.getRegisttime());
+                if (user.getCompanyId() == 0) {
+                    userDto.setCompany("个人");
+                } else {
+                    Company company = companyMapper.selectByPrimaryKey(user.getCompanyId());
+                    if (company != null && company.getId() > 0) {
+                        userDto.setCompany(company.getName());
+                    } else {
+                        userDto.setCompany("未知");
+                    }
+                }
+
+                recordDto.setUser(user);//用户
+                recordDto.setUserDto(userDto);//用户DTO
+                recordDto.setSaleImgList(saleImgs);//图片列表
+                recordDto.setSaleRecord(saleRecord);//订单信息
+                recordDto.setModel(model);//车辆信息
+                recordDtoList.add(recordDto);
+            } catch (Exception e) {
+                e.printStackTrace();
+                continue;
+            }
+        }
+        PageInfo pageInfo = new PageInfo(recordDtoList);
 
         return JsonResult.OK(pageInfo);
     }

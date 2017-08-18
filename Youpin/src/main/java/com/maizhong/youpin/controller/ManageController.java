@@ -227,16 +227,16 @@ public class ManageController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/system/account")
+    @RequestMapping(value = "/system/record")
     public String recordIndex(Model model, HttpServletRequest request) {
         String token = (String) request.getAttribute("token");
         String username = (String) request.getAttribute("username");
 
         String sysMenuJson = manageService.getSystemMenu(token);
         model.addAttribute("menu", sysMenuJson);
-        model.addAttribute("cur", "/system/account");
+        model.addAttribute("cur", "/system/record");
         model.addAttribute("username", username);
-        return "/manage/views/sys_account";
+        return "/manage/views/sys_record";
     }
 
 
@@ -245,10 +245,10 @@ public class ManageController {
      *
      * @return
      */
-    @RequestMapping(value = "/system/account/list", method = RequestMethod.POST)
+    @RequestMapping(value = "/system/record/list", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult recordList(PageSearchParam param) {
-        JsonResult result = manageService.getSysAccountList(param);
+        JsonResult result = manageService.getRecordList(param);
         return result;
     }
 
@@ -261,7 +261,7 @@ public class ManageController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/system/account/save")
+    @RequestMapping(value = "/system/record/save")
     @ResponseBody
     public JsonResult recordSave(ManagerUser user, HttpServletRequest request) {
         String token = (String) request.getAttribute("token");
@@ -276,7 +276,7 @@ public class ManageController {
      * @param status
      * @return
      */
-    @RequestMapping(value = "/system/account/status/{id}/{status}")
+    @RequestMapping(value = "/system/record/status/{id}/{status}")
     @ResponseBody
     public JsonResult recordStatus(@PathVariable long id, @PathVariable int status) {
         JsonResult result = manageService.statusSysAccount(id, status);
@@ -289,7 +289,7 @@ public class ManageController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/system/account/del/{id}")
+    @RequestMapping(value = "/system/record/del/{id}")
     @ResponseBody
     public JsonResult recordDelete(@PathVariable long id) {
         JsonResult result = manageService.delSysAccount(id);
