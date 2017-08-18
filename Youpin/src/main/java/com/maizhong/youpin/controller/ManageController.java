@@ -219,95 +219,95 @@ public class ManageController {
 
     /*------------------------订单管理----------------------------*/
 
-
-    /**
-     * 订单
-     *
-     * @param model
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/system/account")
-    public String recordIndex(Model model, HttpServletRequest request) {
-        String token = (String) request.getAttribute("token");
-        String username = (String) request.getAttribute("username");
-
-        String sysMenuJson = manageService.getSystemMenu(token);
-        model.addAttribute("menu", sysMenuJson);
-        model.addAttribute("cur", "/system/account");
-        model.addAttribute("username", username);
-        return "/manage/views/sys_account";
-    }
-
-
-    /**
-     * 获取订单列表数据
-     *
-     * @return
-     */
-    @RequestMapping(value = "/system/account/list", method = RequestMethod.POST)
-    @ResponseBody
-    public JsonResult recordList(PageSearchParam param) {
-        JsonResult result = manageService.getSysAccountList(param);
-        return result;
-    }
-
-
-
-    /**
-     * 订单保存或更新
-     *
-     * @param user
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/system/account/save")
-    @ResponseBody
-    public JsonResult recordSave(ManagerUser user, HttpServletRequest request) {
-        String token = (String) request.getAttribute("token");
-        JsonResult result = manageService.saveSysAccount(user, token);
-        return result;
-    }
-
-    /**
-     * 订单修改状态
-     *
-     * @param id
-     * @param status
-     * @return
-     */
-    @RequestMapping(value = "/system/account/status/{id}/{status}")
-    @ResponseBody
-    public JsonResult recordStatus(@PathVariable long id, @PathVariable int status) {
-        JsonResult result = manageService.statusSysAccount(id, status);
-        return result;
-    }
-
-    /**
-     * 订单删除
-     *
-     * @param id
-     * @return
-     */
-    @RequestMapping(value = "/system/account/del/{id}")
-    @ResponseBody
-    public JsonResult recordDelete(@PathVariable long id) {
-        JsonResult result = manageService.delSysAccount(id);
-        return result;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
+//
+//    /**
+//     * 订单
+//     *
+//     * @param model
+//     * @param request
+//     * @return
+//     */
+//    @RequestMapping(value = "/system/account")
+//    public String recordIndex(Model model, HttpServletRequest request) {
+//        String token = (String) request.getAttribute("token");
+//        String username = (String) request.getAttribute("username");
+//
+//        String sysMenuJson = manageService.getSystemMenu(token);
+//        model.addAttribute("menu", sysMenuJson);
+//        model.addAttribute("cur", "/system/account");
+//        model.addAttribute("username", username);
+//        return "/manage/views/sys_account";
+//    }
+//
+//
+//    /**
+//     * 获取订单列表数据
+//     *
+//     * @return
+//     */
+//    @RequestMapping(value = "/system/account/list", method = RequestMethod.POST)
+//    @ResponseBody
+//    public JsonResult recordList(PageSearchParam param) {
+//        JsonResult result = manageService.getSysAccountList(param);
+//        return result;
+//    }
+//
+//
+//
+//    /**
+//     * 订单保存或更新
+//     *
+//     * @param user
+//     * @param request
+//     * @return
+//     */
+//    @RequestMapping(value = "/system/account/save")
+//    @ResponseBody
+//    public JsonResult recordSave(ManagerUser user, HttpServletRequest request) {
+//        String token = (String) request.getAttribute("token");
+//        JsonResult result = manageService.saveSysAccount(user, token);
+//        return result;
+//    }
+//
+//    /**
+//     * 订单修改状态
+//     *
+//     * @param id
+//     * @param status
+//     * @return
+//     */
+//    @RequestMapping(value = "/system/account/status/{id}/{status}")
+//    @ResponseBody
+//    public JsonResult recordStatus(@PathVariable long id, @PathVariable int status) {
+//        JsonResult result = manageService.statusSysAccount(id, status);
+//        return result;
+//    }
+//
+//    /**
+//     * 订单删除
+//     *
+//     * @param id
+//     * @return
+//     */
+//    @RequestMapping(value = "/system/account/del/{id}")
+//    @ResponseBody
+//    public JsonResult recordDelete(@PathVariable long id) {
+//        JsonResult result = manageService.delSysAccount(id);
+//        return result;
+//    }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 

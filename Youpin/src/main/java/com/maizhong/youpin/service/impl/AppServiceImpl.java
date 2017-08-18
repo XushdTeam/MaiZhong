@@ -6,11 +6,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.maizhong.common.enums.SMSTemplateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.*;
-import com.maizhong.youpin.dto.CompanyDto;
-import com.maizhong.youpin.dto.NewsDto;
-import com.maizhong.youpin.mapper.CompanyMapper;
-import com.maizhong.youpin.mapper.DocMapper;
-import com.maizhong.youpin.mapper.UserMapper;
+import com.maizhong.youpin.dao.JedisClient;
+import com.maizhong.youpin.dto.*;
+import com.maizhong.youpin.mapper.*;
 import com.maizhong.youpin.pojo.*;
 import com.maizhong.youpin.service.AppService;
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +16,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -34,6 +33,10 @@ public class AppServiceImpl extends BaseService implements AppService {
     private UserMapper userMapper;
     @Autowired
     private CompanyMapper companyMapper;
+    @Autowired
+    private SaleRecordMapper saleRecordMapper;
+    @Autowired
+    private SaleImgMapper saleImgMapper;
 
     /**
      * 获取相关新闻
@@ -259,6 +262,372 @@ public class AppServiceImpl extends BaseService implements AppService {
         if(user==null)return JsonResult.Error("用户已退出登录");
         return JsonResult.OK(user);
     }
+
+    /**
+     * 获取model
+     *
+     * @param token
+     * @param guzhiKey
+     * @param otherKey
+     * @return
+     */
+    @Override
+    public JsonResult getModelDetail(String guzhiKey, String otherKey, String token) {
+
+        AppRecordDto dto = new AppRecordDto();
+
+        dto.setParam1(guzhiKey);
+        dto.setParam2(otherKey);
+
+        String[] paramarry = guzhiKey.split("c|m|r|g");
+
+        //城市
+        dto.setCityId(paramarry[1]);
+        String city = super.getJedisClient().hget("CITY_KEY",paramarry[1]);
+        dto.setCityName(city);
+        //车型
+        dto.setModelId(paramarry[2]);
+        String car_model = super.getJedisClient().hget("CAR_MODEL", paramarry[2]);
+        Model model = JsonUtils.jsonToPojo(car_model, Model.class);
+        //图片
+        int seriesId = model.getSeriesId();
+        String car_series_key = super.getJedisClient().hget("CAR_SERIES_KEY", seriesId + "");
+        Series series = JsonUtils.jsonToPojo(car_series_key, Series.class);
+        dto.setImg(series.getSeriesPic());
+
+        dto.setModelName(model.getModelName());
+        //排量
+        dto.setLiter(model.getLiter());
+        //排放标准
+        dto.setPfbz(model.getDischargeStandard());
+
+        //上牌数据
+        dto.setRegistTime(paramarry[3]);
+        //公里数
+        dto.setGls(paramarry[4]);
+
+        String[] otherArry = otherKey.split("o|j|h|t|x|n|d|k");
+
+        String ck = otherArry[7], color = otherArry[0], jqx = otherArry[1],
+                gh = otherArry[2], ghtime = otherArry[3], xz = otherArry[4],
+                nj = otherArry[5], method = otherArry[6];
+
+        if (StringUtils.equals("1", ck)) {
+            dto.setCk("车况优秀,好没有任何故障");
+        } else if (StringUtils.equals("2", ck)) {
+            dto.setCk("车况良好,有过少量剐蹭或钣金");
+        } else if (StringUtils.equals("3", ck)) {
+            dto.setCk("车况一般,有过前后轻碰事故");
+        } else {
+            dto.setCk("车况较差,有发生过伤及主体框架的碰撞或较大事故");
+        }
+        //颜色
+        switch (color) {
+            case "1":
+                dto.setColor("米色");
+                break;
+            case "2":
+                dto.setColor("白色");
+                break;
+            case "3":
+                dto.setColor("灰色");
+                break;
+            case "4":
+                dto.setColor("红色");
+                break;
+            case "5":
+                dto.setColor("棕色");
+                break;
+            case "6":
+                dto.setColor("蓝色");
+                break;
+            case "7":
+                dto.setColor("黄色");
+                break;
+            case "8":
+                dto.setColor("黑色");
+                break;
+            case "9":
+                dto.setColor("银色");
+                break;
+            case "10":
+                dto.setColor("绿色");
+                break;
+            default:
+                dto.setColor("其他颜色");
+                break;
+        }
+        //交强险
+        if (StringUtils.equals(jqx, "1")) {
+            dto.setJqx("两个月以内");
+        } else {
+            dto.setJqx("两个月以上");
+        }
+        //过户
+        if (StringUtils.equals(gh, "4")) {
+            dto.setGh("0次");
+        } else if (StringUtils.equals(gh, "1")) {
+            dto.setGh("1次");
+        } else if (StringUtils.equals(gh, "2")) {
+            dto.setGh("2次");
+        } else {
+            dto.setGh("3次及以上");
+        }
+        //过户时间
+        if (StringUtils.equals(ghtime, "1")) {
+            dto.setGhtime("无过户");
+        } else if (StringUtils.equals(ghtime, "2")) {
+            dto.setGhtime("六个月以内");
+        }else
+        {
+            dto.setGhtime("六个月以上");
+        }
+        //性质
+        if (StringUtils.equals(xz, "1")) {
+            dto.setXz("非营运");
+        } else {
+            dto.setXz("租赁");
+        }
+        //年检
+        if (StringUtils.equals(nj, "1")) {
+            dto.setNj("两个月以内");
+        } else {
+            dto.setNj("两个月以上");
+        }
+        //使用方式
+        if (StringUtils.equals(method, "1")) {
+            dto.setMethod("公司");
+        } else {
+            dto.setMethod("个人");
+        }
+
+        super.getJedisClient().set("RECORD:"+token,JsonUtils.objectToJson(dto));
+        super.getJedisClient().expire("RECORD:"+token,60*10);
+
+        return JsonResult.OK(dto);
+    }
+
+    /**
+     * 提交申请
+     * @param imgArry
+     * @param token
+     * @return
+     */
+
+    @Transactional
+    @Override
+    public JsonResult saveSaleRecord(String imgArry,String token) {
+
+        User user = super.getAppUserByToken(token);
+        if(user==null)return JsonResult.Error("当前用户非登录状态");
+
+        String s = super.getJedisClient().get("RECORD:" + token);
+        if(StringUtils.isBlank(s))return JsonResult.Error("数据失效，重新选择");
+
+        AppRecordDto appRecordDto = JsonUtils.jsonToPojo(s, AppRecordDto.class);
+
+        long orderId = IDUtils.getOrderId();
+        SaleRecord record = new SaleRecord();
+        record.setOrdernum(orderId+"");
+        record.setCityId(appRecordDto.getCityId());
+        record.setCk(appRecordDto.getCk());
+        record.setColor(appRecordDto.getColor());
+        record.setCreatetime(TimeUtils.getFormatDateTime3(new Date()));
+        record.setGh(appRecordDto.getGh());
+        record.setJqx(appRecordDto.getJqx());
+        record.setMethod(appRecordDto.getMethod());
+        record.setGhtime(appRecordDto.getGhtime());
+        record.setModelId(Long.valueOf(appRecordDto.getModelId()));
+        record.setNj(appRecordDto.getNj());
+        record.setRegDate(appRecordDto.getRegistTime());
+        record.setsKm(appRecordDto.getGls());
+        record.setXz(appRecordDto.getXz());
+        record.setStatus(1);
+        record.setUserId(user.getId());
+
+        saleRecordMapper.insertSelective(record);
+
+        Long id = record.getId();
+
+        String[] split = imgArry.split(",");
+        SaleImg img = new SaleImg();
+        img.setRecordId(id);
+        img.setImg1(split[0]);
+        img.setImg2(split[1]);
+        img.setImg3(split[2]);
+        img.setImg4(split[3]);
+        img.setImg5(split[4]);
+        img.setImg6(split[5]);
+
+        saleImgMapper.insertSelective(img);
+
+        super.getJedisClient().hset("RECORD_INFO",orderId+"",s);
+
+        return JsonResult.OK();
+    }
+
+//    /**
+//     * 获取估值结果
+//     * @param param
+//     * @return
+//     */
+//
+//    public JsonResult getGuzhi(String param) {
+//
+//
+//        // 测试
+//       /* WebSocketTest webSocketTest = new WebSocketTest();
+//
+//        webSocketTest.SendMessages("<html><a onclick=\"openOrders('/orders/handle/138')\">测试</a></html>");*/
+//        //测试
+//
+//        try {
+//
+//            String redisJson = null;
+////            try {
+////                redisJson = jedisClient.hget("GUZHI", param);
+////            } catch (Exception e) {
+////                e.printStackTrace();
+////            }
+////
+////            if (StringUtils.isNotBlank(redisJson)) {
+////
+////                return JsonResult.OK(JsonUtils.jsonToPojo(redisJson, GuzhiDTO.class));
+////            }
+//
+//            String[] paramarry = param.split("c|m|r|g");
+//            String url = String.format("%s?token=%s&modelId=%s&regDate=%s&mile=%s&zone=%s", GUZHI, token, paramarry[2], paramarry[3], paramarry[4], paramarry[1]);
+//
+//
+//
+//
+//            String res = HttpClientUtil.doGet(url);
+//
+//            JSONObject jsonObject = JSON.parseObject(res);
+//            JSONArray eval_prices = jsonObject.getJSONArray("eval_prices");
+//
+//
+//
+//
+//
+//
+//            Gzrecord gzrecord = new Gzrecord();
+//            gzrecord.setParam(param);
+//            gzrecord.setCity(Integer.valueOf(paramarry[1]));
+//            gzrecord.setMail(paramarry[4]);
+//            gzrecord.setModelId(Long.valueOf(paramarry[2]));
+//            gzrecord.setRegDate(paramarry[3]);
+//            gzrecord.setTime(new Date());
+//
+//            for (Object eval_price : eval_prices) {
+//                JSONObject object = (JSONObject) eval_price;
+////
+//                /**
+//                 * 修改 2017-0804 修改 段位价格整体下移
+//                 */
+//                if (object.getString("condition").equals("excellent")) {
+//                    //车况优秀
+////                    gzrecord.setPriceMaxA(object.getString("individual_low_sold_price"));
+////                    gzrecord.setPriceMinA(object.getString("dealer_low_buy_price"));
+//                }
+//                if (object.getString("condition").equals("good")) {
+//                    //车况优秀
+//                    gzrecord.setPriceMaxA(object.getString("individual_low_sold_price"));
+//                    gzrecord.setPriceMinA(object.getString("dealer_low_buy_price"));
+//
+//                }
+//                if (object.getString("condition").equals("normal")) {
+//                    //车况良好
+//                    gzrecord.setPriceMaxB(object.getString("individual_low_sold_price"));
+//                    gzrecord.setPriceMinB(object.getString("dealer_low_buy_price"));
+////                    //车况一般
+////                    gzrecord.setPriceMaxC(object.getString("individual_low_sold_price"));
+////                    gzrecord.setPriceMinC(object.getString("dealer_low_buy_price"));
+//                    //车况一般
+//                    gzrecord.setPriceMaxC(new BigDecimal(object.getDouble("individual_low_sold_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+//                    gzrecord.setPriceMinC(new BigDecimal(object.getDouble("dealer_low_buy_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+//
+////                  //车况较差
+//                    gzrecord.setPriceMaxD(new BigDecimal(object.getDouble("individual_low_sold_price") * 0.94 * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+//                    gzrecord.setPriceMinD(new BigDecimal(object.getDouble("dealer_low_buy_price") * 0.94 * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+//                }
+//
+//            }
+//
+//
+//            com.maizhong.common.dto.GuzhiDTO guzhiDTO = new com.maizhong.common.dto.GuzhiDTO();
+//            guzhiDTO.setPriceA(gzrecord.getPriceMinA() + "万~" + gzrecord.getPriceMaxA() + "万");
+//            guzhiDTO.setPriceA_max(gzrecord.getPriceMaxA());
+//            guzhiDTO.setPriceA_min(gzrecord.getPriceMinA());
+//            guzhiDTO.setPriceB(gzrecord.getPriceMinB() + "万~" + gzrecord.getPriceMaxB() + "万");
+//            guzhiDTO.setPriceB_max(gzrecord.getPriceMaxB());
+//            guzhiDTO.setPriceB_min(gzrecord.getPriceMinB());
+//            guzhiDTO.setPriceC(gzrecord.getPriceMinC() + "万~" + gzrecord.getPriceMaxC() + "万");
+//            guzhiDTO.setPriceC_max(gzrecord.getPriceMaxC());
+//            guzhiDTO.setPriceC_min(gzrecord.getPriceMinC());
+//            guzhiDTO.setPriceD(gzrecord.getPriceMinD() + "万~" + gzrecord.getPriceMaxD() + "万");
+//            guzhiDTO.setPriceD_max(gzrecord.getPriceMaxD());
+//            guzhiDTO.setPriceD_min(gzrecord.getPriceMinD());
+//
+//
+//            String modelRedis = jedisClient.hget("CAR_MODEL", gzrecord.getModelId() + "");
+//
+//            Model model = JsonUtils.jsonToPojo(modelRedis, Model.class);
+//
+//            if(StringUtils.isNotBlank(modelRedis)){
+//
+//                ModelExample example = new ModelExample();
+//                ModelExample.Criteria criteria = example.createCriteria();
+//                criteria.andModelIdEqualTo(Long.parseLong(paramarry[2]));
+//                long l = modelMapper.countByExample(example);
+//                if(l==0){
+//                    modelMapper.insert(model);
+//                }
+//            }
+//
+//
+//            guzhiDTO.setMaxYear(model.getMaxRegYear() + "");
+//            guzhiDTO.setMinYear(model.getMinRegYear() + "");
+//
+//            guzhiDTO.setModelId(model.getModelId() + "");
+//
+//            guzhiDTO.setModelName(model.getModelName());
+//            guzhiDTO.setDischargeStandard(model.getDischargeStandard());
+//            guzhiDTO.setLiter(model.getLiter());
+//            guzhiDTO.setModelPrice(model.getModelPrice() + "");
+//            guzhiDTO.setGearType(model.getGearType());
+//
+//            guzhiDTO.setMail(gzrecord.getMail() + "");
+//            guzhiDTO.setCity(jedisClient.hget("CITY_KEY", gzrecord.getCity() + ""));
+//
+//            String seriesRedis = jedisClient.hget("CAR_SERIES_KEY", model.getSeriesId() + "");
+//
+//            Series series = JsonUtils.jsonToPojo(seriesRedis, Series.class);
+//            guzhiDTO.setSeriesImg(series.getSeriesPic());
+//            guzhiDTO.setSeriesId(series.getSeriesId() + "");
+//            guzhiDTO.setBrandId(series.getBrandId() + "");
+//
+//            guzhiDTO.setRegdate(gzrecord.getRegDate().replace("-", "年") + "月");
+//
+//
+//            jedisClient.hset("GUZHI", param, JsonUtils.objectToJson(guzhiDTO));
+//            gzrecordMapper.insert(gzrecord);
+//
+//            return JsonResult.OK(guzhiDTO);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        return null;
+//    }
+
+
+
+
+
+
+
 
     /**
      * 异步同步新闻信息

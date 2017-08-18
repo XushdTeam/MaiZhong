@@ -26,4 +26,8 @@ public interface AppService {
     JsonResult changHeadImg(String headimg, String token);
 
     JsonResult syncUserInfo(String token);
+
+    JsonResult getModelDetail(String guzhiKey, String otherKey, String token);
+
+    JsonResult saveSaleRecord(String imgArry,String token);
 }
