@@ -4,9 +4,7 @@ import com.maizhong.common.result.JsonResult;
 import com.maizhong.youpin.service.AppService;
 import com.maizhong.youpin.service.ImgUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -139,6 +137,31 @@ public class APPController extends BaseController {
     public JsonResult syncUserInfo(HttpServletRequest request){
         String token = super.getToken(request);
         return appService.syncUserInfo(token);
+    }
+
+    /**
+     * 获取
+     * @param guzhiKey
+     * @param otherKey
+     * @return
+     */
+    @RequestMapping(value = "/app/getSaleGZDetail/{guzhiKey:.+}/{otherKey}", method = RequestMethod.GET)
+    public JsonResult getModeDetail(@PathVariable String guzhiKey,
+                                    @PathVariable String otherKey,HttpServletRequest request){
+        String token = super.getToken(request);
+        return appService.getModelDetail(guzhiKey,otherKey,token);
+
+    }
+
+    /**
+     * 提交卖车 申请
+     * @param imgArry
+     * @return
+     */
+    @RequestMapping(value = "/app/submit/record")
+    public JsonResult submitRecord(String imgArry,HttpServletRequest request){
+        String token = super.getToken(request);
+        return appService.saveSaleRecord(imgArry,token);
     }
 
 }
