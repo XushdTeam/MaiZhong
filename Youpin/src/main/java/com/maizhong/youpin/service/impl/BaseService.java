@@ -1,13 +1,9 @@
 package com.maizhong.youpin.service.impl;
 
-<<<<<<< Updated upstream:Youpin/src/main/java/com/maizhong/youpin/service/impl/BaseService.java
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.youpin.dao.JedisClient;
 import com.maizhong.youpin.pojo.User;
 import org.apache.commons.lang3.StringUtils;
-=======
-import com.maizhong.youpin.dao.JedisClient;
->>>>>>> Stashed changes:Youpin/src/main/java/com.maizhong.youpin.service/impl/BaseService.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 

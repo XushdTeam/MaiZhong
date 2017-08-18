@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.maizhong.common.enums.SMSTemplateEnum;
 import com.maizhong.common.result.JsonResult;
-<<<<<<< Updated upstream:Youpin/src/main/java/com/maizhong/youpin/service/impl/AppServiceImpl.java
 import com.maizhong.common.utils.*;
 import com.maizhong.youpin.dto.CompanyDto;
 import com.maizhong.youpin.dto.NewsDto;
@@ -14,13 +13,6 @@ import com.maizhong.youpin.mapper.DocMapper;
 import com.maizhong.youpin.mapper.UserMapper;
 import com.maizhong.youpin.pojo.*;
 import com.maizhong.youpin.service.AppService;
-=======
-import com.maizhong.common.utils.HttpUtils;
-import com.maizhong.common.utils.IDUtils;
-import com.maizhong.common.utils.JsonUtils;
-import com.maizhong.youpin.pojo.Doc;
-import com.maizhong.youpin.pojo.DocExample;
->>>>>>> Stashed changes:Youpin/src/main/java/com.maizhong.youpin.service/impl/AppServiceImpl.java
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
