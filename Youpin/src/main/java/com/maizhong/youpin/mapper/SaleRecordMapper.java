@@ -2,9 +2,9 @@ package com.maizhong.youpin.mapper;
 
 import com.maizhong.youpin.pojo.SaleRecord;
 import com.maizhong.youpin.pojo.SaleRecordExample;
-import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface SaleRecordMapper {
     long countByExample(SaleRecordExample example);
