@@ -3,6 +3,7 @@ package com.maizhong.youpin.mapper;
 import com.maizhong.youpin.pojo.Company;
 import com.maizhong.youpin.pojo.CompanyExample;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface CompanyMapper {
