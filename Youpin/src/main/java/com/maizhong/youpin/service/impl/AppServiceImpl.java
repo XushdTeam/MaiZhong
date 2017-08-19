@@ -225,6 +225,13 @@ public class AppServiceImpl extends BaseService implements AppService {
         user.setCompanyName(companyName);
 
         userMapper.updateByPrimaryKeySelective(user);
+        switch (job){
+            case 1:user.setJobName("CEO");
+            case 2:user.setJobName("经理");
+            case 3:user.setJobName("销售");
+            case 4:user.setJobName("评估师");
+            case 5:user.setJobName("其他");
+        }
 
         super.getJedisClient().set("APP_PERSONAL:"+token,JsonUtils.objectToJson(user));
 
@@ -432,7 +439,8 @@ public class AppServiceImpl extends BaseService implements AppService {
         record.setCityId(appRecordDto.getCityId());
         record.setCk(appRecordDto.getCk());
         record.setColor(appRecordDto.getColor());
-        record.setCreatetime(TimeUtils.getFormatDateTime3(new Date()));
+        String createTime = TimeUtils.getFormatDateTime3(new Date());
+        record.setCreatetime(createTime);
         record.setGh(appRecordDto.getGh());
         record.setJqx(appRecordDto.getJqx());
         record.setMethod(appRecordDto.getMethod());
@@ -461,9 +469,65 @@ public class AppServiceImpl extends BaseService implements AppService {
 
         saleImgMapper.insertSelective(img);
 
-        super.getJedisClient().hset("RECORD_INFO",orderId+"",s);
+        appRecordDto.setImgArry(imgArry);
+        appRecordDto.setOrderNum(orderId+"");
+        appRecordDto.setSubmitTime(createTime);
+
+        super.getJedisClient().hset("RECORD_INFO",orderId+"",JsonUtils.objectToJson(appRecordDto));
 
         return JsonResult.OK();
+    }
+
+    /**
+     * 获取提交记录
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult getRecordList(String token) {
+
+        User user = super.getAppUserByToken(token);
+        if(user==null)return JsonResult.Error("当前用户非登录状态");
+
+        SaleRecordExample example = new SaleRecordExample();
+        example.createCriteria().andUserIdEqualTo(user.getId());
+
+        List<SaleRecord> saleRecords = saleRecordMapper.selectByExample(example);
+        List<AppRecordDto> list = new ArrayList<>();
+        for (SaleRecord saleRecord : saleRecords) {
+            String ordernum = saleRecord.getOrdernum();
+
+            String record_info = super.getJedisClient().hget("RECORD_INFO", ordernum);
+            if(StringUtils.isBlank(record_info))continue;
+
+            AppRecordDto appRecordDto = JsonUtils.jsonToPojo(record_info, AppRecordDto.class);
+
+            appRecordDto.setStatus(saleRecord.getStatus());
+            appRecordDto.setPrice(saleRecord.getPrice());
+
+            list.add(appRecordDto);
+        }
+
+        return JsonResult.OK(list);
+
+    }
+
+
+    /**
+     * 获取职位列表
+     * @return
+     */
+    @Override
+    public JsonResult getJobList() {
+
+        List<JobDto> list = new ArrayList<>();
+        list.add(new JobDto(1,"CEO"));
+        list.add(new JobDto(2,"经理"));
+        list.add(new JobDto(3,"销售"));
+        list.add(new JobDto(4,"评估师"));
+        list.add(new JobDto(5,"其他"));
+
+        return JsonResult.OK(list);
     }
 
 //    /**

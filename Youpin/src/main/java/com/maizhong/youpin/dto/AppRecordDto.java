@@ -33,8 +33,57 @@ public class AppRecordDto {
     private String param1;
     private String param2;
 
+    private String price;
+    private int status;
+    private String orderNum;
+
+    private String submitTime;
+
+    private String imgArry;
+
+
 
     public AppRecordDto() {
+    }
+
+    public String getImgArry() {
+        return imgArry;
+    }
+
+    public void setImgArry(String imgArry) {
+        this.imgArry = imgArry;
+    }
+
+    public String getSubmitTime() {
+        return submitTime;
+    }
+
+    public void setSubmitTime(String submitTime) {
+        this.submitTime = submitTime;
+    }
+
+    public String getOrderNum() {
+        return orderNum;
+    }
+
+    public void setOrderNum(String orderNum) {
+        this.orderNum = orderNum;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getPfbz() {

@@ -1,6 +1,7 @@
 package com.maizhong.youpin.controller;
 
 import com.maizhong.common.result.JsonResult;
+import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.youpin.service.AppService;
 import com.maizhong.youpin.service.ImgUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -162,6 +163,26 @@ public class APPController extends BaseController {
     public JsonResult submitRecord(String imgArry,HttpServletRequest request){
         String token = super.getToken(request);
         return appService.saveSaleRecord(imgArry,token);
+    }
+
+    /**
+     * 获取提交记录
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/app/record/list")
+    public JsonResult getRecordList(HttpServletRequest request){
+        String token = super.getToken(request);
+        return appService.getRecordList(token);
+    }
+
+    /**
+     * 获取职位列表
+     * @return
+     */
+    @RequestMapping(value = "/app/job/list")
+    public JsonResult getJobList(){
+        return appService.getJobList();
     }
 
 }

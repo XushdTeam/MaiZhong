@@ -17,6 +17,8 @@ public class User {
 
     private String job;
 
+    private String jobName;
+
     private String headimg;
 
     private Integer type;
@@ -33,6 +35,14 @@ public class User {
 
     public String getCompanyName() {
         return companyName;
+    }
+
+    public String getJobName() {
+        return jobName;
+    }
+
+    public void setJobName(String jobName) {
+        this.jobName = jobName;
     }
 
     public void setCompanyName(String companyName) {

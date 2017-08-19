@@ -30,4 +30,8 @@ public interface AppService {
     JsonResult getModelDetail(String guzhiKey, String otherKey, String token);
 
     JsonResult saveSaleRecord(String imgArry,String token);
+
+    JsonResult getRecordList(String token);
+
+    JsonResult getJobList();
 }
