@@ -1,0 +1,468 @@
+@charset "utf-8";
+/* 防止用户自定义背景颜色对网页的影响 */
+html{
+	font-weight: inherit;
+	font-style: inherit;
+	font-family: inherit;
+	vertical-align: baseline;
+	font-size:16px;
+	list-style:none;
+	text-decoration:none;
+	font-family:-apple-system,BlinkMacSystemFont,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Hiragino Sans GB,Microsoft Yahei,Microsoft Jhenghei,sans-serif;
+	-webkit-tap-highlight-color:rgba(255,255,255,0);
+	-webkit-appearance:none;
+	font-weight:300;
+}
+body,
+button,
+input,
+select,
+textarea{
+	-ms-text-autospace: ideograph-alpha ideograph-numeric ideograph-parenthesis;
+  /* 5 */
+  text-spacing: ideograph-alpha ideograph-numeric ideograph-parenthesis;
+}
+
+/* 内外边距通常让各个浏览器样式的表现位置不同 */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+	margin:0;padding:0;
+}
+/* 重设 HTML5 标签, IE 需要在 js 中 createElement(TAG) */
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section { 
+    display:block;
+}
+/* 要注意表单元素并不继承父级 font 的问题 */
+body,button,input,select,textarea{
+	resize:none;
+}
+input,select,textarea{
+	font-size:100%;font-family:'微软雅黑 Regular', '微软雅黑';
+}
+/* 去掉各Table  cell 的边距并让其边重合 */
+table{
+	border-collapse:collapse;border-spacing:0;
+}
+/* IE bug fixed: th 不继承 text-align*/
+th{
+	text-align:inherit;
+}
+/* 去除默认边框 */
+fieldset,img{
+	border:0;
+}
+/* ie6 7 8(q) bug 显示为行内表现 */
+iframe{
+	display:block;
+}
+/* 去掉 firefox 下此元素的边框 */
+abbr,acronym{
+	border:0;font-variant:normal;
+}
+/* 一致的 del 样式 */
+del {
+	text-decoration:line-through;
+}
+address,caption,cite,code,dfn,em,th,var {
+	font-style:normal;
+	font-weight:500;
+}
+/* 去掉列表前的标识, li 会继承 */
+ol,ul {
+	list-style:none;
+}
+/* 对齐居中 */
+caption,th {
+	text-align:left;
+}
+/* 来自yahoo, 让标题都自定义, 适应多个系统应用 */
+h1,h2,h3,h4,h5,h6 {
+	font-size:100%;
+	font-weight:300;
+}
+q:before,q:after {
+	content:'';
+}
+/* 统一上标和下标 */
+sup {
+	vertical-align:text-top;
+}
+sub {
+	vertical-align:text-bottom;
+}
+/**
+* 1. 去除链接默认的下划线，提高文字可读性
+* 2. 去掉 IE 10+ 点击链接时的灰色背景
+*/
+a {
+  text-decoration: none;
+  /* 1 */
+  background-color: transparent;
+  /* 2 */
+}
+
+/**
+* 去掉点击时的焦点框，同时保证使用键盘可以显示焦点框
+*/
+a:active,
+a:hover {
+  outline-width: 0;
+}
+/**
+* 统一 Chrome 和 Safari 的焦点框样式
+* Chrome 中 thin 关键字放大页面后焦点框不会放大 http://jsbin.com/ehakom/1
+* Firefox 中 box-shadow 会导致焦点框位置偏移，需用「outline-offset」修正
+*
+*/
+a:focus {
+  outline: 1px dotted;
+}
+/* 清理浮动 */
+.fn-clear:after {
+	visibility:hidden;
+	display:block;
+	font-size:0;
+	content:" ";
+	clear:both;
+	height:0;
+}
+.fn-clear {
+	zoom:1; /* for IE6 IE7 */
+}
+
+/* 隐藏, 通常用来与 JS 配合 */
+body .fn-hide {
+	display:none;
+}
+/**
+* 中文小于 12px 可读性很差
+* 1. 统一 IE 6-7 中字体大小
+* 2. 统一 Firefox 4+，Safari 5 和 Chrome 中「section」和「article」内的字体大小
+*/
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 22px;
+}
+
+h4 {
+  font-size: 18px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  font-size: 12px;
+}
+
+/* ==========================================================================
+ 表格
+ ========================================================================== */
+/**
+* 合并单元格边框
+*/
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/**
+* 修复 IE 中 th 不能继承 text-align 的问题并统一左对齐
+* http://jsbin.com/evoxif/2/edit
+*/
+th {
+  text-align: left;
+}
+
+/**
+* 单元格添加边框
+*/
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 8px 10px;
+}
+
+/**
+* 表头底部边框
+*/
+table th {
+  font-weight: inherit;
+  border-bottom-width: 2px;
+  border-bottom-color: #ccc;
+}
+
+/* ==========================================================================
+ 嵌入元素
+ ========================================================================== */
+/**
+* 1. 去除 IE6-9 和 Firefox 3 中 a 内部 img 元素默认的边框
+* 2. 修正 IE8 图片消失bug
+* 3. 防止 img 指定「height」时图片高度不能按照宽度等比缩放，导致图片变形
+    http://jsbin.com/aJoTUca/2
+* 4. 让图片支持响应式
+* 5. 去除现代浏览器图片底部的空隙
+* 6. 修复 IE7 图片缩放失真
+*/
+img {
+  border-style: none;
+  /* 1 */
+  width: auto\9;
+  /* 2 */
+  height: auto;
+  /* 3 */
+  max-width: 100%;
+  /* 4 */
+  vertical-align: top;
+  /* 5 */
+  -ms-interpolation-mode: bicubic;
+  /* 6 */
+}
+
+/**
+* 修复 IE9 中的「overflow」的怪异表现
+*/
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/**
+* 1. 修正所有浏览器中字体不继承的问题
+* 2. 修正所有浏览器中字号不继承的问题
+* 3. 修正 Firefox 3+， Safari5 和 Chrome 中外边距不同的问题
+* 4. 改善在所有浏览器下的垂直对齐方式
+*/
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  /* 1 */
+  font-size: 100%;
+  /* 2 */
+  margin: 0;
+  /* 3 */
+  vertical-align: baseline;
+  /* 4 */
+  *vertical-align: middle;
+  /* 4 */
+}
+
+/**
+* 修正 IE7 随着字数增加边距不断增加的问题
+*/
+input,
+button {
+  *overflow: visible;
+}
+
+/**
+* 统一各浏览器「text-transform」不会继承的问题
+* http://jsbin.com/iqecic/1/edit
+* http://tjvantoll.com/2012/07/10/default-browser-handling-of-the-css-text-transform-property/
+*/
+button,
+select {
+  text-transform: none;
+}
+
+/**
+* 1. 避免 Android 4.0.* 中的 WebKit bug ，该bug会破坏原生的
+ 「audio」 和「video」的控制器
+* 2. 更正 iOS 中无法设置可点击的「input」的问题
+* 3. 统一其他类型的「input」的光标样式
+*/
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer;
+  /* 3 */
+}
+
+/**
+* 重置按钮禁用时光标样式
+*/
+button[disabled],
+input[disabled] {
+  cursor: default;
+}
+
+/**
+* 1. 修正 IE 8/9 box-sizing 被设置为「content-box」的问题
+* 2. 移除 IE 8/9 中多余的内边距
+* 3. 移除 IE7 中多余的内边距(IE6 中任然存在)
+*/
+input[type="checkbox"],
+input[type="radio"] {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+  *height: 13px;
+  /* 3 */
+  *width: 13px;
+  /* 3 */
+}
+
+/**
+* 1. 修正 Safari 5 和 Chrome 中「appearance」被设置为「searchfield」的问题
+* 2. 修正 Safari 5 和 Chrome 中「box-sizing」被设置为 「border-box」的问题
+*/
+input[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+}
+
+/**
+* 1.移除 OS X 中 Safari5 和 Chrome 搜索框内侧的左边距
+* 2.如果需要隐藏清除按钮需要加上
+ input[type="search"]::-webkit-search-cancel-button
+*/
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+* 移除 Firefox 3+ 的内边距
+*/
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+* 修正 Chrome 中 input [type="number"] 在特定高度和 font-size 时,
+* 下面一个箭头光标变成「cursor: text」
+* @demo: http://jsfiddle.net/FFXEc/
+* 动画演示：http://gtms04.alicdn.com/tps/i4/T18kd8FCtaXXc_FhcF-330-350.gif
+*/
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+* 1. 移除 IE6-11 中默认的垂直滚动条
+* 2. 禁止水平拖动，防止破坏布局
+*/
+textarea {
+  overflow: auto;
+  /* 1 */
+  resize: vertical;
+  /* 2 */
+}
+
+/**
+* 修正 Chrome 30- option 中文字无法显示的问题
+* http://jsbin.com/avujas/1/edit
+*/
+select:disabled option:checked,
+option:disabled:checked {
+  color: #d2d2d2;
+}
+
+/**
+* 修正 Firefox 19+ Placeholder 设置了opacity 的问题
+*/
+input::-moz-placeholder, textarea::-moz-placeholder {
+  color: darkGray;
+  opacity: 1;
+}
+
+/**
+* label 元素给予手型，暗示此处可点击
+*/
+label {
+  cursor: pointer;
+}
+
+/**
+* 统一 select 样式, Firefox 中有 padding:1px 0
+* http://jsbin.com/avujas/1/edit
+*/
+select[size],
+select[multiple],
+select[size][multiple] {
+  border: 1px solid #aaa;
+  padding: 0;
+}
+
+/* ==========================================================================
+ HTML5 元素
+ ========================================================================== */
+/**
+* 修正未定义为「block」的元素
+*/
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/**
+* 1. 修正未定义为「inline-block」的元素
+* 2. 修正 Chrome、Firefox、Opera 中 「progress」元素 vertical-align 默认值不一致
+*/
+audio,
+canvas,
+video,
+progress {
+  display: inline-block;
+  /* 1 */
+  vertical-align: baseline;
+  /* 2 */
+}
+
+/**
+* 1.防止现代浏览器将没有「controls」属性的 「audio」元素显示出来
+* 2.去掉 iOS 5 中多余的高度
+*/
+audio:not([controls]) {
+  display: none;
+  /* 1 */
+  height: 0;
+  /* 2 */
+}
+
+/**
+* 修复 IE 7/8/9，Firefox 3 和 Safari 4 中 「hidden」属性不起作用的问题
+* 在IE、Safari、Firefox 22- 中隐藏「template」元素
+*/
+[hidden], template {
+  display: none;
+}
+
+/**
+* 为可拖动元素添加拖动的光标
+* http://jsbin.com/apavod/1/edit
+*/
+[draggable] {
+  cursor: move;
+}

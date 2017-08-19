@@ -108,6 +108,25 @@ public class IndexController {
         model.addAttribute("menu","/");
         return "index";
     }
+    /**
+     * 拍卖PC index
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/auction")
+    public String index_auction(@CookieValue(value = "token",required = false) String token,Model model){
+        if(StringUtils.isNotBlank(token)){
+            AcUser user =  indexService.getUserInfo(token);
+            if(user!=null){
+                model.addAttribute("username",user.getName());
+            }
+        }
+        model.addAttribute("menu","/");
+        return "index_auction";
+    }
+
+
+
 
     /**
      * 拍卖大厅
@@ -126,6 +145,11 @@ public class IndexController {
         return "list";
     }
 
+    @RequestMapping(value = "/download")
+    public String download(){
+        return "download";
+    }
+
     /**
      * 服务大厅
      * @param
@@ -133,10 +157,11 @@ public class IndexController {
      */
     @RequestMapping(value = "/warranty")
     public String  warranty(@CookieValue(value = "token",required = false) String token,Model model){
-        AcUser user =  indexService.getUserInfo(token);
-        if(user!=null){
-            model.addAttribute("username",user.getName());
-
+        if(StringUtils.isNotBlank(token)){
+            AcUser user =  indexService.getUserInfo(token);
+            if(user!=null){
+                model.addAttribute("username",user.getName());
+            }
         }
         model.addAttribute("menu","/warranty");
         return "warranty";

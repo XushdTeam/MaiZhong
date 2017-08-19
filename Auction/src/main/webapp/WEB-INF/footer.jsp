@@ -14,11 +14,7 @@
 <div id="footer" class="clearfix">
     <div class="footer_container foot-left w1200">
         <div class="fl ml30 pt10">
-            <div class="footer_nav">
-                <a href=" " target="_blank">公司简介</a> |
-                <a href=" " target="_blank">招贤纳士</a> |
-                <a href=" " target="_blank">联系我们</a>
-            </div>
+
             <div class="pt5">
                 版权所有北京迈众信息科技有限公司 | 京ICP备17017795号-3
             </div>
@@ -28,13 +24,13 @@
                 <dt>
                     <img src="/resources/main/img/app.png">
                 </dt>
-                <dd>下载App</dd>
+                <dd>下载车主App</dd>
             </dl>
             <dl>
                 <dt>
                     <img src="/resources/main/img/weixin.jpg">
                 </dt>
-                <dd>关注微信小助手</dd>
+                <dd>下载拍卖App</dd>
             </dl>
         </div>
         <div class="fr contact ml70">

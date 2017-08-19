@@ -156,6 +156,27 @@ public class AppServiceImpl extends BaseService implements AppService {
                 user = users.get(0);
             }
 
+            if(user.getCompanyId()==0L){
+                user.setCompanyName("未选择");
+            }else{
+                Company company = companyMapper.selectByPrimaryKey(user.getCompanyId());
+                user.setCompanyName(company.getName());
+            }
+            int job = 0;
+            String job1 = user.getJob();
+            if(StringUtils.isNotBlank(job1)){
+                job = Integer.parseInt(job1);
+            }
+
+            switch (job){
+                case 1:user.setJobName("CEO");break;
+                case 2:user.setJobName("经理");break;
+                case 3:user.setJobName("销售");break;
+                case 4:user.setJobName("评估师");break;
+                default:user.setJobName("其他");break;
+            }
+
+
             super.getJedisClient().set("APP_PERSONAL:"+token, JsonUtils.objectToJson(user));
             if(!StringUtils.equals("17600601529",phone)){
                 super.getJedisClient().del("SMS:" + phone);
@@ -227,11 +248,11 @@ public class AppServiceImpl extends BaseService implements AppService {
 
         userMapper.updateByPrimaryKeySelective(user);
         switch (job){
-            case 1:user.setJobName("CEO");
-            case 2:user.setJobName("经理");
-            case 3:user.setJobName("销售");
-            case 4:user.setJobName("评估师");
-            case 5:user.setJobName("其他");
+            case 1:user.setJobName("CEO");break;
+            case 2:user.setJobName("经理");break;
+            case 3:user.setJobName("销售");break;
+            case 4:user.setJobName("评估师");break;
+            case 5:user.setJobName("其他");break;
         }
 
         super.getJedisClient().set("APP_PERSONAL:"+token,JsonUtils.objectToJson(user));
