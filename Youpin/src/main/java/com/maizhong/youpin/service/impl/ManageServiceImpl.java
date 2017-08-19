@@ -11,11 +11,15 @@ import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.common.utils.SqlUtils;
 import com.maizhong.common.utils.TimeUtils;
 import com.maizhong.youpin.dto.MenuDto;
+import com.maizhong.youpin.dto.OrderInfoDto;
 import com.maizhong.youpin.dto.RecordDto;
 import com.maizhong.youpin.dto.UserDto;
 import com.maizhong.youpin.mapper.*;
 import com.maizhong.youpin.pojo.*;
 import com.maizhong.youpin.service.ManageService;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.util.JSONUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,9 +60,6 @@ public class ManageServiceImpl extends BaseService implements ManageService {
 
     @Autowired
     private ModelMapper modelMapper;
-
-
-
 
 
     /**
@@ -420,64 +421,38 @@ public class ManageServiceImpl extends BaseService implements ManageService {
      */
     @Override
     public JsonResult getRecordList(PageSearchParam param) {
-
-        List<RecordDto> recordDtoList=new ArrayList<>();
-
-        PageHelper.startPage(param.getPageIndex(), param.getPageSize());
-
-        SaleRecordExample example = new SaleRecordExample();
-        SaleRecordExample.Criteria criteria = example.createCriteria();
-
-        if (StringUtils.isNotBlank(param.getFiled("status"))) {
-            criteria.andStatusEqualTo(Integer.valueOf(param.getFiled("status")));
-        }
-
-        List<SaleRecord> saleRecords = saleRecordMapper.selectByExample(example);
-
-        for (SaleRecord saleRecord : saleRecords) {
-            try {
-                RecordDto recordDto = new RecordDto();
-                User user = userMapper.selectByPrimaryKey(saleRecord.getUserId());//查询用户
-                Model model=modelMapper.selectByPrimaryKey(saleRecord.getModelId());//获取车辆信息
-                SaleImgExample example1 = new SaleImgExample();
-                SaleImgExample.Criteria criteria1 = example1.createCriteria();
-                criteria1.andRecordIdEqualTo(saleRecord.getId());
-                List<SaleImg> saleImgs = saleImgMapper.selectByExample(example1);//查询图片
-
-                UserDto userDto = new UserDto();
-                userDto.setId(user.getId());
-                userDto.setName(user.getName());
-                userDto.setPhone(user.getPhone());
-                userDto.setLevel(String.valueOf(user.getLevel()));
-                userDto.setType(String.valueOf(user.getType()));
-                userDto.setJob(user.getJob());
-                userDto.setStatus(user.getStatus());
-                userDto.setRegisttime(user.getRegisttime());
-                if (user.getCompanyId() == 0) {
-                    userDto.setCompany("个人");
-                } else {
+        JSONArray jsonArray = new JSONArray();
+        List<SaleRecord> saleRecords = saleRecordMapper.selectByExample(null);
+        if (saleRecords != null && saleRecords.size() > 0) {
+            for (SaleRecord saleRecord : saleRecords) {
+                try {
+                    JSONObject object = new JSONObject();
+                    User user = userMapper.selectByPrimaryKey(saleRecord.getUserId());
+                    String record_info = super.getJedisClient().hget("RECORD_INFO", saleRecord.getOrdernum());
+                    OrderInfoDto orderInfoDto = JsonUtils.jsonToPojo(record_info, OrderInfoDto.class);
                     Company company = companyMapper.selectByPrimaryKey(user.getCompanyId());
-                    if (company != null && company.getId() > 0) {
-                        userDto.setCompany(company.getName());
+                    if (company == null) {
+                        Company company1 = new Company();
+                        company1.setName("个人");
+                        object.put("company", company1);//公司信息
                     } else {
-                        userDto.setCompany("未知");
+                        object.put("company", company);//公司信息
                     }
-                }
+                    object.put("record_info", orderInfoDto);//订单信息
+                    object.put("user", user);//用户信息
 
-                recordDto.setUser(user);//用户
-                recordDto.setUserDto(userDto);//用户DTO
-                recordDto.setSaleImgList(saleImgs);//图片列表
-                recordDto.setSaleRecord(saleRecord);//订单信息
-                recordDto.setModel(model);//车辆信息
-                recordDtoList.add(recordDto);
-            } catch (Exception e) {
-                e.printStackTrace();
-                continue;
+                    object.put("saleRecord", saleRecord);//
+                    jsonArray.add(object);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    continue;
+                }
             }
         }
-        PageInfo pageInfo = new PageInfo(recordDtoList);
 
+        PageInfo pageInfo = new PageInfo(jsonArray);
         return JsonResult.OK(pageInfo);
+
     }
 
 
@@ -559,5 +534,69 @@ public class ManageServiceImpl extends BaseService implements ManageService {
         return JsonResult.Error(OperateEnum.FAILE);
     }
 
+    /**
+     * 根据订单编查询详情
+     *
+     * @param orderNumber
+     * @return
+     */
+    @Override
+    public JsonResult getOrderDetail(long orderNumber) {
+        JSONObject object = null;
+        try {
+
+            SaleRecordExample example = new SaleRecordExample();
+            SaleRecordExample.Criteria criteria = example.createCriteria();
+            criteria.andOrdernumEqualTo(String.valueOf(orderNumber));
+            List<SaleRecord> saleRecords = saleRecordMapper.selectByExample(example);
+            SaleRecord saleRecord=saleRecords.get(0);
+
+            object = new JSONObject();
+            User user = userMapper.selectByPrimaryKey(saleRecord.getUserId());
+            String record_info = super.getJedisClient().hget("RECORD_INFO", saleRecord.getOrdernum());
+            OrderInfoDto orderInfoDto = JsonUtils.jsonToPojo(record_info, OrderInfoDto.class);
+            Company company = companyMapper.selectByPrimaryKey(user.getCompanyId());
+            if (company == null) {
+                Company company1 = new Company();
+                company1.setName("个人");
+                object.put("company", company1);//公司信息
+            } else {
+                object.put("company", company);//公司信息
+            }
+            object.put("record_info", orderInfoDto);//订单信息
+            object.put("user", user);//用户信息
+
+            object.put("saleRecord", saleRecord);//
+        } catch (Exception e) {
+            e.printStackTrace();
+            return JsonResult.OK(null);
+        }
+        return JsonResult.OK(object);
+    }
+
+    @Override
+    public JsonResult price(long ordernumber, String price,String token) {
+        try {
+            SaleRecordExample saleRecordExample=new SaleRecordExample();
+            SaleRecordExample.Criteria criteria = saleRecordExample.createCriteria();
+            criteria.andOrdernumEqualTo(String.valueOf(ordernumber));
+            List<SaleRecord> saleRecords = saleRecordMapper.selectByExample(saleRecordExample);
+            SaleRecord saleRecord=saleRecords.get(0);
+            saleRecord.setPrice(price);
+            saleRecord.setStatus(2);
+            if(saleRecord.getSolveTime()==null||"".equals(saleRecord.getSolveTime())){
+                saleRecord.setSolveTime(TimeUtils.getFormatDateTime3(new Date()));
+            }else{
+                saleRecord.setUpdatetime(TimeUtils.getFormatDateTime3(new Date()));
+            }
+
+            saleRecordMapper.updateByPrimaryKeySelective(saleRecord);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return  JsonResult.Error("修改失败");
+        }
+        return  JsonResult.OK();
+    }
 
 }

@@ -2,6 +2,7 @@ package com.maizhong.youpin.controller;
 
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.result.JsonResult;
+import com.maizhong.youpin.dto.RecordDto;
 import com.maizhong.youpin.pojo.ManagerUser;
 import com.maizhong.youpin.service.ManageService;
 import org.apache.commons.lang3.StringUtils;
@@ -27,6 +28,7 @@ public class ManageController {
 
     /**
      * 后台首页
+     *
      * @param token
      * @param model
      * @return
@@ -46,7 +48,6 @@ public class ManageController {
 
         return "manage/index";
     }
-
 
 
     /**
@@ -124,7 +125,6 @@ public class ManageController {
         JsonResult result = manageService.getSysAccountList(param);
         return result;
     }
-
 
 
     /**
@@ -253,7 +253,6 @@ public class ManageController {
     }
 
 
-
     /**
      * 订单保存或更新
      *
@@ -298,25 +297,53 @@ public class ManageController {
 
 
 
+    /*订单详情*/
+
+    /**
+     * 订单详情
+     *
+     * @param model
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/system/order/{ordernumber}")
+    public String orderDetail(Model model, HttpServletRequest request,@PathVariable long ordernumber) {
 
 
+        String token = (String) request.getAttribute("token");
+        String username = (String) request.getAttribute("username");
+
+        String sysMenuJson = manageService.getSystemMenu(token);
+        model.addAttribute("menu", sysMenuJson);
+        model.addAttribute("cur", "/system/order");
+        model.addAttribute("username", username);
+        model.addAttribute("ordernumber", ordernumber);
+        return "/manage/views/sys_recordDetail";
+    }
+
+    /**
+     * 根据编号获取订单详情
+     *
+     * @param token
+     * @param ordernumber
+     * @return
+     */
+    @RequestMapping(value = "/system/orderDetail/{ordernumber}")
+    @ResponseBody
+    public JsonResult getOrderDetailByOrderNumber(@CookieValue(value = "token", required = false) String token,
+                                         @PathVariable long ordernumber) {
+        JsonResult result = manageService.getOrderDetail(ordernumber);
+        return result;
+    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @RequestMapping(value = "/system/price/{ordernumber}")
+    @ResponseBody
+    public JsonResult price(@CookieValue(value = "token", required = false) String token,
+                                                  @PathVariable long ordernumber,String price) {
+        JsonResult result = manageService.price(ordernumber,price,token);
+        return result;
+    }
 
 
 }

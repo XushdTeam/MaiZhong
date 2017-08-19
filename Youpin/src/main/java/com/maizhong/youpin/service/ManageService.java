@@ -45,4 +45,7 @@ public interface ManageService {
     JsonResult delRecord(long id);
 
 
+    JsonResult getOrderDetail(long orderNumber);
+
+    JsonResult price(long ordernumber, String price,String token);
 }
