@@ -6,10 +6,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.maizhong.common.enums.SMSTemplateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.*;
-import com.maizhong.youpin.dao.JedisClient;
+
 import com.maizhong.youpin.dto.*;
 import com.maizhong.youpin.mapper.*;
 import com.maizhong.youpin.pojo.*;
+import com.maizhong.youpin.pojo.Model;
 import com.maizhong.youpin.service.AppService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
