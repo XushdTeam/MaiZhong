@@ -8,6 +8,7 @@ import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.*;
 
 import com.maizhong.youpin.dto.*;
+import com.maizhong.youpin.dto.Model;
 import com.maizhong.youpin.mapper.*;
 import com.maizhong.youpin.pojo.*;
 import com.maizhong.youpin.pojo.Model;

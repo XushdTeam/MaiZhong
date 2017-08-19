@@ -196,6 +196,7 @@
                $.post('/system/account/list',this.searchForm,function(d){
                     if(d.status==200){
                         VM.pageInfo = d.data;
+                        console.log(JSON.stringify(d))
                     }else{
                         this.error(d.message);
                     }

@@ -57,12 +57,11 @@
                               v-loading="loading"
                               element-loading-text="拼命加载中"
                               style="width: 100%" height="500">
-                        <el-table-column prop="saleRecord.id" label="ID"width="100"></el-table-column>
-                        <el-table-column prop="model.modelName" label="车辆名称"width="300"></el-table-column>
+                        <el-table-column prop="record_info.orderNum" label="订单编号"width="200"></el-table-column>
+                        <el-table-column prop="record_info.modelName" label="车辆名称"width="300"></el-table-column>
                         <el-table-column prop="user.name" label="客户称呼"width="200"></el-table-column>
                         <el-table-column prop="user.phone" label="联系电话"width="200"></el-table-column>
-                        <el-table-column prop="userDto.company" label="所属公司"width="200"></el-table-column>
-                        <el-table-column prop="saleRecord.level" label="等级"width="100"></el-table-column>
+                        <el-table-column prop="company.name" label="所属公司"width="200"></el-table-column>
                         <el-table-column prop="saleRecord.status" label="状态"width="100">
                             <template scope="scope">
                                 <a href="javascript:;" v-if="scope.row.saleRecord.status" ><el-tag  type="success">可用</el-tag></a>
@@ -73,11 +72,11 @@
                             <template scope="scope">
                             <el-button
                                     size="small" icon="edit"
-                                    @click="handleEdit(scope.row)">查看</el-button>
-                            <el-button
+                                    @click="handleEdit(scope.row.record_info.orderNum)">查看</el-button>
+                           <%-- <el-button
                                     size="small"
                                     type="danger" icon="delete"
-                                    @click="delConfim(scope.row)">删除</el-button>
+                                    @click="delConfim(scope.row)">删除</el-button>--%>
                             </template>
                         </el-table-column>
                     </el-table>
@@ -198,7 +197,9 @@
             },init () {
                $.post('/system/record/list',this.searchForm,function(d){
                     if(d.status==200){
+
                         VM.pageInfo = d.data;
+                        console.log(JSON.stringify(d))
                     }else{
                         this.error(d.message);
                     }
@@ -213,17 +214,15 @@
                 this.confrimStr = "确认删除 "+row.name+"?";
                 this.cur_index = row.id;
 
-            },handleEdit (row) {
-
-                this.form.id = row.id;
-                this.form.name = row.name;
-                this.form.linkMan = row.linkMan;
-                this.form.linkPhone = row.linkPhone+'';
-                this.handle = 'edit';
+            },handleEdit (ordernumber) {
+               /* $.getJSON('/system/order/'+ordernumber,function(d){
+                    console.log("=========")
+                })*/
+               window.location.href="/system/order/"+ordernumber;
 
             },changeState (index,row) {
                 this.loading = true;
-                $.getJSON('/system/user/status/'+row.id+'/'+row.status,function(d){
+                $.getJSON('/system/recoder/status/'+row.id+'/'+row.status,function(d){
                     if(d.status==200){
                         VM.pageInfo.list[index].status = row.status?0:1;
                     }else{
