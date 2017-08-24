@@ -152,8 +152,8 @@
                     </tr>
 
                     </tbody>
-                </table>
-                <div id="pagination" class="pageinfo" style="  display: block;">
+                </table>                <div id="pagination" class="pageinfo" style="  display: block;">
+
                     <ul class="pages">
                         <li>
                             <span class="beginEnd">首页</span>
