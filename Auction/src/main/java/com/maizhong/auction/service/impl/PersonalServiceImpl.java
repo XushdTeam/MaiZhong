@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -100,17 +101,20 @@ public class PersonalServiceImpl implements PersonalService {
      * @return
      */
     @Override
-    public JsonResult getOrderDealOK(String token) {
+    public List<CarInfoDto> getOrderDealOK(String token) {
+
+        List<CarInfoDto> list = new ArrayList<>();
+
         AcUser acUser = this.getUserInfoByToken(token);
 
-        if(acUser==null)return JsonResult.Error("未登录");
+        if(acUser==null)return list;
 
         AcOrderExample example = new AcOrderExample();
         example.createCriteria().andUserIdEqualTo(acUser.getId()).andStatusEqualTo(1);
 
         List<AcOrder> acOrders = acOrderMapper.selectByExample(example);
 
-        JSONArray list = new JSONArray();
+
 
         for (AcOrder acOrder : acOrders) {
             Long carId = acOrder.getCarId();
@@ -120,7 +124,7 @@ public class PersonalServiceImpl implements PersonalService {
             infoDto.setDealPrice(acOrder.getPrice());
             list.add(infoDto);
         }
-        return JsonResult.OK(list);
+        return list;
 
     }
 
@@ -130,17 +134,18 @@ public class PersonalServiceImpl implements PersonalService {
      * @return
      */
     @Override
-    public JsonResult getOrderList(String token) {
+    public List<CarInfoDto> getOrderList(String token) {
+        List<CarInfoDto> list = new ArrayList<>();
         AcUser acUser = this.getUserInfoByToken(token);
 
-        if(acUser==null)return JsonResult.Error("未登录");
+        if(acUser==null)return list;
 
         AcOrderExample example = new AcOrderExample();
         example.createCriteria().andUserIdEqualTo(acUser.getId());
 
         List<AcOrder> acOrders = acOrderMapper.selectByExample(example);
 
-        JSONArray list = new JSONArray();
+
 
         for (AcOrder acOrder : acOrders) {
             Long carId = acOrder.getCarId();
@@ -161,7 +166,7 @@ public class PersonalServiceImpl implements PersonalService {
             }
             list.add(infoDto);
         }
-        return JsonResult.OK(list);
+        return list;
     }
 
     /**
@@ -170,17 +175,20 @@ public class PersonalServiceImpl implements PersonalService {
      * @return
      */
     @Override
-    public JsonResult getBidRecordList(String token) {
+    public List<CarInfoDto> getBidRecordList(String token) {
+
+        List<CarInfoDto> list = new ArrayList<>();
 
         AcUser acUser = this.getUserInfoByToken(token);
 
-        if(acUser==null)return JsonResult.Error("未登录");
+        if(acUser==null)return list;
 
         AcBidRecordExample example = new AcBidRecordExample();
         example.createCriteria().andUserIdEqualTo(acUser.getId()).andCreateTimeBetween(TimeUtils.getNowMoring(),new Date());
         example.setDistinct(true);
-        List<AcBidRecord> acBidRecords = acBidRecordMapper.selectByExample(example);
-        JSONArray list = new JSONArray();
+
+        List<AcBidRecord> acBidRecords = acBidRecordMapper.selectByExampleWithGroupBy(example);
+
         for (AcBidRecord acBidRecord : acBidRecords) {
             Long carId = acBidRecord.getCarId();
             CkCarbase ckCarbase = ckCarbaseMapper.selectByPrimaryKey(carId);
@@ -194,7 +202,7 @@ public class PersonalServiceImpl implements PersonalService {
         }
 
 
-        return JsonResult.OK(list);
+        return list;
     }
 
     /**
@@ -203,15 +211,16 @@ public class PersonalServiceImpl implements PersonalService {
      * @return
      */
     @Override
-    public JsonResult getLikeCarList(String token) {
+    public List<CarInfoDto> getLikeCarList(String token) {
 
+        List<CarInfoDto> list = new ArrayList<>();
         AcUser acUser = this.getUserInfoByToken(token);
 
-        if(acUser==null)return JsonResult.Error("未登录");
+        if(acUser==null)return list;
 
         AcCarLikeExample example = new AcCarLikeExample();
         example.createCriteria().andUserIdEqualTo(acUser.getId());
-        JSONArray list = new JSONArray();
+
         List<AcCarLikeKey> acCarLikeKeys = acCarLikeMapper.selectByExample(example);
         for (AcCarLikeKey acCarLikeKey : acCarLikeKeys) {
 
@@ -222,11 +231,14 @@ public class PersonalServiceImpl implements PersonalService {
             if(ckCarbase.getStatus()==5){
                 infoDto.setAuction(true);
             }
+            AcAuctionRecordExample ex = new AcAuctionRecordExample();
+            ex.createCriteria().andCarIdEqualTo(carId).andStatusEqualTo(0);
+
             list.add(infoDto);
 
         }
 
-        return JsonResult.OK(list);
+        return list;
     }
 
 

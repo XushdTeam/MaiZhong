@@ -17,6 +17,7 @@
         <module name="Reckon" />
         <module name="Rest" />
         <module name="WebSocketJetty" />
+        <module name="Youpin" />
         <module name="Z_Mybatis" />
       </profile>
     </annotationProcessing>
@@ -35,6 +36,7 @@
       <module name="Reckon" target="1.7" />
       <module name="Rest" target="1.7" />
       <module name="WebSocketJetty" target="1.7" />
+      <module name="Youpin" target="1.7" />
       <module name="Z_Mybatis" target="1.7" />
     </bytecodeTargetLevel>
   </component>

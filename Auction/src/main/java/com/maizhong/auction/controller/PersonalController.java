@@ -1,5 +1,6 @@
 package com.maizhong.auction.controller;
 
+import com.maizhong.auction.dto.CarInfoDto;
 import com.maizhong.auction.pojo.AcUser;
 import com.maizhong.auction.service.IndexService;
 import com.maizhong.auction.service.PersonalService;
@@ -8,10 +9,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by Xushd on 2017/6/7.
@@ -26,113 +29,110 @@ public class PersonalController {
 
 
     /**
-     * 成交确认
-     * @param request
+     * 成交列表
+     * @param token
+     * @param model
      * @return
      */
-    @RequestMapping(value = "/orderDealOK")
-    @ResponseBody
-    public JsonResult orderDealOK(HttpServletRequest request){
-        String token = (String) request.getAttribute("token");
-        if(StringUtils.equals("null",token)){
-            return JsonResult.build(500,"no login","login");
+    @RequestMapping(value = "/personal/deallist")
+    private String dealList(@CookieValue(value = "token",required = false)String token,Model model){
+
+        if(StringUtils.isBlank(token)){
+            return "redirect:/user/login";
         }
-        return personalService.getOrderDealOK(token);
+        AcUser user =  indexService.getUserInfo(token);
+        if(user!=null){
+            model.addAttribute("username",user.getName());
+        }else{
+            return "redirect:/user/login";
+        }
+
+        List<CarInfoDto> list = personalService.getOrderDealOK(token);
+        model.addAttribute("list",list);
+
+        model.addAttribute("cur",1);
+        return "deal_list";
+    }
+
+    /**
+     * 全部订单
+     * @param token
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/personal/orderlist")
+    public String orderList(@CookieValue(value = "token",required = false)String token,Model model){
+        if(StringUtils.isBlank(token)){
+            return "redirect:/user/login";
+        }
+        AcUser user =  indexService.getUserInfo(token);
+        if(user!=null){
+            model.addAttribute("username",user.getName());
+        }else{
+            return "redirect:/user/login";
+        }
+
+        List<CarInfoDto> list = personalService.getOrderList(token);
+        model.addAttribute("list",list);
+
+        model.addAttribute("cur",2);
+
+        return "list_order";
+    }
+
+    /**
+     * 出价车辆
+     * @return
+     */
+    @RequestMapping(value = "/personal/bidlist")
+    public String bidList(@CookieValue(value = "token",required = false)String token,Model model){
+        if(StringUtils.isBlank(token)){
+            return "redirect:/user/login";
+        }
+        AcUser user =  indexService.getUserInfo(token);
+        if(user!=null){
+            model.addAttribute("username",user.getName());
+        }else{
+            return "redirect:/user/login";
+        }
+
+        List<CarInfoDto> list = personalService.getBidRecordList(token);
+        model.addAttribute("list",list);
+
+        model.addAttribute("cur",3);
+        return "list_bid";
     }
 
 
     /**
-     * 我的确认列表
-     * @param request
+     * 关注车辆列表
+     * @param token
+     * @param model
      * @return
      */
-    @RequestMapping(value = "/auction/personal/mylist")
-    public String mylist(HttpServletRequest request,Model model){
-        String token = (String) request.getAttribute("token");
-        if(StringUtils.isNotBlank(token)){
-            AcUser user =  indexService.getUserInfo(token);
-            if(user!=null){
-                model.addAttribute("username",user.getName());
-                model.addAttribute("userInfo",user);
-                model.addAttribute("from",1);
-                model.addAttribute("title","成交确认");
-            }
-            return "mylist";
-        }else{
-            return "login";
+    @RequestMapping(value = "/personal/likelist")
+    public String likeList(@CookieValue(value = "token",required = false)String token,Model model){
+        if(StringUtils.isBlank(token)){
+            return "redirect:/user/login";
         }
+        AcUser user =  indexService.getUserInfo(token);
+        if(user!=null){
+            model.addAttribute("username",user.getName());
+        }else{
+            return "redirect:/user/login";
+        }
+
+        List<CarInfoDto> list = personalService.getLikeCarList(token);
+        model.addAttribute("list",list);
+
+        model.addAttribute("cur",4);
+
+        return "list_like";
     }
 
 
 
 
-
-    /**
-     * 订单车辆
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/auction/personal/orderList")
-    public String order(HttpServletRequest request,Model model){
-        String token = (String) request.getAttribute("token");
-        if(StringUtils.isNotBlank(token)){
-            AcUser user =  indexService.getUserInfo(token);
-            if(user!=null){
-                model.addAttribute("username",user.getName());
-                model.addAttribute("userInfo",user);
-                model.addAttribute("from",2);
-                model.addAttribute("title","订单车辆");
-            }
-            return "mylist";
-        }else{
-            return "login";
-        }
-    }
-
-
-    /**
-     * 我的确认列表
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/auction/personal/bidRecordList")
-    public String history(HttpServletRequest request,Model model){
-        String token = (String) request.getAttribute("token");
-        if(StringUtils.isNotBlank(token)){
-            AcUser user =  indexService.getUserInfo(token);
-            if(user!=null){
-                model.addAttribute("username",user.getName());
-                model.addAttribute("userInfo",user);
-                model.addAttribute("from",3);
-                model.addAttribute("title","历史订单");
-            }
-            return "mylist";
-        }else{
-            return "login";
-        }
-    }
-
-    /**
-     * 我喜欢的列表
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/auction/personal/likeCarList")
-    public String like(HttpServletRequest request,Model model){
-        String token = (String) request.getAttribute("token");
-        if(StringUtils.isNotBlank(token)){
-            AcUser user =  indexService.getUserInfo(token);
-            if(user!=null){
-                model.addAttribute("username",user.getName());
-                model.addAttribute("userInfo",user);
-                model.addAttribute("from",4);
-                model.addAttribute("title","关注车辆");
-            }
-            return "mylist";
-        }else{
-            return "login";
-        }
-    }
 
 
     /**
@@ -177,72 +177,7 @@ public class PersonalController {
     }
 
 
-    /**
-     * 个人列表跳转
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/auction/mylist")
-    @ResponseBody
-    public JsonResult mylist2(HttpServletRequest request,Model model){
-        String token = (String) request.getAttribute("token");
-        if(StringUtils.equals("null",token)){
-            return JsonResult.build(500,"no login","login");
-        }
-        return personalService.getOrderList(token);
-    }
 
-
-
-
-    /**
-     * 订单车辆
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/auction/orderList")
-    @ResponseBody
-    public JsonResult getOrderList(HttpServletRequest request){
-        String token = (String) request.getAttribute("token");
-        if(StringUtils.equals("null",token)){
-            return JsonResult.build(500,"no login","login");
-        }
-        return personalService.getOrderList(token);
-    }
-
-
-    /**
-     * 历史竞价
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/auction/bidRecordList")
-    @ResponseBody
-    public JsonResult bidRecordList(HttpServletRequest request){
-        String token = (String) request.getAttribute("token");
-        if(StringUtils.equals("null",token)){
-            return JsonResult.build(500,"no login","login");
-        }
-        return personalService.getBidRecordList(token);
-    }
-
-
-
-
-    /**
-     * 关注车辆
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/auction/likeCarList")
-    @ResponseBody
-    public JsonResult likeCarList(HttpServletRequest request){
-        String token = (String) request.getAttribute("token");
-        if(StringUtils.equals("null",token)){
-            return JsonResult.build(500,"no login","login");
-        }
-        return personalService.getLikeCarList(token);
-    }
 
 
     /**

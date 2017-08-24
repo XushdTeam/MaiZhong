@@ -17,6 +17,7 @@
         <module>Reckon</module>
         <module>Auction</module>
         <module>WebSocketJetty</module>
+        <module>Youpin</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -128,11 +129,7 @@
                 <artifactId>commons-net</artifactId>
                 <version>${commons-net.version}</version>
             </dependency>
-            <dependency>
-                <groupId>commons-net</groupId>
-                <artifactId>commons-net</artifactId>
-                <version>${commons-net.version}</version>
-            </dependency>
+
             <!--hibernate验证-->
             <dependency>
                 <groupId>org.hibernate</groupId>

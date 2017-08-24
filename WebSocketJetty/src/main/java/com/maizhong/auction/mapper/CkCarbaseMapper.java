@@ -2,8 +2,9 @@ package com.maizhong.auction.mapper;
 
 import com.maizhong.auction.pojo.CkCarbase;
 import com.maizhong.auction.pojo.CkCarbaseExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface CkCarbaseMapper {
     long countByExample(CkCarbaseExample example);

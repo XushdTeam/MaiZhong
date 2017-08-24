@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maizhong.youpin.mapper.SaleImgMapper">
+  <resultMap id="BaseResultMap" type="com.maizhong.youpin.pojo.SaleImg">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="record_id" jdbcType="BIGINT" property="recordId" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="img1" jdbcType="VARCHAR" property="img1" />
+    <result column="img2" jdbcType="VARCHAR" property="img2" />
+    <result column="img3" jdbcType="VARCHAR" property="img3" />
+    <result column="img4" jdbcType="VARCHAR" property="img4" />
+    <result column="img5" jdbcType="VARCHAR" property="img5" />
+    <result column="img6" jdbcType="VARCHAR" property="img6" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, record_id, img, img1, img2, img3, img4, img5, img6, type, mark
+  </sql>
+  <select id="selectByExample" parameterType="com.maizhong.youpin.pojo.SaleImgExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sale_img
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sale_img
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sale_img
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maizhong.youpin.pojo.SaleImgExample">
+    delete from sale_img
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maizhong.youpin.pojo.SaleImg">
+    insert into sale_img (id, record_id, img, 
+      img1, img2, img3, img4, 
+      img5, img6, type, mark
+      )
+    values (#{id,jdbcType=BIGINT}, #{recordId,jdbcType=BIGINT}, #{img,jdbcType=VARCHAR}, 
+      #{img1,jdbcType=VARCHAR}, #{img2,jdbcType=VARCHAR}, #{img3,jdbcType=VARCHAR}, #{img4,jdbcType=VARCHAR}, 
+      #{img5,jdbcType=VARCHAR}, #{img6,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{mark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.maizhong.youpin.pojo.SaleImg">
+    insert into sale_img
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="recordId != null">
+        record_id,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="img1 != null">
+        img1,
+      </if>
+      <if test="img2 != null">
+        img2,
+      </if>
+      <if test="img3 != null">
+        img3,
+      </if>
+      <if test="img4 != null">
+        img4,
+      </if>
+      <if test="img5 != null">
+        img5,
+      </if>
+      <if test="img6 != null">
+        img6,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="mark != null">
+        mark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recordId != null">
+        #{recordId,jdbcType=BIGINT},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="img1 != null">
+        #{img1,jdbcType=VARCHAR},
+      </if>
+      <if test="img2 != null">
+        #{img2,jdbcType=VARCHAR},
+      </if>
+      <if test="img3 != null">
+        #{img3,jdbcType=VARCHAR},
+      </if>
+      <if test="img4 != null">
+        #{img4,jdbcType=VARCHAR},
+      </if>
+      <if test="img5 != null">
+        #{img5,jdbcType=VARCHAR},
+      </if>
+      <if test="img6 != null">
+        #{img6,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="mark != null">
+        #{mark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maizhong.youpin.pojo.SaleImgExample" resultType="java.lang.Long">
+    select count(*) from sale_img
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sale_img
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.recordId != null">
+        record_id = #{record.recordId,jdbcType=BIGINT},
+      </if>
+      <if test="record.img != null">
+        img = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img1 != null">
+        img1 = #{record.img1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img2 != null">
+        img2 = #{record.img2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img3 != null">
+        img3 = #{record.img3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img4 != null">
+        img4 = #{record.img4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img5 != null">
+        img5 = #{record.img5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img6 != null">
+        img6 = #{record.img6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.mark != null">
+        mark = #{record.mark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sale_img
+    set id = #{record.id,jdbcType=BIGINT},
+      record_id = #{record.recordId,jdbcType=BIGINT},
+      img = #{record.img,jdbcType=VARCHAR},
+      img1 = #{record.img1,jdbcType=VARCHAR},
+      img2 = #{record.img2,jdbcType=VARCHAR},
+      img3 = #{record.img3,jdbcType=VARCHAR},
+      img4 = #{record.img4,jdbcType=VARCHAR},
+      img5 = #{record.img5,jdbcType=VARCHAR},
+      img6 = #{record.img6,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
+      mark = #{record.mark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.youpin.pojo.SaleImg">
+    update sale_img
+    <set>
+      <if test="recordId != null">
+        record_id = #{recordId,jdbcType=BIGINT},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="img1 != null">
+        img1 = #{img1,jdbcType=VARCHAR},
+      </if>
+      <if test="img2 != null">
+        img2 = #{img2,jdbcType=VARCHAR},
+      </if>
+      <if test="img3 != null">
+        img3 = #{img3,jdbcType=VARCHAR},
+      </if>
+      <if test="img4 != null">
+        img4 = #{img4,jdbcType=VARCHAR},
+      </if>
+      <if test="img5 != null">
+        img5 = #{img5,jdbcType=VARCHAR},
+      </if>
+      <if test="img6 != null">
+        img6 = #{img6,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="mark != null">
+        mark = #{mark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maizhong.youpin.pojo.SaleImg">
+    update sale_img
+    set record_id = #{recordId,jdbcType=BIGINT},
+      img = #{img,jdbcType=VARCHAR},
+      img1 = #{img1,jdbcType=VARCHAR},
+      img2 = #{img2,jdbcType=VARCHAR},
+      img3 = #{img3,jdbcType=VARCHAR},
+      img4 = #{img4,jdbcType=VARCHAR},
+      img5 = #{img5,jdbcType=VARCHAR},
+      img6 = #{img6,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      mark = #{mark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
