@@ -2,6 +2,7 @@ package com.maizhong.youpin.controller;
 
 import com.maizhong.common.dto.PageSearchParam;
 import com.maizhong.common.result.JsonResult;
+import com.maizhong.youpin.dto.Che300Dto;
 import com.maizhong.youpin.dto.RecordDto;
 import com.maizhong.youpin.pojo.ManagerUser;
 import com.maizhong.youpin.service.ManageService;
@@ -104,12 +105,14 @@ public class ManageController {
     @RequestMapping(value = "/system/account")
     public String accountIndex(Model model, HttpServletRequest request) {
         String token = (String) request.getAttribute("token");
-        String username = (String) request.getAttribute("username");
+
+        ManagerUser managerUser = manageService.getManageUserByToken(token);
 
         String sysMenuJson = manageService.getSystemMenu(token);
         model.addAttribute("menu", sysMenuJson);
         model.addAttribute("cur", "/system/account");
-        model.addAttribute("username", username);
+        model.addAttribute("username", managerUser.getName());
+        model.addAttribute("userId", managerUser.getId());
         return "/manage/views/sys_account";
     }
 
@@ -181,12 +184,13 @@ public class ManageController {
     public String companyIndex(Model model, HttpServletRequest request) {
 
         String token = (String) request.getAttribute("token");
-        String username = (String) request.getAttribute("username");
+        ManagerUser managerUser = manageService.getManageUserByToken(token);
 
         String sysMenuJson = manageService.getSystemMenu(token);
         model.addAttribute("menu", sysMenuJson);
         model.addAttribute("cur", "/system/user");
-        model.addAttribute("username", username);
+        model.addAttribute("username", managerUser.getName());
+        model.addAttribute("userId", managerUser.getId());
         return "/manage/views/sys_user";
     }
 
@@ -230,12 +234,14 @@ public class ManageController {
     @RequestMapping(value = "/system/record")
     public String recordIndex(Model model, HttpServletRequest request) {
         String token = (String) request.getAttribute("token");
-        String username = (String) request.getAttribute("username");
+        ManagerUser managerUser = manageService.getManageUserByToken(token);
 
         String sysMenuJson = manageService.getSystemMenu(token);
         model.addAttribute("menu", sysMenuJson);
         model.addAttribute("cur", "/system/record");
-        model.addAttribute("username", username);
+        model.addAttribute("username", managerUser.getName());
+        model.addAttribute("userId", managerUser.getId());
+
         return "/manage/views/sys_record";
     }
 
@@ -311,13 +317,23 @@ public class ManageController {
 
 
         String token = (String) request.getAttribute("token");
-        String username = (String) request.getAttribute("username");
+        ManagerUser managerUser = manageService.getManageUserByToken(token);
 
         String sysMenuJson = manageService.getSystemMenu(token);
         model.addAttribute("menu", sysMenuJson);
         model.addAttribute("cur", "/system/order");
-        model.addAttribute("username", username);
+        model.addAttribute("username", managerUser.getName());
+        model.addAttribute("userId", managerUser.getId());
         model.addAttribute("ordernumber", ordernumber);
+
+        JsonResult result = manageService.getGuZhi(ordernumber);
+        if(result.getStatus()==200){
+            model.addAttribute("guzhi",result.getData());
+        }else{
+            model.addAttribute("error",result.getMessage());
+        }
+
+
         return "/manage/views/sys_recordDetail";
     }
 

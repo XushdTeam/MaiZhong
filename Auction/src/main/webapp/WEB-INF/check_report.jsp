@@ -324,7 +324,7 @@
             <ul class="car-pho clearfix mt30">
                 <c:forEach items="${carInfo.baseImgArry}" var="item" varStatus="status">
                     <li>
-                        <img src="${item.img}" onclick="showImg(${status.index})">
+                        <img src="${item.img}" onclick="showImg(${status.index})" width="560" height="420">
                         <span> ${item.desc}</span>
                     </li>
                 </c:forEach>

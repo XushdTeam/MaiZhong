@@ -11,9 +11,12 @@ public class CarDetailDto {
 
     private String modelName;
 
+    private int like;
+    private int likeCount;
+
     //拍卖次数
     private int auctionCount;
-
+    //起拍价
     private String startPrice;
 
     //变速箱1手动2自动3CVT
@@ -24,7 +27,7 @@ public class CarDetailDto {
     private String checkNum;
 
     private String checkDate;
-
+    //保留价
     private String savePrice;
 
     //基本图片
@@ -62,6 +65,22 @@ public class CarDetailDto {
 
 
     public CarDetailDto() {
+    }
+
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public int getLike() {
+        return like;
+    }
+
+    public void setLike(int like) {
+        this.like = like;
     }
 
     public String getSavePrice() {

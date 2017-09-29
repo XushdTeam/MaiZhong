@@ -279,6 +279,12 @@
                 this.$message.error(msg);
             },resetForm () {
                 this.$refs["form"].resetFields();
+            },notify(object){
+                this.$notify.info({
+                    title: '新的订单消息',
+                    message: '你有新的订单提交，订单编号：'+object.orderId+"，提交时间："+object.time,
+                    duration: 0
+                });
             }
         },mounted () {
             this.init();

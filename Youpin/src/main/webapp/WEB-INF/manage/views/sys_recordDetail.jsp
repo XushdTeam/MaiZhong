@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>车辆审核</title>
@@ -112,6 +113,16 @@
                             <el-form-item label="所属公司">
                                 <span>{{detail.company.name}}</span>
                             </el-form-item>
+                            <c:if test="${guzhi!=null}">
+                                <el-form-item label="系统预估" >
+                                    <span>${guzhi.precisePrice}万元</span>
+                                </el-form-item>
+                            </c:if>
+                            <c:if test="${error!=null}">
+                                <el-form-item label="系统预估" >
+                                    <span>${error}</span>
+                                </el-form-item>
+                            </c:if>
                             <el-form-item label="报价" v-show="detail.saleRecord.price">
                                 <span>{{detail.saleRecord.price}}万元</span>
                             </el-form-item>
@@ -135,6 +146,7 @@
                                     </div>
                                 </div>
                             </el-form-item>
+
 
                         </el-form>
                         <div style="margin-left: 400px!important;" @click="chujia">
@@ -270,7 +282,14 @@
                 }).catch(() => {
 
                 });
-            }
+            },notify(object){
+            const h = this.$createElement;
+            this.$notify.info({
+                title: '新的订单消息',
+                message:'你有新的订单提交，订单编号：'+object.orderId+"，提交时间："+object.time,
+                duration: 0
+            });
+        }
         }, mounted() {
             this.init();
         }

@@ -14,10 +14,10 @@
             <img src="/resources/main/img/logo.png">
         </a>
         <ul>
-            <li class="track <c:if test="${menu =='/'}">cur</c:if>"><a href="/">首页</a></li>
-            <li class="track <c:if test="${menu =='/list'}">cur</c:if>"><a href="/list">交易大厅</a></li>
-            <li class="track <c:if test="${menu =='/warranty'}">cur</c:if>"><a href="/warranty">服务保障</a></li>
-            <li class="track <c:if test="${menu =='/personal'}">cur</c:if>"><a href="/personal">个人中心</a></li>
+            <li class="track <c:if test="${menu =='/'}">cur</c:if>"><a href="/" target="_blank">首页</a></li>
+            <li class="track <c:if test="${menu =='/list'}">cur</c:if>"><a href="/list" target="_blank">交易大厅</a></li>
+            <li class="track <c:if test="${menu =='/warranty'}">cur</c:if>"><a href="/warranty" target="_blank">服务保障</a></li>
+            <li class="track <c:if test="${menu =='/personal'}">cur</c:if>"><a href="/personal" target="_blank">个人中心</a></li>
         </ul>
         <c:if test="${username!=null}">
             <p class="logins"><a href="javascript:;">${username}</a> <a href="/user/logout">退出</a></p>

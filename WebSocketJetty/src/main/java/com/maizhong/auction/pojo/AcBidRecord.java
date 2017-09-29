@@ -17,6 +17,8 @@ public class AcBidRecord {
 
     private Long userId;
 
+    private Integer type;
+
     private String bussinessName;
 
     private Date createTime;
@@ -95,6 +97,14 @@ public class AcBidRecord {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public String getBussinessName() {

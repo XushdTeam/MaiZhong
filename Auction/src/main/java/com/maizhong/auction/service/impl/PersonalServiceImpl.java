@@ -7,7 +7,10 @@ import com.maizhong.auction.dto.CarInfoDto;
 import com.maizhong.auction.mapper.*;
 import com.maizhong.auction.pojo.*;
 import com.maizhong.auction.service.PersonalService;
+import com.maizhong.common.enums.SMSTemplateEnum;
 import com.maizhong.common.result.JsonResult;
+import com.maizhong.common.utils.AliSMSUtils;
+import com.maizhong.common.utils.IDUtils;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.common.utils.TimeUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -46,6 +49,12 @@ public class PersonalServiceImpl implements PersonalService {
     @Autowired
     private CkCarbaseMapper ckCarbaseMapper;
 
+    @Autowired
+    private AcUserMapper acUserMapper;
+
+    @Autowired
+    private AcBzjRecordMapper acBzjRecordMapper;
+
 
     /**
      * 个人中心 信息
@@ -82,7 +91,7 @@ public class PersonalServiceImpl implements PersonalService {
 
         //保证金冻结
         AcFreezeExample ex = new AcFreezeExample();
-        ex.createCriteria().andUserIdNotEqualTo(acUser.getId());
+        ex.createCriteria().andUserIdEqualTo(acUser.getId());
         List<AcFreeze> acFreezes = acFreezeMapper.selectByExample(ex);
 
         long freezePrice = 0L;
@@ -239,6 +248,154 @@ public class PersonalServiceImpl implements PersonalService {
         }
 
         return list;
+    }
+
+    /**
+     * 修改城市
+     * @param city
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult changeCity(String city, String token) {
+
+        AcUser acUser = this.getUserInfoByToken(token);
+        if(acUser==null)return JsonResult.Error("当前用户未登录");
+
+        acUser.setCity(city);
+
+        acUserMapper.updateByPrimaryKeySelective(acUser);
+
+        jedisClient.hset("AC_USER_TOKEN",token,JsonUtils.objectToJson(acUser));
+
+        return JsonResult.OK();
+    }
+
+    /**
+     * 实名认证提交
+     * @param name
+     * @param idNum
+     * @param img1
+     * @param img2
+     * @param img3
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult smrzSubmit(String name, String idNum, String img1, String img2, String img3, String token) {
+
+
+        AcUser acUser = this.getUserInfoByToken(token);
+        if(acUser==null)return JsonResult.Error("当前用户未登录");
+
+        if(acUser.getStatus()==1)return JsonResult.Error("已认证，请勿重复认证");
+        if(acUser.getStatus()==2)return JsonResult.Error("认证中，请等待");
+
+        acUser.setStatus(2);
+        acUser.setIdNum(idNum);
+        acUser.setPic1(img1);
+        acUser.setPic2(img2);
+        acUser.setPic3(img3);
+
+        acUserMapper.updateByPrimaryKeySelective(acUser);
+
+        jedisClient.hset("AC_USER_TOKEN",token,JsonUtils.objectToJson(acUser));
+        return JsonResult.OK();
+
+    }
+
+    /**
+     * 头像修改
+     * @param s
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult changeHeadImg(String s, String token) {
+        AcUser acUser = this.getUserInfoByToken(token);
+        if(acUser==null)return JsonResult.Error("当前用户未登录");
+
+        acUser.setHeadImg(s);
+
+        acUserMapper.updateByPrimaryKeySelective(acUser);
+        jedisClient.hset("AC_USER_TOKEN",token,JsonUtils.objectToJson(acUser));
+        return JsonResult.build(200,"OK",s);
+    }
+
+    /**
+     * 获取充值记录
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult getRechargeList(String token) {
+        AcUser acUser = this.getUserInfoByToken(token);
+        if(acUser==null)return JsonResult.Error("当前用户未登录");
+
+        AcBzjRecordExample example = new AcBzjRecordExample();
+        example.createCriteria().andUserIdEqualTo(acUser.getId());
+        example.setOrderByClause("create_time desc");
+
+        List<AcBzjRecord> acBzjRecords = acBzjRecordMapper.selectByExample(example);
+
+        return JsonResult.OK(acBzjRecords);
+
+    }
+
+    @Override
+    public JsonResult sendSMS(String phone, String token) {
+        AcUser acUser = this.getUserInfoByToken(token);
+        if(acUser==null)return JsonResult.Error("当前用户未登录");
+        String m_phone = String.valueOf(acUser.getPhone());
+        if(StringUtils.equals(m_phone,phone)){
+
+
+            String phoneVerifyCode = jedisClient.get("SMS:" + phone);
+            if(StringUtils.isNotBlank(phoneVerifyCode)){
+                return JsonResult.Error("验证码已发送");
+            }
+            String verifyCode = IDUtils.getVerifyCode();
+            boolean sms = AliSMSUtils.sendSMS2(SMSTemplateEnum.YouPinPaiChe, verifyCode, String.valueOf(phone),"修改密码");
+            if(sms){
+                jedisClient.set("SMS:"+phone,verifyCode);
+                jedisClient.expire("SMS:"+phone,120);
+                return JsonResult.OK("验证码发送成功，请注意查收！");
+            }
+
+            return JsonResult.Error("发送失败");
+
+        }else{
+            return JsonResult.Error("注册手机号错误！");
+        }
+
+    }
+
+    /**
+     * 修改密码
+     * @param verifyCode
+     * @param pass
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult changePass(String verifyCode, String pass, String token) {
+        AcUser acUser = this.getUserInfoByToken(token);
+        if(acUser==null)return JsonResult.Error("当前用户未登录");
+        String phoneVerifyCode = jedisClient.get("SMS:" + acUser.getPhone());
+        if(StringUtils.isBlank(phoneVerifyCode))return JsonResult.Error("验证码过期");
+        if(StringUtils.equals(phoneVerifyCode,verifyCode)){
+
+            acUser.setPassword(IDUtils.sha256(pass));
+
+            acUserMapper.updateByPrimaryKeySelective(acUser);
+
+            jedisClient.hset("AC_USER_TOKEN",token,JsonUtils.objectToJson(acUser));
+            return JsonResult.OK();
+
+        }else{
+            return JsonResult.Error("验证码错误");
+        }
+
     }
 
 

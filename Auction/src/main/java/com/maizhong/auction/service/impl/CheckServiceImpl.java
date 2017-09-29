@@ -1,24 +1,28 @@
 package com.maizhong.auction.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.maizhong.auction.dao.JedisClient;
 import com.maizhong.auction.dto.CarBaseDto;
+import com.maizhong.auction.dto.VinModel;
 import com.maizhong.auction.mapper.*;
 import com.maizhong.auction.pojo.*;
 import com.maizhong.auction.service.CheckService;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
+import com.maizhong.common.utils.HttpUtils;
 import com.maizhong.common.utils.IDUtils;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.common.utils.TimeUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Xushd on 2017/6/14.
@@ -73,6 +77,10 @@ public class CheckServiceImpl implements CheckService {
     @Autowired
     private JedisClient jedisClient;
 
+    @Value("${VIN_API_URL}")
+    private String VIN_API_URL;
+    @Value("${APPCODE}")
+    private String APPCODE;
 
 //    @Resource(name = "transactionManager")
 //    private DataSourceTransactionManager transactionManager;
@@ -951,6 +959,47 @@ public class CheckServiceImpl implements CheckService {
         if(i>0)return JsonResult.OK();
 
         return JsonResult.Error(OperateEnum.FAILE);
+    }
+
+    /**
+     * 获取VIN信息
+     * @param vin
+     * @return
+     */
+    @Override
+    public JsonResult getVinInfo(String vin) {
+
+        String vin_carinfo = jedisClient.hget("VIN_CARINFO", vin);
+        if(StringUtils.isNotBlank(vin_carinfo)){
+            return JsonResult.OK(JsonUtils.jsonToPojo(vin_carinfo,VinModel.class));
+        }
+
+        String host = "https://ali-vin.showapi.com";
+        String path = "/vin";
+        String method = "GET";
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Authorization", "APPCODE " + APPCODE);
+        Map<String, String> querys = new HashMap<String, String>();
+        querys.put("vin", vin);
+
+        try {
+            HttpResponse response = HttpUtils.doGet(host, path, method, headers, querys);
+            String entity = EntityUtils.toString(response.getEntity());
+            JSONObject jsonEntity = JSONObject.parseObject(entity);
+            JSONObject showapi_res_body = jsonEntity.getJSONObject("showapi_res_body");
+            int ret_code = showapi_res_body.getIntValue("ret_code");
+            if(ret_code>=0){
+                VinModel vinModel = JSONObject.toJavaObject(showapi_res_body,VinModel.class);
+                jedisClient.hset("VIN_CARINFO",vin,JsonUtils.objectToJson(vinModel));
+                return JsonResult.OK(vinModel);
+            }else{
+                return JsonResult.Error(showapi_res_body.getString("remark"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return JsonResult.Error(OperateEnum.SERVER_ERROR);
     }
 
 

@@ -308,13 +308,13 @@ public class ChannelServiceImpl implements ChannelService {
                             //如果智能报价与当前价格差值小于500 直接给智能报价
                             if(diff.compareTo(new BigDecimal("0.05"))<0){
 
-                                body.put("plus",diff.toString());
-                                body.put("price",now.toString());
+                                body.put("plus",auto.toString());
+                                body.put("price","0");
 
                             }else{
                                 //加500
-                                body.put("plus","0.05");
-                                body.put("price",now.toString());
+                                body.put("plus",now.add(new BigDecimal("0.05")).toString());
+                                body.put("price","0");
                                 //放回队列
                                 jedisClient.lpush(key.getBytes(),rpop);
                             }

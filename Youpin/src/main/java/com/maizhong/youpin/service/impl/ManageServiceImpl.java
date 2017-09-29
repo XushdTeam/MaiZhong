@@ -1,29 +1,27 @@
 package com.maizhong.youpin.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.maizhong.common.dto.PageSearchParam;
+import com.maizhong.common.dto.*;
 import com.maizhong.common.enums.AuthEnum;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
-import com.maizhong.common.utils.IDUtils;
-import com.maizhong.common.utils.JsonUtils;
-import com.maizhong.common.utils.SqlUtils;
-import com.maizhong.common.utils.TimeUtils;
-import com.maizhong.youpin.dto.MenuDto;
-import com.maizhong.youpin.dto.OrderInfoDto;
-import com.maizhong.youpin.dto.RecordDto;
-import com.maizhong.youpin.dto.UserDto;
+import com.maizhong.common.utils.*;
+import com.maizhong.youpin.dto.*;
+
 import com.maizhong.youpin.mapper.*;
 import com.maizhong.youpin.pojo.*;
 import com.maizhong.youpin.service.ManageService;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.util.JSONUtils;
+
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,6 +36,7 @@ import java.util.List;
 
 @Service
 public class ManageServiceImpl extends BaseService implements ManageService {
+
 
 
     @Autowired
@@ -304,7 +303,7 @@ public class ManageServiceImpl extends BaseService implements ManageService {
      * @param token
      * @return
      */
-    private ManagerUser getSysUserByToken(String token) {
+    public ManagerUser getSysUserByToken(String token) {
         String userStr = super.getJedisClient().get("YOUPIN_LOGIN:" + token);
         ManagerUser managerUser = JsonUtils.jsonToPojo(userStr, ManagerUser.class);
         return managerUser;
@@ -422,7 +421,9 @@ public class ManageServiceImpl extends BaseService implements ManageService {
     @Override
     public JsonResult getRecordList(PageSearchParam param) {
         JSONArray jsonArray = new JSONArray();
-        List<SaleRecord> saleRecords = saleRecordMapper.selectByExample(null);
+        SaleRecordExample example = new SaleRecordExample();
+        example.setOrderByClause("createtime desc");
+        List<SaleRecord> saleRecords = saleRecordMapper.selectByExample(example);
         if (saleRecords != null && saleRecords.size() > 0) {
             for (SaleRecord saleRecord : saleRecords) {
                 try {
@@ -454,6 +455,7 @@ public class ManageServiceImpl extends BaseService implements ManageService {
         return JsonResult.OK(pageInfo);
 
     }
+
 
 
     /**
@@ -597,6 +599,199 @@ public class ManageServiceImpl extends BaseService implements ManageService {
             return  JsonResult.Error("修改失败");
         }
         return  JsonResult.OK();
+    }
+
+    /**
+     * 估值
+     * @param ordernumber
+     * @return
+     */
+    @Override
+    public JsonResult getGuZhi(long ordernumber) {
+
+        String record_info = super.getJedisClient().hget("RECORD_INFO", String.valueOf(ordernumber));
+        if(StringUtils.isBlank(record_info)){
+            return JsonResult.Error("数据错误，订单编号不存在");
+        }
+        AppRecordDto appRecordDto = JsonUtils.jsonToPojo(record_info, AppRecordDto.class);
+        String param1 = appRecordDto.getParam1();
+        Che300Dto che300Data = getChe300Data(param1);
+        if(che300Data!=null){
+            String param2 = appRecordDto.getParam2();
+            String precisePrice = getPrecisePrice(param2, che300Data);
+            if(precisePrice==null)return JsonResult.Error("数据错误,车辆信息有误");
+            che300Data.setPrecisePrice(precisePrice);
+            return JsonResult.OK(che300Data);
+
+        }else{
+            return JsonResult.Error("CHE300 Data ERROR");
+        }
+
+    }
+
+    /**
+     * 获取车300数据
+     * @param param
+     */
+    private Che300Dto getChe300Data(String param){
+
+        try {
+            String che_300 = super.getJedisClient().get("CHE_300:"+param);
+
+            if(StringUtils.isNotBlank(che_300)){
+                return JsonUtils.jsonToPojo(che_300,Che300Dto.class);
+            }
+
+            String[] paramarry = param.split("c|m|r|g");
+            String url = String.format("%s?token=%s&modelId=%s&regDate=%s&mile=%s&zone=%s", super.getCHE300_GUZHI(), super.getCHE300_TOKEN(), paramarry[2], paramarry[3], paramarry[4], paramarry[1]);
+            String result = HttpClientUtil.doGet(url);
+            JSONObject object = JSON.parseObject(result);
+            Che300Dto dto = new Che300Dto();
+            String default_car_condition = object.getString("default_car_condition");
+            dto.setDefault_condition(default_car_condition);
+            JSONArray eval_prices = object.getJSONArray("eval_prices");
+            for (Object eval_price : eval_prices) {
+                JSONObject obj = (JSONObject) eval_price;
+                if (obj.getString("condition").equals("excellent")) {
+                    //车况优秀
+                    dto.setPriceA_max(obj.getString("individual_low_sold_price"));
+                    dto.setPriceA_min(obj.getString("dealer_low_buy_price"));
+                }
+                if (obj.getString("condition").equals("good")) {
+                    //车况良好
+                    dto.setPriceB_max(obj.getString("individual_low_sold_price"));
+                    dto.setPriceB_min(obj.getString("dealer_low_buy_price"));
+                }
+                if (obj.getString("condition").equals("normal")) {
+                    //车况一般
+                    dto.setPriceC_max(obj.getString("individual_low_sold_price"));
+                    dto.setPriceC_min(obj.getString("dealer_low_buy_price"));
+                    //车况较差
+                    dto.setPriceD_max(new BigDecimal(obj.getDouble("individual_low_sold_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+                    dto.setPriceD_min(new BigDecimal(obj.getDouble("dealer_low_buy_price") * 0.94).setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+                }
+            }
+            //放入缓存
+            super.getJedisClient().set("CHE_300:"+param,JsonUtils.objectToJson(dto));
+            //设置过期时间7天
+            super.getJedisClient().expire("CHE_300:"+param,60*60*24*7);
+            return dto;
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+
+        }
+
+    }
+
+    /**
+     * 二次精准估值
+     * @param param
+     * @param che300Dto
+     * @return
+     */
+    public String getPrecisePrice(String param,Che300Dto che300Dto){
+
+        try {
+            String[] otherArry = param.split("o|j|h|t|x|n|d|k");
+
+            String ck = otherArry[7], color = otherArry[0], jqx = otherArry[1],
+                    gh = otherArry[2], ghtime = otherArry[3], xz = otherArry[4],
+                    nj = otherArry[5], method = otherArry[6];
+
+            BigDecimal basePrice ;
+            if (StringUtils.equals("1", ck)) {
+                basePrice = new BigDecimal(che300Dto.getPriceA_min());
+            } else if (StringUtils.equals("2", ck)) {
+                basePrice = new BigDecimal(che300Dto.getPriceB_min());
+            } else if (StringUtils.equals("3", ck)) {
+                basePrice = new BigDecimal(che300Dto.getPriceC_min());
+            } else {
+                basePrice = new BigDecimal(che300Dto.getPriceD_min());
+            }
+
+            String colorParam = super.getJedisClient().hget("GZ_PARAM", "color");
+
+            JSONObject colorObject = JSON.parseObject(colorParam);
+            String rate = colorObject.getString("p" + color);
+            //颜色影响
+            basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
+            if (basePrice.compareTo(BigDecimal.ZERO) < 0) {
+                basePrice = BigDecimal.ZERO;
+            }
+            String jqxParam = super.getJedisClient().hget("GZ_PARAM", "jqx");
+            JSONObject jqxObject = JSON.parseObject(jqxParam);
+            rate = jqxObject.getString("p" + jqx);
+            //交强险影响 减法
+            basePrice = basePrice.subtract(new BigDecimal(rate));
+            if (basePrice.compareTo(BigDecimal.ZERO) < 0) {
+                basePrice = BigDecimal.ZERO;
+            }
+
+            String ghParam = super.getJedisClient().hget("GZ_PARAM", "gh");
+            JSONObject ghObject = JSON.parseObject(ghParam);
+            rate = ghObject.getString("p" + gh);
+            //过户次数影响
+            basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
+            if (basePrice.compareTo(BigDecimal.ZERO) < 0) {
+                basePrice = BigDecimal.ZERO;
+            }
+
+            String ghtParam = super.getJedisClient().hget("GZ_PARAM", "ghtime");
+            JSONObject ghtObject = JSON.parseObject(ghtParam);
+            rate = ghtObject.getString("p" + ghtime);
+            //过户时间影响
+            basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
+            if (basePrice.compareTo(BigDecimal.ZERO) < 0) {
+                basePrice = BigDecimal.ZERO;
+            }
+            String xzParam = super.getJedisClient().hget("GZ_PARAM", "xz");
+            JSONObject xzObject = JSON.parseObject(xzParam);
+            rate = xzObject.getString("p" + xz);
+            //性质
+            basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
+            if (basePrice.compareTo(BigDecimal.ZERO) < 0) {
+                basePrice = BigDecimal.ZERO;
+            }
+            String njParam = super.getJedisClient().hget("GZ_PARAM", "nj");
+            JSONObject njObject = JSON.parseObject(njParam);
+            rate = njObject.getString("p" + nj);
+            //年检 (减法)
+            basePrice = basePrice.subtract(new BigDecimal(rate));
+            if (basePrice.compareTo(BigDecimal.ZERO) < 0) {
+                basePrice = BigDecimal.ZERO;
+            }
+
+            String methodParam = super.getJedisClient().hget("GZ_PARAM", "method");
+            JSONObject mObject = JSON.parseObject(methodParam);
+            rate = mObject.getString("p" + method);
+            //使用方式
+            basePrice = basePrice.subtract(basePrice.multiply(new BigDecimal(rate)));
+            if (basePrice.compareTo(BigDecimal.ZERO) < 0) {
+                basePrice = BigDecimal.ZERO;
+            }
+
+            if (basePrice.compareTo(new BigDecimal(1))<0){
+                /**
+                 * 201706068
+                 * 小于1w 保留3位小数 若最后一位为零 保留2位小数
+                 * Xushd
+                 */
+                String price = basePrice.setScale(3, BigDecimal.ROUND_HALF_DOWN).toString();
+                while (price.endsWith("0")){
+                    price = price.substring(0,price.length()-1);
+                }
+                return price;
+
+            }else{
+                return basePrice.setScale(2, BigDecimal.ROUND_HALF_DOWN).toString();
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

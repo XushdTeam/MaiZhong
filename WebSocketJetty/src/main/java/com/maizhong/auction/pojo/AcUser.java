@@ -6,6 +6,7 @@ public class AcUser {
     private Long id;
 
     private String name;
+    private String nickName;
 
     private Long phone;
 
@@ -38,6 +39,14 @@ public class AcUser {
     private String createUser;
 
     private Date createTime;
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 
     public Long getId() {
         return id;

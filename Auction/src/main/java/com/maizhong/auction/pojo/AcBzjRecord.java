@@ -1,5 +1,8 @@
 package com.maizhong.auction.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class AcBzjRecord {
@@ -11,6 +14,8 @@ public class AcBzjRecord {
 
     private String createUser;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     public Long getId() {

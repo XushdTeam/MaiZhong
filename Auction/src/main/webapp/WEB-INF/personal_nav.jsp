@@ -18,8 +18,9 @@
         <h3 class="fs14 c3 lh27 mt20">个人设置</h3>
         <ul class="fs12 newsubnav">
             <li ><a href="/personal/baseinfo" style="<c:if test="${cur==5}">color:#F60;</c:if>">基本信息</a></li>
-            <li ><a href="/personal/deallist" style="<c:if test="${cur==6}">color:#F60;</c:if>">修改密码</a></li>
-            <li ><span @click="changePassword" style="cursor: hand"></span></li>
+            <li ><a href="/personal/recharge" style="<c:if test="${cur==6}">color:#F60;</c:if>">充值记录</a></li>
+            <li ><a href="/personal/account/safe" style="<c:if test="${cur==7}">color:#F60;</c:if>">帐号安全</a></li>
+
         </ul>
     </div>
 </div>

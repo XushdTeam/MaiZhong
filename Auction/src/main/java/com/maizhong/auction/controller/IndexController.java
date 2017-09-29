@@ -3,6 +3,7 @@ package com.maizhong.auction.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.maizhong.auction.dto.CarDetailDto;
 import com.maizhong.auction.dto.CarInfoDto;
+import com.maizhong.auction.dto.CarReportDTO;
 import com.maizhong.auction.pojo.AcUser;
 import com.maizhong.auction.service.AuctionService;
 import com.maizhong.auction.service.IndexService;
@@ -452,6 +453,7 @@ public class IndexController {
         }
 
         CarDetailDto dto = indexService.getCarDetail(carId);
+        //CarReportDTO dto = indexService.getCheckReport(carId);
         model.addAttribute("title",dto.getModelName());
         model.addAttribute("carInfo",dto);
 

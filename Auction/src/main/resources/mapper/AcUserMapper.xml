@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.maizhong.auction.pojo.AcUser">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
     <result column="phone" jdbcType="BIGINT" property="phone" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="head_img" jdbcType="VARCHAR" property="headImg" />
@@ -11,6 +12,7 @@
     <result column="referee" jdbcType="VARCHAR" property="referee" />
     <result column="company_id" jdbcType="BIGINT" property="companyId" />
     <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="level" jdbcType="INTEGER" property="level" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="id_num" jdbcType="VARCHAR" property="idNum" />
     <result column="pic1" jdbcType="VARCHAR" property="pic1" />
@@ -80,8 +82,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, phone, password, head_img, city, referee, company_id, type, status, id_num, 
-    pic1, pic2, pic3, bzj, pickupman, create_user, create_time
+    id, nick_name, name, phone, password, head_img, city, referee, company_id, type, level, status,
+    id_num, pic1, pic2, pic3, bzj, pickupman, create_user, create_time
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.auction.pojo.AcUserExample" resultMap="BaseResultMap">
     select
@@ -114,18 +116,20 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.maizhong.auction.pojo.AcUser">
-    insert into ac_user (id, name, phone, 
+    insert into ac_user (id, nick_name,name, phone,
       password, head_img, city, 
       referee, company_id, type, 
-      status, id_num, pic1, 
-      pic2, pic3, bzj, pickupman, 
-      create_user, create_time)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=BIGINT}, 
+      level, status, id_num, 
+      pic1, pic2, pic3, bzj, 
+      pickupman, create_user, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{nickName,jdbcType=VARCHAR} ,#{name,jdbcType=VARCHAR}, #{phone,jdbcType=BIGINT},
       #{password,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
       #{referee,jdbcType=VARCHAR}, #{companyId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, 
-      #{status,jdbcType=INTEGER}, #{idNum,jdbcType=VARCHAR}, #{pic1,jdbcType=VARCHAR}, 
-      #{pic2,jdbcType=VARCHAR}, #{pic3,jdbcType=VARCHAR}, #{bzj,jdbcType=VARCHAR}, #{pickupman,jdbcType=BIGINT}, 
-      #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+      #{level,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{idNum,jdbcType=VARCHAR}, 
+      #{pic1,jdbcType=VARCHAR}, #{pic2,jdbcType=VARCHAR}, #{pic3,jdbcType=VARCHAR}, #{bzj,jdbcType=VARCHAR}, 
+      #{pickupman,jdbcType=BIGINT}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.auction.pojo.AcUser">
     <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
@@ -135,6 +139,9 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
+      </if>
+      <if test="nickName != null">
+        nick_name,
       </if>
       <if test="name != null">
         name,
@@ -159,6 +166,9 @@
       </if>
       <if test="type != null">
         type,
+      </if>
+      <if test="level != null">
+        level,
       </if>
       <if test="status != null">
         status,
@@ -192,6 +202,9 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
@@ -215,6 +228,9 @@
       </if>
       <if test="type != null">
         #{type,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
@@ -257,6 +273,9 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
+      <if test="record.nickName != null">
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
@@ -280,6 +299,9 @@
       </if>
       <if test="record.type != null">
         type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.level != null">
+        level = #{record.level,jdbcType=INTEGER},
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
@@ -316,6 +338,7 @@
   <update id="updateByExample" parameterType="map">
     update ac_user
     set id = #{record.id,jdbcType=BIGINT},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=BIGINT},
       password = #{record.password,jdbcType=VARCHAR},
@@ -324,6 +347,7 @@
       referee = #{record.referee,jdbcType=VARCHAR},
       company_id = #{record.companyId,jdbcType=BIGINT},
       type = #{record.type,jdbcType=INTEGER},
+      level = #{record.level,jdbcType=INTEGER},
       status = #{record.status,jdbcType=INTEGER},
       id_num = #{record.idNum,jdbcType=VARCHAR},
       pic1 = #{record.pic1,jdbcType=VARCHAR},
@@ -340,6 +364,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.maizhong.auction.pojo.AcUser">
     update ac_user
     <set>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
@@ -363,6 +390,9 @@
       </if>
       <if test="type != null">
         type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
@@ -397,6 +427,7 @@
   <update id="updateByPrimaryKey" parameterType="com.maizhong.auction.pojo.AcUser">
     update ac_user
     set name = #{name,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=BIGINT},
       password = #{password,jdbcType=VARCHAR},
       head_img = #{headImg,jdbcType=VARCHAR},
@@ -404,6 +435,7 @@
       referee = #{referee,jdbcType=VARCHAR},
       company_id = #{companyId,jdbcType=BIGINT},
       type = #{type,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
       id_num = #{idNum,jdbcType=VARCHAR},
       pic1 = #{pic1,jdbcType=VARCHAR},

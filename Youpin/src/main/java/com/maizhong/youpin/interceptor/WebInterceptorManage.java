@@ -17,12 +17,12 @@ public class WebInterceptorManage extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("=====进入拦截器=======");
+
 
         String token = null;
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
-            System.out.println("---获取cookie----"+cookie.getName());
+
             if(cookie.getName().equals("m_token")){
                 token = cookie.getValue();
             }
@@ -30,7 +30,7 @@ public class WebInterceptorManage extends HandlerInterceptorAdapter {
         String requestType = request.getHeader("X-Requested-With");
         if (StringUtils.isNotBlank(token)) {
             request.setAttribute("token",token);
-            System.out.println("========true======");
+
             return true;
         }
 

@@ -9,8 +9,17 @@ public class BidRecordDto {
     private String bussinessName;
     private String price;
     private boolean isMy;
+    private int type;
 
     public BidRecordDto() {
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public String getPlusTime() {

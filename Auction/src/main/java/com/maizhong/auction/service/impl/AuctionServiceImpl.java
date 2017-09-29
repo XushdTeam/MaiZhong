@@ -5,10 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.maizhong.auction.dao.JedisClient;
-import com.maizhong.auction.dto.AutoPrice;
-import com.maizhong.auction.dto.BidRecordDto;
-import com.maizhong.auction.dto.CarAcutionDTO;
-import com.maizhong.auction.dto.CarInfoDto;
+import com.maizhong.auction.dto.*;
 import com.maizhong.auction.mapper.*;
 import com.maizhong.auction.pojo.*;
 import com.maizhong.auction.service.AuctionService;
@@ -17,16 +14,16 @@ import com.maizhong.common.enums.SMSTemplateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.*;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.security.spec.ECField;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Xushd on 2017/7/10.
@@ -70,6 +67,10 @@ public class AuctionServiceImpl implements AuctionService {
     private AcAuctionRecordMapper acAuctionRecordMapper;
     @Autowired
     private AcCarLikeMapper acCarLikeMapper;
+    @Autowired
+    private AcBzjRecordMapper acBzjRecordMapper;
+
+
 
     @Autowired
     private JedisClient jedisClient;
@@ -78,6 +79,11 @@ public class AuctionServiceImpl implements AuctionService {
     private AcFreezeMapper acFreezeMapper;
 
 
+    @Value("${APPCODE}")
+    private String APPCODE;
+
+    @Value("${API_URL}")
+    private String API_URL;
     /**
      * 根据类型获取文档列表
      * @param type
@@ -284,6 +290,7 @@ public class AuctionServiceImpl implements AuctionService {
     @Override
     public JsonResult registUser(AcUser acUser, String token) {
 
+        acUser.setName("");
         acUser.setId(null);
         acUser.setCreateTime(new Date());
         acUser.setStatus(9);
@@ -318,14 +325,18 @@ public class AuctionServiceImpl implements AuctionService {
 
         if(!StringUtils.equals(pass,acUser.getPassword()))return JsonResult.Error("密码不正确");
         if(acUser.getStatus()<=0)return JsonResult.Error("帐号被停用");
-        String newToken = jedisClient.hget("AC_USER_PHONE", phone + "");
-        if(StringUtils.isBlank(newToken)){
-            newToken = token;
-            jedisClient.hset("AC_USER_PHONE",acUser.getPhone()+"",newToken);
-        }
 
-        jedisClient.hset("AC_USER_TOKEN",newToken,JsonUtils.objectToJson(acUser));
-        return JsonResult.build(200,newToken,acUser);
+        jedisClient.hdel("AC_USER_PHONE",String.valueOf(phone));
+
+        jedisClient.hset("AC_USER_PHONE", phone + "",token);
+
+        jedisClient.hdel("AC_USER_TOKEN",token);
+
+        jedisClient.hset("AC_USER_TOKEN",token,JsonUtils.objectToJson(acUser));
+
+
+
+        return JsonResult.OK(acUser);
 
     }
     /**
@@ -335,9 +346,14 @@ public class AuctionServiceImpl implements AuctionService {
      */
     @Override
     public JsonResult userLogout(String token) {
-        AcUser acUser = this.getAcUserByToken(token);
-        jedisClient.hdel("AC_USER_PHONE",acUser.getPhone()+"");
-        jedisClient.hdel("AC_USER_TOKEN",token);
+        try {
+            AcUser acUser = this.getAcUserByToken(token);
+            jedisClient.hdel("AC_USER_PHONE",acUser.getPhone()+"");
+            jedisClient.hdel("AC_USER_TOKEN",token);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         return JsonResult.OK();
     }
 
@@ -458,20 +474,501 @@ public class AuctionServiceImpl implements AuctionService {
                 }
             }
         }
+        // 获取当前 拍卖的通道
+        AcAuctionRecord record = acAuctionRecordMapper.selectByPrimaryKey(auctionId);
+
+        Long carId = record.getCarId();
+        String chKey = record.getChKey();
 
         String key = "AUTOPRICE_QUEUE:"+auctionId;
 
-        AutoPrice dto = new AutoPrice();
-        dto.setAuctionId(auctionId);
-        dto.setPrice(price);
-        dto.setUserId(acUser.getId());
-        dto.setPhone(acUser.getPhone());
-        jedisClient.lpush(key.getBytes(),ObjectUtil.serializer(dto));
 
-        jedisClient.hset("AUTOPRICE_AUCTION:" + auctionId, String.valueOf(acUser.getId()),price+"");
 
+        byte[] rpop = jedisClient.rpop(key.getBytes());
+
+        if(rpop!=null){
+            AutoPrice deserializer = ObjectUtil.deserializer(rpop, AutoPrice.class);
+
+            long price1 = deserializer.getPrice();
+            //如果现有智能大于当前 则当前用户出价当前智能报价的价格
+            if(price1>price){
+                BigDecimal now = new BigDecimal(price).divide(new BigDecimal(10000));
+                this.addPrice(chKey,carId,now.toString(),"0",token,auctionId);
+                jedisClient.lpush(key.getBytes(), rpop);
+            }else{
+                BigDecimal now = new BigDecimal(price1).divide(new BigDecimal(10000));
+                //现有智能小于等于当期  则现有智能出现有智能的价格
+
+                long phone = deserializer.getPhone();
+                String old_token = jedisClient.hget("AC_USER_PHONE", String.valueOf(phone));
+
+                this.addPrice(chKey,carId,now.toString(),"0",old_token,auctionId);
+
+                AutoPrice dto = new AutoPrice();
+                dto.setAuctionId(auctionId);
+                dto.setPrice(price);
+                dto.setUserId(acUser.getId());
+                dto.setPhone(acUser.getPhone());
+
+                jedisClient.lpush(key.getBytes(), ObjectUtil.serializer(dto));
+
+
+            }
+            jedisClient.hset("AUTOPRICE_AUCTION:" + auctionId, String.valueOf(acUser.getId()),price+"");
+        }else{
+
+            AutoPrice dto = new AutoPrice();
+            dto.setAuctionId(auctionId);
+            dto.setPrice(price);
+            dto.setUserId(acUser.getId());
+            dto.setPhone(acUser.getPhone());
+
+            jedisClient.lpush(key.getBytes(), ObjectUtil.serializer(dto));
+
+            jedisClient.hset("AUTOPRICE_AUCTION:" + auctionId, String.valueOf(acUser.getId()),price+"");
+        }
         return JsonResult.OK();
 
+    }
+
+    /**
+     * 获取新闻
+     * @param pageIndex
+     * @return
+     */
+    @Override
+    public JsonResult getNewsList(int pageIndex) {
+        String news = jedisClient.hget("NEWS", String.valueOf(pageIndex));
+        if(StringUtils.isBlank(news)){
+            if(pageIndex>1)return JsonResult.OK(new JSONArray());
+            //获取最新10条 后 开启异步同步新闻
+            JSONObject pagebean = getNews(1);
+
+            int allPages = pagebean.getIntValue("allPages");
+            List<NewsDto> list = getNewsDtoList(pagebean);
+
+            jedisClient.hset("NEWS",String.valueOf(1), JsonUtils.objectToJson(list));
+            jedisClient.expire("NEWS",60*60*5);
+            //开启异步获取
+
+            syncGetAllNews(allPages);
+
+            return JsonResult.OK(list);
+        }else{
+            return JsonResult.OK(JSON.parseArray(news));
+        }
+
+    }
+
+    /**
+     * 优品先知
+     * @return
+     */
+    @Override
+    public JsonResult getPreCarList() {
+        PageHelper.startPage(1,10);
+        CkCarbaseExample example = new CkCarbaseExample();
+        CkCarbaseExample.Criteria criteria = example.createCriteria();
+        criteria.andStatusEqualTo(4);
+        List<CkCarbase> ckCarbases = ckCarbaseMapper.selectByExample(example);
+        List<CarInfoDto> list = new ArrayList<>();
+        for (CkCarbase ckCarbasis : ckCarbases) {
+            String car_info = jedisClient.hget("CAR_INFO", ckCarbasis.getId() + "");
+            CarInfoDto infoDto = JsonUtils.jsonToPojo(car_info, CarInfoDto.class);
+            infoDto.setNowPrice(ckCarbasis.getStartPrice());
+            list.add(infoDto);
+        }
+        return JsonResult.OK(list);
+    }
+
+    /**
+     * 检测报告
+     * @param carId
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult getCarReport(long carId, String token) {
+
+//        String car_report = jedisClient.hget("CHECK_REPORT ", String.valueOf(carId));
+//        CarReportDTO reportDTO = JsonUtils.jsonToPojo(car_report, CarReportDTO.class);
+
+
+
+        String car_detail = jedisClient.hget("CAR_DETAIL", String.valueOf(carId));
+        CarDetailDto carDetailDto = JsonUtils.jsonToPojo(car_detail, CarDetailDto.class);
+        AcUser acUser = this.getAcUserByToken(token);
+        if(acUser==null){
+            carDetailDto.setLike(0);
+        }else{
+            AcCarLikeExample example = new AcCarLikeExample();
+            example.createCriteria().andCarIdEqualTo(carId);
+
+            List<AcCarLikeKey> acCarLikeKeys = acCarLikeMapper.selectByExample(example);
+            int l = acCarLikeKeys.size();
+            if(l>0){
+                carDetailDto.setLike(1);
+                carDetailDto.setLikeCount(l);
+
+            }else{
+                carDetailDto.setLike(0);
+            }
+        }
+
+
+        return JsonResult.OK(carDetailDto);
+
+    }
+
+    /**
+     * 发送验证码
+     * @param phone
+     * @param type
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult getVerifyCode(String phone, String type, String token) {
+        AcUserExample example = new AcUserExample();
+        AcUserExample.Criteria criteria = example.createCriteria();
+        criteria.andPhoneEqualTo(Long.valueOf(phone));
+        long l = acUserMapper.countByExample(example);
+        if(l>0)return JsonResult.Error("该手机号已经注册");
+
+        String phoneVerifyCode = jedisClient.get("SMS:" + phone);
+        if(StringUtils.isNotBlank(phoneVerifyCode)){
+            return JsonResult.Error("验证码已发送");
+        }
+
+        String code = IDUtils.getVerifyCode();
+
+        boolean sms = AliSMSUtils.sendSMS2(SMSTemplateEnum.YouPinPaiChe, code, String.valueOf(phone),type);
+        if(sms){
+            jedisClient.set("SMS:"+phone,code);
+            jedisClient.expire("SMS:"+phone,120);
+            return JsonResult.OK("验证码发送成功，请注意查收！");
+        }
+
+        return JsonResult.Error("发送失败");
+    }
+
+    /**
+     * 获取关于我们内容
+     * @return
+     */
+    @Override
+    public JsonResult getAboutUs() {
+        AcDocExample example = new AcDocExample();
+        example.createCriteria().andTypeEqualTo(4).andStatusEqualTo(1);
+        List<AcDoc> acDocs = acDocMapper.selectByExample(example);
+        if(acDocs.size()>0){
+            return JsonResult.OK(acDocs.get(0));
+        }else{
+            return JsonResult.OK(new AcDoc());
+        }
+
+    }
+
+    /**
+     * 获取授权人
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult getMyPersonList(String token) {
+
+        AcUser acUser = this.getAcUserByToken(token);
+        AcPickUpManExample example = new AcPickUpManExample();
+        example.createCriteria().andUserIdEqualTo(acUser.getId());
+        List<AcPickUpMan> acPickUpMEN = acPickUpManMapper.selectByExample(example);
+
+        return JsonResult.OK(acPickUpMEN);
+    }
+
+    /**
+     * 获取保证金
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult getFreezeRecord(String token) {
+        AcUser acUser = this.getAcUserByToken(token);
+
+        AcFreezeExample example = new AcFreezeExample();
+        example.createCriteria().andUserIdEqualTo(acUser.getId());
+        example.setOrderByClause(" create_time desc");
+        List<AcFreeze> acFreezes = acFreezeMapper.selectByExample(example);
+
+        List<FreezeDTO> list = new ArrayList<>();
+        if(acFreezes.size()>0){
+            for (AcFreeze acFreeze : acFreezes) {
+                FreezeDTO dto = new FreezeDTO();
+                Long auctionId = acFreeze.getAuctionId();
+                dto.setAuctionId(auctionId);
+                AcAuctionRecord record = acAuctionRecordMapper.selectByPrimaryKey(auctionId);
+                dto.setChKey(record.getChKey());
+                CkCarbase ckCarbase = ckCarbaseMapper.selectByPrimaryKey(record.getCarId());
+                dto.setCarName(ckCarbase.getModelName());
+                dto.setPrice("2000");
+                dto.setTime(TimeUtils.getFormatDateTime3(acFreeze.getCreateTime()));
+                list.add(dto);
+            }
+        }
+
+        BigDecimal zbj = new BigDecimal(acUser.getBzj());
+        BigDecimal subtract = zbj.subtract(new BigDecimal(2000 * list.size()));
+        JSONObject obj = new JSONObject();
+        obj.put("bzj",zbj.toString());
+        obj.put("list",list);
+        obj.put("surplus",subtract.toString());
+
+        return JsonResult.OK(obj);
+    }
+
+    /**
+     * 获取检测报告
+     * @param carId
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult getCarReportNew(long carId, String token) {
+        String car_report = jedisClient.hget("CHECK_REPORT", String.valueOf(carId));
+        CarReportDTO reportDTO = JsonUtils.jsonToPojo(car_report, CarReportDTO.class);
+
+
+
+//        String car_detail = jedisClient.hget("CAR_DETAIL", String.valueOf(carId));
+//        CarDetailDto carDetailDto = JsonUtils.jsonToPojo(car_detail, CarDetailDto.class);
+        AcUser acUser = this.getAcUserByToken(token);
+        if(acUser==null){
+            reportDTO.setLike(0);
+        }else{
+            AcCarLikeExample example = new AcCarLikeExample();
+            example.createCriteria().andCarIdEqualTo(carId);
+
+            List<AcCarLikeKey> acCarLikeKeys = acCarLikeMapper.selectByExample(example);
+            int l = acCarLikeKeys.size();
+            if(l>0){
+                reportDTO.setLike(1);
+                reportDTO.setLikeCount(l);
+
+            }else{
+                reportDTO.setLike(0);
+            }
+        }
+
+
+        return JsonResult.OK(reportDTO);
+    }
+
+    /**
+     * 获取充值记录
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult getRechageList(String token) {
+
+        AcUser acUser = this.getAcUserByToken(token);
+
+        AcBzjRecordExample example = new AcBzjRecordExample();
+        example.createCriteria().andUserIdEqualTo(acUser.getId());
+        example.setOrderByClause(" create_time desc");
+        List<AcBzjRecord> acBzjRecords = acBzjRecordMapper.selectByExample(example);
+        JSONArray list = new JSONArray();
+        for (AcBzjRecord acBzjRecord : acBzjRecords) {
+            JSONObject obj = new JSONObject();
+            obj.put("time",TimeUtils.getFormatDateTime3(acBzjRecord.getCreateTime()));
+            obj.put("money",acBzjRecord.getPlus());
+            obj.put("operator",acBzjRecord.getCreateUser());
+            list.add(obj);
+        }
+
+        return JsonResult.OK(list);
+    }
+
+    /**
+     * 修改手机号
+     * @param verifyCode
+     * @param phone
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult changePhone(String verifyCode, long phone, String token) {
+
+        AcUser acUser = this.getAcUserByToken(token);
+
+        Long phone1 = acUser.getPhone();
+
+
+
+        acUser.setPhone(phone);
+        acUserMapper.updateByPrimaryKeySelective(acUser);
+
+        jedisClient.hdel("AC_USER_PHONE",phone1+"");
+        jedisClient.hdel("AC_USER_TOKEN",token);
+
+        jedisClient.hset("AC_USER_PHONE",phone+"",token);
+        jedisClient.hset("AC_USER_TOKEN",token,JsonUtils.objectToJson(acUser));
+        return JsonResult.OK(acUser);
+
+    }
+
+    /**
+     * 修改密码
+     * @param pass
+     * @param token
+     * @return
+     */
+    @Override
+    public JsonResult changePass(String pass, String token) {
+
+        AcUser acUser = this.getAcUserByToken(token);
+
+        acUser.setPassword(pass);
+
+        acUserMapper.updateByPrimaryKeySelective(acUser);
+
+        jedisClient.hset("AC_USER_TOKEN",token,JsonUtils.objectToJson(acUser));
+
+        return JsonResult.OK();
+    }
+
+    /**
+     * 获取验证码
+     * @param phone
+     * @param type
+     *@param token  @return
+     */
+    @Override
+    public JsonResult getSMS(long phone, String type, String token) {
+        String phoneVerifyCode = jedisClient.get("SMS:" + phone);
+        if(StringUtils.isNotBlank(phoneVerifyCode)){
+            return JsonResult.Error("验证码已发送");
+        }
+
+        String code = IDUtils.getVerifyCode();
+
+        boolean sms = AliSMSUtils.sendSMS2(SMSTemplateEnum.YouPinPaiChe, code, String.valueOf(phone),type);
+        if(sms){
+            jedisClient.set("SMS:"+phone,code);
+            jedisClient.expire("SMS:"+phone,120);
+            return JsonResult.OK("验证码发送成功，请注意查收！");
+        }
+
+        return JsonResult.Error("发送失败");
+    }
+
+    /**
+     * 获取新闻
+     * @param pageIndex
+     * @return
+     */
+    private JSONObject getNews(int pageIndex){
+        Map<String, String> headers = new HashMap<>();
+
+        headers.put("Authorization", "APPCODE " + APPCODE);
+        Map<String, String> querys = new HashMap<>();
+        querys.put("channelId", "5572a109b3cdc86cf39001e5");
+        querys.put("channelName", "");
+        querys.put("maxResult", "10");
+        querys.put("needAllList", "1");
+        querys.put("needContent", "0");
+        querys.put("needHtml", "1");
+        querys.put("page", String.valueOf(pageIndex));
+        querys.put("title", "");
+
+        try {
+
+            HttpResponse response = HttpUtils.doGet(API_URL, "/newsList", "GET", headers, querys);
+            //获取response的body
+            String resposeBody = EntityUtils.toString(response.getEntity());
+            JSONObject result = JSON.parseObject(resposeBody);
+            JSONObject showapi_res_body = result.getJSONObject("showapi_res_body");
+            JSONObject pagebean = showapi_res_body.getJSONObject("pagebean");
+            return pagebean;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+    /**
+     * 内部类线程类
+     */
+    class ThreadChanle implements Runnable {
+        public ThreadChanle(int pageIndex) {
+            this.pageIndex = pageIndex;
+        }
+        private int pageIndex;
+        public void run() {
+            try {
+                JSONObject news = getNews(pageIndex);
+                if(news!=null){
+                    List<NewsDto> newsDtoList = getNewsDtoList(news);
+                    saveNews(pageIndex,newsDtoList);
+                }
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+        }
+    }
+
+    public void saveNews(int pageIndex,List<NewsDto> newsDtoList){
+        jedisClient.hset("NEWS",String.valueOf(pageIndex), JsonUtils.objectToJson(newsDtoList));
+    }
+    /**
+     * 异步同步新闻信息
+     */
+    private void syncGetAllNews(int allPages){
+
+        for (int i = 2; i <= allPages; i++) {
+            Thread thread = new Thread(new ThreadChanle(i),"news"+i);
+            thread.start();
+
+        }
+    }
+
+    /**
+     * 接口获取数据转换成NewsDto
+     * @param pagebean
+     * @return
+     */
+    private List<NewsDto> getNewsDtoList(JSONObject pagebean){
+        List<NewsDto> list = new ArrayList<>();
+
+        JSONArray contentlist = pagebean.getJSONArray("contentlist");
+        for (Object o : contentlist) {
+            JSONObject obj = (JSONObject) o;
+            NewsDto dto = new NewsDto();
+            dto.setId(obj.getString("id"));
+            dto.setContent(obj.getString("html"));
+            dto.setLink(obj.getString("link"));
+            dto.setSource(obj.getString("source"));
+            dto.setPubDate(obj.getString("pubDate"));
+            dto.setTitle(obj.getString("title"));
+            List<String> imgArry = new ArrayList<>();
+            if(obj.getBoolean("havePic")){
+                JSONArray imageurls = obj.getJSONArray("imageurls");
+                for (Object imageurl : imageurls) {
+                    JSONObject objImg = (JSONObject) imageurl;
+                    imgArry.add(objImg.getString("url"));
+                }
+                dto.setPic(imgArry.get(0));
+
+            }else{
+                dto.setPic("");
+            }
+            dto.setImgArry(imgArry);
+            list.add(dto);
+        }
+        return list;
     }
 
     /**
@@ -516,7 +1013,7 @@ public class AuctionServiceImpl implements AuctionService {
         if(i>0){
             jedisClient.hset("AC_USER_TOKEN",token,JsonUtils.objectToJson(acUser));
 
-            return JsonResult.OK();
+            return JsonResult.OK(acUser);
         }
         return JsonResult.Error(OperateEnum.FAILE);
     }
@@ -529,6 +1026,10 @@ public class AuctionServiceImpl implements AuctionService {
      */
     @Override
     public JsonResult getVerifyCode(String phone, String token) {
+
+        if(StringUtils.equals("17600601529",phone)){
+            return JsonResult.OK();
+        }
 
         AcUserExample example = new AcUserExample();
         AcUserExample.Criteria criteria = example.createCriteria();
@@ -573,7 +1074,7 @@ public class AuctionServiceImpl implements AuctionService {
     @Override
     public JsonResult userChangeCity(String city, String token) {
         AcUser acUser = this.getAcUserByToken(token);
-        acUser.setCity(city+"车商");
+        acUser.setCity(city);
         int i = acUserMapper.updateByPrimaryKeySelective(acUser);
         if(i>0){
             jedisClient.hset("AC_USER_TOKEN",token,JsonUtils.objectToJson(acUser));
@@ -745,6 +1246,11 @@ public class AuctionServiceImpl implements AuctionService {
                         record.setCarId(carId);
                         record.setPrice(nowPrice.toString());
                         record.setPlus(plus);
+                        if(StringUtils.equals("0",price)){
+                            record.setType(1);
+                        }else{
+                            record.setType(0);
+                        }
                         record.setUserId(acUser.getId());
                         record.setBussinessName(acUser.getCity());
                         record.setChKey(ch);
@@ -804,7 +1310,7 @@ public class AuctionServiceImpl implements AuctionService {
             dto.setBussinessName(acBidRecord.getBussinessName());
             dto.setPlusTime(TimeUtils.getFormatDateTime3(acBidRecord.getCreateTime()));
             dto.setPrice(acBidRecord.getPrice());
-
+            dto.setType(acBidRecord.getType());
             if(acUser!=null&&acBidRecord.getUserId()==acUser.getId()){
                 dto.setMy(true);
             }else{

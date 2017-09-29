@@ -9,6 +9,7 @@
     <result column="price" jdbcType="VARCHAR" property="price" />
     <result column="plus" jdbcType="VARCHAR" property="plus" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
     <result column="bussiness_name" jdbcType="VARCHAR" property="bussinessName" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, auction_id, car_id, ch_key, price, plus, user_id, bussiness_name, create_time
+    id, auction_id, car_id, ch_key, price, plus, user_id, type, bussiness_name, create_time
   </sql>
   <select id="selectByExample" parameterType="com.maizhong.auction.pojo.AcBidRecordExample" resultMap="BaseResultMap">
     select
@@ -106,12 +107,12 @@
   <insert id="insert" parameterType="com.maizhong.auction.pojo.AcBidRecord">
     insert into ac_bid_record (id, auction_id, car_id, 
       ch_key, price, plus, 
-      user_id, bussiness_name, create_time
-      )
+      user_id, type, bussiness_name, 
+      create_time)
     values (#{id,jdbcType=BIGINT}, #{auctionId,jdbcType=BIGINT}, #{carId,jdbcType=BIGINT}, 
       #{chKey,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, #{plus,jdbcType=VARCHAR}, 
-      #{userId,jdbcType=BIGINT}, #{bussinessName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
-      )
+      #{userId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{bussinessName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.maizhong.auction.pojo.AcBidRecord">
     insert into ac_bid_record
@@ -136,6 +137,9 @@
       </if>
       <if test="userId != null">
         user_id,
+      </if>
+      <if test="type != null">
+        type,
       </if>
       <if test="bussinessName != null">
         bussiness_name,
@@ -165,6 +169,9 @@
       </if>
       <if test="userId != null">
         #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
       </if>
       <if test="bussinessName != null">
         #{bussinessName,jdbcType=VARCHAR},
@@ -204,6 +211,9 @@
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=BIGINT},
       </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
       <if test="record.bussinessName != null">
         bussiness_name = #{record.bussinessName,jdbcType=VARCHAR},
       </if>
@@ -224,6 +234,7 @@
       price = #{record.price,jdbcType=VARCHAR},
       plus = #{record.plus,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=BIGINT},
+      type = #{record.type,jdbcType=INTEGER},
       bussiness_name = #{record.bussinessName,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -251,6 +262,9 @@
       <if test="userId != null">
         user_id = #{userId,jdbcType=BIGINT},
       </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
       <if test="bussinessName != null">
         bussiness_name = #{bussinessName,jdbcType=VARCHAR},
       </if>
@@ -268,6 +282,7 @@
       price = #{price,jdbcType=VARCHAR},
       plus = #{plus,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=BIGINT},
+      type = #{type,jdbcType=INTEGER},
       bussiness_name = #{bussinessName,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

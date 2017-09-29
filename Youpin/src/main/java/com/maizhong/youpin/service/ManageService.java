@@ -48,4 +48,9 @@ public interface ManageService {
     JsonResult getOrderDetail(long orderNumber);
 
     JsonResult price(long ordernumber, String price,String token);
+
+    JsonResult getGuZhi(long ordernumber);
+
+
+    ManagerUser getManageUserByToken(String token);
 }

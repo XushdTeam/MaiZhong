@@ -4,16 +4,13 @@ import com.maizhong.auction.pojo.AcPickUpMan;
 import com.maizhong.auction.pojo.AcUser;
 import com.maizhong.auction.service.AuctionService;
 import com.maizhong.auction.service.ImgUploadService;
+import com.maizhong.auction.service.PersonalAppService;
 import com.maizhong.common.result.JsonResult;
-import com.maizhong.common.utils.IDUtils;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,16 +27,19 @@ public class AuctionAppController {
     private AuctionService auctionService;
     @Autowired
     private ImgUploadService imgUploadService;
+    @Autowired
+    private PersonalAppService personalAppService;
+
+
 
     /**
-     * 获取临时token
-     * @param request
+     * 获取token
+     * @param deviceId
      * @return
      */
-    @RequestMapping(value = "/get/token")
-    public JsonResult getToken(HttpServletRequest request){
-        String token = IDUtils.getUUID();
-        return JsonResult.build(200,"ok",token);
+    @RequestMapping(value = "/app/token/{deviceId}")
+    public JsonResult getToken(@PathVariable String deviceId){
+        return personalAppService.getToken(deviceId);
     }
 
     /**
@@ -67,14 +67,37 @@ public class AuctionAppController {
     }
 
 
+
     /**
-     * 首页推荐车辆
+     * 优品先知
      * @return
      */
-    @RequestMapping(value = "/app/top/car")
-    public JsonResult getTopCar(){
-        JsonResult result = auctionService.getTopCar();
-        return result;
+    @RequestMapping(value = "/app/precar/list")
+    public JsonResult getPreCarList(){
+        return auctionService.getPreCarList();
+    }
+
+    /**
+     * 检测报告
+     * @param carId
+     * @return
+     */
+    @RequestMapping(value = "/app/report/{carId}")
+    public JsonResult getCarReport(@PathVariable long carId,HttpServletRequest request){
+        String token = (String) request.getAttribute("token");
+        return auctionService.getCarReport(carId,token);
+    }
+
+    /**
+     * 检测报告新
+     * @param carId
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/app/check/report/{carId}")
+    public JsonResult getCarCheckReport(@PathVariable long carId,HttpServletRequest request){
+        String token = (String) request.getAttribute("token");
+        return auctionService.getCarReportNew(carId,token);
     }
 
     /**
@@ -126,6 +149,19 @@ public class AuctionAppController {
     }
 
     /**
+     * 公用图片上传
+     * @param imgStr
+     * @param target
+     * @return
+     */
+    @RequestMapping(value = "/app/imgupload")
+    public JsonResult imgUpload(String imgStr,String target){
+        JsonResult result = imgUploadService.uploadImg(imgStr,target);
+        return result;
+    }
+
+
+    /**
      * 获取验证码
      * @param phone
      * @param request
@@ -138,6 +174,20 @@ public class AuctionAppController {
         return result;
     }
 
+    /**
+     * 获取短信验证码
+     * @param phone
+     * @param type
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/app/verify/code/{phone}")
+    public JsonResult getVerifyConde(@PathVariable String phone,
+                                     String type,
+                                     HttpServletRequest request){
+        String token = (String) request.getAttribute("token");
+        return auctionService.getVerifyCode(phone,type,token);
+    }
     /**
      * 用户注册
      * @param acUser
@@ -182,6 +232,20 @@ public class AuctionAppController {
         return result;
 
     }
+
+    /**
+     * APP 用户登录
+     * @param phone
+     * @param pass
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/app/user/login")
+    public JsonResult userLoginNew(long phone,String pass,HttpServletRequest request){
+        String token = (String) request.getAttribute("token");
+        return auctionService.userLogin(phone,pass,token);
+    }
+
 
     /**
      * 用户退出登录
@@ -401,5 +465,99 @@ public class AuctionAppController {
         return result;
     }
 
+    /**
+     * 获取新闻列表
+     * @param pageIndex
+     * @return
+     */
+    @RequestMapping(value = "/app/news/list/{pageIndex}")
+    public JsonResult getNewsList(@PathVariable int pageIndex){
+        return auctionService.getNewsList(pageIndex);
+    }
 
+
+    /**
+     *  获取关于我们内容
+     * @return
+     */
+    @RequestMapping(value = "/app/about")
+    public JsonResult getAbout(){
+        return auctionService.getAboutUs();
+    }
+
+    /**
+     * 获取授权人
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/app/person/list")
+    public JsonResult getMyPersonList(HttpServletRequest request){
+        String token = (String) request.getAttribute("token");
+        return auctionService.getMyPersonList(token);
+    }
+
+
+    /**
+     * 获取保证金
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/app/mybzj")
+    public JsonResult getFreezeRecord(HttpServletRequest request){
+        String token = (String) request.getAttribute("token");
+        return auctionService.getFreezeRecord(token);
+    }
+
+    /**
+     * 获取充值记录
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/app/recharge/list")
+    public JsonResult getRechargeList(HttpServletRequest request){
+        String token = (String) request.getAttribute("token");
+        return auctionService.getRechageList(token);
+    }
+
+    /**
+     * 修改手机号
+     * @param phone
+     * @param verifyCode
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/app/user/change/phone/{phone}/{verifyCode}")
+    public JsonResult changePhone(@PathVariable long phone,
+                                  @PathVariable String verifyCode, HttpServletRequest request){
+        String token = (String) request.getAttribute("token");
+        if(!auctionService.checkVerifyCode(verifyCode,phone+""))return JsonResult.Error("验证码错误");
+        return auctionService.changePhone(verifyCode,phone,token);
+    }
+
+    /**
+     * 修改密码
+     * @param phone
+     * @param pass
+     * @param verifyCode
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/app/user/change/pass")
+    public JsonResult changePass(String phone,String pass,String verifyCode,HttpServletRequest request){
+        String token = (String) request.getAttribute("token");
+        if(!auctionService.checkVerifyCode(verifyCode,phone+""))return JsonResult.Error("验证码错误");
+        return auctionService.changePass(pass,token);
+    }
+
+    /**
+     * 获取验证码
+     * @param phone
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/app/sms/{phone}")
+    public JsonResult getSMS(@PathVariable long phone,String type,HttpServletRequest request){
+        String token = (String) request.getAttribute("token");
+        return auctionService.getSMS(phone,type,token);
+    }
 }

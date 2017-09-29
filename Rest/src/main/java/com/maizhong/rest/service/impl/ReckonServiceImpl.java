@@ -1033,8 +1033,9 @@ public class ReckonServiceImpl implements ReckonService {
 
             Series series = seriesMapper.selectByPrimaryKey(model.getSeriesId());
 
+            if(series==null)continue;
 
-            orderDTO.setSeriesImg(series.getSeriesPic());//车系图片
+
             orderDTO.setModel(model);
             orderDTO.setModelName(orders.getModelName());//车型名称
             orderDTO.setReckonPrice(orders.getReckonPrice());//评估价格

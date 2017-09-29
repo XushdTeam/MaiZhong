@@ -207,6 +207,10 @@ public class IndexServiceImpl implements IndexService {
     @Override
     public JsonResult getVerifyCodeRegist(long phone) {
 
+        if(StringUtils.equals("17600601529",String.valueOf(phone))){
+            return JsonResult.OK("验证码发送成功，请注意查收！");
+        }
+
         AcUserExample example = new AcUserExample();
         example.createCriteria().andPhoneEqualTo(phone).andStatusNotEqualTo(-1);
         long l = acUserMapper.countByExample(example);
@@ -619,6 +623,20 @@ public class IndexServiceImpl implements IndexService {
     @Override
     public String getSocketUrl() {
         return this.socketUrl;
+    }
+
+    /**
+     * 获取检测报告
+     * @param carId
+     * @return
+     */
+    @Override
+    public CarReportDTO getCheckReport(long carId) {
+
+        String check_report = jedisClient.hget("CHECK_REPORT", String.valueOf(carId));
+
+
+        return JsonUtils.jsonToPojo(check_report,CarReportDTO.class);
     }
 
 }

@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.maizhong.auction.dao.JedisClient;
 import com.maizhong.auction.dto.*;
+import com.maizhong.auction.enums.*;
 import com.maizhong.auction.mapper.*;
 import com.maizhong.auction.pojo.*;
 import com.maizhong.auction.service.SystemService;
@@ -14,6 +15,7 @@ import com.maizhong.common.dto.WaitAuctionQueueDto;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.*;
+import com.sun.org.apache.bcel.internal.generic.BREAKPOINT;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -437,7 +439,13 @@ public class SystemServiceImpl implements SystemService {
         if (StringUtils.isNotBlank(param.getFiled("timeEnd"))) {
             criteria.andCreateTimeLessThanOrEqualTo(TimeUtils.getDate(param.getFiled("timeBegin")));
         }
+
+
+
         List<CkCarbase> list = carbaseMapper.selectByExample(example);
+
+        PageInfo<CarExamineDto> pageInfo = new PageInfo(list);
+
 
         List<CarExamineDto> rows = new ArrayList<>();
         for (CkCarbase carbase : list) {
@@ -473,7 +481,7 @@ public class SystemServiceImpl implements SystemService {
             dto.setCompanyName(company.getName());
             rows.add(dto);
         }
-        PageInfo<CarExamineDto> pageInfo = new PageInfo(rows);
+        pageInfo.setList(rows);
 
         return JsonResult.OK(pageInfo);
     }
@@ -497,10 +505,604 @@ public class SystemServiceImpl implements SystemService {
         ckCarbase.setExamineTime(new Date());
         ckCarbase.setExamineReason("通过");
         int i = carbaseMapper.updateByPrimaryKeySelective(ckCarbase);
-        if (i > 0) return JsonResult.OK();
+        if (i > 0) {
+            // mod 20170908 审核通过后生成检测报告
+            this.buildReport(id);
+            return JsonResult.OK();
+        }
 
         return JsonResult.Error(OperateEnum.FAILE);
     }
+
+
+    /**
+     * 生成检测报告
+     *
+     * @param carId
+     */
+    private void buildReport(long carId) {
+
+        CarReportDTO report = new CarReportDTO();
+
+        //获取车辆基本信息
+        CkCarbase ckCarbase = carbaseMapper.selectByPrimaryKey(carId);
+
+        String checkTime = TimeUtils.getFormatDateTime(ckCarbase.getCreateTime(), "yyyyMMdd");
+        String reportNum = "YPRN" + checkTime + carId;
+        //检测报告编号
+        report.setReportNum(reportNum);
+        //检测时间
+        report.setCheckTime(checkTime);
+        //车型名称
+        report.setModelName(ckCarbase.getModelName());
+        report.setCarId(carId);
+        report.setStartPrice(ckCarbase.getStartPrice());
+        report.setSavePrice(ckCarbase.getSavePrice());
+        report.setCount(ckCarbase.getAuctionCount());
+        //车型信息
+        CkCarmodel ckCarmodel = new CkCarmodel();
+        CkCarmodelExample exm = new CkCarmodelExample();
+        exm.createCriteria().andCarIdEqualTo(carId);
+        List<CkCarmodel> ckCarmodels = ckCarmodelMapper.selectByExample(exm);
+        if (ckCarmodels.size() > 0) ckCarmodel = ckCarmodels.get(0);
+        //附加信息
+        CkOther ckOther = new CkOther();
+        CkOtherExample exo = new CkOtherExample();
+        exo.createCriteria().andCarIdEqualTo(carId);
+        List<CkOther> ckOthers = ckOtherMapper.selectByExample(exo);
+        if (ckOthers.size() > 0) ckOther = ckOthers.get(0);
+        //基本照片
+        CkBaseimg ckBaseimg = new CkBaseimg();
+        CkBaseimgExample exi = new CkBaseimgExample();
+        exi.createCriteria().andCarIdEqualTo(carId);
+        List<CkBaseimg> ckBaseimgs = ckBaseimgMapper.selectByExample(exi);
+        if (ckBaseimgs.size() > 0) ckBaseimg = ckBaseimgs.get(0);
+        //登记证
+        CkDjz ckDjz = new CkDjz();
+        CkDjzExample exd = new CkDjzExample();
+        exd.createCriteria().andCarIdEqualTo(carId);
+        List<CkDjz> ckDjzs = djzMapper.selectByExample(exd);
+        if (ckDjzs.size() > 0) ckDjz = ckDjzs.get(0);
+        //行驶证
+        CkXsz ckXsz = new CkXsz();
+        CkXszExample exx = new CkXszExample();
+        exx.createCriteria().andCarIdEqualTo(carId);
+        List<CkXsz> ckXszs = ckXszMapper.selectByExample(exx);
+        if (ckXszs.size() > 0) ckXsz = ckXszs.get(0);
+        //核对信息
+        CkVerify verify = new CkVerify();
+        CkVerifyExample exv = new CkVerifyExample();
+        exv.createCriteria().andCarIdEqualTo(carId);
+        List<CkVerify> ckVerifies = ckVerifyMapper.selectByExample(exv);
+        if (ckVerifies.size() > 0) verify = ckVerifies.get(0);
+        //其他证件信息
+        CkQtz ckQtz = new CkQtz();
+        CkQtzExample exq = new CkQtzExample();
+        exq.createCriteria().andCarIdEqualTo(carId);
+        List<CkQtz> ckQtzs = ckQtzMapper.selectByExample(exq);
+        if (ckQtzs.size() > 0)  ckQtz = ckQtzs.get(0);
+        //配置信息
+        CkPz ckPz = new CkPz();
+        CkPzExample expz = new CkPzExample();
+        expz.createCriteria().andCarIdEqualTo(carId);
+        List<CkPz> ckPzs = ckPzMapper.selectByExample(expz);
+        if(ckPzs.size()>0) ckPz = ckPzs.get(0);
+        //动力信息
+        CkDl ckDl = new CkDl();
+        CkDlExample exdl = new CkDlExample();
+        exdl.createCriteria().andCarIdEqualTo(carId);
+        List<CkDl> ckDls = ckDlMapper.selectByExample(exdl);
+        if(ckDls.size()>0)ckDl = ckDls.get(0);
+        //事故信息
+        CkCksgExample exsg = new CkCksgExample();
+        exsg.createCriteria().andCarIdEqualTo(carId);
+        List<CkCksg> ckCksgs = ckCksgMapper.selectByExample(exsg);
+        //泡水
+        CkCkpsExample exps = new CkCkpsExample();
+        exps.createCriteria().andCarIdEqualTo(carId);
+        List<CkCkps> ckCkps = ckCkpsMapper.selectByExample(exps);
+        //火烧
+        CkCkhsExample exhs = new CkCkhsExample();
+        exhs.createCriteria().andCarIdEqualTo(carId);
+        List<CkCkhs> ckCkhs = ckCkhsMapper.selectByExample(exhs);
+        //外观
+        CkCkwgqxExample exwg = new CkCkwgqxExample();
+        exwg.createCriteria().andCarIdEqualTo(carId);
+        List<CkCkwgqx> ckCkwgqxes = ckCkwgqxMapper.selectByExample(exwg);
+        //内饰
+        CkCknsqxExample exns = new CkCknsqxExample();
+        exns.createCriteria().andCarIdEqualTo(carId);
+        List<CkCknsqx> ckCknsqxes = ckCknsqxMapper.selectByExample(exns);
+
+        //初登日期
+        report.setRegistTime(ckDjz.getCdrq());
+        //公里数
+        report.setMileage(verify.getBxlc());
+        //排放标准
+        report.setPfbz(PFBZ_ENUM.indexOf(ckOther.getPfbz()));
+        //注册地
+        report.setRegistLocal(ckDjz.getZcd());
+        //车况等级
+        LEVEL_ENUM level_enum = LEVEL_ENUM.indexOf(ckOther.getPj());
+
+        report.setLevel(level_enum.getName());
+        report.setLevelDes1(level_enum.getDes1());
+        report.setLevelDes2(level_enum.getDes2());
+
+        //基本信息
+        List<ItemDTO> bsList = new ArrayList<>();
+        bsList.add(new ItemDTO("初登日期",ckDjz.getCdrq()));
+        bsList.add(new ItemDTO("使用性质", SYXZ_ENUM.indexOf(ckXsz.getXz())));
+        bsList.add(new ItemDTO("表显里程",verify.getBxlc()));
+        bsList.add(new ItemDTO("出厂日期",ckDjz.getCcrq()));
+        bsList.add(new ItemDTO("注册地",ckDjz.getZcd()));
+        bsList.add(new ItemDTO("排放标准",PFBZ_ENUM.indexOf(ckOther.getPfbz())));
+        bsList.add(new ItemDTO("排量",ckDjz.getPl()));
+        bsList.add(new ItemDTO("变速箱", BSX_ENUM.indexOf(ckCarmodel.getBsx())));
+        bsList.add(new ItemDTO("汽车类型", CARLX_ENUM.indexOf(ckXsz.getLx())));
+        bsList.add(new ItemDTO("驱动方式",QDFS_ENUM.indexOf(ckCarmodel.getQdfs())));
+        bsList.add(new ItemDTO("燃烧种类", RSZL_ENUM.indexOf(ckDjz.getRszl())));
+        bsList.add(new ItemDTO("车身颜色",COLOR_ENUM.indexOf(ckDjz.getColor())));
+        bsList.add(new ItemDTO("核定载客数",ckDjz.getHdzks()));
+        bsList.add(new ItemDTO("轮胎规格",ckDjz.getLtgg()));
+        bsList.add(new ItemDTO("品牌型号",ckXsz.getPpxh()));
+        bsList.add(new ItemDTO("发动机号",ckXsz.getFdjh()));
+        bsList.add(new ItemDTO("是否进口",JK_ENUM.indexOf(ckDjz.getJk())));
+        bsList.add(new ItemDTO("过户次数",ckDjz.getGhcs()));
+        bsList.add(new ItemDTO("现使用方",SYF_ENUM.indexOf(ckDjz.getXsyf())));
+        if(!StringUtils.equals("0",ckDjz.getGhcs())){
+            bsList.add(new ItemDTO("现使用方",SYF_ENUM.indexOf(ckDjz.getYsyf())));
+            bsList.add(new ItemDTO("最后过户时间",ckDjz.getZhghsj()));
+            bsList.add(new ItemDTO("最后转入地",ckDjz.getYzrd()));
+        }
+        report.setJb(bsList);
+        //手续信息
+        List<ItemDTO> sxList = new ArrayList<>();
+        sxList.add(new ItemDTO("登记证",HAS_ENUM.indexOf(ckDjz.getWj())));
+        sxList.add(new ItemDTO("行驶证",HAS_ENUM.indexOf(ckXsz.getWj())));
+        sxList.add(new ItemDTO("年检有效期",ckXsz.getNjh()));
+        if(!StringUtils.equals("0",ckDjz.getGhcs())){
+            sxList.add(new ItemDTO("过户票",HAS_ENUM.indexOf(ckQtz.getGhp())));
+        }
+        sxList.add(new ItemDTO("交强险有效期",ckQtz.getJqxrq()));
+        sxList.add(new ItemDTO("交强险所在地",ckQtz.getJqxd()));
+        sxList.add(new ItemDTO("车船税",ckQtz.getCcx()));
+        sxList.add(new ItemDTO("车牌所在地",ckXsz.getNumber().substring(0, 2)));
+        sxList.add(new ItemDTO("购置税政",GZS_ENUM.indexOf(ckQtz.getGzs())));
+        String djz = verify.getDjz();
+        String text="";
+        if (djz.contains("1")) {
+            text += "铭牌破损";
+        }
+        if (djz.contains("2")) {
+            text += "铭牌未见";
+        }
+        if (djz.contains("3")) {
+            text += "铭牌日期与登记证不一致";
+        }
+        if(StringUtils.isBlank(text)){
+            sxList.add(new ItemDTO("车身铭牌","有"));
+        }else{
+            sxList.add(new ItemDTO("车身铭牌",text));
+        }
+        String xsz = verify.getXsz();
+        text = "";
+        if (xsz.contains("1")) {
+            text += "天窗不一致";
+        }
+        if (xsz.contains("2")) {
+            text += "车窗覆盖件不一致";
+        }
+        if (xsz.contains("3")) {
+            text += "中网不一致";
+        }
+        if (xsz.contains("4")) {
+            text += "颜色不一致(贴纸)";
+        }
+        if (xsz.contains("5")) {
+            text += "轮毂不一致";
+        }
+        if (xsz.contains("6")) {
+            text += "前照灯总成不一致";
+        }
+        if (StringUtils.isBlank(text)) {
+            sxList.add(new ItemDTO("外观改造","实车与行驶证照片相符"));
+        } else {
+            sxList.add(new ItemDTO("外观改造",text));
+        }
+
+        //违章
+        int wzF = ckOther.getWzF();
+        String wzQ = ckOther.getWzQ();
+        if (wzF == 0) {
+            sxList.add(new ItemDTO("违章记录","无"));
+        } else {
+            sxList.add(new ItemDTO("违章记录",wzF + "分" + (wzQ == null ? "0" : wzQ) + "元"));
+        }
+        sxList.add(new ItemDTO("备用钥匙",HAS_ENUM.indexOf(ckQtz.getByys())));
+        report.setSx(sxList);
+
+        //配置信息
+        List<ItemDTO> pzList = new ArrayList<>();
+        //abs
+        if(ckPz.getAbs()==0){
+            pzList.add(new ItemDTO("ABS","无"));
+        }else{
+            pzList.add(new ItemDTO("ABS","有 / " + QX_ENUM.indexOf(ckPz.getAbsBug())));
+        }
+        //qn
+        int qn = ckPz.getQn();
+        switch (qn) {
+            case 0:
+                pzList.add(new ItemDTO("气囊","无"));
+                break;
+            case 1:
+                pzList.add(new ItemDTO("气囊","一个 /" + QX_ENUM.indexOf(ckPz.getQnBug())));
+                break;
+            case 2:
+                pzList.add(new ItemDTO("气囊","两个 /" + QX_ENUM.indexOf(ckPz.getQnBug())));
+                break;
+            case 3:
+                pzList.add(new ItemDTO("气囊","三个 /" + QX_ENUM.indexOf(ckPz.getQnBug())));
+                break;
+            case 4:
+                pzList.add(new ItemDTO("气囊","四个 /" + QX_ENUM.indexOf(ckPz.getQnBug())));
+                break;
+            default:
+                pzList.add(new ItemDTO("气囊","正常"));
+                break;
+        }
+        //转向助力
+        if(ckPz.getAbs()==0){
+            pzList.add(new ItemDTO("转向助力","无"));
+        }else{
+            pzList.add(new ItemDTO("转向助力","有 / " + QX_ENUM.indexOf(ckPz.getZxzlBug())));
+        }
+
+        //车窗玻璃1四门电动2手动3两门电动
+        int ccbl = ckPz.getCcbl();
+        switch (ccbl) {
+            case 1:
+                pzList.add(new ItemDTO("车窗玻璃","四门电动 /" + QX_ENUM.indexOf(ckPz.getCcblBug())));
+                break;
+            case 2:
+                pzList.add(new ItemDTO("车窗玻璃","手动 /" + QX_ENUM.indexOf(ckPz.getCcblBug())));
+                break;
+            case 3:
+                pzList.add(new ItemDTO("车窗玻璃","两门电动 /" + QX_ENUM.indexOf(ckPz.getCcblBug())));
+                break;
+            default:
+                pzList.add(new ItemDTO("车窗玻璃","不详 " ));
+                break;
+        }
+        //天窗0无1有2全景3加装
+        int tc = ckPz.getTc();
+        switch (tc) {
+            case 0:
+                pzList.add(new ItemDTO("车窗玻璃","无" ));
+                break;
+            case 1:
+                pzList.add(new ItemDTO("车窗玻璃","有 /" + QX_ENUM.indexOf(ckPz.getTcBug())));
+                break;
+            case 2:
+                pzList.add(new ItemDTO("车窗玻璃","全景 /" + QX_ENUM.indexOf(ckPz.getTcBug())));
+                break;
+            case 3:
+                pzList.add(new ItemDTO("车窗玻璃","加装 /" + QX_ENUM.indexOf(ckPz.getTcBug())));
+                break;
+            default:
+                pzList.add(new ItemDTO("车窗玻璃","无"));
+                break;
+        }
+        //车外后视镜 1电折叠	2电动调节	3手动调节
+        int cwhsj = ckPz.getCwhsj();
+        switch (cwhsj) {
+            case 1:
+                pzList.add(new ItemDTO("车外后视镜","电折叠 /" + QX_ENUM.indexOf(ckPz.getCwhsjBug())));
+                break;
+            case 2:
+                pzList.add(new ItemDTO("车外后视镜","电动调节 /" + QX_ENUM.indexOf(ckPz.getCwhsjBug())));
+                break;
+            case 3:
+                pzList.add(new ItemDTO("车外后视镜","手动调节 /" + QX_ENUM.indexOf(ckPz.getCwhsjBug())));
+                break;
+            default:
+                pzList.add(new ItemDTO("车外后视镜","无"));
+                break;
+        }
+        //座椅材质 1织布2真皮3改装真皮4混合材质
+        int zycz = ckPz.getZycz();
+        switch (zycz) {
+            case 1:
+                pzList.add(new ItemDTO("座椅材质","织布"));
+                break;
+            case 2:
+                pzList.add(new ItemDTO("座椅材质","真皮"));
+                break;
+            case 3:
+                pzList.add(new ItemDTO("座椅材质","改装真皮"));
+                break;
+            case 4:
+                pzList.add(new ItemDTO("座椅材质","混合材质"));
+                break;
+            default:
+                pzList.add(new ItemDTO("座椅材质","织布"));
+                break;
+        }
+        //座椅调节方式 1手动2电动3记忆
+        int zytjfs = ckPz.getZytjfs();
+        switch (zytjfs) {
+            case 1:
+                pzList.add(new ItemDTO("座椅调节方式","手动"));
+                break;
+            case 2:
+                pzList.add(new ItemDTO("座椅调节方式","电动"));
+                break;
+            case 3:
+                pzList.add(new ItemDTO("座椅调节方式","记忆"));
+                break;
+            default:
+                pzList.add(new ItemDTO("座椅调节方式","不详"));
+                break;
+        }
+        //座椅功能 1电加热2通风3按摩0无
+        int zygn = ckPz.getZygn();
+        switch (zygn) {
+            case 0:
+                pzList.add(new ItemDTO("座椅功能","无"));
+                break;
+            case 1:
+                pzList.add(new ItemDTO("座椅功能","电加热 /" + QX_ENUM.indexOf(ckPz.getZyBug())));
+                break;
+            case 2:
+                pzList.add(new ItemDTO("座椅功能","通风 /" + QX_ENUM.indexOf(ckPz.getZyBug())));
+                break;
+            case 3:
+                pzList.add(new ItemDTO("座椅功能","按摩 /" + QX_ENUM.indexOf(ckPz.getZyBug())));
+                break;
+            default:
+                pzList.add(new ItemDTO("座椅功能","不详"));
+                break;
+        }
+        //空调 0无1手动2自动3前后
+        int kt = ckPz.getKt();
+        switch (kt) {
+            case 0:
+                pzList.add(new ItemDTO("空调","无"));
+                break;
+            case 1:
+                pzList.add(new ItemDTO("空调","手动 /" + QX_ENUM.indexOf(ckPz.getKtBug())));
+                break;
+            case 2:
+                pzList.add(new ItemDTO("空调","自动 /" + QX_ENUM.indexOf(ckPz.getKtBug())));
+                break;
+            case 3:
+                pzList.add(new ItemDTO("空调","前后 /" + QX_ENUM.indexOf(ckPz.getKtBug())));
+                break;
+            default:
+                pzList.add(new ItemDTO("空调","不详"));
+                break;
+        }
+        //影音设备 0无1收音机2CD3加装CD4前屏DVD5多屏DVD6加装单屏DVD7加装多屏DVD
+        int yysb = ckPz.getYysb();
+        switch (yysb) {
+            case 0:
+                pzList.add(new ItemDTO("影音设备","无"));
+                break;
+            case 1:
+                pzList.add(new ItemDTO("影音设备","收音机 /" + QX_ENUM.indexOf(ckPz.getYysbBug())));
+                break;
+            case 2:
+                pzList.add(new ItemDTO("影音设备","CD /" + QX_ENUM.indexOf(ckPz.getYysbBug())));
+                break;
+            case 3:
+                pzList.add(new ItemDTO("影音设备","加装CD /" + QX_ENUM.indexOf(ckPz.getYysbBug())));
+                break;
+            case 4:
+                pzList.add(new ItemDTO("影音设备","前屏DVD /" + QX_ENUM.indexOf(ckPz.getYysbBug())));
+                break;
+            case 5:
+                pzList.add(new ItemDTO("影音设备","多屏DVD /" + QX_ENUM.indexOf(ckPz.getYysbBug())));
+                break;
+            case 6:
+                pzList.add(new ItemDTO("影音设备","加装单屏DVD /" + QX_ENUM.indexOf(ckPz.getYysbBug())));
+                break;
+            case 7:
+                pzList.add(new ItemDTO("影音设备","加装多屏DVD /" + QX_ENUM.indexOf(ckPz.getYysbBug())));
+                break;
+            default:
+                pzList.add(new ItemDTO("影音设备","不详"));
+                break;
+        }
+        //导航
+        if(ckPz.getAbs()==0){
+            pzList.add(new ItemDTO("导航","无"));
+        }else{
+            pzList.add(new ItemDTO("导航","有 / " + QX_ENUM.indexOf(ckPz.getZxzlBug())));
+        }
+
+        //定速巡航 0无	1有	2加装
+        int dsxh = ckPz.getDsxh();
+        switch (dsxh) {
+            case 0:
+                pzList.add(new ItemDTO("定速巡航","无"));
+                break;
+            case 1:
+                pzList.add(new ItemDTO("定速巡航","有 /" + QX_ENUM.indexOf(ckPz.getDsxhBug())));
+                break;
+            case 2:
+                pzList.add(new ItemDTO("定速巡航","加装 /" + QX_ENUM.indexOf(ckPz.getDsxhBug())));
+                break;
+            default:
+                pzList.add(new ItemDTO("定速巡航","不详"));
+                break;
+        }
+
+        //倒车雷达 0无	1有	2加装	3前后
+        int dcld = ckPz.getDcld();
+        switch (dcld) {
+            case 0:
+                pzList.add(new ItemDTO("倒车雷达","无"));
+                break;
+            case 1:
+                pzList.add(new ItemDTO("倒车雷达","有 /" + QX_ENUM.indexOf(ckPz.getDcldBug())));
+                break;
+            case 2:
+                pzList.add(new ItemDTO("倒车雷达","加装 /" + QX_ENUM.indexOf(ckPz.getDcldBug())));
+                break;
+            case 3:
+                pzList.add(new ItemDTO("倒车雷达","前后 /" + QX_ENUM.indexOf(ckPz.getDcldBug())));
+                break;
+            default:
+                pzList.add(new ItemDTO("倒车雷达","不详"));
+                break;
+        }
+        //倒车影像 0无	1有	2全景	3加装
+        int dcyx = ckPz.getDcyx();
+        switch (dcyx) {
+            case 0:
+                pzList.add(new ItemDTO("倒车影像","无"));
+                break;
+            case 1:
+                pzList.add(new ItemDTO("倒车影像","有 /" + QX_ENUM.indexOf(ckPz.getDcyxBug())));
+                break;
+            case 2:
+                pzList.add(new ItemDTO("倒车影像","全景 /" + QX_ENUM.indexOf(ckPz.getDcyxBug())));
+                break;
+            case 3:
+                pzList.add(new ItemDTO("倒车影像","加装 /" + QX_ENUM.indexOf(ckPz.getDcyxBug())));
+                break;
+            default:
+                pzList.add(new ItemDTO("倒车影像","不详"));
+                break;
+        }
+        //轮毂 1钢	2铝合金
+        if(ckPz.getAbs()==0){
+            pzList.add(new ItemDTO("轮毂","钢"));
+        }else{
+            pzList.add(new ItemDTO("轮毂","铝合金"));
+        }
+        report.setPz(pzList);
+
+        //动力信息
+        List<ItemDTO> dlList = new ArrayList<>();
+        int fdjXn = ckDl.getFdjXn();
+        switch (fdjXn) {
+            case -1:
+                dlList.add(new ItemDTO("发动机性能","正常"));
+                break;
+            case 1:
+                dlList.add(new ItemDTO("发动机性能","异响"));
+                break;
+            case 2:
+                dlList.add(new ItemDTO("发动机性能","漏油"));
+                break;
+            case 3:
+                dlList.add(new ItemDTO("发动机性能","水温高"));
+                break;
+            case 4:
+                dlList.add(new ItemDTO("发动机性能","运转不平稳"));
+                break;
+            default:
+                dlList.add(new ItemDTO("发动机性能","不详"));
+                break;
+        }
+        //发动机尾气 -1正常 1冒蓝烟 2冒黑烟 3冒白烟  4改装
+        int fdjWq = ckDl.getFdjWq();
+        switch (fdjWq) {
+            case -1:
+                dlList.add(new ItemDTO("发动机尾气","正常"));
+                break;
+            case 1:
+                dlList.add(new ItemDTO("发动机尾气","冒蓝烟"));
+                break;
+            case 2:
+                dlList.add(new ItemDTO("发动机尾气","冒黑烟"));
+                break;
+            case 3:
+                dlList.add(new ItemDTO("发动机尾气","冒白烟"));
+                break;
+            case 4:
+                dlList.add(new ItemDTO("发动机尾气","改装"));
+                break;
+            default:
+                dlList.add(new ItemDTO("发动机尾气","不详"));
+                break;
+        }
+        //变速器 -1正常 1闯档 2换档有冲击
+        int bsq = ckDl.getBsq();
+        switch (bsq) {
+            case -1:
+                dlList.add(new ItemDTO("变速器","正常"));
+                break;
+            case 1:
+                dlList.add(new ItemDTO("变速器","闯档"));
+                break;
+            case 2:
+                dlList.add(new ItemDTO("变速器","换档有冲击"));
+                break;
+            default:
+                dlList.add(new ItemDTO("变速器","不详"));
+                break;
+        }
+        report.setDl(dlList);
+        //事故
+        List<ItemDTO> sgList = new ArrayList<>();
+        for (CkCksg ckCksg : ckCksgs) {
+            sgList.add(new ItemDTO(ckCksg.getDes(),ckCksg.getImg()));
+        }
+        report.setSg(sgList);
+        //泡水
+        List<ItemDTO> psList = new ArrayList<>();
+        for (CkCkps ckCkp : ckCkps) {
+            psList.add(new ItemDTO(ckCkp.getDes(),ckCkp.getImg()));
+        }
+        report.setPs(psList);
+        //火烧
+        List<ItemDTO> hsList = new ArrayList<>();
+        for (CkCkhs ckhs : ckCkhs) {
+            hsList.add(new ItemDTO(ckhs.getDes(),ckhs.getImg()));
+        }
+        report.setHs(hsList);
+        //外观
+        List<ItemDTO> wgList = new ArrayList<>();
+        for (CkCkwgqx qx : ckCkwgqxes) {
+            wgList.add(new ItemDTO(qx.getDes(),qx.getImg()));
+        }
+        report.setWg(wgList);
+        //内饰
+        List<ItemDTO> nsList = new ArrayList<>();
+        for (CkCknsqx qx : ckCknsqxes) {
+            nsList.add(new ItemDTO(qx.getDes(),qx.getImg()));
+        }
+        report.setNs(nsList);
+        //基本图片
+        List<ItemDTO> baseList = new ArrayList<>();
+        baseList.add(new ItemDTO("左前45°",ckBaseimg.getZq45()));
+        baseList.add(new ItemDTO("发动机舱",ckBaseimg.getFdjc()));
+        baseList.add(new ItemDTO("发动机舱左",ckBaseimg.getFdjcz()));
+        baseList.add(new ItemDTO("发动机舱右",ckBaseimg.getFdjcy()));
+        baseList.add(new ItemDTO("轮胎型号",ckBaseimg.getLtxh()));
+        baseList.add(new ItemDTO("前排座椅",ckBaseimg.getQpzy()));
+        baseList.add(new ItemDTO("仪表盘",ckBaseimg.getYbp()));
+        baseList.add(new ItemDTO("后排座椅",ckBaseimg.getHpzy()));
+        baseList.add(new ItemDTO("中控台",ckBaseimg.getZkt()));
+        baseList.add(new ItemDTO("后备箱",ckBaseimg.getHbx()));
+        baseList.add(new ItemDTO("右后45°",ckBaseimg.getYh45()));
+        baseList.add(new ItemDTO("钥匙",ckBaseimg.getYs()));
+
+        report.setImgs(baseList);
+
+        //附加信息
+        List<ItemDTO> fjList = new ArrayList<>();
+        if(StringUtils.isNotBlank(ckOther.getOther())){
+            fjList.add(new ItemDTO("",ckOther.getOther()));
+        }
+        report.setFj(fjList);
+
+        jedisClient.hset("CHECK_REPORT",String.valueOf(carId),JsonUtils.objectToJson(report));
+    }
+
 
     /**
      * 驳回审核
@@ -547,7 +1149,7 @@ public class SystemServiceImpl implements SystemService {
             criteria.andCreateTimeLessThanOrEqualTo(TimeUtils.getDate(param.getFiled("timeBegin")));
         }
         List<CkCarbase> list = carbaseMapper.selectByExample(example);
-
+        PageInfo<CarExamineDto> pageInfo = new PageInfo(list);
         List<CarExamineDto> rows = new ArrayList<>();
         for (CkCarbase carbase : list) {
             CarExamineDto dto = new CarExamineDto();
@@ -584,7 +1186,7 @@ public class SystemServiceImpl implements SystemService {
             dto.setCompanyName(company.getName());
             rows.add(dto);
         }
-        PageInfo<CarExamineDto> pageInfo = new PageInfo(rows);
+        pageInfo.setList(rows);
 
         return JsonResult.OK(pageInfo);
 
@@ -644,7 +1246,7 @@ public class SystemServiceImpl implements SystemService {
         for (String id : ids) {
             long carId = Long.valueOf(id);
             //缓存一下汽车信息
-            Map<String, Object> map = this.getCarInfoandDetailDto(carId,ch);
+            Map<String, Object> map = this.getCarInfoandDetailDto(carId, ch);
 
 
             jedisClient.hset("CAR_INFO", carId + "", JsonUtils.objectToJson(map.get("info")));
@@ -756,7 +1358,7 @@ public class SystemServiceImpl implements SystemService {
      */
     @Override
     @Transactional
-    public JsonResult carDeal(long carId,long auctionId) {
+    public JsonResult carDeal(long carId, long auctionId) {
 
         AcOrderExample example = new AcOrderExample();
         example.createCriteria().andCarIdEqualTo(carId).andAuctionIdEqualTo(auctionId);
@@ -786,11 +1388,11 @@ public class SystemServiceImpl implements SystemService {
      * @return
      */
     @Override
-    public JsonResult carSecond(long carId,long auctionId) {
+    public JsonResult carSecond(long carId, long auctionId) {
         CkCarbase ckCarbase = carbaseMapper.selectByPrimaryKey(carId);
         ckCarbase.setId(carId);
         ckCarbase.setStatus(3);
-        ckCarbase.setAuctionCount(ckCarbase.getAuctionCount()+1);
+        ckCarbase.setAuctionCount(ckCarbase.getAuctionCount() + 1);
         int i = carbaseMapper.updateByPrimaryKeySelective(ckCarbase);
         if (i > 0) {
             AcAuctionRecord record = new AcAuctionRecord();
@@ -806,14 +1408,13 @@ public class SystemServiceImpl implements SystemService {
 
             orderExample.createCriteria().andCarIdEqualTo(carId).andAuctionIdEqualTo(auctionId);
 
-            acOrderMapper.updateByExampleSelective(order,orderExample);
+            acOrderMapper.updateByExampleSelective(order, orderExample);
 
             //清楚冻结资金
             AcFreezeExample acFreezeExample = new AcFreezeExample();
             acFreezeExample.createCriteria().andAuctionIdEqualTo(auctionId);
 
             acFreezeMapper.deleteByExample(acFreezeExample);
-
 
 
             return JsonResult.OK();
@@ -924,6 +1525,15 @@ public class SystemServiceImpl implements SystemService {
 
         AcUser acUser = acUserMapper.selectByPrimaryKey(id);
         long bzj = Long.valueOf(acUser.getBzj()) + plus;
+        if(0<=bzj && bzj< 5000){
+            acUser.setLevel(0);
+        }else if(bzj>=5000){
+            acUser.setLevel(1);
+        }else if(bzj>=8000){
+            acUser.setLevel(2);
+        }else if(bzj>=10000){
+            acUser.setLevel(3);
+        }
         acUser.setBzj(String.valueOf(bzj));
 
         int i = acUserMapper.updateByPrimaryKeySelective(acUser);
@@ -938,6 +1548,9 @@ public class SystemServiceImpl implements SystemService {
             record.setCreateTime(new Date());
             record.setCreateUser(sysUser.getUsername());
             acBzjRecordMapper.insertSelective(record);
+
+            //
+
             return JsonResult.OK();
         }
 
@@ -983,6 +1596,7 @@ public class SystemServiceImpl implements SystemService {
 
     /**
      * 修改保留价
+     *
      * @param carId
      * @param price
      * @return
@@ -1020,7 +1634,7 @@ public class SystemServiceImpl implements SystemService {
      * @param carId
      * @return
      */
-    private Map<String, Object> getCarInfoandDetailDto(long carId,String ch) {
+    private Map<String, Object> getCarInfoandDetailDto(long carId, String ch) {
 
         CarInfoDto infoDto = new CarInfoDto();
         CarDetailDto detailDto = getCarDetailDto(carId);
@@ -1046,26 +1660,41 @@ public class SystemServiceImpl implements SystemService {
 
     /**
      * 获取车辆检测详情
+     *
      * @param carId
      * @return
      */
-    private CarDetailDto getCarDetailDto(long carId){
+    private CarDetailDto getCarDetailDto(long carId) {
 
         CarDetailDto detailDto = new CarDetailDto();
         detailDto.setCarId(carId);
+
 
         //ckcarbase
         CkCarbase ckCarbase = carbaseMapper.selectByPrimaryKey(carId);
         //车型全称
         detailDto.setModelName(ckCarbase.getModelName());
+
+
+        String reportNum = "YPRN" + TimeUtils.getFormatDateTime(ckCarbase.getCreateTime(), "yyyyMMdd") + carId;
         //检测报告编号
-        detailDto.setCheckNum("YPRN"+TimeUtils.getFormatDateTime(ckCarbase.getCreateTime(),"yyyyMMdd") + carId);
+        detailDto.setCheckNum(reportNum);
+
+
         //检测报告时间
-        detailDto.setCheckDate(TimeUtils.getFormatDateTime3(ckCarbase.getCreateTime()));
+        String checkTime = TimeUtils.getFormatDateTime(ckCarbase.getCreateTime(), "yyyyMMdd");
+
+        detailDto.setCheckDate(checkTime);
+
         //拍卖次数
         detailDto.setAuctionCount(ckCarbase.getAuctionCount());
+
+
         //保留价
         detailDto.setSavePrice(ckCarbase.getSavePrice());
+
+        //起拍价
+        detailDto.setStartPrice(ckCarbase.getStartPrice());
 
 
         CkCarmodelExample ex0 = new CkCarmodelExample();
@@ -1112,7 +1741,7 @@ public class SystemServiceImpl implements SystemService {
             OtherDto otherDto = new OtherDto();
             //排放标准 1 国2及以下 2 “国3” 3 “国4” 4 “国5” 5 不详
             int pfbz = ckOther.getPfbz();
-            switch (pfbz){
+            switch (pfbz) {
                 case 1:
                     otherDto.setPfbz("国2及以下");
                     break;
@@ -1133,7 +1762,7 @@ public class SystemServiceImpl implements SystemService {
             }
             //评级 1A2B3C4D
             int pj = ckOther.getPj();
-            switch (pj){
+            switch (pj) {
                 case 1:
                     otherDto.setPj("A");
                     otherDto.setPjDes1("较好");
@@ -1162,13 +1791,13 @@ public class SystemServiceImpl implements SystemService {
             //违章
             int wzF = ckOther.getWzF();
             String wzQ = ckOther.getWzQ();
-            if(wzF==0){
+            if (wzF == 0) {
                 otherDto.setWz("无");
-            }else{
-                otherDto.setWz(wzF+"分"+ (wzQ==null?"0":wzQ) + "元");
+            } else {
+                otherDto.setWz(wzF + "分" + (wzQ == null ? "0" : wzQ) + "元");
             }
             //其他提示
-            otherDto.setOther(ckOther.getOther()==null?"无":ckOther.getOther());
+            otherDto.setOther(ckOther.getOther() == null ? "无" : ckOther.getOther());
             detailDto.setOther(otherDto);
         }
 
@@ -1240,23 +1869,23 @@ public class SystemServiceImpl implements SystemService {
             CkDjz ckDjz = ckDjzs.get(0);
             DjzDto djz = new DjzDto();
             //初登日期
-            djz.setCdrq(ckDjz.getCdrq()==null?"不详":ckDjz.getCdrq());
+            djz.setCdrq(ckDjz.getCdrq() == null ? "不详" : ckDjz.getCdrq());
             //注册地
-            djz.setZcd(ckDjz.getZcd()==null?"不详":ckDjz.getZcd());
+            djz.setZcd(ckDjz.getZcd() == null ? "不详" : ckDjz.getZcd());
             //出厂日期
-            djz.setCcrq(ckDjz.getCcrq()==null?"不详":ckDjz.getCcrq());
+            djz.setCcrq(ckDjz.getCcrq() == null ? "不详" : ckDjz.getCcrq());
             //排量
-            djz.setPl(ckDjz.getPl()==null?"不详":ckDjz.getPl());
+            djz.setPl(ckDjz.getPl() == null ? "不详" : ckDjz.getPl());
             //核定载客数
-            djz.setHdzks(ckDjz.getHdzks()==null?"不详":ckDjz.getHdzks());
+            djz.setHdzks(ckDjz.getHdzks() == null ? "不详" : ckDjz.getHdzks());
             //轮胎规格
-            djz.setLtgg(ckDjz.getLtgg()==null?"不详":ckDjz.getLtgg());
+            djz.setLtgg(ckDjz.getLtgg() == null ? "不详" : ckDjz.getLtgg());
             //过户次数
-            djz.setGhcs(ckDjz.getGhcs()==null?"不详":ckDjz.getGhcs());
+            djz.setGhcs(ckDjz.getGhcs() == null ? "不详" : ckDjz.getGhcs());
             //最后一次过户时间
-            djz.setZhghsj(ckDjz.getZhghsj()==null?"不详":ckDjz.getZhghsj());
+            djz.setZhghsj(ckDjz.getZhghsj() == null ? "不详" : ckDjz.getZhghsj());
             //最后转入地
-            djz.setYzrd(ckDjz.getYzrd()==null?"不详":ckDjz.getYzrd());
+            djz.setYzrd(ckDjz.getYzrd() == null ? "不详" : ckDjz.getYzrd());
 
             //燃烧种类 1汽油2柴油3纯电动4混合动力5天然气
             int rszl = ckDjz.getRszl();
@@ -1276,10 +1905,11 @@ public class SystemServiceImpl implements SystemService {
                 case 5:
                     djz.setRszl("天然气");
                     break;
-                default:djz.setRszl("不详");
+                default:
+                    djz.setRszl("不详");
             }
             //车身颜色 1黑2蓝3白4红5银6金7绿8灰9紫10黄11橙12粉13其他颜色
-            int color= ckDjz.getColor();
+            int color = ckDjz.getColor();
             switch (color) {
                 case 1:
                     djz.setColor("黑");
@@ -1331,15 +1961,26 @@ public class SystemServiceImpl implements SystemService {
             //是否进口 1非进口2海关罚没3境外自带4海关进口5海关监管
             int jk = ckDjz.getJk();
             switch (jk) {
-                case 1: djz.setJk("非进口"); break;
-                case 2: djz.setJk("海关罚没"); break;
-                case 3: djz.setJk("境外自带"); break;
-                case 4: djz.setJk("海关进口"); break;
-                case 5: djz.setJk("海关监管"); break;
-                default: djz.setJk("不详");
+                case 1:
+                    djz.setJk("非进口");
+                    break;
+                case 2:
+                    djz.setJk("海关罚没");
+                    break;
+                case 3:
+                    djz.setJk("境外自带");
+                    break;
+                case 4:
+                    djz.setJk("海关进口");
+                    break;
+                case 5:
+                    djz.setJk("海关监管");
+                    break;
+                default:
+                    djz.setJk("不详");
             }
             //0未见1见
-            djz.setWj(ckDjz.getWj()==0?"未见":"有");
+            djz.setWj(ckDjz.getWj() == 0 ? "未见" : "有");
             detailDto.setDjz(djz);
         }
 
@@ -1351,28 +1992,48 @@ public class SystemServiceImpl implements SystemService {
             CkXsz ckXsz = ckXszs.get(0);
             XszDto xsz = new XszDto();
             //0未见1见
-            xsz.setWj(ckXsz.getWj()==0?"未见":"有");
+            xsz.setWj(ckXsz.getWj() == 0 ? "未见" : "有");
             //牌照号码
             xsz.setNumber(ckXsz.getNumber().substring(0, 2));
             //车辆类型 1微型车2小型车3中型车4大型车
             int lx = ckXsz.getLx();
             switch (lx) {
-                case 1: xsz.setLx("微型车"); break;
-                case 2: xsz.setLx("小型车"); break;
-                case 3: xsz.setLx("中型车"); break;
-                case 4: xsz.setLx("大型车"); break;
-                default:xsz.setLx("不详");
+                case 1:
+                    xsz.setLx("微型车");
+                    break;
+                case 2:
+                    xsz.setLx("小型车");
+                    break;
+                case 3:
+                    xsz.setLx("中型车");
+                    break;
+                case 4:
+                    xsz.setLx("大型车");
+                    break;
+                default:
+                    xsz.setLx("不详");
             }
 
             //使用性质 1非营运2运营3营转非4租赁5教练
             int xz = ckXsz.getXz();
             switch (xz) {
-                case 1:xsz.setXz("非营运");break;
-                case 2:xsz.setXz("运营");break;
-                case 3:xsz.setXz("营转非");break;
-                case 4:xsz.setXz("租赁");break;
-                case 5:xsz.setXz("教练");break;
-                default:xsz.setXz("不详");
+                case 1:
+                    xsz.setXz("非营运");
+                    break;
+                case 2:
+                    xsz.setXz("运营");
+                    break;
+                case 3:
+                    xsz.setXz("营转非");
+                    break;
+                case 4:
+                    xsz.setXz("租赁");
+                    break;
+                case 5:
+                    xsz.setXz("教练");
+                    break;
+                default:
+                    xsz.setXz("不详");
             }
             //品牌型号
             xsz.setPpxh(ckXsz.getPpxh());
@@ -1404,9 +2065,9 @@ public class SystemServiceImpl implements SystemService {
             if (djz.contains("3")) {
                 text += "铭牌日期与登记证不一致";
             }
-            if(StringUtils.isBlank(text)){
+            if (StringUtils.isBlank(text)) {
                 verify.setDjz("有");
-            }else{
+            } else {
                 verify.setDjz(text);
             }
 
@@ -1431,9 +2092,9 @@ public class SystemServiceImpl implements SystemService {
             if (xsz.contains("6")) {
                 text += "前照灯总成不一致";
             }
-            if(StringUtils.isBlank(text)){
+            if (StringUtils.isBlank(text)) {
                 verify.setXsz("实车与行驶证照片相符");
-            }else{
+            } else {
                 verify.setXsz(text);
             }
             detailDto.setVerify(verify);
@@ -1454,15 +2115,22 @@ public class SystemServiceImpl implements SystemService {
             //购置税 1购置税政（征税）2购置税政（免税）3无购置税政
             int gzs = ckQtz.getGzs();
             switch (gzs) {
-                case 1: qtz.setGzs("购置税政（征税）"); break;
-                case 2: qtz.setGzs("购置税政（免税）"); break;
-                case 3: qtz.setGzs("无购置税政"); break;
-                default:qtz.setGzs("不详");
+                case 1:
+                    qtz.setGzs("购置税政（征税）");
+                    break;
+                case 2:
+                    qtz.setGzs("购置税政（免税）");
+                    break;
+                case 3:
+                    qtz.setGzs("无购置税政");
+                    break;
+                default:
+                    qtz.setGzs("不详");
             }
             //备用钥匙 0有1无
-            qtz.setByys(ckQtz.getByys()==0?"有":"无");
+            qtz.setByys(ckQtz.getByys() == 0 ? "有" : "无");
             //过户票
-            qtz.setGhp(ckQtz.getGhp()==0?"有":"无");
+            qtz.setGhp(ckQtz.getGhp() == 0 ? "有" : "无");
             //交强险所在地
             qtz.setJqxd(ckQtz.getJqxd());
             detailDto.setQtz(qtz);
@@ -1477,7 +2145,7 @@ public class SystemServiceImpl implements SystemService {
             PzDto dto = new PzDto();
 
             //abs
-            dto.setAbs(ckPz.getAbs()==0?"无":"有");
+            dto.setAbs(ckPz.getAbs() == 0 ? "无" : "有");
             dto.setAbsBug(getGZ(ckPz.getAbsBug()));
             //气囊0无1一个2两个3三个4四个
             int qn = ckPz.getQn();
@@ -1507,130 +2175,229 @@ public class SystemServiceImpl implements SystemService {
                     dto.setQnBug("");
 
             }
-            dto.setZxzl(ckPz.getZxzl()==0?"无":"有");
+            dto.setZxzl(ckPz.getZxzl() == 0 ? "无" : "有");
             dto.setZxzlBug(getGZ(ckPz.getZxzlBug()));
 
             //车窗玻璃1四门电动2手动3两门电动
             int ccbl = ckPz.getCcbl();
             switch (ccbl) {
-                case 1: dto.setCcbl("四门电动"); break;
-                case 2: dto.setCcbl("手动"); break;
-                case 3: dto.setCcbl("两门电动"); break;
-                default: dto.setCcbl("不详");
+                case 1:
+                    dto.setCcbl("四门电动");
+                    break;
+                case 2:
+                    dto.setCcbl("手动");
+                    break;
+                case 3:
+                    dto.setCcbl("两门电动");
+                    break;
+                default:
+                    dto.setCcbl("不详");
             }
             dto.setCcblBug(getGZ(ckPz.getCcblBug()));
 
             //天窗0无1有2全景3加装
             int tc = ckPz.getTc();
             switch (tc) {
-                case 0: dto.setTc("无"); break;
-                case 1: dto.setTc("有"); break;
-                case 2: dto.setTc("全景"); break;
-                case 3: dto.setTc("加装"); break;
-                default: dto.setTc("不详");
+                case 0:
+                    dto.setTc("无");
+                    break;
+                case 1:
+                    dto.setTc("有");
+                    break;
+                case 2:
+                    dto.setTc("全景");
+                    break;
+                case 3:
+                    dto.setTc("加装");
+                    break;
+                default:
+                    dto.setTc("不详");
             }
             dto.setTcBug(getGZ(ckPz.getTcBug()));
 
             //车外后视镜1电折叠	2电动调节	3手动调节
             int cwhsj = ckPz.getCwhsj();
             switch (cwhsj) {
-                case 1: dto.setCwhsj("电折叠"); break;
-                case 2: dto.setCwhsj("电动调节"); break;
-                case 3: dto.setCwhsj("手动调节"); break;
-                default: dto.setCwhsj("不详");
+                case 1:
+                    dto.setCwhsj("电折叠");
+                    break;
+                case 2:
+                    dto.setCwhsj("电动调节");
+                    break;
+                case 3:
+                    dto.setCwhsj("手动调节");
+                    break;
+                default:
+                    dto.setCwhsj("不详");
             }
             dto.setCwhsjBug(getGZ(ckPz.getCwhsjBug()));
 
             //座椅材质1织布2真皮3改装真皮4混合材质
             int zycz = ckPz.getZycz();
             switch (zycz) {
-                case 1: dto.setZycz("织布"); break;
-                case 2: dto.setZycz("真皮"); break;
-                case 3: dto.setZycz("改装真皮"); break;
-                case 4: dto.setZycz("混合材质"); break;
-                default: dto.setZycz("不详");
+                case 1:
+                    dto.setZycz("织布");
+                    break;
+                case 2:
+                    dto.setZycz("真皮");
+                    break;
+                case 3:
+                    dto.setZycz("改装真皮");
+                    break;
+                case 4:
+                    dto.setZycz("混合材质");
+                    break;
+                default:
+                    dto.setZycz("不详");
             }
             //座椅调节方式1手动2电动3记忆
             int zytjfs = ckPz.getZytjfs();
             switch (zytjfs) {
-                case 1: dto.setZytjfs("手动"); break;
-                case 2: dto.setZytjfs("电动"); break;
-                case 3: dto.setZytjfs("记忆"); break;
-                default: dto.setZytjfs("不详");
+                case 1:
+                    dto.setZytjfs("手动");
+                    break;
+                case 2:
+                    dto.setZytjfs("电动");
+                    break;
+                case 3:
+                    dto.setZytjfs("记忆");
+                    break;
+                default:
+                    dto.setZytjfs("不详");
             }
             //座椅功能1电加热2通风3按摩0无
             int zygn = ckPz.getZygn();
             switch (zygn) {
-                case 0: dto.setZygn("无"); break;
-                case 1: dto.setZygn("电加热"); break;
-                case 2: dto.setZygn("通风"); break;
-                case 3: dto.setZygn("按摩"); break;
-                default: dto.setZygn("不详");
+                case 0:
+                    dto.setZygn("无");
+                    break;
+                case 1:
+                    dto.setZygn("电加热");
+                    break;
+                case 2:
+                    dto.setZygn("通风");
+                    break;
+                case 3:
+                    dto.setZygn("按摩");
+                    break;
+                default:
+                    dto.setZygn("不详");
             }
             dto.setZyBug(getGZ(ckPz.getZyBug()));
 
             //空调0无1手动2自动3前后
             int kt = ckPz.getKt();
             switch (kt) {
-                case 0: dto.setKt("无"); break;
-                case 1: dto.setKt("手动"); break;
-                case 2: dto.setKt("自动"); break;
-                case 3: dto.setKt("前后"); break;
-                default: dto.setKt("不详");
+                case 0:
+                    dto.setKt("无");
+                    break;
+                case 1:
+                    dto.setKt("手动");
+                    break;
+                case 2:
+                    dto.setKt("自动");
+                    break;
+                case 3:
+                    dto.setKt("前后");
+                    break;
+                default:
+                    dto.setKt("不详");
             }
             dto.setKtBug(getGZ(ckPz.getKtBug()));
 
             //影音设备0无1收音机2CD3加装CD4前屏DVD5多屏DVD6加装单屏DVD7加装多屏DVD
             int yysb = ckPz.getYysb();
             switch (yysb) {
-                case 0: dto.setYysb("无"); break;
-                case 1: dto.setYysb("收音机"); break;
-                case 2: dto.setYysb("CD"); break;
-                case 3: dto.setYysb("加装CD"); break;
-                case 4: dto.setYysb("前屏DVD"); break;
-                case 5: dto.setYysb("多屏DVD"); break;
-                case 6: dto.setYysb("加装单屏DVD"); break;
-                case 7: dto.setYysb("加装多屏DVD"); break;
-                default: dto.setYysb("不详");
+                case 0:
+                    dto.setYysb("无");
+                    break;
+                case 1:
+                    dto.setYysb("收音机");
+                    break;
+                case 2:
+                    dto.setYysb("CD");
+                    break;
+                case 3:
+                    dto.setYysb("加装CD");
+                    break;
+                case 4:
+                    dto.setYysb("前屏DVD");
+                    break;
+                case 5:
+                    dto.setYysb("多屏DVD");
+                    break;
+                case 6:
+                    dto.setYysb("加装单屏DVD");
+                    break;
+                case 7:
+                    dto.setYysb("加装多屏DVD");
+                    break;
+                default:
+                    dto.setYysb("不详");
             }
             dto.setYysbBug(getGZ(ckPz.getYysbBug()));
             //导航
-            dto.setDh(ckPz.getDh()==0?"无":"有");
+            dto.setDh(ckPz.getDh() == 0 ? "无" : "有");
             dto.setDhBug(getGZ(ckPz.getDhBug()));
             //定速巡航 0无	1有	2加装
             int dsxh = ckPz.getDsxh();
             switch (dsxh) {
-                case 0: dto.setDsxh("无"); break;
-                case 1: dto.setDsxh("有"); break;
-                case 2: dto.setDsxh("加装"); break;
-                default: dto.setDsxh("不详");
+                case 0:
+                    dto.setDsxh("无");
+                    break;
+                case 1:
+                    dto.setDsxh("有");
+                    break;
+                case 2:
+                    dto.setDsxh("加装");
+                    break;
+                default:
+                    dto.setDsxh("不详");
             }
             dto.setDsxhBug(getGZ(ckPz.getDsxhBug()));
 
             //倒车雷达 0无	1有	2加装	3前后
             int dcld = ckPz.getDcld();
             switch (dcld) {
-                case 0: dto.setDcld("无"); break;
-                case 1: dto.setDcld("有"); break;
-                case 2: dto.setDcld("加装"); break;
-                case 3: dto.setDcld("前后"); break;
-                default: dto.setDcld("不详");
+                case 0:
+                    dto.setDcld("无");
+                    break;
+                case 1:
+                    dto.setDcld("有");
+                    break;
+                case 2:
+                    dto.setDcld("加装");
+                    break;
+                case 3:
+                    dto.setDcld("前后");
+                    break;
+                default:
+                    dto.setDcld("不详");
             }
             dto.setDcldBug(getGZ(ckPz.getDsxhBug()));
 
             //倒车影像 0无	1有	2全景	3加装
             int dcyx = ckPz.getDcyx();
             switch (dcyx) {
-                case 0: dto.setDcyx("无"); break;
-                case 1: dto.setDcyx("有"); break;
-                case 2: dto.setDcyx("全景"); break;
-                case 3: dto.setDcyx("加装"); break;
-                default: dto.setDcyx("不详");
+                case 0:
+                    dto.setDcyx("无");
+                    break;
+                case 1:
+                    dto.setDcyx("有");
+                    break;
+                case 2:
+                    dto.setDcyx("全景");
+                    break;
+                case 3:
+                    dto.setDcyx("加装");
+                    break;
+                default:
+                    dto.setDcyx("不详");
             }
             dto.setDcyxBug(getGZ(ckPz.getDcyxBug()));
 
             //轮毂 1钢	2铝合金
-            dto.setLg(ckPz.getLg()==1?"钢":"铝合金");
+            dto.setLg(ckPz.getLg() == 1 ? "钢" : "铝合金");
             dto.setLgBug(getGZ(ckPz.getLgBug()));
 
             //起动机缺陷类型1故障2卡滞3异响4漏油5沉重
@@ -1638,7 +2405,7 @@ public class SystemServiceImpl implements SystemService {
 
             dto.setGzdBug(ckPz.getGzdBug());
 
-            dto.setOther(ckPz.getOther()==null?"无":ckPz.getOther());
+            dto.setOther(ckPz.getOther() == null ? "无" : ckPz.getOther());
             dto.setOtherBug(getGZ(ckPz.getOtherBug()));
 
             detailDto.setPz(dto);
@@ -1654,30 +2421,59 @@ public class SystemServiceImpl implements SystemService {
             //发动机性能 -1正常 1异响 2漏油 3水温高 4运转不平稳
             int fdjXn = ckDl.getFdjXn();
             switch (fdjXn) {
-                case -1: dto.setFdjXn("正常"); break;
-                case 1: dto.setFdjXn("异响"); break;
-                case 2: dto.setFdjXn("漏油"); break;
-                case 3: dto.setFdjXn("水温高"); break;
-                case 4: dto.setFdjXn("运转不平稳"); break;
-                default: dto.setFdjXn("不详");
+                case -1:
+                    dto.setFdjXn("正常");
+                    break;
+                case 1:
+                    dto.setFdjXn("异响");
+                    break;
+                case 2:
+                    dto.setFdjXn("漏油");
+                    break;
+                case 3:
+                    dto.setFdjXn("水温高");
+                    break;
+                case 4:
+                    dto.setFdjXn("运转不平稳");
+                    break;
+                default:
+                    dto.setFdjXn("不详");
             }
             //发动机尾气 -1正常 1冒蓝烟 2冒黑烟 3冒白烟  4改装
             int fdjWq = ckDl.getFdjWq();
             switch (fdjWq) {
-                case -1: dto.setFdjWq("正常"); break;
-                case 1: dto.setFdjWq("冒蓝烟"); break;
-                case 2: dto.setFdjWq("冒黑烟"); break;
-                case 3: dto.setFdjWq("冒白烟"); break;
-                case 4: dto.setFdjWq("改装"); break;
-                default: dto.setFdjWq("不详");
+                case -1:
+                    dto.setFdjWq("正常");
+                    break;
+                case 1:
+                    dto.setFdjWq("冒蓝烟");
+                    break;
+                case 2:
+                    dto.setFdjWq("冒黑烟");
+                    break;
+                case 3:
+                    dto.setFdjWq("冒白烟");
+                    break;
+                case 4:
+                    dto.setFdjWq("改装");
+                    break;
+                default:
+                    dto.setFdjWq("不详");
             }
             //变速器 -1正常 1闯档 2换档有冲击
             int bsq = ckDl.getBsq();
             switch (bsq) {
-                case -1: dto.setBsq("正常"); break;
-                case 1: dto.setBsq("闯档"); break;
-                case 2: dto.setBsq("换档有冲击"); break;
-                default: dto.setBsq("不详");
+                case -1:
+                    dto.setBsq("正常");
+                    break;
+                case 1:
+                    dto.setBsq("闯档");
+                    break;
+                case 2:
+                    dto.setBsq("换档有冲击");
+                    break;
+                default:
+                    dto.setBsq("不详");
             }
             detailDto.setDl(dto);
         }
@@ -1755,18 +2551,30 @@ public class SystemServiceImpl implements SystemService {
 
     /**
      * 使用方转换
+     *
      * @param tag
      * @return
      */
-    private String getSYF(int tag){
+    private String getSYF(int tag) {
         String text = "";
         switch (tag) {
-            case 1:text = "个人";break;
-            case 2:text = "单位";break;
-            case 3:text = "出租车";break;
-            case 4:text = "汽车租赁公司";break;
-            case 5:text = "汽车销售（服务）公司";break;
-            default:text = "不详";
+            case 1:
+                text = "个人";
+                break;
+            case 2:
+                text = "单位";
+                break;
+            case 3:
+                text = "出租车";
+                break;
+            case 4:
+                text = "汽车租赁公司";
+                break;
+            case 5:
+                text = "汽车销售（服务）公司";
+                break;
+            default:
+                text = "不详";
         }
         return text;
     }
@@ -1774,19 +2582,33 @@ public class SystemServiceImpl implements SystemService {
     /**
      * 缺陷类型转换
      * 缺陷类型1故障2卡滞3异响4漏油5沉重
+     *
      * @param tag
      * @return
      */
-    private String getGZ(int tag){
+    private String getGZ(int tag) {
         String text = "";
-        switch (tag){
-            case -1:text = "正常";break;
-            case 1:text = "故障";break;
-            case 2:text = "卡滞";break;
-            case 3:text = "异响";break;
-            case 4:text = "漏油";break;
-            case 5:text = "沉重";break;
-            default:text = "";
+        switch (tag) {
+            case -1:
+                text = "正常";
+                break;
+            case 1:
+                text = "故障";
+                break;
+            case 2:
+                text = "卡滞";
+                break;
+            case 3:
+                text = "异响";
+                break;
+            case 4:
+                text = "漏油";
+                break;
+            case 5:
+                text = "沉重";
+                break;
+            default:
+                text = "";
         }
         return text;
     }

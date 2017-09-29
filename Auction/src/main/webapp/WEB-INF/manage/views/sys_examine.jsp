@@ -929,7 +929,7 @@
             searchForm:{
                 searchFileds:{name: ''},
                 pageIndex:1,
-                pageSize:10
+                pageSize:5
             },
             cur_row:{},
             form:{
@@ -1045,7 +1045,7 @@
                 this.searchForm= {
                     searchFileds:{username: '',phoneNum:''},
                     pageIndex:1,
-                    pageSize:10
+                    pageSize:5
                 }
                 this.loading = true;
                 this.init();

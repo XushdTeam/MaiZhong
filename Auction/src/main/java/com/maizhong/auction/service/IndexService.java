@@ -2,6 +2,7 @@ package com.maizhong.auction.service;
 
 import com.maizhong.auction.dto.CarDetailDto;
 import com.maizhong.auction.dto.CarInfoDto;
+import com.maizhong.auction.dto.CarReportDTO;
 import com.maizhong.auction.pojo.AcUser;
 import com.maizhong.common.result.JsonResult;
 
@@ -41,4 +42,5 @@ public interface IndexService {
 
     String getSocketUrl();
 
+    CarReportDTO getCheckReport(long carId);
 }

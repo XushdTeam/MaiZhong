@@ -61,4 +61,27 @@ public interface AuctionService {
 
     JsonResult autoPrice(long auctionId, long price, String token);
 
+    JsonResult getNewsList(int pageIndex);
+
+    JsonResult getPreCarList();
+
+    JsonResult getCarReport(long carId, String token);
+
+    JsonResult getVerifyCode(String phone, String type, String token);
+
+    JsonResult getAboutUs();
+
+    JsonResult getMyPersonList(String token);
+
+    JsonResult getFreezeRecord(String token);
+
+    JsonResult getCarReportNew(long carId, String token);
+
+    JsonResult getRechageList(String token);
+
+    JsonResult changePhone(String verifyCode, long phone, String token);
+
+    JsonResult changePass(String pass, String token);
+
+    JsonResult getSMS(long phone, String type, String token);
 }

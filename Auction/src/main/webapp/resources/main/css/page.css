@@ -23,8 +23,17 @@ line-height:18px;padding-left:.4em;padding-right:.4em;display:block;height:18px;
 .infor h2{ font-size: 24px; line-height: 50px; border-bottom: 1px dotted #ccc;}
 .infor h2 span{ width: 10px; background: #f60;padding: 5px ;margin-right:20px }
 .infor p{ font-size: 16px; line-height: 45px;margin-left: 60px }
-.infor .lay{ border: 1px solid #f60;color: #f60;height: 30px;
-    line-height: 30px; border-radius: 9px ;float: right;  padding: 0 10px; margin-right:530px;cursor: pointer;}
+.infor .lay{
+	border: 1px solid #f60;
+	color: #f60;
+	height: 45px;
+	line-height: 45px;
+	border-radius: 9px;
+	float: right;
+	padding: 0px 10px;
+	margin-right: 480px;
+	cursor: pointer;
+}
 .infor_div{color: #f60; font-size: 18px; line-height: 45px; margin-left: 90px}
 .infor_com{ margin:20px 20px 80px 20px; }
 .infor .head{ color: #333; margin:30px 0 0 100px; font-size: 24px}

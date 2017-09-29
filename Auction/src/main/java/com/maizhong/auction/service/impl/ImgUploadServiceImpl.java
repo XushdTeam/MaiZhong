@@ -16,6 +16,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -131,6 +132,100 @@ public class ImgUploadServiceImpl implements ImgUploadService {
             returnObj.put("xz",objDateValue.getString("use_character"));
 
             return JsonResult.OK(returnObj);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return JsonResult.Error("图片有误");
+    }
+
+    /**
+     * 图片上传
+     * @param file
+     * @param key
+     * @return
+     */
+    @Override
+    public JsonResult uploadImgFile(MultipartFile file, String key) {
+
+        try {
+            if (file.isEmpty()) return JsonResult.build(OperateEnum.FILE_EMPTY);
+            if (file.getSize() > 3000 * 1024) return JsonResult.build(OperateEnum.FILE_SIZE);
+
+            Map param = getParam();
+            String originalFilename = file.getOriginalFilename();
+            param.put("originalFilename", originalFilename);
+            param.put("key", key);
+
+            String newFileName = FileUploadUtil.UploadFileOSS(param, file.getBytes());
+
+            return JsonResult.build(200, OperateEnum.FILE_UPLOAD_SUCCESS.getStateInfo(), IMGURL + key + newFileName);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return JsonResult.build(OperateEnum.FAILE);
+        }
+
+
+    }
+
+    /**
+     * 行驶证识别
+     * @param base64
+     * @return
+     */
+    @Override
+    public JsonResult xszSbBase64(String base64) {
+
+        if(base64.indexOf("data:image/png;base64,")>-1){
+            base64 = base64.replace("data:image/png;base64,", "");
+
+        }
+        if(base64.indexOf("data:image/jpeg;base64,")>-1){
+            base64 = base64.replace("data:image/jpeg;base64,", "");
+
+        }
+        if(base64.indexOf("data:image/jpg;base64,")>-1){
+            base64 = base64.replace("data:image/jpg;base64,", "");
+
+        }
+        String host = "https://dm-53.data.aliyun.com";
+        String path = "/rest/160601/ocr/ocr_vehicle.json";
+        String method = "POST";
+        String appcode = "7aa943b54aff495bbdec6c30aae1fb06";
+        Map<String, String> headers = new HashMap<String, String>();
+
+        headers.put("Authorization", "APPCODE " + appcode);
+        //根据API的要求，定义相对应的Content-Type
+        headers.put("Content-Type", "application/json; charset=UTF-8");
+        Map<String, String> querys = new HashMap<String, String>();
+        JSONObject object=new JSONObject();
+        JSONObject image=new JSONObject();
+        image.put("dataType",50);
+        image.put("dataValue",base64);
+        JSONArray array=new JSONArray();
+        JSONObject object1=new JSONObject();
+        object1.put("image",image);
+        array.add(object1);
+        object.put("inputs",array);
+        String bodys= JsonUtils.objectToJson(object);
+
+        try {
+            HttpResponse response = HttpUtils.doPost(host, path, method, headers, querys, bodys);
+
+            String result= EntityUtils.toString(response.getEntity());
+            JSONObject resultObj = JSONObject.parseObject(result);
+
+            JSONArray jsonArray = resultObj.getJSONArray("outputs");
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            String jsonObjectString = jsonObject.getString("outputValue");
+            JSONObject parseObject = JSONObject.parseObject(jsonObjectString);
+            String dataValue = parseObject.getString("dataValue");
+            JSONObject objDateValue = JSONObject.parseObject(dataValue);
+
+
+            return JsonResult.OK(objDateValue);
         } catch (Exception e) {
             e.printStackTrace();
         }

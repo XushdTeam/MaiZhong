@@ -1331,6 +1331,7 @@ public class AppServiceImpl implements AppService {
             return JsonResult.OK();
         }
         JsonResult gzDetailByOrderNumber = getGZDetailByOrderNumber(orderNumber);
+
         return gzDetailByOrderNumber;
     }
 
@@ -1356,7 +1357,9 @@ public class AppServiceImpl implements AppService {
         Model model = modelMapper.selectByPrimaryKey(orders.getModelId());//车型对象
 
         Series series = seriesMapper.selectByPrimaryKey(model.getSeriesId());
-        orderDTO.setSeriesImg(series.getSeriesPic());//车系图片
+        if(series!=null){
+            orderDTO.setSeriesImg(series.getSeriesPic());//车系图片
+        }
         orderDTO.setModel(model);
         orderDTO.setModelName(orders.getModelName());//车型名称
         orderDTO.setReckonPrice(orders.getReckonPrice());//评估价格

@@ -1,14 +1,11 @@
 package com.maizhong.auction.controller;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.maizhong.auction.pojo.*;
 import com.maizhong.auction.service.CheckService;
 import com.maizhong.auction.service.ImgUploadService;
 import com.maizhong.common.enums.OperateEnum;
 import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.JsonUtils;
-import net.sf.json.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -456,5 +453,27 @@ public class CheckController {
     public JsonResult checkUpdateSavePrice(@PathVariable long carId, String price,HttpServletRequest request){
         String token = (String)request.getAttribute("token");
         return checkService.checkUpdateSavePrice(carId,price,token);
+    }
+
+    /**
+     * 获取VIN信息
+     * @param vin
+     * @return
+     */
+    @RequestMapping(value = "/vin/carInfo/{vin}")
+    @ResponseBody
+    public JsonResult getVinInfo(@PathVariable String vin){
+        return checkService.getVinInfo(vin);
+    }
+
+    /**
+     * 行驶证识别
+     * @param base64
+     * @return
+     */
+    @RequestMapping(value = "/csz/info")
+    @ResponseBody
+    public JsonResult getCszInfo(String base64){
+        return imgUploadService.xszSbBase64(base64);
     }
 }

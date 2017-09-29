@@ -51,7 +51,7 @@ public class PersonalAppServiceImpl extends BaseServiceImpl implements PersonalA
     @Override
     public JsonResult getToken(String deviceId) {
         String token = IDUtils.sha256(IDUtils.replaceSpecStr(deviceId));
-        return JsonResult.build(200,"OK",token);
+        return JsonResult.build(200,token,token);
     }
 
     /**

@@ -11,16 +11,20 @@ import com.maizhong.youpin.dto.*;
 import com.maizhong.youpin.dto.Model;
 import com.maizhong.youpin.mapper.*;
 import com.maizhong.youpin.pojo.*;
-import com.maizhong.youpin.pojo.Model;
+
 import com.maizhong.youpin.service.AppService;
+import com.maizhong.youpin.socket.SpringWebSocketHandler;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.socket.TextMessage;
 
+import java.io.IOException;
 import java.util.*;
+import java.util.logging.SocketHandler;
 
 /**
  * Created by Xushd on 2017/8/16.
@@ -39,6 +43,8 @@ public class AppServiceImpl extends BaseService implements AppService {
     private SaleRecordMapper saleRecordMapper;
     @Autowired
     private SaleImgMapper saleImgMapper;
+    @Autowired
+    private SpringWebSocketHandler socketHandler;
 
     /**
      * 获取相关新闻
@@ -141,7 +147,7 @@ public class AppServiceImpl extends BaseService implements AppService {
             if(users.size()==0){
                 //注册
                 user.setPhone(phone);
-                user.setPassword(IDUtils.sha256(phone.substring(7,10)));
+                user.setPassword(IDUtils.sha256(phone.substring(7,11)));
                 user.setDelflag(0);
                 user.setStatus(1);
                 user.setCompanyId(0L);
@@ -497,7 +503,14 @@ public class AppServiceImpl extends BaseService implements AppService {
         appRecordDto.setSubmitTime(createTime);
 
         super.getJedisClient().hset("RECORD_INFO",orderId+"",JsonUtils.objectToJson(appRecordDto));
+        //发送下单消息
 
+        TextMessage textMessage = new TextMessage(JsonUtils.objectToJson(new SocketMsg(orderId, TimeUtils.getNowTime())));
+        try {
+            socketHandler.sendMessageToAll(textMessage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return JsonResult.OK();
     }
 
@@ -514,6 +527,7 @@ public class AppServiceImpl extends BaseService implements AppService {
 
         SaleRecordExample example = new SaleRecordExample();
         example.createCriteria().andUserIdEqualTo(user.getId());
+        example.setOrderByClause("createtime desc");
 
         List<SaleRecord> saleRecords = saleRecordMapper.selectByExample(example);
         List<AppRecordDto> list = new ArrayList<>();

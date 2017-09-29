@@ -5,6 +5,8 @@ import java.util.Date;
 public class AcUser {
     private Long id;
 
+    private String nickName;
+
     private String name;
 
     private Long phone;
@@ -20,6 +22,8 @@ public class AcUser {
     private Long companyId;
 
     private Integer type;
+
+    private Integer level;
 
     private Integer status;
 
@@ -38,6 +42,14 @@ public class AcUser {
     private String createUser;
 
     private Date createTime;
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 
     public Long getId() {
         return id;
@@ -109,6 +121,14 @@ public class AcUser {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     public Integer getStatus() {
