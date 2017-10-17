@@ -12,6 +12,8 @@ import com.maizhong.common.result.JsonResult;
 import com.maizhong.common.utils.JsonUtils;
 import com.maizhong.common.utils.VerifyCodeUtils;
 import net.sf.json.JSON;
+import nl.bitwalker.useragentutils.OperatingSystem;
+import nl.bitwalker.useragentutils.UserAgent;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -552,5 +554,34 @@ public class IndexController {
     @RequestMapping(value = "/tosale")
     public String toSale(){
         return "sell";
+    }
+
+    @RequestMapping(value = "/app/download")
+    public String scanDown(HttpServletRequest request,Model model){
+        UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
+        OperatingSystem os = userAgent.getOperatingSystem();
+        String key = os.toString().toLowerCase();
+        if(key.contains("android")){
+            //安卓
+            model.addAttribute("key","android");
+        }else if(key.contains("mac")){
+            //IOS
+            model.addAttribute("key","ios");
+        }
+        return "appdownload";
+    }
+    @RequestMapping(value = "/app/download2")
+    public String scanDown2(HttpServletRequest request,Model model){
+        UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
+        OperatingSystem os = userAgent.getOperatingSystem();
+        String key = os.toString().toLowerCase();
+        if(key.contains("android")){
+            //安卓
+            model.addAttribute("key","android");
+        }else if(key.contains("mac")){
+            //IOS
+            model.addAttribute("key","ios");
+        }
+        return "appdownload2";
     }
 }

@@ -33,7 +33,7 @@
                     <li><a href="/auction" class="gujia">拍卖入口</a></li>
                     <li><a href="/tosale" class="gujia">我要卖车</a></li>
                     <li><a href="/download" class="xiazai">APP下载</a></li>
-                    <li><a href="http://www.wukongshouche.com" class="xiazai">悟空收车</a></li>
+                    <li><a href="http://www.wukongshouche.com" class="xiazai" target="_blank">悟空收车</a></li>
                 </ul>
             </div>
 
