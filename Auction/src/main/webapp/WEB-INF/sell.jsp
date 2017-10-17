@@ -37,18 +37,17 @@
             align-items: center;
             justify-content: space-around;
         }
+        .banner .banner_center div:nth-child(2) h3{
+            margin-top:20px;
+            font-size:26px;
+        }
         .banner .banner_center div:nth-child(2) select{
             width:260px;
             height:38px;
             border:1px solid #E3E3E3;
             outline:0;
             padding:0 10px;
-            margin-top:50px;
         }
-        /*.banner .banner_center div:nth-child(2) select option{*/
-            /*margin:5px 0;*/
-            /*line-height:40px;*/
-        /*}*/
         .banner .banner_center div:nth-child(2) input{
             width:260px;
             height:38px;
@@ -56,7 +55,14 @@
             outline:0;
             padding:0 15px;
         }
-        .banner .banner_center div:nth-child(2) a{
+        .banner .banner_center div:nth-child(2) span{
+            display:none;
+            color:#FFC200;
+            font-size:14px;
+            align-self: flex-start;
+            margin:-20px 0 0 60px;
+        }
+        .banner .banner_center div:nth-child(2) >a{
             display:inline-block;
             width:260px;
             height:38px;
@@ -64,21 +70,32 @@
             color:#fff;
             line-height:38px;
             font-size:18px;
-            margin-bottom:70px;
+            margin:20px 0 40px 0;
             border-radius:6px;
         }
         .banner .banner_center div:nth-child(2) div{
             width:335px;
-            height:100px;
-            background:rgba(0,0,0,0.7);
+            height:110px;
+            background:rgba(0,0,0,0.8);
             color:#fff;
             font-size:18px;
             position:fixed;
             top:40%;
             left:40%;
             border-radius:6px;
-            padding-top:60px;
+            padding-top:50px;
             display:none;
+        }
+        .banner .banner_center div:nth-child(2) div a{
+            display:inline-block;
+            width:100px;
+            height:30px;
+            background:#FFC200;
+            text-align: center;
+            line-height:30px;
+            color:#fff;
+            border-radius:5px;
+            margin-top:30px;
         }
     </style>
 </head>
@@ -130,6 +147,7 @@
                 <h3 class="_wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.4s">交易最长不超过3天</h3>
             </div>
             <div>
+                <h3>快速卖车</h3>
                 <select name="" id="">
                     <option value="0">全国</option>
                     <option value="1">北京</option>
@@ -144,10 +162,14 @@
                     <option value="10">辽宁</option>
                     <option value="11">内蒙古</option>
                 </select>
+                <span id="n1">请选择城市</span>
                 <input type="text" placeholder="请输入您的手机号">
+                <span id="n2">请输入手机号</span>
+                <span id="n3">请输入正确的手机号</span>
                 <a href="#" id="sub">提  交</a>
                 <div id="pop">
                     <p>提交成功！</p>
+                    <a href="#1">OK</a>
                 </div>
             </div>
         </div>
@@ -523,9 +545,25 @@
 
 <script>
     $('#sub').click(function(){
-        $('#pop').fadeIn(200);
+        var text=$('.banner input').val();
+        var reg=/^1[34578]\d{9}$/;
+        var ind=$('.banner select').val();
+        if(ind==0){
+            $('#n1').show();
+        }else{
+            $('#n1').hide();
+            if(!text){
+                $('#n2').show().siblings('span').hide();
+            }else if(!reg.test(text)){
+                $('#n3').show().siblings('span').hide();
+            }else{
+                $('#pop').fadeIn(200);
+                $('#n2').hide();
+                $('#n3').hide();
+            }
+        }
     });
-    $('#pop').click(function(){
+    $('#pop a').click(function(){
        $('#pop').fadeOut(100);
     });
 </script>
