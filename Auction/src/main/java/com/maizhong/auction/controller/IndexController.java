@@ -548,4 +548,9 @@ public class IndexController {
         return page+id;
 
     }
+
+    @RequestMapping(value = "/tosale")
+    public String toSale(){
+        return "sell";
+    }
 }

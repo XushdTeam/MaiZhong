@@ -22,13 +22,13 @@
         <div class="app fl ml94">
             <dl>
                 <dt>
-                    <img src="/resources/main/img/app.png">
+                    <img src="/resources/main/img/app.png" width="87" height="87">
                 </dt>
                 <dd>下载车主App</dd>
             </dl>
             <dl>
                 <dt>
-                    <img src="/resources/main/img/weixin.jpg">
+                    <img src="/resources/main/img/weixin.jpg" width="87" height="87">
                 </dt>
                 <dd>下载拍卖App</dd>
             </dl>
