@@ -43,4 +43,6 @@ public interface IndexService {
     String getSocketUrl();
 
     CarReportDTO getCheckReport(long carId);
+
+    JsonResult submitSale(String city, String phone);
 }

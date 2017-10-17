@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -60,6 +61,9 @@ public class IndexServiceImpl implements IndexService {
 
     @Autowired
     private AcFreezeMapper acFreezeMapper;
+
+    @Autowired
+    private AcFeedbackMapper acFeedbackMapper;
 
     @Value("${SOCKET.URL}")
     private String socketUrl;
@@ -637,6 +641,27 @@ public class IndexServiceImpl implements IndexService {
 
 
         return JsonUtils.jsonToPojo(check_report,CarReportDTO.class);
+    }
+
+    /**
+     * 提交卖车申请
+     * @Since 2017年10月17日 14:39:25
+     * @param city
+     * @param phone
+     * @return
+     */
+    @Override
+    public JsonResult submitSale(String city, String phone) {
+
+        AcFeedback feedback = new AcFeedback();
+        feedback.setCreateTime(new Date());
+        feedback.setUserPhone(Long.valueOf(phone));
+        feedback.setUserId(0L);
+        feedback.setContent(city);
+        feedback.setType(5);
+        acFeedbackMapper.insertSelective(feedback);
+
+        return JsonResult.OK();
     }
 
 }

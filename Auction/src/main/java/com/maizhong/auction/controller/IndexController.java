@@ -584,4 +584,14 @@ public class IndexController {
         }
         return "appdownload2";
     }
+
+    /**
+     * 卖车提交
+     * @return
+     */
+    @RequestMapping(value = "/submit/sale")
+    @ResponseBody
+    public JsonResult sellSubmit(String city,String phone){
+        return indexService.submitSale(city,phone);
+    }
 }

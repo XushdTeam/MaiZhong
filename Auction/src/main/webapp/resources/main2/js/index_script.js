@@ -18,8 +18,8 @@ jQuery(document).ready(function($) {
 //    openMsgBox('.msgBox_being');
 //    event.preventDefault();
 //  });
-	$('.menu').find('a').removeClass('checked');
-    $('.shouye').addClass('checked');
+// 	$('.menu').find('a').removeClass('checked');
+//     $('.shouye').addClass('checked');
 
 	// 页面滚动
 	// header
