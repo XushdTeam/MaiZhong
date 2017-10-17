@@ -549,7 +549,7 @@
         var reg=/^1[34578]\d{9}$/;
         var ind=$('.banner select').val();
         if(ind==0){
-            $('#n1').show();
+            $('#n1').show().siblings('span').hide();
         }else{
             $('#n1').hide();
             if(!text){
