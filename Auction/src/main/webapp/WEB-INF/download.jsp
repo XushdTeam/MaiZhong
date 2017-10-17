@@ -13,6 +13,13 @@
     <link rel="stylesheet" href="/resources/main2/css/common.css" type="text/css">
     <link rel="stylesheet" href="/resources/main2/css/animate.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/main2/css/style_j.css" type="text/css">
+    <style>
+        .phone{
+            width: 300px;
+            border-radius: 10px;
+            border: 2px solid #FFF;
+        }
+    </style>
 </head>
 <body class="bg_f2" style="zoom: 1;">
 <div id="header" class="_index">
@@ -25,9 +32,11 @@
                 <!-- menu -->
                 <div class="menu clearfix">
                     <ul>
-                        <li><a href="/" class="shouye ">首页</a></li>
+                        <li><a href="/" class="shouye checked">首页</a></li>
                         <li><a href="/auction" class="gujia">拍卖入口</a></li>
-                        <li><a href="/download" class="xiazai checked">APP下载</a></li>
+                        <li><a href="/tosale" class="gujia">我要卖车</a></li>
+                        <li><a href="/download" class="xiazai">APP下载</a></li>
+                        <li><a href="http://www.wukongshouche.com" class="xiazai" target="_blank">悟空收车</a></li>
                     </ul>
                 </div>
 
@@ -54,16 +63,15 @@
     <img src="/resources/main2/7.jpg" width="100%" style="height: 860px">
     <div class="con">
         <div class="con_center">
-            <img src="/resources/main2/s.png" class="left">
+            <img src="/resources/images/3-1.jpg" class="left phone">
             <div class="right">
                 <p>优品拍车</p>
                 <div class="jianjie">优品拍车国内收车专业平台  全国收车价最高</div>
                 <div class="div_img">
-                    <img src="/resources/main2/2.png" style="display: block;">
-                    <b>个人版</b> <b>车商版</b>
+                    <b>车主</b> <b>车商</b>
                     <div style="clear: both;" class="imgs">
-                        <img src="/resources/main2/5.png">
-                        <img src="/resources/main2/6.png">
+                        <img src="/resources/images/yppccz.png">
+                        <img src="/resources/images/yppc.png">
                     </div>
                 </div>
             </div>
